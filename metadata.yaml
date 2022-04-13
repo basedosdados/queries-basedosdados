@@ -2,4 +2,4 @@
 #   example:
 #     my_first_dbt_model:
 #       spreadsheet_id: "the-spreadsheet-id"
-models:
+models: {}
