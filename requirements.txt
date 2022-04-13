@@ -1,0 +1,2 @@
+dbt==0.21.1
+markupsafe==2.0.1

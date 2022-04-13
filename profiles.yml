@@ -1,0 +1,19 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: basedosdados-dev
+      dataset: dbt
+      location: southamerica-east1
+      threads: 2
+      keyfile: /credentials-dev/dev.json
+    prod:
+      type: bigquery
+      method: service-account
+      project: basedosdados
+      dataset: dbt
+      location: southamerica-east1
+      threads: 2
+      keyfile: /credentials-prod/prod.json
