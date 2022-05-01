@@ -38,3 +38,7 @@ models:
     example:
       +materialized: view # Materialization type (view, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
+    br_bd_indicadores:
+      +materialized: view
+      +schema: br_bd_indicadores
+
