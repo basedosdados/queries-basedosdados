@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: metricas_tweets_dbt_model
+    description: "dbt model for metricas_tweets"
+    columns:
+      - name: upload_day
+        description: "day of scrapping [partition variable]"
+      - name: id
+        description: "tweet id [primary key]"
+      - name: created_at
+        description: "time of tweet creation"
+      - name: retweet_count
+        description: "tweet's retweet count"
+      - name: reply_count
+        description: "tweet's reply count"
+      - name: like_count
+        description: "tweet's like count"
+      - name: quote_count
+        description: "tweet's quote count"
+      - name: text
+        description: "tweet's text content"
+      - name: user_profile_clicks
+        description: "number of user profile clicks"
+      - name: url_link_clicks
+        description: "number of clicks in url link"
+      - name: impression_count
+        description: "tweet's impression count"
+      - name: following_count
+        description: "user's following count"
+      - name: followers_count
+        description: "user's followers count at upload day"
+      - name: tweet_count
+        description: "user's tweets count at upload day"
+      - name: listed_count
+        description: "user's listed count at upload day"
