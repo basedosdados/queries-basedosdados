@@ -6,7 +6,7 @@ default:
       method: service-account
       project: basedosdados-dev
       dataset: dbt
-      location: us
+      location: US
       threads: 2
       keyfile: /credentials-dev/dev.json
     prod:
@@ -14,6 +14,6 @@ default:
       method: service-account
       project: basedosdados
       dataset: dbt
-      location: us
+      location: US
       threads: 2
       keyfile: /credentials-prod/prod.json
