@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: br_sp_saopaulo_dieese_icv
+    description: "Dados de Custo de vida de São Paulo"
+    columns:
+      - name: mes
+        description: "Mês"

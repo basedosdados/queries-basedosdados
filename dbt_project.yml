@@ -41,4 +41,6 @@ models:
     br_bd_indicadores:
       +materialized: view
       +schema: br_bd_indicadores
-
+    br_sp_saopaulo_dieese_icv:
+      +materialized: view
+      +schema: br_sp_saopaulo_dieese_icv
