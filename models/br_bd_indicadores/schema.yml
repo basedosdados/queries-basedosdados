@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: metricas_tweets_dbt_model
+  - name: metricas_tweets
     description: "dbt model for metricas_tweets"
     columns:
       - name: upload_day
