@@ -8,8 +8,8 @@ models:
         description: "day of scrapping [partition variable]"
       - name: id
         description: "tweet id [primary key]"
-      - name: created_at
-        description: "time of tweet creation"
+      - name: text
+        description: "tweet's text content"
       - name: retweet_count
         description: "tweet's retweet count"
       - name: reply_count
@@ -18,11 +18,11 @@ models:
         description: "tweet's like count"
       - name: quote_count
         description: "tweet's quote count"
-      - name: text
-        description: "tweet's text content"
-      - name: user_profile_clicks
+      - name: created_at
         description: "number of user profile clicks"
       - name: url_link_clicks
+        description: "time of tweet creation"
+      - name: user_profile_clicks
         description: "number of clicks in url link"
       - name: impression_count
         description: "tweet's impression count"
