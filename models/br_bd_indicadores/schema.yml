@@ -20,12 +20,12 @@ models:
         description: "tweet's quote count"
       - name: created_at
         description: "number of user profile clicks"
-      - name: url_link_clicks
-        description: "time of tweet creation"
-      - name: user_profile_clicks
-        description: "number of clicks in url link"
       - name: impression_count
         description: "tweet's impression count"
+      - name: user_profile_clicks
+        description: "number of clicks in url link"
+      - name: url_link_clicks
+        description: "time of tweet creation"
       - name: following_count
         description: "user's following count"
       - name: followers_count
