@@ -2,7 +2,7 @@ SELECT
 SAFE_CAST(upload_day AS DATE) upload_day,
 SAFE_CAST(id AS STRING) id,
 SAFE_CAST(text AS STRING) text,
-SAFE_CAST(created_at AS DATE '%Y-%m-%dT%H:%I:%S.00Z') created_at,
+SAFE_CAST(created_at AS STRING) created_at,
 SAFE_CAST(retweet_count AS INT64) retweet_count,
 SAFE_CAST(reply_count AS INT64) reply_count,
 SAFE_CAST(like_count AS INT64) like_count,
