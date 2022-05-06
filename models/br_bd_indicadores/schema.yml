@@ -10,10 +10,10 @@ models:
         description: "tweet id [primary key]"
       - name: text
         description: "tweet's text content"
+      - name: created_at
+        description: "datetime tweet creation"
       - name: retweet_count
         description: "tweet's quote count"
-      - name: created_at
-        description: "tweet's retweet count"
       - name: reply_count
         description: "tweet's reply count"
       - name: like_count
