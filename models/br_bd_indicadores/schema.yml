@@ -4,8 +4,8 @@ models:
   - name: metricas_tweets
     description: "dbt model for metricas_tweets"
     columns:
-      - name: upload_day
-        description: "day of scrapping [partition variable]"
+      - name: upload_ts
+        description: "timestamp of scrapping [partition variable]"
       - name: id
         description: "tweet id [primary key]"
       - name: text
