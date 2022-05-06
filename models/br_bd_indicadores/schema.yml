@@ -11,14 +11,14 @@ models:
       - name: text
         description: "tweet's text content"
       - name: retweet_count
+        description: "tweet's quote count"
+      - name: created_at
         description: "tweet's retweet count"
       - name: reply_count
         description: "tweet's reply count"
       - name: like_count
         description: "tweet's like count"
       - name: quote_count
-        description: "tweet's quote count"
-      - name: created_at
         description: "number of user profile clicks"
       - name: impression_count
         description: "tweet's impression count"
