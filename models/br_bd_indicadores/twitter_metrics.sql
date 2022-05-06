@@ -14,4 +14,4 @@ SAFE_CAST(following_count AS INT64) following_count,
 SAFE_CAST(followers_count AS INT64) followers_count,
 SAFE_CAST(tweet_count AS INT64) tweet_count,
 SAFE_CAST(listed_count AS INT64) listed_count
-FROM `basedosdados-dev.br_bd_indicadores_staging.metricas_tweets`
+FROM `basedosdados-dev.br_bd_indicadores_staging.twitter_metrics`
