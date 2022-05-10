@@ -1,5 +1,5 @@
 SELECT
-SAFE_CAST(upload_day AS INT64) upload_ts,
+SAFE_CAST(upload_ts AS INT64) upload_ts,
 SAFE_CAST(id AS STRING) id,
 SAFE_CAST(text AS STRING) text,
 SAFE_CAST(created_at AS STRING) created_at,
