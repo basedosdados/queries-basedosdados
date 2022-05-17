@@ -1,0 +1,44 @@
+name: Deploy docs
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DBT_SA: ${{ secrets.DBT_SA }}
+
+jobs:
+  docs:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9.x"
+
+      - name: Upgrade pip
+        run: |
+          pip install -U pip
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements-actions.txt -r requirements.txt
+      - name: Setup credentials
+        run: |
+          echo $DBT_SA | base64 --decode > dbt-sa.json
+          python3 .github/workflows/scripts/modify_profiles.py
+      - name: Generate docs
+        run: |
+          dbt docs generate --profiles-dir .
+      - name: Delete credentials
+        run: |
+          rm dbt-sa.json
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
+        with:
+          branch: gh-pages
+          folder: target
