@@ -5,7 +5,7 @@ models:
     description: "dbt model for metricas_tweets"
     columns:
       - name: upload_ts
-        description: "timestamp of scrapping [partition variable]"
+        description: "timestamp of data extraction [partition variable]"
       - name: id
         description: "tweet id [primary key]"
       - name: text
@@ -13,7 +13,7 @@ models:
       - name: created_at
         description: "datetime tweet creation"
       - name: retweet_count
-        description: "tweet's quote count"
+        description: "tweet's retweets count"
       - name: reply_count
         description: "tweet's reply count"
       - name: like_count
@@ -34,3 +34,30 @@ models:
         description: "user's tweets count at upload day"
       - name: listed_count
         description: "user's listed count at upload day"
+  - name: twitter_metrics_agg
+    description: "dbt model for twitter_metrics_agg"
+    columns:
+      - name: upload_day
+        description: "day of data extraction [partition variable]"
+      - name: retweets
+        description: "total day's retweets"
+      - name: replies
+        description: "total day's replies"
+      - name: likes
+        description: "total day's likes"
+      - name: quote_tweets
+        description: "total day's quote tweets"
+      - name: impression
+        description: "total day's impressions"
+      - name: profile_clicks
+        description: "total day's profile clicks"
+      - name: link_clicks
+        description: "total day's clicks in embeded tweet links"
+      - name: followings
+        description: "total followings up to upload_day"
+      - name: followers
+        description: "total followers up to upload_day"
+      - name: tweets
+        description: "total tweets up to upload_day"
+      - name: listed
+        description: "total list that BD's account was listed up to upload_day"
