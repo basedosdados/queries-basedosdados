@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: microdados
+    description: "dbt model for table microdados"
+    columns:
+      - name: id_pesquisa
+        description: ID da pesquisa
+      - name: ano
+        description: Ano
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: nome_municipio
+        description: Nome do município
+      - name: cargo
+        description: Cargo
+      - name: data
+        description: Data
+      - name: data_referencia
+        description: Data de referência
+      - name: instituto
+        description: Instituto realizador
+      - name: contratante
+        description: Contratante
+      - name: orgao_registro
+        description: Orgão de registro
+      - name: numero_registro
+        description: Número de registro
+      - name: quantidade_entrevistas
+        description: Quantidade de entrevistas
+      - name: margem_mais
+        description: Margem a mais
+      - name: margem_menos
+        description: Margem a menos
+      - name: tipo
+        description: Tipo
+      - name: turno
+        description: Turno
+      - name: tipo_voto
+        description: Tipo do voto
+      - name: id_cenario
+        description: ID do cenário
+      - name: descricao_cenario
+        description: Descrição do cenário
+      - name: id_candidato_poder360
+        description: ID do candidato - Poder360
+      - name: nome_candidato
+        description: Nome do candidato
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: condicao
+        description: Condição
+      - name: percentual
+        description: Percentual
