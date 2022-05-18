@@ -47,11 +47,11 @@ models:
         description: "total day's likes"
       - name: quote_tweets
         description: "total day's quote tweets"
-      - name: impression
+      - name: impressions
         description: "total day's impressions"
       - name: profile_clicks
         description: "total day's profile clicks"
-      - name: link_clicks
+      - name: links_clicks
         description: "total day's clicks in embeded tweet links"
       - name: followings
         description: "total followings up to upload_day"
