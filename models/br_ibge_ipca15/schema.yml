@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: mes_brasil
+  - name: mes_brasil_ipca15
     description: "dbt model for table mes_brasil"
     columns:
       - name: ano
@@ -20,7 +20,7 @@ models:
         description: Variação percentual anual
       - name: variacao_doze_meses
         description: Variação percentual doze meses
-  - name: mes_categoria_brasil
+  - name: mes_categoria_brasil_ipca15
     description: "dbt model for table mes_categoria_brasil"
     columns:
       - name: ano
@@ -41,7 +41,7 @@ models:
         description: Variação percentual acumulada no ano
       - name: variacao_doze_meses
         description: Variação percentual acumulada em doze meses
-  - name: mes_categoria_municipio
+  - name: mes_categoria_municipio_ipca15
     description: "dbt model for table mes_categoria_municipio"
     columns:
       - name: ano
@@ -64,7 +64,7 @@ models:
         description: Variação percentual acumulada no ano
       - name: variacao_doze_meses
         description: Variação percentual acumulada em doze meses
-  - name: mes_categoria_rm
+  - name: mes_categoria_rm_ipca15
     description: "dbt model for table mes_categoria_rm"
     columns:
       - name: ano
