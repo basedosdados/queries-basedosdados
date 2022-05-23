@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: mes_brasil_inpc
+  - name: br_ibge_inpc_mes_brasil
     description: "dbt model for table mes_brasil"
     columns:
       - name: ano
