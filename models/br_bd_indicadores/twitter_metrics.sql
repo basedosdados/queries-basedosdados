@@ -1,5 +1,18 @@
+{{
+    config(
+        materialized='incremental',
+        partition_by={
+            "field": "upload_day",
+            "data_type": "date",
+            "granularity": "month",
+        }
+    )
+}}
+
+
 SELECT
 SAFE_CAST(upload_ts AS INT64) upload_ts,
+EXTRACT(DATE FROM TIMESTAMP_MILLIS(upload_ts*1000)) AS upload_day,
 SAFE_CAST(id AS STRING) id,
 SAFE_CAST(text AS STRING) text,
 SAFE_CAST(created_at AS STRING) created_at,
@@ -15,3 +28,14 @@ SAFE_CAST(followers_count AS INT64) followers_count,
 SAFE_CAST(tweet_count AS INT64) tweet_count,
 SAFE_CAST(listed_count AS INT64) listed_count
 FROM `basedosdados-dev.br_bd_indicadores_staging.twitter_metrics`
+WHERE
+    upload_day < CURRENT_DATE('America/Sao_Paulo')
+
+{% if is_incremental() %}
+
+{% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
+
+AND
+    data_particao > ("{{ max_partition }}")
+
+{% endif %}
