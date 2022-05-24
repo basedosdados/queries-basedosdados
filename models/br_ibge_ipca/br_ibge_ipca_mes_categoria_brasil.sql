@@ -1,3 +1,4 @@
+{{ config(alias='mes_categoria_brasil', schema='br_ibge_ipca') }}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
