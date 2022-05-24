@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: br_ibge_inpc_mes_brasil
+  - name: br_ibge_inpc__mes_brasil
     description: "dbt model for table mes_brasil"
     columns:
       - name: ano
@@ -20,7 +20,7 @@ models:
         description: Variação percentual anual
       - name: variacao_doze_meses
         description: Variação percentual doze meses
-  - name: mes_categoria_brasil_inpc
+  - name: br_ibge_inpc__mes_categoria_brasil
     description: "dbt model for table mes_categoria_brasil"
     columns:
       - name: ano
@@ -41,7 +41,7 @@ models:
         description: Variação percentual acumulada no ano
       - name: variacao_doze_meses
         description: Variação percentual acumulada em doze meses
-  - name: mes_categoria_municipio_inpc
+  - name: br_ibge_inpc__mes_categoria_municipio
     description: "dbt model for table mes_categoria_municipio"
     columns:
       - name: ano
@@ -64,7 +64,7 @@ models:
         description: Variação percentual acumulada no ano
       - name: variacao_doze_meses
         description: Variação percentual acumulada em doze meses
-  - name: mes_categoria_rm_inpc
+  - name: br_ibge_inpc__mes_categoria_rm
     description: "dbt model for table mes_categoria_rm"
     columns:
       - name: ano
