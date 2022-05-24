@@ -1,3 +1,4 @@
+{{ config(alias='mes_categoria_municipio', schema='br_ibge_inpc') }}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -9,4 +10,4 @@ SAFE_CAST(peso_mensal AS FLOAT64) peso_mensal,
 SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal,
 SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
 SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
-FROM basedosdados-staging.br_ibge_ipca15_staging.mes_categoria_municipio AS t
+FROM basedosdados-staging.br_ibge_inpc_staging.mes_categoria_municipio AS t
