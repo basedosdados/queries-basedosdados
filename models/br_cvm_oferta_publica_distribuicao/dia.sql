@@ -36,10 +36,10 @@ SAFE_CAST(oferta_incentivo_fiscal AS STRING) oferta_incentivo_fiscal,
 SAFE_CAST(oferta_regime_fiduciario AS STRING) oferta_regime_fiduciario,
 SAFE_CAST(atualizacao_monetaria AS STRING) atualizacao_monetaria,
 SAFE_CAST(juros AS STRING) juros,
-SAFE_CAST(projeto_audiovisual AS STRING) projeto_audiovisual
-SAFE_CAST(tipo_societario_emissor AS STRING) tipo_societario_emissor
-SAFE_CAST(tipo_fundo_investimento AS STRING) tipo_fundo_investimento
-SAFE_CAST(ultimo_comunicado AS STRING) ultimo_comunicado
+SAFE_CAST(projeto_audiovisual AS STRING) projeto_audiovisual,
+SAFE_CAST(tipo_societario_emissor AS STRING) tipo_societario_emissor,
+SAFE_CAST(tipo_fundo_investimento AS STRING) tipo_fundo_investimento,
+SAFE_CAST(ultimo_comunicado AS STRING) ultimo_comunicado,
 SAFE_CAST(data_comunicado AS STRING) data_comunicado
 
 FROM basedosdados-staging.br_cvm_oferta_publica_distribuicao_staging.dia AS t
