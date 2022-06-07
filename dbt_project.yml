@@ -70,4 +70,7 @@ models:
     br_poder360_pesquisas:
       +materialized: table
       +schema: br_poder360_pesquisas
+    fundacao_lemann:
+      +materialized: table
+      +schema: fundacao_lemann
 

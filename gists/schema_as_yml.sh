@@ -9,4 +9,4 @@
 dataset=$1
 table=$2
 
-bq show --schema basedosdados:$dataset.$table  | jq '.' | yq -P | egrep -v type
+bq show --schema basedosdados-projetos:$dataset.$table  | jq '.' | yq -P | egrep -v type
