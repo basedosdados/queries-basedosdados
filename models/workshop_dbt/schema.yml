@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: microdados
+    description: "Microdados de pesquisas eleitorais"
+    columns:
+      - name: id_pesquisa
+        description: ID da pesquisa
+      - name: ano
+      - name: data
+        description: Data
+      - name: nome_candidato
+        description: Nome do candidato
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: percentual
+        description: Percentual
+      - name: distancia_lider
+        description: Distância do candidato em relação ao líder

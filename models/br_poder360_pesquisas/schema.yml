@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: microdados
-    description: "dbt model for table microdados"
+    description: "Microdados de pesquisas eleitorais"
     columns:
       - name: id_pesquisa
         description: ID da pesquisa

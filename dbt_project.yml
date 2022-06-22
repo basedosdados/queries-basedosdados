@@ -73,4 +73,7 @@ models:
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
+    workshop_dbt:
+      +materialized: table
+      +schema: workshop_dbt
 
