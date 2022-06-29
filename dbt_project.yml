@@ -73,7 +73,5 @@ models:
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
-    workshop_dbt:
+    br_tse:
       +materialized: table
-      +schema: workshop_dbt
-
