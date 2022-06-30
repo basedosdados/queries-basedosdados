@@ -25,12 +25,5 @@ cd_cargo,
 nr_votavel,
 nm_votavel,
 SAFE_CAST(qt_votos AS INT64) qt_votos,
-nr_local_votacao,
-
-
-
-
-
-
-
+nr_local_votacao
 FROM votacao
