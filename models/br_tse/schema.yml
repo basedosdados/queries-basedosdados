@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: detalhe_votacao_secao
+    description: "Microdados de votação por seção"
+    columns:
+      - name: dt_geracao
+        description: data geração
+      - name: hh_geração
+        description: hora geração
+      - name: cd_tipo_eleicao
+        description: código tipo de eleição
+      - name: nm_tipo_eleicao
+        description: nome do tipo de eleição
+      - name: nr_turno
+        description: número do turno
+      - name: cd_eleicao 
+        description: código da eleição
+      - name: ds_eleicao
+        description: descrição da eleição
+      - name: dt_eleicao
+        description: data da eleição
+      - name: tp_abrangencia
+        description: tipo de abrangência
+      - name: sg_ue
+        description: sigla da unidade eleitoral
+      - name: nm_ue
+        description: nome da unidade eleitoral
+      - name: cd_municipio
+        description: código do município
+      - name: nm_municipio
+        description: nome do município
+      - name: nr_zona
+        description: número da zona
+      - name: nr_secao  
+        description: número da seção
+      - name: cd_cargo
+        description: código do cargo
+      - name: ds_cargo
+        description: descrição do cargo
+      - name: nr_votavel
+        description: número do votável
+      - name: nm_votavel
+        description: nome do votável
+      - name: qt_votos
+        description: quantidade de votos
+      - name: hr_local_votacao
+        description: hora local da votação
+      - name: ano 
+        description: ano
+      - name: sigla_uf
+        description: sigla do estado
+
+
