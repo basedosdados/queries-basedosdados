@@ -73,6 +73,3 @@ models:
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
-    br_tse:
-      +materialized: table
-      +schema: br_tse
