@@ -35,6 +35,8 @@ models:
       - name: prestou_contas
         description: Indicador de prestação de contas
   - name: bens_candidato
+    description: "microdados bens candidato"
+    columns:
       - name: ano
         description: Ano
       - name: sigla_uf
@@ -54,6 +56,8 @@ models:
       - name: valor_item
         description: Valor do Item (R$)
     - name: receitas_candidato
+      description: microdados receitas candidato
+      columns:
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
       - name: cpf_cnpj_doador_orig
@@ -89,6 +93,8 @@ models:
       - name: entrega_conjunto
         description: Entrega em conjunto
     - name: despesas_candidato
+      description: microdados despesas candidato
+      columns:
       - name: ano
         description: Ano
       - name: turno
