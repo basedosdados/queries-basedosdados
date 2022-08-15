@@ -1,0 +1,183 @@
+version 2:
+
+models:
+  - name: candidatos
+    description: "microdados de candidatos"
+    columns:
+      - name: ano
+        description: Ano
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: tipo_eleicao
+        description: Tipo da Eleição
+      - name: sequencial_candidato
+        description: Sequencial do Candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: id_tipo_item
+        description: ID Tipo Item
+      - name: tipo_item
+        description: Tipo Item
+      - name: descricao_item
+        description: Descrição do Item
+      - name: valor_item
+        description: Valor do Item (R$)
+      - name: situacao_totalizacao
+        description: Situação Totalização
+      - name: numero_federacao
+        description: Número Federação
+      - name: nome_federacao
+        description: Nome Federação
+      - name: sigla_federacao
+        description: Sigla Federação
+      - name: composicao_federacao
+        description: Composição Federação
+      - name: prestou_contas
+        description: Indicador de prestação de contas
+  - name: bens_candidato
+      - name: ano
+        description: Ano
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: tipo_eleicao
+        description: Tipo da Eleição
+      - name: sequencial_candidato
+        description: Sequencial do Candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: id_tipo_item
+        description: ID Tipo Item
+      - name: tipo_item
+        description: Tipo Item
+      - name: descricao_item
+        description: Descrição do Item
+      - name: valor_item
+        description: Valor do Item (R$)
+    - name: receitas_candidato
+      - name: descricao_cnae_2_doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
+      - name: cpf_cnpj_doador_orig
+        description: CPF ou CNPJ do doador originário
+      - name: nome_doador_orig
+        description: Nome do doador originário
+      - name: nome_doador_orig_rf
+        description: Nome do doador originário - Receita Federal
+      - name: tipo_doador_orig
+        description: Tipo do doador originário
+      - name: descricao_cnae_2_doador_orig
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
+      - name: nome_administrador
+        description: Nome do administrador
+      - name: cpf_administrador
+        description: CPF do administrador
+      - name: numero_recibo_eleitoral
+        description: Número do recibo eleitoral
+      - name: numero_documento
+        description: Número do documento
+      - name: numero_recibo_doacao
+        description: Número do recibo da doação
+      - name: numero_documento_doacao
+        description: Número do documento da doação
+      - name: tipo_prestacao_contas
+        description: Tipo de prestação de contas
+      - name: data_prestacao_contas
+        description: Data de prestação de contas
+      - name: sequencial_prestador_contas
+        description: Sequencial do prestador de contas
+      - name: cnpj_prestador_contas
+        description: CNPJ do prestador de contas
+      - name: entrega_conjunto
+        description: Entrega em conjunto
+    - name: despesas_candidato
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: numero_candidato
+        description: Número do candidato
+      - name: cpf_candidato
+        description: CPF do candidato
+      - name: sequencial_candidato
+        description: Sequencial do candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: nome_candidato
+        description: Nome do candidato
+      - name: cpf_vice_suplente
+        description: CPF do vice ou suplente
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: nome_partido
+        description: Nome do partido
+      - name: cargo
+        description: Cargo
+      - name: sequencial_despesa
+        description: Sequencial da despesa
+      - name: data_despesa
+        description: Data da despesa
+      - name: tipo_despesa
+        description: Tipo da despesa
+      - name: descricao_despesa
+        description: Descrição da despesa
+      - name: origem_despesa
+        description: Origem da despesa
+      - name: valor_despesa
+        description: Valor da despesa
+      - name: tipo_prestacao_contas
+        description: Tipo de prestação de contas
+      - name: data_prestacao_contas
+        description: Data de prestação de contas
+      - name: sequencial_prestador_contas
+        description: Sequencial do prestador de contas
+      - name: cnpj_prestador_contas
+        description: CNPJ do prestador de contas
+      - name: cnpj_candidato
+        description: CNPJ do candidato
+      - name: tipo_documento
+        description: Tipo do documento
+      - name: numero_documento
+        description: Número do documento
+      - name: especie_recurso
+        description: Espécie do recurso
+      - name: fonte_recurso
+        description: Fonte do recurso
+      - name: cpf_cnpj_fornecedor
+        description: CPF ou CNPJ do fornecedor
+      - name: nome_fornecedor
+        description: Nome do fornecedor
+      - name: nome_fornecedor_rf
+        description: Nome do fornecedor - Receita Federal
+      - name: cnae_2_fornecedor
+        description: Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
+      - name: descricao_cnae_2_fornecedor
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
+      - name: tipo_fornecedor
+        description: Tipo do fornecedor
+      - name: esfera_partidaria_fornecedor
+        description: Esfera partidária do fornecedor
+      - name: sigla_uf_fornecedor
+        description: Sigla da unidade da federação do fornecedor
+      - name: id_municipio_tse_fornecedor
+        description: ID Município do fornecedor - TSE
+      - name: sequencial_candidato_fornecedor
+        description: Sequencial do candidato fornecedor
+      - name: numero_candidato_fornecedor
+        description: Número do candidato do fornecedor
+      - name: numero_partido_fornecedor
+        description: Número do partido do fornecedor
+      - name: sigla_partido_fornecedor
+        description: Sigla do partido do fornecedor
+      - name: nome_partido_fornecedor
+        description: Nome do partido do fornecedor
+      - name: cargo_fornecedor
+        description: Cargo do fornecedor
