@@ -75,4 +75,4 @@ models:
       +schema: fundacao_lemann
     br_tse_eleicoes:
       +materialized: table
-      +schema: fundacao_lemann
+      +schema: br_tse_eleicoes
