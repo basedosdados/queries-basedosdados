@@ -55,7 +55,7 @@ models:
         description: Descrição do Item
       - name: valor_item
         description: Valor do Item (R$)
-    - name: receitas_candidato
+  - name: receitas_candidato
       description: microdados receitas candidato
       columns:
       - name: descricao_cnae_2_doador
@@ -92,7 +92,7 @@ models:
         description: CNPJ do prestador de contas
       - name: entrega_conjunto
         description: Entrega em conjunto
-    - name: despesas_candidato
+  - name: despesas_candidato
       description: microdados despesas candidato
       columns:
       - name: ano
