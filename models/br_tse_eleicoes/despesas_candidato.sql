@@ -45,4 +45,4 @@ SAFE_CAST(numero_partido_fornecedor AS STRING) numero_partido_fornecedor,
 SAFE_CAST(sigla_partido_fornecedor AS STRING) sigla_partido_fornecedor,
 SAFE_CAST(nome_partido_fornecedor AS STRING) nome_partido_fornecedor,
 SAFE_CAST(cargo_fornecedor AS STRING) cargo_fornecedor
-FROM basedosdados-staging.br_tse_eleicoes_staging.despesas_candidato AS t
+FROM basedosdados-dev.br_tse_eleicoes_staging.despesas_candidato AS t

@@ -8,4 +8,4 @@ SAFE_CAST(id_tipo_item AS STRING) id_tipo_item,
 SAFE_CAST(tipo_item AS STRING) tipo_item,
 SAFE_CAST(descricao_item AS STRING) descricao_item,
 SAFE_CAST(valor_item AS FLOAT64) valor_item
-FROM basedosdados-staging.br_tse_eleicoes_staging.bens_candidato AS t
+FROM basedosdados-dev.br_tse_eleicoes_staging.bens_candidato AS t

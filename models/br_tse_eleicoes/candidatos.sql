@@ -32,4 +32,4 @@ SAFE_CAST(nome_federacao AS STRING) nome_federacao,
 SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
 SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
 SAFE_CAST(prestou_contas AS STRING) prestou_contas,
-FROM basedosdados-staging.br_tse_eleicoes_staging.candidatos AS t
+FROM basedosdados-dev.br_tse_eleicoes_staging.candidatos AS t
