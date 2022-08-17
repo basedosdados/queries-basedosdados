@@ -31,5 +31,8 @@ SAFE_CAST(numero_federacao AS STRING) numero_federacao,
 SAFE_CAST(nome_federacao AS STRING) nome_federacao,
 SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
 SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
-SAFE_CAST(prestou_contas AS STRING) prestou_contas,
+CASE
+  WHEN prestou_contas='N' THEN 'Nao'
+  WHEN prestou_contas='S' THEN 'Sim'
+END AS prestou_contas
 FROM basedosdados-dev.br_tse_eleicoes_staging.candidatos AS t
