@@ -6,34 +6,58 @@ models:
     columns:
       - name: ano
         description: Ano
-      - name: sigla_uf
-        description: Sigla da Unidade da Federação
       - name: tipo_eleicao
         description: Tipo da Eleição
-      - name: sequencial_candidato
-        description: Sequencial do Candidato
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos 
+      - name: id_municipio_tse
+        description: ID Município - TSE
       - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
-      - name: id_tipo_item
-        description: ID Tipo Item
-      - name: tipo_item
-        description: Tipo Item
-      - name: descricao_item
-        description: Descrição do Item
-      - name: valor_item
-        description: Valor do Item (R$)
-      - name: situacao_totalizacao
-        description: Situação Totalização
-      - name: numero_federacao
-        description: Número Federação
-      - name: nome_federacao
-        description: Nome Federação
-      - name: sigla_federacao
-        description: Sigla Federação
-      - name: composicao_federacao
-        description: Composição Federação
-      - name: prestou_contas
-        description: Indicador de prestação de contas
+        description: ID Candidato no Banco de Dados
+      - name: cpf
+        description: CPF
+      - name: titulo_eleitoral
+        description: Título Eleitoral
+      - name: sequencial
+        description: Sequencial
+      - name: numero
+        description: Número
+      - name: nome
+        description: Nome
+      - name: nome_urna
+        description: Nome Urna
+      - name: numero_partido
+        description: Número do Partido
+      - name: sigla_partido
+        description: Sigla do Partido
+      - name: cargo
+        description: Cargo
+      - name: situacao
+        description: Situação
+      - name: ocupacao
+        description: Ocupação
+      - name: data_nascimento
+        description: Data de Nascimento
+      - name: idade
+        description: Idade
+      - name: genero
+        description: Gênero
+      - name: instrucao
+        description: Instrução
+      - name: estado_civil
+        description: Estado Civil
+      - name: nacionalidade
+        description: Nacionalidade
+      - name: sigla_uf_nascimento
+        description: Sigla da UF de Nascimento
+      - name: municipio_nascimento
+        description: Município de Nascimento
+      - name: email
+        description: E-mail
+      - name: raca
+        description: Raça ou cor 
   - name: bens_candidato
     description: "microdados bens candidato"
     columns:
@@ -58,6 +82,86 @@ models:
   - name: receitas_candidato
     description: microdados receitas candidato
     columns:
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da Eleição
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: numero_candidato
+        description: Número do Candidato
+      - name: cpf_candidato
+        description: CPF do Candidato
+      - name: cnpj_candidato
+        description: CNPJ do Candidato
+      - name: titulo_eleitor_candidato
+        description: Título Eleitoral do Candidato
+      - name: sequencial_candidato
+        description: Sequencial do Candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: nome_candidato
+        description: Nome do Candidato
+      - name: cpf_vice_suplente
+        description: CPF do Vice Suplente
+      - name: numero_partido
+        description: Número do Partido
+      - name: nome_partido
+        description: Nome do Partido
+      - name: sigla_partido
+        description: Sigla do Partido
+      - name: cargo
+        description: Cargo
+      - name: sequencial_receita
+        description: Sequencial da Receita
+      - name: data_receita
+        description: Data da Receita
+      - name: fonte_receita
+        description: Fonte da Receita
+      - name: origem_receita
+        description: Origem da Receita
+      - name: natureza_receita
+        description: Natureza da Receita
+      - name: especie_receita
+        description: Espécie da Receita
+      - name: situacao_receita
+        description: Situação da Receita
+      - name: descricao_receita
+        description: Descrição da Receita
+      - name: valor_receita
+        description: Valor da Receita (R$)
+      - name: sequencial_candidato_doador
+        description: Sequencial do Candidato Doador
+      - name: cpf_cnpj_doador
+        description: CPF/CNPJ do Doador
+      - name: sigl_uf_doador
+        description: Sigla da UF do Doador
+      - name: id_municipio_tse_doador
+        description: ID Município - TSE do Doador
+      - name: nome_doador
+        description: Nome do Doador
+      - name: nome_doador_rf
+        description: Nome do Doador - RF
+      - name: cargo_candidato_doador
+        description: Cargo do Candidato Doador
+      - name: numero_partido_doador
+        description: Número do Partido do Doador
+      - name: sigla_partido_doador
+        description: Sigla do Partido do Doador
+      - name: nome_partido_doador
+        description: Nome do Partido do Doador
+      - name: esfera_partidaria_doador
+        description: Esfera Partidária do Doador
+      - name: numero_candidato_doador
+        description: Número do Candidato do Doador
+      - name: cnae_2_doador
+        description: CNAE 2 do Doador
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
       - name: cpf_cnpj_doador_orig
