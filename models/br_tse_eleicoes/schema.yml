@@ -152,7 +152,7 @@ models:
         description: Sequencial do Candidato Doador
       - name: cpf_cnpj_doador
         description: CPF/CNPJ do Doador
-      - name: sigl_uf_doador
+      - name: sigla_uf_doador
         description: Sigla da UF do Doador
       - name: id_municipio_tse_doador
         description: ID Município - TSE do Doador
