@@ -57,7 +57,19 @@ models:
       - name: email
         description: E-mail
       - name: raca
-        description: Raça ou cor 
+        description: Raça ou cor
+      - name: situacao_totalizacao
+        description: Situação Totalização
+      - name: numero_federacao
+        description: Número Federação
+      - name: nome_federacao
+        description: Nome Federação
+      - name: sigla_federacao
+        description: Sigla Federação
+      - name: composicao_federacao
+        description: Composição Federação
+      - name: prestou_contas
+        description: Indicador de prestação de contas
   - name: bens_candidato
     description: "microdados bens candidato"
     columns:
