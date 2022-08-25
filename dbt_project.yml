@@ -76,3 +76,6 @@ models:
     br_tse_eleicoes:
       +materialized: table
       +schema: br_tse_eleicoes
+    br_jota:
+      +materialized: table
+      +schema: br_jota
