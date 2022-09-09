@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: igp_di_mes
+    description: "dbt model for igp_di month table"
+    columns:
+      - name: ano
+        description: Ano da coleta
+      - name: mes
+        description: Mês da coleta
+      - name: indice
+        description: Valor absoluto (ago/1994 = 100) do índice no mês
+      - name: var_mensal
+        description: Variação do índice no mês em relação ao mês anterior
+      - name: var_12_meses
+        description: Variação do índice nos últimos 12 meses
+      - name: acum_ano
+        description: Variação acumulada no ano (a partir de janeiro do ano corrente)
+      - name: indice_fechamento_mensal
+        description: Elaboração Ipeadata - calculado a partir da média geométrica dos valores dos meses corrente e seguinte da série original do IGP-DI.
