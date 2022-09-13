@@ -43,4 +43,4 @@ SAFE_CAST(tipo_societario_emissor AS STRING) tipo_societario_emissor,
 SAFE_CAST(tipo_fundo_investimento AS STRING) tipo_fundo_investimento,
 SAFE_CAST(ultimo_comunicado AS STRING) ultimo_comunicado,
 SAFE_CAST(data_comunicado AS DATE) data_comunicado
-FROM basedosdados.br_cvm_oferta_publica_distribuicao.dia AS t
+FROM basedosdados-staging.br_cvm_oferta_publica_distribuicao_staging.dia AS t

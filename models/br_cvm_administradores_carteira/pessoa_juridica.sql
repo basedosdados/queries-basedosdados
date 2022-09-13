@@ -23,4 +23,4 @@ SAFE_CAST(valor_patrimonial_liquido AS STRING) valor_patrimonial_liquido,
 SAFE_CAST(data_patrimonio_liquido AS DATE) data_patrimonio_liquido,
 SAFE_CAST(email AS STRING) email,
 SAFE_CAST(website AS STRING) website
-FROM basedosdados.br_cvm_administradores_carteira.pessoa_juridica AS t
+FROM basedosdados-staging.br_cvm_administradores_carteira_staging.pessoa_juridica AS t
