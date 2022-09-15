@@ -67,12 +67,12 @@ models:
       - name: resource_id
         description: "Resource ID"
       - name: dataset_id
-        description: 
+        description: "Dataset ID"
       - name: table_id
-        description: 
+        description: "Table ID"
       - name: temporal_coverage
-        description: 
+        description: "Temporal coverage"
       - name: update_frequency
-        description: 
+        description: "Update Frequency"
       - name: outdated
-        description: 
+        description: "Table is outdated"
