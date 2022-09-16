@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: organizations
+    description: "Metadata on organizations in the BD+ platform."
+    columns:
+      - name: id
+        description: ""
+      - name: name
+        description: ""
+      - name: description
+        description: ""
+      - name: display_name
+        description: ""
+      - name: title
+        description: ""
+      - name: package_count
+        description: ""
+      - name: date_created
+        description: ""
