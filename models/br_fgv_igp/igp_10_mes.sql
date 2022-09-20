@@ -6,4 +6,4 @@ SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal,
 SAFE_CAST(variacao_12_meses AS FLOAT64) variacao_12_meses,
 SAFE_CAST(variacao_acumulada_ano AS FLOAT64) variacao_acumulada_ano,
 SAFE_CAST(indice_fechamento_mensal AS FLOAT64) indice_fechamento_mensal
-FROM basedosdados-dev.br_fgv_igp_staging.igp_10_mes AS t
+FROM basedosdados-staging.br_fgv_igp_staging.igp_10_mes AS t
