@@ -1,0 +1,178 @@
+version: 2
+
+models:
+  - name: organizations
+    description: "Metadata on organizations in the BD+ platform."
+    columns:
+      - name: id
+        description: ""
+      - name: name
+        description: ""
+      - name: description
+        description: ""
+      - name: display_name
+        description: ""
+      - name: title
+        description: ""
+      - name: package_count
+        description: ""
+      - name: date_created
+        description: ""
+  - name: datasets
+    description: "Metadata on datasets in the BD+ platform."
+    columns:
+      - name: organization_id
+        description: ""
+      - name: id
+        description: ""
+      - name: name
+        description: ""
+      - name: title
+        description: ""
+      - name: date_created
+        description: ""
+      - name: date_last_modified
+        description: ""
+      - name: themes
+        description: ""
+      - name: tags
+        description: ""
+  - name: resources
+    description: "Metadata on resources in the BD+ platform."
+    columns:
+      - name: dataset_id
+        description: ""
+      - name: id
+        description: ""
+      - name: name
+        description: ""
+      - name: date_created
+        description: ""
+      - name: date_last_modified
+        description: ""
+      - name: type
+        description: ""
+  - name: external_links
+    description: "Metadata on external links in the BD+ platform."
+    columns:
+      - name: dataset_id
+        description: ""
+      - name: id
+        description: ""
+      - name: name
+        description: ""
+      - name: date_created
+        description: ""
+      - name: date_last_modified
+        description: ""
+      - name: url
+        description: ""
+      - name: language
+        description: ""
+      - name: has_structured_data
+        description: ""
+      - name: has_api
+        description: ""
+      - name: is_free
+        description: ""
+      - name: requires_registration
+        description: ""
+      - name: availability
+        description: ""
+      - name: spatial_coverage
+        description: ""
+      - name: temporal_coverage
+        description: ""
+      - name: update_frequency
+        description: ""
+      - name: observation_level
+        description: ""
+  - name: information_requests
+    description: "Metadata on information requests in the BD+ platform."
+    columns:
+      - name: dataset_id
+        description: ""
+      - name: id
+        description: ""
+      - name: name
+        description: ""
+      - name: date_created
+        description: ""
+      - name: date_last_modified
+        description: ""
+      - name: url
+        description: ""
+      - name: origin
+        description: ""
+      - name: number
+        description: ""
+      - name: opening_date
+        description: ""
+      - name: requested_by
+        description: ""
+      - name: status
+        description: ""
+      - name: data_url
+        description: ""
+      - name: spatial_coverage
+        description: ""
+      - name: temporal_coverage
+        description: ""
+      - name: update_frequency
+        description: ""
+      - name: observation_level
+        description: ""
+  - name: tables
+    description: "Metadata on tables in the BD+ platform."
+    columns:
+      - name: dataset_id
+        description: ""
+      - name: id
+        description: ""
+      - name: table_id
+        description: ""
+      - name: date_created
+        description: ""
+      - name: date_last_modified
+        description: ""
+      - name: spatial_coverage
+        description: ""
+      - name: temporal_coverage
+        description: ""
+      - name: update_frequency
+        description: ""
+      - name: observation_level
+        description: ""
+      - name: number_rows
+        description: ""
+      - name: number_columns
+        description: ""
+      - name: outdated
+        description: ""
+  - name: columns
+    description: "Metadata on columns in the BD+ platform."
+    columns:
+      - name: table_id
+        description: ""
+      - name: name
+        description: ""
+      - name: bigquery_type
+        description: ""
+      - name: description
+        description: ""
+      - name: temporal_coverage
+        description: ""
+      - name: covered_by_dictionary
+        description: ""
+      - name: directory_column
+        description: ""
+      - name: measurement_unit
+        description: ""
+      - name: has_sensitive_data
+        description: ""
+      - name: observations
+        description: ""
+      - name: is_in_staging
+        description: ""
+      - name: is_partition
+        description: ""
