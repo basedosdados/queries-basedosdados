@@ -61,18 +61,3 @@ models:
         description: "total tweets up to upload_day"
       - name: listed
         description: "total list that BD's account was listed up to upload_day"
-  - name: data_quality
-    description: "Data quality controls for Base dos Dados"
-    columns:
-      - name: resource_id
-        description: "Resource ID"
-      - name: dataset_id
-        description: "Dataset ID"
-      - name: table_id
-        description: "Table ID"
-      - name: temporal_coverage
-        description: "Temporal coverage"
-      - name: update_frequency
-        description: "Update Frequency"
-      - name: outdated
-        description: "Table is outdated"
