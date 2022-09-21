@@ -85,3 +85,6 @@ models:
     br_jota:
       +materialized: table
       +schema: br_jota
+    br_ibge_pnadc:
+      +materialized: table
+      +schema: br_ibge_pnadc

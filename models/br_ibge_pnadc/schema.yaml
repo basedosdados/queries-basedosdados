@@ -1,0 +1,852 @@
+version: 2
+
+models:
+  - name: br_ibge_pnadc
+    description: "Microdados PNADC"
+    columns:
+      - name: ano
+        description: Ano
+      - name: trimestre
+        description: Trimestre
+      - name: id_uf
+        description: ID Unidade da Federação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: capital
+        description: Município da Capital
+      - name: rm_ride
+        description: Região Metropolitana e Região Administrativa Integrada
+      - name: id_upa
+        description: ID Unidade Primária de Amostragem (UPA)
+      - name: id_estrato
+        description: ID Estrato (As 2 primeiras posições representam o código da Unidade da Federação)
+      - name: id_domicilio
+        description: ID Domicílio
+      - name: V1008
+        description: Número de seleção do domicílio
+      - name: V1014
+        description: Painel
+      - name: V1016
+        description: Número da entrevista no domicílio
+      - name: V1022
+        description: Situação do domicílio
+      - name: V1023
+        description: Tipo de área
+      - name: V1027
+        description: Peso do domicílio e das pessoas (Peso trimestral com correção de não entrevista sem pós estratificação pela projeção de população)
+      - name: V1028
+        description: Peso do domicílio e das pessoas (Peso trimestral com correção de não entrevista com pós estratificação pela projeção de população)
+      - name: V1029
+        description: Projeção da população por níveis geográficos
+      - name: V1033
+        description: Projeção da população por sexo e idade
+      - name: posest
+        description: Domínios de projeção (As 2 primeiras posições representam o código da Unidade da Federação e a última, o tipo de área. UF(2) + V1023(1))
+      - name: posest_sxi
+        description: Domínios de projeção (As 2 primeiras posições representam o código da Unidade da Federação e a última, o tipo de área. UF(2) + V1023(1))
+      - name: V2001
+        description: Número de pessoas no domicílio
+      - name: V2003
+        description: Número de ordem
+      - name: V2005
+        description: Condição no domicílio
+      - name: V2007
+        description: Sexo
+      - name: V2008
+        description: Dia de nascimento
+      - name: V20081
+        description: Mês de nascimento
+      - name: V20082
+        description: Ano de nascimento
+      - name: V2009
+        description: Idade do morador na data de referência
+      - name: V2010
+        description: Cor ou raça
+      - name: V3001
+        description: '... sabe ler e escrever?'
+      - name: V3002
+        description: '... frequenta escola?'
+      - name: V3002A
+        description: A escola que ... frequenta é de
+      - name: V3003
+        description: Qual é o curso que ... frequenta?
+      - name: V3003A
+        description: Qual é o curso que ... frequenta?
+      - name: V3004
+        description: A duração deste curso que ... frequenta é de
+      - name: V3005
+        description: Este curso que ... frequenta é seriado?
+      - name: V3005A
+        description: Esse curso que .... frequenta é organizado em
+      - name: V3006
+        description: Qual é o ano/série/semestre que ... frequenta?
+      - name: V3006A
+        description: Qual é a etapa do ensino fundamental que ... frequenta?
+      - name: V3007
+        description: '... já concluiu algum outro curso de graduação?'
+      - name: V3008
+        description: Anteriormente ... frequentou escola?
+      - name: V3009
+        description: Qual foi o curso mais elevado que ... frequentou anteriormente?
+      - name: V3009A
+        description: Qual foi o curso mais elevado que ... frequentou anteriormente?
+      - name: V3010
+        description: A duração deste curso que ... frequentou anteriormente era de
+      - name: V3011
+        description: Este curso que ... frequentou anteriormente era seriado?
+      - name: V3011A
+        description: Esse curso que .... frequentou era organizado em
+      - name: V3012
+        description: '... Concluiu com aprovação, pelo menos a primeira série deste curso que frequentou anteriormente?'
+      - name: V3013
+        description: Qual foi o último ano/série/semestre que ... concluiu com aprovação, neste curso que frequentou anteriormente?
+      - name: V3013A
+        description: Qual foi a etapa de ensino fundamental que ... frequentou?
+      - name: V3013B
+        description: '... Concluiu os anos iniciais deste curso que frequentou anteriormente?'
+      - name: V3014
+        description: '... Concluiu este curso que frequentou anteriormente?'
+      - name: V4001
+        description: Na semana de ... a ... (semana de referência), ... trabalhou ou estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em dinheiro?
+      - name: V4002
+        description: Na semana de ... a ... (semana de referência), ... trabalhou ou estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em produtos, mercadorias, moradia, alimentação, etc.?
+      - name: V4003
+        description: Na semana de ... a ... (semana de referência), ... fez algum bico ou trabalhou em alguma atividade ocasional remunerada durante pelo menos 1 hora?
+      - name: V4004
+        description: Na semana de ... a ... (semana de referência), ... ajudou durante pelo menos 1 hora, sem receber pagamento, no trabalho remunerado de algum morador do domicílio ou de parente?
+      - name: V4005
+        description: Na semana de ... a ... (semana de referência), ... tinha algum trabalho remunerado do qual estava temporariamente afastado?
+      - name: V4006
+        description: Na semana de ... a .... (semana de referência), por que motivo ... estava afastado desse trabalho?
+      - name: V4006A
+        description: Na semana de ... a .... (semana de referência), por que motivo ... estava afastado desse trabalho?
+      - name: V4007
+        description: Durante o tempo de afastamento, ... continuou a receber ao menos uma parte do pagamento?
+      - name: V4008
+        description: Em .../.../...(último dia da semana de referência), fazia quanto tempo que ... estava afastado desse trabalho?
+      - name: V40081
+        description: Tempo que estava afastado (De 1 mês a menos de 1 ano)
+      - name: V40082
+        description: Tempo que estava afastado (De 1 ano a menos de 2 anos)
+      - name: V40083
+        description: Tempo que estava afastado (de 02 anos a 98 anos)
+      - name: V4009
+        description: Quantos trabalhos ... tinha na semana de ... a ... (semana de referência?
+      - name: V4010
+        description: Código da ocupação (cargo ou função)
+      - name: V4012
+        description: Nesse trabalho, ... era
+      - name: V40121
+        description: Trabalhador não remunerado
+      - name: V4013
+        description: Código da principal atividade desse negócio/empresa
+      - name: V40132
+        description: Qual a seção da atividade?
+      - name: V40132A
+        description: Qual a seção da atividade?
+      - name: V4014
+        description: Esse trabalho era na área
+      - name: V4015
+        description: Na semana de ... a ... (semana de referência), ... teve ajuda, nesse trabalho, de pelo menos um trabalhador não remunerado que era membro do domicílio ou parente?
+      - name: V40151
+        description: Quantos trabalhadores não remunerados?
+      - name: V401511
+        description: 1 a 5 trabalhadores não remunerados
+      - name: V401512
+        description: 6 a 10 trabalhadores não remunerados
+      - name: V4016
+        description: Na semana de ... a ... (semana de referência), quantos empregados trabalhavam nesse negócio/empresa que ... tinha?
+      - name: V40161
+        description: 1 a 5 empregados
+      - name: V40162
+        description: 6 a 10 empregados
+      - name: V40163
+        description: 11 a 50 empregados
+      - name: V4017
+        description: Na semana de ... a ... (semana de  referência), ... tinha pelo menos um sócio que trabalhava nesse negócio/empresa?
+      - name: V40171
+        description: Quantos?
+      - name: V401711
+        description: 1 a 5 sócios
+      - name: V4018
+        description: Na semana de ... a ... (semana de referência), contando com ... , quantas pessoas trabalhavam nesse negócio/empresa?
+      - name: V40181
+        description: 1 a 5 pessoas
+      - name: V40182
+        description: 6 a 10 pessoas
+      - name: V40183
+        description: 11 a 50 pessoas
+      - name: V4019
+        description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa Jurídica - CNPJ?
+      - name: V4020
+        description: Em que tipo de local funcionava esse negócio/empresa?
+      - name: V4021
+        description: '... exercia normalmente o trabalho em estabelecimento desse negócio/empresa?'
+      - name: V4022
+        description: Então onde ... exercia normalmente esse trabalho?
+      - name: V4024
+        description: No período de ... a ... (período de referência de 30 dias) ... prestava serviço doméstico em mais de um domicílio?
+      - name: V4025
+        description: Nesse trabalho, ... era contratado(a) como empregado temporário?
+      - name: V4026
+        description: Na semana de ... a ... (semana de referência), ... era contratado(a) somente por pessoa responsável pelo negócio/empresa em que trabalhava?
+      - name: V4027
+        description: Na semana de ... a ... (semana de referência) era contratado(a) somente por intermediário (empresa empreiteira, empreiteiro, "gato", etc.)?
+      - name: V4028
+        description: Nesse trabalho, ... era servidor público estatutário (federal, estadual ou municipal)?
+      - name: V4029
+        description: Nesse trabalho, ... tinha carteira de trabalho assinada?
+      - name: V4032
+        description: Era contribuinte de instituto de previdência por esse trabalho?
+      - name: V4033
+        description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente nesse trabalho? (variável auxiliar)
+      - name: V40331
+        description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em dinheiro?
+      - name: V403311
+        description: Número da faixa do rendimento/retirada em dinheiro
+      - name: V403312
+        description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia normalmente nesse trabalho? (valor em dinheiro)
+      - name: V40332
+        description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em produtos e mercadorias?
+      - name: V403321
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      - name: V403322
+        description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia normalmente nesse trabalho ? (valor estimado dos produtos ou mercadorias)
+      - name: V40333
+        description: Recebia/fazia normalmente nesse trabalho rendimento/retirada somente em benefícios?
+      - name: V403331
+        description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse trabalho
+      - name: V4034
+        description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho, no mês de referência? (variável auxiliar)
+      - name: V40341
+        description: Recebeu/fez nesse trabalho rendimento/retirada em dinheiro no mês de referência
+      - name: V403411
+        description: Número da faixa do rendimento/retirada em dinheiro
+      - name: V403412
+        description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse trabalho, no mês de referência? (valor em dinheiro)
+      - name: V40342
+        description: Recebeu/fez nesse trabalho no mês de referencia, rendimento/retirada em produtos e mercadorias
+      - name: V403421
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      - name: V403422
+        description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse trabalho, no mês de referência? (valor estimado dos produtos ou mercadorias)
+      - name: V4039
+        description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho principal?
+      - name: V4039C
+        description: Quantas horas ... trabalhou efetivamente na semana de referência nesse trabalho pincipal?
+      - name: V4040
+        description: Até o dia ... (último dia da semana de referência) fazia quanto tempo que ... estava nesse trabalho?
+      - name: V40401
+        description: Fazia quanto tempo que estava nesse trabalho (de 1 mês a menos de 1 ano)
+      - name: V40402
+        description: Fazia quanto tempo que estava nesse trabalho (de 1 ano a menos de 2 anos)
+      - name: V40403
+        description: Fazia quanto tempo estava nesse trabalho (2 anos ou mais)
+      - name: V4041
+        description: Código da ocupação (cargo ou função)
+      - name: V4043
+        description: Nesse trabalho secundário, ... era
+      - name: V40431
+        description: Trabalhador familiar não remunerado
+      - name: V4044
+        description: Código da principal atividade desse negócio/empresa
+      - name: V4045
+        description: Esse trabalho era na área
+      - name: V4046
+        description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa Jurídica - CNPJ?
+      - name: V4047
+        description: Nesse trabalho secundário era funcionário público estatutário (federal, estadual ou municipal)?
+      - name: V4048
+        description: Nesse trabalho secundário tinha carteira de trabalho assinada?
+      - name: V4049
+        description: Era contribuinte de instituto de previdência por esse trabalho secundário?
+      - name: V4050
+        description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente nesse trabalho secundário? (variável auxiliar)
+      - name: V40501
+        description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada em dinheiro
+      - name: V405011
+        description: Número da faixa do rendimento/retirada em dinheiro
+      - name: V405012
+        description: Valor em dinheiro do rendimento mensal que recebia normalmente nesse trabalho secundário
+      - name: V40502
+        description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada em produtos e mercadorias
+      - name: V405021
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      - name: V405022
+        description: Valor estimado dos produtos e mercadorias que recebia normalmente nesse trabalho secundário
+      - name: V40503
+        description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada somente em benefícios
+      - name: V405031
+        description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse trabalho secundário
+      - name: V4051
+        description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho secundário, no mês de referência? (variável auxiliar)
+      - name: V40511
+        description: Recebeu/fez nesse trabalho secundário rendimento/retirada em dinheiro no mês de referência
+      - name: V405111
+        description: Número da faixa do rendimento/retirada em dinheiro
+      - name: V405112
+        description: Valor em dinheiro do rendimento mensal que recebeu nesse trabalho secundário no mês de referência
+      - name: V40512
+        description: Recebeu/fez nesse trabalho secundário no mês de referencia, rendimento/retirada em produtos e mercadorias
+      - name: V405121
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      - name: V405122
+        description: Valor estimado dos produtos e mercadorias que recebia recebeu nesse trabalho secundário no mês de referência
+      - name: V4056
+        description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho secundário?
+      - name: V4056C
+        description: Quantas horas ... trabalhou efetivamente na semana de referência nesse trabalho secundário?
+      - name: V4057
+        description: Era contribuinte de instituto de previdência por esse(s) outro(s) trabalho(s)?
+      - name: V4058
+        description: Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente nesse(s) outro(s) trabalho(s)? (variável auxiliar)
+      - name: V40581
+        description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada em dinheiro
+      - name: V405811
+        description: Número da faixa do rendimento/retirada em dinheiro
+      - name: V405812
+        description: Valor em dinheiro do rendimento mensal que recebia normalmente nesse(s) outro(s) trabalho(s)
+      - name: V40582
+        description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada em produtos e mercadorias
+      - name: V405821
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      - name: V405822
+        description: Valor estimado do produtos e mercadorias que recebia normalmente nesse(s) outro(s) trabalho(s)
+      - name: V40583
+        description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada somente em benefícios
+      - name: V405831
+        description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse(s) outro(s) trabalho(s)
+      - name: V40584
+        description: Não remunerado nesse(s) outro(s) trabalho(s)
+      - name: V4059
+        description: Qual foi o rendimento bruto que ... recebeu/fez nesse(s) outro(s) trabalho(s), no mês de referência? (variável auxiliar)
+      - name: V40591
+        description: Recebeu/fez nesse(s) outro(s) trabalho(s) rendimento/retirada em dinheiro no mês de referência
+      - name: V405911
+        description: Número da faixa do rendimento/retirada em dinheiro
+      - name: V405912
+        description: Valor em dinheiro do rendimento mensal que recebeu nesse(s) outro(s) trabalho(s) no mês de referência
+      - name: V40592
+        description: Recebeu/fez nesse(s) outro(s) trabalhos no mês de referencia, rendimento/retirada em produtos e mercadorias
+      - name: V405921
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      - name: V405922
+        description: Valor estimado do produtos e mercadorias que recebia normalmente nesse(s) outro(s) trabalho(s) no mês de referência
+      - name: V4062
+        description: Quantas horas ... trabalhava normalmente, por semana, nesse(s) outro(s) trabalho(s)?
+      - name: V4062C
+        description: Quantas horas ... trabalhou efetivamente na semana de referência nesses outros trabalhos?
+      - name: V4063
+        description: '... gostaria de trabalhar mais horas do que as ... (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de referência?'
+      - name: V4063A
+        description: '... gostaria de trabalhar mais horas do que as ... (soma das horas declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?'
+      - name: V4064
+        description: No mês de referência, ... estaria disponível para trabalhar mais do que as (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de referência?
+      - name: V4064A
+        description: No mês de referência, ... estaria disponível para trabalhar mais do que as (soma das horas declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?
+      - name: V4071
+        description: No período de ... a ... (período de referência de 30 dias), ... Tomou alguma providência para conseguir trabalho, seja um emprego ou um negócio próprio?
+      - name: V4072
+        description: No período de ... a ... (período de referência de 30 dias), qual foi a principal providência que ... tomou para conseguir trabalho?
+      - name: V4072A
+        description: No período de ... a ... (período de referência de 30 dias), qual foi a principal providência que ... tomou para conseguir trabalho?
+      - name: V4073
+        description: Embora não tenha tomado providência para conseguir trabalho, gostaria de ter trabalhado na semana de ... a ... (semana de referência)?
+      - name: V4074
+        description: Qual foi o principal motivo de ... não ter tomado providência para conseguir trabalho no período de ... a ... (período de referência de 30 dias)?
+      - name: V4074A
+        description: Qual foi o principal motivo de ... não ter tomado providência para conseguir trabalho no período de ... a ... (período de referência de 30 dias)?
+      - name: V4075A
+        description: Quanto tempo depois de ... (último dia da semana de referência) irá começar esse trabalho que conseguiu?
+      - name: V4075A1
+        description: Número de meses para começar o trabalho que conseguiu
+      - name: V4076
+        description: Até o dia ... (último dia da semana de referência), fazia quanto tempo que ... estava sem qualquer trabalho e tentando conseguir trabalho?
+      - name: V40761
+        description: fazia quanto tempo que vinha procurando trabalho (de 1 mês a menos de 1 ano)
+      - name: V40762
+        description: fazia quanto tempo que vinha procurando trabalho (de 1 ano a menos de 2 anos)
+      - name: V40763
+        description: fazia quanto tempo vinha procurando trabalho (2 anos ou mais)
+      - name: V4077
+        description: Se tivesse conseguido um trabalho, ... poderia ter começado a trabalhar na semana de ... a ... (semana de referência)?
+      - name: V4078
+        description: Qual foi o principal motivo para ... não querer(poder começar a) trabalhar na semana de  ... a ... (semana de referência)?
+      - name: V4078A
+        description: Qual foi o principal motivo para ... não querer(poder começar a) trabalhar na semana de ... a ... (semana de referência)?
+      - name: V4082
+        description: No período de captação de 358 dias, ... trabalhou por pelo menos 1 hora?
+      - name: VD2002
+        description: Condição no domicílio
+      - name: VD2003
+        description: Número de componentes do domicílio (exclusive as pessoas cuja condição no domicílio era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD2004
+        description: Espécie da unidade doméstica
+      - name: VD3004
+        description: Nível de instrução mais elevado alcançado (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
+      - name: VD3005
+        description: Anos de estudo (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
+      - name: VD3006
+        description: Grupos de anos de estudo (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
+      - name: VD4001
+        description: Condição em relação à força de trabalho na semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4002
+        description: Condição de ocupação na semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4003
+        description: Força de trabalho potencial para pessoas de 14 anos ou mais de idade
+      - name: VD4004
+        description: Subocupação por insuficiência de horas efetivamente trabalhadas em todos os trabalhos
+      - name: VD4004A
+        description: Subocupação por insuficiência de horas habitualmente trabalhadas em todos os trabalhos
+      - name: VD4005
+        description: Pessoas desalentadas na semana de referência
+      - name: VD4007
+        description: Posição na ocupação no trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4008
+        description: Posição na ocupação no trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade (com subcategorias de empregados)
+      - name: VD4009
+        description: Posição na ocupação e categoria do emprego do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4010
+        description: Grupamentos de atividade principal do empreendimento do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4011
+        description: Grupamentos ocupacionais do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4012
+        description: Contribuição para instituto de previdência em qualquer trabalho da semana de referência para pessoas de 14 anos ou mais de idade
+      - name: VD4013
+        description: Faixa das horas habitualmente trabalhadas por semana em todos os trabalhos para pessoas de 14 anos ou mais de idade
+      - name: VD4014
+        description: Faixa das horas efetivamente trabalhadas na semana de referência em todos os trabalhos para pessoas de 14 anos ou mais de idade
+      - name: VD4015
+        description: Tipo de remuneração habitualmente recebida no trabalho principal para pessoas de 14 anos ou mais de idade
+      - name: VD4016
+        description: Rendimento mensal habitual do trabalho principal para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias no trabalho principal)
+      - name: VD4017
+        description: Rendimento mensal efetivo do trabalho principal para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias no trabalho principal)
+      - name: VD4018
+        description: Tipo de remuneração habitualmente recebida em todos os trabalhos para pessoas de 14 anos ou mais de idade
+      - name: VD4019
+        description: Rendimento mensal habitual de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)
+      - name: VD4020
+        description: Rendimento mensal efetivo de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)
+      - name: VD4023
+        description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado ou não estava disponível para iniciar um trabalho
+      - name: VD4030
+        description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado ou não estava disponível para iniciar um trabalho
+      - name: VD4031
+        description: Horas habitualmente trabalhadas por semana em todos os trabalhos para pessoas de 14 anos ou mais de idade
+      - name: VD4032
+        description: Horas efetivamente trabalhadas na semana de referência no trabalho principal para pessoas de 14 anos ou mais de idade
+      - name: VD4033
+        description: Horas efetivamente trabalhadas na semana de referência no trabalho secundário para pessoas de 14 anos ou mais de idade
+      - name: VD4034
+        description: Horas efetivamente trabalhadas na semana de referência nos outros trabalhos para pessoas de 14 anos ou mais de idade
+      - name: VD4035
+        description: Horas efetivamente trabalhadas na semana de referência em todos os trabalhos para pessoas de 14 anos ou mais de idade
+      - name: VD4036
+        description: Faixa das horas habitualmente trabalhadas por semana no trabalho principal para pessoas de 14 anos ou mais de idade
+      - name: VD4037
+        description: Faixa das horas efetivamente trabalhadas na semana de referência no trabalho principal para pessoas de 14 anos ou mais de idade
+      - name: V1028001
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028002
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028003
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028004
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028005
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028006
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028007
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028008
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028009
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028010
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028011
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028012
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028013
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028014
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028015
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028016
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028017
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028018
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028019
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028020
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028021
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028022
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028023
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028024
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028025
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028026
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028027
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028028
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028029
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028030
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028031
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028032
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028033
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028034
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028035
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028036
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028037
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028038
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028039
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028040
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028041
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028042
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028043
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028044
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028045
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028046
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028047
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028048
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028049
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028050
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028051
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028052
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028053
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028054
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028055
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028056
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028057
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028058
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028059
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028060
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028061
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028062
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028063
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028064
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028065
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028066
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028067
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028068
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028069
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028070
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028071
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028072
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028073
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028074
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028075
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028076
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028077
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028078
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028079
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028080
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028081
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028082
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028083
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028084
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028085
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028086
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028087
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028088
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028089
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028090
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028091
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028092
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028093
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028094
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028095
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028096
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028097
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028098
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028099
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028100
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028101
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028102
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028103
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028104
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028105
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028106
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028107
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028108
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028109
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028110
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028111
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028112
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028113
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028114
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028115
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028116
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028117
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028118
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028119
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028120
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028121
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028122
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028123
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028124
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028125
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028126
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028127
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028128
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028129
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028130
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028131
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028132
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028133
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028134
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028135
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028136
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028137
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028138
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028139
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028140
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028141
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028142
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028143
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028144
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028145
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028146
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028147
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028148
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028149
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028150
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028151
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028152
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028153
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028154
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028155
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028156
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028157
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028158
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028159
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028160
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028161
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028162
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028163
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028164
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028165
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028166
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028167
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028168
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028169
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028170
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028171
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028172
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028173
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028174
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028175
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028176
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028177
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028178
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028179
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028180
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028181
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028182
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028183
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028184
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028185
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028186
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028187
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028188
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028189
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028190
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028191
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028192
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028193
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028194
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028195
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028196
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028197
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028198
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028199
+        description: Peso replicado do domicílio e das pessoas
+      - name: V1028200
+        description: Peso replicado do domicílio e das pessoas
+      - name: habitual
+        description: Habitual (campo derivado)
+      - name: efetivo
+        description: Efetivo (campo derivado)
