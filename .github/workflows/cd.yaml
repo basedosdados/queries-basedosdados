@@ -58,7 +58,7 @@ jobs:
           kubectl rollout status -w -n prefect deployment/dbt-rpc-prod
           kubectl rollout status -w -n prefect-agent-basedosdados deployment/dbt-rpc-dev
           kubectl rollout status -w -n prefect-agent-basedosdados deployment/dbt-rpc-prod
-          kubectl rollout status -w -n prefect-agent-projects deployment/dbt-rpc-dev
-          kubectl rollout status -w -n prefect-agent-projects deployment/dbt-rpc-prod
-          kubectl rollout status -w -n prefect-agent-questions deployment/dbt-rpc-dev
-          kubectl rollout status -w -n prefect-agent-questions deployment/dbt-rpc-prod
+          kubectl rollout status -w -n prefect-agent-basedosdados-projetos deployment/dbt-rpc-dev
+          kubectl rollout status -w -n prefect-agent-basedosdados-projetos deployment/dbt-rpc-prod
+          kubectl rollout status -w -n prefect-agent-basedosdados-perguntas deployment/dbt-rpc-dev
+          kubectl rollout status -w -n prefect-agent-basedosdados-perguntas deployment/dbt-rpc-prod
