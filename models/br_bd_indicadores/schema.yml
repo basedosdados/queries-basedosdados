@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: metricas_tweets
-    description: "dbt model for metricas_tweets"
+    description: "dados de metricas de tweets"
     columns:
       - name: upload_ts
         description: "timestamp of data extraction [partition variable]"
@@ -35,7 +35,7 @@ models:
       - name: listed_count
         description: "user's listed count at upload day"
   - name: twitter_metrics_agg
-    description: "dbt model for twitter_metrics_agg"
+    description: "dados agregados de métricas de tweets"
     columns:
       - name: upload_day
         description: "day of data extraction [partition variable]"
@@ -61,3 +61,20 @@ models:
         description: "total tweets up to upload_day"
       - name: listed
         description: "total list that BD's account was listed up to upload_day"
+  - name: website_user
+    description: "dados de acessos ao site da BD"
+    columns:
+      - name: reference_date
+        description: Reference date
+      - name: users_1_day
+        description: Number of users in 1 day
+      - name: users_7_days
+        description: Number of users in the last 7 days
+      - name: users_14_days
+        description: Number of users in the last 14 days
+      - name: users_28_days
+        description: Number of users in the last 28 days
+      - name: users_30_days
+        description: Number of users in the last 30 days
+      - name: new_users
+        description: Number of new users in that date
