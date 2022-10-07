@@ -43,6 +43,9 @@ models:
     example:
       +materialized: table # Materialization type (table, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
+    br_tse_eleicoes_2022:
+      +materialized: table
+      +schema: br_tse_eleicoes_2022
     br_bd_indicadores:
       +materialized: table
       +schema: br_bd_indicadores
