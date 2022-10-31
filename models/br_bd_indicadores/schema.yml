@@ -78,3 +78,22 @@ models:
         description: Number of users in the last 30 days
       - name: new_users
         description: Number of new users in that date
+  - name: contabilidade
+    description: "contabilidade da BD"
+    columns:
+      - name: ano_competencia
+        description: "ano de competência"
+      - name: mes_competencia
+        description: "mês de competência"
+      - name: ano_caixa
+        description: "ano de caixa"
+      - name: mes_caixa
+        description: "mês de caixa"
+      - name: categoria
+        description: "categoria de despesa"
+      - name: tipo
+        description: "tipo de despesa"
+      - name: frequencia
+        description: "frequência de pagamento"
+      - name: valor
+        description: "valor da despesa"
