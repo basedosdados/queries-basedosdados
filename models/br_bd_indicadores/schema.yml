@@ -97,3 +97,22 @@ models:
         description: "frequência de pagamento"
       - name: valor
         description: "valor da despesa"
+  - name: receitas_planejadas
+    description: "receitas planejadas da BD"
+    columns:
+      - name: ano_competencia
+        description: "ano de competência"
+      - name: mes_competencia
+        description: "mês de competência"
+      - name: ano_caixa
+        description: "ano de caixa"
+      - name: mes_caixa
+        description: "mês de caixa"
+      - name: categoria
+        description: "categoria de receita"
+      - name: tipo
+        description: "tipo de receita"
+      - name: frequencia
+        description: "frequência de recebimento"
+      - name: valor
+        description: "valor da receita"
