@@ -7,4 +7,4 @@ SAFE_CAST(categoria AS STRING) categoria,
 SAFE_CAST(tipo AS STRING) tipo,
 SAFE_CAST(frequencia AS STRING) frequencia,
 SAFE_CAST(valor AS FLOAT64) valor
-FROM basedosdados-dev.br_bd_indicadores_staging.receitas_planejadas AS t
+FROM basedosdados-staging.br_bd_indicadores_staging.receitas_planejadas AS t
