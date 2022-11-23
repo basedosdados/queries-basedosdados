@@ -116,3 +116,39 @@ models:
         description: "frequência de recebimento"
       - name: valor
         description: "valor da receita"
+  - name: equipes
+    description: "equipes da BD"
+    columns:
+      - name: id_pessoa
+        description: "id da pessoa"
+      - name: data_inicio
+        description: "data de início na equipe"
+      - name: data_fim
+        description: "data de saída da equipe"
+      - name: equipe
+        description: "nome da equipe"
+      - name: nivel
+        description: "nível da pessoa na equipe"
+      - name: cargo
+        description: "cargo da pessoa na equipe"
+  - name: pessoas
+    description: "pessoas da BD"
+    columns:
+      - name: id
+        description: "id da pessoa"
+      - name: nome
+        description: "nome"
+      - name: descricao
+        description: "descrição pessoal"
+      - name: email
+        description: "email pessoal"
+      - name: twitter
+        description: "twitter"
+      - name: github
+        description: "github"
+      - name: website
+        description: "website pessoal"
+      - name: linkedin
+        description: "perfil no linkedin"
+      - name: url_foto
+        description: "url da foto"
