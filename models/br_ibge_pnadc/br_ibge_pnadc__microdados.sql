@@ -7,7 +7,7 @@
       "data_type": "int64",
       "range": {
         "start": 2012,
-        "end": 2015,
+        "end": 2025,
         "interval": 1}
     },
     cluster_by = ["ano", "sigla_uf"],
