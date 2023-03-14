@@ -1,4 +1,18 @@
-{{ config(alias='microdados', schema='br_ibge_pnadc') }}
+{{ config(
+    alias='microdados',
+    schema='br_ibge_pnadc',
+    materialized='table',
+     partition_by={
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2012,
+        "end": 2015,
+        "interval": 1}
+    },
+    cluster_by = ["ano", "sigla_uf"],
+    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+}}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(trimestre AS INT64) trimestre,
