@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: br_bcb_estban__municipio
+    description: "dbt model for municipio month table"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: cnpj_basico
+        description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros dígitos)
+      - name: instituicao
+        description: Nome da Instituição Financeira (IF)
+      - name: agencias_esperadas	
+        description: Quantidade de agências esperadas da IF no município  
+      - name: agencias_processadas
+        description: Quantidade de agências processadas da IF no município
+      - name: id_verbete
+        description: Código do verbete
+      - name: valor
+        description: Valores
+  - name: br_bcb_estban__agencia
+    description: "dbt model for agencia month table"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: cnpj_basico
+        description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros dígitos)
+      - name: instituicao
+        description: Nome da Instituição Financeira (IF)
+      - name: cnpj_agencia
+        description: CNPJ da agência bancária
+      - name: id_verbete
+        description: Código do verbete
+      - name: valor
+        description: Valores

@@ -91,3 +91,6 @@ models:
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
+    br_bcb_estban:
+      +materialized: table
+      +schema: br_bcb_estban 
