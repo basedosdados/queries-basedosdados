@@ -18,4 +18,4 @@ SELECT
   SAFE_CAST(published_by AS STRING) published_by
   SAFE_CAST(cleaned_by AS STRING) cleaned_by
   SAFE_CAST(missing_metadata AS STRING) missing_metadata
-FROM `basedosdados-dev.br_bd_metadados_staging.tables` AS t
+FROM `basedosdados-staging.br_bd_metadados_staging.tables` AS t
