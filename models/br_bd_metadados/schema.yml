@@ -127,6 +127,8 @@ models:
     columns:
       - name: dataset_id
         description: ""
+      - name: dataset_name
+        description: ""
       - name: id
         description: ""
       - name: table_id
@@ -149,6 +151,18 @@ models:
         description: ""
       - name: outdated
         description: ""
+      - name: metadata
+        description: ""
+      - name: data
+        description: "" 
+      - name: release
+        description: ""               
+      - name: published_by
+        description: ""
+      - name: cleaned_by
+        description: ""
+      - name: missing_metadata
+        description: ""     
   - name: columns
     description: "Metadata on columns in the BD+ platform."
     columns:
