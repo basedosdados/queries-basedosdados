@@ -28,3 +28,39 @@ models:
         description: Tipo de Produto
       - name: acessos
         description: Número total de contratos
+
+  - name: br_anatel_banda_larga_fixa__densidade_brasil
+    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano desde março de 2007"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+
+  - name: br_anatel_banda_larga_fixa__densidade_uf
+    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+        
+  - name: br_anatel_banda_larga_fixa__densidade_municipio
+    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      -name: id_municipio
+        description: ID Município - IBGE 7 Dígitos    
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
