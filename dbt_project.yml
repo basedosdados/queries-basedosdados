@@ -94,3 +94,6 @@ models:
     br_bcb_estban:
       +materialized: table
       +schema: br_bcb_estban 
+    br_inmet_bdmep:
+      +materialized: table
+      +schema: br_inmet_bdmep      
