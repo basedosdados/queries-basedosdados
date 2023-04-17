@@ -60,7 +60,7 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
-      -name: id_municipio
+      - name: id_municipio
         description: ID Município - IBGE 7 Dígitos    
       - name: densidade
         description: Densidade de acessos por 100 domicílios
