@@ -11,4 +11,4 @@ SELECT
     SAFE_CAST(agencias_processadas AS INT64) agencias_processadas,
     SAFE_CAST(id_verbete AS STRING) id_verbete,
     SAFE_CAST(valor AS FLOAT64) valor
-FROM basedosdados-dev.br_bcb_estban_staging.municipio AS t
+FROM basedosdados-staging.br_bcb_estban_staging.municipio AS t

@@ -10,6 +10,6 @@ SELECT
     SAFE_CAST(cnpj_agencia AS STRING) cnpj_agencia,
     SAFE_CAST(id_verbete AS STRING) id_verbete,
     SAFE_CAST(valor AS FLOAT64) valor
-FROM basedosdados-dev.br_bcb_estban_staging.agencia AS t
+FROM basedosdados-staging.br_bcb_estban_staging.agencia AS t
 
 
