@@ -14,4 +14,4 @@ SAFE_CAST(velocidade AS STRING) velocidade,
 SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(acessos AS INT64) acessos
 
-FROM basedosdados-staging.br_anatel_banda_larga_fixa_staging.densidade_uf AS t
+FROM basedosdados-staging.br_anatel_banda_larga_fixa_staging.microdados AS t
