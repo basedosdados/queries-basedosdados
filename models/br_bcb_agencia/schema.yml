@@ -15,7 +15,7 @@ models:
       - name: data_inicio
         description: "Data de criação da agência"
       - name: cnpj
-        description: "Cadastro Nacional de Pessoa Júridica (CNPJ)""
+        description: "Cadastro Nacional de Pessoa Júridica (CNPJ)"
       - name: nome_agencia	
         description: "Nome da Agência"  
       - name: instituicao
