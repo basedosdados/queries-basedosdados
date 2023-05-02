@@ -19,4 +19,4 @@ SAFE_CAST(bairro AS STRING) bairro,
 SAFE_CAST(ddd AS STRING) ddd,
 SAFE_CAST(fone AS STRING) fone,
 SAFE_CAST(id_instalacao AS STRING) id_instalacao
-FROM basedosdados-staging.br_bcb_agencia_staging.agencia AS t
+FROM basedosdados-dev.br_bcb_agencia_staging.agencia AS t
