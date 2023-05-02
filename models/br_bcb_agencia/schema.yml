@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: br_bcb_agencia__agencia
+    description: "dbt model for agencia month table"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: data_inicio
+        description: Data de criação da agência
+      - name: cnpj
+        description: Cadastro Nacional de Pessoa Júridica (CNPJ)
+      - name: nome_agencia	
+        description: Nome da Agência  
+      - name: instituicao
+        description: Nome da Instituição Financeira (IF)
+      - name: segmento
+        description: Segemento de atuação da IF
+      - name: id_compe_bcb_agencia
+        description: Identificador do Sistema de Operações Monetárias e Compensações de Outros Papéis (COMPE) do Banco Central da agência
+      - name: id_compe_bcb_instituicao
+        description: Identificador do Sistema de Operações Monetárias e Compensações de Outros Papéis (COMPE) do Banco Central da instituição
+      - name: nome_agencia	
+        description: Nome da Agência  
+      - name: cep
+        description: CEP
+      - name: endereco
+        description: endereço da agência
+      - name: complemento	
+        description: Complemento do endereço  
+      - name: bairro
+        description: Bairro
+      - name: ddd
+        description: ddd
+      - name: fone
+        description: Fone
+      - name: id_instalacao
+        description: identificador de instalação da agência     
