@@ -37,7 +37,7 @@ models:
       - name: bairro
         description: "Bairro"
       - name: ddd
-        description: ddd
+        description: "ddd"
       - name: fone
         description: "Fone"
       - name: id_instalacao
