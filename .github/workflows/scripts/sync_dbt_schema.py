@@ -1,13 +1,12 @@
 from argparse import ArgumentParser
 from copy import deepcopy
 import json
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 from backend import Backend
 from utils import get_datasets_tables_from_modified_files
 
 
-# TODO: if a modified file doesn't exist (aka deleted) remove it from metadata.json
 def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str, Any]:
     """
     Builds a JSON with the whole metadata for a table.
@@ -20,9 +19,18 @@ def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str
     Returns:
         str: JSON with the whole metadata for a table.
     """
-    print(f"Building metadata for {dataset_id}.{table_id}...")
-    # TODO: handle __all__ for table_id
-    return backend.get_table_config(dataset_id, table_id)
+    if table_id == "__all__":
+        table_slugs = [
+            table["slug"]
+            for table in backend._get_tables_for_dataset(dataset_id)["tables"]
+        ]
+    else:
+        table_slugs = [table_id]
+    metadatas = []
+    for table_slug in table_slugs:
+        print(f"Building metadata for `{dataset_id}.{table_slug}`...")
+        metadatas.append(backend.get_table_config(dataset_id, table_slug))
+    return metadatas
 
 
 def merge_metadatas(metadatas: List[Dict[str, Any]]):
@@ -144,7 +152,9 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
     return final_metadata
 
 
-def update_metadata_json(final_metadata: Dict[str, Any]) -> None:
+def update_metadata_json(
+    final_metadata: Dict[str, Any], deleted_datasets_tables: List[Tuple[str, str]]
+) -> None:
     """
     Gets the latest version of metadata.json file, if exists, and updates it with the new metadata.
     """
@@ -158,6 +168,7 @@ def update_metadata_json(final_metadata: Dict[str, Any]) -> None:
     for dataset_slug, dataset_metadata in final_metadata.items():
         # If it's not yet on the file, simply add it
         if dataset_slug not in metadata:
+            print(f"Adding dataset `{dataset_slug}`...")
             metadata[dataset_slug] = dataset_metadata
         # If it's already there
         else:
@@ -167,6 +178,7 @@ def update_metadata_json(final_metadata: Dict[str, Any]) -> None:
             ]
             # For each table in the new metadata
             for table in dataset_metadata["tables"]:
+                print(f"Adding/updating table `{dataset_slug}.{table['slug']}`...")
                 # If it's not yet on the file, simply add it
                 if table["slug"] not in metadata_dataset_tables:
                     metadata[dataset_slug]["tables"].append(table)
@@ -176,6 +188,27 @@ def update_metadata_json(final_metadata: Dict[str, Any]) -> None:
                     for metadata_table in metadata[dataset_slug]["tables"]:
                         if metadata_table["slug"] == table["slug"]:
                             metadata_table.update(table)
+
+    # Now we remove the deleted datasets and tables
+    for dataset_slug, table_slug in deleted_datasets_tables:
+        # If the table_slug is __all__, we remove the whole dataset
+        if table_slug == "__all__":
+            if dataset_slug in metadata:
+                print(f"Removing dataset `{dataset_slug}`...")
+                del metadata[dataset_slug]
+        # Otherwise, we remove only the table
+        else:
+            print(f"Removing table `{dataset_slug}.{table_slug}`...")
+            if dataset_slug in metadata:
+                metadata_dataset_tables = [
+                    table["slug"] for table in metadata[dataset_slug]["tables"]
+                ]
+                if table_slug in metadata_dataset_tables:
+                    metadata[dataset_slug]["tables"] = [
+                        table
+                        for table in metadata[dataset_slug]["tables"]
+                        if table["slug"] != table_slug
+                    ]
 
     # Write the new metadata to the file
     with open("metadata.json", "w") as f:
@@ -207,19 +240,30 @@ if __name__ == "__main__":
     args = arg_parser.parse_args()
 
     # Get datasets and tables from modified files
-    datasets_tables = get_datasets_tables_from_modified_files(args.modified_files)
+    datasets_tables = get_datasets_tables_from_modified_files(
+        args.modified_files, show_deleted=True
+    )
+
+    # Split deleted datasets and tables
+    deleted_datasets_tables = []
+    existing_datasets_tables = []
+    for dataset_id, table_id, exists in datasets_tables:
+        if exists:
+            existing_datasets_tables.append((dataset_id, table_id))
+        else:
+            deleted_datasets_tables.append((dataset_id, table_id))
 
     # Initialize backend
     backend = Backend(args.graphql_url)
 
     # Build metadatas for each table
     metadatas = []
-    for dataset_id, table_id in datasets_tables:
+    for dataset_id, table_id in existing_datasets_tables:
         metadata = build_metadata(dataset_id, table_id, backend)
-        metadatas.append(metadata)
+        metadatas.extend(metadata)
 
     # Merge metadatas
     final_metadata = merge_metadatas(metadatas)
 
     # Update metadata.json file
-    update_metadata_json(final_metadata)
+    update_metadata_json(final_metadata, deleted_datasets_tables)

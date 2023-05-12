@@ -247,6 +247,33 @@ class Backend:
         response = self._execute_query(query=query, variables=variables)
         return self._simplify_graphql_response(response).get("allTable")[0]
 
+    def _get_tables_for_dataset(self, dataset_id: str) -> Dict[str, Any]:
+        """
+        Gets all table slugs for a dataset.
+        """
+        dataset_id = self._get_dataset_id_from_slug(dataset_id)
+        query = """
+            query ($dataset_id: ID!) {
+                allDataset (id: $dataset_id) {
+                    edges {
+                        node {
+                            tables {
+                                edges {
+                                    node {
+                                        _id,
+                                        slug
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        """
+        variables = {"dataset_id": dataset_id}
+        response = self._execute_query(query=query, variables=variables)
+        return self._simplify_graphql_response(response).get("allDataset")[0]
+
     def _simplify_graphql_response(self, response: dict) -> dict:
         """
         Simplify the graphql response
