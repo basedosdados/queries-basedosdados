@@ -180,37 +180,64 @@ class Backend:
         """
 
         query = """
-            query ($table_id: ID!){
-                allTable(id: $table_id) {
+            query ($table_id: ID!) {
+                allTable (id: $table_id) {
                     edges {
                         node {
-                            slug
+                            slug,
+                            name,
+                            description,
                             dataset {
-                                slug
-                                organization {
-                                    slug
-                                }
-                            }
-                            namePt
-                            descriptionPt
-                            columns {
-                            edges {
-                                node {
-                                    name
-                                    isInStaging
-                                    isPartition
-                                    descriptionPt
-                                    observations
-                                    bigqueryType {
-                                        name
+                                slug,
+                                name,
+                                description,
+                                themes {
+                                    edges {
+                                        node {
+                                            slug,
+                                            name,
+                                        }
+                                    }
+                                },
+                                tags {
+                                    edges {
+                                        node {
+                                            slug
+                                            name
+                                        }
                                     }
                                 }
-                            }
+                            },
+                            status {
+                                name,
+                                slug
+                            },
+                            license {
+                                name,
+                                slug
+                            },
+                            pipeline {
+                                githubUrl
+                            },
+                            publishedBy {
+                                firstName,
+                                lastName,
+                                email
+                            },
+                            dataCleanedBy {
+                                firstName,
+                                lastName,
+                                email
+                            },
+                            dataCleaningDescription,
+                            dataCleaningCodeUrl,
+                            rawDataUrl,
+                            auxiliaryFilesUrl,
+                            architectureUrl,
                         }
                     }
                 }
-                }
-            }    
+            }
         """
         variables = {
             "table_id": self._get_table_id_from_slug(
