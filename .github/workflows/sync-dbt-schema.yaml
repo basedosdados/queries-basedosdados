@@ -1,0 +1,2 @@
+# Trigger on PR creation or adding label 'sync-dbt-schema'
+# Use the script at scripts/sync_dbt_schema.py
