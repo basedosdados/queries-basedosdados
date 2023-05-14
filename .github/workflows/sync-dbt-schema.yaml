@@ -1,5 +1,3 @@
-# Trigger on PR creation or adding label 'sync-dbt-schema'
-# Use the script at scripts/sync_dbt_schema.py
 name: Sync DBT schema
 
 on:
@@ -13,6 +11,7 @@ on:
 
 jobs:
   sync-dbt-schema:
+    name: Sync DBT schema
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
