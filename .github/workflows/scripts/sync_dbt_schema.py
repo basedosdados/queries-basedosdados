@@ -230,7 +230,6 @@ if __name__ == "__main__":
     # Add list of modified files argument
     arg_parser.add_argument(
         "--modified-files",
-        nargs="+",
         type=str,
         required=True,
         help="List of modified files.",
@@ -240,8 +239,9 @@ if __name__ == "__main__":
     args = arg_parser.parse_args()
 
     # Get datasets and tables from modified files
+    modified_files = args.modified_files.split(",")
     datasets_tables = get_datasets_tables_from_modified_files(
-        args.modified_files, show_deleted=True
+        modified_files, show_deleted=True
     )
 
     # Split deleted datasets and tables

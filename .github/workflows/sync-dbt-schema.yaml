@@ -1,2 +1,39 @@
 # Trigger on PR creation or adding label 'sync-dbt-schema'
 # Use the script at scripts/sync_dbt_schema.py
+name: Sync DBT schema
+
+on:
+  pull_request:
+    types: [labeled, opened]
+    branches:
+      - master
+    paths:
+      - 'models/**'
+      - '.github/workflows/sync-dbt-schema.yaml'
+
+jobs:
+  sync-dbt-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get all changed files using a comma separator
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          separator: ','
+
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-actions.txt
+
+      - name: Run script for syncing DBT schema
+        run: |
+          python .github/workflows/scripts/sync_dbt_schema.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url https://staging.api.basedosdados.org/api/v1/graphql
