@@ -76,51 +76,60 @@ class Backend:
             )
         return client.execute(gql(query), variable_values=variables)
 
-    def _get_dataset_id_from_slug(self, dataset_slug):
+    def _get_dataset_id_from_name(self, gcp_dataset_id):
         query = """
-            query ($slug: String!){
-                allDataset(slug: $slug) {
+            query ($gcp_dataset_id: String!){
+                allCloudtable(gcpDatasetId: $gcp_dataset_id) {
                     edges {
                         node {
-                            _id,
-                        }
-                    }
-                }
-            }
-        """
-        variables = {"slug": dataset_slug}
-        response = self._execute_query(query=query, variables=variables)
-        r = self._simplify_graphql_response(response)
-        if r["allDataset"] != []:
-            return r["allDataset"][0]["_id"]
-        msg = f"{dataset_slug} not found. Please create the metadata first in {self.graphql_url}"
-        raise Exception(msg)
-
-    def _get_table_id_from_slug(self, dataset_slug, table_slug):
-        query = """
-            query ($dataset_Id: ID!, $table_slug: String!){
-                allTable (dataset_Id:$dataset_Id slug:$table_slug){
-                    edges {
-                        node {
-                            _id
+                                table {
+                                    dataset {
+                                        _id
+                                    }
+                            }
                         }
                     }
                 }
             }
         """
 
-        variables = {
-            "dataset_Id": self._get_dataset_id_from_slug(dataset_slug),
-            "table_slug": table_slug,
-        }
+        variables = {"gcp_dataset_id": gcp_dataset_id}
         response = self._execute_query(query=query, variables=variables)
-        r = self._simplify_graphql_response(response)
-        if r["allTable"] != []:
-            return r["allTable"][0]["_id"]
-        msg = f"No table {table_slug} found in {dataset_slug}."
+        r = {} if response is None else self._simplify_graphql_response(response)
+        if r.get("allCloudtable", []) != []:
+            return r.get("allCloudtable")[0].get("table").get("dataset").get("_id")
+        msg = f"{gcp_dataset_id} not found. Please create the metadata first in {self.graphql_url}"
         raise Exception(msg)
 
-    def get_dataset_config(self, dataset_id: str) -> Dict[str, Any]:
+    def _get_table_id_from_name(self, gcp_dataset_id, gcp_table_id):
+        query = """
+            query ($gcp_dataset_id: String!, $gcp_table_id: String!){
+                allCloudtable(gcpDatasetId: $gcp_dataset_id, gcpTableId: $gcp_table_id) {
+                    edges {
+                        node {
+                                table {
+                                    _id
+                            }
+                        }
+                    }
+                }
+            }
+        """
+
+        if gcp_dataset_id:
+            variables = {
+                "gcp_dataset_id": gcp_dataset_id,
+                "gcp_table_id": gcp_table_id,
+            }
+
+            response = self._execute_query(query=query, variables=variables)
+            r = {} if response is None else self._simplify_graphql_response(response)
+            if r.get("allCloudtable", []) != []:
+                return r.get("allCloudtable")[0].get("table").get("_id")
+        msg = f"No table {gcp_table_id} found in {gcp_dataset_id}. Please create in {self.graphql_url}"
+        raise Exception(msg)
+
+    def get_dataset_config(self, gcp_dataset_id: str) -> Dict[str, Any]:
         """
         Get dataset configuration.
 
@@ -163,11 +172,15 @@ class Backend:
             }
         
         """
-        variables = {"dataset_id": self._get_dataset_id_from_slug(dataset_id)}
+        variables = {
+            "dataset_id": self._get_dataset_id_from_name(gcp_dataset_id=gcp_dataset_id)
+        }
         response = self._execute_query(query=query, variables=variables)
         return self._simplify_graphql_response(response).get("allDataset")[0]
 
-    def get_table_config(self, dataset_id: str, table_id: str) -> Dict[str, Any]:
+    def get_table_config(
+        self, gcp_dataset_id: str, gcp_table_id: str
+    ) -> Dict[str, Any]:
         """
         Get table configuration.
 
@@ -240,8 +253,8 @@ class Backend:
             }
         """
         variables = {
-            "table_id": self._get_table_id_from_slug(
-                dataset_slug=dataset_id, table_slug=table_id
+            "table_id": self._get_table_id_from_name(
+                gcp_dataset_id=gcp_dataset_id, gcp_table_id=gcp_table_id
             )
         }
         response = self._execute_query(query=query, variables=variables)
@@ -251,7 +264,7 @@ class Backend:
         """
         Gets all table slugs for a dataset.
         """
-        dataset_id = self._get_dataset_id_from_slug(dataset_id)
+        dataset_id = self._get_dataset_id_from_name(dataset_id)
         query = """
             query ($dataset_id: ID!) {
                 allDataset (id: $dataset_id) {
