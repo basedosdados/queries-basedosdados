@@ -35,4 +35,4 @@ jobs:
 
       - name: Run script for syncing DBT schema
         run: |
-          python .github/workflows/scripts/sync_dbt_schema.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url https://staging.api.basedosdados.org/api/v1/graphql
+          python .github/workflows/scripts/sync_dbt_schema.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }}

@@ -76,6 +76,21 @@ class Backend:
             )
         return client.execute(gql(query), variable_values=variables)
 
+    def _get_token(self, email: str, password: str) -> str:
+        """
+        Get JWT token for authentication.
+        """
+        mutation = """
+            mutation ($email: String!, $password: String!) {
+                tokenAuth(email: $email, password: $password) {
+                    token
+                }
+            }
+        """
+        variables = {"email": email, "password": password}
+        response = self._execute_query(mutation, variables)
+        return response["tokenAuth"]["token"]
+
     def _get_dataset_id_from_name(self, gcp_dataset_id):
         query = """
             query ($gcp_dataset_id: String!){
@@ -293,6 +308,68 @@ class Backend:
         variables = {"dataset_id": dataset_id}
         response = self._execute_query(query=query, variables=variables)
         return self._simplify_graphql_response(response).get("allDataset")[0]
+
+    def _get_status_id(self, status_slug: str) -> str:
+        query = """
+            query ($status_slug: String!) {
+                allStatus (slug: $status_slug) {
+                    edges {
+                        node {
+                            _id
+                        }
+                    }
+                }
+            }
+        """
+        variables = {"status_slug": status_slug}
+        response = self._execute_query(query=query, variables=variables)
+        statuses = self._simplify_graphql_response(response).get("allStatus")
+        if len(statuses) == 0:
+            raise Exception(f"Status {status_slug} not found")
+        return statuses[0].get("_id")
+
+    def modify_status_for_table(
+        self,
+        gcp_dataset_id: str,
+        gcp_table_id: str,
+        status_slug: str,
+        email: str = None,
+        password: str = None,
+        token: str = None,
+    ):
+        # Assert that either (email and password) or token is provided
+        if (email is None or password is None) and token is None:
+            raise Exception(
+                "Either (email and password) or token must be provided to modify status"
+            )
+        # If token is not provided, get token from email and password
+        if token is None:
+            token = self._get_token(email, password)
+        table_id = self._get_table_id_from_name(gcp_dataset_id, gcp_table_id)
+        status_id = self._get_status_id(status_slug)
+        mutation = """
+            mutation ($table_id: ID!, $status_id: ID!) {
+                CreateUpdateTable(input: {
+                    id: $table_id,
+                    status: $status_id
+                }) {
+                    errors {
+                        field,
+                        messages
+                    }
+                }
+            }
+        """
+        variables = {"table_id": table_id, "status_id": status_id}
+        headers = {
+            "Authorization": f"Bearer {token}",
+        }
+        response = self._simplify_graphql_response(
+            self._execute_query(query=mutation, variables=variables, headers=headers)
+        )
+        errors = response.get("CreateUpdateTable").get("errors")
+        if errors:
+            raise Exception(errors)
 
     def _simplify_graphql_response(self, response: dict) -> dict:
         """

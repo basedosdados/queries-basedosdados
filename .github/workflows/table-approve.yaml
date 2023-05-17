@@ -59,4 +59,4 @@ jobs:
 
       - name: Run script for changing metadata status
         run: |
-          echo "TODO: Add script for changing metadata status"
+          python .github/workflows/scripts/change_metadata_status.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --status published --email ${{ secrets.BACKEND_EMAIL }} --password ${{ secrets.BACKEND_EMAIL }}
