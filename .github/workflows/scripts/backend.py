@@ -274,7 +274,14 @@ class Backend:
                                 edges {
                                     node {
                                         _id,
-                                        slug
+                                        slug,
+                                        cloudTables {
+                                            edges {
+                                                node {
+                                                    gcpTableId
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }

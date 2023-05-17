@@ -20,16 +20,17 @@ def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str
         str: JSON with the whole metadata for a table.
     """
     if table_id == "__all__":
-        table_slugs = [
-            table["slug"]
-            for table in backend._get_tables_for_dataset(dataset_id)["tables"]
-        ]
+        table_ids = []
+        tables = backend._get_tables_for_dataset(dataset_id)["tables"]
+        for table in tables:
+            for cloudtable in table["cloudTables"]:
+                table_ids.append(cloudtable["gcpTableId"])
     else:
-        table_slugs = [table_id]
+        table_ids = [table_id]
     metadatas = []
-    for table_slug in table_slugs:
-        print(f"Building metadata for `{dataset_id}.{table_slug}`...")
-        metadatas.append(backend.get_table_config(dataset_id, table_slug))
+    for table_id in table_ids:
+        print(f"Building metadata for `{dataset_id}.{table_id}`...")
+        metadatas.append(backend.get_table_config(dataset_id, table_id))
     return metadatas
 
 
