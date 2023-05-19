@@ -348,17 +348,17 @@ if __name__ == "__main__":
             )
     existing_datasets_tables = expanded_existing_datasets_tables
 
-    # # Sync and create tables
-    # for dataset_id, table_id, _ in existing_datasets_tables:
-    #     print(f"Creating table {dataset_id}.{table_id}...")
-    #     push_table_to_bq(
-    #         dataset_id=dataset_id,
-    #         table_id=table_id,
-    #         source_bucket_name=args.source_bucket_name,
-    #         destination_bucket_name=args.destination_bucket_name,
-    #         backup_bucket_name=args.backup_bucket_name,
-    #     )
-    #     print(f"Table {dataset_id}.{table_id} created.")
+    # Sync and create tables
+    for dataset_id, table_id, _ in existing_datasets_tables:
+        print(f"Creating table {dataset_id}.{table_id}...")
+        push_table_to_bq(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            source_bucket_name=args.source_bucket_name,
+            destination_bucket_name=args.destination_bucket_name,
+            backup_bucket_name=args.backup_bucket_name,
+        )
+        print(f"Table {dataset_id}.{table_id} created.")
 
     # Launch materialization flows
     backend = Backend(args.prefect_backend_url)
