@@ -30,8 +30,12 @@ jobs:
           pip install -r requirements-actions.txt
 
       - name: Wait for deployment to finish
-        run: |
-          TODO: Add script for waiting for deployment to finish
+        uses: lewagon/wait-on-check-action@v1.1.2
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          verbose: true
 
       - name: Run script for approving table
         run: |
