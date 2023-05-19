@@ -1,5 +1,4 @@
 from argparse import ArgumentParser
-from typing import List, Tuple
 
 from backend import Backend
 from utils import expand_alls, get_datasets_tables_from_modified_files
