@@ -31,8 +31,8 @@ def expand_alls(
 
 def get_datasets_tables_from_modified_files(
     modified_files: List[str],
-    show_deleted: bool = False,
-) -> Union[List[Tuple[str, str]], List[Tuple[str, str, bool]]]:
+    show_details: bool = False,
+) -> Union[List[Tuple[str, str]], List[Tuple[str, str, bool, bool]]]:
     """
     Returns a list of (dataset_id, table_id) from the list of modified files.
 
@@ -40,7 +40,11 @@ def get_datasets_tables_from_modified_files(
         modified_files (List[str]): List of modified files.
 
     Returns:
-        List[Tuple[str, str]]: List of (dataset_id, table_id).
+        Union[List[Tuple[str, str]], List[Tuple[str, str, bool, bool]]]: List of
+            tuples with dataset IDs and table IDs. If `show_details` is `True`, then
+            the list of tuples will also contain two booleans: the first boolean
+            indicates whether the file has been deleted, and the second boolean
+            indicates whether the table_id has an alias.
     """
     # Convert to Path
     modified_files: List[Path] = [Path(file) for file in modified_files]
@@ -49,31 +53,33 @@ def get_datasets_tables_from_modified_files(
     sql_files: List[Path] = [file for file in modified_files if file.suffix == ".sql"]
 
     # Extract dataset_id and table_id from SQL files
-    if not show_deleted:
+    if not show_details:
         datasets_tables: List[Tuple[str, str]] = [
             (file.parent.name, file.stem) for file in sql_files
         ]
     else:
         datasets_tables: List[Tuple[str, str, bool]] = [
-            (file.parent.name, file.stem, file.exists()) for file in sql_files
+            (file.parent.name, file.stem, file.exists(), False) for file in sql_files
         ]
 
     # Post-process table_id:
     # - Some of `table_id` will have the format `{dataset_id}__{table_id}`. We must
     #   remove the `{dataset_id}__` part.
     new_datasets_tables: List[Tuple[str, str]] = []
-    if not show_deleted:
+    if not show_details:
         for dataset_id, table_id in datasets_tables:
             crop_str = f"{dataset_id}__"
             if table_id.startswith(crop_str):
                 table_id = table_id[len(crop_str) :]
             new_datasets_tables.append((dataset_id, table_id))
     else:
-        for dataset_id, table_id, exists in datasets_tables:
+        for dataset_id, table_id, exists, _ in datasets_tables:
+            alias = False
             crop_str = f"{dataset_id}__"
             if table_id.startswith(crop_str):
                 table_id = table_id[len(crop_str) :]
-            new_datasets_tables.append((dataset_id, table_id, exists))
+                alias = True
+            new_datasets_tables.append((dataset_id, table_id, exists, alias))
     datasets_tables = new_datasets_tables
 
     # Get schema files
@@ -88,9 +94,9 @@ def get_datasets_tables_from_modified_files(
     for schema_file in schema_files:
         dataset_id = schema_file.parent.name
         table_id = "__all__"
-        if not show_deleted:
+        if not show_details:
             datasets_tables.append((dataset_id, table_id))
         else:
-            datasets_tables.append((dataset_id, table_id, schema_file.exists()))
+            datasets_tables.append((dataset_id, table_id, schema_file.exists(), False))
 
     return datasets_tables
