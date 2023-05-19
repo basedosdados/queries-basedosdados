@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from pathlib import Path
 import sys
 from time import sleep
 import traceback
@@ -78,22 +79,75 @@ def push_table_to_bq(
             traceback.print_exc(file=sys.stderr)
             print()
 
+    file_path = save_header_files(dataset_id, table_id)
+
     # create table object of selected table and dataset ID
     tb = bd.Table(dataset_id=dataset_id, table_id=table_id)
 
     # delete table from staging and prod if exists
+    print("DELETE TABLE FROM STAGING AND PROD")
     tb.delete(mode="staging")
 
+    print("CREATE NEW TABLE IN STAGING")
     # create the staging table in bigquery
     tb.create(
-        path=f"./staging/{dataset_id}/{table_id}/",
+        path="./downloaded_data/",
         if_table_exists="replace",
         if_storage_data_exists="pass",
         dataset_is_public=True,
     )
 
+    print("UPDATE DATASET DESCRIPTION")
     # updates the dataset description
     Dataset(dataset_id).update(mode="prod")
+
+    print("DELETE HEADER FILE FROM STAGING STORAGE")
+    st = Storage(dataset_id=dataset_id, table_id=table_id)
+    st.delete_file(filename=file_path.replace("./downloaded_data/", ""), mode="staging")
+
+
+def save_header_files(dataset_id, table_id):
+    print("GET FIRST BLOB PATH")
+
+    ref = Storage(dataset_id=dataset_id, table_id=table_id)
+    blobs = (
+        ref.client["storage_staging"]
+        .bucket("basedosdados-dev")
+        .list_blobs(prefix=f"staging/{dataset_id}/{table_id}/")
+    )
+    ## only needs the first bloob
+    partitions = []
+    for blob in blobs:
+        blob_path = str(blob.name).replace(
+            f"staging/{dataset_id}/{table_id}/", "./downloaded_data/"
+        )
+        for folder in blob.name.split("/"):
+            if "=" in folder:
+                partitions.append(folder.split("=")[0])
+        break
+    ### save table header in storage
+
+    print("DOWNLOAD HEADER FILE FROM STAGING DATASET")
+    query = f"""
+    SELECT * FROM `basedosdados-dev.{dataset_id}_staging.{table_id}` LIMIT 1
+    """
+    df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
+    df = df.drop(columns=partitions)
+
+    file_name = blob_path.split("/")[-1]
+    file_type = file_name.split(".")[-1]
+
+    path = Path(blob_path.replace(f"/{file_name}", ""))
+    path.mkdir(parents=True, exist_ok=True)
+
+    if file_type == "csv":
+        file_path = f"./{path}/table_approve_temp_file_271828.csv"
+        df.to_csv(file_path, index=False)
+    if file_type == "parquet":
+        file_path = f"./{path}/table_approve_temp_file_271828.parquet"
+        df.to_parquet(file_path)
+    print("SAVE HEADER FILE: ", file_path)
+    return file_path
 
 
 def sync_bucket(
@@ -176,18 +230,6 @@ def sync_bucket(
         destination_bucket_name=destination_bucket_name,
         mode=mode,
     )
-    if mode == "staging":
-        print("DOWNLOADING FIRST BLOB DATA TO LOCAL")
-        blobs = (
-            ref.client["storage_staging"]
-            .bucket("basedosdados-dev")
-            .list_blobs(prefix=f"staging/{dataset_id}/{table_id}/")
-        )
-        ## only needs the first bloob
-        for blob in blobs:
-            blob_path = str(blob.name).replace(f"staging/{dataset_id}/{table_id}/", "")
-            ref.download(filename=blob_path, savepath=".", mode="staging")
-            break
 
 
 if __name__ == "__main__":
