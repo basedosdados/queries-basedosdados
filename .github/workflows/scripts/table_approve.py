@@ -18,7 +18,8 @@ def push_table_to_bq(
 ):
     # copy proprosed data between storage buckets
     # create a backup of old data, then delete it and copies new data into the destination bucket
-    modes = ["staging", "raw", "auxiliary_files", "architecture", "header"]
+    # modes = ["staging", "raw", "auxiliary_files", "architecture", "header"]
+    modes = ["staging"]
 
     for mode in modes:
         try:
@@ -44,7 +45,7 @@ def push_table_to_bq(
 
     # create the staging table in bigquery
     tb.create(
-        path=None,
+        path=f"./staging/{dataset_id}/{table_id}/",
         if_table_exists="replace",
         if_storage_data_exists="pass",
         dataset_is_public=True,
@@ -134,6 +135,18 @@ def sync_bucket(
         destination_bucket_name=destination_bucket_name,
         mode=mode,
     )
+    if mode == "staging":
+        print("DOWNLOADING FIRST BLOB DATA TO LOCAL")
+        blobs = (
+            ref.client["storage_staging"]
+            .bucket("basedosdados-dev")
+            .list_blobs(prefix=f"staging/{dataset_id}/{table_id}/")
+        )
+        ## only needs the first bloob
+        for blob in blobs:
+            blob_path = str(blob.name).replace(f"staging/{dataset_id}/{table_id}/", "")
+            ref.download(filename=blob_path, savepath=".", mode="staging")
+            break
 
 
 if __name__ == "__main__":
