@@ -1,6 +1,33 @@
 from pathlib import Path
 from typing import List, Tuple, Union
 
+from backend import Backend
+
+
+def expand_alls(
+    dataset_id: str, table_id: str, backend: Backend
+) -> List[Tuple[str, str]]:
+    """
+    Expands `__all__` tables into all tables in the dataset.
+
+    Args:
+        dataset_id (str): Dataset ID.
+        table_id (str): Table ID.
+        backend (Backend): Backend class for interacting with the backend.
+
+    Returns:
+        List[Tuple[str, str]]: List of tuples with dataset IDs and table IDs.
+    """
+    if table_id == "__all__":
+        table_ids = []
+        tables = backend._get_tables_for_dataset(dataset_id)["tables"]
+        for table in tables:
+            for cloudtable in table["cloudTables"]:
+                table_ids.append(cloudtable["gcpTableId"])
+    else:
+        table_ids = [table_id]
+    return [(dataset_id, table_id) for table_id in table_ids]
+
 
 def get_datasets_tables_from_modified_files(
     modified_files: List[str],

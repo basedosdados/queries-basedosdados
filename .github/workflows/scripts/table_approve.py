@@ -1,9 +1,10 @@
 from argparse import ArgumentParser
-from typing import List, Tuple
+from copy import deepcopy
+import json
+from typing import Any, Dict, List, Tuple
 
 from backend import Backend
 from utils import expand_alls, get_datasets_tables_from_modified_files
-
 
 if __name__ == "__main__":
     # Start argument parser
@@ -23,31 +24,6 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="List of modified files.",
-    )
-
-    # Add status argument
-    arg_parser.add_argument(
-        "--status",
-        type=str,
-        required=False,
-        default="published",
-        help="Status to change to.",
-    )
-
-    # Add email argument
-    arg_parser.add_argument(
-        "--email",
-        type=str,
-        required=True,
-        help="Email for authentication.",
-    )
-
-    # Add password argument
-    arg_parser.add_argument(
-        "--password",
-        type=str,
-        required=True,
-        help="Password for authentication.",
     )
 
     # Get arguments
@@ -78,20 +54,3 @@ if __name__ == "__main__":
             expand_alls(dataset_id, table_id, backend)
         )
     existing_datasets_tables = expanded_existing_datasets_tables
-
-    # Change status for existing datasets and tables
-    print("Authenticating...", end="")
-    token = backend._get_token(args.email, args.password)
-    print(" OK!")
-    for dataset_id, table_id in existing_datasets_tables:
-        print(
-            f'Changing status of `{dataset_id}.{table_id}` to "{args.status}"...',
-            end="",
-        )
-        backend.modify_status_for_table(
-            gcp_dataset_id=dataset_id,
-            gcp_table_id=table_id,
-            status_slug=args.status,
-            token=token,
-        )
-        print(" Done!")

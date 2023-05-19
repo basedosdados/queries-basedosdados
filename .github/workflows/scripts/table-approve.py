@@ -1,1 +1,0 @@
-import basedosdados as bd
