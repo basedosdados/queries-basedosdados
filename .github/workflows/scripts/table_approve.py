@@ -10,6 +10,30 @@ from backend import Backend
 from utils import expand_alls, get_datasets_tables_from_modified_files
 
 
+def get_materialization_flow_id(backend: Backend, auth_token: str):
+    query = """
+    query {
+        flow (where: {
+            name: {
+                _like: "BD template: Executa DBT model"
+            },
+            archived: {
+                _eq: false
+            },
+            project: {
+                name: {_eq: "main"}
+            }
+        }) {
+            id
+        }
+    }
+    """
+    response = backend._execute_query(
+        query, headers={"Authorization": f"Bearer {auth_token}"}
+    )
+    return response["flow"][0]["id"]
+
+
 def push_table_to_bq(
     dataset_id,
     table_id,
@@ -211,44 +235,149 @@ if __name__ == "__main__":
         help="List of modified files.",
     )
 
+    # Add source bucket name argument
+    arg_parser.add_argument(
+        "--source-bucket-name",
+        type=str,
+        required=True,
+        help="Source bucket name.",
+    )
+
+    # Add destination bucket name argument
+    arg_parser.add_argument(
+        "--destination-bucket-name",
+        type=str,
+        required=True,
+        help="Destination bucket name.",
+    )
+
+    # Add backup bucket name argument
+    arg_parser.add_argument(
+        "--backup-bucket-name",
+        type=str,
+        required=True,
+        help="Backup bucket name.",
+    )
+
+    # Add Prefect backend URL argument
+    arg_parser.add_argument(
+        "--prefect-backend-url",
+        type=str,
+        required=False,
+        default="https://prefect.basedosdados.org/api",
+        help="Prefect backend URL.",
+    )
+
+    # Add prefect base URL argument
+    arg_parser.add_argument(
+        "--prefect-base-url",
+        type=str,
+        required=False,
+        default="https://prefect.basedosdados.org",
+        help="Prefect base URL.",
+    )
+
+    # Add Prefect API token argument
+    arg_parser.add_argument(
+        "--prefect-backend-token",
+        type=str,
+        required=True,
+        help="Prefect backend token.",
+    )
+
+    # Add materialization mode argument
+    arg_parser.add_argument(
+        "--materialization-mode",
+        type=str,
+        required=False,
+        default="prod",
+        help="Materialization mode.",
+    )
+
+    # Add materialization label argument
+    arg_parser.add_argument(
+        "--materialization-label",
+        type=str,
+        required=True,
+        help="Materialization label.",
+    )
+
     # Get arguments
     args = arg_parser.parse_args()
 
     # Get datasets and tables from modified files
     modified_files = args.modified_files.split(",")
     datasets_tables = get_datasets_tables_from_modified_files(
-        modified_files, show_deleted=True
+        modified_files, show_details=True
     )
 
     # Split deleted datasets and tables
     deleted_datasets_tables = []
     existing_datasets_tables = []
-    for dataset_id, table_id, exists in datasets_tables:
+    for dataset_id, table_id, exists, alias in datasets_tables:
         if exists:
-            existing_datasets_tables.append((dataset_id, table_id))
+            existing_datasets_tables.append((dataset_id, table_id, alias))
         else:
-            deleted_datasets_tables.append((dataset_id, table_id))
-
-    # Initialize backend
-    backend = Backend(args.graphql_url)
+            deleted_datasets_tables.append((dataset_id, table_id, alias))
 
     # Expand `__all__` tables
+    backend = Backend(args.graphql_url)
     expanded_existing_datasets_tables = []
-    for dataset_id, table_id in existing_datasets_tables:
-        expanded_existing_datasets_tables.extend(
-            expand_alls(dataset_id, table_id, backend)
-        )
+    for dataset_id, table_id, alias in existing_datasets_tables:
+        expanded_table_ids = expand_alls(dataset_id, table_id, backend)
+        for expanded_dataset_id, expanded_table_id in expanded_table_ids:
+            expanded_existing_datasets_tables.append(
+                (expanded_dataset_id, expanded_table_id, alias)
+            )
     existing_datasets_tables = expanded_existing_datasets_tables
     print(existing_datasets_tables)
 
-    # Sync and create tables
-    for dataset_id, table_id in existing_datasets_tables:
-        print(f"Creating table {dataset_id}.{table_id}...")
-        push_table_to_bq(
-            dataset_id=dataset_id,
-            table_id=table_id,
-            source_bucket_name="basedosdados-dev",  # TODO: replace
-            destination_bucket_name="basedosdados",  # TODO: replace
-            backup_bucket_name="basedosdados-backup",  # TODO: replace
+    # # Sync and create tables
+    # for dataset_id, table_id, _ in existing_datasets_tables:
+    #     print(f"Creating table {dataset_id}.{table_id}...")
+    #     push_table_to_bq(
+    #         dataset_id=dataset_id,
+    #         table_id=table_id,
+    #         source_bucket_name=args.source_bucket_name,
+    #         destination_bucket_name=args.destination_bucket_name,
+    #         backup_bucket_name=args.backup_bucket_name,
+    #     )
+    #     print(f"Table {dataset_id}.{table_id} created.")
+
+    # Launch materialization flows
+    backend = Backend(args.prefect_backend_url)
+    flow_id = get_materialization_flow_id(backend, args.prefect_backend_token)
+    for dataset_id, table_id, alias in existing_datasets_tables:
+        print(
+            f"Launching materialization flow for {dataset_id}.{table_id} (alias={alias})..."
         )
-        print(f"Table {dataset_id}.{table_id} created.")
+        parameters = {
+            "dataset_id": dataset_id,
+            "dbt_alias": alias,
+            "mode": args.materialization_mode,
+            "table_id": table_id,
+        }
+        mutation = """
+        mutation ($flow_id: UUID, $parameters: JSON, $label: String!) {
+            create_flow_run (input: {
+                flow_id: $flow_id,
+                parameters: $parameters,
+                labels: [$label],
+            }) {
+                id
+            }
+        }
+        """
+        variables = {
+            "flow_id": flow_id,
+            "parameters": parameters,
+            "label": args.materialization_label,
+        }
+        response = backend._execute_query(
+            mutation,
+            variables,
+            headers={"Authorization": f"Bearer {args.prefect_backend_token}"},
+        )
+        flow_run_id = response["create_flow_run"]["id"]
+        flow_run_url = f"{args.prefect_base_url}/flow-run/{flow_run_id}"
+        print(f" - Materialization flow run launched: {flow_run_url}")
