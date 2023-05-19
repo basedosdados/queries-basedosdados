@@ -100,10 +100,12 @@ def push_table_to_bq(
     print("UPDATE DATASET DESCRIPTION")
     # updates the dataset description
     Dataset(dataset_id).update(mode="prod")
-
-    print("DELETE HEADER FILE FROM STAGING STORAGE")
+    delete_storage_path = file_path.replace("./downloaded_data/", "")
+    print(
+        f"DELETE HEADER FILE FROM basedosdados/staing/{dataset_id}_staging/{table_id}/{delete_storage_path}"
+    )
     st = Storage(dataset_id=dataset_id, table_id=table_id)
-    st.delete_file(filename=file_path.replace("./downloaded_data/", ""), mode="staging")
+    st.delete_file(filename=delete_storage_path, mode="staging")
 
 
 def save_header_files(dataset_id, table_id):
@@ -127,7 +129,7 @@ def save_header_files(dataset_id, table_id):
         break
     ### save table header in storage
 
-    print("DOWNLOAD HEADER FILE FROM STAGING DATASET")
+    print(f"DOWNLOAD HEADER FILE FROM basedosdados-dev.{dataset_id}_staging.{table_id}")
     query = f"""
     SELECT * FROM `basedosdados-dev.{dataset_id}_staging.{table_id}` LIMIT 1
     """
@@ -358,7 +360,7 @@ if __name__ == "__main__":
             destination_bucket_name=args.destination_bucket_name,
             backup_bucket_name=args.backup_bucket_name,
         )
-        print(f"Table {dataset_id}.{table_id} created.")
+        print(f"TABLE basedosdados-staging.{dataset_id}_staging.{table_id} created.")
 
     # Launch materialization flows
     backend = Backend(args.prefect_backend_url)
