@@ -1,3 +1,4 @@
 gql==3.4.1
 requests==2.30.0
 requests_toolbelt==1.0.0
+basedosdados==2.0.0b4
