@@ -40,14 +40,13 @@ def push_table_to_bq(
     tb = bd.Table(dataset_id=dataset_id, table_id=table_id)
 
     # delete table from staging and prod if exists
-    tb.delete("all")
+    tb.delete(mode="staging")
 
     # create the staging table in bigquery
     tb.create(
         path=None,
         if_table_exists="replace",
         if_storage_data_exists="pass",
-        if_table_config_exists="pass",
         dataset_is_public=True,
     )
 
@@ -185,6 +184,7 @@ if __name__ == "__main__":
             expand_alls(dataset_id, table_id, backend)
         )
     existing_datasets_tables = expanded_existing_datasets_tables
+    print(existing_datasets_tables)
 
     # Sync and create tables
     for dataset_id, table_id in existing_datasets_tables:
