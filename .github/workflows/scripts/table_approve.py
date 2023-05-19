@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 import sys
+from time import sleep
 import traceback
 
 import basedosdados as bd
@@ -7,6 +8,22 @@ from basedosdados import Dataset, Storage
 
 from backend import Backend
 from utils import expand_alls, get_datasets_tables_from_modified_files
+
+
+def get_flow_run_state(flow_run_id: str, backend: Backend, auth_token: str):
+    query = """
+    query ($flow_run_id: uuid!) {
+        flow_run_by_pk (id: $flow_run_id) {
+            state
+        }
+    }
+    """
+    response = backend._execute_query(
+        query,
+        variables={"flow_run_id": flow_run_id},
+        headers={"Authorization": f"Bearer {auth_token}"},
+    )
+    return response["flow_run_by_pk"]["state"]
 
 
 def get_materialization_flow_id(backend: Backend, auth_token: str):
@@ -288,7 +305,6 @@ if __name__ == "__main__":
                 (expanded_dataset_id, expanded_table_id, alias)
             )
     existing_datasets_tables = expanded_existing_datasets_tables
-    print(existing_datasets_tables)
 
     # # Sync and create tables
     # for dataset_id, table_id, _ in existing_datasets_tables:
@@ -305,6 +321,7 @@ if __name__ == "__main__":
     # Launch materialization flows
     backend = Backend(args.prefect_backend_url)
     flow_id = get_materialization_flow_id(backend, args.prefect_backend_token)
+    launched_flow_run_ids = []
     for dataset_id, table_id, alias in existing_datasets_tables:
         print(
             f"Launching materialization flow for {dataset_id}.{table_id} (alias={alias})..."
@@ -337,5 +354,28 @@ if __name__ == "__main__":
             headers={"Authorization": f"Bearer {args.prefect_backend_token}"},
         )
         flow_run_id = response["create_flow_run"]["id"]
+        launched_flow_run_ids.append(flow_run_id)
         flow_run_url = f"{args.prefect_base_url}/flow-run/{flow_run_id}"
         print(f" - Materialization flow run launched: {flow_run_url}")
+
+    # Keep monitoring the launched flow runs until they are finished
+    for launched_flow_run_id in launched_flow_run_ids:
+        print(f"Monitoring flow run {launched_flow_run_id}...")
+        flow_run_state = get_flow_run_state(
+            flow_run_id=launched_flow_run_id,
+            backend=backend,
+            auth_token=args.prefect_backend_token,
+        )
+        while flow_run_state not in ["Success", "Failed", "Cancelled"]:
+            sleep(5)
+            flow_run_state = get_flow_run_state(
+                flow_run_id=launched_flow_run_id,
+                backend=backend,
+                auth_token=args.prefect_backend_token,
+            )
+        if flow_run_state != "Success":
+            raise Exception(
+                f'Flow run {launched_flow_run_id} finished with state "{flow_run_state}". '
+                f"Check the logs at {args.prefect_base_url}/flow-run/{launched_flow_run_id}"
+            )
+        print(f"Flow run {launched_flow_run_id} finished successfully.")
