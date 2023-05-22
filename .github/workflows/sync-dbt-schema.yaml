@@ -36,3 +36,8 @@ jobs:
       - name: Run script for syncing DBT schema
         run: |
           python .github/workflows/scripts/sync_dbt_schema.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }}
+
+      - name: Commit changed files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Update metadata'
