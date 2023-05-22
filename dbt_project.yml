@@ -100,3 +100,6 @@ models:
     br_inmet_bdmep:
       +materialized: table
       +schema: br_inmet_bdmep      
+    test_dataset:
+      +materialized: table
+      +schema: test_dataset
