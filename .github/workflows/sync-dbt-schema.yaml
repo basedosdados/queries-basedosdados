@@ -11,6 +11,7 @@ on:
 
 jobs:
   sync-dbt-schema:
+    if: contains(github.event.pull_request.labels.*.name, 'sync-dbt-schema')
     name: Sync DBT schema
     runs-on: ubuntu-latest
     steps:
