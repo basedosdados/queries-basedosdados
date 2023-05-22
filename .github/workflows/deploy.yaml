@@ -79,14 +79,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-actions.txt
 
-      - name: Wait for deployment to finish
-        uses: lewagon/wait-on-check-action@v1.1.2
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Deploy'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          verbose: true
-
       - name: Run script for approving table
         run: |
           python .github/workflows/scripts/table_approve.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --source-bucket-name ${{ secrets.SOURCE_BUCKET_NAME }} --destination-bucket-name ${{ secrets.DESTINATION_BUCKET_NAME }} --backup-bucket-name ${{ secrets.BACKUP_BUCKET_NAME }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }} --materialization-mode ${{ secrets.MATERIALIZATION_MODE }} --materialization-label ${{ secrets.MATERIALIZATION_LABEL }}
