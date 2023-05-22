@@ -1,5 +1,19 @@
-{{ config(alias = 'agencia', schema = 'br_bcb_estban')}}
-
+{{ 
+  config(
+    alias = 'agencia',
+    schema='br_bcb_estban',
+    materialized='table',
+     partition_by={
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 1987,
+        "end": 2023,
+        "interval": 1}
+    },
+    cluster_by = ["mes", "sigla_uf"],
+    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+ }}
 SELECT 
     SAFE_CAST(ano AS INT64) ano,
     SAFE_CAST(mes AS INT64) mes,
