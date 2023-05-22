@@ -253,6 +253,8 @@ if __name__ == "__main__":
             existing_datasets_tables.append((dataset_id, table_id))
         else:
             deleted_datasets_tables.append((dataset_id, table_id))
+    print(f"Deleted datasets and tables: {deleted_datasets_tables}")
+    print(f"Existing datasets and tables: {existing_datasets_tables}")
 
     # Initialize backend
     backend = Backend(args.graphql_url)
