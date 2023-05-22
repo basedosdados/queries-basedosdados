@@ -3,8 +3,21 @@ from copy import deepcopy
 import json
 from typing import Any, Dict, List, Tuple
 
+import ruamel.yaml as ryaml
+
 from backend import Backend
 from utils import get_datasets_tables_from_modified_files
+
+
+def load_ruamel():
+    """
+    Loads a YAML file.
+    """
+    ruamel = ryaml.YAML()
+    ruamel.default_flow_style = False
+    ruamel.top_level_colon_align = True
+    ruamel.indent(mapping=2, sequence=4, offset=2)
+    return ruamel
 
 
 def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str, Any]:
@@ -84,6 +97,13 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
         "rawDataUrl",
         "auxiliaryFilesUrl",
         "architectureUrl",
+        "columns": [
+            {
+                "name": "...",
+                "description": "...",
+            },
+            ...
+        ]
     }
 
     We must merge so it looks like this (dataset outside, table inside):
@@ -134,6 +154,13 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
                     "rawDataUrl",
                     "auxiliaryFilesUrl",
                     "architectureUrl",
+                    "columns": [
+                        {
+                            "name": "...",
+                            "description": "...",
+                        },
+                        ...
+                    ]
                 }
             ]
         }
@@ -216,6 +243,46 @@ def update_metadata_json(
         json.dump(metadata, f, indent=4)
 
 
+def update_schema_yaml_files():
+    """
+    Reads the current `metadata.json` file and generates the corresponding `schema.yaml` file for
+    each dataset.
+    """
+    # Read the metadata file
+    with open("metadata.json", "r") as f:
+        metadata = json.load(f)
+
+    # Instantiate the YAML object
+    ruamel = load_ruamel()
+
+    # For each dataset
+    for dataset_slug, dataset_metadata in metadata.items():
+        print(f"Generating schema.yaml for dataset `{dataset_slug}`...")
+        schema_yaml = {"version": 2, "models": []}
+        for table_metadata in dataset_metadata["tables"]:
+            print(
+                f"  - Going through table `{dataset_slug}.{table_metadata['slug']}`..."
+            )
+            table_schema = {
+                "name": table_metadata["slug"],
+                "description": table_metadata["description"],
+                "columns": [],
+            }
+            for column_metadata in table_metadata["columns"]:
+                print(
+                    f"    - Going through column `{dataset_slug}.{table_metadata['slug']}.{column_metadata['name']}`..."  # noqa
+                )
+                table_schema["columns"].append(
+                    {
+                        "name": column_metadata["name"],
+                        "description": column_metadata["description"],
+                    }
+                )
+            schema_yaml["models"].append(table_schema)
+        with open(f"models/{dataset_slug}/schema.yaml", "w") as f:
+            ruamel.dump(schema_yaml, f)
+
+
 if __name__ == "__main__":
     # Start argument parser
     arg_parser = ArgumentParser()
@@ -270,3 +337,6 @@ if __name__ == "__main__":
 
     # Update metadata.json file
     update_metadata_json(final_metadata, deleted_datasets_tables)
+
+    # Update `schema.yaml` files
+    update_schema_yaml_files()
