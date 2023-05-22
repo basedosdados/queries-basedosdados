@@ -4,4 +4,3 @@ logs/
 .vscode/
 .env
 tmp/
-models/test_dataset/
