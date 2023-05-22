@@ -39,7 +39,7 @@ jobs:
 
       - name: Run script for approving table
         run: |
-          echo "TODO: Add script for approving table"
+          python .github/workflows/scripts/table_approve.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --source-bucket-name ${{ secrets.SOURCE_BUCKET_NAME }} --destination-bucket-name ${{ secrets.DESTINATION_BUCKET_NAME }} --backup-bucket-name ${{ secrets.BACKUP_BUCKET_NAME }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }} --materialization-mode ${{ secrets.MATERIALIZATION_MODE }} --materialization-label ${{ secrets.MATERIALIZATION_LABEL }}
 
   change-metadata-status:
     needs: table-approve
@@ -67,4 +67,4 @@ jobs:
 
       - name: Run script for changing metadata status
         run: |
-          python .github/workflows/scripts/change_metadata_status.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --status published --email ${{ secrets.BACKEND_EMAIL }} --password ${{ secrets.BACKEND_EMAIL }}
+          python .github/workflows/scripts/change_metadata_status.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --status published --email ${{ secrets.BACKEND_EMAIL }} --password ${{ secrets.BACKEND_PASSWORD }}
