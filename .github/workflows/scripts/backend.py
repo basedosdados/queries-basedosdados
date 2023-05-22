@@ -262,6 +262,14 @@ class Backend:
                             rawDataUrl,
                             auxiliaryFilesUrl,
                             architectureUrl,
+                            columns {
+                                edges {
+                                    node {
+                                        name,
+                                        description
+                                    }
+                                }
+                            }
                         }
                     }
                 }

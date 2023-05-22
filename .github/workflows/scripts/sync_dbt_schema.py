@@ -1,10 +1,24 @@
 from argparse import ArgumentParser
 from copy import deepcopy
 import json
+from pathlib import Path
 from typing import Any, Dict, List, Tuple
+
+import ruamel.yaml as ryaml
 
 from backend import Backend
 from utils import get_datasets_tables_from_modified_files
+
+
+def load_ruamel():
+    """
+    Loads a YAML file.
+    """
+    ruamel = ryaml.YAML()
+    ruamel.default_flow_style = False
+    ruamel.top_level_colon_align = True
+    ruamel.indent(mapping=2, sequence=4, offset=2)
+    return ruamel
 
 
 def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str, Any]:
@@ -84,6 +98,13 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
         "rawDataUrl",
         "auxiliaryFilesUrl",
         "architectureUrl",
+        "columns": [
+            {
+                "name": "...",
+                "description": "...",
+            },
+            ...
+        ]
     }
 
     We must merge so it looks like this (dataset outside, table inside):
@@ -134,6 +155,13 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
                     "rawDataUrl",
                     "auxiliaryFilesUrl",
                     "architectureUrl",
+                    "columns": [
+                        {
+                            "name": "...",
+                            "description": "...",
+                        },
+                        ...
+                    ]
                 }
             ]
         }
@@ -165,6 +193,27 @@ def update_metadata_json(
     except FileNotFoundError:
         metadata = {}
 
+    # Now we remove the deleted datasets and tables
+    for dataset_slug, table_slug in deleted_datasets_tables:
+        # If the table_slug is __all__, we remove the whole dataset
+        if table_slug == "__all__":
+            if dataset_slug in metadata:
+                print(f"Removing dataset `{dataset_slug}`...")
+                del metadata[dataset_slug]
+        # Otherwise, we remove only the table
+        else:
+            print(f"Removing table `{dataset_slug}.{table_slug}`...")
+            if dataset_slug in metadata:
+                metadata_dataset_tables = [
+                    table["slug"] for table in metadata[dataset_slug]["tables"]
+                ]
+                if table_slug in metadata_dataset_tables:
+                    metadata[dataset_slug]["tables"] = [
+                        table
+                        for table in metadata[dataset_slug]["tables"]
+                        if table["slug"] != table_slug
+                    ]
+
     # For each dataset slug
     for dataset_slug, dataset_metadata in final_metadata.items():
         # If it's not yet on the file, simply add it
@@ -190,30 +239,62 @@ def update_metadata_json(
                         if metadata_table["slug"] == table["slug"]:
                             metadata_table.update(table)
 
-    # Now we remove the deleted datasets and tables
-    for dataset_slug, table_slug in deleted_datasets_tables:
-        # If the table_slug is __all__, we remove the whole dataset
-        if table_slug == "__all__":
-            if dataset_slug in metadata:
-                print(f"Removing dataset `{dataset_slug}`...")
-                del metadata[dataset_slug]
-        # Otherwise, we remove only the table
-        else:
-            print(f"Removing table `{dataset_slug}.{table_slug}`...")
-            if dataset_slug in metadata:
-                metadata_dataset_tables = [
-                    table["slug"] for table in metadata[dataset_slug]["tables"]
-                ]
-                if table_slug in metadata_dataset_tables:
-                    metadata[dataset_slug]["tables"] = [
-                        table
-                        for table in metadata[dataset_slug]["tables"]
-                        if table["slug"] != table_slug
-                    ]
-
     # Write the new metadata to the file
     with open("metadata.json", "w") as f:
         json.dump(metadata, f, indent=4)
+
+
+def update_schema_yaml_files():
+    """
+    Reads the current `metadata.json` file and generates the corresponding `schema.yaml` file for
+    each dataset.
+    """
+    # Read the metadata file
+    with open("metadata.json", "r") as f:
+        metadata = json.load(f)
+
+    # Instantiate the YAML object
+    ruamel = load_ruamel()
+
+    # For each dataset
+    for dataset_slug, dataset_metadata in metadata.items():
+        print(f"Generating schema.yaml for dataset `{dataset_slug}`...")
+        schema_yaml = {"version": 2, "models": []}
+        for table_metadata in dataset_metadata["tables"]:
+            print(
+                f"  - Going through table `{dataset_slug}.{table_metadata['slug']}`..."
+            )
+            table_schema = {
+                "name": table_metadata["slug"],
+                "description": table_metadata["description"],
+                "columns": [],
+            }
+            for column_metadata in table_metadata["columns"]:
+                print(
+                    f"    - Going through column `{dataset_slug}.{table_metadata['slug']}.{column_metadata['name']}`..."  # noqa
+                )
+                table_schema["columns"].append(
+                    {
+                        "name": column_metadata["name"],
+                        "description": column_metadata["description"],
+                    }
+                )
+            schema_yaml["models"].append(table_schema)
+
+        # Assert that the path exists
+        dataset_dir = Path(f"models/{dataset_slug}")
+        dataset_dir.mkdir(parents=True, exist_ok=True)
+        with open(dataset_dir / "schema.yaml", "w") as f:
+            print(
+                f"  - Writing schema.yaml for dataset `{dataset_slug}` in file {f.name}..."
+            )
+            ruamel.dump(schema_yaml, f)
+
+        # Check if file exists
+        if (dataset_dir / "schema.yaml").exists():
+            print(f"  - File {dataset_dir / 'schema.yaml'} exists.")
+        else:
+            raise Exception(f"  - File {dataset_dir / 'schema.yaml'} does not exist.")
 
 
 if __name__ == "__main__":
@@ -253,6 +334,8 @@ if __name__ == "__main__":
             existing_datasets_tables.append((dataset_id, table_id))
         else:
             deleted_datasets_tables.append((dataset_id, table_id))
+    print(f"Deleted datasets and tables: {deleted_datasets_tables}")
+    print(f"Existing datasets and tables: {existing_datasets_tables}")
 
     # Initialize backend
     backend = Backend(args.graphql_url)
@@ -268,3 +351,6 @@ if __name__ == "__main__":
 
     # Update metadata.json file
     update_metadata_json(final_metadata, deleted_datasets_tables)
+
+    # Update `schema.yaml` files
+    update_schema_yaml_files()
