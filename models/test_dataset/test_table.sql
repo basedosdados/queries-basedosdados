@@ -1,6 +1,4 @@
 
-{{ config(alias='test_table', schema='test_dataset') }}
-
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
