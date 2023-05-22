@@ -1,5 +1,7 @@
-
 target/
 dbt_modules/
 logs/
 .vscode/
+.env
+tmp/
+models/test_dataset/
