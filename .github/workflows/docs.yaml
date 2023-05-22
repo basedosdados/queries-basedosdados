@@ -1,15 +1,15 @@
 name: Deploy docs
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [closed]
 
 env:
   DBT_SA: ${{ secrets.DBT_SA }}
 
 jobs:
   docs:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master' && contains(github.event.pull_request.labels.*.name, 'table-approve')
     name: Deploy docs
     runs-on: ubuntu-latest
     steps:

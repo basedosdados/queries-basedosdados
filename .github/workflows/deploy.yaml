@@ -1,9 +1,8 @@
 name: Deployment
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [closed]
 
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -16,6 +15,7 @@ env:
 
 jobs:
   build-container:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master' && contains(github.event.pull_request.labels.*.name, 'table-approve')
     name: Deployment
     runs-on: ubuntu-latest
     steps:
