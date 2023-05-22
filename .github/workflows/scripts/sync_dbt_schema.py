@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from copy import deepcopy
 import json
+from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 import ruamel.yaml as ryaml
@@ -279,8 +280,21 @@ def update_schema_yaml_files():
                     }
                 )
             schema_yaml["models"].append(table_schema)
-        with open(f"models/{dataset_slug}/schema.yaml", "w") as f:
+
+        # Assert that the path exists
+        dataset_dir = Path(f"models/{dataset_slug}")
+        dataset_dir.mkdir(parents=True, exist_ok=True)
+        with open(dataset_dir / "schema.yaml", "w") as f:
+            print(
+                f"  - Writing schema.yaml for dataset `{dataset_slug}` in file {f.name}..."
+            )
             ruamel.dump(schema_yaml, f)
+
+        # Check if file exists
+        if (dataset_dir / "schema.yaml").exists():
+            print(f"  - File {dataset_dir / 'schema.yaml'} exists.")
+        else:
+            raise Exception(f"  - File {dataset_dir / 'schema.yaml'} does not exist.")
 
 
 if __name__ == "__main__":
