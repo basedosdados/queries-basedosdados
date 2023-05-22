@@ -55,7 +55,25 @@
                 "dataCleaningCodeUrl": null,
                 "rawDataUrl": null,
                 "auxiliaryFilesUrl": null,
-                "architectureUrl": null
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "ano description"
+                    },
+                    {
+                        "name": "dado",
+                        "description": "dado description"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "mes description"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "sigla_uf description"
+                    }
+                ]
             }
         ]
     }
