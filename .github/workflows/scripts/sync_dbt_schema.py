@@ -165,6 +165,27 @@ def update_metadata_json(
     except FileNotFoundError:
         metadata = {}
 
+    # Now we remove the deleted datasets and tables
+    for dataset_slug, table_slug in deleted_datasets_tables:
+        # If the table_slug is __all__, we remove the whole dataset
+        if table_slug == "__all__":
+            if dataset_slug in metadata:
+                print(f"Removing dataset `{dataset_slug}`...")
+                del metadata[dataset_slug]
+        # Otherwise, we remove only the table
+        else:
+            print(f"Removing table `{dataset_slug}.{table_slug}`...")
+            if dataset_slug in metadata:
+                metadata_dataset_tables = [
+                    table["slug"] for table in metadata[dataset_slug]["tables"]
+                ]
+                if table_slug in metadata_dataset_tables:
+                    metadata[dataset_slug]["tables"] = [
+                        table
+                        for table in metadata[dataset_slug]["tables"]
+                        if table["slug"] != table_slug
+                    ]
+
     # For each dataset slug
     for dataset_slug, dataset_metadata in final_metadata.items():
         # If it's not yet on the file, simply add it
@@ -189,27 +210,6 @@ def update_metadata_json(
                     for metadata_table in metadata[dataset_slug]["tables"]:
                         if metadata_table["slug"] == table["slug"]:
                             metadata_table.update(table)
-
-    # Now we remove the deleted datasets and tables
-    for dataset_slug, table_slug in deleted_datasets_tables:
-        # If the table_slug is __all__, we remove the whole dataset
-        if table_slug == "__all__":
-            if dataset_slug in metadata:
-                print(f"Removing dataset `{dataset_slug}`...")
-                del metadata[dataset_slug]
-        # Otherwise, we remove only the table
-        else:
-            print(f"Removing table `{dataset_slug}.{table_slug}`...")
-            if dataset_slug in metadata:
-                metadata_dataset_tables = [
-                    table["slug"] for table in metadata[dataset_slug]["tables"]
-                ]
-                if table_slug in metadata_dataset_tables:
-                    metadata[dataset_slug]["tables"] = [
-                        table
-                        for table in metadata[dataset_slug]["tables"]
-                        if table["slug"] != table_slug
-                    ]
 
     # Write the new metadata to the file
     with open("metadata.json", "w") as f:
