@@ -1,12 +1,12 @@
 name: Table approve
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [closed]
 
 jobs:
   table-approve:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master' && contains(github.event.pull_request.labels.*.name, 'table-approve')
     name: Table approve
     runs-on: ubuntu-latest
     steps:
