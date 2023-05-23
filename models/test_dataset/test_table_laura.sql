@@ -1,3 +1,5 @@
+# tabela de teste
+
 SELECT 
 SAFE_CAST(id_empreendimento AS STRING) id_empreendimento,
 SAFE_CAST(data_inicio_empreendimento AS DATE) data_inicio,
@@ -15,3 +17,6 @@ SAFE_CAST(consorcio AS STRING) consorcio,
 SAFE_CAST(cedula_mae AS STRING) cedula_mae,
 SAFE_CAST(id_tipo_cultura AS STRING) id_tipo_cultura
 FROM basedosdados-staging.test_dataset_staging.test_table_laura AS t
+
+
+
