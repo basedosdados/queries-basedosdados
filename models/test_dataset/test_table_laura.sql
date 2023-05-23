@@ -1,5 +1,5 @@
 SELECT 
-SAFE_CAST(id_empreendimento AS STRING) id,
+SAFE_CAST(id_empreendimento AS STRING) id_empreendimento,
 SAFE_CAST(data_inicio_empreendimento AS DATE) data_inicio,
 SAFE_CAST(data_fim_empreendimento AS DATE) data_fim,
 SAFE_CAST(finalidade AS STRING) finalidade,
