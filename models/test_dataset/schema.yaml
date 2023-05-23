@@ -12,7 +12,7 @@ models :
       - name: sigla_uf
         description: sigla_uf description
   - name: test_table_laura
-    description:
+    description: descrição da tabela
     columns:
       - name: atividade
         description: Atividade do empreendimento
