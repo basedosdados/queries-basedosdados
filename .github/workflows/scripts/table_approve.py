@@ -88,13 +88,16 @@ def push_table_to_bq(
     print("DELETE TABLE FROM STAGING AND PROD")
     tb.delete(mode="staging")
 
-    print("CREATE NEW TABLE IN STAGING")
+    file_format = file_path.split(".")[-1]
+    print("CREATE NEW TABLE IN STAGING WITH FILE FORMAT: ", file_format)
     # create the staging table in bigquery
+
     tb.create(
         path="./downloaded_data/",
         if_table_exists="replace",
         if_storage_data_exists="pass",
         dataset_is_public=True,
+        source_format=file_format,
     )
 
     print("UPDATE DATASET DESCRIPTION")
