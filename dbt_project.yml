@@ -103,3 +103,6 @@ models:
     test_dataset:
       +materialized: table
       +schema: test_dataset
+    br_me_comex_stat:
+      +materialized: table
+      +schema: br_me_comex_stat
