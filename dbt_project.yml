@@ -106,3 +106,6 @@ models:
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
+    br_cvm_fi:
+      +materialized: table
+      +schema: br_cvm_fi      
