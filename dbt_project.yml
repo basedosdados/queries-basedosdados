@@ -106,3 +106,6 @@ models:
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
+    br_me_caged:
+      +materialized: table
+      +schema: br_me_cage      
