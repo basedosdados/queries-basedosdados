@@ -40,4 +40,4 @@ SAFE_CAST(indicador_aprendiz AS STRING) indicador_aprendiz,
 SAFE_CAST(origem_informacao AS STRING) origem_informacao,
 SAFE_CAST(indicador_exclusao AS INT64) indicador_exclusao,
 SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
-FROM basedosdados-dev.br_me_caged_staging.microdados_movimentacao_excluida AS t
+FROM basedosdados-staging.br_me_caged_staging.microdados_movimentacao_excluida AS t
