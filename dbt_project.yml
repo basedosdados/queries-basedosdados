@@ -109,3 +109,6 @@ models:
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
+    br_ons_avaliacao_operacao:
+      +materialized: table
+      +schema: br_ons_avaliacao_operacao  
