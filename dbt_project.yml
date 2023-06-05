@@ -43,6 +43,9 @@ models:
     example:
       +materialized: table # Materialization type (table, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
+    br_b3_cotacoes:
+      +materialized: table
+      +schema: br_b3_cotacoes 
     br_anatel_banda_larga_fixa:
       +materialized: table
       +schema: br_anatel_banda_larga_fixa
@@ -108,4 +111,7 @@ models:
       +schema: br_me_comex_stat
     br_cvm_fi:
       +materialized: table
-      +schema: br_cvm_fi      
+      +schema: br_cvm_fi
+    br_ons_estimativa_custos:
+      +materialized: table
+      +schema: br_ons_estimativa_custos
