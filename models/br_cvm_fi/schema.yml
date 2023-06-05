@@ -482,7 +482,7 @@ models:
         description: Valor do patrimônio líquido
       - name: captacao_dia
         description: Captação do dia
-      - name: regate_dia
+      - name: resgate_dia
         description: Resgate no dia
       - name: quantidade_cotistas
         description: Número de cotistas
