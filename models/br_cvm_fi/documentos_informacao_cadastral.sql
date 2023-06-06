@@ -3,7 +3,7 @@
     schema='br_cvm_fi',
     materialized='table',
     cluster_by = "id_fundo",
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    labels =  {'project_id': 'basedosdados', 'tema': 'economia'})
  }}
 SELECT
 SAFE_CAST(id_fundo AS STRING) id_fundo,

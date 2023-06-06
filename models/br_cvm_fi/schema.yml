@@ -13,7 +13,7 @@ models:
       - name: data_competencia
         description: Data de competência
       - name: plano_contabil_balancete
-        description: Plano contábil utilizado no balancete
+        description: Plano contábil utilizado no balancete 
       - name: codigo_conta
         description: Código da conta
       - name: saldo_conta

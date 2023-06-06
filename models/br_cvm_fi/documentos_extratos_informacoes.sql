@@ -10,7 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    cluster_by = ["mes", "data_competencia"],
+    cluster_by =  ["mes", "data_competencia"],
     labels = {'project_id': 'basedosdados', 'tema': 'economia'})
  }}
 SELECT
