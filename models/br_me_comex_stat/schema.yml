@@ -93,6 +93,20 @@ models:
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
-        description: Valor Livre a Bordo      
+        description: Valor Livre a Bordo
+  - name: dicionario
+    description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+    columns:
+      - name: id_tabela
+        description: ID da tabela
+      - name: coluna
+        description: Coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor
+   
 
 
