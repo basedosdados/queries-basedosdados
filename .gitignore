@@ -4,3 +4,4 @@ logs/
 .vscode/
 .env
 tmp/
+.DS_store
