@@ -6,23 +6,23 @@ models:
     columns:
       - name: data_referencia
         description: Data de referência da informação
-      - name: tipo_sessao_pregao
-        description: Tipo sessão do Pregão (e.g. sessão regular, after hours)
-      - name: codigo_instrumento
-        description: Código que identifica um instrumento negociado/registrado em bolsa de valores
-      - name: acao_atualizacao
-        description: Informa a ação de atualização que está ocorrendo (e.g. negócio novo, cancelado)
       - name: data_negocio
         description: Data do pregão
-      - name: codigo_identificador_negocio
-        description: Número do negócio
-      - name: preco_negocio
-        description: Preço do negocio
-      - name: quantidade_negociada
-        description: Quantidade de ações negociadas
       - name: hora_fechamento
         description: Hora (o instante) do negócio fechado (UTC-3)
+      - name: codigo_identificador_negocio
+        description: Número do negócio
+      - name: codigo_instrumento
+        description: Código que identifica um instrumento negociado/registrado em bolsa de valores
       - name: codigo_participante_comprador
         description: Código comprador
       - name: codigo_participante_vendedor
         description: Código vendedor
+      - name: acao_atualizacao
+        description: Informa a ação de atualização que está ocorrendo (e.g. negócio novo, cancelado)
+      - name: tipo_sessao_pregao
+        description: Tipo sessão do Pregão (e.g. sessão regular, after hours)
+      - name: quantidade_negociada
+        description: Quantidade de ações negociadas
+      - name: preco_negocio
+        description: Preço do negocio

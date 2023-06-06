@@ -112,6 +112,9 @@ models:
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao  
+    br_cvm_fi:
+      +materialized: table
+      +schema: br_cvm_fi
     br_ons_estimativa_custos:
       +materialized: table
       +schema: br_ons_estimativa_custos
