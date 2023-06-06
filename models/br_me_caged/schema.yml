@@ -1,0 +1,168 @@
+version: 2
+
+models:
+  - name: microdados_movimentacao
+    description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_6
+        description: ID Município - IBGE 6 Dígitos
+      - name: cnae_2_secao
+        description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
+      - name: cnae_2_subclasse
+        description: Subclasse do Código Nacional de Atividades Econômicas 2.0
+      - name: cbo_2002
+        description: Classificação Brasileira de Ocupações (CBO) - 2002
+      - name: saldo_movimentacao
+        description: Saldo de movimentação (1 para admissão e -1 para desligamento)
+      - name: categoria
+        description: Categoria de trabalhador
+      - name: grau_instrucao
+        description: Grau de instrução ou escolaridade
+      - name: idade
+        description: Idade do trabalhador
+      - name: horas_contratuais
+        description: Horas contratuais
+      - name: raca_cor
+        description: Raça ou Cor do Trabalhador
+      - name: sexo
+        description: Sexo (1-Homem, 3-Mulher e 9-Não Identificado)
+      - name: salario_mensal
+        description: Salário mensal em moeda corrente
+      - name: tipo_empregador
+        description: Tipo de empregador (0-CNPJ RAIZ, 2-CPF e 9-Não Identificado)
+      - name: tipo_estabelecimento
+        description: Tipo de estabelecimento (1-CNPJ, 3-CAEPF(Cadastro de Atividade Econômica de Pessoa Física), 4-CNO(Cadastro Nacional de Obra), 5-CEI(CAGED), 9-Não Identificado)
+      - name: tipo_movimentacao
+        description: Tipo de movimentação
+      - name: tipo_deficiencia
+        description: Tipo de deficiência/Beneficiário habilitado
+      - name: indicador_trabalho_intermitente
+        description: Indicador de trabalhador intermitente (0-Não, 1-Sim, 9-Não Identificado)
+      - name: indicador_trabalho_parcial
+        description: Indicador de movimentação referente a contrato parcial (0-Não, 1-Sim, 9-Não Identificado)
+      - name: tamanho_estabelecimento_janeiro
+        description: Faixa de tamanho do estabelecimento no início do ano
+      - name: indicador_aprendiz
+        description: Indicador de trabalhador aprendiz (0-Não, 1-Sim, 9-Não Identificado)
+      - name: origem_informacao
+        description: Origem da Informação
+      - name: indicador_fora_prazo
+        description: Indicador fora do prazo
+  - name: microdados_movimentacao_fora_prazo
+    description: Contém dados de movimentações declaradas fora do prazo com competência de declaração.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_6
+        description: ID Município - IBGE 6 Dígitos
+      - name: cnae_2_secao
+        description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
+      - name: cnae_2_subclasse
+        description: Subclasse do Código Nacional de Atividades Econômicas 2.0
+      - name: cbo_2002
+        description: Classificação Brasileira de Ocupações (CBO) - 2002
+      - name: saldo_movimentacao
+        description: Saldo de movimentação (1 para admissão e -1 para desligamento)
+      - name: categoria
+        description: Categoria de trabalhador
+      - name: grau_instrucao
+        description: Grau de instrução ou escolaridade
+      - name: idade
+        description: Idade do trabalhador
+      - name: horas_contratuais
+        description: Horas contratuais
+      - name: raca_cor
+        description: Raça ou Cor do Trabalhador
+      - name: sexo
+        description: Sexo (1-Homem, 3-Mulher e 9-Não Identificado)
+      - name: salario_mensal
+        description: Salário mensal em moeda corrente
+      - name: tipo_empregador
+        description: Tipo de empregador (0-CNPJ RAIZ, 2-CPF e 9-Não Identificado)
+      - name: tipo_estabelecimento
+        description: Tipo de estabelecimento (1-CNPJ, 3-CAEPF(Cadastro de Atividade Econômica de Pessoa Física), 4-CNO(Cadastro Nacional de Obra), 5-CEI(CAGED), 9-Não Identificado)
+      - name: tipo_movimentacao
+        description: Tipo de movimentação
+      - name: tipo_deficiencia
+        description: Tipo de deficiência/Beneficiário habilitado
+      - name: indicador_trabalho_intermitente
+        description: Indicador de trabalhador intermitente (0-Não, 1-Sim, 9-Não Identificado)
+      - name: indicador_trabalho_parcial
+        description: Indicador de movimentação referente a contrato parcial (0-Não, 1-Sim, 9-Não Identificado)
+      - name: tamanho_estabelecimento_janeiro
+        description: Faixa de tamanho do estabelecimento no início do ano
+      - name: indicador_aprendiz
+        description: Indicador de trabalhador aprendiz (0-Não, 1-Sim, 9-Não Identificado)
+      - name: origem_informacao
+        description: Origem da Informação
+      - name: indicador_fora_prazo
+        description: Indicador fora do prazo
+  - name: microdados_movimentacao_excluida
+    description: Contém dados de movimentações excluídas com competência de declaração.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_6
+        description: ID Município - IBGE 6 Dígitos
+      - name: cnae_2_secao
+        description: Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)
+      - name: cnae_2_subclasse
+        description: Subclasse do Código Nacional de Atividades Econômicas 2.0
+      - name: cbo_2002
+        description: Classificação Brasileira de Ocupações (CBO) - 2002
+      - name: saldo_movimentacao
+        description: Saldo de movimentação
+      - name: categoria
+        description: Categoria de trabalhador
+      - name: grau_instrucao
+        description: Grau de instrução ou escolaridade
+      - name: idade
+        description: Idade do trabalhador
+      - name: horas_contratuais
+        description: Horas contratuais
+      - name: raca_cor
+        description: Raça ou Cor do Trabalhador
+      - name: sexo
+        description: Sexo
+      - name: salario_mensal
+        description: Salário mensal em moeda corrente
+      - name: tipo_empregador
+        description: Tipo de empregador
+      - name: tipo_estabelecimento
+        description: Tipo de estabelecimento
+      - name: tipo_movimentacao
+        description: Tipo de movimentação
+      - name: tipo_deficiencia
+        description: Tipo de deficiência/Beneficiário habilitado
+      - name: indicador_trabalho_intermitente
+        description: Indicador de trabalhador intermitente
+      - name: indicador_trabalho_parcial
+        description: Indicador de movimentação referente a contrato parcial
+      - name: tamanho_estabelecimento_janeiro
+        description: Faixa de tamanho do estabelecimento no início do ano
+      - name: indicador_aprendiz
+        description: Indicador de trabalhador aprendiz
+      - name: origem_informacao
+        description: Origem da Informação
+      - name: indicador_fora_prazo
+        description: Indicador fora do prazo
