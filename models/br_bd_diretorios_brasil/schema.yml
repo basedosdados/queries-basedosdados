@@ -1,0 +1,70 @@
+version: 2
+
+models: 
+  - name: br_bd_diretorios_brasil__empresa
+    description: A tabela apresenta informações do Cadastro Nacional da Pessoa Jurídica (CNPJ), que é um banco de dados administrado pela Secretaria Especial da Receita Federal do Brasil (RFB). Esse cadastro armazena detalhes cadastrais de pessoas jurídicas e outras entidades relevantes para as administrações tributárias do governo federal, dos estados, do Distrito Federal e dos municípios.
+    columns:
+      - name: cnpj
+        description: CNPJ
+      - name: cnpj_basico
+        description: CNPJ Básico (8 primeiros dígitos)
+      - name: cnpj_ordem
+        description: CNPJ Ordem
+      - name: cnpj_dv
+        description: CNPJ Dígito Verificador
+      - name: razao_social
+        description: Nome empresarial da pessoa jurídica
+      - name: nome_fantasia
+        description: Denomização Comercial
+      - name: natureza_juridica
+        description: Natureza Jurídica
+      - name: ente_federativo
+        description: Ente Federativo Responsável 
+      - name: cnae_fiscal_principal
+        description: CNAE Fiscal Principal
+      - name: cnae_fiscal_secundaria
+        description: CNAEs Fiscais Secundárias
+      - name: capital_social
+        description: Capital Social
+      - name: porte
+        description: Tipo do porte da empresa
+      - name: matriz_filial
+        description: Identificador entre Matriz e Filial 
+      - name: situacao_cadastral
+        description: Situação Cadastral
+      - name: situacao_especial
+        description: Situação Especial
+      - name: opcao_simples
+        description: Opção pelo Simples Nacional
+      - name: opcao_mei
+        description: Opção pelo MEI
+      - name: cep
+        description: CEP
+      - name: tipo_logradouro
+        description: Tipo de Logradouro
+      - name: logradouro
+        description: Logradouro
+      - name: numero
+        description: Número
+      - name: complemento
+        description: Complemento
+      - name: bairro
+        description: Bairro
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_code_iso3
+        description: Sigla do País - ISO3
+      - name: id_pais_me
+        description: ID do país - Ministério da Economia
+      - name: nome_pais_me
+        description: Nome do país - Ministério da Economia
+      - name: telefone_1
+        description: Telefone (com DDD) 1
+      - name: telefone_2
+        description: Telefone (com DDD) 2
+      - name: fax
+        description: Fax (con DDD)
+      - name: email
+        description: Email
