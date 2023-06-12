@@ -9,7 +9,7 @@
 version: 2
 # ! modelo dbt armas_apreendidas_mensal
 models: 
-  - name: br_rj_isp_estatisticas_seguranca__armas_apreendidas_mensal
+  - name: armas_apreendidas_mensal
     description: "Série histórica mensal por área de delegacia desde 01/2007"
     columns:
       - name: ano
@@ -49,7 +49,7 @@ models:
 
 
 # ! modelo dbt evolucao_mensal_cisp
-  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_cisp
+  - name: evolucao_mensal_cisp
     description: "Evolução mensal CISP"
     columns:
       - name: ano
@@ -175,7 +175,7 @@ models:
 
 
 # ! modelo dbt evolucao_mensal_municipio
-  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_municipio
+  - name: evolucao_mensal_municipio
     description: "Série histórica mensal por município desde 2014"
     columns:
       - name: ano
@@ -293,7 +293,7 @@ models:
 
 
 # ! modelo dbt evolucao_mensal_uf
-  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_uf
+  - name: evolucao_mensal_uf
     description: "Série histórica mensal no estado desde 01/1991"
     columns:
       - name: ano
@@ -409,8 +409,8 @@ models:
 
 
 # ! modelo dbt evolucao_policial_morto_servico_mensal
-  - name: br_rj_isp_estatisticas_seguranca__evolucao_policial_morto_servico_mensal
-    description: "Evolução mensal CISP"
+  - name: evolucao_policial_morto_servico_mensal
+    description: Série histórica mensal por área de delegacia desde 01/2003
     columns:
       - name: ano
         description: Ano
@@ -425,7 +425,7 @@ models:
 
 
 # ! modelo dbt feminicidio_mensal_cisp
-  - name: br_rj_isp_estatisticas_seguranca__feminicidio_mensal_cisp
+  - name: feminicidio_mensal_cisp
     description: "Feminicídio (Lei 7.448/2016) série histórica mensal por área de delegacia desde 10/2016"
     columns:
       - name: ano
@@ -443,7 +443,7 @@ models:
 
 
 # ! modelo dbt taxa_evolucao_mensal_municipio
-  - name: br_rj_isp_estatisticas_seguranca__taxa_evolucao_mensal_municipio
+  - name: taxa_evolucao_mensal_municipio
     description: "Série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)"
     columns:
       - name: ano
@@ -561,9 +561,27 @@ models:
       - name: tipo_fase
         description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
 
+# ! model dbt taxa_letalidade
+
+  - name: taxa_letalidade
+    description: "Taxa de evolução mensal no Estado por 100 mil habitantes"
+    columns:
+      - name: ano
+        description: Ano
+      - name: regiao
+        description: Região do Rio de Janeiro
+      - name: delito
+        description: Delito
+      - name: contagem_delito
+        description: Contagem de delitos por 100 mil habitantes
+      - name: populacao
+        description: População
+      - name: taxa_cem_mil_habitantes
+        description: Taxa de delito por 100 mil habitantes
+
 
 # ! modelo dbt taxa_evolucao_mensal_uf
-  - name: br_rj_isp_estatisticas_seguranca__taxa_evolucao_mensal_uf
+  - name: taxa_evolucao_mensal_uf
     description: "Taxa de evolução mensal no Estado por 100 mil habitantes"
     columns:
       - name: ano
