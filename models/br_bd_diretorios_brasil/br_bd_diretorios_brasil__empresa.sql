@@ -99,7 +99,6 @@ SELECT
   opcao_mei
 FROM `basedosdados.br_me_cnpj.simples` 
 )
-
 SELECT 
     cnpj,
     a.cnpj_basico,
