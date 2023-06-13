@@ -43,6 +43,9 @@ models:
     example:
       +materialized: table # Materialization type (table, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
+    br_rj_isp_estatisticas_seguranca:
+      +materialized: table
+      +schema: br_rj_isp_estatisticas_seguranca 
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
@@ -121,6 +124,3 @@ models:
     br_ons_estimativa_custos:
       +materialized: table
       +schema: br_ons_estimativa_custos
-    br_rj_isp_estatisticas_seguranca:
-      +materialized: table
-      +schema: br_rj_isp_estatisticas_seguranca 
