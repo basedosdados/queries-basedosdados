@@ -123,4 +123,4 @@ models:
       +schema: br_ons_estimativa_custos
     br_rj_isp_estatisticas_seguranca:
       +materialized: table
-      +schema: br_rj_isp_estatisticas_seguranca
+      +schema: br_rj_isp_estatisticas_seguranca 
