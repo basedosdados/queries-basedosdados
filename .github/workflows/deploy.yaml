@@ -19,7 +19,6 @@ env:
 
 jobs:
   build-container:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
     name: Deployment
     runs-on: ubuntu-latest
     steps:
