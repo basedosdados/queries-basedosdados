@@ -112,7 +112,7 @@ models:
       - name: indicador_fora_prazo
         description: Indicador fora do prazo
   - name: microdados_movimentacao_excluida
-    description: Contém dados de movimentações excluídas com competência de declaração.
+    description: Contém dados de movimentações excluídas com competência de declaração
     columns:
       - name: ano
         description: Ano
