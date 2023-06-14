@@ -2,7 +2,8 @@ name: Deployment
 
 on:
   pull_request:
-    types: [closed]
+    branches:
+      - master
 
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
