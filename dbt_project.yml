@@ -109,3 +109,18 @@ models:
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
+    br_me_caged:
+      +materialized: table
+      +schema: br_me_caged
+    br_ons_avaliacao_operacao:
+      +materialized: table
+      +schema: br_ons_avaliacao_operacao  
+    br_cvm_fi:
+      +materialized: table
+      +schema: br_cvm_fi
+    br_ons_estimativa_custos:
+      +materialized: table
+      +schema: br_ons_estimativa_custos
+    br_bd_diretorios_brasil:
+      +materialized: table
+      +schema: br_bd_diretorios_brasil

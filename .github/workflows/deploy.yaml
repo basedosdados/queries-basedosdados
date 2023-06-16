@@ -3,6 +3,7 @@ name: Deployment
 on:
   pull_request:
     types: [closed]
+  workflow_dispatch:
 
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -18,7 +19,7 @@ env:
 
 jobs:
   build-container:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    if: (github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master') || ${{ github.event_name == 'workflow_dispatch' }}
     name: Deployment
     runs-on: ubuntu-latest
     steps:
@@ -58,7 +59,7 @@ jobs:
           kubectl rollout status -w -n prefect-agent-basedosdados deployment/dbt-rpc-prod
 
   table-approve:
-    if: contains(github.event.pull_request.labels.*.name, 'table-approve')
+    if: contains(github.event.pull_request.labels.*.name, 'table-approve') || ${{ github.event_name == 'workflow_dispatch' }}
     needs: build-container
     name: Table approve
     runs-on: ubuntu-latest
