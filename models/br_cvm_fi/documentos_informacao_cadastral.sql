@@ -46,5 +46,5 @@ SAFE_CAST(nome_custodiante AS STRING) nome_custodiante,
 SAFE_CAST(cnpj_controlador AS STRING) cnpj_controlador,
 SAFE_CAST(nome_controlador AS STRING) nome_controlador,
 SAFE_CAST(indicador_aplicacao_total_recursos_exterior AS INT64) indicador_aplicacao_total_recursos_exterior,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_informacao_cadastral AS t
+FROM basedosdados-dev.br_cvm_fi_staging.documentos_informacao_cadastral AS t
 

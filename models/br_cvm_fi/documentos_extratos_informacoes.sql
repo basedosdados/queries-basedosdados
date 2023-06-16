@@ -132,5 +132,5 @@ SAFE_CAST(porcentagem_exposicao_minima_cotas_fip AS FLOAT64) porcentagem_exposic
 SAFE_CAST(porcentagem_exposicao_maxima_cotas_fip AS FLOAT64) porcentagem_exposicao_maxima_cotas_fip,
 SAFE_CAST(porcentagem_exposicao_minima_cotas_ficfip AS FLOAT64) porcentagem_exposicao_minima_cotas_ficfip,
 SAFE_CAST(porcentagem_exposicao_maxima_cotas_ficfip AS FLOAT64) porcentagem_exposicao_maxima_cotas_ficfip,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_extratos_informacoes AS t
+FROM basedosdados-dev.br_cvm_fi_staging.documentos_extratos_informacoes AS t
 
