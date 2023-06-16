@@ -14,7 +14,7 @@ models :
   - name: test_table_laura
     description: descrição da tabela
     columns:
-      - name: atividade
+      - name: atividade22
         description: Atividade do empreendimento
       - name: cedula_mae
         description: Indica se o empreendimento refere-se a uma cédula mãe
