@@ -16,7 +16,7 @@ SAFE_CAST(unidade_medida_previsao_producao AS STRING) unidade_medida_previsao_pr
 SAFE_CAST(consorcio AS STRING) consorcio,
 SAFE_CAST(cedula_mae AS STRING) cedula_mae,
 SAFE_CAST(id_tipo_cultura AS STRING) id_tipo_cultura
-FROM basedosdados-staging.test_dataset_staging.test_table_laura AS t
+FROM basedosdados-dev.test_dataset_staging.test_table_laura AS t
 
 
 
