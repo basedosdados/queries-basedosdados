@@ -10,8 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    cluster_by =  ["mes", "data_competencia"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    cluster_by =  ["mes", "data_competencia"])
  }}
 SELECT
 SAFE_CAST(ano AS INT64) ano,

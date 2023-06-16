@@ -1,23 +1,6 @@
 version: 2
 
 models:
-  - name: documentos_balancete
-    description: O balancete é um documento gerado mensalmente pela contabilidade do fundo.
-    columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês            
-      - name: cnpj
-        description: CNPJ do fundo
-      - name: data_competencia
-        description: Data de competência
-      - name: plano_contabil_balancete
-        description: Plano contábil utilizado no balancete 
-      - name: codigo_conta
-        description: Código da conta
-      - name: saldo_conta
-        description: Saldo da Conta
   - name: documentos_carteiras_fundos_investimento
     description: A Composição e Diversificação das Aplicações (CDA) descreve os ativos que compõem as carteiras de fundos de investimento.
     columns:
