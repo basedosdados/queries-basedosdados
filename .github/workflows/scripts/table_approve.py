@@ -120,8 +120,13 @@ def save_header_files(dataset_id, table_id):
         .bucket("basedosdados-dev")
         .list_blobs(prefix=f"staging/{dataset_id}/{table_id}/")
     )
+
+    if len(blobs)==0:
+        raise ValueError(f"No blobs found in staging/{dataset_id}/{table_id}/")
+        
     ## only needs the first bloob
     partitions = []
+
     for blob in blobs:
         blob_path = str(blob.name).replace(
             f"staging/{dataset_id}/{table_id}/", "./downloaded_data/"
@@ -148,9 +153,11 @@ def save_header_files(dataset_id, table_id):
     if file_type == "csv":
         file_path = f"./{path}/table_approve_temp_file_271828.csv"
         df.to_csv(file_path, index=False)
-    if file_type == "parquet":
+    elif file_type == "parquet":
         file_path = f"./{path}/table_approve_temp_file_271828.parquet"
         df.to_parquet(file_path)
+    else:
+        raise ValueError("file type must be csv or parquet")
     print("SAVE HEADER FILE: ", file_path)
     return file_path
 
