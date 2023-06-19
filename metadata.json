@@ -301,5 +301,1211 @@
                 ]
             }
         ]
+    },
+    "br_me_caged": {
+        "name": "Cadastro Geral de Empregados e Desempregados (CAGED)",
+        "description": "O Cadastro Geral de Empregados e Desempregados – CAGED, instituído pela Lei nº 4.923, em 23 de dezembro de 1965, constitui fonte de informação de âmbito nacional e de periodicidade mensal. Foi criado como instrumento de acompanhamento e de fiscalização do processo de admissão e de dispensa de trabalhadores regidos pela CLT, com o objetivo de assistir os desempregados e de apoiar medidas contra o desemprego.\r\n\r\nO CAGED é um Registro Administrativo, e, inicialmente, objetivou gerir e controlar a concessão do auxílio-desemprego. A partir de 1986, passou a ser utilizado como suporte ao pagamento do seguro desemprego e, mais recentemente, tornou-se, também, um relevante instrumento à reciclagem profissional e à recolocação do trabalhador no mercado de trabalho e, ainda, um importante subsídio para a fiscalização.\r\n\r\nDevido à crescente demanda por dados conjunturais do mercado de trabalho e à necessidade deste Ministério em contar com estatísticas mais completas, mais consistentes e mais ágeis, foram implementadas expressivas alterações ao sistema – Lei nº 4.923/65. Como decorrência dos substanciais avanços, pôde-se construir, a partir de 1983, o índice mensal de emprego, a taxa de rotatividade e a flutuação da mão-de-obra (admitidos / desligados).\r\n\r\nOs aperfeiçoamentos ocorridos no sistema CAGED e também na metodologia de tratamento dos dados tornaram esse registro administrativo uma das principais fontes de informações estatísticas sobre o mercado de trabalho conjuntural. O CAGED apresenta desagregações idênticas às da RAIS, em termos geográficos, setoriais e ocupacionais, possibilitando a realização de estudos que indicam as tendências mais atuais. No espectro conjuntural, é a única fonte de informação com tal nível de desagregação, sendo, portanto, imprescindível para o balizamento das intervenções dos formuladores de políticas na esfera do mercado de trabalho, aumentando a eficácia e eficiência das políticas de emprego que possibilitam o aumento do número e da qualidade de postos de trabalho e, por conseguinte, a redução da desigualdade social.\r\n\r\nA qualidade das informações do CAGED vem apresentando significativa melhora. Concorreu para esse fato a implantação da Portaria nº 561/2001 que determinou a extinção da declaração do CAGED em formulário padrão a partir da competência de novembro de 2001. Esta medida teve um impacto positivo na qualidade, uma vez que as informações declaradas, em meios eletrônicos, passam por um processo de críticas. Ademais, a implantação da recepção do CAGED, via Internet, possibilitou, também, um ganho na tempestividade.",
+        "themes": [
+            {
+                "slug": "economia",
+                "name": "Economia"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "emprego",
+                "name": "emprego"
+            },
+            {
+                "slug": "empresa",
+                "name": "empresa"
+            },
+            {
+                "slug": "firma",
+                "name": "firma"
+            },
+            {
+                "slug": "trabalho",
+                "name": "trabalho"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "microdados_movimentacao",
+                "name": "microdados_movimentacao",
+                "description": "Contém dados de movimentações declaradas dentro do prazo com competência de declaração.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_movimentacao"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "1. Acessar o FTP do Ministério do Trabalho e Previdência; 2. Baixar os arquivos brutos no formato '.7z'; 3. Renomear as colunas para o padrão definido no Manual de Estilo; 4. Remover as colunas \"competenciamov\", \"sigla_uf\", \"regiao\",\"competenciadec\", \"unidadesalariocodigo\" e \"valorsalariofixo\"; 5. Salvar os arquivos nas diretórios particionadas no formato `/caged/output/ano=AAAA/mes=MM/sigla_uf=XX/`",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": "https://storage.googleapis.com/basedosdados-dev/raw/br_me_caged/microdados_movimencatacao/CAGEDMOV202001.txt",
+                "auxiliaryFilesUrl": "https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_me_caged/microdados_movimentacao/auxiliary_files.zip",
+                "architectureUrl": "https://storage.googleapis.com/basedosdados-dev/architecture/br_me_caged/microdados_movimentacao/microdados_movimentacao.xlsx",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "categoria",
+                        "description": "Categoria de trabalhador"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações (CBO) - 2002"
+                    },
+                    {
+                        "name": "cnae_2_secao",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse do Código Nacional de Atividades Econômicas 2.0"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "horas_contratuais",
+                        "description": "Horas contratuais"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de trabalhador aprendiz"
+                    },
+                    {
+                        "name": "indicador_fora_prazo",
+                        "description": "Indicador fora do prazo"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de trabalhador intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "origem_informacao",
+                        "description": "Origem da Informação"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça ou Cor do Trabalhador"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal em moeda corrente"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tamanho_estabelecimento_janeiro",
+                        "description": "Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_empregador",
+                        "description": "Tipo de empregador"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_movimentacao_excluida",
+                "name": "microdados_movimentacao_excluida",
+                "description": "Contém dados de movimentações excluídas com competência de declaração.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_movimentacao_excluida"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Limpeza para consistência",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": "https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_me_caged/microdados_movimentacao_excluida/auxiliary_files.zip",
+                "architectureUrl": "https://storage.googleapis.com/basedosdados-dev/architecture/br_me_caged/microdados_movimentacao_excluida/microdados_movimentacao_excluida.xlsx",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "categoria",
+                        "description": "Categoria de trabalhador"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações (CBO) - 2002"
+                    },
+                    {
+                        "name": "cnae_2_secao",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse do Código Nacional de Atividades Econômicas 2.0"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "horas_contratuais",
+                        "description": "Horas contratuais"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de trabalhador aprendiz"
+                    },
+                    {
+                        "name": "indicador_exclusao",
+                        "description": "Indicador Exclusão"
+                    },
+                    {
+                        "name": "indicador_fora_prazo",
+                        "description": "Indicador fora do prazo"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de trabalhador intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "origem_informacao",
+                        "description": "Origem da Informação"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça ou Cor do Trabalhador"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal em moeda corrente"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tamanho_estabelecimento_janeiro",
+                        "description": "Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_empregador",
+                        "description": "Tipo de empregador"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_movimentacao_fora_prazo",
+                "name": "microdados_movimentacao_fora_prazo",
+                "description": "Contém dados de movimentações declaradas fora do prazo com competência de declaração.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_movimentacao_fora_prazo"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Limpeza para consistência",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": "https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_me_caged/microdados_movimentacao_fora_prazo/auxiliary_files.zip",
+                "architectureUrl": "https://storage.googleapis.com/basedosdados-dev/architecture/br_me_caged/microdados_movimentacao_fora_prazo/microdados_movimentacao_fora_prazo.xlsx",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "categoria",
+                        "description": "Categoria de trabalhador"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações (CBO) - 2002"
+                    },
+                    {
+                        "name": "cnae_2_secao",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse do Código Nacional de Atividades Econômicas 2.0"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "horas_contratuais",
+                        "description": "Horas contratuais"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de trabalhador aprendiz"
+                    },
+                    {
+                        "name": "indicador_fora_prazo",
+                        "description": "Indicador fora do prazo"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de trabalhador intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "origem_informacao",
+                        "description": "Origem da Informação"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça ou Cor do Trabalhador"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal em moeda corrente"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tamanho_estabelecimento_janeiro",
+                        "description": "Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_empregador",
+                        "description": "Tipo de empregador"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_antigos",
+                "name": "microdados_antigos",
+                "description": "Microdados públicos do CAGED (2007-2019)",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_antigos"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Unificação de todos os anos e meses, padronização do nomes de colunas, erros de valores, etc.",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "admitidos_desligados",
+                        "description": "Admissão ou Desligamento (1 para admissão e 2 para desligamento)"
+                    },
+                    {
+                        "name": "ano",
+                        "description": "Ano em que a movimentação foi declarada"
+                    },
+                    {
+                        "name": "bairros_fortaleza",
+                        "description": "Bairros do município de Fortaleza"
+                    },
+                    {
+                        "name": "bairros_rj",
+                        "description": "Bairros do município do Rio de Janeiro"
+                    },
+                    {
+                        "name": "bairros_sp",
+                        "description": "Bairros do Municipio de São Paulo"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações"
+                    },
+                    {
+                        "name": "cnae_1",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE) 1.0"
+                    },
+                    {
+                        "name": "cnae_2",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE) 2.0"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse de Atividade Econômica, segundo classificação CNAE - versão 2.0 a partir de 2006"
+                    },
+                    {
+                        "name": "distritos_sp",
+                        "description": "Distritos do município de São Paulo"
+                    },
+                    {
+                        "name": "faixa_emprego_inicio_janeiro",
+                        "description": "Tamanho do estabelecimento em janeiro do ano de referência"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_municipio_6",
+                        "description": "ID Município - IBGE 6 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de movimentação referente a contrato de aprendizagem"
+                    },
+                    {
+                        "name": "indicador_portador_deficiencia",
+                        "description": "Indicador se o empregado/servidor de portador de deficiência habilitado ou beneficiário reabilitado"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de movimentação referente a contrato intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês em que a movimentação foi declarada"
+                    },
+                    {
+                        "name": "quantidade_horas_contratadas",
+                        "description": "Quantidade de horas contratuais por semana"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça e Cor do Trabalhador - disponível a partir de 01/2007"
+                    },
+                    {
+                        "name": "regiao_administrativas_df",
+                        "description": "Regiões Administrativas do Distrito Federal"
+                    },
+                    {
+                        "name": "regiao_administrativas_rj",
+                        "description": "Regiões Administrativas do Rio de Janeiro"
+                    },
+                    {
+                        "name": "regiao_administrativas_sp",
+                        "description": "Regiões Administrativas de São Paulo"
+                    },
+                    {
+                        "name": "regiao_corede",
+                        "description": "Região Corede"
+                    },
+                    {
+                        "name": "regiao_corede_04",
+                        "description": "Região Corede 04"
+                    },
+                    {
+                        "name": "regiao_gov_sp",
+                        "description": "Região Governo de SP"
+                    },
+                    {
+                        "name": "regiao_senac_pr",
+                        "description": "Região Senac PR"
+                    },
+                    {
+                        "name": "regiao_senai_pr",
+                        "description": "Região Senai PR"
+                    },
+                    {
+                        "name": "regiao_senai_sp",
+                        "description": "Região Senai SP"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "subregiao_senai_pr",
+                        "description": "Sub-região Senai PR"
+                    },
+                    {
+                        "name": "subsetor_ibge",
+                        "description": "Subsetor Econômico segundo IBGE"
+                    },
+                    {
+                        "name": "tempo_emprego",
+                        "description": "Tempo de emprego do trabalhador"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao_desagregado",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_antigos_ajustes",
+                "name": "microdados_antigos_ajustes",
+                "description": "Microdados públicos de ajuste do CAGED (2007-2019)",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_antigos_ajustes"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Unificação de todos os anos e meses, padronização do nomes de colunas, erros de valores, etc.",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "admitidos_desligados",
+                        "description": "Admissão ou Desligamento"
+                    },
+                    {
+                        "name": "ano",
+                        "description": "Ano em que a movimentação foi declarada"
+                    },
+                    {
+                        "name": "bairros_fortaleza",
+                        "description": "Bairros do município de Fortaleza"
+                    },
+                    {
+                        "name": "bairros_rj",
+                        "description": "Bairros do município do Rio de Janeiro"
+                    },
+                    {
+                        "name": "bairros_sp",
+                        "description": "Bairros do Municipio de São Paulo"
+                    },
+                    {
+                        "name": "cbo_1994",
+                        "description": "Classificação Brasileira de Ocupações 1994"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações"
+                    },
+                    {
+                        "name": "cnae_1",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE) 1.0"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse de Atividade Econômica, segundo classificação CNAE - versão 2.0 a partir de 2006"
+                    },
+                    {
+                        "name": "competencia_movimentacao",
+                        "description": "Competência da qual é a movimentação"
+                    },
+                    {
+                        "name": "distritos_sp",
+                        "description": "Distritos do município de São Paulo"
+                    },
+                    {
+                        "name": "faixa_emprego_inicio_janeiro",
+                        "description": "Tamanho do estabelecimento em janeiro do ano de referência"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_municipio_6",
+                        "description": "ID Município - IBGE 6 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de movimentação referente a contrato de aprendizagem"
+                    },
+                    {
+                        "name": "indicador_portador_deficiencia",
+                        "description": "Indicador se o empregado/servidor de portador de deficiência habilitado ou beneficiário reabilitado"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de movimentação referente a contrato intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês em que a movimentação foi declarada"
+                    },
+                    {
+                        "name": "quantidade_horas_contratadas",
+                        "description": "Quantidade de horas contratuais por semana"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça e Cor do Trabalhador"
+                    },
+                    {
+                        "name": "regiao_administrativas_df",
+                        "description": "Regiões Administrativas do Distrito Federal"
+                    },
+                    {
+                        "name": "regiao_administrativas_rj",
+                        "description": "Regiões Administrativas do Rio de Janeiro"
+                    },
+                    {
+                        "name": "regiao_administrativas_sp",
+                        "description": "Regiões Administrativas de São Paulo"
+                    },
+                    {
+                        "name": "regiao_corede",
+                        "description": "Região Corede"
+                    },
+                    {
+                        "name": "regiao_corede_04",
+                        "description": "Região Corede 04"
+                    },
+                    {
+                        "name": "regiao_gov_sp",
+                        "description": "Região Governo de SP"
+                    },
+                    {
+                        "name": "regiao_metropolitana_mte",
+                        "description": "Região Metropolitana de localização do estabelecimento"
+                    },
+                    {
+                        "name": "regiao_senac_pr",
+                        "description": "Região Senac PR"
+                    },
+                    {
+                        "name": "regiao_senai_pr",
+                        "description": "Região Senai PR"
+                    },
+                    {
+                        "name": "regiao_senai_sp",
+                        "description": "Região Senai SP"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "subregiao_senai_pr",
+                        "description": "Sub-região Senai PR"
+                    },
+                    {
+                        "name": "subsetor_ibge",
+                        "description": "Subsetor Econômico - IBGE"
+                    },
+                    {
+                        "name": "tempo_emprego",
+                        "description": "Tempo de emprego do trabalhador"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao_desagregado",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_movimentacao",
+                "name": "microdados_movimentacao",
+                "description": "Contém dados de movimentações declaradas dentro do prazo com competência de declaração.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_movimentacao"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "1. Acessar o FTP do Ministério do Trabalho e Previdência; 2. Baixar os arquivos brutos no formato '.7z'; 3. Renomear as colunas para o padrão definido no Manual de Estilo; 4. Remover as colunas \"competenciamov\", \"sigla_uf\", \"regiao\",\"competenciadec\", \"unidadesalariocodigo\" e \"valorsalariofixo\"; 5. Salvar os arquivos nas diretórios particionadas no formato `/caged/output/ano=AAAA/mes=MM/sigla_uf=XX/`",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": "https://storage.googleapis.com/basedosdados-dev/raw/br_me_caged/microdados_movimencatacao/CAGEDMOV202001.txt",
+                "auxiliaryFilesUrl": "https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_me_caged/microdados_movimentacao/auxiliary_files.zip",
+                "architectureUrl": "https://storage.googleapis.com/basedosdados-dev/architecture/br_me_caged/microdados_movimentacao/microdados_movimentacao.xlsx",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "categoria",
+                        "description": "Categoria de trabalhador"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações (CBO) - 2002"
+                    },
+                    {
+                        "name": "cnae_2_secao",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse do Código Nacional de Atividades Econômicas 2.0"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "horas_contratuais",
+                        "description": "Horas contratuais"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de trabalhador aprendiz"
+                    },
+                    {
+                        "name": "indicador_fora_prazo",
+                        "description": "Indicador fora do prazo"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de trabalhador intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "origem_informacao",
+                        "description": "Origem da Informação"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça ou Cor do Trabalhador"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal em moeda corrente"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tamanho_estabelecimento_janeiro",
+                        "description": "Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_empregador",
+                        "description": "Tipo de empregador"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_movimentacao_excluida",
+                "name": "microdados_movimentacao_excluida",
+                "description": "Contém dados de movimentações excluídas com competência de declaração.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_movimentacao_excluida"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Limpeza para consistência",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": "https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_me_caged/microdados_movimentacao_excluida/auxiliary_files.zip",
+                "architectureUrl": "https://storage.googleapis.com/basedosdados-dev/architecture/br_me_caged/microdados_movimentacao_excluida/microdados_movimentacao_excluida.xlsx",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "categoria",
+                        "description": "Categoria de trabalhador"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações (CBO) - 2002"
+                    },
+                    {
+                        "name": "cnae_2_secao",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse do Código Nacional de Atividades Econômicas 2.0"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "horas_contratuais",
+                        "description": "Horas contratuais"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de trabalhador aprendiz"
+                    },
+                    {
+                        "name": "indicador_exclusao",
+                        "description": "Indicador Exclusão"
+                    },
+                    {
+                        "name": "indicador_fora_prazo",
+                        "description": "Indicador fora do prazo"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de trabalhador intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "origem_informacao",
+                        "description": "Origem da Informação"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça ou Cor do Trabalhador"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal em moeda corrente"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tamanho_estabelecimento_janeiro",
+                        "description": "Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_empregador",
+                        "description": "Tipo de empregador"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados_movimentacao_fora_prazo",
+                "name": "microdados_movimentacao_fora_prazo",
+                "description": "Contém dados de movimentações declaradas fora do prazo com competência de declaração.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_me_caged",
+                        "gcpTableId": "microdados_movimentacao_fora_prazo"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Limpeza para consistência",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": "https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_me_caged/microdados_movimentacao_fora_prazo/auxiliary_files.zip",
+                "architectureUrl": "https://storage.googleapis.com/basedosdados-dev/architecture/br_me_caged/microdados_movimentacao_fora_prazo/microdados_movimentacao_fora_prazo.xlsx",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "categoria",
+                        "description": "Categoria de trabalhador"
+                    },
+                    {
+                        "name": "cbo_2002",
+                        "description": "Classificação Brasileira de Ocupações (CBO) - 2002"
+                    },
+                    {
+                        "name": "cnae_2_secao",
+                        "description": "Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)"
+                    },
+                    {
+                        "name": "cnae_2_subclasse",
+                        "description": "Subclasse do Código Nacional de Atividades Econômicas 2.0"
+                    },
+                    {
+                        "name": "grau_instrucao",
+                        "description": "Grau de instrução ou escolaridade"
+                    },
+                    {
+                        "name": "horas_contratuais",
+                        "description": "Horas contratuais"
+                    },
+                    {
+                        "name": "idade",
+                        "description": "Idade do trabalhador"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "indicador_aprendiz",
+                        "description": "Indicador de trabalhador aprendiz"
+                    },
+                    {
+                        "name": "indicador_fora_prazo",
+                        "description": "Indicador fora do prazo"
+                    },
+                    {
+                        "name": "indicador_trabalho_intermitente",
+                        "description": "Indicador de trabalhador intermitente"
+                    },
+                    {
+                        "name": "indicador_trabalho_parcial",
+                        "description": "Indicador de movimentação referente a contrato parcial"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "origem_informacao",
+                        "description": "Origem da Informação"
+                    },
+                    {
+                        "name": "raca_cor",
+                        "description": "Raça ou Cor do Trabalhador"
+                    },
+                    {
+                        "name": "salario_mensal",
+                        "description": "Salário mensal em moeda corrente"
+                    },
+                    {
+                        "name": "saldo_movimentacao",
+                        "description": "Saldo de movimentação"
+                    },
+                    {
+                        "name": "sexo",
+                        "description": "Sexo"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tamanho_estabelecimento_janeiro",
+                        "description": "Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano"
+                    },
+                    {
+                        "name": "tipo_deficiencia",
+                        "description": "Tipo de deficiência/Beneficiário habilitado"
+                    },
+                    {
+                        "name": "tipo_empregador",
+                        "description": "Tipo de empregador"
+                    },
+                    {
+                        "name": "tipo_estabelecimento",
+                        "description": "Tipo de estabelecimento"
+                    },
+                    {
+                        "name": "tipo_movimentacao",
+                        "description": "Tipo de movimentação"
+                    }
+                ]
+            }
+        ]
     }
 }
