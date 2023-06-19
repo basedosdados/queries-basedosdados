@@ -47,3 +47,4 @@ SAFE_CAST(nome_controlador AS STRING) nome_controlador,
 SAFE_CAST(indicador_aplicacao_total_recursos_exterior AS INT64) indicador_aplicacao_total_recursos_exterior,
 FROM basedosdados-dev.br_cvm_fi_staging.documentos_informacao_cadastral AS t
 
+
