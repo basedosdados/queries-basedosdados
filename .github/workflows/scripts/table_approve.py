@@ -363,10 +363,11 @@ if __name__ == "__main__":
                 (expanded_dataset_id, expanded_table_id, alias)
             )
     existing_datasets_tables = expanded_existing_datasets_tables
-    print(existing_datasets_tables)
     # Sync and create tables
     for dataset_id, table_id, _ in existing_datasets_tables:
-        print(f"\n\n Creating table {dataset_id}.{table_id}...")
+        print(
+            f"\n\n\n\n************   START CREATING TABLE {dataset_id}.{table_id}...   ************"
+        )
         table_was_created = push_table_to_bq(
             dataset_id=dataset_id,
             table_id=table_id,
@@ -376,11 +377,11 @@ if __name__ == "__main__":
         )
         if table_was_created:
             print(
-                f"TABLE created: basedosdados-staging.{dataset_id}_staging.{table_id}"
+                f"============   TABLE CREATED: basedosdados-staging.{dataset_id}_staging.{table_id}   ============"
             )
         else:
             print(
-                f"TABLE was NOT created: basedosdados-staging.{dataset_id}_staging.{table_id}"
+                f"============   TABLE was NOT created: basedosdados-staging.{dataset_id}_staging.{table_id}   ============"
             )
 
     # Launch materialization flows
