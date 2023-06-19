@@ -120,6 +120,10 @@ def save_header_files(dataset_id, table_id):
         .bucket("basedosdados-dev")
         .list_blobs(prefix=f"staging/{dataset_id}/{table_id}/")
     )
+
+    if len(blobs) == 0:
+        raise ValueError(f"No blobs found in staging/{dataset_id}/{table_id}/")
+
     ## only needs the first bloob
     partitions = []
     for blob in blobs:
@@ -148,7 +152,7 @@ def save_header_files(dataset_id, table_id):
     if file_type == "csv":
         file_path = f"./{path}/table_approve_temp_file_271828.csv"
         df.to_csv(file_path, index=False)
-    if file_type == "parquet":
+    elif file_type == "parquet":
         file_path = f"./{path}/table_approve_temp_file_271828.parquet"
         df.to_parquet(file_path)
     print("SAVE HEADER FILE: ", file_path)
@@ -355,7 +359,7 @@ if __name__ == "__main__":
 
     # Sync and create tables
     for dataset_id, table_id, _ in existing_datasets_tables:
-        print(f"Creating table {dataset_id}.{table_id}...")
+        print(f"\n\n Creating table {dataset_id}.{table_id}...")
         push_table_to_bq(
             dataset_id=dataset_id,
             table_id=table_id,
