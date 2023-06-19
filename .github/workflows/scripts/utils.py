@@ -18,6 +18,7 @@ def expand_alls(
     Returns:
         List[Tuple[str, str]]: List of tuples with dataset IDs and table IDs.
     """
+
     if table_id == "__all__":
         table_ids = []
         tables = backend._get_tables_for_dataset(dataset_id)["tables"]
@@ -83,7 +84,7 @@ def get_datasets_tables_from_modified_files(
 
     # Get schema files
     schema_files: List[Path] = [
-        file
+        Path(file)
         for file in modified_files
         if file.name.startswith("schema")
         and (file.suffix == ".yaml" or file.suffix == ".yml")
