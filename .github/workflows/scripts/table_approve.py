@@ -363,6 +363,7 @@ if __name__ == "__main__":
                 (expanded_dataset_id, expanded_table_id, alias)
             )
     existing_datasets_tables = expanded_existing_datasets_tables
+
     # Sync and create tables
     for dataset_id, table_id, _ in existing_datasets_tables:
         print(

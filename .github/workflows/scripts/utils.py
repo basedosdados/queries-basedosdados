@@ -48,7 +48,6 @@ def get_datasets_tables_from_modified_files(
     """
     # Convert to Path
     modified_files: List[Path] = [Path(file) for file in modified_files]
-
     # Get SQL files
     sql_files: List[Path] = [file for file in modified_files if file.suffix == ".sql"]
 

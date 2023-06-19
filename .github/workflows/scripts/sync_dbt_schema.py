@@ -188,7 +188,7 @@ def update_metadata_json(
     Gets the latest version of metadata.json file, if exists, and updates it with the new metadata.
     """
     try:
-        with open("metadata.json", "r") as f:
+        with open("metadata.json", "r", encoding="utf-8") as f:
             metadata = json.load(f)
     except FileNotFoundError:
         metadata = {}
@@ -240,8 +240,8 @@ def update_metadata_json(
                             metadata_table.update(table)
 
     # Write the new metadata to the file
-    with open("metadata.json", "w") as f:
-        json.dump(metadata, f, indent=4)
+    with open("metadata.json", "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=4, ensure_ascii=False)
 
 
 def update_schema_yaml_files():
@@ -250,7 +250,7 @@ def update_schema_yaml_files():
     each dataset.
     """
     # Read the metadata file
-    with open("metadata.json", "r") as f:
+    with open("metadata.json", "r", encoding="utf-8") as f:
         metadata = json.load(f)
 
     # Instantiate the YAML object
