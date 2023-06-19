@@ -44,7 +44,18 @@ def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str
     metadatas = []
     for table_id in table_ids:
         print(f"Building metadata for `{dataset_id}.{table_id}`...")
-        metadatas.append(backend.get_table_config(dataset_id, table_id))
+        metadata = backend.get_table_config(dataset_id, table_id)
+
+        # Add description UNKNOWN metadata when does not have description
+        if (
+            metadata.get("description", None) is None
+            or metadata.get("columns", []) == []
+        ):
+            print(
+                f" {dataset_id}.{table_id} does not have description or columns and will be ignored"
+            )
+        else:
+            metadatas.append(metadata)
     return metadatas
 
 

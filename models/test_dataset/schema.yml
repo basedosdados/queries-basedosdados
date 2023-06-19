@@ -1,8 +1,5 @@
 version: 2
 models :
-  - name: test_3
-    description:
-    columns: []
   - name: test_laura_student
     description: A subset of variables from PISA data for the years 2000 - 2018 at
       the student level, collected from the R package 'learning-tower'. This is an
