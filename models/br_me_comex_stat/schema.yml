@@ -95,7 +95,7 @@ models:
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
   - name: dicionario
-    description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+    description: Dicionário de dados
     columns:
       - name: id_tabela
         description: ID da tabela
