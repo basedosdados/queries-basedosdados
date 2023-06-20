@@ -1507,5 +1507,109 @@
                 ]
             }
         ]
+    },
+    "br_b3_cotacoes": {
+        "name": "Cotações B3",
+        "description": "Cotações negociadas diariamente, b3 é uma fonte completa e atualizada de informações sobre o mercado financeiro brasileiro. Inclui dados horário de fechamento do negócio, código referente ao negócio, preço e também quantidade de ações negociadas.",
+        "themes": [
+            {
+                "slug": "economia",
+                "name": "Economia"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "bolsa",
+                "name": "bolsa"
+            },
+            {
+                "slug": "dinheiro",
+                "name": "dinheiro"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "cotacoes",
+                "name": "Cotações",
+                "description": "Cotações negociadas diariamente, b3 é uma fonte completa e atualizada de informações sobre o mercado financeiro brasileiro. Inclui dados horário de fechamento do negócio, código referente ao negócio, preço e também quantidade de ações negociadas.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_b3_cotacoes",
+                        "gcpTableId": "cotacoes"
+                    }
+                ],
+                "status": {
+                    "name": "active",
+                    "slug": "active"
+                },
+                "license": {
+                    "name": "Desconhecida",
+                    "slug": "unknown"
+                },
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleaningDescription": "As colunas forem renomeadas e reordenadas; O type da coluna hora_fechamento foi alterada para TIME",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/pipelines/tree/master/pipelines/datasets/br_b3_cotacoes",
+                "rawDataUrl": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/consultas/boletim-diario/dados-publicos-de-produtos-listados-e-de-balcao/glossario/",
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://drive.google.com/drive/u/1/folders/1gNuPatIp8K32GeozQKRRroXNisk6f2As",
+                "columns": [
+                    {
+                        "name": "acao_atualizacao",
+                        "description": "Informa a ação de atualização que está ocorrendo (e.g. negócio novo, cancelado)"
+                    },
+                    {
+                        "name": "codigo_identificador_negocio",
+                        "description": "Número do negócio"
+                    },
+                    {
+                        "name": "codigo_instrumento",
+                        "description": "Código que identifica um instrumento negociado/registrado em bolsa de valores"
+                    },
+                    {
+                        "name": "codigo_participante_comprador",
+                        "description": "Código comprador"
+                    },
+                    {
+                        "name": "codigo_participante_vendedor",
+                        "description": "Código vendedor"
+                    },
+                    {
+                        "name": "data_negocio",
+                        "description": "Data do pregão"
+                    },
+                    {
+                        "name": "data_referencia",
+                        "description": "Data de referência da informação"
+                    },
+                    {
+                        "name": "hora_fechamento",
+                        "description": "Hora (o instante) do negócio fechado (UTC-3)"
+                    },
+                    {
+                        "name": "preco_negocio",
+                        "description": "Preço do negocio"
+                    },
+                    {
+                        "name": "quantidade_negociada",
+                        "description": "Quantidade de ações negociadas"
+                    },
+                    {
+                        "name": "tipo_sessao_pregao",
+                        "description": "Tipo sessão do Pregão (e.g. sessão regular, after hours\r\n)"
+                    }
+                ]
+            }
+        ]
     }
 }
