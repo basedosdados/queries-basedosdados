@@ -23,3 +23,4 @@ SAFE_CAST(quantidade_negociada AS INT64) quantidade_negociada,
 SAFE_CAST(preco_negocio AS FLOAT64) preco_negocio
 
 FROM basedosdados-staging.br_b3_cotacoes_staging.cotacoes AS t 
+
