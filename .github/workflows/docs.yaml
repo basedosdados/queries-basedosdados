@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip3 install -r requirements-actions.txt -r requirements.txt
+          pip3 install -r requirements-docs.txt -r requirements.txt
 
       - name: Setup credentials
         run: |
