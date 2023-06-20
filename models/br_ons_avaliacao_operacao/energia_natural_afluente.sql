@@ -1,4 +1,4 @@
-config{{
+{{config(
     labels = {'project_id': 'basedosdados', 'tema': 'infraestrutura'})
     }}
 SELECT
