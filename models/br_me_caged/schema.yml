@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: microdados_movimentacao
-    description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração.
+    description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração
     columns:
       - name: ano
         description: Ano
