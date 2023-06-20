@@ -95,7 +95,7 @@ models:
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
   - name: dicionario
-    description: Dicionário de dados
+    description: Dicionário de dados.
     columns:
       - name: id_tabela
         description: ID da tabela
