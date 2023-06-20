@@ -44,7 +44,18 @@ def build_metadata(dataset_id: str, table_id: str, backend: Backend) -> Dict[str
     metadatas = []
     for table_id in table_ids:
         print(f"Building metadata for `{dataset_id}.{table_id}`...")
-        metadatas.append(backend.get_table_config(dataset_id, table_id))
+        metadata = backend.get_table_config(dataset_id, table_id)
+
+        # Add description UNKNOWN metadata when does not have description
+        if (
+            metadata.get("description", None) is None
+            or metadata.get("columns", []) == []
+        ):
+            print(
+                f" {dataset_id}.{table_id} does not have description or columns and will be ignored"
+            )
+        else:
+            metadatas.append(metadata)
     return metadatas
 
 
@@ -55,6 +66,11 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
         "slug": "...",
         "name": "...",
         "description": "...",
+        cloudTables [{
+            "gcpProjectId": "...",
+            "gcpDatasetId": "...",
+            "gcpTableId": "...",
+        }]
         "dataset": {
             "slug": "...",
             "name": "...",
@@ -169,7 +185,7 @@ def merge_metadatas(metadatas: List[Dict[str, Any]]):
     """
     final_metadata = {}
     for metadata in metadatas:
-        dataset_slug = metadata["dataset"]["slug"]
+        dataset_slug = metadata["cloudTables"][0]["gcpDatasetId"]
         if dataset_slug not in final_metadata:
             dataset_metadata = deepcopy(metadata["dataset"])
             del dataset_metadata["slug"]
@@ -188,7 +204,7 @@ def update_metadata_json(
     Gets the latest version of metadata.json file, if exists, and updates it with the new metadata.
     """
     try:
-        with open("metadata.json", "r") as f:
+        with open("metadata.json", "r", encoding="utf-8") as f:
             metadata = json.load(f)
     except FileNotFoundError:
         metadata = {}
@@ -213,7 +229,6 @@ def update_metadata_json(
                         for table in metadata[dataset_slug]["tables"]
                         if table["slug"] != table_slug
                     ]
-
     # For each dataset slug
     for dataset_slug, dataset_metadata in final_metadata.items():
         # If it's not yet on the file, simply add it
@@ -240,17 +255,17 @@ def update_metadata_json(
                             metadata_table.update(table)
 
     # Write the new metadata to the file
-    with open("metadata.json", "w") as f:
-        json.dump(metadata, f, indent=4)
+    with open("metadata.json", "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=4, ensure_ascii=False)
 
 
 def update_schema_yaml_files():
     """
-    Reads the current `metadata.json` file and generates the corresponding `schema.yaml` file for
+    Reads the current `metadata.json` file and generates the corresponding `schema.yml` file for
     each dataset.
     """
     # Read the metadata file
-    with open("metadata.json", "r") as f:
+    with open("metadata.json", "r", encoding="utf-8") as f:
         metadata = json.load(f)
 
     # Instantiate the YAML object
@@ -258,7 +273,7 @@ def update_schema_yaml_files():
 
     # For each dataset
     for dataset_slug, dataset_metadata in metadata.items():
-        print(f"Generating schema.yaml for dataset `{dataset_slug}`...")
+        print(f"Generating schema.yml for dataset `{dataset_slug}`...")
         schema_yaml = {"version": 2, "models": []}
         for table_metadata in dataset_metadata["tables"]:
             print(
@@ -284,17 +299,17 @@ def update_schema_yaml_files():
         # Assert that the path exists
         dataset_dir = Path(f"models/{dataset_slug}")
         dataset_dir.mkdir(parents=True, exist_ok=True)
-        with open(dataset_dir / "schema.yaml", "w") as f:
+        with open(dataset_dir / "schema.yml", "w") as f:
             print(
-                f"  - Writing schema.yaml for dataset `{dataset_slug}` in file {f.name}..."
+                f"  - Writing schema.yml for dataset `{dataset_slug}` in file {f.name}..."
             )
             ruamel.dump(schema_yaml, f)
 
         # Check if file exists
-        if (dataset_dir / "schema.yaml").exists():
-            print(f"  - File {dataset_dir / 'schema.yaml'} exists.")
+        if (dataset_dir / "schema.yml").exists():
+            print(f"  - File {dataset_dir / 'schema.yml'} exists.")
         else:
-            raise Exception(f"  - File {dataset_dir / 'schema.yaml'} does not exist.")
+            raise Exception(f"  - File {dataset_dir / 'schema.yml'} does not exist.")
 
 
 if __name__ == "__main__":
@@ -352,5 +367,5 @@ if __name__ == "__main__":
     # Update metadata.json file
     update_metadata_json(final_metadata, deleted_datasets_tables)
 
-    # Update `schema.yaml` files
+    # Update `schema.yml` files
     update_schema_yaml_files()

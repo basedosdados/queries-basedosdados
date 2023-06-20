@@ -10,8 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    cluster_by = ["mes", "id_fundo"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    cluster_by = ["mes", "id_fundo"])
  }}
 SELECT
 SAFE_CAST(ano AS INT64) ano,
@@ -73,5 +72,5 @@ SAFE_CAST(codigo_ativo_bolsa_mercado_balcao_local_aquisicao AS STRING) codigo_at
 SAFE_CAST(descricao_ativo_exterior AS STRING) descricao_ativo_exterior,
 SAFE_CAST(REPLACE(quantidade_ativos_exterior,'.0','') AS INT64) quantidade_ativos_exterior,
 SAFE_CAST(valor_ativo_exterior AS FLOAT64) valor_ativo_exterior,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_carteiras_fundos_investimento AS t
+FROM basedosdados-dev.br_cvm_fi_staging.documentos_carteiras_fundos_investimento AS t
 

@@ -10,8 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    cluster_by =  ["mes", "data_competencia"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    cluster_by =  ["mes", "data_competencia"])
  }}
 SELECT
 SAFE_CAST(ano AS INT64) ano,
@@ -122,5 +121,5 @@ SAFE_CAST(quantidade_dias_cinquenta_percentual AS INT64) quantidade_dias_cinquen
 SAFE_CAST(quantidade_dias_cem_percentual AS INT64) quantidade_dias_cem_percentual,
 SAFE_CAST(indicador_liquidez AS INT64) indicador_liquidez,
 SAFE_CAST(porcentagem_patrimonio_liquido_convertido_caixa AS FLOAT64) porcentagem_patrimonio_liquido_convertido_caixa,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_perfil_mensal AS t
+FROM basedosdados-dev.br_cvm_fi_staging.documentos_perfil_mensal AS t
 

@@ -26,3 +26,19 @@ models:
         description: Quantidade de ações negociadas
       - name: preco_negocio
         description: Preço do negocio
+
+  - name: br_b3_cotacoes__dicionario
+    description: "Dicionário de dados da tabela de cotações"
+    columns: 
+      - name: id_coluna
+        description: ID da coluna
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor
+
+      
