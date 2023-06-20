@@ -130,6 +130,10 @@ models:
       +materialized: table
       +schema: br_poder360_pesquisas
       +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_rj_isp_estatisticas_seguranca:
+      +materialized: table
+      +schema: br_rj_isp_estatisticas_seguranca       
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
     br_sp_saopaulo_dieese_icv:
       +materialized: table
       +schema: br_sp_saopaulo_dieese_icv

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: microdados_movimentacao
-    description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração
+    description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração.
     columns:
       - name: ano
         description: Ano
@@ -164,5 +164,7 @@ models:
         description: Indicador de trabalhador aprendiz
       - name: origem_informacao
         description: Origem da Informação
+      - name: indicador_exclusao
+        description: Indicador Exclusão
       - name: indicador_fora_prazo
-        description: Indicador fora do prazo
+        description: Indicador fora do prazo        
