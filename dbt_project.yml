@@ -34,7 +34,6 @@ clean-targets: # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
   +persist_docs:
     relation: true
     columns: true
@@ -43,84 +42,111 @@ models:
     example:
       +materialized: table # Materialization type (table, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
-    br_b3_cotacoes:
-      +materialized: table
-      +schema: br_b3_cotacoes 
     br_anatel_banda_larga_fixa:
       +materialized: table
       +schema: br_anatel_banda_larga_fixa
-    br_tse_eleicoes_2022:
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_b3_cotacoes:
       +materialized: table
-      +schema: br_tse_eleicoes_2022
-    br_bd_indicadores:
-      +materialized: table
-      +schema: br_bd_indicadores
-    br_bd_metadados:
-      +materialized: table
-      +schema: br_bd_metadados
-    br_sp_saopaulo_dieese_icv:
-      +materialized: table
-      +schema: br_sp_saopaulo_dieese_icv
-    br_cgu_pessoal_executivo_federal:
-      +materialized: table
-      +schema: br_cgu_pessoal_executivo_federal
-    br_cvm_administradores_carteira:
-      +materialized: table
-      +schema: br_cvm_administradores_carteira
-    br_cvm_oferta_publica_distribuicao:
-      +materialized: table
-      +schema: br_cvm_oferta_publica_distribuicao
-    br_fgv_igp:
-      +materialized: table
-      +schema: br_fgv_igp
-    br_ibge_inpc:
-      +materialized: table
-      +schema: br_ibge_inpc
-    br_ibge_ipca:
-      +materialized: table
-      +schema: br_ibge_ipca
-    br_ibge_ipca15:
-      +materialized: table
-      +schema: br_ibge_ipca15
-    br_poder360_pesquisas:
-      +materialized: table
-      +schema: br_poder360_pesquisas
-    fundacao_lemann:
-      +materialized: table
-      +schema: fundacao_lemann
-    br_tse_eleicoes:
-      +materialized: table
-      +schema: br_tse_eleicoes
-    br_jota:
-      +materialized: table
-      +schema: br_jota
-    br_ibge_pnadc:
-      +materialized: table
-      +schema: br_ibge_pnadc
+      +schema: br_b3_cotacoes 
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_bcb_estban:
       +materialized: table
       +schema: br_bcb_estban 
-    br_inmet_bdmep:
-      +materialized: table
-      +schema: br_inmet_bdmep      
-    test_dataset:
-      +materialized: table
-      +schema: test_dataset
-    br_me_comex_stat:
-      +materialized: table
-      +schema: br_me_comex_stat
-    br_me_caged:
-      +materialized: table
-      +schema: br_me_caged
-    br_ons_avaliacao_operacao:
-      +materialized: table
-      +schema: br_ons_avaliacao_operacao  
-    br_cvm_fi:
-      +materialized: table
-      +schema: br_cvm_fi
-    br_ons_estimativa_custos:
-      +materialized: table
-      +schema: br_ons_estimativa_custos
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
+      # This dataset does not have a grant post-hook because it contains both open and closed tables.
+    br_bd_indicadores:
+      +materialized: table
+      +schema: br_bd_indicadores
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_bd_metadados:
+      +materialized: table
+      +schema: br_bd_metadados
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_cgu_pessoal_executivo_federal:
+      +materialized: table
+      +schema: br_cgu_pessoal_executivo_federal
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_cvm_administradores_carteira:
+      +materialized: table
+      +schema: br_cvm_administradores_carteira
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_cvm_fi:
+      +materialized: table
+      +schema: br_cvm_fi
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_cvm_oferta_publica_distribuicao:
+      +materialized: table
+      +schema: br_cvm_oferta_publica_distribuicao
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_fgv_igp:
+      +materialized: table
+      +schema: br_fgv_igp
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_ibge_inpc:
+      +materialized: table
+      +schema: br_ibge_inpc
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_ibge_ipca:
+      +materialized: table
+      +schema: br_ibge_ipca
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_ibge_ipca15:
+      +materialized: table
+      +schema: br_ibge_ipca15
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_ibge_pnadc:
+      +materialized: table
+      +schema: br_ibge_pnadc
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_inmet_bdmep:
+      +materialized: table
+      +schema: br_inmet_bdmep     
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"' 
+    br_jota:
+      +materialized: table
+      +schema: br_jota
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_me_caged:
+      +materialized: table
+      +schema: br_me_caged
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_me_comex_stat:
+      +materialized: table
+      +schema: br_me_comex_stat
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_ons_avaliacao_operacao:
+      +materialized: table
+      +schema: br_ons_avaliacao_operacao 
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_ons_estimativa_custos:
+      +materialized: table
+      +schema: br_ons_estimativa_custos
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_poder360_pesquisas:
+      +materialized: table
+      +schema: br_poder360_pesquisas
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_sp_saopaulo_dieese_icv:
+      +materialized: table
+      +schema: br_sp_saopaulo_dieese_icv
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_tse_eleicoes:
+      +materialized: table
+      +schema: br_tse_eleicoes
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    br_tse_eleicoes_2022:
+      +materialized: table
+      +schema: br_tse_eleicoes_2022
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    fundacao_lemann:
+      +materialized: table
+      +schema: fundacao_lemann
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+    test_dataset:
+      +materialized: table
+      +schema: test_dataset
+      +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
