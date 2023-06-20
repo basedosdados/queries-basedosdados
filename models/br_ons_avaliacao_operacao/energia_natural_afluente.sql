@@ -1,3 +1,6 @@
+config{{
+    labels = {'project_id': 'basedosdados', 'tema': 'infraestrutura'})
+    }}
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(ano AS INT64) ano,
