@@ -21,6 +21,6 @@ SAFE_CAST(data_competencia AS DATE) data_competencia,
 SAFE_CAST(plano_contabil_balancete AS STRING) plano_contabil_balancete,
 SAFE_CAST(codigo_conta AS STRING) codigo_conta,
 SAFE_CAST(saldo_conta AS FLOAT64) saldo_conta,
-FROM basedosdados-dev.br_cvm_fi_staging.documentos_balancete AS t
+FROM basedosdados-staging.br_cvm_fi_staging.documentos_balancete AS t
 
 
