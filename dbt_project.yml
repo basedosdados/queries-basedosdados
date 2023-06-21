@@ -49,6 +49,9 @@ models:
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_bcb_estban:
       +materialized: table
       +schema: br_bcb_estban 
@@ -70,7 +73,9 @@ models:
     br_cvm_fi:
       +materialized: table
       +schema: br_cvm_fi
-      +post-hook: [ 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"','GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"']
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
@@ -103,10 +108,16 @@ models:
       +schema: br_me_comex_stat
     br_ons_avaliacao_operacao:
       +materialized: table
-      +schema: br_ons_avaliacao_operacao 
+      +schema: br_ons_avaliacao_operacao
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_ons_estimativa_custos:
       +materialized: table
       +schema: br_ons_estimativa_custos
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_poder360_pesquisas:
       +materialized: table
       +schema: br_poder360_pesquisas
