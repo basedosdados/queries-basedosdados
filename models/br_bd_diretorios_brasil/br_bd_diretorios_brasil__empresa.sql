@@ -4,8 +4,7 @@
     schema='br_bd_diretorios_brasil',
     materialized='table',
     cluster_by =    ['id_municipio', 'sigla_uf'],
-    labels = {'tema': 'economia'},
-    post_hook = 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"')
+    labels = {'tema': 'economia'})
 }}
 
 WITH  max_dia AS (
