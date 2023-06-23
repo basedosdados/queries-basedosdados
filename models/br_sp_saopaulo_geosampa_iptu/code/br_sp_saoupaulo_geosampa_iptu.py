@@ -3,39 +3,6 @@ import numpy as np
 from datetime import datetime, timedelta
 from pathlib import Path
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_row', None)
-
-anos_tratamento = ['1995',
-        '1996',
-        '1997',
-        '1998',
-        '1999',
-        '2000',
-        '2001',
-        '2002',
-        '2003',
-        '2004',
-        '2005',
-        '2006',
-        '2007',
-        '2008',
-        '2009',
-        '2010',
-        '2011',
-        '2012',
-        '2013',
-        '2014',
-        '2015',
-        '2016',
-        '2017',
-        '2018',
-        '2019',
-        '2020',
-        '2021',
-        '2022',
-        '2023']
-
 def to_partitions(data: pd.DataFrame, partition_columns: list[str], savepath: str):
     """Save data in to hive patitions schema, given a dataframe and a list of partition columns.
     Args:
@@ -96,7 +63,7 @@ def to_partitions(data: pd.DataFrame, partition_columns: list[str], savepath: st
     else:
         raise BaseException("Data need to be a pandas DataFrame")
 
-for anos in anos_tratamento:
+for anos in range(1995,2024):
     print(f'Abrindo o arquivo de {anos}')
     df = pd.read_csv(f'D:\download\iptu\EG_{anos}.csv', sep=';', encoding='utf-8')
 
@@ -160,27 +127,29 @@ for anos in anos_tratamento:
     'fase_contribuinte',
     'fator_obsolescencia']
 
-
     print('renomenado...')
     df.rename(columns=rename, inplace=True)
+
     print('tratando...')
-    lista = ['fator_obsolescencia',
+
+    colunas_virgula = ['fator_obsolescencia',
             'testada_imovel',
             'valor_construcao',
             'valor_terreno',
             'fracao_ideal',
             ]
-    for x in lista:
-        df[x] = df[x].apply(lambda x: str(x).replace(',', '.'))
+    
+    for coluna_virgula in colunas_virgula:
+        df[coluna_virgula] = df[coluna_virgula].apply(lambda x: str(x).replace(',', '.'))
 
-    cep_codigo_logradouro = ['cep',
+    colunas_traco = ['cep',
                             'codigo_logradouro',
                             'numero_contribuinte']
-    for traço in cep_codigo_logradouro:
+    for coluna_traco in colunas_traco:
 
-        df[traço] = df[traço].apply(lambda x: str(x).replace('-', ''))
+        df[coluna_traco] = df[coluna_traco].apply(lambda x: str(x).replace('-', ''))
 
-    nova_lista = ['ano_inicio_vida_contribuinte',
+    colunas_ponto_zero = ['ano_inicio_vida_contribuinte',
                 'mes_inicio_vida_contribuinte',
                 'numero_imovel',
                 'quantidade_esquina_imovel',
@@ -193,8 +162,9 @@ for anos in anos_tratamento:
                 'cep',
                 'valor_construcao'
                 ]
-    for y in nova_lista:
-        df[y] = df[y].apply(lambda x: str(x).replace('.0', ''))
+    
+    for coluna_ponto_zero in colunas_ponto_zero:
+        df[coluna_ponto_zero] = df[coluna_ponto_zero].apply(lambda x: str(x).replace('.0', ''))
 
     print('formatando data')
     if (df['ano'] <= 2015).all():
@@ -213,10 +183,6 @@ for anos in anos_tratamento:
     print('ordenando...')
 
     df = df[ordem]
-
-    print('dropando duplicados...')
-
-    df = df.drop_duplicates()
 
     print('particionando...')
 
