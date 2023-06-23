@@ -58,3 +58,4 @@ models :
         description: Mês de início da vida do contribuinte
       - name: fator_obsolescencia
         description: Fator de obsolescencia
+        

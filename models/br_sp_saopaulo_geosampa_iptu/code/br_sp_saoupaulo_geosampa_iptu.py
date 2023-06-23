@@ -160,6 +160,7 @@ for anos in anos_tratamento:
     'fase_contribuinte',
     'fator_obsolescencia']
 
+
     print('renomenado...')
     df.rename(columns=rename, inplace=True)
     print('tratando...')
