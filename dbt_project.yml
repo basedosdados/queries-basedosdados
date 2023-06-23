@@ -139,3 +139,6 @@ models:
     test_dataset:
       +materialized: table
       +schema: test_dataset
+    br_sp_saopaulo_geosampa_iptu:
+      +materialized: table
+      +schema: br_sp_saopaulo_geosampa_iptu
