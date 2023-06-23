@@ -1,4 +1,5 @@
 version: 2
+
 models :
   - name: iptu
     description: O Geosampa disponibiliza a base completa do cadastro imobiliário
