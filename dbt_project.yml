@@ -43,6 +43,9 @@ models:
     example:
       +materialized: table # Materialization type (table, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
+    br_sp_saopaulo_geosampa_iptu:
+      +materialized: table
+      +schema: br_sp_saopaulo_geosampa_iptu
     br_anatel_banda_larga_fixa:
       +materialized: table
       +schema: br_anatel_banda_larga_fixa
