@@ -23,3 +23,5 @@ SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(peso_liquido_kg AS INT64) peso_liquido_kg,
 SAFE_CAST(valor_fob_dolar AS INT64) valor_fob_dolar
 FROM basedosdados-staging.br_me_comex_stat_staging.municipio_importacao AS t
+WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
+  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)
