@@ -1023,8 +1023,8 @@ models:
       - name: tipo_fase
         description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
 
-  - name: dicionario
-    description: "Dicionário referente as tabelas de segurança pública do Rio de Janeiro"
+  - name: relacao_cisp_aisp_risp
+    description: "Relação entre Circunscrição Integrada de Segurança Pública (CISP), Área Integrada de Segurança Pública (AISP) e Região Integrada de Segurança Pública (RISP) no estado do Rio de Janeiro"
     columns:
       - name: id_aisp
         description: Número da Área Integrada de Segurança Pública
