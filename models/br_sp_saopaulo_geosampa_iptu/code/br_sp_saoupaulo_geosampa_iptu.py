@@ -143,8 +143,7 @@ for anos in range(1995,2024):
         df[coluna_virgula] = df[coluna_virgula].apply(lambda x: str(x).replace(',', '.'))
 
     colunas_traco = ['cep',
-                            'codigo_logradouro',
-                            'numero_contribuinte']
+                    'numero_contribuinte']
     for coluna_traco in colunas_traco:
 
         df[coluna_traco] = df[coluna_traco].apply(lambda x: str(x).replace('-', ''))
@@ -185,8 +184,6 @@ for anos in range(1995,2024):
     df = df[ordem]
 
     print('particionando...')
-
-    df = df.drop(columns=['fase_contribuinte'])
 
     to_partitions(
     df,
