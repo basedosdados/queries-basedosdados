@@ -10,8 +10,12 @@
         "interval": 1}
     },
     cluster_by = ["mes","sigla_uf_ncm"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    labels = {'project_id': 'basedosdados', 'tema': 'economia'},
+    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
+
+ 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -27,5 +31,4 @@ SAFE_CAST(valor_fob_dolar AS FLOAT64) valor_fob_dolar,
 SAFE_CAST(valor_frete AS FLOAT64) valor_frete,
 SAFE_CAST(valor_seguro AS FLOAT64) valor_seguro
 FROM basedosdados-staging.br_me_comex_stat_staging.ncm_importacao AS t
-WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
-  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)
+WHERE DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
