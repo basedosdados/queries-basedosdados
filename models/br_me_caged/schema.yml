@@ -344,3 +344,4 @@ models :
         description: Tipo de estabelecimento
       - name: tipo_movimentacao
         description: Tipo de movimentação
+        
