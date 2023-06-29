@@ -136,6 +136,9 @@ models:
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
+    mundo_transfermarkt_competicoes:
+      +materialized: table
+      +schema: mundo_transfermarkt_competicoes
     test_dataset:
       +materialized: table
       +schema: test_dataset
