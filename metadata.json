@@ -1611,5 +1611,170 @@
                 ]
             }
         ]
+    },
+    "br_anatel_banda_larga_fixa": {
+        "name": "Acessos de banda larga fixa no Brasil",
+        "description": "Dados referente ao total de acessos a Banda Larga Fixa (também denominado por Serviço Comunicação Multimídia - SCM) provenientes da Anatel. A base inclui ainda, dados de entrada de banda larga nas escolas segundo o Programa Banda Larga nas Escolas e a instalação de backhauls segundo o Plano Nacional de Universalização da Banda Larga.",
+        "themes": [
+            {
+                "slug": "ciencia-tec-inov",
+                "name": "Ciência, Tecnologia e Inovação"
+            },
+            {
+                "slug": "comunicacao",
+                "name": "Jornalismo e Comunicação"
+            },
+            {
+                "slug": "infra-transp",
+                "name": "Infraestrutura e Transportes"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "computador",
+                "name": "computador"
+            },
+            {
+                "slug": "internet",
+                "name": "internet"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "densidade_brasil",
+                "name": "densidade_brasil",
+                "description": "Total de acessos e densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano desde março de 2007",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_banda_larga_fixa",
+                        "gcpTableId": "densidade_brasil"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Renomear as colunas",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "densidade",
+                        "description": "Densidade de acessos por 100 domicílios"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    }
+                ]
+            },
+            {
+                "slug": "densidade_municipio",
+                "name": "densidade_municipio",
+                "description": "Total de acessos e densidade por domicílio da Banda Larga Fixa nos municípios brasileiros por mês e ano desde março de 2007.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_banda_larga_fixa",
+                        "gcpTableId": "densidade_municipio"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Renomear as colunas",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "densidade",
+                        "description": "Densidade de acessos por 100 domicílios"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    }
+                ]
+            },
+            {
+                "slug": "densidade_uf",
+                "name": "densidade_uf",
+                "description": "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_banda_larga_fixa",
+                        "gcpTableId": "densidade_uf"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "Renomear as colunas",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "densidade",
+                        "description": "Densidade de acessos por 100 domicílios"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    }
+                ]
+            }
+        ]
     }
 }
