@@ -18,6 +18,7 @@ def expand_alls(
     Returns:
         List[Tuple[str, str]]: List of tuples with dataset IDs and table IDs.
     """
+
     if table_id == "__all__":
         table_ids = []
         tables = backend._get_tables_for_dataset(dataset_id)["tables"]
@@ -48,7 +49,6 @@ def get_datasets_tables_from_modified_files(
     """
     # Convert to Path
     modified_files: List[Path] = [Path(file) for file in modified_files]
-
     # Get SQL files
     sql_files: List[Path] = [file for file in modified_files if file.suffix == ".sql"]
 
@@ -82,21 +82,21 @@ def get_datasets_tables_from_modified_files(
             new_datasets_tables.append((dataset_id, table_id, exists, alias))
     datasets_tables = new_datasets_tables
 
-    # Get schema files
-    schema_files: List[Path] = [
-        file
-        for file in modified_files
-        if file.name.startswith("schema")
-        and (file.suffix == ".yaml" or file.suffix == ".yml")
-    ]
+    # # Get schema files
+    # schema_files: List[Path] = [
+    #     Path(file)
+    #     for file in modified_files
+    #     if file.name.startswith("schema")
+    #     and (file.suffix == ".yaml" or file.suffix == ".yml")
+    # ]
 
-    # Extract dataset_id and table_id from schema files
-    for schema_file in schema_files:
-        dataset_id = schema_file.parent.name
-        table_id = "__all__"
-        if not show_details:
-            datasets_tables.append((dataset_id, table_id))
-        else:
-            datasets_tables.append((dataset_id, table_id, schema_file.exists(), False))
+    # # Extract dataset_id and table_id from schema files
+    # for schema_file in schema_files:
+    #     dataset_id = schema_file.parent.name
+    #     table_id = "__all__"
+    #     if not show_details:
+    #         datasets_tables.append((dataset_id, table_id))
+    #     else:
+    #         datasets_tables.append((dataset_id, table_id, schema_file.exists(), False))
 
     return datasets_tables

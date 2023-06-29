@@ -1,3 +1,6 @@
+{{config(
+    labels = {'project_id': 'basedosdados', 'tema': 'infraestrutura'})
+    }}
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(ano AS INT64) ano,
@@ -15,4 +18,4 @@ SAFE_CAST(energia_natural_afluente_longo_termo AS FLOAT64) energia_natural_aflue
 SAFE_CAST(energia_natural_afluente_queda AS FLOAT64) energia_natural_afluente_queda,
 SAFE_CAST(proporcao_energia_natural_afluente_bruta AS FLOAT64) proporcao_energia_natural_afluente_bruta,
 SAFE_CAST(proporcao_energia_natural_afluente_armazenavel AS FLOAT64) proporcao_energia_natural_afluente_armazenavel
-FROM basedosdados-staging.br_ons_avalicao_operacao_staging.energia_natural_afluente AS t
+FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.energia_natural_afluente AS t

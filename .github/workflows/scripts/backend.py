@@ -215,6 +215,15 @@ class Backend:
                             slug,
                             name,
                             description,
+                            cloudTables {
+                                edges {
+                                    node {
+                                        gcpProjectId
+                                        gcpDatasetId
+                                        gcpTableId
+                                    }
+                                }
+                            }
                             dataset {
                                 slug,
                                 name,
