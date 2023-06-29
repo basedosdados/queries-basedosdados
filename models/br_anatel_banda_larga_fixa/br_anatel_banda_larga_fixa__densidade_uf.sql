@@ -5,5 +5,4 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(densidade AS FLOAT64) densidade
-
 FROM basedosdados-staging.br_anatel_banda_larga_fixa_staging.densidade_uf AS t
