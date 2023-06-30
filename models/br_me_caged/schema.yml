@@ -12,8 +12,6 @@ models:
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
-      - name: id_municipio_6
-        description: ID Município - IBGE 6 Dígitos
       - name: cnae_2_secao
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
       - name: cnae_2_subclasse
@@ -67,8 +65,6 @@ models:
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
-      - name: id_municipio_6
-        description: ID Município - IBGE 6 Dígitos
       - name: cnae_2_secao
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
       - name: cnae_2_subclasse
@@ -122,8 +118,6 @@ models:
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
-      - name: id_municipio_6
-        description: ID Município - IBGE 6 Dígitos
       - name: cnae_2_secao
         description: Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)
       - name: cnae_2_subclasse
