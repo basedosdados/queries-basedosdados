@@ -62,11 +62,13 @@ def to_partitions(data: pd.DataFrame, partition_columns: list[str], savepath: st
             )
     else:
         raise BaseException("Data need to be a pandas DataFrame")
-
+    
+# Loop para cada ano de 1995 a 2023
 for anos in range(1995,2024):
-    print(f'Abrindo o arquivo de {anos}')
+    # Lendo o arquivo CSV usando pandas
     df = pd.read_csv(f'D:\download\iptu\EG_{anos}.csv', sep=';', encoding='utf-8')
 
+    # Dicionário de renomeação de colunas
     rename = {'NUMERO DO CONTRIBUINTE':'numero_contribuinte',
     'ANO DO EXERCICIO':'ano',
     'NUMERO DA NL':'numero_notificacao',
@@ -97,6 +99,7 @@ for anos in range(1995,2024):
     'FASE DO CONTRIBUINTE':'fase_contribuinte',
     'FATOR DE OBSOLESCENCIA':'fator_obsolescencia'}
 
+    # Lista de colunas na ordem desejada
     ordem = ['ano',
     'data_cadastramento',
     'numero_contribuinte',
@@ -127,11 +130,9 @@ for anos in range(1995,2024):
     'fase_contribuinte',
     'fator_obsolescencia']
 
-    print('renomenado...')
     df.rename(columns=rename, inplace=True)
 
-    print('tratando...')
-
+    # Substituir vírgulas por pontos em colunas específicas
     colunas_virgula = ['fator_obsolescencia',
             'testada_imovel',
             'valor_construcao',
@@ -142,12 +143,14 @@ for anos in range(1995,2024):
     for coluna_virgula in colunas_virgula:
         df[coluna_virgula] = df[coluna_virgula].apply(lambda x: str(x).replace(',', '.'))
 
+    # Remover traços em colunas específicas
     colunas_traco = ['cep',
                     'numero_contribuinte']
     for coluna_traco in colunas_traco:
 
         df[coluna_traco] = df[coluna_traco].apply(lambda x: str(x).replace('-', ''))
 
+    # Remover ".0" em colunas específicas
     colunas_ponto_zero = ['ano_inicio_vida_contribuinte',
                 'mes_inicio_vida_contribuinte',
                 'numero_imovel',
@@ -165,7 +168,8 @@ for anos in range(1995,2024):
     for coluna_ponto_zero in colunas_ponto_zero:
         df[coluna_ponto_zero] = df[coluna_ponto_zero].apply(lambda x: str(x).replace('.0', ''))
 
-    print('formatando data')
+    # Formatando as datas para o padrão YYYY-MM-DD nos arquivos de 2016 a 2023
+    # Em anos anteriores a 2016, as datas estão vazias
     if (df['ano'] <= 2015).all():
         df['data_cadastramento'] = np.nan
     else:
@@ -179,12 +183,10 @@ for anos in range(1995,2024):
 
     df = df.apply(lambda x: x.replace(np.nan, '').replace(',', '.'))
 
-    print('ordenando...')
-
+    # Ordenando as colunas
     df = df[ordem]
 
-    print('particionando...')
-
+    # Particionando o DataFrame por ano a partir da função acima.
     to_partitions(
     df,
     partition_columns=['ano'],
