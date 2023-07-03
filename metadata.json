@@ -1776,5 +1776,179 @@
                 ]
             }
         ]
+    },
+    "br_sp_saopaulo_geosampa_iptu": {
+        "name": "Cadastro do IPTU na cidade de São Paulo",
+        "description": "O Geosampa disponibiliza a base completa do cadastro imobiliário fiscal relativo ao IPTU (Imposto Predial e Territorial Urbano) da cidade. São mais de 85 milhões de registros e 21,5 GB de informações sobre os imóveis de São Paulo.\r\nA publicação da base do IPTU representa um avanço significativo nas ações de transparência da Prefeitura ao garantir o acesso livre e a reutilização das informações pelos cidadãos, e permitir a elaboração de estudos, análises e cruzamento com outros dados, fundamentais para analisar os aspectos territoriais e sócio-econômicos da Cidade.",
+        "themes": [
+            {
+                "slug": "economia",
+                "name": "Economia"
+            },
+            {
+                "slug": "infra-transp",
+                "name": "Infraestrutura e Transportes"
+            },
+            {
+                "slug": "territorio",
+                "name": "Organização Territorial"
+            },
+            {
+                "slug": "urbanizacao",
+                "name": "Urbanização"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "aluguel",
+                "name": "aluguel"
+            },
+            {
+                "slug": "imovel",
+                "name": "imovel"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "cadastro_iptu",
+                "name": "Cadastro do IPTU",
+                "description": "O Geosampa disponibiliza a base completa do cadastro imobiliário fiscal relativo ao IPTU (Imposto Predial e Territorial Urbano) da cidade. São mais de 85 milhões de registros e 21,5 GB de informações sobre os imóveis de São Paulo.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "br_sp_saopaulo_geosampa_iptu",
+                        "gcpTableId": "iptu"
+                    }
+                ],
+                "status": null,
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleaningDescription": "1. renomear as colunas; 2. reordena-las; 3. replace em algumas variáveis substituindo , por . ; 4. organizando a data_cadastramento.",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/staging-querie-basedosdados/tree/master/bases/br_bcb_agencia/code",
+                "rawDataUrl": "https://geosampa.prefeitura.sp.gov.br/PaginasPublicas/_SBC.aspx",
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1syf-cwGHMAYshvO5Mv2LPxWHjGRro8-yJHIVAFMyK40/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "ano_construcao_corrigida",
+                        "description": "Ano da construção corrigida"
+                    },
+                    {
+                        "name": "ano_inicio_vida_contribuinte",
+                        "description": "Ano de início da vida do contribuinte"
+                    },
+                    {
+                        "name": "area_construida",
+                        "description": "Área construída"
+                    },
+                    {
+                        "name": "area_ocupada",
+                        "description": "Área ocupada"
+                    },
+                    {
+                        "name": "area_terreno",
+                        "description": "Área do terreno"
+                    },
+                    {
+                        "name": "bairro",
+                        "description": "Bairro do Imóvel"
+                    },
+                    {
+                        "name": "cep",
+                        "description": "Número do CEP"
+                    },
+                    {
+                        "name": "complemento",
+                        "description": "Complemento do endereço"
+                    },
+                    {
+                        "name": "data_cadastramento",
+                        "description": "Data do Cadastramento"
+                    },
+                    {
+                        "name": "fator_obsolescencia",
+                        "description": "Fator de obsolescencia"
+                    },
+                    {
+                        "name": "finalidade_imovel",
+                        "description": "Finalidade do imóvel"
+                    },
+                    {
+                        "name": "fracao_ideal",
+                        "description": "Fração ideal"
+                    },
+                    {
+                        "name": "logradouro",
+                        "description": "Logradouro"
+                    },
+                    {
+                        "name": "mes_inicio_vida_contribuinte",
+                        "description": "Mês de início da vida do contribuinte"
+                    },
+                    {
+                        "name": "numero_condominio",
+                        "description": "Número do condomínio"
+                    },
+                    {
+                        "name": "numero_contribuinte",
+                        "description": "Número do contribuinte do iptu"
+                    },
+                    {
+                        "name": "numero_imovel",
+                        "description": "Número do Imóvel"
+                    },
+                    {
+                        "name": "numero_notificacao",
+                        "description": "Número da notificação de lançamento (NL)"
+                    },
+                    {
+                        "name": "quantidade_esquina_imovel",
+                        "description": "Quantidade de esquinas na frente do imóvel"
+                    },
+                    {
+                        "name": "quantidade_pavimento",
+                        "description": "Quantidade de pavimentos"
+                    },
+                    {
+                        "name": "referencia_imovel",
+                        "description": "Referencia do imóvel"
+                    },
+                    {
+                        "name": "testada_imovel",
+                        "description": "Testada do imóvel"
+                    },
+                    {
+                        "name": "tipo_construcao",
+                        "description": "Tipo de padrão da construção"
+                    },
+                    {
+                        "name": "tipo_terreno",
+                        "description": "Tipo de terreno"
+                    },
+                    {
+                        "name": "valor_construcao",
+                        "description": "Valor do metro quadrado de construção"
+                    },
+                    {
+                        "name": "valor_terreno",
+                        "description": "Valor do metro quadrado do terreno"
+                    }
+                ]
+            }
+        ]
     }
 }
