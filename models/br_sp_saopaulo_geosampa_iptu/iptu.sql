@@ -42,4 +42,4 @@ SAFE_CAST(testada_imovel AS FLOAT64) testada_imovel,
 SAFE_CAST(valor_terreno AS INT64) valor_terreno,
 SAFE_CAST(valor_construcao AS INT64) valor_construcao,
 
-FROM basedosdados-dev.br_sp_saopaulo_geosampa_iptu_staging.iptu AS t
+FROM basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu AS t
