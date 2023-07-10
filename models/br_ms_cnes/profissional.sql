@@ -16,7 +16,7 @@
 WITH raw_cnes_profissional AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados-dev.br_ms_cnes_staging.profissional`
+  FROM `basedosdados-staging.br_ms_cnes_staging.profissional`
   WHERE CNES IS NOT NULL
 ),
 raw_cnes_profissional_dir AS (

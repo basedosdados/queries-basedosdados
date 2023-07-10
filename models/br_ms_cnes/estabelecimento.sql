@@ -16,7 +16,7 @@
 WITH raw_cnes_estabelecimento AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados-dev.br_ms_cnes_staging.estabelecimento`
+  FROM `basedosdados-staging.br_ms_cnes_staging.estabelecimento`
   WHERE CNES IS NOT NULL
 ),
 raw_cnes_estabelecimento_without_duplicates as(
