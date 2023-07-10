@@ -148,3 +148,6 @@ models:
     test_dataset:
       +materialized: table
       +schema: test_dataset
+    br_ms_cnes:
+      +materialized: table
+      +schema: br_ms_cnes
