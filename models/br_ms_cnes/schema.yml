@@ -1,52 +1,6 @@
 version: 2
 
 models:
-  - name: profissional
-    description: Cadastro dos profissionais de saúde
-    columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: sigla_uf
-        description: Sigla da Unidade da Federação
-      - name: id_municipio
-        description: ID Município IBGE - 7 Dígitos
-      - name: id_municipio_6_residencia
-        description: ID Município da residência  - IBGE 6 Dígitos
-      - name: id_estabelecimento_cnes
-        description: ID Estabelecimento - CNES
-      - name: nome
-        description: Nome do profissional
-      - name: cartao_nacional_saude
-        description: CNS - Cartão Nacional de Saúde
-      - name: cbo_2002
-        description: Código da especialidade 
-      - name: id_registro_conselho
-        description: Número do registro no conselho de classe
-      - name: id_conselho
-        description: Código do conselho de classe
-      - name: indicador_estabelecimento_terceiro
-        description: Indica se o estabelecimento é de terceiros ou não
-      - name: id_vinculo
-        description: Código do vínculo empregatício com o estabelecimento
-      - name: indicador_vinculo_contratado_sus
-        description: Vínculo empregatício com o estabelecimento - Contratado SUS
-      - name: indicador_vinculo_autonomo_sus
-        description: Vínculo empregatício com o estabelecimento - Autônomo SUS
-      - name: indicador_vinculo_outros
-        description: Vínculo empregatício com o estabelecimento - Vínculo não identificado
-            (registros de profissionais não SUS e outras situações anômalas)
-      - name: indicador_atende_sus
-        description: Realiza Atendimento SUS
-      - name: indicador_atende_nao_sus
-        description: Realiza Atendimento Não-SUS
-      - name: carga_horaria_outros
-        description: Carga horária não ambulatorial, nem hospitalar
-      - name: carga_horaria_hospitalar
-        description: Carga horária hospitalar
-      - name: carga_horaria_ambulatorial
-        description: Carga horária Ambulatorial
   - name: estabelecimento
     description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos de saúde brasileiros.
     columns:
