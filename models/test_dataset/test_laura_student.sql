@@ -1,3 +1,6 @@
+
+
+
 SELECT 
 SAFE_CAST(year AS INT64) year,
 SAFE_CAST(country_id_iso_3 AS STRING) country_id_iso_3,
