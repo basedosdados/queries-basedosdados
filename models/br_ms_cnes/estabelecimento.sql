@@ -25,10 +25,10 @@ raw_cnes_estabelecimento_without_duplicates as(
   FROM raw_cnes_estabelecimento
 ),
 cnes_add_muni AS (
-  -- 3. Adicionar id_municipio e sigla_uf
+  -- 3. Adicionar id_municipio
   SELECT *
   FROM raw_cnes_estabelecimento_without_duplicates  
-  LEFT JOIN (SELECT id_municipio, id_municipio_6, sigla_uf,
+  LEFT JOIN (SELECT id_municipio, id_municipio_6,
   FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_estabelecimento_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
