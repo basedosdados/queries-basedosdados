@@ -20,7 +20,7 @@ WITH raw_cnes_estabelecimento AS (
   WHERE CNES IS NOT NULL
 ),
 raw_cnes_estabelecimento_without_duplicates as(
-  -- 2. distinct nas linhas 
+  -- 2. Distinct nas linhas 
   SELECT DISTINCT *
   FROM raw_cnes_estabelecimento
 ),
