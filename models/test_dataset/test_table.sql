@@ -12,7 +12,7 @@
                     GRANT TO ("group:bd-pro@basedosdados.org")
                     FILTER USING
                     (ano>=2023)',
-                'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                'CREATE OR REPLACE ROW ACCESS POLICY laura_filter 
                     ON `basedosdados.test_dataset.test_table`  
                     GRANT TO ("user:laura.amaral@basedosdados.org")
                     FILTER USING
