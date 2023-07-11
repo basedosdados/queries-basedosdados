@@ -1,4 +1,20 @@
-# tabela de teste
+{{ 
+  config(
+    schema='test_dataset',
+    materialized='table',
+    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"',
+                'CREATE OR REPLACE ROW ACCESS POLICY bdmais_filter 
+                    ON `basedosdados-dev.br_cvm_fi.documentos_balancete`  
+                    GRANT TO ("allUsers")
+                    FILTER USING
+                    (ano<2023)',
+                 'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                    ON `basedosdados-dev.br_cvm_fi.documentos_balancete`  
+                    GRANT TO ("group:bd-pro@basedosdados.org")
+                    FILTER USING
+                    (ano>=2023)' )
+ }}
 
 SELECT 
 SAFE_CAST(id_empreendimento AS STRING) id_empreendimento,
