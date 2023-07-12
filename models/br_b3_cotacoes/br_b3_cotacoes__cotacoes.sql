@@ -1,13 +1,13 @@
-{{ config(alias='cotacoes', schema='br_b3_cotacoes') }}
-
 {{ config(
+    alias='cotacoes',
+    schema='br_b3_cotacoes',
     materialized='table',
     partition_by={
       "field": "data_referencia",
       "data_type": "date",
       "granularity": "day"
     }
-)}}
+) }}
 
 SELECT 
 SAFE_CAST(data_referencia AS DATE) data_referencia,
@@ -22,5 +22,4 @@ SAFE_CAST(tipo_sessao_pregao AS STRING) tipo_sessao_pregao,
 SAFE_CAST(quantidade_negociada AS INT64) quantidade_negociada,
 SAFE_CAST(preco_negocio AS FLOAT64) preco_negocio
 
-FROM basedosdados-staging.br_b3_cotacoes_staging.cotacoes AS t 
-
+FROM basedosdados-dev.br_b3_cotacoes_staging.cotacoes AS t 
