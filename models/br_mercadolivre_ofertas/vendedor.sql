@@ -1,14 +1,14 @@
 {{ config(
     materialized='table',
     partition_by={
-      "field": "data_referencia",
+      "field": "dia",
       "data_type": "date",
       "granularity": "day"
     }
 )}}
 
 with main as (
-  select lpad(id_vendor, 12, '0') as vendedor_id,
+  select lpad(vendedor_id, 12, '0') as vendedor_id,
   dia,
   nome,
   SAFE_CAST(experiencia AS INT64) experiencia,
@@ -22,7 +22,7 @@ with main as (
 
 predata as (
   select
-    lpad(id_vendor, 12, '0') as vendedor_id,
+    lpad(vendedor_id, 12, '0') as vendedor_id,
     struct(
     json_extract_scalar(opinioes, '$.Bom') as Bom,
     json_extract_scalar(opinioes, '$.Regular') as Regular,
