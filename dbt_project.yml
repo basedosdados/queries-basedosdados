@@ -151,3 +151,6 @@ models:
     br_ms_cnes:
       +materialized: table
       +schema: br_ms_cnes
+    br_mercadolivre_ofertas:
+      +materialized: table
+      +schema: br_mercadolivre_ofertas
