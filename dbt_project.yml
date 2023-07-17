@@ -139,6 +139,15 @@ models:
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
+      +post-hook:
+        - 'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING ( (EXTRACT(WEEK from data) <= (EXTRACT( WEEK from CURRENT_DATE())-6) ) OR ano_campeonato<EXTRACT(YEAR from  CURRENT_DATE()))'
+        - 'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                    ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (ano_campeonato=EXTRACT(YEAR from  CURRENT_DATE()))'      
     test_dataset:
       +materialized: table
       +schema: test_dataset
