@@ -1,14 +1,14 @@
 {{ 
   config(
-    schema='world_transfermarkt_competicoes',
+    schema='mundo_transfermarkt_competicoes',
     materialized='table',
      partition_by={
       "field": "ano_campeonato",
       "data_type": "int64",
       "range": {
-      "start": 2003,
-      "end": 2023,
-      "interval": 1}
+        "start": 2003,
+        "end": 2023,
+        "interval": 1}
     },
     labels = {'project_id': 'basedosdados'})
  }}

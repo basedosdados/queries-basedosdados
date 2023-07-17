@@ -142,9 +142,9 @@ models:
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
-    world_transfermarkt_competicoes:
+    mundo_transfermarkt_competicoes:
       +materialized: table
-      +schema: world_transfermarkt_competicoes
+      +schema: mundo_transfermarkt_competicoes
       +post-hook:
         - 'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
