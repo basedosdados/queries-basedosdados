@@ -1057,3 +1057,18 @@ models :
         description: Região do Rio de Janeiro
       - name: taxa_cem_mil_habitantes
         description: Taxa de delito por 100 mil habitantes
+  - name: relacao_cisp_aisp_risp
+    description: "Relação entre Circunscrição Integrada de Segurança Pública (CISP), Área Integrada de Segurança Pública (AISP) e Região Integrada de Segurança Pública (RISP) no estado do Rio de Janeiro"
+    columns:
+      - name: id_aisp
+        description: Número da Área Integrada de Segurança Pública
+      - name: id_risp
+        description: Número da Região Integrada de Segurança Pública
+      - name: id_cisp
+        description: Número da Circunscrição Integrada de Segurança Pública
+      - name: id_municipio
+        description: Código IBGE de 7 dígitos do município
+      - name: unidade_territorial
+        description: Unidade Territorial
+      - name: regiao
+        description: Região do Rio de Janeiro
