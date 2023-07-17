@@ -7,7 +7,7 @@
       "data_type": "int64",
       "range": {
       "start": 2003,
-      "end": 2022,
+      "end": 2023,
       "interval": 1}
     },
     labels = {'project_id': 'basedosdados'})
