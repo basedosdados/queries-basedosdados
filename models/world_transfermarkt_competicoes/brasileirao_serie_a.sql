@@ -6,9 +6,9 @@
       "field": "ano_campeonato",
       "data_type": "int64",
       "range": {
-        "start": 2003,
-        "end": 2022,
-        "interval": 1}
+      "start": 2003,
+      "end": 2022,
+      "interval": 1}
     },
     labels = {'project_id': 'basedosdados'})
  }}
