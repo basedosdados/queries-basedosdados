@@ -1,6 +1,6 @@
 {{ 
   config(
-    schema='mundo_transfermarkt_competicoes',
+    schema='world_transfermarkt_competicoes',
     materialized='table',
      partition_by={
       "field": "ano_campeonato",
