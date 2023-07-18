@@ -39,4 +39,4 @@ SAFE_CAST(quantidade_policial_militar_morto_servico AS INT64) quantidade_policia
 SAFE_CAST(quantidade_policial_civil_morto_servico AS INT64) quantidade_policial_civil_morto_servico,
 SAFE_CAST(quantidade_registro_ocorrencia AS INT64) quantidade_registro_ocorrencia
 
-FROM basedosdados-dev.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_upp AS t
+FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_upp AS t
