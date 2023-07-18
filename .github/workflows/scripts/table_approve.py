@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 from time import sleep
 import traceback
+import shutil
 
 import basedosdados as bd
 from basedosdados import Dataset, Storage
@@ -65,7 +66,7 @@ def push_table_to_bq(
 
     for mode in modes:
         try:
-            sync_bucket(
+            table_not_exists_in_storage = sync_bucket(
                 source_bucket_name=source_bucket_name,
                 dataset_id=dataset_id,
                 table_id=table_id,
@@ -77,7 +78,12 @@ def push_table_to_bq(
         except Exception as error:
             print(f"DATA ERROR ON {mode}.{dataset_id}.{table_id}")
             traceback.print_exc(file=sys.stderr)
+            table_not_exists_in_storage = True
             print()
+
+    if table_not_exists_in_storage:
+        print(f"Table {dataset_id}.{table_id} does not have data in storage.")
+        return False
 
     file_path = save_header_files(dataset_id, table_id)
 
@@ -109,6 +115,8 @@ def push_table_to_bq(
     )
     st = Storage(dataset_id=dataset_id, table_id=table_id)
     st.delete_file(filename=delete_storage_path, mode="staging")
+    shutil.rmtree("./downloaded_data/")
+    return True
 
 
 def save_header_files(dataset_id, table_id):
@@ -120,6 +128,10 @@ def save_header_files(dataset_id, table_id):
         .bucket("basedosdados-dev")
         .list_blobs(prefix=f"staging/{dataset_id}/{table_id}/")
     )
+
+    # if len(blobs) == 0:
+    #     raise ValueError(f"No blobs found in staging/{dataset_id}/{table_id}/")
+
     ## only needs the first bloob
     partitions = []
     for blob in blobs:
@@ -148,7 +160,7 @@ def save_header_files(dataset_id, table_id):
     if file_type == "csv":
         file_path = f"./{path}/table_approve_temp_file_271828.csv"
         df.to_csv(file_path, index=False)
-    if file_type == "parquet":
+    elif file_type == "parquet":
         file_path = f"./{path}/table_approve_temp_file_271828.parquet"
         df.to_parquet(file_path)
     print("SAVE HEADER FILE: ", file_path)
@@ -201,9 +213,8 @@ def sync_bucket(
     destination_ref = ref.bucket.list_blobs(prefix=prefix)
 
     if len(list(source_ref)) == 0:
-        raise ValueError(
-            f"No objects found on the source bucket {source_bucket_name}.{prefix}"
-        )
+        print(f"No objects found on the source bucket {source_bucket_name}.{prefix}")
+        return True
 
     if len(list(destination_ref)):
         backup_bucket_blobs = list(
@@ -235,6 +246,7 @@ def sync_bucket(
         destination_bucket_name=destination_bucket_name,
         mode=mode,
     )
+    return False
 
 
 if __name__ == "__main__":
@@ -332,7 +344,6 @@ if __name__ == "__main__":
     datasets_tables = get_datasets_tables_from_modified_files(
         modified_files, show_details=True
     )
-
     # Split deleted datasets and tables
     deleted_datasets_tables = []
     existing_datasets_tables = []
@@ -341,7 +352,6 @@ if __name__ == "__main__":
             existing_datasets_tables.append((dataset_id, table_id, alias))
         else:
             deleted_datasets_tables.append((dataset_id, table_id, alias))
-
     # Expand `__all__` tables
     backend = Backend(args.graphql_url)
     expanded_existing_datasets_tables = []
@@ -355,15 +365,24 @@ if __name__ == "__main__":
 
     # Sync and create tables
     for dataset_id, table_id, _ in existing_datasets_tables:
-        print(f"Creating table {dataset_id}.{table_id}...")
-        push_table_to_bq(
+        print(
+            f"\n\n\n\n************   START CREATING TABLE {dataset_id}.{table_id}...   ************"
+        )
+        table_was_created = push_table_to_bq(
             dataset_id=dataset_id,
             table_id=table_id,
             source_bucket_name=args.source_bucket_name,
             destination_bucket_name=args.destination_bucket_name,
             backup_bucket_name=args.backup_bucket_name,
         )
-        print(f"TABLE basedosdados-staging.{dataset_id}_staging.{table_id} created.")
+        if table_was_created:
+            print(
+                f"============   TABLE CREATED: basedosdados-staging.{dataset_id}_staging.{table_id}   ============"
+            )
+        else:
+            print(
+                f"============   TABLE was NOT created: basedosdados-staging.{dataset_id}_staging.{table_id}   ============"
+            )
 
     # Launch materialization flows
     backend = Backend(args.prefect_backend_url)

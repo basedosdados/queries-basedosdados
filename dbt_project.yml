@@ -43,33 +43,39 @@ models:
     example:
       +materialized: table # Materialization type (table, table or incremental)
       +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
-    br_rj_isp_estatisticas_seguranca:
-      +materialized: table
-      +schema: br_rj_isp_estatisticas_seguranca 
-    br_b3_cotacoes:
-      +materialized: table
-      +schema: br_b3_cotacoes 
     br_anatel_banda_larga_fixa:
       +materialized: table
       +schema: br_anatel_banda_larga_fixa
-    br_tse_eleicoes_2022:
+    br_b3_cotacoes:
       +materialized: table
-      +schema: br_tse_eleicoes_2022
+      +schema: br_b3_cotacoes 
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_bcb_estban:
+      +materialized: table
+      +schema: br_bcb_estban 
+    br_bd_diretorios_brasil:
+      +materialized: table
+      +schema: br_bd_diretorios_brasil
     br_bd_indicadores:
       +materialized: table
       +schema: br_bd_indicadores
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
-    br_sp_saopaulo_dieese_icv:
-      +materialized: table
-      +schema: br_sp_saopaulo_dieese_icv
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
     br_cvm_administradores_carteira:
       +materialized: table
       +schema: br_cvm_administradores_carteira
+    br_cvm_fi:
+      +materialized: table
+      +schema: br_cvm_fi
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
@@ -85,42 +91,75 @@ models:
     br_ibge_ipca15:
       +materialized: table
       +schema: br_ibge_ipca15
-    br_poder360_pesquisas:
-      +materialized: table
-      +schema: br_poder360_pesquisas
-    fundacao_lemann:
-      +materialized: table
-      +schema: fundacao_lemann
-    br_tse_eleicoes:
-      +materialized: table
-      +schema: br_tse_eleicoes
-    br_jota:
-      +materialized: table
-      +schema: br_jota
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
-    br_bcb_estban:
-      +materialized: table
-      +schema: br_bcb_estban 
     br_inmet_bdmep:
       +materialized: table
-      +schema: br_inmet_bdmep      
-    test_dataset:
+      +schema: br_inmet_bdmep     
+    br_jota:
       +materialized: table
-      +schema: test_dataset
-    br_me_comex_stat:
-      +materialized: table
-      +schema: br_me_comex_stat
+      +schema: br_jota
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
+    br_me_comex_stat:
+      +materialized: table
+      +schema: br_me_comex_stat
     br_ons_avaliacao_operacao:
       +materialized: table
-      +schema: br_ons_avaliacao_operacao  
-    br_cvm_fi:
-      +materialized: table
-      +schema: br_cvm_fi
+      +schema: br_ons_avaliacao_operacao
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_ons_estimativa_custos:
       +materialized: table
       +schema: br_ons_estimativa_custos
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_poder360_pesquisas:
+      +materialized: table
+      +schema: br_poder360_pesquisas
+    br_rj_isp_estatisticas_seguranca:
+      +materialized: table
+      +schema: br_rj_isp_estatisticas_seguranca       
+    br_sp_saopaulo_dieese_icv:
+      +materialized: table
+      +schema: br_sp_saopaulo_dieese_icv
+    br_sp_saopaulo_geosampa_iptu:
+      +materialized: table
+      +schema: br_sp_saopaulo_geosampa_iptu
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_tse_eleicoes:
+      +materialized: table
+      +schema: br_tse_eleicoes
+    br_tse_eleicoes_2022:
+      +materialized: table
+      +schema: br_tse_eleicoes_2022
+    fundacao_lemann:
+      +materialized: table
+      +schema: fundacao_lemann
+    mundo_transfermarkt_competicoes:
+      +materialized: table
+      +schema: mundo_transfermarkt_competicoes
+      +post-hook:
+        - 'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING ( (EXTRACT(WEEK from data) <= (EXTRACT( WEEK from CURRENT_DATE())-6) ) OR ano_campeonato<EXTRACT(YEAR from  CURRENT_DATE()))'
+        - 'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                    ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (ano_campeonato=EXTRACT(YEAR from  CURRENT_DATE()))'      
+    test_dataset:
+      +materialized: table
+      +schema: test_dataset
+    br_ms_cnes:
+      +materialized: table
+      +schema: br_ms_cnes
+    br_mercadolivre_ofertas:
+      +materialized: table
+      +schema: br_mercadolivre_ofertas

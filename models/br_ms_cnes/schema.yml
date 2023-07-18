@@ -1,0 +1,486 @@
+version: 2
+
+models:
+  - name: estabelecimento
+    description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos de saúde brasileiros.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: ano_atualizacao
+        description: Ano de atualização da informação pelo estabelecimento
+      - name: mes_atualizacao
+        description: Mês de atualização da informação pelo estabelecimento
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_6
+        description: ID Município - IBGE 6 Dígitos
+      - name: id_regiao_saude
+        description: ID da região de saúde NOAS
+      - name: id_microrregiao_saude
+        description: ID da microrregião de saúde NOAS
+      - name: id_distrito_sanitario
+        description: ID do módulo assistencial
+      - name: id_distrito_administrativo
+        description: ID do distrito adminstrativo
+      - name: cep
+        description: Código do CEP
+      - name: id_estabelecimento_cnes
+        description: ID estabelecimento - CNES
+      - name: tipo_pessoa
+        description: Indicador de pessoa física ou jurídica
+      - name: cpf_cnpj
+        description: CPF, caso pessoa física ou CNPJ, caso pessoa jurídica
+      - name: tipo_grau_dependencia
+        description: ID do grau de dependência
+      - name: cnpj_mantenedora
+        description: CNPJ da mantenedora
+      - name: tipo_retencao_tributos_mantenedora
+        description: Identifica do tipo de retenção de tributos da mantenedora
+      - name: indicador_vinculo_sus
+        description: Indica se tem vínculo com sus
+      - name: tipo_gestao
+        description: Tipo de gestão
+      - name: tipo_esfera_administrativa
+        description: Esfera administrativa
+      - name: tipo_retencao_tributos
+        description: Retenção de tributos
+      - name: tipo_atividade_ensino_pesquisa
+        description: Atividade de ensino/pesquisa
+      - name: tipo_natureza_administrativa
+        description: Natureza da organização
+      - name: id_natureza_juridica
+        description: Natureza jurídica
+      - name: tipo_fluxo_atendimento
+        description: Fluxo da clientela
+      - name: tipo_unidade
+        description: Tipo de unidade
+      - name: tipo_turno
+        description: Turno de atendimento
+      - name: tipo_nivel_hierarquia
+        description: Nível de hierarquia
+      - name: tipo_prestador
+        description: Tipo de prestador
+      - name: banco
+        description: Código do banco
+      - name: agencia
+        description: Código da agência
+      - name: conta_corrente
+        description: Código da conta corrente
+      - name: id_contrato_municipio_sus
+        description: Número do contrato/convênio municipal do vínculo com o SUS
+      - name: data_publicacao_contrato_municipal
+        description: Data de publicação do contrato ou convênio municipal
+      - name: id_contrato_estado_sus
+        description: Número do contrato/convênio estadual do vínculo com o SUS
+      - name: data_publicacao_contrato_estadual
+        description: Data de publicação do contrato ou convênio estadual
+      - name: numero_alvara
+        description: Número do alvará
+      - name: data_expedicao_alvara
+        description: Data da expedição do alvará
+      - name: tipo_orgao_expedidor
+        description: Código do órgão expedidor do alvará
+      - name: tipo_avaliacao_acreditacao_hospitalar
+        description: Indica se o estabelecimento foi avaliado segundo o manual de
+            acreditação hospitalar do Ministério da Saúde
+      - name: tipo_classificacao_acreditacao_hospitalar
+        description: Classificação da avaliação segundo o manual de acreditação hospitalar
+            do Ministério da Saúde
+      - name: mes_acreditacao
+        description: Mês da acreditação
+      - name: ano_acreditacao
+        description: Ano da acreditação
+      - name: tipo_avaliacao_pnass
+        description: Indica se o estabelecimento foi avaliado segundo o programa nacional
+            de serviços de saúde - PNASS
+      - name: ano_avaliacao_pnass
+        description: Ano da avaliação PNASS
+      - name: mes_avaliacao_pnass
+        description: Mês da avaliação PNASS
+      - name: indicador_atencao_ambulatorial
+        description: Indica a existência atenção ambulatorial
+      - name: indicador_gestao_basica_ambulatorial_estadual
+        description: Indicador se a gestão da atividade atenção básica ambulatorial
+            é estadual
+      - name: indicador_gestao_basica_ambulatorial_municipal
+        description: Indicador se a gestão da atividade atenção básica ambulatorial
+            é municipal
+      - name: indicador_gestao_media_ambulatorial_estadual
+        description: Indicador se a gestão da atividade média complexidade ambulatorial
+            é estadual
+      - name: indicador_gestao_media_ambulatorial_municipal
+        description: Indicador se a gestão da atividade média complexidade ambulatorial
+            é municipal
+      - name: indicador_gestao_alta_ambulatorial_estadual
+        description: Indicador se a gestão da atividade alta complexidade ambulatorial
+            é estadual
+      - name: indicador_gestao_alta_ambulatorial_municipal
+        description: Indicador se a gestão da atividade alta complexidade ambulatorial
+            é municipal
+      - name: indicador_atencao_hospitalar
+        description: Indica a existência de atenção hospitalar
+      - name: indicador_gestao_media_hospitalar_estadual
+        description: Indicador se a gestão da atividade média complexidade hospitalar
+            é estadual
+      - name: indicador_gestao_media_hospitalar_municipal
+        description: Indicador se a gestão da atividade média complexidade hospitalar
+            é municipal
+      - name: indicador_gestao_alta_hospitalar_estadual
+        description: Indicador se a gestão da atividade alta complexidade hospitalar
+            é estadual
+      - name: indicador_gestao_alta_hospitalar_municipal
+        description: Indicador se a gestão da atividade alta complexidade hospitalar
+            é municipal
+      - name: indicador_gestao_hospitalar_estadual
+        description: Indicador se a gestão do programa cód. 03 é estadual (Antigo)
+      - name: indicador_gestao_hospitalar_municipal
+        description: Indicador se a gestão do programa cód. 03 é municipal (Antigo)
+      - name: indicador_leito_hospitalar
+        description: Indica a existência de leitos hospitalares
+      - name: quantidade_leito_cirurgico
+        description: Quantidade de leitos hospitalares cirúrgicos
+      - name: quantidade_leito_clinico
+        description: Quantidade de leitos hospitalares clínicos
+      - name: quantidade_leito_complementar
+        description: Quantidade de leitos hospitalares complementares
+      - name: quantidade_leito_repouso_pediatrico_urgencia
+        description: Quantidade de leitos de repouso/observação pediátrico (urgência/emergência)
+      - name: quantidade_leito_repouso_feminino_urgencia
+        description: Quantidade de leitos de repouso/observação feminino (urgência/emergência)
+      - name: quantidade_leito_repouso_masculino_urgencia
+        description: Quantidade de leitos de repouso/observação masculino (urgência/emergência)
+      - name: quantidade_leito_repouso_indiferenciado_urgencia
+        description: Quantidade de leitos de repouso/observação indiferenciado (urgência/emergência)
+      - name: indicador_instalacao_urgencia
+        description: Indica a existência de instalação física de atendimento de urgência/emergência
+      - name: quantidade_consultorio_pediatrico_urgencia
+        description: Quantidade de salas/consultórios de atendimento pediátrico (urgência/emergência)
+      - name: quantidade_consultorio_feminino_urgencia
+        description: Quantidade de salas/consultórios de atendimento feminino (urgência/emergência)
+      - name: quantidade_consultorio_masculino_urgencia
+        description: Quantidade de salas/consultórios de atendimento masculino (urgência/emergência)
+      - name: quantidade_consultorio_indiferenciado_urgencia
+        description: Quantidade de salas/consultórios de atendimento indiferenciado
+            (urgência/emergência)
+      - name: quantidade_consultorio_odontologia_urgencia
+        description: Quantidade de consultórios de odontologia (urgência/emergência)
+      - name: quantidade_sala_repouso_pediatrico_urgencia
+        description: Quantidade de salas de repouso/observação pediátrico (urgência/emergência)
+      - name: quantidade_sala_repouso_feminino_urgencia
+        description: Quantidade de salas de repouso/observação feminino (urgência/emergência)
+      - name: quantidade_sala_repouso_masculino_urgencia
+        description: Quantidade de salas de repouso/observação masculino (urgência/emergência)
+      - name: quantidade_sala_repouso_indiferenciado_urgencia
+        description: Quantidade de salas de repouso/observação indiferenciado (urgência/emergência)
+      - name: quantidade_equipos_odontologia_urgencia
+        description: Quantidade de equipos de odontologia (urgência/emergência)
+      - name: quantidade_sala_higienizacao_urgencia
+        description: Quantidade de salas de higienização (urgência/emergência)
+      - name: quantidade_sala_gesso_urgencia
+        description: Quantidade de salas de gesso (urgência/emergência)
+      - name: quantidade_sala_curativo_urgencia
+        description: Quantidade de salas de curativos (urgência/emergência)
+      - name: quantidade_sala_pequena_cirurgia_urgencia
+        description: Quantidade de salas de pequenas cirurgias (urgência/emergência)
+      - name: quantidade_consultorio_medico_urgencia
+        description: Quantidade de consultórios médicos (urgência/emergência)
+      - name: indicador_instalacao_ambulatorial
+        description: Indica a existência de instalação física de atendimento ambulatorial
+      - name: quantidade_consultorio_clinica_basica_ambulatorial
+        description: Quantidade de consultórios de clínica básica (ambulatorial)
+      - name: quantidade_consultorio_clinica_especializada_ambulatorial
+        description: Quantidade de consultórios de clínica especializada (ambulatorial)
+      - name: quantidade_consultorio_clinica_indiferenciada_ambulatorial
+        description: Quantidade de consultórios de clínica indiferenciada (ambulatorial)
+      - name: quantidade_consultorio_nao_medico_ambulatorial
+        description: Quantidade de consultórios não médicos (ambulatorial)
+      - name: quantidade_sala_repouso_feminino_ambulatorial
+        description: Quantidade de salas de repouso/observação feminino (ambulatorial)
+      - name: quantidade_leito_repouso_feminino_ambulatorial
+        description: Quantidade de leitos de repouso/observação feminino (ambulatorial)
+      - name: quantidade_sala_repouso_masculino_ambulatorial
+        description: Quantidade de salas de repouso/observação masculino (ambulatorial)
+      - name: quantidade_leito_repouso_masculino_ambulatorial
+        description: Quantidade de leitos de repouso/observação masculino (ambulatorial)
+      - name: quantidade_sala_repouso_pediatrico_ambulatorial
+        description: Quantidade de salas de repouso/observação pediátrico (ambulatorial)
+      - name: quantidade_leito_repouso_pediatrico_ambulatorial
+        description: Quantidade de leitos de repouso/observação pediátrico (ambulatorial)
+      - name: quantidade_sala_repouso_indiferenciado_ambulatorial
+        description: Quantidade de salas de repouso/observação indiferenciado (ambulatorial)
+      - name: quantidade_leito_repouso_indiferenciado_ambulatorial
+        description: Quantidade de leitos de repouso/observação indiferenciado (ambulatorial)
+      - name: quantidade_consultorio_odontologia_ambulatorial
+        description: Quantidade de consultórios de odontologia (ambulatorial)
+      - name: quantidade_equipos_odontologia_ambulatorial
+        description: Quantidade de equipos de odontologia (ambulatorial)
+      - name: quantidade_sala_pequena_cirurgia_ambulatorial
+        description: Quantidade de salas de pequenas cirurgias (ambulatorial)
+      - name: quantidade_sala_enfermagem_ambulatorial
+        description: Quantidade de salas de enfermagem (ambulatorial)
+      - name: quantidade_sala_imunizacao_ambulatorial
+        description: Quantidade de salas de imunização (ambulatorial)
+      - name: quantidade_sala_nebulizacao_ambulatorial
+        description: Quantidade de salas de nebulização (ambulatorial)
+      - name: quantidade_sala_gesso_ambulatorial
+        description: Quantidade de salas de gesso (ambulatorial)
+      - name: quantidade_sala_curativo_ambulatorial
+        description: Quantidade de salas de curativos (ambulatorial)
+      - name: quantidade_sala_cirurgia_ambulatorial
+        description: Quantidade de salas de cirurgia ambulatorial (ambulatorial)
+      - name: indicador_instalacao_hospitalar
+        description: Indica a existência de instalação física de atendimento hospitalar
+      - name: indicador_instalacao_hospitalar_centro_cirurgico
+        description: Indica a existência de instalação física de atendimento hospitalar-
+            centro cirúrgico
+      - name: quantidade_sala_cirurgia_centro_cirurgico
+        description: Quantidade de salas de cirurgias em centro cirúrgico
+      - name: quantidade_sala_recuperacao_centro_cirurgico
+        description: Quantidade de salas de recuperação em centro cirúrgico
+      - name: quantidade_leito_recuperacao_centro_cirurgico
+        description: Quantidade de leitos de recuperação em centro cirúrgico
+      - name: quantidade_sala_cirurgia_ambulatorial_centro_cirurgico
+        description: Quantidade de salas de cirurgia ambulatorial em centro cirúrgico
+      - name: indicador_instalacao_hospitalar_centro_obstetrico
+        description: Indica a existência de instalação física de atendimento hospitalar-
+            centro obstétrico
+      - name: quantidade_sala_pre_parto_centro_obstetrico
+        description: Quantidade de salas de pré-parto em centro obstétrico
+      - name: quantidade_leito_pre_parto_centro_obstetrico
+        description: Quantidade de leitos de pré-parto em centro obstétrico
+      - name: quantidade_sala_parto_normal_centro_obstetrico
+        description: Quantidade de salas de parto normal em centro obstétrico
+      - name: quantidade_sala_curetagem_centro_obstetrico
+        description: Quantidade de salas de curetagem em centro obstétrico
+      - name: quantidade_sala_cirurgia_centro_obstetrico
+        description: Quantidade de salas de cirurgias em centro obstétrico
+      - name: indicador_instalacao_hospitalar_neonatal
+        description: Indica a existência de instalação física de atendimento hospitalar-
+            unidade neonatal
+      - name: quantidade_leito_recem_nascido_normal_neonatal
+        description: Quantidade de leitos de recém-nascido normal em unidadade neonatal
+      - name: quantidade_leito_recem_nascido_patologico_neonatal
+        description: Quantidade de leitos de recém-nascido patológico em unidadade
+            neonatal
+      - name: quantidade_leito_conjunto_neonatal
+        description: Quantidade de leitos de alojamento conjunto em unidadade neonatal
+      - name: indicador_servico_apoio
+        description: Indica a existência de algum serviço de apoio
+      - name: indicador_servico_same_spp_proprio
+        description: Indica a existência de serviço de Arquivo Médico e Estatística
+            ou Serviço de Prontuário de Paciente próprio
+      - name: indicador_servico_same_spp_terceirizado
+        description: Indica a existência de serviço de Arquivo Médico e Estatística
+            ou Serviço de Prontuário de Paciente terceirizado
+      - name: indicador_servico_social_proprio
+        description: Indica a existência de serviço de apoio serviço social próprio
+      - name: indicador_servico_social_terceirizado
+        description: Indica a existência de serviço de apoio serviço social terceirizado
+      - name: indicador_servico_farmacia_proprio
+        description: Indica a existência de serviço de apoio farmácia próprio
+      - name: indicador_servico_farmacia_terceirizado
+        description: Indica a existência de serviço de apoio farmácia terceirizado
+      - name: indicador_servico_esterilizacao_proprio
+        description: Indica a existência de serviço de apoio esterilização de materiais
+            próprio
+      - name: indicador_servico_esterilizacao_terceirizado
+        description: Indica a existência de serviço de apoio esterilização de materiais
+            terceirizado
+      - name: indicador_servico_nutricao_proprio
+        description: Indica a existência de serviço de apoio nutrição/dietética próprio
+      - name: indicador_servico_nutricao_terceirizado
+        description: Indica a existência de serviço de apoio nutrição/dietética terceirizado
+      - name: indicador_servico_lactario_proprio
+        description: Indica a existência de serviço de apoio lactário próprio
+      - name: indicador_servico_lactario_terceirizado
+        description: Indica a existência de serviço de apoio lactário terceirizado
+      - name: indicador_servico_banco_leite_proprio
+        description: Indica a existência de serviço de apoio banco de leite próprio
+      - name: indicador_servico_banco_leite_terceirizado
+        description: Indica a existência de serviço de apoio banco de leite terceirizado
+      - name: indicador_servico_lavanderia_proprio
+        description: Indica a existência de serviço de apoio lavanderia próprio
+      - name: indicador_servico_lavanderia_terceirizado
+        description: Indica a existência de serviço de apoio lavanderia terceirizado
+      - name: indicador_servico_manutencao_proprio
+        description: Indica a existência de serviço de apoio manutenção de equipamento
+            próprio
+      - name: indicador_servico_manutencao_terceirizado
+        description: Indica a existência de serviço de apoio manutenção de equipamento
+            terceirizado
+      - name: indicador_servico_ambulancia_proprio
+        description: Indica a existência de serviço de apoio ambulância próprio
+      - name: indicador_servico_ambulancia_terceirizado
+        description: Indica a existência de serviço de apoio ambulância terceirizado
+      - name: indicador_servico_necroterio_proprio
+        description: Indica a existência de serviço de apoio necrotério próprio
+      - name: indicador_servico_necroterio_terceirizado
+        description: Indica a existência de serviço de apoio necrotério terceirizado
+      - name: indicador_coleta_residuo
+        description: Indica a existência de alguma coleta de resíduo
+      - name: indicador_coleta_residuo_biologico
+        description: Indica a existência de coleta de resíduo biológico
+      - name: indicador_coleta_residuo_quimico
+        description: Indica a existência de coleta de resíduo químico
+      - name: indicador_coleta_rejeito_radioativo
+        description: Indica a existência de coleta de rejeitos radioativos
+      - name: indicador_coleta_rejeito_comum
+        description: Indica a existência de coleta de rejeitos comum
+      - name: indicador_comissao
+        description: Indica a existência de alguma comissão
+      - name: indicador_comissao_etica_medica
+        description: Indica a existência de comissão de ética médica
+      - name: indicador_comissao_etica_enfermagem
+        description: Indica a existência de comissão de ética de enfermagem
+      - name: indicador_comissao_farmacia_terapeutica
+        description: Indica a existência de comissão de farmácia e terapêutica
+      - name: indicador_comissao_controle_infeccao
+        description: Indica a existência de comissão de controle de infecção hospitalar
+      - name: indicador_comissao_apropriacao_custos
+        description: Indica a existência de comissão de apropriação de custos
+      - name: indicador_comissao_cipa
+        description: Indica a existência de comissão de CIPA
+      - name: indicador_comissao_revisao_prontuario
+        description: Indica a existência de comissão de revisão de prontuários
+      - name: indicador_comissao_revisao_documentacao
+        description: Indica a existência decomissão de revisão de documentação médica
+            e estatística
+      - name: indicador_comissao_analise_obito_biopisias
+        description: Indica a existência de comissão de análise de óbitos e biópsias
+      - name: indicador_comissao_investigacao_epidemiologica
+        description: Indica a existência de comissão de investigação epidemiológica
+      - name: indicador_comissao_notificacao_doencas
+        description: Indica a existência de comissão de notificação de doenças
+      - name: indicador_comissao_zoonose_vetores
+        description: Indica a existência de comissão de controle de zoonoses e vetores
+      - name: indicador_atendimento_prestado
+        description: Indica a existência de algum atendimento prestado
+      - name: indicador_atendimento_internacao_sus
+        description: Indica a existência de atendimento prestado internação/convênio
+            sus
+      - name: indicador_atendimento_internacao_particular
+        description: Indica a existência de atendimento prestado internação/convênio
+            particular
+      - name: indicador_atendimento_internacao_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado internação/convênio
+            plano-seguro próprio
+      - name: indicador_atendimento_internacao_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado internação/convênio
+            plano-seguro terceiro
+      - name: indicador_atendimento_internacao_plano_saude_publico
+        description: Indica a existência de atendimento prestado internação/convênio
+            plano de saúde público
+      - name: indicador_atendimento_internacao_plano_saude_privado
+        description: Indica a existência de atendimento prestado internação/convênio
+            plano de saúde privado
+      - name: indicador_atendimento_ambulatorial_sus
+        description: Indica a existência de atendimento prestado atendimento ambulatorial/convênio
+            sus
+      - name: indicador_atendimento_ambulatorial_particular
+        description: Indica a existência de atendimento prestado atendimento ambulatorial/convênio
+            particular
+      - name: indicador_atendimento_ambulatorial_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado atendimento ambulatorial/convênio
+            plano- seguro próprio
+      - name: indicador_atendimento_ambulatorial_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado atendimento ambulatorial/convênio
+            plano- seguro terceiro
+      - name: indicador_atendimento_ambulatorial_plano_saude_publico
+        description: Indica a existência de atendimento prestado atendimento ambulatorial/convênio
+            plano de saúde público
+      - name: indicador_atendimento_ambulatorial_plano_saude_privado
+        description: Indica a existência de atendimento prestado atendimento ambulatorial/convênio
+            plano de saúde privado
+      - name: indicador_atendimento_sadt_sus
+        description: Indica a existência de atendimento prestado Serviço de Apoio
+            Diagnóstico Terapêutico/convênio sus
+      - name: indicador_atendimento_sadt_privado
+        description: Indica a existência de atendimento prestado Serviço de Apoio
+            Diagnóstico Terapêutico/convênio particular
+      - name: indicador_atendimento_sadt_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado Serviço de Apoio
+            Diagnóstico Terapêutico/convênio plano-seguro próprio
+      - name: indicador_atendimento_sadt_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado Serviço de Apoio
+            Diagnóstico Terapêutico/convênio plano-seguro terceiro
+      - name: indicador_atendimento_sadt_plano_saude_publico
+        description: Indica a existência de atendimento prestado Serviço de Apoio
+            Diagnóstico Terapêutico/convênio plano de saúde público
+      - name: indicador_atendimento_sadt_plano_saude_privado
+        description: Indica a existência de atendimento prestado Serviço de Apoio
+            Diagnóstico Terapêutico/convênio plano de saúde privado
+      - name: indicador_atendimento_urgencia_sus
+        description: Indica a existência de atendimento prestado urgência/ convênio
+            sus
+      - name: indicador_atendimento_urgencia_privado
+        description: Indica a existência de atendimento prestado urgência/ convênio
+            particular
+      - name: indicador_atendimento_urgencia_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado urgência/ convênio
+            plano-seguro próprio
+      - name: indicador_atendimento_urgencia_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado urgência/ convênio
+            plano-seguro terceiro
+      - name: indicador_atendimento_urgencia_plano_saude_publico
+        description: Indica a existência de atendimento prestado urgência/ convênio
+            plano de saúde público
+      - name: indicador_atendimento_urgencia_plano_saude_privado
+        description: Indica a existência de atendimento prestado urgência/ convênio
+            plano de saúde privado
+      - name: indicador_atendimento_outros_sus
+        description: Indica a existência de atendimento prestado outros/ convênio
+            sus
+      - name: indicador_atendimento_outros_privado
+        description: Indica a existência de atendimento prestado outros/convênio particular
+      - name: indicador_atendimento_outros_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado outros/convênio plano-seguro
+            próprio
+      - name: indicador_atendimento_outros_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado outros/convênio plano-seguro
+            terceiro
+      - name: indicador_atendimento_outros_plano_saude_publico
+        description: Indica a existência de atendimento prestado outros/convênio plano
+            de saúde público
+      - name: indicador_atendimento_outros_plano_saude_privado
+        description: Indica a existência de atendimento prestado outros/convênio plano
+            de saúde privado
+      - name: indicador_atendimento_vigilancia_sus
+        description: Indica a existência de atendimento prestado vigilância em saúde/convênio
+            sus
+      - name: indicador_atendimento_vigilancia_privado
+        description: Indica a existência de atendimento prestado vigilância em saúde/convênio
+            particular
+      - name: indicador_atendimento_vigilancia_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado vigilância em saúde/convênio
+            plano-seguro próprio
+      - name: indicador_atendimento_vigilancia_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado vigilância em saúde/convênio
+            plano-seguro terceiro
+      - name: indicador_atendimento_vigilancia_plano_saude_publico
+        description: Indica a existência de atendimento prestado vigilância em saúde/convênio
+            plano de saúde público
+      - name: indicador_atendimento_vigilancia_plano_saude_privado
+        description: Indica a existência de atendimento prestado vigilância em saúde/convênio
+            plano de saúde privado
+      - name: indicador_atendimento_regulacao_sus
+        description: Indica a existência de atendimento prestado regulação/convênio
+            sus
+      - name: indicador_atendimento_regulacao_privado
+        description: Indica a existência de atendimento prestado regulação/convênio
+            particular
+      - name: indicador_atendimento_regulacao_plano_seguro_proprio
+        description: Indica a existência de atendimento prestado regulação/convênio
+            plano-seguro próprio
+      - name: indicador_atendimento_regulacao_plano_seguro_terceiro
+        description: Indica a existência de atendimento prestado regulação/convênio
+            plano-seguro terceiro
+      - name: indicador_atendimento_regulacao_plano_saude_publico
+        description: Indica a existência de atendimento prestado regulação/convênio
+            plano de saúde público
+      - name: indicador_atendimento_regulacao_plano_saude_privado
+        description: Indica a existência de atendimento prestado regulação/convênio
+            plano de saúde privado
