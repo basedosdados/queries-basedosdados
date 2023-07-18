@@ -14,7 +14,7 @@ SAFE_CAST(quantidade_lesao_corporal_dolosa AS INT64) quantidade_lesao_corporal_d
 SAFE_CAST(quantidade_estupro AS INT64) quantidade_estupro,
 SAFE_CAST(quantidade_homicidio_culposo AS INT64) quantidade_homicidio_culposo,
 SAFE_CAST(quantidade_lesao_corporal_culposa AS INT64) quantidade_lesao_corporal_culposa,
-SAFE_CAST(quantidade_roubo AS INT64) quantidade_roubo_transeunte,
+SAFE_CAST(quantidade_roubo_transeunte AS INT64) quantidade_roubo_transeunte,
 SAFE_CAST(quantidade_roubo_celular AS INT64) quantidade_roubo_celular,
 SAFE_CAST(quantidade_roubo_corporal_coletivo AS INT64) quantidade_roubo_corporal_coletivo,
 SAFE_CAST(quantidade_roubo_rua AS INT64) quantidade_roubo_rua,
@@ -57,5 +57,5 @@ SAFE_CAST(quantidade_policial_militar_morto_servico AS INT64) quantidade_policia
 SAFE_CAST(quantidade_policial_civil_morto_servico AS INT64) quantidade_policial_civil_morto_servico,
 SAFE_CAST(quantidade_registro_ocorrencia AS INT64) quantidade_registro_ocorrencia,
 SAFE_CAST(tipo_fase AS STRING) tipo_fase
-
+ 
 FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_municipio AS t

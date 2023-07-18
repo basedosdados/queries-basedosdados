@@ -173,7 +173,7 @@ models:
       - name: tipo_fase
         description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
 
-
+ 
 # ! modelo dbt evolucao_mensal_municipio
   - name: evolucao_mensal_municipio
     description: "Série histórica mensal por município desde 2014"
