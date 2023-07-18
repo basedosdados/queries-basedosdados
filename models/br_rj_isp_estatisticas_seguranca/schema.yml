@@ -220,6 +220,8 @@ models:
         description: Roubo de carga
       - name: quantidade_roubo_residencia
         description: Roubo a residência
+      - name: quantidade_roubo_comercio
+        description: Roubo a estabelecimento comercial
       - name: quantidade_roubo_banco
         description: Roubo a banco
       - name: quantidade_roubo_caixa_eletronico
