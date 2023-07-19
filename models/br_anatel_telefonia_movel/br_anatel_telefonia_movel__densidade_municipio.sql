@@ -11,7 +11,7 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados-dev'})
+    labels = {'project_id': 'basedosdados'})
  }}
  
 SELECT
@@ -22,4 +22,4 @@ SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(densidade AS FLOAT64) densidade
 
-FROM basedosdados-dev.br_anatel_telefonia_movel_staging.densidade_municipio AS t
+FROM basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_municipio AS t

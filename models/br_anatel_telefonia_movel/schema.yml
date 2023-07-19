@@ -1,5 +1,5 @@
 version: 2
- 
+
 models:
   - name: br_anatel_telefonia_movel__microdados
     description: "Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados."

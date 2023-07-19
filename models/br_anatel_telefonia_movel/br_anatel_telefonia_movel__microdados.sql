@@ -11,7 +11,7 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados-dev'})
+    labels = {'project_id': 'basedosdados'})
  }}
 
 
@@ -31,4 +31,4 @@ SAFE_CAST(pessoa AS STRING) pessoa,
 SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(acessos AS INT64) acessos
 
-FROM basedosdados-dev.br_anatel_telefonia_movel_staging.microdados AS t
+FROM basedosdados-staging.br_anatel_telefonia_movel_staging.microdados AS t
