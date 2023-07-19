@@ -34,7 +34,7 @@ models:
         description: Número total de acessos
 
   - name: br_anatel_telefonia_movel__densidade_brasil
-    description: "Densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano"
+    description: "Densidade por domicílio da Telefonia móvel no Brasil por mês e ano"
     columns:
       - name: ano
         description: Ano
@@ -44,7 +44,7 @@ models:
         description: Densidade de acessos por 100 domicílios
 
   - name: br_anatel_telefonia_movel__densidade_uf
-    description: "Densidade por domicílio da Banda Larga Fixa nos estados por mês e ano"
+    description: "Densidade por domicílio da Telefonia móvel nos estados por mês e ano"
     columns:
       - name: ano
         description: Ano
@@ -56,7 +56,7 @@ models:
         description: Densidade de acessos por 100 domicílios
         
   - name: br_anatel_telefonia_movel__densidade_municipio
-    description: "Densidade por domicílio da Banda Larga Fixa nos estados por mês e ano"
+    description: "Densidade por domicílio da Telefonia móvel nos estados por mês e ano"
     columns:
       - name: ano
         description: Ano
