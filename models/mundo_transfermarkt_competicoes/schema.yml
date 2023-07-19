@@ -1,4 +1,4 @@
-version: 2
+version: 2 
 
 models:
   - name: brasileirao_serie_a
@@ -14,8 +14,6 @@ Fonte: https://www.transfermarkt.com/campeonato-brasileiro-serie-a/startseite/we
         description: Ano do campeonato
       - name: data
         description: Data da partida
-      - name: horario
-        description: Horário da partida
       - name: rodada
         description: Rodada
       - name: estadio

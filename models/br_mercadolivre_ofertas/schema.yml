@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: item
+    description: informações de itens em oferta no Mercado Livre
+    columns:
+      - name: data_hora
+        description: timestamp da listagem do item
+      - name: titulo
+        description: título do item
+      - name: item_id
+        description: identificador único para o item
+      - name: categorias
+        description: categorias às quais o item pertence
+      - name: quantidade_avaliacoes
+        description: número de avaliações do item
+      - name: desconto
+        description: desconto aplicado ao item
+      - name: envio_pais
+        description: país de envio do item
+      - name: estrelas
+        description: classificação em estrelas do item
+      - name: preco
+        description: preço atual do item
+      - name: preco_original
+        description: preço original do item antes do desconto
+      - name: id_vendedor
+        description: identificador único do vendedor
+      - name: vendedor
+        description: nome do vendedor
+      - name: secao_site
+        description: seção do site onde o item está listado
+      - name: caracteristicas
+        description: características do item
+
+  - name: vendedor
+    description: informações de vendedores dos itens na tabela de oferta
+    columns:
+      - name: id_vendor
+        description: identificador único para o vendedor
+      - name: nome
+        description: nome do vendedor
+      - name: experiencia
+        description: nível de experiência do vendedor
+      - name: reputacao
+        description: classificação de reputação do vendedor
+      - name: classificacao
+        description: classificação ou categoria do vendedor
+      - name: id_municipio
+        description: identificador único para o município do vendedor
+      - name: opinioes
+        description: opiniões ou avaliações sobre o vendedor
+      - name: data
+        description: data relacionada ao vendedor, como a data de criação da conta
