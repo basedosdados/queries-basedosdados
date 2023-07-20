@@ -1,5 +1,5 @@
 {{ config(
-    alias='densidade_municipio',
+    alias='densidade_municipio_atualizado',
     schema='br_anatel_telefonia_movel',
     materialized='table',
      partition_by={

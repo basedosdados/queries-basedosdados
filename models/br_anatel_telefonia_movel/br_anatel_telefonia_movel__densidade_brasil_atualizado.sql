@@ -1,4 +1,4 @@
-{{ config(alias='densidade_brasil', schema='br_anatel_telefonia_movel',
+{{ config(alias='densidade_brasil_atualizado', schema='br_anatel_telefonia_movel',
     post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
                 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"']) }}
  
