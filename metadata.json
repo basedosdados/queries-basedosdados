@@ -1776,5 +1776,285 @@
                 ]
             }
         ]
+    },
+    "br_anatel_telefonia_movel": {
+        "name": "Acessos de telefonia móvel no Brasil",
+        "description": "Dados da Anatel referente a dados móveis, também conhecido como Serviço Móvel Pessoal (SMP). A agência oferece análises preliminares sobre os dados numa perspectiva geral no próprio site de dowloand dos microdados.",
+        "themes": [
+            {
+                "slug": "ciencia-tec-inov",
+                "name": "Ciência, Tecnologia e Inovação"
+            },
+            {
+                "slug": "comunicacao",
+                "name": "Jornalismo e Comunicação"
+            },
+            {
+                "slug": "infra-transp",
+                "name": "Infraestrutura e Transportes"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "celular",
+                "name": "celular"
+            },
+            {
+                "slug": "internet",
+                "name": "internet"
+            },
+            {
+                "slug": "telefone",
+                "name": "telefone"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "densidade_brasil",
+                "name": "Densidade Brasil",
+                "description": "Densidade de acessos por domicílios de Telefonia móvel no Brasil por mês e ano",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_telefonia_movel",
+                        "gcpTableId": "densidade_brasil"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleaningDescription": "Download das bases e a renomeação das colunas segundo padrão da BD+;",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/pipelines/tree/master/bases/br_anatel_telefonia_movel/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "densidade",
+                        "description": "Densidade de acessos por 100 domicílios"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    }
+                ]
+            },
+            {
+                "slug": "densidade_municipio",
+                "name": "Densidade Município",
+                "description": "Densidade de acessos por domicílios de Telefonia móvel nos municípios por mês e ano",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_telefonia_movel",
+                        "gcpTableId": "densidade_municipio"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleaningDescription": "Download das bases e a renomeação das colunas segundo padrão da BD+;",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/pipelines/tree/master/bases/br_anatel_telefonia_movel/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "densidade",
+                        "description": "Densidade de acessos por 100 domicílios"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    }
+                ]
+            },
+            {
+                "slug": "densidade_uf",
+                "name": "Densidade UF",
+                "description": "Densidade de acessos por domicílios de Telefonia móvel nos estados por mês e ano",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_telefonia_movel",
+                        "gcpTableId": "densidade_uf"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleaningDescription": "Download das bases e a renomeação das colunas segundo padrão da BD+;",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/pipelines/tree/master/bases/br_anatel_telefonia_movel/code",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "densidade",
+                        "description": "Densidade de acessos por 100 domicílios"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    }
+                ]
+            },
+            {
+                "slug": "microdados",
+                "name": "Microdados",
+                "description": "Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_anatel_telefonia_movel",
+                        "gcpTableId": "microdados"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Patrick",
+                    "lastName": "Teixeira",
+                    "email": "patrick.teixeira@basedosdados.org"
+                },
+                "dataCleaningDescription": "Download das bases e a renomeação das colunas segundo padrão da BD+;\r\nAgrupamento dos dados de observações duplicadas;\r\nCompatibilização da base para identificação única das observações;",
+                "dataCleaningCodeUrl": "https://github.com/basedosdados/pipelines/tree/master/bases/br_anatel_telefonia_movel",
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "acessos",
+                        "description": "Total de contratos sob tais especificações"
+                    },
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "cnpj",
+                        "description": "Cadastro Nacional de Pessoa Jurídica"
+                    },
+                    {
+                        "name": "ddd",
+                        "description": "Código de Discagem Direta a Distância"
+                    },
+                    {
+                        "name": "empresa",
+                        "description": "Nome da companhia ofertante do serviço"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "modalidade",
+                        "description": "Modalidade de contrato, se pré ou pós-pago"
+                    },
+                    {
+                        "name": "pessoa",
+                        "description": "Contrato atrelado a Pessoa Física ou Pessoa Jurídica"
+                    },
+                    {
+                        "name": "porte_empresa",
+                        "description": "Qualificação do tamanho da companhia"
+                    },
+                    {
+                        "name": "produto",
+                        "description": "Tipo de Serviço"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "sinal",
+                        "description": "Geração de Sistemas Celulares"
+                    },
+                    {
+                        "name": "tecnologia",
+                        "description": "Padrão de tecnologia e conectividade dos celulares"
+                    }
+                ]
+            }
+        ]
     }
 }
