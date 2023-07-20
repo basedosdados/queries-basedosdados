@@ -25,3 +25,4 @@ REPLACE(CAST(id_municipio AS STRING), '.0', '') id_municipio,
 SAFE_CAST(densidade AS FLOAT64) densidade
 
 FROM basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_municipio AS t
+
