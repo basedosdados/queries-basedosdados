@@ -1,5 +1,5 @@
 {{ config(
-    alias='microdados',
+    alias='microdados_atualizado',
     schema='br_anatel_telefonia_movel',
     materialized='table',
      partition_by={
@@ -15,7 +15,6 @@
     post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
               'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
-
 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,

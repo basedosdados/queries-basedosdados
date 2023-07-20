@@ -11,7 +11,7 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados-dev'})
+    labels = {'project_id': 'basedosdados'})
  }}
  
 SELECT
@@ -24,3 +24,4 @@ SAFE_CAST(densidade AS FLOAT64) densidade
 
 FROM basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_municipio AS t
 WHERE DATE_DIFF(CURRENT_DATE(),DATE(SAFE_CAST(ano AS INT64),SAFE_CAST(mes AS INT64),01),month) >= 6
+
