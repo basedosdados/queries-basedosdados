@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: reservatorio
-    description: Dados cadastrais dos reservatórios.
+    description: Dados cadastrais dos reservatórios
     columns:
       - name: data
         description: Data de entrada em operação do reservatório

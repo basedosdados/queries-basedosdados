@@ -27,3 +27,5 @@ SAFE_CAST(valor_fob_dolar AS FLOAT64) valor_fob_dolar,
 SAFE_CAST(valor_frete AS FLOAT64) valor_frete,
 SAFE_CAST(valor_seguro AS FLOAT64) valor_seguro
 FROM basedosdados-staging.br_me_comex_stat_staging.ncm_importacao AS t
+WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
+  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)

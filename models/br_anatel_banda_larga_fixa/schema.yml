@@ -27,7 +27,7 @@ models:
       - name: produto
         description: Tipo de Produto
       - name: acessos
-        description: Número total de contratos
+        description: Número total de acessos
 
   - name: br_anatel_banda_larga_fixa__densidade_brasil
     description: "Total de acessos e densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano desde março de 2007"

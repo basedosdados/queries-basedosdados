@@ -10,7 +10,8 @@
         "interval": 1}
     },
     cluster_by = ["mes","sigla_uf_ncm"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    labels = {'project_id': 'basedosdados', 'tema': 'economia'}
+    )
  }}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -25,3 +26,5 @@ SAFE_CAST(quantidade_estatistica AS INT64) quantidade_estatistica,
 SAFE_CAST(peso_liquido_kg AS INT64) peso_liquido_kg,
 SAFE_CAST(valor_fob_dolar AS INT64) valor_fob_dolar
 FROM basedosdados-staging.br_me_comex_stat_staging.ncm_exportacao AS t
+WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
+  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)
