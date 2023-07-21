@@ -1,11 +1,3 @@
-# ! Definição schemas dbt.
-
-# ? No modelo dbt (Data Build Tool), "schemas" referem-se a namespaces ou contêineres lógicos que armazenam objetos de banco de dados, como tabelas, visualizações, funções e procedimentos armazenados.
-
-# ? Em outras palavras, um esquema é uma estrutura organizacional que permite separar e agrupar objetos de banco de dados relacionados de uma maneira lógica. Por exemplo, em um banco de dados de comércio eletrônico, você pode ter um esquema para armazenar informações de clientes e outro esquema para armazenar informações de produtos.
-
-# ? No dbt, os esquemas são definidos nos arquivos YAML e geralmente são associados a modelos específicos. O dbt cria esquemas automaticamente quando você executa uma operação de criação de modelo (como "dbt run" ou "dbt test") e pode ser configurado para usar diferentes tipos de esquemas, dependendo do seu ambiente de dados e requisitos específicos.
-
 version: 2
 # ! modelo dbt armas_apreendidas_mensal
 models: 
@@ -218,6 +210,8 @@ models:
         description: Roubo de veículo
       - name: quantidade_roubo_carga
         description: Roubo de carga
+      - name: quantidade_roubo_comercio
+        description: Roubo a estabelecimento comercial
       - name: quantidade_roubo_residencia
         description: Roubo a residência
       - name: quantidade_roubo_comercio
