@@ -210,6 +210,8 @@ models:
         description: Roubo de veículo
       - name: quantidade_roubo_carga
         description: Roubo de carga
+      - name: quantidade_roubo_comercio
+        description: Roubo a estabelecimento comercial
       - name: quantidade_roubo_residencia
         description: Roubo a residência
       - name: quantidade_roubo_banco
