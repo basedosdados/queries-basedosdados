@@ -1,46 +1,85 @@
 {{ config(
     materialized='table',
     partition_by={
-      "field": "dia",
+      "field": "data_consulta",
       "data_type": "date",
       "granularity": "day"
     }
 )}}
 
-with main as (
-  select lpad(vendedor_id, 12, '0') as vendedor_id,
-  dia,
-  nome,
-  SAFE_CAST(experiencia AS INT64) experiencia,
-  reputacao,
-  case
-  when classificacao='None' then null
-  else classificacao end as classificacao,
-  id_municipio,
-  from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
-),
 
-predata as (
-  select
-    lpad(vendedor_id, 12, '0') as vendedor_id,
-    struct(
-    json_extract_scalar(opinioes, '$.Bom') as Bom,
-    json_extract_scalar(opinioes, '$.Regular') as Regular,
-    json_extract_scalar(opinioes, '$.Ruim') as Ruim
-  ) as opinioes
-  from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
+WITH tabela_deduplicada AS (
+    SELECT
+        PARSE_DATE('%Y-%m-%d', FORMAT_TIMESTAMP('%Y-%m-%d', dia)) AS data_consulta,
+        id_municipio,
+        vendedor_id as id_vendedor,
+        nome as vendedor,
+        classificacao,
+        reputacao,
+        experiencia as anos_experiencia,        
+        ARRAY_AGG(opinioes.Bom)[OFFSET(0)] AS avaliacao_bom,
+        ARRAY_AGG(opinioes.Regular)[OFFSET(0)] AS avaliacao_regular,
+        ARRAY_AGG(opinioes.Ruim)[OFFSET(0)] AS avaliacao_ruim
+    FROM
+        `basedosdados.br_mercadolivre_ofertas.vendedor`
+    GROUP BY
+        data_consulta,
+        vendedor_id,
+        vendedor,
+        experiencia,
+        reputacao,
+        classificacao,
+        id_municipio
+    HAVING
+        COUNT(*) > 1
+), tabela_unicos AS (
+    SELECT
+        PARSE_DATE('%Y-%m-%d', FORMAT_TIMESTAMP('%Y-%m-%d', dia)) AS data_consulta,
+        id_municipio,
+        vendedor_id as id_vendedor,
+        nome as vendedor,
+        classificacao,
+        reputacao,
+        experiencia as anos_experiencia,
+        ARRAY_AGG(opinioes.Bom)[OFFSET(0)] AS avaliacao_bom,
+        ARRAY_AGG(opinioes.Regular)[OFFSET(0)] AS avaliacao_regular,
+        ARRAY_AGG(opinioes.Ruim)[OFFSET(0)] AS avaliacao_ruim
+    FROM
+        `basedosdados.br_mercadolivre_ofertas.vendedor`
+    GROUP BY
+        data_consulta,
+        vendedor_id,
+        vendedor,
+        experiencia,
+        reputacao,
+        classificacao,
+        id_municipio
+    HAVING
+        COUNT(*) = 1
 )
-
-select 
-  dia,
-  main.vendedor_id,
-  nome,
-  experiencia,
-  reputacao,
-  classificacao,
-  id_municipio,
-  predata.opinioes as opinioes,
-from main
-left join predata 
-on main.vendedor_id=predata.vendedor_id
+SELECT 
+    data_consulta,
+    id_municipio,
+    id_vendedor,
+    vendedor,
+    classificacao,
+    reputacao,
+    anos_experiencia,
+    SAFE_CAST(avaliacao_bom AS INT64) AS avaliacao_bom,
+    SAFE_CAST(avaliacao_regular AS INT64) AS avaliacao_regular,
+    SAFE_CAST(avaliacao_ruim AS INT64) AS avaliacao_ruim    
+FROM tabela_unicos
+UNION ALL
+SELECT 
+    data_consulta,
+    id_municipio,
+    id_vendedor,
+    vendedor,
+    classificacao,
+    reputacao,
+    anos_experiencia,
+    SAFE_CAST(avaliacao_bom AS INT64) AS avaliacao_bom,
+    SAFE_CAST(avaliacao_regular AS INT64) AS avaliacao_regular,
+    SAFE_CAST(avaliacao_ruim AS INT64) AS avaliacao_ruim   
+FROM tabela_deduplicada
 
