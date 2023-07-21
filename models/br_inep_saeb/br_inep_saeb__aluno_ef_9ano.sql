@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias='aluno_ef_9ano',
     schema='br_inep_saeb',
     materialized='table',
      partition_by={

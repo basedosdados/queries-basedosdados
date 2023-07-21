@@ -1,6 +1,6 @@
 version: 2
 models :
-  - name: aluno_ef_2ano
+  - name: br_inep_saeb__aluno_ef_2ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 2º ano do Ensino Fundamental
     columns:
@@ -83,7 +83,7 @@ models :
         description: Conceito obtido para grafia na produção de texto
       - name: turno
         description: Turno
-  - name: aluno_ef_5ano
+  - name: br_inep_saeb__aluno_ef_5ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 5º ano do Ensino Fundamental
     columns:
@@ -642,7 +642,7 @@ models :
         description: Você usa computador na escola?
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
-  - name: aluno_ef_9ano
+  - name: br_inep_saeb__aluno_ef_9ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 9º ano do Ensino Fundamental
     columns:
@@ -1263,7 +1263,7 @@ models :
         description: Você usa computador na escola?
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
-  - name: dicionario
+  - name: br_inep_saeb__dicionario
     description: Dicionário para as tabelas do SAEB
     columns:
       - name: chave
@@ -1276,7 +1276,7 @@ models :
         description: ID da tabela
       - name: valor
         description: Valor
-  - name: proficiencia
+  - name: br_inep_saeb__proficiencia
     description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma
       série histórica e compatibilizada à partir de 1995 com informações sobre o aluno,
       a escola e o resultado do exame
