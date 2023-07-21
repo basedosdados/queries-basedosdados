@@ -1,4 +1,4 @@
-SELECT 
+SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
@@ -50,7 +50,7 @@ SAFE_CAST(quantidade_aaapai AS INT64) quantidade_aaapai,
 SAFE_CAST(quantidade_cmp AS INT64) quantidade_cmp,
 SAFE_CAST(quantidade_cmba AS INT64) quantidade_cmba,
 SAFE_CAST(quantidade_ameaca AS INT64) quantidade_ameaca,
-SAFE_CAST(quantidade_pessoas_desaparecidas AS INT64) quantidade_pessoas_desaparecidas,
+SAFE_CAST(quantidade_pessoas_desaparecida AS INT64) quantidade_pessoas_desaparecida,
 SAFE_CAST(quantidade_encontro_cadaver AS INT64) quantidade_encontro_cadaver,
 SAFE_CAST(quantidade_encontro_ossada AS INT64) quantidade_encontro_ossada,
 SAFE_CAST(quantidade_policial_militar_morto_servico AS INT64) quantidade_policial_militar_morto_servico,
