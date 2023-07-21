@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias='proficiencia',
     schema='br_inep_saeb',
     materialized='table',
      partition_by={
