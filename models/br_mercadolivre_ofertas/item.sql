@@ -7,6 +7,7 @@
     }
 )}}
 
+
 WITH tabela AS (
   SELECT 
     PARSE_DATE('%Y-%m-%d', FORMAT_TIMESTAMP('%Y-%m-%d', data_hora)) AS data_consulta,
