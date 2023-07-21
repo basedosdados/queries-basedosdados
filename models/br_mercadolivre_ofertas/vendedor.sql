@@ -7,7 +7,6 @@
     }
 )}}
 
-
 WITH tabela_deduplicada AS (
     SELECT
         PARSE_DATE('%Y-%m-%d', FORMAT_TIMESTAMP('%Y-%m-%d', dia)) AS data_consulta,
