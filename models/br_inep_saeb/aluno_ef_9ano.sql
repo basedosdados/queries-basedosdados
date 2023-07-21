@@ -283,4 +283,4 @@ SAFE_CAST(opiniao_teste AS STRING) opiniao_teste,
 SAFE_CAST(opiniao_frase_1 AS STRING) opiniao_frase_1,
 SAFE_CAST(opiniao_frase_2 AS STRING) opiniao_frase_2,
 SAFE_CAST(opiniao_frase_3 AS STRING) opiniao_frase_3
-FROM basedosdados.br_inep_saeb_staging.aluno_ef_9ano AS t
+FROM basedosdados-staging.br_inep_saeb_staging.aluno_ef_9ano AS t

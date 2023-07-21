@@ -53,4 +53,4 @@ SAFE_CAST(proficiencia AS FLOAT64) proficiencia,
 SAFE_CAST(erro_padrao AS FLOAT64) erro_padrao,
 SAFE_CAST(proficiencia_saeb AS FLOAT64) proficiencia_saeb,
 SAFE_CAST(erro_padrao_saeb AS FLOAT64) erro_padrao_saeb
-FROM basedosdados.br_inep_saeb_staging.aluno_ef_2ano AS t
+FROM basedosdados-staging.br_inep_saeb_staging.aluno_ef_2ano AS t

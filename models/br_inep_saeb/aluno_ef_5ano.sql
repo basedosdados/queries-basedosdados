@@ -258,4 +258,4 @@ SAFE_CAST(pandemia_apoio_familia AS STRING) pandemia_apoio_familia,
 SAFE_CAST(pandemia_apoio_colegas AS STRING) pandemia_apoio_colegas,
 SAFE_CAST(pretensao_futura AS STRING) pretensao_futura,
 SAFE_CAST(opiniao_teste AS STRING) opiniao_teste
-FROM basedosdados.br_inep_saeb_staging.aluno_ef_5ano AS t
+FROM basedosdados-staging.br_inep_saeb_staging.aluno_ef_5ano AS t
