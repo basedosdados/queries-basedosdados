@@ -97,6 +97,9 @@ models:
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
+    br_inep_saeb:
+      +materialized: table
+      +schema: br_inep_saeb
     br_inmet_bdmep:
       +materialized: table
       +schema: br_inmet_bdmep     
