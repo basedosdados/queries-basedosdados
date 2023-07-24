@@ -51,7 +51,6 @@ TIME(
   END AS FLOAT64) AS preco_final,
 FROM
   `basedosdados-staging.br_mercadolivre_ofertas_staging.item`)
-
 SELECT 
   data_consulta,
   hora_consulta,
