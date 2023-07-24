@@ -21,7 +21,7 @@ models:
       - name: categoria_principal
         description: Primeira categoria do item classificada no site
       - name: outras_categorias
-        description: Todas as categorias descritas no site em relação ao item
+        description: Demais categorias descritas no site em relação ao item
       - name: caracteristicas
         description: Características adicionais do item
       - name: envio_nacional
