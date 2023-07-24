@@ -32,4 +32,4 @@ SAFE_CAST(natureza_despesa AS STRING) natureza_despesa,
 SAFE_CAST(programa_ppa AS STRING) programa_ppa,
 SAFE_CAST(acao_ppa AS STRING) acao_ppa,
 SAFE_CAST(valor AS FLOAT64) valor
-FROM basedosdados-dev.br_cnpq_bolsas_staging.microdados AS t
+FROM basedosdados-staging.br_cnpq_bolsas_staging.microdados AS t
