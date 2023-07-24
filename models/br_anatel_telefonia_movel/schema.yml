@@ -1,0 +1,141 @@
+version: 2
+
+models:
+  - name: br_anatel_telefonia_movel__microdados
+    description: "Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados."
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: ddd
+        description: Código de Discagem Direta a Distância
+      - name: cnpj
+        description: Cadastro Nacional de Pessoa Jurídica
+      - name: empresa
+        description: Nome da empresa
+      - name: porte_empresa
+        description: Porte da empresa
+      - name: tecnologia
+        description: Tecnologia
+      - name: sinal
+        description: Geração de Sistemas Celulares
+      - name: modalidade
+        description: Modalidade de contrato, se pré ou pós-pago
+      - name: pessoa
+        description: Contrato atrelado a Pessoa Física ou Pessoa Jurídica	
+      - name: produto
+        description: Tipo de Produto
+      - name: acessos
+        description: Número total de acessos
+
+  - name: br_anatel_telefonia_movel__densidade_brasil
+    description: "Densidade de acessos por domicílios de Telefonia móvel no Brasil por mês e ano"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+
+  - name: br_anatel_telefonia_movel__densidade_uf
+    description: "Densidade de acessos por domicílios de Telefonia móvel nos estados por mês e ano"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+        
+  - name: br_anatel_telefonia_movel__densidade_municipio
+    description: "Densidade de acessos por domicílios de Telefonia móvel nos municípios por mês e ano"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos    
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+
+
+  # ! modelo dbt para bd pro ! 
+
+  - name: br_anatel_telefonia_movel__microdados_atualizado
+    description: "Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados."
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: ddd
+        description: Código de Discagem Direta a Distância
+      - name: cnpj
+        description: Cadastro Nacional de Pessoa Jurídica
+      - name: empresa
+        description: Nome da empresa
+      - name: porte_empresa
+        description: Porte da empresa
+      - name: tecnologia
+        description: Tecnologia
+      - name: sinal
+        description: Geração de Sistemas Celulares
+      - name: modalidade
+        description: Modalidade de contrato, se pré ou pós-pago
+      - name: pessoa
+        description: Contrato atrelado a Pessoa Física ou Pessoa Jurídica	
+      - name: produto
+        description: Tipo de Produto
+      - name: acessos
+        description: Número total de acessos
+
+  - name: br_anatel_telefonia_movel__densidade_brasil_atualizado
+    description: "Densidade de acessos por domicílios de Telefonia móvel no Brasil por mês e ano"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+
+  - name: br_anatel_telefonia_movel__densidade_uf_atualizado
+    description: "Densidade de acessos por domicílios de Telefonia móvel nos estados por mês e ano"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
+        
+  - name: br_anatel_telefonia_movel__densidade_municipio_atualizado
+    description: "Densidade de acessos por domicílios de Telefonia móvel nos municípios por mês e ano"
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos    
+      - name: densidade
+        description: Densidade de acessos por 100 domicílios
