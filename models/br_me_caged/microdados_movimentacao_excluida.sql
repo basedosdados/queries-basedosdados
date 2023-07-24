@@ -16,8 +16,8 @@
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(a.sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(b.id_municipio AS STRING) id_municipio,
 SAFE_CAST(cnae_2_secao AS STRING) cnae_2_secao,
 SAFE_CAST(cnae_2_subclasse AS STRING) cnae_2_subclasse,
 SAFE_CAST(saldo_movimentacao AS INT64) saldo_movimentacao,
@@ -40,4 +40,6 @@ SAFE_CAST(indicador_aprendiz AS STRING) indicador_aprendiz,
 SAFE_CAST(origem_informacao AS STRING) origem_informacao,
 SAFE_CAST(indicador_exclusao AS INT64) indicador_exclusao,
 SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
-FROM basedosdados-staging.br_me_caged_staging.microdados_movimentacao_excluida AS t
+FROM `basedosdados-staging.br_me_caged_staging.microdados_movimentacao_excluida` a
+LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` b
+  ON a.id_municipio =  b.id_municipio_6
