@@ -9,7 +9,7 @@
 
 WITH tabela_ordenada as (
 SELECT
-  PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
+  dia AS data_consulta,
 TIME(
   EXTRACT(HOUR FROM PARSE_DATETIME('%Y-%m-%d %H:%M:%S', data_hora)),
   EXTRACT(MINUTE FROM PARSE_DATETIME('%Y-%m-%d %H:%M:%S', data_hora)),
@@ -50,7 +50,7 @@ TIME(
     ELSE preco
   END AS FLOAT64) AS preco_final,
 FROM
-  `basedosdados-dev.br_mercadolivre_ofertas_staging.item`)
+  `basedosdados-staging.br_mercadolivre_ofertas_staging.item`)
 
 SELECT 
   data_consulta,
@@ -96,7 +96,7 @@ LEFT JOIN
     id_vendor,
     nome
 FROM
-    `basedosdados-dev.br_mercadolivre_ofertas_staging.vendedor`)  b
+    `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`)  b
 ON a.vendedor = b.nome and data_consulta = dia
 WHERE NOT (preco_original IS NULL AND preco_final IS NULL)
   AND NOT (preco_final IS NULL AND desconto IS NULL)
