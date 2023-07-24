@@ -96,7 +96,7 @@ LEFT JOIN
     nome
 FROM
     `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`)  b
-ON a.vendedor = b.nome and data_consulta = dia
+ON a.vendedor = b.nome and data_consulta = PARSE_DATE('%Y-%m-%d', dia)
 WHERE NOT (preco_original IS NULL AND preco_final IS NULL)
   AND NOT (preco_final IS NULL AND desconto IS NULL)
   AND NOT (preco_original IS NULL AND desconto IS NULL)
