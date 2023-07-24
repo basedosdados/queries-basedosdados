@@ -1,5 +1,4 @@
 SELECT 
-
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_upp AS STRING) id_upp,
@@ -38,5 +37,4 @@ SAFE_CAST(quantidade_encontro_ossada AS INT64) quantidade_encontro_ossada,
 SAFE_CAST(quantidade_policial_militar_morto_servico AS INT64) quantidade_policial_militar_morto_servico,
 SAFE_CAST(quantidade_policial_civil_morto_servico AS INT64) quantidade_policial_civil_morto_servico,
 SAFE_CAST(quantidade_registro_ocorrencia AS INT64) quantidade_registro_ocorrencia
-
 FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_upp AS t

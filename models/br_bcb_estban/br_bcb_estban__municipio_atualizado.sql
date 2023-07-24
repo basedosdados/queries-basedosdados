@@ -1,6 +1,6 @@
 {{ 
   config(
-    alias = 'agencia',
+    alias = 'municipio_atualizado',
     schema='br_bcb_estban',
     materialized='table',
      partition_by={
@@ -12,7 +12,9 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    labels = {'project_id': 'basedosdados', 'tema': 'economia'},
+    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
 SELECT 
     SAFE_CAST(ano AS INT64) ano,
@@ -21,9 +23,8 @@ SELECT
     SAFE_CAST(id_municipio AS STRING) id_municipio,
     SAFE_CAST(cnpj_basico AS STRING) cnpj_basico,
     SAFE_CAST(instituicao AS STRING) instituicao,
-    SAFE_CAST(cnpj_agencia AS STRING) cnpj_agencia,
+    SAFE_CAST(agencias_esperadas AS INT64) agencias_esperadas,
+    SAFE_CAST(agencias_processadas AS INT64) agencias_processadas,
     SAFE_CAST(id_verbete AS STRING) id_verbete,
     SAFE_CAST(valor AS FLOAT64) valor
-FROM basedosdados-staging.br_bcb_estban_staging.agencia AS t
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)<= DATE(2023,3,1)
-
+FROM basedosdados-staging.br_bcb_estban_staging.municipio AS t
