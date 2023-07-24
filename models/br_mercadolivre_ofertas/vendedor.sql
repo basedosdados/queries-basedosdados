@@ -30,7 +30,7 @@ WITH main AS (
   from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
 ), tabela_ordenada AS (
 SELECT 
-  PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
+  dia AS data_consulta,
   id_municipio,
   main.id_vendedor,
   nome AS vendedor,
@@ -42,7 +42,58 @@ SELECT
   SAFE_CAST(predata.opinioes.regular AS INT64) AS avaliacao_ruim 
 FROM main
 LEFT JOIN predata 
-ON main.id_vendedor = predata.id_vendedor)
+ON main.id_vendedor = predata.id_vendedor),
 
-SELECT * FROM tabela_ordenada
+tabela_deduplicada AS (
+    SELECT
+        PARSE_DATE('%Y-%m-%d', data_consulta) AS data_consulta,
+        id_municipio,
+        id_vendedor,
+        vendedor,
+        classificacao,
+        reputacao,
+        anos_experiencia,        
+        ARRAY_AGG(avaliacao_bom)[OFFSET(0)] AS avaliacao_bom,
+        ARRAY_AGG(avaliacao_regular)[OFFSET(0)] AS avaliacao_regular,
+        ARRAY_AGG(avaliacao_ruim)[OFFSET(0)] AS avaliacao_ruim
+    FROM
+        tabela_ordenada
+    GROUP BY
+        data_consulta,
+        id_vendedor,
+        vendedor,
+        anos_experiencia,
+        reputacao,
+        classificacao,
+        id_municipio
+    HAVING
+        COUNT(*) > 1
+), tabela_unicos AS (
+    SELECT
+        PARSE_DATE('%Y-%m-%d', data_consulta) AS data_consulta,
+        id_municipio,
+        id_vendedor,
+        vendedor,
+        classificacao,
+        reputacao,
+        anos_experiencia,
+        ARRAY_AGG(avaliacao_bom)[OFFSET(0)] AS avaliacao_bom,
+        ARRAY_AGG(avaliacao_regular)[OFFSET(0)] AS avaliacao_regular,
+        ARRAY_AGG(avaliacao_ruim)[OFFSET(0)] AS avaliacao_ruim
+    FROM
+        tabela_ordenada
+    GROUP BY
+        data_consulta,
+        id_vendedor,
+        vendedor,
+        anos_experiencia,
+        reputacao,
+        classificacao,
+        id_municipio
+    HAVING
+        COUNT(*) = 1
+)
+SELECT * FROM tabela_unicos
+UNION ALL
+SELECT * FROM tabela_deduplicada
 
