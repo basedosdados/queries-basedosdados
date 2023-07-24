@@ -30,7 +30,7 @@ WITH main AS (
   from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
 ), tabela_ordenada AS (
 SELECT 
-  PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
+  dia AS data_consulta,
   id_municipio,
   main.id_vendedor,
   nome AS vendedor,
