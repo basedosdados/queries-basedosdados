@@ -9,7 +9,7 @@
 
 WITH tabela_ordenada as (
 SELECT
-  dia AS data_consulta,
+  PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
 TIME(
   EXTRACT(HOUR FROM PARSE_DATETIME('%Y-%m-%d %H:%M:%S', data_hora)),
   EXTRACT(MINUTE FROM PARSE_DATETIME('%Y-%m-%d %H:%M:%S', data_hora)),
