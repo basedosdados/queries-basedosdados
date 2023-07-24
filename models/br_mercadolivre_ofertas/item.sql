@@ -22,12 +22,23 @@ TIME(
     ELSE vendedor
   END vendedor,
   titulo,
+  categorias,
   CASE 
     WHEN categorias = '[]' THEN null
+    WHEN  TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(1)], '"') = '...' THEN 
+      TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(2)], '"')
+    WHEN TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(0)], '"') = '...' THEN 
+      TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(1)], '"')
     ELSE TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(0)], '"')  
   END as categoria_principal,
   CASE 
-    WHEN categorias = '[]' THEN null
+    when categorias = '[]' then null
+    WHEN TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(1)], '"') = '...' THEN 
+      ARRAY_TO_STRING(ARRAY(SELECT x FROM UNNEST(JSON_EXTRACT_ARRAY(categorias)) AS x WITH OFFSET
+                              WHERE OFFSET > 3), ', ')    
+    WHEN TRIM(JSON_EXTRACT_ARRAY(categorias)[OFFSET(0)], '"') = '...' THEN 
+      ARRAY_TO_STRING(ARRAY(SELECT x FROM UNNEST(JSON_EXTRACT_ARRAY(categorias)) AS x WITH OFFSET
+                              WHERE OFFSET > 1), ', ')
     ELSE ARRAY_TO_STRING(ARRAY(SELECT x FROM UNNEST(JSON_EXTRACT_ARRAY(categorias)) AS x WITH OFFSET
                               WHERE OFFSET > 0), ', ')
   END as outras_categorias,
@@ -50,7 +61,10 @@ TIME(
     ELSE preco
   END AS FLOAT64) AS preco_final,
 FROM
-  `basedosdados-staging.br_mercadolivre_ofertas_staging.item`)
+  `basedosdados-staging.br_mercadolivre_ofertas_staging.item`
+
+)
+
 SELECT 
   data_consulta,
   hora_consulta,
@@ -59,7 +73,7 @@ SELECT
   titulo,
   id_vendor as id_vendedor,
   vendedor,
-  categoria_principal,
+  a.categoria_principal,
   REGEXP_REPLACE(
     TRIM(outras_categorias, '"'),
     r'("([^"]+)")',
