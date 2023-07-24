@@ -9,7 +9,7 @@
 
 WITH tabela_ordenada as (
 SELECT
-  dia AS data_consulta,
+  PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
 TIME(
   EXTRACT(HOUR FROM PARSE_DATETIME('%Y-%m-%d %H:%M:%S', data_hora)),
   EXTRACT(MINUTE FROM PARSE_DATETIME('%Y-%m-%d %H:%M:%S', data_hora)),
@@ -51,7 +51,6 @@ TIME(
   END AS FLOAT64) AS preco_final,
 FROM
   `basedosdados-staging.br_mercadolivre_ofertas_staging.item`)
-
 SELECT 
   data_consulta,
   hora_consulta,
