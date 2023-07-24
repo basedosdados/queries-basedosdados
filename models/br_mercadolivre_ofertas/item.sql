@@ -7,7 +7,6 @@
     }
 )}}
 
-
 WITH tabela_ordenada as (
 SELECT
   PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
