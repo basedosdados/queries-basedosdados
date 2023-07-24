@@ -1,5 +1,4 @@
 SELECT 
-
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
@@ -58,5 +57,4 @@ SAFE_CAST(taxa_policial_militar_morto_servico AS INT64) taxa_policial_militar_mo
 SAFE_CAST(taxa_policial_civil_morto_servico AS INT64) taxa_policial_civil_morto_servico,
 SAFE_CAST(taxa_registro_ocorrencia AS INT64) taxa_registro_ocorrencia,
 SAFE_CAST(tipo_fase AS STRING) tipo_fase
-
 FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_mensal_municipio AS t
