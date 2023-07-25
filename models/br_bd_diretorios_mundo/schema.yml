@@ -1,0 +1,28 @@
+version: 2
+
+models: 
+  - name: br_bd_diretorios_mundo__pais
+    description: A tabela contém dados com identificadores dos países segundo instituições internacionais, além de siglas e os nomes
+    columns:
+      - name: id_pais_m49
+        description: ID País - M49/PNUD
+      - name: id_pais_fao
+        description: ID País - FAO
+      - name: id_pais_gaul
+        description: ID País - GAUL
+      - name: sigla_pais_iso3
+        description: Sigla do País - ISO3
+      - name: sigla_pais_iso2
+        description: Sigla do País - ISO2
+      - name: sigla_pais_pnud
+        description: Sigla do País - PNUD
+      - name: nome
+        description: Nome do país em português
+      - name: nome_ingles
+        description: Nome do país em inglês
+      - name: nome_oficial_ingles
+        description: Nome oficial do país em inglês
+      - name: nacionalidade
+        description: Nacionalidade
+      - name: sigla_continente
+        description: Sigla do continente do país
