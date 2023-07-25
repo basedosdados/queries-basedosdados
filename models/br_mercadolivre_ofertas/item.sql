@@ -106,7 +106,7 @@ LEFT JOIN
 (SELECT
   DISTINCT
     dia,
-    id_vendor,
+    LPAD(id_vendor, 12, '0') as id_vendor,
     nome
 FROM
     `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`)  b
