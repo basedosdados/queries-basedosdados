@@ -1,7 +1,12 @@
 {{ config(
-    alias = 'agencia', 
-    schema = 'br_bcb_agencia')
-}}
+    alias = 'agencia_atualizado', 
+    schema = 'br_bcb_agencia',
+    post_hook=[
+        'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+        'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
+ }}
+    
+
 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -23,4 +28,3 @@ SAFE_CAST(ddd AS STRING) ddd,
 SAFE_CAST(fone AS STRING) fone,
 SAFE_CAST(id_instalacao AS STRING) id_instalacao
 FROM basedosdados-staging.br_bcb_agencia_staging.agencia AS t
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)<= DATE(2023,2,1)
