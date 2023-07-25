@@ -7,6 +7,7 @@
     }
 )}}
 
+
 WITH tabela_ordenada as (
 SELECT
   PARSE_DATE('%Y-%m-%d', dia) AS data_consulta,
@@ -49,19 +50,47 @@ TIME(
   SAFE_CAST(envio_pais AS BOOL) envio_nacional,
   SAFE_CAST(quantidade_avaliacoes AS INT64) quantidade_avaliacao,
   SAFE_CAST(estrelas AS FLOAT64) avaliacao,
-  SAFE_CAST(CASE 
-    WHEN preco_original = 'nan' THEN null 
-    WHEN preco > preco_original THEN preco
-    ELSE preco_original
-  END AS FLOAT64) AS preco_original,
+  SAFE_CAST(
+    CASE 
+      WHEN preco_original = 'nan' THEN null 
+      ELSE preco_original
+    END AS FLOAT64) AS preco_original,
   SAFE_CAST(desconto AS INT64) desconto,
-  SAFE_CAST (CASE
-    WHEN preco > preco_original THEN preco_original
-    WHEN preco = preco_original THEN  null
-    ELSE preco
-  END AS FLOAT64) AS preco_final,
+  SAFE_CAST (preco AS FLOAT64) AS preco,
 FROM
   `basedosdados-staging.br_mercadolivre_ofertas_staging.item`
+
+), tabela_preco AS (
+  SELECT
+    data_consulta,
+    hora_consulta,
+    secao_site,
+    id_item,
+    titulo,
+    vendedor,
+    categoria_principal,
+    REGEXP_REPLACE(
+      TRIM(outras_categorias, '"'),
+      r'("([^"]+)")',
+      r'\2'
+    ) as outras_categorias,
+      caracteristicas,
+      envio_nacional,
+      quantidade_avaliacao,
+      avaliacao,
+      CASE  
+        WHEN preco_original < preco THEN preco
+        WHEN preco_original = preco THEN  null
+        ELSE preco_original
+      END preco_original,
+      desconto,
+      CASE
+        WHEN preco > preco_original THEN preco_original
+        WHEN preco = preco_original THEN  null
+        ELSE preco
+      END preco_final,
+  FROM 
+    tabela_ordenada 
 
 )
 
@@ -74,11 +103,7 @@ SELECT
   id_vendor as id_vendedor,
   vendedor,
   a.categoria_principal,
-  REGEXP_REPLACE(
-    TRIM(outras_categorias, '"'),
-    r'("([^"]+)")',
-    r'\2'
-  ) as outras_categorias,
+  outras_categorias,
   caracteristicas,
   envio_nacional,
   quantidade_avaliacao,
@@ -101,7 +126,9 @@ SELECT
       ELSE preco_final
     END, 2
   ) AS preco_final
-FROM  tabela_ordenada a
+
+FROM  tabela_preco a
+
 LEFT JOIN
 (SELECT
   DISTINCT
