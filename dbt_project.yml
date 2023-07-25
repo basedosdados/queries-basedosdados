@@ -73,6 +73,9 @@ models:
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
+    br_cnpq_bolsas:
+      +materialized: table
+      +schema: br_cnpq_bolsas
     br_cvm_administradores_carteira:
       +materialized: table
       +schema: br_cvm_administradores_carteira
