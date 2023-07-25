@@ -61,6 +61,9 @@ models:
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
+    br_bd_diretorios_mundo:
+      +materialized: table
+      +schema: br_bd_diretorios_mundo
     br_bd_indicadores:
       +materialized: table
       +schema: br_bd_indicadores
