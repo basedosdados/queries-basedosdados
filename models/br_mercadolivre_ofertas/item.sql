@@ -93,6 +93,7 @@ FROM
     tabela_ordenada 
 
 )
+
 SELECT 
   data_consulta,
   hora_consulta,
@@ -125,7 +126,9 @@ SELECT
       ELSE preco_final
     END, 2
   ) AS preco_final
+
 FROM  tabela_preco a
+
 LEFT JOIN
 (SELECT
   DISTINCT
