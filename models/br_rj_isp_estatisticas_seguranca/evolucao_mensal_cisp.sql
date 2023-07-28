@@ -60,5 +60,4 @@ SAFE_CAST(quantidade_policial_militar_morto_servico AS INT64) quantidade_policia
 SAFE_CAST(quantidade_policial_civil_morto_servico AS INT64) quantidade_policial_civil_morto_servico,
 SAFE_CAST(quantidade_registro_ocorrencia AS INT64) quantidade_registro_ocorrencia,
 SAFE_CAST(tipo_fase AS STRING) tipo_fase
-
 FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_cisp AS t

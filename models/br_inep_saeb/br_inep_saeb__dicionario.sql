@@ -2,7 +2,7 @@
   config(
     alias='dicionario',
     schema='br_inep_saeb',
-    materialized='table'
+    materialized='table')
 }}
 
 SELECT 

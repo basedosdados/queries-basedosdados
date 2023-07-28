@@ -2,53 +2,61 @@ version: 2
 
 models:
   - name: item
-    description: informações de itens em oferta no Mercado Livre
+    description: A tabela apresenta informações específicas sobre os produtos disponíveis no Mercado Livre. Valores missing podem se dar por instabilidade do site no momento da coleta.
     columns:
-      - name: data_hora
-        description: timestamp da listagem do item
-      - name: titulo
-        description: título do item
-      - name: item_id
-        description: identificador único para o item
-      - name: categorias
-        description: categorias às quais o item pertence
-      - name: quantidade_avaliacoes
-        description: número de avaliações do item
-      - name: desconto
-        description: desconto aplicado ao item
-      - name: envio_pais
-        description: país de envio do item
-      - name: estrelas
-        description: classificação em estrelas do item
-      - name: preco
-        description: preço atual do item
-      - name: preco_original
-        description: preço original do item antes do desconto
-      - name: id_vendedor
-        description: identificador único do vendedor
-      - name: vendedor
-        description: nome do vendedor
+      - name: data_consulta
+        description: Data consulta da oferta
+      - name: hora_consulta
+        description: Hora consulta da oferta
       - name: secao_site
-        description: seção do site onde o item está listado
+        description: Seção do site em que aparece a oferta
+      - name: id_item
+        description: ID item
+      - name: titulo
+        description: Título de divulgação, referente ao item
+      - name: id_vendedor
+        description: ID vendedor
+      - name: vendedor
+        description: Nome do vendedor
+      - name: categoria_principal
+        description: Primeira categoria do item classificada no site
+      - name: outras_categorias
+        description: Demais categorias descritas no site em relação ao item
       - name: caracteristicas
-        description: características do item
+        description: Características adicionais do item
+      - name: envio_nacional
+        description: Existe envio para todo país?
+      - name: quantidade_avaliacao
+        description: Quantidade de avaliações recebidas
+      - name: avaliacao
+        description: Avaliação média medida em estrelas, em uma escala de zero a cinco
+      - name: preco_original
+        description: Preço original de referência
+      - name: desconto
+        description: Desconto percentual em relação ao preço original de referência 
+      - name: preco_final
+        description: Preço de oferta
 
   - name: vendedor
-    description: informações de vendedores dos itens na tabela de oferta
+    description: A tabela contém informações sobre os vendedores associados às ofertas presentes na tabela de itens. Valores missing podem se dar por instabilidade do site no momento da coleta.
     columns:
-      - name: id_vendor
-        description: identificador único para o vendedor
-      - name: nome
-        description: nome do vendedor
-      - name: experiencia
-        description: nível de experiência do vendedor
-      - name: reputacao
-        description: classificação de reputação do vendedor
-      - name: classificacao
-        description: classificação ou categoria do vendedor
+      - name: data_consulta
+        description: Data consulta
       - name: id_municipio
-        description: identificador único para o município do vendedor
-      - name: opinioes
-        description: opiniões ou avaliações sobre o vendedor
-      - name: data
-        description: data relacionada ao vendedor, como a data de criação da conta
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_vendedor
+        description: ID Vendedor
+      - name: vendedor
+        description: Nome vendedor
+      - name: classificacao
+        description: Classificação dada pelo Mercado Livre
+      - name: reputacao
+        description: Reputação medido por quantidade de vendas nos últimos dias
+      - name: anos_experiencia
+        description: Anos de experiência
+      - name: avaliacao_bom
+        description: Quantidade de consumidores avaliando como bom
+      - name: avaliacao_regular
+        description: Quantidade de consumidores avaliando como regular
+      - name: avaliacao_ruim
+        description: Quantidade de consumidores avaliando como ruim
