@@ -1,5 +1,5 @@
 {{ config(
-    alias='microdados',
+    alias='microdados_atualizado',
     schema='br_anatel_banda_larga_fixa',
     materialized='table',
      partition_by={
@@ -11,8 +11,11 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados'})
+    labels = {'project_id': 'basedosdados'},
+    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+              'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
+
 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -27,6 +30,5 @@ SAFE_CAST(transmissao AS STRING) transmissao,
 SAFE_CAST(velocidade AS STRING) velocidade,
 SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(acessos AS INT64) acessos
+
 FROM basedosdados-staging.br_anatel_banda_larga_fixa_staging.microdados AS t
-WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
-  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)

@@ -1,5 +1,5 @@
 {{ config(
-    alias='densidade_municipio',
+    alias='densidade_municipio_atualizado',
     schema='br_anatel_banda_larga_fixa',
     materialized='table',
      partition_by={
@@ -11,15 +11,18 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados'})
+    labels = {'project_id': 'basedosdados'},
+    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+              'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
 
-SELECT 
+SELECT
+
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
+REPLACE(CAST(id_municipio AS STRING), '.0', '') id_municipio,
 SAFE_CAST(densidade AS FLOAT64) densidade
+
 FROM basedosdados-staging.br_anatel_banda_larga_fixa_staging.densidade_municipio AS t
-WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
-  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)
+
