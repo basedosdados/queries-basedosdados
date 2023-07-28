@@ -10,7 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    labels =  {'tema': 'esporte'},
+    labels =  {'tema': 'esporte'}
     )
  }}
 SELECT 
