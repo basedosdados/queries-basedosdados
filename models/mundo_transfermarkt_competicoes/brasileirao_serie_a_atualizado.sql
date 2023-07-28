@@ -10,7 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    labels = {'project_id': 'basedosdados-dev'},
+    labels = {'tema': 'esporte'},
     post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
                 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}

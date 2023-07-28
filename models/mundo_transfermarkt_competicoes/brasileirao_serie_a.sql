@@ -10,7 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    labels = {'project_id': 'basedosdados-dev'},
+    labels =  {'tema': 'esporte'},
     )
  }}
 SELECT 
