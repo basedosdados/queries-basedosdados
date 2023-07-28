@@ -112,6 +112,15 @@ models:
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
+    br_mercadolivre_ofertas:
+      +materialized: table
+      +schema: br_mercadolivre_ofertas
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_ms_cnes:
+      +materialized: table
+      +schema: br_ms_cnes
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao
@@ -151,21 +160,7 @@ models:
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
-      +post-hook:
-        - 'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING ( (EXTRACT(WEEK from data) <= (EXTRACT( WEEK from CURRENT_DATE())-6) ) OR ano_campeonato<EXTRACT(YEAR from  CURRENT_DATE()))'
-        - 'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                    ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (ano_campeonato=EXTRACT(YEAR from  CURRENT_DATE()))'      
     test_dataset:
       +materialized: table
       +schema: test_dataset
-    br_ms_cnes:
-      +materialized: table
-      +schema: br_ms_cnes
-    br_mercadolivre_ofertas:
-      +materialized: table
-      +schema: br_mercadolivre_ofertas
+    
