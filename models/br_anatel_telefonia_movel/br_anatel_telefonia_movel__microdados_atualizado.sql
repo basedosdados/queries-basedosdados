@@ -16,6 +16,7 @@
               'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
 
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -32,4 +33,4 @@ SAFE_CAST(pessoa AS STRING) pessoa,
 SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(acessos AS INT64) acessos
 
-FROM basedosdados-staging.br_anatel_telefonia_movel_staging.microdados AS t
+FROM basedosdados-dev.br_anatel_telefonia_movel_staging.microdados AS t

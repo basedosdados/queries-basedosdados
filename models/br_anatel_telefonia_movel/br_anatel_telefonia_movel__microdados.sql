@@ -11,7 +11,7 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados'})
+    labels = {'project_id': 'basedosdados-dev'})
  }}
 
 
@@ -31,5 +31,5 @@ SAFE_CAST(pessoa AS STRING) pessoa,
 SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(acessos AS INT64) acessos
 
-FROM basedosdados-staging.br_anatel_telefonia_movel_staging.microdados AS t
+FROM basedosdados-dev.br_anatel_telefonia_movel_staging.microdados AS t
 WHERE DATE_DIFF(CURRENT_DATE(),DATE(SAFE_CAST(ano AS INT64),SAFE_CAST(mes AS INT64),01),month) >= 6
