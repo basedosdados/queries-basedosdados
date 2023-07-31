@@ -1,20 +1,7 @@
-{{ config(
-    alias='densidade_municipio_atualizado',
-    schema='br_anatel_banda_larga_fixa',
-    materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2007,
-        "end": 2023,
-        "interval": 1}
-    },
-    cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados'},
+{{ config(alias='densidade_municipio_atualizado', schema='br_anatel_banda_larga_fixa',
     post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
-              'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
- }}
+                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"']) }}
+
 
 SELECT
 
