@@ -11,7 +11,7 @@
         "interval": 1}
     },
     cluster_by = ["id_municipio", "mes"],
-    labels = {'project_id': 'basedosdados-dev'})
+    labels = {'project_id': 'basedosdados'})
  }}
 
 SELECT 
