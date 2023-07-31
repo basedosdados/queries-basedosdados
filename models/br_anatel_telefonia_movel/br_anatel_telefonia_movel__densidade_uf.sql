@@ -8,4 +8,3 @@ SAFE_CAST(densidade AS FLOAT64) densidade
 
 FROM basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_uf AS t 
 WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
-  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)

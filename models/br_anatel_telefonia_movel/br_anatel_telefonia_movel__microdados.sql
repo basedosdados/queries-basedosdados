@@ -33,4 +33,3 @@ SAFE_CAST(acessos AS INT64) acessos
 
 FROM basedosdados-staging.br_anatel_telefonia_movel_staging.microdados AS t
 WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
-  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)
