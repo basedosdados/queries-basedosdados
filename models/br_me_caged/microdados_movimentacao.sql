@@ -42,3 +42,4 @@ SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
 FROM `basedosdados-staging.br_me_caged_staging.microdados_movimentacao` a
 LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` b
   ON a.id_municipio =  b.id_municipio_6
+WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)  
