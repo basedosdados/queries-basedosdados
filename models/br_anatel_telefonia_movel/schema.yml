@@ -70,7 +70,7 @@ models:
         description: Densidade de acessos por 100 domicílios
 
 
-  # ! modelo dbt para bd pro ! 
+  # ! modelo dbt para bd pro
 
   - name: br_anatel_telefonia_movel__microdados_atualizado
     description: "Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados."
@@ -139,3 +139,4 @@ models:
         description: ID Município - IBGE 7 Dígitos    
       - name: densidade
         description: Densidade de acessos por 100 domicílios
+        
