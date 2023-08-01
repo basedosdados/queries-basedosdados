@@ -8,4 +8,4 @@ SAFE_CAST(tipo AS STRING) tipo,
 SAFE_CAST(frequencia AS STRING) frequencia,
 SAFE_CAST(equipe AS STRING) equipe,
 SAFE_CAST(SAFE_CAST(valor AS NUMERIC) AS FLOAT64) valor
-FROM basedosdados-dev.br_bd_indicadores_staging.contabilidade AS t
+FROM basedosdados-staging.br_bd_indicadores_staging.contabilidade AS t
