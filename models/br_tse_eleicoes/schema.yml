@@ -13,7 +13,7 @@ models:
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos 
       - name: id_municipio_tse
-        description: ID Município - TSE
+        description: ID Município - Tribunal Superior Eleitoral (TSE)
       - name: id_candidato_bd
         description: ID Candidato no Banco de Dados
       - name: cpf
@@ -303,3 +303,179 @@ models:
         description: Nome do partido do fornecedor
       - name: cargo_fornecedor
         description: Cargo do fornecedor
+  - name: receitas_comite
+    description: Receitas de comitês eleitorais
+    columns:
+      - name: ano
+        description: Ano
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: tipo_comite
+        description: Tipo do comite
+      - name: sequencial_comite
+        description: Sequencial do comite
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: data_receita
+        description: Data da receita
+      - name: valor_receita
+        description: Valor da receita
+      - name: origem_receita
+        description: Origem da receita
+      - name: fonte_receita
+        description: Fonte da receita
+      - name: natureza_receita
+        description: Natureza da receita
+      - name: situacao_receita
+        description: Situação da receita
+      - name: descricao_receita
+        description: Descrição da receita
+      - name: tipo_documento
+        description: Tipo de documento
+      - name: numero_documento
+        description: Número do documento
+      - name: nome_membro
+        description: Nome do membro
+      - name: cpf_membro
+        description: CPF do membro
+      - name: cnpj_prestador_contas
+        description: CNPJ do prestador de contas
+      - name: cpf_cnpj_doador
+        description: CPF ou CNPJ do doador
+      - name: sigla_uf_doador
+        description: Sigla da unidade da federação do doador
+      - name: nome_doador
+        description: Nome do doador
+      - name: nome_doador_rf
+        description: Nome do doador - Receita Federal
+      - name: descricao_cnae_2_doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
+      - name: numero_partido_doador
+        description: Número do partido do doador
+      - name: numero_candidato_doador
+        description: Número do Candidato do Doador
+      - name: cnae_2_doador
+        description: CNAE 2 do Doador
+      - name: cpf_cnpj_doador_orig
+        description: CPF ou CNPJ do doador originário
+      - name: nome_doador_orig
+        description: Nome do doador originário
+      - name: tipo_doador_orig
+        description: Tipo do doador originário
+      - name: descricao_cnae_2_doador_orig
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
+      - name: nome_doador_orig_rf
+        description: Nome do doador originário - Receita Federal
+  - name: receitas_orgao_partidario
+    description: Receitas de comitês eleitorais
+    columns:
+      - name: ano
+        description: Ano
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - Tribunal Superior Eleitoral (TSE)
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: esfera_partidaria
+        description: Esfera Partidária
+      - name: sigla_uf_diretorio
+        description: Sigla UF do diretório
+      - name: id_municipio_diretorio
+        description: ID Município IBGE 7 Dígitos do diretório
+      - name: id_municipio_tse_diretorio
+        description: ID Municipio TSE do diretório
+      - name: tipo_diretorio
+        description: Tipo diretório
+      - name: sequencial_diretorio
+        description: Sequencial do diretório
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: nome_partido
+        description: Nome do partido
+      - name: numero_recibo_eleitoral
+        description: Número do recibo eleitoral
+      - name: tipo_documento
+        description: Tipo do documento
+      - name: numero_documento
+        description: Número do documento
+      - name: tipo_prestacao_contas
+        description: Tipo de prestação de contas
+      - name: data_prestacao_contas
+        description: Data de prestação de contas
+      - name: sequencial_prestador_contas
+        description: Sequencial do prestador de contas
+      - name: cnpj_prestador_contas
+        description: CNPJ do prestador de contas
+      - name: data_receita
+        description: Data da receita
+      - name: valor_receita
+        description: Valor da receita
+      - name: origem_receita
+        description: Origem da receita
+      - name: fonte_receita
+        description: Fonte da receita
+      - name: natureza_receita
+        description: Natureza da receita
+      - name: especie_receita
+        description: Espécie da receita
+      - name: descricao_receita
+        description: Descrição da receita
+      - name: sequencial_receita
+        description: Sequencial da receita
+      - name: cnae_2_doador
+        description: Classificação Nacional de Atividades Econômicas 2.0 do doador
+      - name: descricao_cnae_2_doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
+      - name: cpf_cnpj_doador
+        description: CPF ou CNPJ do doador
+      - name: nome_doador
+        description: Nome do doador
+      - name: nome_doador_rf
+        description: Nome do doador - Receita Federal
+      - name: esfera_partidaria_doador
+        description: Esfera partidária do doador
+      - name: sigla_uf_doador
+        description: Sigla da unidade da federação do doador
+      - name: id_municipio_doador
+        description: ID Município do doador - IBGE
+      - name: id_municipio_tse_doador
+        description: ID Município do doador - TSE
+      - name: sequencial_candidato_doador
+        description: Sequencial do candidato doador
+      - name: numero_candidato_doador
+        description: Número do candidato doador
+      - name: cargo_candidato_doador
+        description: Cargo do candidato doador
+      - name: numero_partido_doador
+        description: Número do partido do doador
+      - name: sigla_partido_doador
+        description: Sigla do partido do doador
+      - name: nome_partido_doador
+        description: Nome do partido do doador
+      - name: numero_recibo_doacao
+        description: Número do recibo da doação
+      - name: numero_documento_doacao
+        description: Número do documento da doação
+      - name: cpf_cnpj_doador_orig
+        description: CPF ou CNPJ do doador originário
+      - name: nome_doador_orig
+        description: Nome do doador originário
+      - name: tipo_doador_orig
+        description: Tipo do doador originário
+      - name: descricao_cnae_2_doador_orig
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
+      - name: nome_doador_orig_rf
+        description: Nome do doador originário - Receita Federal
