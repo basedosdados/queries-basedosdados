@@ -365,7 +365,7 @@ models:
       - name: cnae_2_doador
         description: CNAE 2 do Doador
       - name: cpf_cnpj_doador_orig
-        description: cpf_cnpj_doador_orig
+        description: CPF ou CNPJ do doador originário
       - name: nome_doador_orig
         description: Nome do doador originário
       - name: tipo_doador_orig
@@ -379,6 +379,12 @@ models:
     columns:
       - name: ano
         description: Ano
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - Tribunal Superior Eleitoral (TSE)
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: esfera_partidaria
