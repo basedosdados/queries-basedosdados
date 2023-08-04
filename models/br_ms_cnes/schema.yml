@@ -1,6 +1,83 @@
 version: 2
 
 models:
+  - name: equipamento
+    description: Esta tabela contém o catálogo de equipamentos em atividade ou não nos estabelecimentos de saúde
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mes
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos  
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: id_equipamento
+        description: Identificador do equipamento
+      - name: tipo_equipamento
+        description: Categoria do equipamento
+      - name: quantidade_equipamentos
+        description: Quantidade existente do equipamento
+      - name: quantidade_equipamentos_ativos
+        description: Quantidade de equipamentos em uso
+      - name: indicador_equipamento_disponivel_sus
+        description: Indicador de equipamento disponível para o SUS
+      - name: indicador_equipamento_indisponivel_sus
+        description: Indicador de equipamento não disponível para o SUS
+  - name: equipe
+    description: Esta tabela contém o cadastro de equipes em atividade ou não nos estabelecimentos de saúde. 
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: id_equipe
+        description: ID da equipe dado pelo código do Município, area e sequencial
+            da equipe
+      - name: tipo_equipe
+        description: Tipo de equipe
+      - name: equipe
+        description: Nome da equipe
+      - name: area
+        description: Nome da área
+      - name: id_segmento
+        description: Código do segmento
+      - name: tipo_segmento
+        description: Tipo do segmento  
+      - name: descricao_segmento
+        description: Descrição do segmento
+      - name: ano_ativacao_equipe
+        description: Ano de ativação da equipe
+      - name: mes_ativacao_equipe
+        description: Mês de ativação da equipe
+      - name: motivo_desativacao_equipe
+        description: Código do motivo de desativação da equipe
+      - name: tipo_desativacao_equipe
+        description: Código do tipo de desativação da equipe
+      - name: ano_desativacao_equipe
+        description: Ano de desativação da equipe
+      - name: mes_desativacao_equipe
+        description: Mês de desativação da equipe
+      - name: indicador_atende_populacao_assistida_quilombolas
+        description: Indicador de atendimento a população Quilombolas
+      - name: indicador_atende_populacao_assistida_assentados
+        description: Indicador de atendimento a população Assentados
+      - name: indicador_atende_populacao_assistida_geral
+        description: Indicador de atendimento a população Geral
+      - name: indicador_atende_populacao_assistida_escolares
+        description: Indicador de atendimento a população Escolares
+      - name: indicador_atende_populacao_assistida_indigena
+        description: Indicador de atendimento a população Indígena
+      - name: indicador_atende_populacao_assistida_pronasci
+        description: Indicador de atendimento a população Pronasci
   - name: estabelecimento
     description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos de saúde brasileiros.
     columns:
@@ -484,3 +561,26 @@ models:
       - name: indicador_atendimento_regulacao_plano_saude_privado
         description: Indica a existência de atendimento prestado regulação/convênio
             plano de saúde privado
+  - name: leito
+    description: leitos disponíveis nos estabelecimentos de saúde
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos  
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: tipo_especialidade_leito
+        description: Especialidade do leito
+      - name: tipo_leito
+        description: Tipo do leito  
+      - name: quantidade_total
+        description: Quantidade de leitos existentes
+      - name: quantidade_contratado
+        description: Quantidade de leitos contratados
+      - name: quantidade_sus
+        description: Quantidade de leitos para o SUS
