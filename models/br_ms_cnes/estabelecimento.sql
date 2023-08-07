@@ -28,15 +28,15 @@ cnes_add_muni AS (
   -- 3. Adicionar id_municipio e sigla_uf
   SELECT *
   FROM raw_cnes_estabelecimento_without_duplicates  
-  LEFT JOIN (SELECT id_municipio, id_municipio_6, sigla_uf,
+  LEFT JOIN (SELECT id_municipio, id_municipio_6,
   FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_estabelecimento_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
   -- 4. padronização, ordenação de colunas e conversão de tipos
   -- 5. Aplica macro clean_cols em certas colunas 
   SELECT
-  CAST(SUBSTR(COMPETEN, 1, 4) AS INT64) AS ano,
-  CAST(SUBSTR(COMPETEN, 5, 2) AS INT64) AS mes,
+  SAFE_CAST(ano AS INT64) AS ano,
+  SAFE_CAST(mes  AS INT64) AS mes,
   SAFE_CAST(sigla_uf AS STRING) sigla_uf, 
   CAST(SUBSTR(DT_ATUAL, 1, 4) AS INT64) AS ano_atualizacao,
   CAST(SUBSTR(DT_ATUAL, 5, 2) AS INT64) AS mes_atualizacao,
@@ -245,3 +245,5 @@ cnes_add_muni AS (
   SAFE_CAST(AP07CV05 AS INT64) indicador_atendimento_regulacao_plano_saude_publico,
   SAFE_CAST(AP07CV06 AS INT64) indicador_atendimento_regulacao_plano_saude_privado
   FROM cnes_add_muni AS t
+  WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
+  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0) 

@@ -16,7 +16,7 @@
 WITH raw_cnes_equipe AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados-staging.br_ms_cnes_staging.equipe`
+  FROM `basedosdados-dev.br_ms_cnes_staging.equipe`
   WHERE CNES IS NOT NULL),
 cnes_add_muni AS (
   -- 2. Adicionar id_municipio de 7 dígitos

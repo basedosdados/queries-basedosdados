@@ -46,7 +46,6 @@ SAFE_CAST(NOMEAREA AS STRING) AS area,
 SAFE_CAST(ID_SEGM AS STRING) AS id_segmento,
 SAFE_CAST(TIPOSEGM AS STRING) AS tipo_segmento,
 SAFE_CAST(DESCSEGM AS STRING) AS descricao_segmento,
---- inserir subsrt para criar ano e mes
 SAFE_CAST(SUBSTR(DT_ATIVA, 1, 4) AS INT64) AS ano_ativacao_equipe,
 SAFE_CAST(SUBSTR(DT_ATIVA,5,6) AS INT64) AS mes_ativacao_equipe,
 SAFE_CAST(MOTDESAT AS STRING) AS motivo_desativacao_equipe,
