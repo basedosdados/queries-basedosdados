@@ -79,7 +79,7 @@ models:
       - name: new_users
         description: Number of new users in that date
   - name: contabilidade
-    description: "contabilidade da BD"
+    description: "contabilidade da BD."
     columns:
       - name: ano_competencia
         description: "ano de competência"
@@ -95,6 +95,8 @@ models:
         description: "tipo de despesa"
       - name: frequencia
         description: "frequência de pagamento"
+      - name: equipe
+        description: "equipe relacionada a despesa"
       - name: valor
         description: "valor da despesa"
   - name: receitas_planejadas
