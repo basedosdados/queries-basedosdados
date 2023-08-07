@@ -1,5 +1,4 @@
 SELECT 
-
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_cisp AS STRING) id_cisp,
@@ -18,3 +17,4 @@ SAFE_CAST(quantidade_revolver AS INT64) quantidade_revolver,
 SAFE_CAST(quantidade_submetralhadora AS INT64) quantidade_submetralhadora,
 SAFE_CAST(total AS INT64) total
 FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.armas_apreendidas_mensal AS t
+

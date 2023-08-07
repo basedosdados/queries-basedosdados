@@ -7,15 +7,15 @@
       "data_type": "int64",
       "range": {
         "start": 2003,
-        "end": 2022,
+        "end": 2023,
         "interval": 1}
     },
-    labels = {'project_id': 'basedosdados'})
+    labels =  {'tema': 'esporte'}
+    )
  }}
 SELECT 
 SAFE_CAST(REPLACE (ano_campeonato,".0","") AS INT64) ano_campeonato,
 SAFE_CAST(data AS DATE) data,
-SAFE_CAST(horario AS STRING) horario,
 SAFE_CAST(REPLACE (rodada,".0","") AS INT64) rodada,
 SAFE_CAST(estadio AS STRING) estadio,
 SAFE_CAST(arbitro AS STRING) arbitro,
@@ -50,3 +50,5 @@ SAFE_CAST(REPLACE (chutes_vis,".0","") AS INT64) chutes_vis,
 SAFE_CAST(REPLACE (chutes_fora_man,".0","") AS INT64) chutes_fora_man,
 SAFE_CAST(REPLACE (chutes_fora_vis,".0","") AS INT64) chutes_fora_vis
 FROM basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
+WHERE (EXTRACT(WEEK FROM SAFE_CAST(data AS DATE)) <= (EXTRACT( WEEK FROM CURRENT_DATE())-6) ) 
+OR SAFE_CAST(ano_campeonato AS INT64)<EXTRACT(YEAR from  CURRENT_DATE())

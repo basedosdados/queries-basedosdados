@@ -1,5 +1,4 @@
 SELECT
-
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(taxa_homicidio_doloso AS INT64) taxa_homicidio_doloso,
 SAFE_CAST(taxa_latrocinio AS INT64) taxa_latrocinio,
@@ -55,5 +54,4 @@ SAFE_CAST(taxa_policial_militar_morto_servico AS INT64) taxa_policial_militar_mo
 SAFE_CAST(taxa_policial_civil_morto_servico AS INT64) taxa_policial_civil_morto_servico,
 SAFE_CAST(taxa_registro_ocorrencia AS INT64) taxa_registro_ocorrencia,
 SAFE_CAST(tipo_fase AS STRING) tipo_fase
-
-FROM basedosdados-dev.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_anual_uf AS t
+FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_anual_uf AS t
