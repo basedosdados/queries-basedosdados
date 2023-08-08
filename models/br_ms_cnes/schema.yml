@@ -630,7 +630,7 @@ models:
         description: Quantidade de leitos contratados
       - name: quantidade_sus
         description: Quantidade de leitos para o SUS
-  - name: dicionario
+  - name: br_ms_cnes__dicionario
     description: Dicionário de dados
     columns:
       - name: id_tabela
