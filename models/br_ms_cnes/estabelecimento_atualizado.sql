@@ -9,8 +9,11 @@
         "start": 2005,
         "end": 2023,
         "interval": 1}
-     }  
-    )
+     },
+    post_hook=[
+      'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+      'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    ])   
  }}
 
 WITH raw_cnes_estabelecimento AS (
@@ -20,12 +23,12 @@ WITH raw_cnes_estabelecimento AS (
   WHERE CNES IS NOT NULL
 ),
 raw_cnes_estabelecimento_without_duplicates as(
-  -- 2. Distinct nas linhas 
+  -- 2. distinct nas linhas 
   SELECT DISTINCT *
   FROM raw_cnes_estabelecimento
 ),
 cnes_add_muni AS (
-  -- 3. Adicionar id_municipio
+  -- 3. Adicionar id_municipio e sigla_uf
   SELECT *
   FROM raw_cnes_estabelecimento_without_duplicates  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
@@ -245,5 +248,3 @@ cnes_add_muni AS (
   SAFE_CAST(AP07CV05 AS INT64) indicador_atendimento_regulacao_plano_saude_publico,
   SAFE_CAST(AP07CV06 AS INT64) indicador_atendimento_regulacao_plano_saude_privado
   FROM cnes_add_muni AS t
-  WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6
-  OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0) 
