@@ -630,6 +630,19 @@ models:
         description: Quantidade de leitos contratados
       - name: quantidade_sus
         description: Quantidade de leitos para o SUS
+  - name: dicionario
+    description: Dicionário de dados
+    columns:
+      - name: id_tabela
+      - description: ID da tabela
+      - name: coluna
+      - description: Nome da coluna
+      - name: chave
+      - description: Chave
+      - name: cobertura_temporal
+      - description: Cobertura temporal
+      - name: valor
+      - description: Valor 
   - name: equipamento_atualizado
     description: Esta tabela contém o catálogo de equipamentos em atividade ou não nos estabelecimentos de saúde
     columns:
