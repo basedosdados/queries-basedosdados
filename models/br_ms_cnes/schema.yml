@@ -634,15 +634,15 @@ models:
     description: Dicionário de dados
     columns:
       - name: id_tabela
-      - description: ID da tabela
+        description: ID da tabela
       - name: coluna
-      - description: Nome da coluna
+        description: Nome da coluna
       - name: chave
-      - description: Chave
+        description: Chave
       - name: cobertura_temporal
-      - description: Cobertura temporal
+        description: Cobertura temporal
       - name: valor
-      - description: Valor 
+        description: Valor 
   - name: equipamento_atualizado
     description: Esta tabela contém o catálogo de equipamentos em atividade ou não nos estabelecimentos de saúde
     columns:
