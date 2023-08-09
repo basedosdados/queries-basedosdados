@@ -12,8 +12,13 @@
                 "interval": 1
             }
         },
-        cluster_by='mes'
-) }}
+        cluster_by='mes',
+        post_hook=[
+            'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+            'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+        ]
+    )    
+}}
 
 SELECT 
     SAFE_CAST(ano as INT64) as ano,
@@ -33,6 +38,3 @@ SELECT
     SAFE_CAST(cce_e_fce as INT64) as cce_e_fce,
     SAFE_CAST(das_e_correlatas as INT64) as das_e_correlatas
 FROM `basedosdados-dev.br_mp_pep_staging.cargos_funcoes`
-WHERE (
-    DATE_DIFF(CURRENT_DATE(), DATE(CAST(ano AS INT64), CAST(mes AS INT64), 1), MONTH) > 6
-)
