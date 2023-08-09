@@ -1,0 +1,448 @@
+version: 2
+models :
+  - name: microdados_influenza_srag
+    description: O  Ministério da Saúde (MS), por meio da Secretaria de Vigilância
+      em Saúde (SVS), desenvolve a vigilância da Síndrome Respiratória Aguda Grave
+      (SRAG) no Brasil, desde a pandemia de Influenza A(H1N1) desde 2009. A partir
+      disso, a vigilância de SRAG foi implantada na rede de vigilância de Influenza
+      e outros vírus respiratórios, que anteriormente atuava exclusivamente com a
+      vigilância sentinela de Síndrome Gripal (SG). De 2009 até 2018, o sistema oficial
+      para o registo dos casos e óbitos por SRAG era o Sistema de Informação de Agravos
+      de Notificação – Sinan Web Influenza. A partir de 2019, o sistema oficial passou
+      a ser o Sistema de Informação da Vigilância Epidemiológica da Gripe (SIVEP-Gripe).
+    columns:
+      - name: ano
+        description: Ano
+      - name: antiviral_gripe
+        description: Usou antiviral para gripe?
+      - name: apresenta_artralgia
+        description: Paciente apresentou artralgia?
+      - name: apresenta_calafrio
+        description: Paciente apresentou calafrio?
+      - name: apresenta_conjuntivite
+        description: Paciente apresentou conjuntivite?
+      - name: apresenta_coriza
+        description: Paciente apresentou coriza?
+      - name: apresenta_desconforto_respiratorio
+        description: Paciente apresentou desconforto respiratório?
+      - name: apresenta_diarreia
+        description: Paciente apresentou diarreia?
+      - name: apresenta_dispneia
+        description: Paciente apresentou dispneia?
+      - name: apresenta_dor_abdominal
+        description: Paciente apresentou dor abdominal?
+      - name: apresenta_dor_garganta
+        description: Paciente apresentou dor de garganta?
+      - name: apresenta_fadiga
+        description: Paciente apresentou fadiga?
+      - name: apresenta_fator_risco
+        description: Paciente apresenta algum fator de risco?
+      - name: apresenta_febre
+        description: Paciente apresentou febre?
+      - name: apresenta_mialgia
+        description: Paciente apresentou mialgia?
+      - name: apresenta_outros_sintomas
+        description: Paciente apresentou outro(s) sintoma(s)?
+      - name: apresenta_perda_olfato
+        description: Paciente apresentou perda do olfato?
+      - name: apresenta_perda_paladar
+        description: Paciente apresentou perda do paladar?
+      - name: apresenta_saturacao_anormal
+        description: Paciente apresentou saturação O2 < 95%?
+      - name: apresenta_tosse
+        description: Paciente apresentou tosse?
+      - name: apresenta_vomito
+        description: Paciente apresentou vomito?
+      - name: caso_natural_residencia
+        description: O caso é autóctone de residência?
+      - name: classificacao_final
+        description: Classificação final do caso
+      - name: coleta_amostra
+        description: Coletou amostra?
+      - name: contato_aves_suinos
+        description: Caso com contato direto com aves ou suínos
+      - name: contato_outro_animal
+        description: Especifica o animal que o paciente teve contato
+      - name: controle_srag_sinan
+        description: Controle interno do Sistema SINAN
+      - name: criterio_encerramento
+        description: Critério de Encerramento
+      - name: data_alta_obito
+        description: Data da alta ou óbito
+      - name: data_coleta
+        description: Data de coleta da amostra
+      - name: data_coleta_amostra
+        description: Data da coleta do material para diagnóstico por sorologia
+      - name: data_coleta_hemaglutinacao
+        description: Data da coleta para Inibição da Hemaglutinação
+      - name: data_coleta_pcr
+        description: Data de coleta da amostra para o exame PCR
+      - name: data_digitacao
+        description: Data de inclusão do registro no sistema
+      - name: data_encerramento
+        description: Data do encerramento
+      - name: data_entrada_uti
+        description: Data de entrada na UTI
+      - name: data_internacao
+        description: Data da internação por SRAG
+      - name: data_nascimento_paciente
+        description: Data de nascimento do paciente
+      - name: data_notificacao
+        description: Data de preenchimento da ficha de notificação
+      - name: data_primeiros_sintomas
+        description: Data dos primeiros sintomas
+      - name: data_raiox
+        description: Data do Raio X
+      - name: data_resultado_imunofluorescencia
+        description: Data do resultado do diagnóstico do teste de imunofluorescência
+      - name: data_resultado_pcr
+        description: Data do resultado RT-PCR/outro método por biologia molecular
+      - name: data_resultado_sorologia
+        description: Data do resultado do Teste Sorológico
+      - name: data_resultado_teste
+        description: Data do resulado do teste antigênico
+      - name: data_retorno_paciente
+        description: Data de retorno da viagem
+      - name: data_saida_uti
+        description: Data de saída na UTI
+      - name: data_tomografia
+        description: Data da Tomografia
+      - name: data_tratamento_antiviral
+        description: Data início do tratamento com antiviral
+      - name: data_ultima_dose
+        description: Data da última dose de vacinação
+      - name: data_vacina_covid_dose1
+        description: Data em que o paciente recebeu a 1ª dose da vacina contra a Covid-19
+      - name: data_vacina_covid_dose2
+        description: Data em que o paciente recebeu a 2ª dose da vacina contra a Covid-19
+      - name: data_vacina_crianca_1dose
+        description: Se paciente >= 6 meses e <= 8 anos, data da 1ª dose para crianças
+          vacinadas pela primeira vez
+      - name: data_vacina_crianca_2dose
+        description: Se paciente >= 6 meses e <= 8 anos data da 2ª dose para crianças
+          vacinadas pela primeira vez
+      - name: data_vacina_crianca_dose_unica
+        description: Se paciente >= 6 meses e <= 8 anos, data da dose única para crianças
+          vacinadas em campanhas de anos anteriores
+      - name: data_vacina_mae
+        description: Data de aplicação da vacina na mãe
+      - name: data_viagem_paciente
+        description: Data que foi realizada a vaigem
+      - name: diagnostico_adenovirus
+        description: Resultado do diagnóstico para Adenovírus
+      - name: diagnostico_imunofluorescencia
+        description: Diagnóstico efetuado por teste de imunofluorescência
+      - name: diagnostico_influenza_a
+        description: Resultado do diagnóstico para Influenza A
+      - name: diagnostico_influenza_b
+        description: Resultado do diagnóstico para Influenza B
+      - name: diagnostico_outra_metodologia
+        description: Diagnóstico utilizando outra metodologia
+      - name: diagnostico_outro_virus
+        description: Resultado do diagnóstico para outro vírus
+      - name: diagnostico_parainfluenza1
+        description: Resultado do diagnóstico para Parainfluenza 1
+      - name: diagnostico_parainfluenza2
+        description: Resultado do diagnóstico para Parainfluenza 2
+      - name: diagnostico_parainfluenza3
+        description: Resultado do diagnóstico para Parainfluenza 3
+      - name: diagnostico_pcr
+        description: Diagnóstico efetuado por PCR
+      - name: diagnostico_subtipo_influenza_a
+        description: Resultado do diagnóstico para o subtipo de Influenza A
+      - name: diagnostico_virus_sincicial_respiratorio
+        description: Resultado do diagnóstico para Vírus Sincicial Respiratório
+      - name: doenca_relacionada_trabalho
+        description: Paciente apresenta doença em decorrência do trabalho
+      - name: escolaridade_paciente
+        description: Nível de escolaridade do paciente
+      - name: estrangeiro_paciente
+        description: Informa se o paciente é estrangeiro
+      - name: etnia_paciente
+        description: Etnia do paciente, se indígena
+      - name: evolucao_caso
+        description: Evolução do caso
+      - name: fonte_dados_vacina_covid
+        description: Fonte dos dados/informações sobre a vacina contra a Covid-19
+      - name: gestante_paciente
+        description: Idade gestacional da paciente
+      - name: hemaglutinacao_tipo_hemaglutinina
+        description: Classificação do tipo de hemaglutinina pelo teste de Inibição
+          da Hemaglutinação
+      - name: hemaglutinacao_tipo_neuraminidase
+        description: Classificação do tipo de neurominida pelo teste de Inibição da
+          Hemaglutinação
+      - name: historico_viagem_paciente
+        description: Paciente tem histórico de viagem internacional até 14 dias antes
+          do início dos sintomas?
+      - name: idade_paciente
+        description: Idade do paciente
+      - name: id_estabelecimento
+        description: Código da unidade de saúde da área de abrangência da unidade
+          notificadora
+      - name: id_laboratorio_imunofluorescencia
+        description: ID Cnes do laboratório responsável pela liberação do resultado
+          do diagnóstico do teste de imunofluorescência
+      - name: id_laboratorio_pcr
+        description: ID Cnes do laboratório responsável pela liberação do resultado
+          do diagnóstico do teste PCR
+      - name: id_municipio_6_internacao
+        description: ID Município de internação
+      - name: id_municipio_6_notificacao
+        description: ID do município de ocorrência do evento notificado
+      - name: id_municipio_6_residencia
+        description: Município de residência do paciente
+      - name: id_municipio_notificacao
+        description: ID do Município de ocorrência do evento notificado - 7 Dígitos
+      - name: id_regional_saude_internacao
+        description: ID Regional saúde de internação
+      - name: id_regional_saude_notificacao
+        description: Regional de saúde onde está localizado o município da unidade
+          de saúde ou outra fonte notificadora
+      - name: id_regional_saude_residencia
+        description: Regional de saúde onde está localizado o município de residência
+          do paciente
+      - name: id_uf_notificacao
+        description: ID da Unidade Federativa onde está localizada a unidade que realizou
+          a notificação
+      - name: id_uf_residencia_paciente
+        description: ID da Unidade Federativa de residência do paciente
+      - name: imc_paciente_obeso
+        description: Valor do IMC do paciente, caso possua obesidade
+      - name: imunofluorescencia_adenovirus
+        description: Resultado do diagnóstico para Adenovírus através do Teste de
+          Imunofluorescência
+      - name: imunofluorescencia_outro_virus
+        description: Resultado do diagnóstico para outro vírus através do Teste de
+          Imunofluorescência
+      - name: imunofluorescencia_parainfluenza1
+        description: Resultado do diagnóstico para Parainfluenza 1 através do Teste
+          de Imunofluorescência
+      - name: imunofluorescencia_parainfluenza2
+        description: Resultado do diagnóstico para Parainfluenza 2 através do Teste
+          de Imunofluorescência
+      - name: imunofluorescencia_parainfluenza3
+        description: Resultado do diagnóstico para Parainfluenza 3 através do Teste
+          de Imunofluorescência
+      - name: imunofluorescencia_positivo_influenza
+        description: Teste de imunofluorescência positivo para influenza?
+      - name: imunofluorescencia_positivo_outros_virus
+        description: Teste de imunofluorescência positivo para outro vírus
+      - name: imunofluorescencia_qual_outro_virus
+        description: Especifica outro vírus detectado através do Teste de Imunofluorescência
+      - name: imunofluorescencia_virus_sincicial_respiratorio
+        description: Resultado do diagnóstico para Vírus Sincicial Respiratório através
+          do Teste de Imunofluorescência
+      - name: infeccao_hospitalar
+        description: Caso de SRAG com infecção adquirida após internação
+      - name: internacao
+        description: Houve internaçao?
+      - name: internacao_uti
+        description: Internado em UTI?
+      - name: laboratorio_vacina_covid
+        description: Laboratório produtor da vacina contra a Covid-19
+      - name: linhagem_influeza_b
+        description: Qual a linhagem da influenza B?
+      - name: local_viagem_paciente
+        description: Local (cidade, estado, província e outros) onde foi realizada
+          a viagem
+      - name: lote_dose1_vacina_covid
+        description: Lote da 1ª dose da vacina contra a Covid-19
+      - name: lote_dose2_vacina_covid
+        description: Lote da 2ª dose da vacina contra a Covid-19
+      - name: mae_amamenta
+        description: A mãe amamenta a criança?
+      - name: observacoes_paciente
+        description: Outras observações sobre o paciente consideradas pertinentes
+      - name: ocupacao_paciente
+        description: Ocupação do paciente
+      - name: outra_linhagem_influenza_b
+        description: Especifica qual outra linhagem da influenza B
+      - name: outro_agente_etiologico
+        description: Especifica qual outro agente provocou a SRAG
+      - name: outro_resultado_tomografia
+        description: Especifica qual outro resultado da tomografia
+      - name: outro_subtitpo_influenza
+        description: Especifica qual outro subtipo de influenza A
+      - name: outro_tipo_amostra
+        description: Especifica qual outro tipo de amostra coletado
+      - name: outro_tipo_antiviral
+        description: Espeficação do antiviral
+      - name: pais_residencia_paciente
+        description: País de residência do paciente
+      - name: pais_viagem_paciente
+        description: Qual país?
+      - name: pcr_adenovirus
+        description: Teste PCR positivo para Adenovírus
+      - name: pcr_bocavirus
+        description: Teste PCR positivo para Bocavírus
+      - name: pcr_metapneumovirus
+        description: Teste PCR positivo para Metapneumovírus
+      - name: pcr_outro_virus
+        description: Teste PCR positivo para outro vírus
+      - name: pcr_parainfluenza1
+        description: Teste PCR positivo para Parainfluenza 1
+      - name: pcr_parainfluenza2
+        description: Teste PCR positivo para Parainfluenza 2
+      - name: pcr_parainfluenza3
+        description: Teste PCR positivo para Parainfluenza 3
+      - name: pcr_parainfluenza4
+        description: Teste PCR positivo para Parainfluenza 4
+      - name: pcr_positivo_influenza
+        description: Teste PCR positivo para influenza?
+      - name: pcr_positivo_outros_virus
+        description: Teste PCR positivo para outros vírus?
+      - name: pcr_rinovirus
+        description: Teste PCR positivo para Rinovírus
+      - name: pcr_sarscov2
+        description: Teste PCR positivo para SARS-CoV-2
+      - name: pcr_tipo_hemaglutinina
+        description: Classificação do tipo de hemaglutinina pelo teste PCR
+      - name: pcr_tipo_neuraminidase
+        description: Classificação do tipo de neurominida pelo teste PCR
+      - name: pcr_virus_sincicial_respiratorio
+        description: Teste PCR positivo para Vírus Sincicial Respiratório
+      - name: possui_asma
+        description: Paciente possui asma?
+      - name: possui_cardiopatia
+        description: Paciente possui doença cardiovascular crônica?
+      - name: possui_diabetes
+        description: Paciente possui diabetes mellitus?
+      - name: possui_doenca_metabolica
+        description: Paciente possui doença metabólica?
+      - name: possui_doenca_neurologica
+        description: Paciente possui doença neurológica?
+      - name: possui_doenca_renal
+        description: Paciente possui doença renal crônica?
+      - name: possui_hematologia
+        description: Paciente possui doença hematológica crônica?
+      - name: possui_hemoglobinopatia
+        description: Paciente possui hemoglobinopatia?
+      - name: possui_hepatite
+        description: Paciente possui doença hepática crônica?
+      - name: possui_imunodeficiencia
+        description: Paciente possui imunodeficiência ou imunodepressão?
+      - name: possui_obesidade
+        description: Paciente possui obesidade?
+      - name: possui_outra_morbidade
+        description: Paciente possui outro(s) fator(res) de risco?
+      - name: possui_pneumopatia
+        description: Paciente possui pneumopatia?
+      - name: possui_sindrome_down
+        description: Paciente possui Síndrome de Down?
+      - name: puerpera_paciente
+        description: Paciente é puérpera ou parturiente?
+      - name: qual_outra_amostra
+        description: Especifica tipo de amostra coletada para SARS-CoV-2
+      - name: qual_outra_morbidade
+        description: Especifica outro(s) fator(es) de risco do paciente
+      - name: qual_outra_sorologia
+        description: Especifica outro tipo de sorologia
+      - name: qual_outro_raiox
+        description: Especifica outros resultados para o Raio X
+      - name: qual_outro_sintoma
+        description: Especifica outros sinais e sintomas
+      - name: qual_outro_tipo_amostra_pcr
+        description: Especifica outro tipo de amostra coletado para o exame PCR
+      - name: qual_outro_virus
+        description: Especifica outro vírus respiratório detectado pelo teste PCR
+      - name: raca_cor_paciente
+        description: Raça/Cor do paciente
+      - name: raiox_torax
+        description: Raio X de Tórax
+      - name: requisicao_sistema_gal
+        description: Número da requisição de exames gerado pelo sistema GAL
+      - name: resultado_amostra
+        description: Resultado da cultura
+      - name: resultado_hemaglutinacao
+        description: Resultado da Inibição da Hemaglutinação
+      - name: resultado_imunofluorescencia
+        description: Resultado do teste de imunofluorescência ou outro método que
+          não seja biologia molecular
+      - name: resultado_pcr
+        description: Resultado da RT-PCR/outro método por biologia molecular
+      - name: resultado_sorologia_iga
+        description: Resultado da sorologia para SARS-CoV-2
+      - name: resultado_sorologia_igg
+        description: Resultado da sorologia para SARS-CoV-2
+      - name: resultado_sorologia_igm
+        description: Resultado da sorologia para SARS-CoV-2
+      - name: resultado_teste_antigenico
+        description: Resultado do teste antigênico
+      - name: semana_notificacao
+        description: Semana Epidemiológica do preenchimento da ficha de notificação
+      - name: semana_sintomas
+        description: Semana Epidemiológica do início dos sintomas
+      - name: sexo_paciente
+        description: Sexo do paciente
+      - name: sigla_uf_internacao
+        description: Unidade Federativa de internação
+      - name: sigla_uf_notificacao
+        description: Sigla da Unidade Federativa onde está localizada a unidade que
+          realizou a notificação
+      - name: sindrome_gripal
+        description: Caso de surto de síndrome gripal
+      - name: status_monitoramento
+        description: Definição do caso
+      - name: subtipo_influenza_a
+        description: Qual subtipo da influenza A?
+      - name: suporte_ventilatorio
+        description: Uso de suporte ventilatório
+      - name: tabagista_paciente
+        description: Paciente é tabagista?
+      - name: teste_adenovirus
+        description: Resultado do teste antigênico positivo para Adenovírus
+      - name: teste_outro_virus
+        description: Resultado do teste antigênico poisitivo para outro vírus
+      - name: teste_outro_virus_nome
+        description: Especifica outro vírus respiratório identificado pelo Teste Antigênico
+      - name: teste_parainfluenza1
+        description: Resultado do teste antigênico positivo para Parainfluenza 1
+      - name: teste_parainfluenza2
+        description: Resultado do teste antigênico positivo para Parainfluenza 2
+      - name: teste_parainfluenza3
+        description: Resultado do teste antigênico positivo para `Parainfluenza 3
+      - name: teste_positivo_influenza
+        description: Resultado do teste antigênico positivo para influenza
+      - name: teste_positivo_outro_virus
+        description: Resultado do teste antigênico positivo para outro vírus respiratório
+      - name: teste_sarscov2
+        description: Resultado do teste antigênico positivo para SARS-CoV-2
+      - name: teste_virus_sincicial_respiratorio
+        description: Resultado do teste antigênico positivo para Vírus Sincicial Respiratorio
+      - name: tipo_amostra
+        description: Tipo de cultura
+      - name: tipo_amostra_pcr
+        description: Tipo de amostra clínica coletada para exame PCR
+      - name: tipo_amostra_sorologica
+        description: Tipo de amostra sorológica coletada
+      - name: tipo_antiviral
+        description: Qual tipo de antiviral?
+      - name: tipo_ficha
+        description: Campo identificador do tipo de ficha de registro.
+      - name: tipo_influenza_imunofluorescencia
+        description: Qual influenza detectada pela imunofluorescência?
+      - name: tipo_influenza_pcr
+        description: Qual influenza detectada pelo PCR?
+      - name: tipo_influenza_teste
+        description: Resultado do teste antigênico para o tipo de influenza
+      - name: tipo_pcr
+        description: Tipo de coleta da amostra para exame PCR
+      - name: tipo_resultado_hemaglutinacao
+        description: Diagnóstico etiológico por Inibição da Hemaglutinação
+      - name: tipo_resultado_pcr
+        description: Diagnóstico etiológico do teste PCR
+      - name: tipo_sorologia
+        description: Tipo do teste sorológico realizado
+      - name: tipo_teste_antigenico
+        description: Tipo do teste antigênico realizado
+      - name: tomografia
+        description: Informa o resultado/aspecto da tomografia
+      - name: vacina_covid
+        description: Informa se o paciente receveu vacina contra a COVID-19
+      - name: vacina_gripe
+        description: Informa se o paciente foi vacina contra gripe na última campanha
+      - name: vacina_gripe_mae
+        description: Se paciente menor de 6 meses, a mãe recebeu a vacina?
+      - name: zona
+        description: Zona geográfica do endereço de residência do paciente
