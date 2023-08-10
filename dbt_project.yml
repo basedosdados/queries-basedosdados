@@ -49,6 +49,9 @@ models:
     br_anatel_telefonia_movel:
       +materialized: table # Materialization type (table, view or incremental)
       +schema: br_anatel_telefonia_movel
+    br_anp_precos_combustiveis:
+      +materialized: table
+      +schema: br_anp_precos_combustiveis
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
