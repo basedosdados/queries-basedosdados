@@ -51,3 +51,16 @@ models:
         description: Quantidade de beneficiários cancelados na competência
       - name: data_carga
         description: Data de Carga
+  - name: br_ans_beneficiario__dicionario
+    description: Dicionario
+    columns: 
+      - name: id_tabela
+        description: ID da Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor
