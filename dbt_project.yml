@@ -52,6 +52,12 @@ models:
     br_anp_precos_combustiveis:
       +materialized: table
       +schema: br_anp_precos_combustiveis
+    br_ans_beneficiario:
+      +materialized: incremental
+      +schema: br_ans_beneficiario
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'      
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
