@@ -44,5 +44,5 @@ select *
 from ans
 {% if is_incremental() %}
 where
-  data_carga >= (SELECT MAX(data_carga) FROM {{ this }}) 
+  data_carga > (SELECT MAX(data_carga) FROM {{ this }}) 
 {% endif %}
