@@ -70,6 +70,12 @@ models:
     br_bcb_estban:
       +materialized: table
       +schema: br_bcb_estban 
+    br_bcb_taxa_cambio:
+      +materialized: table
+      +schema: br_bcb_taxa_cambio 
+    br_bcb_taxa_selic:
+      +materialized: table
+      +schema: br_bcb_taxa_selic 
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
