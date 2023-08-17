@@ -10,7 +10,7 @@
         "interval": 1}
     },    
     cluster_by = ["id_municipio", "mes", "sigla_uf"],    
-    labels = {'project_id': 'basedosdados-dev'})
+    labels = {'project_id': 'basedosdados'})
  }}
 
 
@@ -37,7 +37,7 @@ CAST(QT_BENEFICIARIO_ATIVO AS INT64) quantidade_beneficiario_ativo,
 CAST(QT_BENEFICIARIO_ADERIDO AS INT64) quantidade_beneficiario_aderido,
 CAST(QT_BENEFICIARIO_CANCELADO AS INT64) quantidade_beneficiario_cancelado,
 CAST(PARSE_DATE('%d/%m/%Y', DT_CARGA) AS DATE) data_carga,
-FROM `basedosdados-dev.br_ans_beneficiario_staging.informacao_consolidada_atualizado` t
+FROM `basedosdados-staging.br_ans_beneficiario_staging.informacao_consolidada_atualizado` t
 join `basedosdados.br_bd_diretorios_brasil.municipio` bd
 on t.CD_MUNICIPIO = bd.id_municipio_6)
 select *
