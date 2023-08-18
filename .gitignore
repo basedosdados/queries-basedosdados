@@ -3,5 +3,11 @@ dbt_modules/
 logs/
 .vscode/
 .env
-tmp/
+.venv
 .DS_store
+__pycache__/
+
+models/*/tmp/
+models/*/input/
+models/*/output/
+models/*/extra/
