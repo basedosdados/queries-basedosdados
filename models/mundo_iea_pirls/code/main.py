@@ -5,6 +5,7 @@ import requests
 import zipfile
 import io
 import os
+import basedosdados as bd
 
 from pirls_utils import LABELS_FROM_CONTEXT_QUESTIONNAIRES, COUNTRY_CODES, RENAMES
 
@@ -363,8 +364,19 @@ def build_dict(table: str) -> pd.DataFrame:
 
 
 # Save dictionary table
-pd.concat([build_dict(table_name) for table_name in PIRLS_TABLES_DESC.keys()]).to_parquet(
-    f"{OUTPUT}/dicionario.parquet", index=False
-)
+pd.concat(
+    [build_dict(table_name) for table_name in PIRLS_TABLES_DESC.keys()]
+).to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)
 
+# Upload to BQ
+for table_suffix_id, table_name in PIRLS_TABLES_DESC.items():
+    path = f"{OUTPUT}/{table_name}_{table_suffix_id}.parquet"
 
+    tb = bd.Table(dataset_id="mundo_iea_pirls", table_id=table_name)
+
+    tb.create(
+        path=path,
+        if_table_exists="replace",
+        if_storage_data_exists="replace",
+        source_format="parquet",
+    )
