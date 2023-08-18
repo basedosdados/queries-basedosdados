@@ -1,7 +1,7 @@
 {{ config(alias = 'dicionario', schema = 'br_ans_beneficiario')}}
 
 with dicionario as(
--- Consulta para a segunda coluna
+-- Consulta para a segunda coluna.
 SELECT
   ROW_NUMBER() OVER(ORDER BY faixa_etaria) AS chave,
   faixa_etaria AS valor,
