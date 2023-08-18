@@ -5,27 +5,20 @@ import requests
 import zipfile
 import io
 import os
-import basedosdados as bd
 
-from pirls_utils import LABELS_FROM_CONTEXT_QUESTIONNAIRES
+from pirls_utils import LABELS_FROM_CONTEXT_QUESTIONNAIRES, COUNTRY_CODES, RENAMES
 
-# %%
-# CWD = os.path.join(os.getcwd(), "models", "mundo_iea_pirls") if __name__ == "__main__" else os.path.dirname(os.getcwd())
-
-# CWD = os.path.join(os.getcwd(), "models", "mundo_iea_pirls")
 CWD = os.path.dirname(os.getcwd())
 INPUT = os.path.join(CWD, "input")
 TMP = os.path.join(CWD, "tmp")
 OUTPUT = os.path.join(CWD, "output")
 
-# %%
 PIRLS_ASSETS_URLS = {
     "data": "https://pirls2021.org/data/downloads/P21_Data_SAS.zip",
     "item_information": "https://pirls2021.org/data/downloads/P21_ItemInformation.xlsx",
     "codebooks": "https://pirls2021.org/data/downloads/P21_Codebooks.zip",
 }
 
-# %%
 if not os.path.exists(INPUT):
     os.mkdir(INPUT)
 
@@ -35,23 +28,23 @@ if not os.path.exists(TMP):
 if not os.path.exists(OUTPUT):
     os.mkdir(OUTPUT)
 
-# r = requests.get(PIRLS_ASSETS_URLS["data"])
-# z = zipfile.ZipFile(io.BytesIO(r.content))
-# z.extractall(INPUT)
+r = requests.get(PIRLS_ASSETS_URLS["data"])
+z = zipfile.ZipFile(io.BytesIO(r.content))
+z.extractall(INPUT)
 
-# r = requests.get(PIRLS_ASSETS_URLS["codebooks"])
-# z = zipfile.ZipFile(io.BytesIO(r.content))
-# z.extractall(INPUT)
+r = requests.get(PIRLS_ASSETS_URLS["codebooks"])
+z = zipfile.ZipFile(io.BytesIO(r.content))
+z.extractall(INPUT)
 
-# r = requests.get(PIRLS_ASSETS_URLS["item_information"], stream=True)
-# with open(f"{INPUT}/item_information.xlsx", "wb") as file:
-#     file.write(r.content)
+r = requests.get(PIRLS_ASSETS_URLS["item_information"], stream=True)
+with open(f"{INPUT}/item_information.xlsx", "wb") as file:
+    file.write(r.content)
 
-# for file in os.listdir(f"{INPUT}/Data"):
-#     parquet_filename = file.replace(".sas7bdat", ".parquet")
-#     parquet_output_filename = f"{TMP}/data/{parquet_filename}"
-
-#     pd.read_sas(f"{INPUT}/Data/{file}").to_parquet(parquet_output_filename)
+# Convert sas files to parquet
+for file in os.listdir(f"{INPUT}/Data"):
+    parquet_filename = file.replace(".sas7bdat", ".parquet")
+    parquet_output_filename = f"{TMP}/data/{parquet_filename}"
+    pd.read_sas(f"{INPUT}/Data/{file}").to_parquet(parquet_output_filename)  # type: ignore
 
 PIRLS_TABLES_DESC = {
     "acg": "school_context",
@@ -63,15 +56,12 @@ PIRLS_TABLES_DESC = {
     "atg": "teacher_context",
 }
 
-TABLES_TO_PROCESS = list(PIRLS_TABLES_DESC.keys())[6:7]
-print(TABLES_TO_PROCESS)
+TABLES_TO_PROCESS = list(PIRLS_TABLES_DESC.keys())
 
 
-# %%
 def read_pirls_files(tables: list[str]):
     files = os.listdir(f"{TMP}/data")
 
-    # result = dict(acg=[], asa=[], asg=[], ash=[], asr=[], ast=[], atg=[])
     result = {k: [] for k in tables}
 
     for file in files:
@@ -89,149 +79,9 @@ def read_pirls_files(tables: list[str]):
     }
 
 
-# %%
-
-# dfs = read_pirls_files(TABLES_TO_PROCESS)
-
-# %% [markdown]
-# # Gerar arquitetura
-
-# %%
-RENAMES = {
-    "asa": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "WAVE": "student_wave_indicator",
-        "IDSCHOOL": "school_id",
-        "IDCLASS": "class_id",
-        "IDSTUD": "student_id",
-        "ITSEX": "sex_student",
-        "ITADMINI": "test_administrator_position",
-        "ITLANG_SA": "language_student_achievement_test",
-        "LCID_SA": "locale_student_test_id",
-        "IDBOOK": "booklet_id",
-        "ITDEV": "administration_device",
-        "ASDAGE": "student_age",
-        "ILRELIAB": "reliability_coding_status",
-        "HOUWGT": "house_weight",
-        "TOTWGT": "total_student_weight",
-        "SENWGT": "senate_weight",
-        "WGTADJ1": "school_weight_adjustment",
-        "WGTADJ2": "class_weight_adjustment",
-        "WGTADJ3": "student_weight_adjustment",
-        "WGTFAC1": "school_weight_factor",
-        "WGTFAC2": "class_weight_factor",
-        "WGTFAC3": "student_weight_factor",
-        "JKREP": "jackknife_replicate_code",
-        "JKZONE": "jackknife_zone",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-    "asr": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "WAVE": "student_wave_indicator",
-        "IDSCHOOL": "school_id",
-        "IDCLASS": "class_id",
-        "IDSTUD": "student_id",
-        "IDBOOK": "booklet_id",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-    "asg": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "WAVE": "student_wave_indicator",
-        "IDSCHOOL": "school_id",
-        "IDCLASS": "class_id",
-        "IDSTUD": "student_id",
-        "ITSEX": "sex_student",
-        "ITADMINI": "test_administrator_position",
-        "LCID_SA": "locale_student_test_id",
-        "ITLANG_SA": "language_student_achievement_test",
-        "ITLANG_SQ": "language_student_achievement_questionnaire",
-        "LCID_SQ": "locale_student_questionnaire_id",
-        "IDBOOK": "booklet_id",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-    "ash": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "WAVE": "student_wave_indicator",
-        "IDSCHOOL": "school_id",
-        "IDCLASS": "class_id",
-        "IDSTUD": "student_id",
-        "ITLANG_HQ": "language_home_questionnaire",
-        "LCID_HQ": "locale_student_home_questionnaire_id",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-    "acg": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "IDSCHOOL": "school_id",
-        "ITLANG_CQ": "language_school_questionnaire",
-        "LCID_CQ": "locale_school_questionnaire_id",
-        "SCHWGT": "school_level_weight",
-        "STOTWGTU": "sum_student_weights",
-        "WGTADJ1": "school_weight_adjustment",
-        "WGTFAC1": "school_weight_factor",
-        "JKCREP": "replicate_code",
-        "JKCZONE": "zone_code",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-    "atg": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "IDSCHOOL": "school_id",
-        "IDTEACH": "teacher_id",
-        "IDLINK": "teacher_link_number",
-        "IDTEALIN": "teacher_link_id",
-        "ITLANG_TQ": "language_teacher_questionnaire",
-        "LCID_TQ": "locale_teacher_questionnaire_id",
-        # "isDummy": "is_dummy",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-    "ast": {
-        "IDCNTRY": "country_id_iso3",
-        "IDPOP": "population_id",
-        "IDGRADER": "standardized_grade_id",
-        "IDGRADE": "grade_id",
-        "WAVE": "student_wave_indicator",
-        "IDSCHOOL": "school_id",
-        "IDCLASS": "class_id",
-        "IDSTUD": "student_id",
-        "IDTEACH": "teacher_id",
-        "IDLINK": "teacher_link_number",
-        "IDTEALIN": "teacher_link_id",
-        "IDBOOK": "booklet_id",
-        "IDSUBJ": "subject_id",
-        "NTEACH": "number_teachers",
-        "TCHWGT": "weight_teacher",
-        "JKREP": "jackknife_replicate_code",
-        "JKZONE": "jackknife_zone",
-        "SCOPE": "scope",
-        "VERSION": "version",
-    },
-}
+dfs = read_pirls_files(TABLES_TO_PROCESS)
 
 
-# %%
 def read_codebooks() -> dict[str, pd.DataFrame]:
     cols = [
         "Variable",
@@ -242,30 +92,7 @@ def read_codebooks() -> dict[str, pd.DataFrame]:
         "Comment",
     ]
 
-    sheets_normal = ["ASAR5", "ASRR5", "ASGR5", "ASHR5", "ACGR5", "ATGR5", "ASTR5"]
-    sheets_bridge = ["ASAA5", "ASRA5", "ASGA5", "ASHA5", "ACGA5", "ATGA5", "ASTA5"]
-
     restrict_use = "In restricted-use IDB only"
-
-    def read_sheet_from_file(
-        filename: str, sheet_name: str, pirls_type: str
-    ) -> pd.DataFrame:
-        df = pd.read_excel(f"{INPUT}/{filename}", sheet_name=sheet_name)[cols]
-        df["pirls_type"] = pirls_type
-        return df[df["Comment"] != restrict_use].drop(columns=["Comment"])
-
-    dfs_normal = {
-        sheet_name[0:3].lower(): read_sheet_from_file(
-            "P21_Codebook.xlsx", sheet_name, "Normal"
-        )
-        for sheet_name in sheets_normal
-    }
-    dfs_bridge = {
-        sheet_name[0:3].lower(): read_sheet_from_file(
-            "P21Br_Codebook.xlsx", sheet_name, "Bridge"
-        )
-        for sheet_name in sheets_bridge
-    }
 
     def read_sheets(table_prefix: str) -> pd.DataFrame:
         sheet_name_normal = f"{table_prefix.upper()}R5"
@@ -288,10 +115,8 @@ def read_codebooks() -> dict[str, pd.DataFrame]:
     result = {k: read_sheets(k) for k in PIRLS_TABLES_DESC.keys()}
 
     return result
-    # return {"normal": dfs_normal, "bridge": dfs_bridge}
 
 
-# %%
 def get_item_informations() -> pd.DataFrame:
     sheets = ["P21 Paper", "P21 Digital", "P21Br (Paper)"]
     cols = ["Item ID", "Label"]
@@ -306,14 +131,12 @@ def get_item_informations() -> pd.DataFrame:
     return result
 
 
-# %%
 codebooks = read_codebooks()
 
-# %%
 item_informations = get_item_informations()
 
 
-# %%
+# Generate architecture
 def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
     def find_label(table, variable, label_original, label_from_item):
         if pd.isnull(label_from_item):
@@ -385,20 +208,18 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
             ["Variable", "Level", "Decimals", "Value Scheme Detailed"]
         ].apply(lambda cols: get_bigquery_type(*cols), axis=1)
 
+        def covered_by_dictionary(bigquery_type, scheme, variable):
+            if variable == "IDCNTRY":
+                return "yes"
+            return "no" if bigquery_type == "bool" or pd.isnull(scheme) else "yes"
+
         df["covered_by_dictionary"] = df[
-            ["bigquery_type", "Value Scheme Detailed"]
-        ].apply(
-            lambda cols: "no" if cols[0] == "bool" or pd.isnull(cols[1]) else "yes",
-            axis=1,
-        )
+            ["bigquery_type", "Value Scheme Detailed", "Variable"]
+        ].apply(lambda cols: covered_by_dictionary(*cols), axis=1)
 
         df["observations"] = None
 
-        df["directory_column"] = df["Variable"].apply(
-            lambda var: "br_bd_diretorios_mundo.pais:id_pais_m49"
-            if var == "IDCNTRY"
-            else None
-        )
+        df["directory_column"] = None
 
         df["measurement_unit"] = df["Variable"].apply(
             lambda var: "person" if var == "NTEACH" else None
@@ -434,8 +255,6 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
 
         return pd.concat([df, pirls_type_row])
 
-    # return process_table(codebooks["normal"]["asa"], "asa")
-
     result = dict(acg=[], asa=[], asg=[], ash=[], asr=[], ast=[], atg=[])
 
     for table in codebooks.keys():
@@ -451,10 +270,11 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
 
 tables_archs = gen_archs(codebooks)
 
-# for table in tables_archs.keys():
-#     df = tables_archs[table]
-#     table_name = f"{CWD}/extra/architecture/{PIRLS_TABLES_DESC[table]}_{table}.xlsx"
-#     df.to_excel(table_name, index=False)
+# Save architecture tables
+for table in tables_archs.keys():
+    df = tables_archs[table]
+    table_name = f"{CWD}/extra/architecture/{PIRLS_TABLES_DESC[table]}_{table}.xlsx"
+    df.to_excel(table_name, index=False)
 
 
 def get_types_cols(table: str) -> dict[str, str]:
@@ -485,17 +305,20 @@ def clean_data(df: pd.DataFrame, table: str):
     return df.rename(columns=RENAMES[table]).rename(columns=str.lower)
 
 
-# for table in TABLES_TO_PROCESS:
-#     table_name = f"{OUTPUT}/{PIRLS_TABLES_DESC[table]}_{table}.parquet"
-#     df = clean_data(dfs[table], table)
-#     df.to_parquet(table_name, index=False)
-#     print(f"Done for {table}")
+# Clean data and save
+for table in TABLES_TO_PROCESS:
+    table_name = f"{OUTPUT}/{PIRLS_TABLES_DESC[table]}_{table}.parquet"
+    df = clean_data(dfs[table], table)
+    df.to_parquet(table_name, index=False)
 
 
 def parse_scheme(table: str, variable: str) -> list[tuple[str, str]]:
     # O valor na celula ta em outro formato
     if variable == "IDPOP":
         return [("1", "1")]
+
+    if variable == "IDCNTRY":
+        return [(k, v) for k, v in COUNTRY_CODES.items()]
 
     df = codebooks[table]
     value = df[df["Variable"] == variable]["Value Scheme Detailed"].values[0].strip()
@@ -512,12 +335,7 @@ def parse_scheme(table: str, variable: str) -> list[tuple[str, str]]:
     return [sanitize(i) for i in value.split(";") if ":" in i]
 
 
-bd_country_codes = bd.read_sql(
-    "SELECT id_pais_m49, nome_oficial_ingles FROM `basedosdados-dev.br_bd_diretorios_mundo.pais`",
-    billing_project_id="basedosdados-dev",
-)
-
-
+# Build dictionary table
 def build_dict(table: str) -> pd.DataFrame:
     table_arch = pd.DataFrame.copy(
         tables_archs[table][["name", "covered_by_dictionary", "original_name"]]
@@ -544,6 +362,9 @@ def build_dict(table: str) -> pd.DataFrame:
     ]
 
 
-pd.concat([build_dict(i) for i in PIRLS_TABLES_DESC.keys()]).to_parquet(
+# Save dictionary table
+pd.concat([build_dict(table_name) for table_name in PIRLS_TABLES_DESC.keys()]).to_parquet(
     f"{OUTPUT}/dicionario.parquet", index=False
 )
+
+
