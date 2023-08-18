@@ -368,6 +368,9 @@ pd.concat(
     [build_dict(table_name) for table_name in PIRLS_TABLES_DESC.keys()]
 ).to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)
 
+
+bd.Dataset(dataset_id="mundo_iea_pirls")
+
 # Upload to BQ
 for table_suffix_id, table_name in PIRLS_TABLES_DESC.items():
     path = f"{OUTPUT}/{table_name}_{table_suffix_id}.parquet"
