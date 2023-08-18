@@ -369,13 +369,14 @@ pd.concat(
 ).to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)
 
 
-bd.Dataset(dataset_id="mundo_iea_pirls")
+ds = bd.Dataset(dataset_id="world_iea_pirls")
+ds.create(mode="staging")
 
 # Upload to BQ
 for table_suffix_id, table_name in PIRLS_TABLES_DESC.items():
     path = f"{OUTPUT}/{table_name}_{table_suffix_id}.parquet"
 
-    tb = bd.Table(dataset_id="mundo_iea_pirls", table_id=table_name)
+    tb = bd.Table(dataset_id="world_iea_pirls", table_id=table_name)
 
     tb.create(
         path=path,
@@ -383,3 +384,14 @@ for table_suffix_id, table_name in PIRLS_TABLES_DESC.items():
         if_storage_data_exists="replace",
         source_format="parquet",
     )
+
+
+# Upload dictionary
+tb = bd.Table(dataset_id="world_iea_pirls", table_id="dicionario")
+
+tb.create(
+    path=f"{OUTPUT}/dicionario.parquet",
+    if_table_exists="replace",
+    if_storage_data_exists="replace",
+    source_format="parquet",
+)
