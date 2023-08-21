@@ -49,6 +49,15 @@ models:
     br_anatel_telefonia_movel:
       +materialized: table # Materialization type (table, view or incremental)
       +schema: br_anatel_telefonia_movel
+    br_anp_precos_combustiveis:
+      +materialized: table
+      +schema: br_anp_precos_combustiveis
+    br_ans_beneficiario:
+      +materialized: incremental
+      +schema: br_ans_beneficiario
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'      
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
@@ -118,6 +127,9 @@ models:
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
+    br_me_cnpj:
+      +materialized: table
+      +schema: br_me_cnpj
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
