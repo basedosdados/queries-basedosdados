@@ -113,9 +113,7 @@ def read_codebooks() -> dict[str, pd.DataFrame]:
             .drop_duplicates(subset=["Variable"])
         )
 
-    result = {k: read_sheets(k) for k in PIRLS_TABLES_DESC.keys()}
-
-    return result
+    return {k: read_sheets(k) for k in PIRLS_TABLES_DESC.keys()}
 
 
 def get_item_informations() -> pd.DataFrame:
@@ -140,6 +138,11 @@ item_informations = get_item_informations()
 # Generate architecture
 def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
     def find_label(table, variable, label_original, label_from_item):
+        if variable == "IDCNTRY":
+            return (
+                "Six-digit country identification code based on the ISO classification"
+            )
+
         if pd.isnull(label_from_item):
             if (
                 table in LABELS_FROM_CONTEXT_QUESTIONNAIRES
@@ -147,7 +150,11 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
             ):
                 return LABELS_FROM_CONTEXT_QUESTIONNAIRES[table][variable]
             else:
-                return label_original
+                return (
+                    label_original[2:-4]
+                    if label_original[1] == "\\"
+                    else label_original
+                )
         else:
             return label_from_item
 
@@ -231,22 +238,31 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
 
         df = df[df["Variable"] != "isDummy"]
 
-        pirls_type_row = pd.DataFrame(
-            [
-                {
-                    "name": "pirls_type",
-                    "bigquery_type": "string",
-                    "description": "Indicates if the record is from PIRLS Bridge or PIRLS Normal",
-                    "temporal_coverage": None,
-                    "covered_by_dictionary": "no",
-                    "directory_column": None,
-                    "measurement_unit": None,
-                    "has_sensitive_data": "no",
-                    "observations": None,
-                    "original_name": None,
-                }
-            ]
-        )
+        country_iso3_code = {
+            "name": "country_iso3_code",
+            "bigquery_type": "string",
+            "description": "Valid Country ISO3 Code",
+            "temporal_coverage": None,
+            "covered_by_dictionary": "no",
+            "directory_column": "br_bd_diretorios_mundo_pais:id_pais_m49",
+            "measurement_unit": None,
+            "has_sensitive_data": "no",
+            "observations": None,
+            "original_name": None,
+        }
+
+        pirls_type_row = {
+            "name": "pirls_type",
+            "bigquery_type": "string",
+            "description": "Indicates if the record is from PIRLS Bridge or PIRLS Normal",
+            "temporal_coverage": None,
+            "covered_by_dictionary": "no",
+            "directory_column": None,
+            "measurement_unit": None,
+            "has_sensitive_data": "no",
+            "observations": None,
+            "original_name": None,
+        }
 
         df = (
             df.drop(columns=["Label_x", "Item ID", "Label_y", "Decimals"])
@@ -254,7 +270,9 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
             .filter(order)
         )
 
-        return pd.concat([df, pirls_type_row])
+        return pd.concat(
+            [pd.DataFrame([country_iso3_code]), df, pd.DataFrame([pirls_type_row])]
+        )
 
     result = dict(acg=[], asa=[], asg=[], ash=[], asr=[], ast=[], atg=[])
 
@@ -302,6 +320,15 @@ def clean_data(df: pd.DataFrame, table: str):
     for col, typ in types_cols.items():
         if typ == "string":
             df[col] = np.vectorize(to_string, otypes=[np.ndarray])(df[col])
+
+    df.insert(0, "country_iso3_code", np.nan)
+
+    def valid_country_code(code: str):
+        return code if len(code) == 3 else np.nan
+
+    df["country_iso3_code"] = np.vectorize(valid_country_code, otypes=[np.ndarray])(
+        df["IDCNTRY"]
+    )
 
     return df.rename(columns=RENAMES[table]).rename(columns=str.lower)
 
@@ -370,7 +397,9 @@ pd.concat(
 
 
 ds = bd.Dataset(dataset_id="world_iea_pirls")
-ds.create(mode="staging")
+
+if not ds.exists():
+    ds.create(mode="staging")
 
 # Upload to BQ
 for table_suffix_id, table_name in PIRLS_TABLES_DESC.items():

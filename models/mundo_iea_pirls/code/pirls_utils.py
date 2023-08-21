@@ -496,7 +496,7 @@ COUNTRY_CODES = {
 
 RENAMES = {
     "asa": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
@@ -527,7 +527,7 @@ RENAMES = {
         "VERSION": "version",
     },
     "asr": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
@@ -540,7 +540,7 @@ RENAMES = {
         "VERSION": "version",
     },
     "asg": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
@@ -559,7 +559,7 @@ RENAMES = {
         "VERSION": "version",
     },
     "ash": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
@@ -573,7 +573,7 @@ RENAMES = {
         "VERSION": "version",
     },
     "acg": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
@@ -590,7 +590,7 @@ RENAMES = {
         "VERSION": "version",
     },
     "atg": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
@@ -605,7 +605,7 @@ RENAMES = {
         "VERSION": "version",
     },
     "ast": {
-        "IDCNTRY": "country_id_iso3",
+        "IDCNTRY": "country_id",
         "IDPOP": "population_id",
         "IDGRADER": "standardized_grade_id",
         "IDGRADE": "grade_id",
