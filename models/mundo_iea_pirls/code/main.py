@@ -209,7 +209,8 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
         )
 
         df["description"] = df[["Variable", "Label_x", "Label_y"]].apply(
-            lambda cols: find_label(table, cols[0], cols[1], cols[2]).title(), axis=1
+            lambda cols: find_label(table, cols[0], cols[1], cols[2]).title().strip(),
+            axis=1,
         )
 
         df["bigquery_type"] = df[
