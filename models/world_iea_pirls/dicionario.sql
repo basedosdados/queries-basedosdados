@@ -1,3 +1,5 @@
+{{ config(alias='dicionario', schema='world_iea_pirls') }}
+
 SELECT 
 SAFE_CAST(id_tabela AS STRING) id_tabela,
 SAFE_CAST(coluna AS STRING) coluna,
