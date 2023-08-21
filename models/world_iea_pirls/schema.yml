@@ -356,8 +356,6 @@ models:
         description: Locale Id Of The Student Test
       - name: booklet_id
         description: Booklet Id
-      - name: administration_device
-        description: Administration Device
       - name: rp41b01
         description: What Is Pemba'S Dream
       - name: rp41b02
@@ -5640,3 +5638,17 @@ models:
         description: Scope Of This File (Ruf)
       - name: pirls_type
         description: Indicates if the record is from PIRLS Bridge or PIRLS Normal
+
+  - name: world_iea_pirls__dicionario
+    description: Dicionário
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor

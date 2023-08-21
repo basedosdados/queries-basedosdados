@@ -185,5 +185,5 @@ SAFE_CAST(atdgrihy AS FLOAT64) atdgrihy,
 SAFE_CAST(version AS STRING) version,
 SAFE_CAST(scope AS STRING) scope,
 SAFE_CAST(pirls_type AS STRING) pirls_type,
-FROM basedosdados-staging.world_iea_pirls_staging.teacher_context AS t
+FROM basedosdados-dev.world_iea_pirls_staging.teacher_context AS t
 
