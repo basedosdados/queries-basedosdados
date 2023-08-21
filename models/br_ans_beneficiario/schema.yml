@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: informacao_consolidada
-    description: O conjunto contém Informações consolidadas de beneficiários por competência. Este será alterado para inclusão de dados acima de 5 anos e melhorias na qualidade dos dados.
+    description: O conjunto contém Informações consolidadas de beneficiários por competência. Este será alterado para inclusão de dados acima de 5 anos e melhorias na qualidade dos dados.  
     columns:
       - name: ano
         description: Competência dos dados (AAAA) 
@@ -50,7 +50,7 @@ models:
       - name: quantidade_beneficiario_cancelado
         description: Quantidade de beneficiários cancelados na competência
       - name: data_carga
-        description: Data de Carga
+        description: Data de Carga dos dados.
   - name: br_ans_beneficiario__dicionario
     description: Dicionario
     columns: 

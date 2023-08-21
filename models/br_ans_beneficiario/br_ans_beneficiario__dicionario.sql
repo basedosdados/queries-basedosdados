@@ -25,7 +25,7 @@ GROUP BY
 
 UNION ALL
 
--- Consulta para a quarta coluna
+-- Consulta para a quarta coluna.
 SELECT
   ROW_NUMBER() OVER(ORDER BY segmentacao_beneficiario) AS chave,
   segmentacao_beneficiario AS valor,
