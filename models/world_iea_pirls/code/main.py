@@ -1,4 +1,3 @@
-# %%
 import pandas as pd
 import numpy as np
 import requests
@@ -19,6 +18,18 @@ PIRLS_ASSETS_URLS = {
     "item_information": "https://pirls2021.org/data/downloads/P21_ItemInformation.xlsx",
     "codebooks": "https://pirls2021.org/data/downloads/P21_Codebooks.zip",
 }
+
+PIRLS_TABLES_DESC = {
+    "acg": "school_context",
+    "asa": "student_achievement",
+    "asg": "student_context",
+    "ash": "home_context",
+    "asr": "within_country_scoring_reliability",
+    "ast": "student_teacher_link",
+    "atg": "teacher_context",
+}
+
+TABLES_TO_PROCESS = list(PIRLS_TABLES_DESC.keys())
 
 if not os.path.exists(INPUT):
     os.mkdir(INPUT)
@@ -46,18 +57,6 @@ for file in os.listdir(f"{INPUT}/Data"):
     parquet_filename = file.replace(".sas7bdat", ".parquet")
     parquet_output_filename = f"{TMP}/data/{parquet_filename}"
     pd.read_sas(f"{INPUT}/Data/{file}").to_parquet(parquet_output_filename)  # type: ignore
-
-PIRLS_TABLES_DESC = {
-    "acg": "school_context",
-    "asa": "student_achievement",
-    "asg": "student_context",
-    "ash": "home_context",
-    "asr": "within_country_scoring_reliability",
-    "ast": "student_teacher_link",
-    "atg": "teacher_context",
-}
-
-TABLES_TO_PROCESS = list(PIRLS_TABLES_DESC.keys())
 
 
 def read_pirls_files(tables: list[str]):
@@ -108,7 +107,8 @@ def read_codebooks() -> dict[str, pd.DataFrame]:
         bridge["pirls_type"] = "Bridge"
         df = pd.concat([normal, bridge])
         return (
-            df[df["Comment"] != restrict_use]
+            # ITDEV is available only in the restricted use version
+            df[(df["Comment"] != restrict_use) & (df["Variable"] != "ITDEV")]
             .drop(columns=["Comment"])
             .drop_duplicates(subset=["Variable"])
         )
@@ -178,7 +178,10 @@ def gen_archs(codebooks: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
         ]:
             return "string"
 
-        if not pd.isnull(scheme) and scheme.strip() == "1: Yes; 2: No":
+        if not pd.isnull(scheme) and scheme.strip() in [
+            "1: Yes; 2: No",
+            "0: False; 1: True",
+        ]:
             return "bool"
 
         if decimals > 0:
@@ -309,6 +312,9 @@ def clean_data(df: pd.DataFrame, table: str):
 
     cols_bool_type = [k for (k, v) in types_cols.items() if v == "bool"]
 
+    if table == "atg":
+        df = df.drop(columns=["isDummy"])
+
     def to_bool(value):
         return True if value == 1 else False
 
@@ -392,10 +398,12 @@ def build_dict(table: str) -> pd.DataFrame:
 
 
 # Save dictionary table
-pd.concat(
+dictionary = pd.concat(
     [build_dict(table_name) for table_name in PIRLS_TABLES_DESC.keys()]
-).to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)
+)
+dictionary.to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)
 
+dictionary.to_excel(f"{CWD}/extra/architecture/dicionario.xlsx", index=False)
 
 ds = bd.Dataset(dataset_id="world_iea_pirls")
 

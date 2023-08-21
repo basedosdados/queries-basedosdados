@@ -509,7 +509,8 @@ RENAMES = {
         "ITLANG_SA": "language_student_achievement_test",
         "LCID_SA": "locale_student_test_id",
         "IDBOOK": "booklet_id",
-        "ITDEV": "administration_device",
+        # Restrict use
+        # "ITDEV": "administration_device",
         "ASDAGE": "student_age",
         "ILRELIAB": "reliability_coding_status",
         "HOUWGT": "house_weight",
