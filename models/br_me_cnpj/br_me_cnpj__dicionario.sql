@@ -1,5 +1,6 @@
 {{
   config(
+    alias = 'dicionario',
     schema='br_me_cnpj',
     materialized='table',
   )
