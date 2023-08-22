@@ -49,6 +49,15 @@ models:
     br_anatel_telefonia_movel:
       +materialized: table # Materialization type (table, view or incremental)
       +schema: br_anatel_telefonia_movel
+    br_anp_precos_combustiveis:
+      +materialized: table
+      +schema: br_anp_precos_combustiveis
+    br_ans_beneficiario:
+      +materialized: incremental
+      +schema: br_ans_beneficiario
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'      
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
@@ -118,6 +127,9 @@ models:
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
+    br_me_cnpj:
+      +materialized: table
+      +schema: br_me_cnpj
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
@@ -127,12 +139,18 @@ models:
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_mp_pep:
+      +materialized: table
+      +schema: br_mp_pep
     br_ms_cnes:
       +materialized: table
       +schema: br_ms_cnes
     br_ms_sim:
       +materialized: table
       +schema: br_ms_sim
+    br_ms_sinan:
+      +materialized: table
+      +schema: br_ms_sinan    
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao
@@ -172,6 +190,9 @@ models:
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
+    world_iea_pirls:
+      +materialized: table
+      +schema: world_iea_pirls
     test_dataset:
       +materialized: table
       +schema: test_dataset
