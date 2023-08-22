@@ -377,23 +377,23 @@ def build_dict(table: str) -> pd.DataFrame:
     )
     cols_covered_by_dict = table_arch[table_arch["covered_by_dictionary"] == "yes"]
 
-    cols_covered_by_dict["id_tabela"] = PIRLS_TABLES_DESC[table]
-    cols_covered_by_dict["cobertura_temporal"] = 2021
+    cols_covered_by_dict["table_id"] = PIRLS_TABLES_DESC[table]
+    cols_covered_by_dict["temporal_coverage"] = 2021
     cols_covered_by_dict["schema_values"] = cols_covered_by_dict["original_name"].apply(
         lambda variable: parse_scheme(table, variable)
     )
     cols_covered_by_dict = cols_covered_by_dict.explode("schema_values")
-    cols_covered_by_dict["chave"] = cols_covered_by_dict["schema_values"].apply(
+    cols_covered_by_dict["key"] = cols_covered_by_dict["schema_values"].apply(
         lambda schema: schema[0]
     )
-    cols_covered_by_dict["valor"] = cols_covered_by_dict["schema_values"].apply(
+    cols_covered_by_dict["value"] = cols_covered_by_dict["schema_values"].apply(
         lambda schema: schema[1]
     )
 
     return cols_covered_by_dict.drop(
         ["covered_by_dictionary", "schema_values", "original_name"], axis=1
-    ).rename(columns={"name": "nome_coluna"})[
-        ["id_tabela", "nome_coluna", "chave", "cobertura_temporal", "valor"]
+    ).rename(columns={"name": "column_name"})[
+        ["table_id", "column_name", "key", "temporal_coverage", "value"]
     ]
 
 
@@ -401,9 +401,9 @@ def build_dict(table: str) -> pd.DataFrame:
 dictionary = pd.concat(
     [build_dict(table_name) for table_name in PIRLS_TABLES_DESC.keys()]
 )
-dictionary.to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)
+dictionary.to_parquet(f"{OUTPUT}/dictionary.parquet", index=False)
 
-dictionary.to_excel(f"{CWD}/extra/architecture/dicionario.xlsx", index=False)
+dictionary.to_excel(f"{CWD}/extra/architecture/dictionary.xlsx", index=False)
 
 ds = bd.Dataset(dataset_id="world_iea_pirls")
 
@@ -425,10 +425,10 @@ for table_suffix_id, table_name in PIRLS_TABLES_DESC.items():
 
 
 # Upload dictionary
-tb = bd.Table(dataset_id="world_iea_pirls", table_id="dicionario")
+tb = bd.Table(dataset_id="world_iea_pirls", table_id="dictionary")
 
 tb.create(
-    path=f"{OUTPUT}/dicionario.parquet",
+    path=f"{OUTPUT}/dictionary.parquet",
     if_table_exists="replace",
     if_storage_data_exists="replace",
     source_format="parquet",
