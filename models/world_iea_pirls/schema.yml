@@ -5639,16 +5639,16 @@ models:
       - name: pirls_type
         description: Indicates if the record is from PIRLS Bridge or PIRLS Normal
 
-  - name: world_iea_pirls__dicionario
-    description: Dicionário
+  - name: world_iea_pirls__dictionary
+    description: Dictionary
     columns:
-      - name: id_tabela
-        description: ID Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
+      - name: table_id
+        description: Table ID
+      - name: column_name
+        description: Column Name
+      - name: key
+        description: Key
+      - name: temporal_coverage
+        description: Temporal Coverage
+      - name: value
+        description: Value
