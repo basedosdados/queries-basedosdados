@@ -6,4 +6,4 @@ SAFE_CAST(nome_coluna AS STRING) nome_coluna,
 SAFE_CAST(chave AS STRING) chave,
 SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
 SAFE_CAST(valor AS STRING) valor
-FROM basedosdados-dev.world_iea_pirls_staging.dicionario AS t
+FROM basedosdados-staging.world_iea_pirls_staging.dicionario AS t

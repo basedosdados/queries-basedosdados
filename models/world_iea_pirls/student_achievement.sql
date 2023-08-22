@@ -863,5 +863,5 @@ SAFE_CAST(asribm05 AS STRING) asribm05,
 SAFE_CAST(version AS STRING) version,
 SAFE_CAST(scope AS STRING) scope,
 SAFE_CAST(pirls_type AS STRING) pirls_type,
-FROM basedosdados-dev.world_iea_pirls_staging.student_achievement AS t
+FROM basedosdados-staging.world_iea_pirls_staging.student_achievement AS t
 
