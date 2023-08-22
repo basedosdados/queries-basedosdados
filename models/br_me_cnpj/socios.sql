@@ -13,7 +13,7 @@
                 FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(data), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(data), MONTH) > 0)',
               'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
                     ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org", "user:gabrielle.carvalho@basedosdados.org")
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
                     FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]) 
 }}
 WITH cnpj_socios AS (SELECT 
