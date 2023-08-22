@@ -5,6 +5,7 @@ logs/
 .env
 .venv
 .DS_store
+pyproject.toml
 __pycache__/
 
 models/*/tmp/
