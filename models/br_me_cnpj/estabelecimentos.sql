@@ -1,13 +1,12 @@
 {{
   config(
     schema='br_me_cnpj',
-    materialized='incremental',
+    materialized='table',
     partition_by={
       "field": "data",
       "data_type": "date",
     },
-    cluster_by='sigla_uf' ,
-    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+    cluster_by='sigla_uf',
     post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
                     GRANT TO ("allUsers")
@@ -17,10 +16,9 @@
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
                     FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]) 
 }}
-WITH cnpj_estabelecimentos AS 
-(SELECT 
+SELECT 
   SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(lpad(cnpj,16,"0") AS STRING) cnpj,
+  SAFE_CAST(lpad(cnpj,14,"0") AS STRING) cnpj,
   SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
   SAFE_CAST(lpad(cnpj_ordem, 6, '0') AS STRING) cnpj_ordem,
   SAFE_CAST(lpad(cnpj_dv, 2, '0') AS STRING) cnpj_dv,
@@ -54,8 +52,4 @@ WITH cnpj_estabelecimentos AS
   SAFE_CAST(data_situacao_especial AS DATE) data_situacao_especial
 FROM basedosdados-staging.br_me_cnpj_staging.estabelecimentos a
 LEFT JOIN basedosdados.br_bd_diretorios_brasil.municipio b
-    ON a.id_municipio_rf = b.id_municipio_rf)
-SELECT * FROM cnpj_estabelecimentos
-{% if is_incremental() %} 
-WHERE data > (SELECT MAX(data) FROM {{ this }} )
-{% endif %}
+    ON a.id_municipio_rf = b.id_municipio_rf
