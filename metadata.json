@@ -5151,5 +5151,102 @@
                 ]
             }
         ]
+    },
+    "br_tse_eleicoes": {
+        "name": "Eleições Brasileiras",
+        "description": "Dados de eleições brasileiras desde 1945 fornecidos pelo TSE. Inclui dados de eleitorado, candidaturas, resultados e prestação de contas",
+        "themes": [
+            {
+                "slug": "politica",
+                "name": "Política"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "congresso",
+                "name": "congresso"
+            },
+            {
+                "slug": "eleicao",
+                "name": "eleicao"
+            },
+            {
+                "slug": "partido",
+                "name": "partido"
+            },
+            {
+                "slug": "presidencia",
+                "name": "presidencia"
+            },
+            {
+                "slug": "voto",
+                "name": "voto"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "certidoes_criminais",
+                "name": "Certidões Criminais",
+                "description": "Dados extraídos das certidões criminais enviadas pelos candidatos ao TSE.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "br_tse_eleicoes",
+                        "gcpTableId": "certidoes_criminais"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": null,
+                "dataCleanedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "extensao_arquivo",
+                        "description": "Extensão do arquivo"
+                    },
+                    {
+                        "name": "id_candidato_bd",
+                        "description": "ID Candidato - Base dos Dados"
+                    },
+                    {
+                        "name": "numero_paginas",
+                        "description": "Número de páginas"
+                    },
+                    {
+                        "name": "sequencial_candidato",
+                        "description": "Sequencial do candidato"
+                    },
+                    {
+                        "name": "sequencial_certidao",
+                        "description": "Sequencial da certidão"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da unidade da federação"
+                    },
+                    {
+                        "name": "texto",
+                        "description": "Texto"
+                    }
+                ]
+            }
+        ]
     }
 }
