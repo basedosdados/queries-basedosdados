@@ -20,7 +20,7 @@ SELECT
   SAFE_CAST(data AS DATE) data,
   SAFE_CAST(lpad(cnpj,14,"0") AS STRING) cnpj,
   SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
-  SAFE_CAST(lpad(cnpj_ordem, 6, '0') AS STRING) cnpj_ordem,
+  SAFE_CAST(lpad(cnpj_ordem, 4, '0') AS STRING) cnpj_ordem,
   SAFE_CAST(lpad(cnpj_dv, 2, '0') AS STRING) cnpj_dv,
   SAFE_CAST(identificador_matriz_filial AS STRING) identificador_matriz_filial,
   SAFE_CAST(nome_fantasia AS STRING) nome_fantasia,
