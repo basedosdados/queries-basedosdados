@@ -38,7 +38,7 @@ cnes_add_muni AS (
   SELECT *
   FROM raw_cnes_estabelecimento_ensino_without_duplicates  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
-  FROM `basedosdados-staging.br_bd_diretorios_brasil.municipio`) as mun
+  FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_estabelecimento_ensino_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
 SELECT
