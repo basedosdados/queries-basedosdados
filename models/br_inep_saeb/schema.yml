@@ -1325,7 +1325,7 @@ models :
         description: Sigla da Unidade da Federação
       - name: turno
         description: Turno
-- name: br_inep_saeb__municipio
+  - name: br_inep_saeb__municipio
     description: "Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro
     de cada nível de aprendizado segundo o Inep a nível municipal"
     columns:
@@ -1367,3 +1367,4 @@ models :
         description: Percentual de alunos que se enquadram no nível nove de aprendizagem 
       - name: nivel_10
         description: Percentual de alunos que se enquadram no nível dez de aprendizagem
+
