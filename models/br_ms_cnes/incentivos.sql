@@ -25,7 +25,7 @@
 WITH raw_cnes_incentivos AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados.br_ms_cnes_staging.incentivos`
+  FROM `basedosdados-dev.br_ms_cnes_staging.incentivos`
   WHERE CNES IS NOT NULL
 ),
 raw_cnes_incentivos_without_duplicates as(
@@ -38,7 +38,7 @@ cnes_add_muni AS (
   SELECT *
   FROM raw_cnes_incentivos_without_duplicates  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
-  FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio`) as mun
+  FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_incentivos_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
 
