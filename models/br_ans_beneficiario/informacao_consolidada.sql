@@ -12,6 +12,7 @@
     cluster_by = ["id_municipio", "mes", "sigla_uf"],    
     labels = {'project_id': 'basedosdados'})
  }}
+
 with ans as (
 SELECT
 CAST(ano AS INT64) ano,
@@ -44,3 +45,4 @@ from ans
 where
   data_carga > (SELECT MAX(data_carga) FROM {{ this }}) 
 {% endif %}
+
