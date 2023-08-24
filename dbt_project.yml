@@ -88,9 +88,9 @@ models:
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
-    br_ce_fortaleza_sefin_dados_imobiliarios:
+    br_ce_fortaleza_sefin_iptu:
       +materialized: table
-      +schema: br_ce_fortaleza_sefin_dados_imobiliarios
+      +schema: br_ce_fortaleza_sefin_iptu
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
