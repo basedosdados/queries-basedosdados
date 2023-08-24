@@ -1,3 +1,10 @@
+{{ 
+  config(
+    schema='br_bcb_taxa_selic',
+    materialized='table',
+    labels = {'tema': 'economia'})
+ }}
+
 SELECT 
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(valor AS FLOAT64) valor,
