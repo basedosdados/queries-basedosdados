@@ -855,7 +855,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria
   - name: estabelecimento_ensino
-    description: Esta tabela apresenta informações sobre os estabelecimentos habilitados para atividades de ensino.
+    description: Esta tabela apresenta informações sobre os estabelecimentos de ensino.
     columns:
       - name: ano
         description: Ano
@@ -886,7 +886,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria
   - name: gestao_metas
-    description: Esta tabela apresenta informações sobre os contratos de gestão de metas dos estabelecimentos de sáude.
+    description: Esta tabela apresenta informações sobre os contratos de gestão e metas dos estabelecimentos de sáude.
     columns:
       - name: ano
         description: Ano
@@ -1052,4 +1052,17 @@ models:
         description: Indicador de serviço especializado único
       - name: quantidade_nacional_estabelecimento_saude_terceiro
         description: Quantidade nacional do estabelecimento de saúde terceiro
+  - name: br_ms_cnes__dicionario
+    description: Dicionario
+    columns: 
+      - name: id_tabela
+        description: ID da Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor    
   
