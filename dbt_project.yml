@@ -133,6 +133,9 @@ models:
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
+    br_me_cnpj:
+      +materialized: table
+      +schema: br_me_cnpj
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
@@ -193,6 +196,9 @@ models:
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
+    world_iea_pirls:
+      +materialized: table
+      +schema: world_iea_pirls
     test_dataset:
       +materialized: table
       +schema: test_dataset
