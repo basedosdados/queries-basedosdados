@@ -3,8 +3,23 @@ from shapely.geometry import Point
 import pandas as pd
 import geopandas as gpd
 import numpy as np
+from selenium import webdriver
+import time
 
-df = pd.read_csv('/content/geopandas/Faces de quadra.csv', sep=',')
+# ---- download to data
+driver = webdriver.Chrome()
+time.sleep(3)
+driver.get("https://ide.sefin.fortaleza.ce.gov.br/downloads")
+time.sleep(2)
+driver.maximize_window()
+time.sleep(2)
+driver.find_element("xpath", '//*[@id="menu"]/li[5]/ul/li/span').click()
+time.sleep(10)
+driver.find_element("xpath", '//*[@id="menu"]/li[5]/ul/li/ul/li[2]/li/label/div[2]/table/tbody/tr/td[1]/a').click()
+time.sleep(15)
+
+# ---- read data
+df = pd.read_csv('/d/download/br_ce_fortaleza_sefin_iptu/Faces de quadra.csv', sep=',')
 df = df.rename(columns={
     "quadra_face_id" : "id_face_quadra",
     "the_geom" : "geometria",
@@ -17,7 +32,6 @@ df = df.rename(columns={
     "iluminacao_publica" : "indicador_iluminacao_publica",
     "arborizacao" : "indicador_arborizacao"
 })
-
 
 lista = ["indicador_agua",
         "indicador_esgoto",
@@ -50,9 +64,7 @@ geometry = [Point(xy) for xy
             in zip(df['longitude'], df['latitude'])]
 
 #For being a point, it became point, if polygon, assign polygon and so on
-geo_df = gpd.GeoDataFrame(df,
-                          crs = crs,
-                          geometry = geometry)
+geo_df = gpd.GeoDataFrame(df, crs = crs, geometry = geometry)
 
 #para projeções geográficas
 gdf = gdf.set_crs(epsg=32724)
