@@ -10,9 +10,18 @@
         "end": 2023,
         "interval": 1}
     },
-    labels =  {'tema': 'esporte'}
+    labels =  {'tema': 'esporte'},
+    post_hook = ['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                ON {{this}}
+                GRANT TO ("allUsers")
+            FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(data), week) > 6)',
+          'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                ON  {{this}}
+                GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]
     )
  }}
+ 
 SELECT 
 SAFE_CAST(REPLACE (ano_campeonato,".0","") AS INT64) ano_campeonato,
 SAFE_CAST(data AS DATE) data,
@@ -49,6 +58,4 @@ SAFE_CAST(REPLACE (chutes_man,".0","") AS INT64) chutes_man,
 SAFE_CAST(REPLACE (chutes_vis,".0","") AS INT64) chutes_vis,
 SAFE_CAST(REPLACE (chutes_fora_man,".0","") AS INT64) chutes_fora_man,
 SAFE_CAST(REPLACE (chutes_fora_vis,".0","") AS INT64) chutes_fora_vis
-FROM basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
-WHERE (EXTRACT(WEEK FROM SAFE_CAST(data AS DATE)) <= (EXTRACT( WEEK FROM CURRENT_DATE())-6) ) 
-OR SAFE_CAST(ano_campeonato AS INT64)<EXTRACT(YEAR from  CURRENT_DATE())
+FROM basedosdados-dev.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
