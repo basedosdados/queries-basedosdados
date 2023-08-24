@@ -87,3 +87,5 @@ gdf = gdf[[
     'geometria',
     'valor'
 ]]
+
+gdf.to_csv("/d/download/br_ce_fortaleza_sefin_iptu/microdados.csv'", index=False, encoding='utf-8', sep=',', na_rep='')
