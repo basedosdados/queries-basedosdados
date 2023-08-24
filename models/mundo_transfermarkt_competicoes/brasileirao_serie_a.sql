@@ -58,4 +58,4 @@ SAFE_CAST(REPLACE (chutes_man,".0","") AS INT64) chutes_man,
 SAFE_CAST(REPLACE (chutes_vis,".0","") AS INT64) chutes_vis,
 SAFE_CAST(REPLACE (chutes_fora_man,".0","") AS INT64) chutes_fora_man,
 SAFE_CAST(REPLACE (chutes_fora_vis,".0","") AS INT64) chutes_fora_vis
-FROM basedosdados-dev.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
+FROM basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
