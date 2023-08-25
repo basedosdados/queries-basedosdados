@@ -6,7 +6,6 @@
             'field': 'ano', 
             'data_type': 'int64', 
             'range': {
-            
                 "start": 1999,
                 "end": 2023,
                 "interval": 1
