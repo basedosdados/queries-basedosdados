@@ -1325,3 +1325,46 @@ models :
         description: Sigla da Unidade da Federação
       - name: turno
         description: Turno
+  - name: br_inep_saeb__municipio
+    description: "Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro
+    de cada nível de aprendizado segundo o Inep a nível municipal"
+    columns:
+      - name: ano
+        description: Ano
+      - name: rede
+        description: Rede Escolar
+      - name: localizacao
+        description: Localização da escola
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: disciplina
+        description: Disciplina
+      - name: serie
+        description: Série/Ano Escolar
+      - name: media
+        description: Média da proficiência
+      - name: nivel_0
+        description: Percentual de alunos que se enquadram no nível zero de aprendizagem
+      - name: nivel_1
+        description: Percentual de alunos que se enquadram no nível um de aprendizagem  
+      - name: nivel_2
+        description: Percentual de alunos que se enquadram no nível dois de aprendizagem
+      - name: nivel_3
+        description: Percentual de alunos que se enquadram no nível três de aprendizagem
+      - name: nivel_4
+        description: Percentual de alunos que se enquadram no nível quatro de aprendizagem
+      - name: nivel_5
+        description: Percentual de alunos que se enquadram no nível cinco de aprendizagem
+      - name: nivel_6
+        description: Percentual de alunos que se enquadram no nível seis de aprendizagem
+      - name: nivel_7
+        description: Percentual de alunos que se enquadram no nível sete de aprendizagem
+      - name: nivel_8
+        description: Percentual de alunos que se enquadram no nível oito de aprendizagem
+      - name: nivel_9
+        description: Percentual de alunos que se enquadram no nível nove de aprendizagem 
+      - name: nivel_10
+        description: Percentual de alunos que se enquadram no nível dez de aprendizagem
+
