@@ -9,21 +9,31 @@
         "start": 2005,
         "end": 2023,
         "interval": 1}
-     }  
+     },
+     post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ]  
     )
  }}
 
 WITH raw_cnes_equipe AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados-dev.br_ms_cnes_staging.equipe`
+  FROM `basedosdados-staging.br_ms_cnes_staging.equipe`
   WHERE CNES IS NOT NULL),
 cnes_add_muni AS (
   -- 2. Adicionar id_municipio de 7 dígitos
   SELECT *
   FROM raw_cnes_equipe  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
-  FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio`) as mun
+  FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_equipe.CODUFMUN = mun.id_municipio_6
 )
 --tipo_desativacao_equipe com valor 0 que não é indicado como um valor possível do campo no dicionário do cnes. 
@@ -56,4 +66,3 @@ SAFE_CAST(ESCOLA AS STRING) AS indicador_atende_populacao_assistida_escolares,
 SAFE_CAST(INDIGENA AS STRING) AS indicador_atende_populacao_assistida_indigena,
 SAFE_CAST(PRONASCI AS STRING) AS indicador_atende_populacao_assistida_pronasci,
 FROM cnes_add_muni
-WHERE concat(ano,mes) NOT IN ('20233','20234', '20235', '20236', '20237', '20238','20239','202310')

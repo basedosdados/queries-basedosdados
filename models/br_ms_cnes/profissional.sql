@@ -9,7 +9,17 @@
         "start": 2005,
         "end": 2023,
         "interval": 1}
-     }  
+     },
+     post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ]  
     )
  }}
 
@@ -55,4 +65,3 @@ SAFE_CAST(HORAOUTR AS INT64) carga_horaria_outros,
 SAFE_CAST(HORAHOSP AS INT64) carga_horaria_hospitalar,
 SAFE_CAST(HORA_AMB AS INT64) carga_horaria_ambulatorial
 FROM profissional_x_estabelecimento 
-WHERE concat(ano,mes) NOT IN ('20233','20234', '20235', '20236', '20237', '20238','20239','202310')

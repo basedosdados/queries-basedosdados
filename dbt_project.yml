@@ -70,6 +70,12 @@ models:
     br_bcb_estban:
       +materialized: table
       +schema: br_bcb_estban 
+    br_bcb_taxa_cambio:
+      +materialized: table
+      +schema: br_bcb_taxa_cambio 
+    br_bcb_taxa_selic:
+      +materialized: table
+      +schema: br_bcb_taxa_selic 
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
@@ -82,6 +88,12 @@ models:
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
+    br_ce_fortaleza_sefin_iptu:
+      +materialized: table
+      +schema: br_ce_fortaleza_sefin_iptu
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
