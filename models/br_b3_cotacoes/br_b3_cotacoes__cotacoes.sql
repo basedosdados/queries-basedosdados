@@ -2,12 +2,12 @@
     alias='cotacoes',
     schema='br_b3_cotacoes',
     materialized='incremental',
-    unique_key='data_referencia',
     partition_by={
       "field": "data_referencia",
       "data_type": "date",
       "granularity": "day"
-    }
+    },
+    cluster_by='acao_atualizacao',
 ) }}
 
 WITH b3 AS (SELECT 
