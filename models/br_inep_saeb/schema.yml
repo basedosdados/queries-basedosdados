@@ -1,6 +1,6 @@
 version: 2
 models :
-  - name: br_inep_saeb__aluno_ef_2ano
+  - name: aluno_ef_2ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 2º ano do Ensino Fundamental
     columns:
@@ -83,7 +83,7 @@ models :
         description: Conceito obtido para grafia na produção de texto
       - name: turno
         description: Turno
-  - name: br_inep_saeb__aluno_ef_5ano
+  - name: aluno_ef_5ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 5º ano do Ensino Fundamental
     columns:
@@ -642,7 +642,7 @@ models :
         description: Você usa computador na escola?
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
-  - name: br_inep_saeb__aluno_ef_9ano
+  - name: aluno_ef_9ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 9º ano do Ensino Fundamental
     columns:
@@ -1263,7 +1263,7 @@ models :
         description: Você usa computador na escola?
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
-  - name: br_inep_saeb__dicionario
+  - name: dicionario
     description: Dicionário para as tabelas do SAEB
     columns:
       - name: chave
@@ -1276,7 +1276,7 @@ models :
         description: ID da tabela
       - name: valor
         description: Valor
-  - name: br_inep_saeb__proficiencia
+  - name: proficiencia
     description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma
       série histórica e compatibilizada à partir de 1995 com informações sobre o aluno,
       a escola e o resultado do exame
@@ -1325,46 +1325,3 @@ models :
         description: Sigla da Unidade da Federação
       - name: turno
         description: Turno
-  - name: br_inep_saeb__municipio
-    description: "Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro
-    de cada nível de aprendizado segundo o Inep a nível municipal"
-    columns:
-      - name: ano
-        description: Ano
-      - name: rede
-        description: Rede Escolar
-      - name: localizacao
-        description: Localização da escola
-      - name: sigla_uf
-        description: Sigla da Unidade da Federação
-      - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-      - name: disciplina
-        description: Disciplina
-      - name: serie
-        description: Série/Ano Escolar
-      - name: media
-        description: Média da proficiência
-      - name: nivel_0
-        description: Percentual de alunos que se enquadram no nível zero de aprendizagem
-      - name: nivel_1
-        description: Percentual de alunos que se enquadram no nível um de aprendizagem  
-      - name: nivel_2
-        description: Percentual de alunos que se enquadram no nível dois de aprendizagem
-      - name: nivel_3
-        description: Percentual de alunos que se enquadram no nível três de aprendizagem
-      - name: nivel_4
-        description: Percentual de alunos que se enquadram no nível quatro de aprendizagem
-      - name: nivel_5
-        description: Percentual de alunos que se enquadram no nível cinco de aprendizagem
-      - name: nivel_6
-        description: Percentual de alunos que se enquadram no nível seis de aprendizagem
-      - name: nivel_7
-        description: Percentual de alunos que se enquadram no nível sete de aprendizagem
-      - name: nivel_8
-        description: Percentual de alunos que se enquadram no nível oito de aprendizagem
-      - name: nivel_9
-        description: Percentual de alunos que se enquadram no nível nove de aprendizagem 
-      - name: nivel_10
-        description: Percentual de alunos que se enquadram no nível dez de aprendizagem
-

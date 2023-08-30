@@ -5151,5 +5151,104 @@
                 ]
             }
         ]
+    },
+    "br_bd_metadados": {
+        "name": "Metadados da Base dos Dados",
+        "description": null,
+        "themes": [
+            {
+                "slug": "ciencia-tec-inov",
+                "name": "Ciência, Tecnologia e Inovação"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "administracao",
+                "name": "administracao"
+            },
+            {
+                "slug": "dados_abertos",
+                "name": "dados_abertos"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "columns",
+                "name": "columns",
+                "description": "Colunas na BD+",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "br_bd_metadados",
+                        "gcpTableId": "columns"
+                    }
+                ],
+                "status": null,
+                "license": {
+                    "name": "desconhecida",
+                    "slug": "desconhecida"
+                },
+                "pipeline": {
+                    "githubUrl": "http://desconhecida.com"
+                },
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "bigquery_type",
+                        "description": "Bigquery Type"
+                    },
+                    {
+                        "name": "covered_by_dictionary",
+                        "description": "Indicates if it is covered by dictionary"
+                    },
+                    {
+                        "name": "description",
+                        "description": "Description"
+                    },
+                    {
+                        "name": "directory_column",
+                        "description": "Directory Column"
+                    },
+                    {
+                        "name": "has_sensitive_data",
+                        "description": "Indicates if it has sensitive data"
+                    },
+                    {
+                        "name": "is_in_staging",
+                        "description": "Is in staging"
+                    },
+                    {
+                        "name": "is_partition",
+                        "description": "Is Partition"
+                    },
+                    {
+                        "name": "measurement_unit",
+                        "description": "Measurement Unit"
+                    },
+                    {
+                        "name": "name",
+                        "description": "Name"
+                    },
+                    {
+                        "name": "observations",
+                        "description": "Observations"
+                    },
+                    {
+                        "name": "table_id",
+                        "description": "Table ID"
+                    },
+                    {
+                        "name": "temporal_coverage",
+                        "description": "Temporal Coverage"
+                    }
+                ]
+            }
+        ]
     }
 }
