@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dados
+    description: Dados sobre Criação de municípios brasileiros bem como os munícipios originários
+    columns:
+      - name: id_municipio_criado
+        description: ID Município criado - IBGE 7 Dígitos
+      - name: nome_municipio_criado
+        description: Nome do município de criado
+      - name: id_municipio_origem
+        description: 'ID Município de origem - IBGE 7 Dígitos '
+      - name: nome_municipio_origem
+        description: Nome do município de origem
+      - name: lei
+        description: Lei da criação do município
+      - name: data_criacao
+        description: Data que foi criado o município
+      - name: data_instalacao
+        description: Data que foi efetivamente instalado

@@ -121,6 +121,9 @@ models:
     br_fgv_igp:
       +materialized: table
       +schema: br_fgv_igp
+    br_ibge_criacao_municipios:
+      +materialized: table 
+      +schema: br_ibge_criacao_municipios
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
