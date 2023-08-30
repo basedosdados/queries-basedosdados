@@ -6,7 +6,6 @@
             'field': 'ano', 
             'data_type': 'int64', 
             'range': {
-            
                 "start": 1999,
                 "end": 2023,
                 "interval": 1
@@ -37,4 +36,4 @@ SELECT
     SAFE_CAST(raca_cor as STRING) as raca_cor,
     SAFE_CAST(cce_e_fce as INT64) as cce_e_fce,
     SAFE_CAST(das_e_correlatas as INT64) as das_e_correlatas
-FROM `basedosdados-dev.br_mp_pep_staging.cargos_funcoes`
+FROM `basedosdados-staging.br_mp_pep_staging.cargos_funcoes`
