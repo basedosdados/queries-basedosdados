@@ -79,7 +79,7 @@ models:
       - name: indicador_atende_populacao_assistida_pronasci
         description: Indicador de atendimento a população Pronasci
   - name: profissional
-    description: Esta tabela fornece o cadastro dos profissionais de saúde nos estabelecimentos.
+    description: A tabela fornece o cadastro dos profissionais de saúde nos estabelecimentos.
     columns:
       - name: ano
         description: Ano
@@ -87,26 +87,24 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
-      - name: id_municipio
-        description: ID Município IBGE - 7 Dígitos
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
       - name: id_municipio_6_residencia
         description: ID Município IBGE - 6 Dígitos do local de residência do profissional 
       - name: nome
         description: Nome do profissional
-      - name: cartao_nacional_saude
-        description: CNS - Cartão Nacional de Saúde
-      - name: cbo_2002
-        description: Código da especialidade 
+      - name: id_vinculo
+        description: Código do vínculo empregatício com o estabelecimento
       - name: id_registro_conselho
         description: Número do registro no conselho de classe
       - name: id_conselho
         description: Código do conselho de classe
+      - name: cartao_nacional_saude
+        description: CNS - Cartão Nacional de Saúde
+      - name: cbo_2002
+        description: Código da especialidade 
       - name: indicador_estabelecimento_terceiro
-        description: Indica se o estabelecimento é de terceiros ou não
-      - name: id_vinculo
-        description: Código do vínculo empregatício com o estabelecimento
+        description: Indica se o estabelecimento é de terceiros ou não 
       - name: indicador_vinculo_contratado_sus
         description: Vínculo empregatício com o estabelecimento - Contratado SUS
       - name: indicador_vinculo_autonomo_sus
@@ -608,16 +606,14 @@ models:
         description: Indica a existência de atendimento prestado regulação/convênio
             plano de saúde privado
   - name: leito
-    description: Esta tabela contém dados sobre os leitos disponíveis nos estabelecimentos de saúde.
+    description: leitos disponíveis nos estabelecimentos de saúde
     columns:
       - name: ano
         description: Ano
       - name: mes
         description: Mês
       - name: sigla_uf
-        description: Sigla da Unidade da Federação
-      - name: id_municipio
-        description: ID Município IBGE - 7 Dígitos  
+        description: Sigla da Unidade da Federação  
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
       - name: tipo_especialidade_leito
@@ -631,7 +627,7 @@ models:
       - name: quantidade_sus
         description: Quantidade de leitos para o SUS
   - name: dados_complementares
-    description: Esta tabela contém dados complementares dos estabelecimentos de saúde
+    description: Dados complementares dos estabelecimentos de saúde
     columns:
       - name: ano
         description: Ano
@@ -855,7 +851,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria
   - name: estabelecimento_ensino
-    description: Esta tabela apresenta informações sobre os estabelecimentos de ensino.
+    description: Esta tabela apresenta informações sobre os estabelecimentos habilitados para atividades de ensino.
     columns:
       - name: ano
         description: Ano
@@ -886,7 +882,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria
   - name: gestao_metas
-    description: Esta tabela apresenta informações sobre os contratos de gestão e metas dos estabelecimentos de sáude.
+    description: Esta tabela apresenta informações sobre os contratos de gestão de metas dos estabelecimentos de sáude.
     columns:
       - name: ano
         description: Ano
@@ -919,7 +915,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria 
   - name: incentivos
-    description: Esta tabela fornece informações sobre os incentivos do estabelecimento. 
+    description: A tabela fornece informações sobre os incentivos do estabelecimento. 
     columns:
       - name: ano
         description: Ano
@@ -952,7 +948,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria  
   - name: habilitacao
-    description: Esta tabela fornece informações sobre as habilitações do estabelecimento. 
+    description: A tabela fornece informações sobre as habilitações do estabelecimento. 
     columns:
       - name: ano
         description: Ano
@@ -987,7 +983,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria      
   - name: regra_contratual
-    description: Esta tabela fornece informações sobre os contratos dos estabelecimentos. 
+    description: A tabela fornece informações sobre os contratos dos estabelecimentos. 
     columns:
       - name: ano
         description: Ano
@@ -1018,7 +1014,7 @@ models:
       - name: mes_portaria
         description: Mês da portaria
   - name: servico_especializado
-    description: Esta tabela fornece informações sobre serviços especializados ofertados pelo estabelecimento. 
+    description: A tabela fornece informações sobre serviços especializados ofertados pelo estabelecimento. 
     columns:
       - name: ano
         description: Ano
@@ -1052,17 +1048,4 @@ models:
         description: Indicador de serviço especializado único
       - name: quantidade_nacional_estabelecimento_saude_terceiro
         description: Quantidade nacional do estabelecimento de saúde terceiro
-  - name: br_ms_cnes__dicionario
-    description: Dicionario
-    columns: 
-      - name: id_tabela
-        description: ID da Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor    
   
