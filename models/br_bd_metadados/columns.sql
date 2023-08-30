@@ -11,4 +11,4 @@ SELECT
   SAFE_CAST(observations AS STRING) observations,
   SAFE_CAST(is_in_staging AS STRING) is_in_staging,
   SAFE_CAST(is_partition AS STRING) is_partition
-FROM `basedosdados-dev.br_bd_metadados_staging.columns` AS t
+FROM `basedosdados-dev.br_bd_metadados_staging.columns`
