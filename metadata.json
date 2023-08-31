@@ -155,57 +155,6 @@
                 ]
             },
             {
-                "slug": "test_table",
-                "name": "Test table",
-                "description": "Test table description",
-                "cloudTables": [
-                    {
-                        "gcpProjectId": "basedosdados-dev",
-                        "gcpDatasetId": "test_dataset",
-                        "gcpTableId": "test_table"
-                    }
-                ],
-                "status": {
-                    "name": "Publicado",
-                    "slug": "published"
-                },
-                "license": null,
-                "pipeline": null,
-                "publishedBy": {
-                    "firstName": "diego",
-                    "lastName": "oliveira",
-                    "email": "d116626@gmail.com"
-                },
-                "dataCleanedBy": {
-                    "firstName": "diego",
-                    "lastName": "oliveira",
-                    "email": "d116626@gmail.com"
-                },
-                "dataCleaningDescription": "Test table cleaning description",
-                "dataCleaningCodeUrl": null,
-                "rawDataUrl": null,
-                "auxiliaryFilesUrl": null,
-                "architectureUrl": null,
-                "columns": [
-                    {
-                        "name": "ano",
-                        "description": "ano description"
-                    },
-                    {
-                        "name": "dado",
-                        "description": "dado description"
-                    },
-                    {
-                        "name": "mes",
-                        "description": "mes description"
-                    },
-                    {
-                        "name": "sigla_uf",
-                        "description": "sigla_uf description"
-                    }
-                ]
-            },
-            {
                 "slug": "test_table_laura",
                 "name": "Tabela de testes da Laura",
                 "description": "descrição da tabela",
@@ -297,6 +246,57 @@
                     {
                         "name": "zoneamento",
                         "description": "Zoneamento do empreendimento"
+                    }
+                ]
+            },
+            {
+                "slug": "test_table",
+                "name": "Test table",
+                "description": "Test table description",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "test_dataset",
+                        "gcpTableId": "test_table"
+                    }
+                ],
+                "status": {
+                    "name": "Publicado",
+                    "slug": "published"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "diego",
+                    "lastName": "oliveira",
+                    "email": "d116626@gmail.com"
+                },
+                "dataCleanedBy": {
+                    "firstName": "diego",
+                    "lastName": "oliveira",
+                    "email": "d116626@gmail.com"
+                },
+                "dataCleaningDescription": "Test table cleaning description",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "ano description"
+                    },
+                    {
+                        "name": "dado",
+                        "description": "dado description"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "mes description"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "sigla_uf description"
                     }
                 ]
             }
