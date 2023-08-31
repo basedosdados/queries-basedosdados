@@ -8,8 +8,6 @@ models:
         description: Data consulta da oferta
       - name: hora_consulta
         description: Hora consulta da oferta
-      - name: secao_site
-        description: Seção do site em que aparece a oferta
       - name: id_item
         description: ID item
       - name: titulo
