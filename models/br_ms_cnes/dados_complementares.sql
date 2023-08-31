@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -10,6 +10,7 @@
         "end": 2023,
         "interval": 1}
      },
+     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
      post_hook = [ 
       'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
@@ -41,6 +42,7 @@ cnes_add_muni AS (
   FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_dados_complementares_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
+
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -137,3 +139,7 @@ SAFE_CAST(OUT_TRAT AS INT64) indicador_tratamento_agua_outros_equipamentos,
 SAFE_CAST(DIALISE AS INT64) indicador_existencia_requisito_dialise,
 SAFE_CAST(QUIMRADI AS INT64) indicador_existencia_requisito_quimio_radio
 FROM cnes_add_muni AS t
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}
+
