@@ -9,18 +9,7 @@
         "start": 2005,
         "end": 2023,
         "interval": 1}
-     },
-     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-     post_hook = [ 
-      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-       ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
-     ]   
+     }  
     )
  }}
 WITH raw_cnes_profissional AS (
@@ -54,6 +43,3 @@ SAFE_CAST(HORAOUTR AS INT64) carga_horaria_outros,
 SAFE_CAST(HORAHOSP AS INT64) carga_horaria_hospitalar,
 SAFE_CAST(HORA_AMB AS INT64) carga_horaria_ambulatorial
 FROM raw_cnes_profissional
-{% if is_incremental() %} 
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
-{% endif %}
