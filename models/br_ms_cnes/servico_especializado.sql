@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -10,6 +10,7 @@
         "end": 2023,
         "interval": 1}
      },
+     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
      post_hook = [ 
       'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
@@ -19,7 +20,7 @@
        ON  {{this}}
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
-     ]  
+     ]   
     )
  }}
 WITH raw_cnes_servico_especializado AS (
@@ -60,3 +61,6 @@ SAFE_CAST(HOSP_SUS AS INT64) indicador_servico_hospitalar_sus,
 SAFE_CAST(CONTSRVU AS INT64) indicador_servico_especializado_unico,
 SAFE_CAST(CNESTERC AS INT64) quantidade_nacional_estabelecimento_saude_terceiro
 FROM cnes_add_muni AS t
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}
