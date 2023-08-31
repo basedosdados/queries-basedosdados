@@ -1,6 +1,127 @@
 version: 2
 
 models:
+  - name: equipamento
+    description: Esta tabela contém o catálogo de equipamentos em atividade ou não nos estabelecimentos de saúde
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mes
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos  
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: id_equipamento
+        description: Identificador do equipamento
+      - name: tipo_equipamento
+        description: Categoria do equipamento
+      - name: quantidade_equipamentos
+        description: Quantidade existente do equipamento
+      - name: quantidade_equipamentos_ativos
+        description: Quantidade de equipamentos em uso
+      - name: indicador_equipamento_disponivel_sus
+        description: Indicador de equipamento disponível para o SUS
+      - name: indicador_equipamento_indisponivel_sus
+        description: Indicador de equipamento não disponível para o SUS
+  - name: equipe
+    description: Esta tabela contém o cadastro de equipes em atividade ou não nos estabelecimentos de saúde. 
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: id_equipe
+        description: ID da equipe dado pelo código do Município, area e sequencial
+            da equipe
+      - name: tipo_equipe
+        description: Tipo de equipe
+      - name: equipe
+        description: Nome da equipe
+      - name: area
+        description: Nome da área
+      - name: id_segmento
+        description: Código do segmento
+      - name: tipo_segmento
+        description: Tipo do segmento  
+      - name: descricao_segmento
+        description: Descrição do segmento
+      - name: ano_ativacao_equipe
+        description: Ano de ativação da equipe
+      - name: mes_ativacao_equipe
+        description: Mês de ativação da equipe
+      - name: motivo_desativacao_equipe
+        description: Código do motivo de desativação da equipe
+      - name: tipo_desativacao_equipe
+        description: Código do tipo de desativação da equipe
+      - name: ano_desativacao_equipe
+        description: Ano de desativação da equipe
+      - name: mes_desativacao_equipe
+        description: Mês de desativação da equipe
+      - name: indicador_atende_populacao_assistida_quilombolas
+        description: Indicador de atendimento a população Quilombolas
+      - name: indicador_atende_populacao_assistida_assentados
+        description: Indicador de atendimento a população Assentados
+      - name: indicador_atende_populacao_assistida_geral
+        description: Indicador de atendimento a população Geral
+      - name: indicador_atende_populacao_assistida_escolares
+        description: Indicador de atendimento a população Escolares
+      - name: indicador_atende_populacao_assistida_indigena
+        description: Indicador de atendimento a população Indígena
+      - name: indicador_atende_populacao_assistida_pronasci
+        description: Indicador de atendimento a população Pronasci
+  - name: profissional
+    description: A tabela fornece o cadastro dos profissionais de saúde nos estabelecimentos.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: id_municipio_6_residencia
+        description: ID Município IBGE - 6 Dígitos do local de residência do profissional 
+      - name: nome
+        description: Nome do profissional
+      - name: id_vinculo
+        description: Código do vínculo empregatício com o estabelecimento
+      - name: id_registro_conselho
+        description: Número do registro no conselho de classe
+      - name: id_conselho
+        description: Código do conselho de classe
+      - name: cartao_nacional_saude
+        description: CNS - Cartão Nacional de Saúde
+      - name: cbo_2002
+        description: Código da especialidade 
+      - name: indicador_estabelecimento_terceiro
+        description: Indica se o estabelecimento é de terceiros ou não 
+      - name: indicador_vinculo_contratado_sus
+        description: Vínculo empregatício com o estabelecimento - Contratado SUS
+      - name: indicador_vinculo_autonomo_sus
+        description: Vínculo empregatício com o estabelecimento - Autônomo SUS
+      - name: indicador_vinculo_outros
+        description: Vínculo empregatício com o estabelecimento - Vínculo não identificado
+            (registros de profissionais não SUS e outras situações anômalas)
+      - name: indicador_atende_sus
+        description: Realiza Atendimento SUS
+      - name: indicador_atende_nao_sus
+        description: Realiza Atendimento Não-SUS
+      - name: carga_horaria_outros
+        description: Carga horária não ambulatorial, nem hospitalar
+      - name: carga_horaria_hospitalar
+        description: Carga horária hospitalar
+      - name: carga_horaria_ambulatorial
+        description: Carga horária Ambulatorial
   - name: estabelecimento
     description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos de saúde brasileiros.
     columns:
@@ -484,3 +605,447 @@ models:
       - name: indicador_atendimento_regulacao_plano_saude_privado
         description: Indica a existência de atendimento prestado regulação/convênio
             plano de saúde privado
+  - name: leito
+    description: leitos disponíveis nos estabelecimentos de saúde
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação  
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: tipo_especialidade_leito
+        description: Especialidade do leito
+      - name: tipo_leito
+        description: Tipo do leito  
+      - name: quantidade_total
+        description: Quantidade de leitos existentes
+      - name: quantidade_contratado
+        description: Quantidade de leitos contratados
+      - name: quantidade_sus
+        description: Quantidade de leitos para o SUS
+  - name: dados_complementares
+    description: Dados complementares dos estabelecimentos de saúde
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mes
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: cns_medico_responsavel_administrador_responsavel_tecnico
+        description: CNS do médico responsável - Administrador ou Responsável Técnico
+      - name: cns_medico_responsavel_oncologista_pediatrico
+        description: CNS do médico responsável - Oncologista Pediátrico 
+      - name: cns_medico_responsavel_cirurgia_oncologica
+        description: CNS do médico responsável - Cirurgia Oncológica 
+      - name: cns_medico_responsavel_oncologista_clinico
+        description: CNS do médico responsável - Oncologista Clínico
+      - name: cns_medico_responsavel_radioterapeuta
+        description: CNS do médico responsável - Radioterapeuta 
+      - name: cns_medico_responsavel_fisico_nuclear
+        description: CNS do médico responsável - Físico Nuclear 
+      - name: cns_medico_responsavel_nefrologista
+        description: CNS do médico responsável - Nefrologista
+      - name: cns_medico_responsavel_hemoterapeuta
+        description: CNS do médico responsável - Hemoterapeuta
+      - name: cns_medico_responsavel_hematologista
+        description: CNS do médico responsável - Hematologista
+      - name: cns_medico_capacitado_responsavel
+        description: CNS do médico capacitado responsável
+      - name: cns_responsavel_tecnico_sorologia
+        description: CNS do responsável Técnico/Sorologia
+      - name: quantidade_salas_hbsag_positivo
+        description: Quantidade de salas HBsAG positivo
+      - name: quantidade_salas_hbsag_negativo
+        description: Quantidade de salas HBsAG negativo
+      - name: quantidade_salas_dpi
+        description: Quantidade de salas DPI
+      - name: quantidade_salas_dpac
+        description: Quantidade de salas DPAC
+      - name: quantidade_salas_reuso_hbsag_positivo
+        description: Quantidade de salas de reuso de HBsAG positivo
+      - name: quantidade_salas_reuso_hbsag_negativo
+        description: Quantidade de salas de reuso de HBsAG negativo
+      - name: quantidade_salas_reuso_hcv_positivo
+        description: Quantidade de Salas de reuso de HCV positivo
+      - name: quantidade_maquinas_proporcao
+        description: Quantidade de máquinas de proporção
+      - name: quantidade_outras_maquinas
+        description: Quantidade de outras máquinas
+      - name: quantidade_salas_simulacao_radioterapia
+        description: Quantidade de salas simulação - Radioterapia
+      - name: quantidade_salas_planejamento_radioterapia
+        description: Quantidade de salas de Planejamento - Radioterapia
+      - name: quantidade_salas_armazenamento_fontes_radioterapia
+        description: Quantidade de salas de armazenamento de fontes - Radioterapia
+      - name: quantidade_salas_confeccao_masc_radioterapia
+        description: Quantidade de salas confecção masc - Radioterapia
+      - name: quantidade_salas_molde_radioterapia
+        description: Quantidade de salas de salas de molde - Radioterapia
+      - name: quantidade_salas_bloco_personalizado_radioterapia
+        description: Quantidade de salas de bloco personalizado - Radioterapia
+      - name: quantidade_salas_armazenagem
+        description: Quantidade de salas de armazenagem
+      - name: quantidade_salas_preparo
+        description: Quantidade de salas de preparo
+      - name: quantidade_salas_equipamentos_quimio_curta_duracao
+        description: Quantidade de Salas/Equipamentos de Quimio Curta duração
+      - name: quantidade_salas_equipamentos_quimio_longa_duracao
+        description: Quantidade de Salas/Equipamentos de Quimio de Longa Duração
+      - name: quantidade_salas_equipamentos_capela_fluxo_laminar
+        description: Quantidade de Salas/Equipamentos de Capela Fluxo Laminar
+      - name: quantidade_simuladores
+        description: Quantidade de Simuladores
+      - name: quantidade_acelerador_linear_ate_6_mev
+        description: Quantidade de Acelerador Linear até 6 MeV
+      - name: quantidade_acelerador_linear_maior_6_mev_sem_eletrons
+        description: Quantidade de Acelerador Linear maior 6 MeV - sem elétrons
+      - name: quantidade_acelerador_linear_maior_6_mev_com_eletrons
+        description: Quantidade de acelerador linear maior 6 MeV - com elétrons
+      - name: quantidade_equipamentos_ortovoltagem_10_50_kv
+        description: Quantidade de Equipamentos de Ortovoltagem 10-50 KV
+      - name: quantidade_equipamentos_ortovoltagem_50_150_kv
+        description: Quantidade de Equipamentos de Ortovoltagem 50-150 KV
+      - name: quantidade_equipamentos_ortovoltagem_150_500_kv
+        description: Quantidade de Equipamentos de Ortovoltagem 150-500 KV
+      - name: quantidade_unidade_cobalto
+        description: Quantidade de Unidade de Cobalto
+      - name: quantidade_equipamentos_braquiterapia_baixa
+        description: Quantidade de Equipamentos de Braquiterapia Baixa
+      - name: quantidade_equipamentos_braquiterapia_media
+        description: Quantidade de Equipamentos de Braquiterapia Média
+      - name: quantidade_equipamentos_braquiterapia_alta
+        description: Quantidade de Equipamentos de Braquiterapia Alta
+      - name: quantidade_monitor_area
+        description: Quantidade de Monitor de Área
+      - name: quantidade_monitor_individual
+        description: Quantidade de Monitor Individual
+      - name: quantidade_sistema_computacao_planejamento
+        description: Quantidade de sistema de Computação para Planejamento
+      - name: quantidade_dosimetro_clinico
+        description: Quantidade de dosímetro clínico
+      - name: quantidade_fontes_seladas
+        description: Quantidade de fontes seladas
+      - name: quantidade_salas_recepcao
+        description: Quantidade de salas de recepção
+      - name: quantidade_salas_triagem_hematologica
+        description: Quantidade de salas de triagem hematológica
+      - name: quantidade_salas_triagem_clinica
+        description: Quantidade de salas de triagem clínica
+      - name: quantidade_salas_coleta
+        description: Quantidade de salas de coleta
+      - name: quantidade_salas_aferese
+        description: Quantidade de salas de aférese
+      - name: quantidade_salas_pre_estoque
+        description: Quantidade de salas de pré-estoque
+      - name: quantidade_salas_processamento
+        description: Quantidade de salas de processamento
+      - name: quantidade_salas_estoque
+        description: Quantidade de salas de estoque
+      - name: quantidade_salas_distribuicao
+        description: Quantidade de salas de distribuição
+      - name: quantidade_salas_sorologia
+        description: Quantidade de salas de sorologia
+      - name: quantidade_salas_imunohematologia
+        description: Quantidade de salas de imunohematologia
+      - name: quantidade_salas_pre_transfusionais
+        description: Quantidade de salas pré-transfusionais
+      - name: quantidade_salas_hemostasia
+        description: Quantidade de salas hemostasia
+      - name: quantidade_salas_controle_qualidade
+        description: Quantidade de salas de controle de qualidade
+      - name: quantidade_salas_biologia_molecular
+        description: Quantidade de salas de biologia molecular
+      - name: quantidade_salas_imunofenotipagem
+        description: Quantidade de salas de imunofenotipágem
+      - name: quantidade_salas_transfusao
+        description: Quantidade de salas de transfusão
+      - name: quantidade_salas_seguimento_doador
+        description: Quantidade de salas seguimento doador
+      - name: quantidade_cadeiras_reclinaveis
+        description: Quantidade de cadeiras reclináveis
+      - name: quantidade_centrifugas_refrigeradas
+        description: Quantidade de centrífugas refrigeradas
+      - name: quantidade_refrigeradores_guarda_sangue
+        description: Quantidade de refrigeradores para guarda de sangue
+      - name: quantidade_congeladores_rapidos
+        description: Quantidade de congeladores rápidos
+      - name: quantidade_extratores_automaticos_plasma
+        description: Quantidade de extratores automáticos de plasma
+      - name: quantidade_freezers_18_graus_celsius
+        description: Quantidade de freezers de 18º C
+      - name: quantidade_freezers_30_graus_celsius
+        description: Quantidade de freezers de 30º C
+      - name: quantidade_agitadores_plaquetas
+        description: Quantidade de agitadores de plaquetas
+      - name: quantidade_seladoras
+        description: Quantidade de seladoras
+      - name: quantidade_irradiadores_hemocomponentes
+        description: Quantidade de irradiadores de hemocomponentes
+      - name: quantidade_aglutinoscopio
+        description: Quantidade de aglutinoscópio
+      - name: quantidade_maquinas_aferese
+        description: Quantidade de máquinas de aférese
+      - name: quantidade_refrigeradores_reagentes
+        description: Quantidade de refrigeradores para guarda de reagentes
+      - name: quantidade_refrigeradores_amostras_sangue
+        description: Quantidade de refrigeradores para guarda de amostras de sangue
+      - name: quantidade_capelas_fluxo_laminar
+        description: Quantidade de capelas fluxo laminar
+      - name: indicador_existencia_requisito_hemoterapia
+        description: Indica a existência de algum requisito de hemoterapia para este CNES
+      - name: indicador_tratamento_agua_filtro_areia
+        description: Indica se faz tratamento de água com filtro de areia
+      - name: indicador_tratamento_agua_filtro_carvao
+        description: Indica se faz tratamento de água com filtro de carvão
+      - name: indicador_tratamento_agua_abrandador
+        description: Indica se faz tratamento de água com abrandador
+      - name: indicador_tratamento_agua_deionizador
+        description: Indica se faz tratamento de água com deionizador
+      - name: indicador_tratamento_agua_maquina_osmose
+        description: Indica se faz tratamento de água com máquina de osmose reversa
+      - name: indicador_tratamento_agua_outros_equipamentos
+        description: Indica se faz tratamento de água com outros tipos de equipamento
+      - name: indicador_existencia_requisito_dialise
+        description: Indica a existência de algum requisito de diálise para este CNES
+      - name: indicador_existencia_requisito_quimio_radio
+        description: Indica a existência de algum requisito de quimio/rádio para este CNES
+  - name: estabelecimento_filantropico
+    description: Esta tabela apresenta um cadastro de estabelecimentos de saúde filantrópicos.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: ano_competencia_inicial
+        description: Ano Competência inicial
+      - name: mes_competencia_inicial
+        description: Mês Competência inicial
+      - name: ano_competencia_final
+        description: Ano Competência final
+      - name: mes_competencia_final
+        description: Mês Competência final
+      - name: tipo_habilitacao
+        description: Código do tipo de habilitação do estabelecimento
+      - name: tipo_regra_contratual
+        description: Código do tipo da regra contratual do estabalecimento 
+      - name: portaria
+        description: Portaria relacionada a regra contratual
+      - name: data_portaria
+        description: Data da portaria
+      - name: ano_portaria
+        description: Ano da portaria
+      - name: mes_portaria
+        description: Mês da portaria
+  - name: estabelecimento_ensino
+    description: Esta tabela apresenta informações sobre os estabelecimentos habilitados para atividades de ensino.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: ano_competencia_inicial
+        description: Ano Competência inicial
+      - name: mes_competencia_inicial
+        description: Mês Competência inicial
+      - name: ano_competencia_final
+        description: Ano Competência final
+      - name: mes_competencia_final
+        description: Mês Competência final
+      - name: tipo_habilitacao
+        description: Código do tipo de habilitação do estabelecimento
+      - name: portaria
+        description: Portaria
+      - name: data_portaria
+        description: Data da portaria
+      - name: ano_portaria
+        description: Ano da portaria
+      - name: mes_portaria
+        description: Mês da portaria
+  - name: gestao_metas
+    description: Esta tabela apresenta informações sobre os contratos de gestão de metas dos estabelecimentos de sáude.
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: ano_competencia_inicial
+        description: Ano Competência inicial
+      - name: mes_competencia_inicial
+        description: Mês Competência inicial
+      - name: ano_competencia_final
+        description: Ano Competência final
+      - name: mes_competencia_final
+        description: Mês Competência final
+      - name: tipo_habilitacao
+        description: Código do tipo de gestão de metas do estabelecimento
+      - name: tipo_gestao_metas
+        description: Código do tipo de gestão de metas do estabalecimento
+      - name: portaria
+        description: Portaria
+      - name: data_portaria
+        description: Data da portaria
+      - name: ano_portaria
+        description: Ano da portaria
+      - name: mes_portaria
+        description: Mês da portaria 
+  - name: incentivos
+    description: A tabela fornece informações sobre os incentivos do estabelecimento. 
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: ano_competencia_inicial
+        description: Ano Competência inicial
+      - name: mes_competencia_inicial
+        description: Mês Competência inicial
+      - name: ano_competencia_final
+        description: Ano Competência final
+      - name: mes_competencia_final
+        description: Mês Competência final
+      - name: tipo_habilitacao
+        description: Código do tipo de incentivo do estabelecimento
+      - name: tipo_incentivo
+        description: Código do tipo de incentivo do estabalecimento
+      - name: portaria
+        description: Portaria
+      - name: data_portaria
+        description: Data da portaria
+      - name: ano_portaria
+        description: Ano da portaria
+      - name: mes_portaria
+        description: Mês da portaria  
+  - name: habilitacao
+    description: A tabela fornece informações sobre as habilitações do estabelecimento. 
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: quantidade_leitos
+        description: Quantidade de leitos
+      - name: ano_competencia_inicial
+        description: Ano Competência inicial
+      - name: mes_competencia_inicial
+        description: Mês Competência inicial
+      - name: ano_competencia_final
+        description: Ano Competência final
+      - name: mes_competencia_final
+        description: Mês Competência final
+      - name: tipo_habilitacao
+        description: Código do tipo de incentivo do estabelecimento
+      - name: nivel_habilitacao
+        description: Código do nível de habilitação do estabalecimento
+      - name: portaria
+        description: Portaria
+      - name: data_portaria
+        description: Data da portaria
+      - name: ano_portaria
+        description: Ano da portaria
+      - name: mes_portaria
+        description: Mês da portaria      
+  - name: regra_contratual
+    description: A tabela fornece informações sobre os contratos dos estabelecimentos. 
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: ano_competencia_inicial
+        description: Ano Competência inicial
+      - name: mes_competencia_inicial
+        description: Mês Competência inicial
+      - name: ano_competencia_final
+        description: Ano Competência final
+      - name: mes_competencia_final
+        description: Mês Competência final
+      - name: habilitacao
+        description: Código da habilitação
+      - name: portaria
+        description: Portaria
+      - name: data_portaria
+        description: Data da portaria
+      - name: ano_portaria
+        description: Ano da portaria
+      - name: mes_portaria
+        description: Mês da portaria
+  - name: servico_especializado
+    description: A tabela fornece informações sobre serviços especializados ofertados pelo estabelecimento. 
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: tipo_servico_especializado
+        description: Código do serviço especializado
+      - name: tipo_classificacao
+        description: Código da classificação do serviço
+      - name: tipo_classificacao_bd
+        description: Código da classificação do serviço criado pela equipe da BD
+      - name: tipo_servico_especializado_unico
+        description: Código do serviço especializado único
+      - name: tipo_caracterizacao
+        description: Caracterização do serviço 
+      - name: indicador_servico_ambulatorial_sus 
+        description: Indica se o Serviço Atende Ambulatorial SUS
+      - name: indicador_servico_nao_sus
+        description: Indica se o Serviço Atende Ambulatorial Não SUS
+      - name: indicador_servico_hospitalar_nao_sus
+        description: Indica se o Serviço é Hospitalar Não SUS
+      - name: indicador_servico_hospitalar_sus
+        description: Indica se o Serviço é Hospitalar SUS
+      - name: indicador_servico_especializado_unico
+        description: Indicador de serviço especializado único
+      - name: quantidade_nacional_estabelecimento_saude_terceiro
+        description: Quantidade nacional do estabelecimento de saúde terceiro
+  

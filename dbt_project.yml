@@ -49,6 +49,15 @@ models:
     br_anatel_telefonia_movel:
       +materialized: table # Materialization type (table, view or incremental)
       +schema: br_anatel_telefonia_movel
+    br_anp_precos_combustiveis:
+      +materialized: table
+      +schema: br_anp_precos_combustiveis
+    br_ans_beneficiario:
+      +materialized: incremental
+      +schema: br_ans_beneficiario
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'      
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes 
@@ -61,6 +70,18 @@ models:
     br_bcb_estban:
       +materialized: table
       +schema: br_bcb_estban 
+    br_bcb_taxa_cambio:
+      +materialized: table
+      +schema: br_bcb_taxa_cambio 
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_bcb_taxa_selic:
+      +materialized: table
+      +schema: br_bcb_taxa_selic 
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
@@ -73,6 +94,12 @@ models:
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
+    br_ce_fortaleza_sefin_iptu:
+      +materialized: table
+      +schema: br_ce_fortaleza_sefin_iptu
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
@@ -118,6 +145,9 @@ models:
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
+    br_me_cnpj:
+      +materialized: table
+      +schema: br_me_cnpj
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
@@ -127,9 +157,18 @@ models:
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_mp_pep:
+      +materialized: table
+      +schema: br_mp_pep
     br_ms_cnes:
       +materialized: table
       +schema: br_ms_cnes
+    br_ms_sim:
+      +materialized: table
+      +schema: br_ms_sim
+    br_ms_sinan:
+      +materialized: table
+      +schema: br_ms_sinan    
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao
@@ -169,15 +208,9 @@ models:
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
-      +post-hook:
-        - 'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING ( (EXTRACT(WEEK from data) <= (EXTRACT( WEEK from CURRENT_DATE())-6) ) OR ano_campeonato<EXTRACT(YEAR from  CURRENT_DATE()))'
-        - 'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                    ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (ano_campeonato=EXTRACT(YEAR from  CURRENT_DATE()))'      
+    world_iea_pirls:
+      +materialized: table
+      +schema: world_iea_pirls
     test_dataset:
       +materialized: table
       +schema: test_dataset

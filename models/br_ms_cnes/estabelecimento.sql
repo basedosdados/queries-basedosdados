@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -9,10 +9,20 @@
         "start": 2005,
         "end": 2023,
         "interval": 1}
-     }  
+     },
+     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+     post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ]   
     )
  }}
-
 WITH raw_cnes_estabelecimento AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
@@ -29,14 +39,14 @@ cnes_add_muni AS (
   SELECT *
   FROM raw_cnes_estabelecimento_without_duplicates  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
-  FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio`) as mun
+  FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_estabelecimento_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
   -- 4. padronização, ordenação de colunas e conversão de tipos
   -- 5. Aplica macro clean_cols em certas colunas 
   SELECT
-  CAST(SUBSTR(COMPETEN, 1, 4) AS INT64) AS ano,
-  CAST(SUBSTR(COMPETEN, 5, 2) AS INT64) AS mes,
+  SAFE_CAST(ano AS INT64) AS ano,
+  SAFE_CAST(mes  AS INT64) AS mes,
   SAFE_CAST(sigla_uf AS STRING) sigla_uf, 
   CAST(SUBSTR(DT_ATUAL, 1, 4) AS INT64) AS ano_atualizacao,
   CAST(SUBSTR(DT_ATUAL, 5, 2) AS INT64) AS mes_atualizacao,
@@ -245,3 +255,6 @@ cnes_add_muni AS (
   SAFE_CAST(AP07CV05 AS INT64) indicador_atendimento_regulacao_plano_saude_publico,
   SAFE_CAST(AP07CV06 AS INT64) indicador_atendimento_regulacao_plano_saude_privado
   FROM cnes_add_muni AS t
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}

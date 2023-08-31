@@ -6,12 +6,22 @@
       "field": "ano_campeonato",
       "data_type": "int64",
       "range": {
-      "start": 2003,
-      "end": 2023,
-      "interval": 1}
+        "start": 2003,
+        "end": 2023,
+        "interval": 1}
     },
-    labels = {'tema': 'esporte'})
+    labels =  {'tema': 'esporte'},
+    post_hook = ['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                ON {{this}}
+                GRANT TO ("allUsers")
+            FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(data), week) > 6)',
+          'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                ON  {{this}}
+                GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]
+    )
  }}
+ 
 SELECT 
 SAFE_CAST(REPLACE (ano_campeonato,".0","") AS INT64) ano_campeonato,
 SAFE_CAST(data AS DATE) data,
