@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='incremental',
+    materialized='table',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -9,18 +9,7 @@
         "start": 2007,
         "end": 2023,
         "interval": 1}
-     },
-     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-     post_hook = [ 
-      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-       ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
-     ]  
+     } 
     )
  }}
 
@@ -46,6 +35,3 @@ SAFE_CAST(QT_EXIST AS STRING) AS quantidade_total,
 SAFE_CAST(QT_CONTR AS STRING) AS quantidade_contratado,
 SAFE_CAST(QT_SUS AS STRING) AS quantidade_sus
 FROM cnes_leito_without_duplicates
-{% if is_incremental() %} 
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
-{% endif %}
