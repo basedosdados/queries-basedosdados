@@ -5151,5 +5151,1153 @@
                 ]
             }
         ]
+    },
+    "br_inep_censo_educacao_superior": {
+        "name": "Censo da Educação Superior",
+        "description": "O Censo da Educação Superior, realizado anualmente pelo Inep, é o instrumento de pesquisa mais completo do Brasil sobre as instituições de educação superior (IES) que ofertam cursos de graduação e sequencias de formação específica, além de seus alunos e docentes. Essa coleta tem como objetivo de oferecer à comunidade acadêmica e à sociedade em geral informações detalhadas sobre a situação e as grandes tendências do setor.\r\n\r\nO Censo da Educação Superior reúne informações sobre as instituições de ensino superior, seus cursos de graduação presencial ou a distância, cursos sequenciais, vagas oferecidas, inscrições, matrículas, ingressantes e concluintes e informações sobre docentes nas diferentes formas de organização acadêmica e categoria administrativa.\r\n\r\nOs dados são coletados a partir do preenchimento dos questionários, por parte das Instituições de Ensino Superior (IES) e por importação de dados do Sistema e-MEC. Durante o período de preenchimento do questionário, os pesquisadores institucionais (PIs) podem fazer, a qualquer momento, alterações ou inclusões necessárias nos dados das respectivas instituições. Após esse período, o Inep verifica a consistência das informações coletadas. O sistema do Censo é então reaberto para conferência e validação dos dados pelas IES.",
+        "themes": [
+            {
+                "slug": "educacao",
+                "name": "Educação"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "educacao_superior",
+                "name": "educacao_superior"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "curso",
+                "name": "curso",
+                "description": "Cursos",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "br_inep_censo_educacao_superior",
+                        "gcpTableId": "curso"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1Q2iq-YAGfqdgEggQ4oV-6kk0u1sXqH2sVmdBSy5K-zM/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "alu_apoio_social",
+                        "description": "Quantidade de alunos que recebem algum tipo de apoio social"
+                    },
+                    {
+                        "name": "alu_ativ_extracurricular",
+                        "description": "Quantidade de alunos que participam de algum tipo de atividade extracurricular"
+                    },
+                    {
+                        "name": "alu_deficiencia",
+                        "description": "Quantidade de alunos com deficiência, transtorno global do desenvolvimento ou altas habilidades/superdotação"
+                    },
+                    {
+                        "name": "alu_mob_academica",
+                        "description": "Quantidade de alunos que se vincularam temporariamente a outra instituição, sendo ela nacional ou internacional"
+                    },
+                    {
+                        "name": "alu_parfor",
+                        "description": "Quantidade de alunos que participam do programa especial para a formação de professores em exercício na rede pública de educação básica (PARFOR)"
+                    },
+                    {
+                        "name": "alu_situacao_desvinculada",
+                        "description": "Quantidade de alunos com situação de vínculo no curso - aluno desvinculado do curso"
+                    },
+                    {
+                        "name": "alu_situacao_falecidos",
+                        "description": "Quantidade de alunos com situação de vínculo no curso - aluno falecido"
+                    },
+                    {
+                        "name": "alu_situacao_trancada",
+                        "description": "Quantidade de alunos com situação de vínculo no curso - matrícula trancada"
+                    },
+                    {
+                        "name": "alu_situacao_transferida",
+                        "description": "Quantidade de alunos com situação de vínculo no curso - aluno transferido para outro curso da mesma IES"
+                    },
+                    {
+                        "name": "ano",
+                        "description": "Ano de referência do Censo da Educação Superior"
+                    },
+                    {
+                        "name": "con",
+                        "description": "Quantidade de concluintes"
+                    },
+                    {
+                        "name": "con_0_17",
+                        "description": "Quantidade de concluintes - Até 17 anos de idade"
+                    },
+                    {
+                        "name": "con_18_24",
+                        "description": "Quantidade de concluintes - De 18 a 24 anos de idade"
+                    },
+                    {
+                        "name": "con_25_29",
+                        "description": "Quantidade de concluintes - De 25 a 29 anos de idade"
+                    },
+                    {
+                        "name": "con_30_34",
+                        "description": "Quantidade de concluintes - De 30 a 34 anos de idade"
+                    },
+                    {
+                        "name": "con_35_39",
+                        "description": "Quantidade de concluintes - De 35 a 39 anos de idade"
+                    },
+                    {
+                        "name": "con_40_49",
+                        "description": "Quantidade de concluintes - De 40 a 49 anos de idade"
+                    },
+                    {
+                        "name": "con_50_59",
+                        "description": "Quantidade de concluintes - De 50 a 59 anos de idade"
+                    },
+                    {
+                        "name": "con_60_mais",
+                        "description": "Quantidade de concluintes - De 60 ou mais anos de idade"
+                    },
+                    {
+                        "name": "con_amarela",
+                        "description": "Quantidade de concluintes - Cor/Raça Amarela"
+                    },
+                    {
+                        "name": "con_apoio_social",
+                        "description": "Quantidade de concluintes que recebem algum tipo de apoio social"
+                    },
+                    {
+                        "name": "con_ativ_extracurricular",
+                        "description": "Quantidade de concluintes que participam de algum tipo de atividade extracurricular"
+                    },
+                    {
+                        "name": "con_branca",
+                        "description": "Quantidade de concluintes - Cor/Raça Branca"
+                    },
+                    {
+                        "name": "con_brasileiro",
+                        "description": "Quantidade de concluintes - nacionalidade brasileira ou brasileira - nascido no exterior ou naturalizado"
+                    },
+                    {
+                        "name": "con_cor_nd",
+                        "description": "Quantidade de concluintes - Cor/Raça não dispõe da informação ou não declarada"
+                    },
+                    {
+                        "name": "con_deficiencia",
+                        "description": "Quantidade de concluintes - alunos com deficiência, transtorno global do desenvolvimento ou altas habilidades/superdotação"
+                    },
+                    {
+                        "name": "con_diurno",
+                        "description": "Quantidade de concluintes - turno diurno"
+                    },
+                    {
+                        "name": "con_em_nao_informada",
+                        "description": "Quantidade de concluintes que não informaram o tipo de escola que terminaram o ensino médio"
+                    },
+                    {
+                        "name": "con_em_rede_privada",
+                        "description": "Quantidade de concluintes que terminaram o ensino médio em escolas privadas"
+                    },
+                    {
+                        "name": "con_em_rede_publica",
+                        "description": "Quantidade de concluintes que terminaram o ensino médio em escolas públicas"
+                    },
+                    {
+                        "name": "con_estrangeiro",
+                        "description": "Quantidade de concluintes - nacionalidade estrangeira"
+                    },
+                    {
+                        "name": "con_feminino",
+                        "description": "Quantidade de concluintes do sexo feminino"
+                    },
+                    {
+                        "name": "con_financ",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil"
+                    },
+                    {
+                        "name": "con_financ_nreemb",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil não reembolsável"
+                    },
+                    {
+                        "name": "con_financ_nreemb_inst",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil não reembolsável - administrado pela instituição"
+                    },
+                    {
+                        "name": "con_financ_nreemb_outros",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil não reembolsável - pelo governo estadual, municipal, entidades externas à IES e outras entidades"
+                    },
+                    {
+                        "name": "con_financ_nreemb_prouni_i",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil não reembolsável - PROUNI Integral"
+                    },
+                    {
+                        "name": "con_financ_nreemb_prouni_p",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil não reembolsável - PROUNI Parcial"
+                    },
+                    {
+                        "name": "con_financ_reemb",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil reembolsável"
+                    },
+                    {
+                        "name": "con_financ_reemb_fies",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil reembolsável - FIES"
+                    },
+                    {
+                        "name": "con_financ_reemb_inst",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil reembolsável - administrado pela instituição"
+                    },
+                    {
+                        "name": "con_financ_reemb_outros",
+                        "description": "Quantidade de concluintes - alunos que utilizam financiamento estudantil reembolsável - pelo governo estadual, municipal, entidades externas à IES e outras entidades"
+                    },
+                    {
+                        "name": "con_indigena",
+                        "description": "Quantidade de concluintes - Cor/Raça Indígena"
+                    },
+                    {
+                        "name": "con_masculino",
+                        "description": "Quantidade de concluintes do sexo masculino"
+                    },
+                    {
+                        "name": "con_mob_academica",
+                        "description": "Quantidade de concluintes que se vincularam temporariamente a outra instituição, sendo ela nacional ou internacional"
+                    },
+                    {
+                        "name": "con_noturno",
+                        "description": "Quantidade de concluintes - turno noturno"
+                    },
+                    {
+                        "name": "con_parda",
+                        "description": "Quantidade de concluintes - Cor/Raça Parda"
+                    },
+                    {
+                        "name": "con_parfor",
+                        "description": "Quantidade de concluintes que participam do programa especial para a formação de professores em exercício na rede pública de educação básica (PARFOR)"
+                    },
+                    {
+                        "name": "con_preta",
+                        "description": "Quantidade de concluintes - Cor/Raça Preta"
+                    },
+                    {
+                        "name": "con_rv",
+                        "description": "Quantidade de concluintes - alunos que participam do programa de reserva de vagas"
+                    },
+                    {
+                        "name": "con_rv_deficiencia",
+                        "description": "Quantidade de concluintes - alunos que participam do programa de reserva de vagas - pessoas com deficiência"
+                    },
+                    {
+                        "name": "con_rv_etnico",
+                        "description": "Quantidade de concluintes - alunos que participam do programa de reserva de vagas - cunho étnico"
+                    },
+                    {
+                        "name": "con_rv_outros",
+                        "description": "Quantidade de concluintes - alunos que participam do programa de reserva de vagas - outros tipos"
+                    },
+                    {
+                        "name": "con_rv_rede_publica",
+                        "description": "Quantidade de concluintes - alunos que participam do programa de reserva de vagas - escola pública"
+                    },
+                    {
+                        "name": "con_rv_social_rf",
+                        "description": "Quantidade de concluintes - alunos que participam do programa de reserva de vagas - cunho social/renda familiar"
+                    },
+                    {
+                        "name": "cursos",
+                        "description": "Número de cursos"
+                    },
+                    {
+                        "name": "gratuito",
+                        "description": "Informa se o curso é gratuito"
+                    },
+                    {
+                        "name": "id_area_detalhada",
+                        "description": "Código de identificação da área detalhada, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "id_area_especifica",
+                        "description": "Código de identificação da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "id_area_geral",
+                        "description": "Código de identificação da área geral, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "id_curso",
+                        "description": "Código do Curso"
+                    },
+                    {
+                        "name": "id_curso_cine",
+                        "description": "Código de identificação do curso, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "id_ies",
+                        "description": "Código da Instituição"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "Código do IBGE do Município do local de oferta do curso"
+                    },
+                    {
+                        "name": "ing",
+                        "description": "Quantidade de ingressantes"
+                    },
+                    {
+                        "name": "ing_0_17",
+                        "description": "Quantidade de ingressantes - Até 17 anos de idade"
+                    },
+                    {
+                        "name": "ing_18_24",
+                        "description": "Quantidade de ingressantes - De 18 a 24 anos de idade"
+                    },
+                    {
+                        "name": "ing_25_29",
+                        "description": "Quantidade de ingressantes - De 25 a 29 anos de idade"
+                    },
+                    {
+                        "name": "ing_30_34",
+                        "description": "Quantidade de ingressantes - De 30 a 34 anos de idade"
+                    },
+                    {
+                        "name": "ing_35_39",
+                        "description": "Quantidade de ingressantes - De 35 a 39 anos de idade"
+                    },
+                    {
+                        "name": "ing_40_49",
+                        "description": "Quantidade de ingressantes - De 40 a 49 anos de idade"
+                    },
+                    {
+                        "name": "ing_50_59",
+                        "description": "Quantidade de ingressantes - De 50 a 59 anos de idade"
+                    },
+                    {
+                        "name": "ing_60_mais",
+                        "description": "Quantidade de ingressantes - De 60 ou mais anos de idade"
+                    },
+                    {
+                        "name": "ing_amarela",
+                        "description": "Quantidade de ingressantes - Cor/Raça Amarela"
+                    },
+                    {
+                        "name": "ing_apoio_social",
+                        "description": "Quantidade de ingressantes que recebem algum tipo de apoio social"
+                    },
+                    {
+                        "name": "ing_ativ_extracurricular",
+                        "description": "Quantidade de ingressantes que participam de algum tipo de atividade extracurricular"
+                    },
+                    {
+                        "name": "ing_avaliacao_seriada",
+                        "description": "Quantidade de ingressantes por meio da avaliação seriada"
+                    },
+                    {
+                        "name": "ing_branca",
+                        "description": "Quantidade de ingressantes - Cor/Raça Branca"
+                    },
+                    {
+                        "name": "ing_brasileiro",
+                        "description": "Quantidade de ingressantes - nacionalidade brasileira ou brasileira - nascido no exterior ou naturalizado"
+                    },
+                    {
+                        "name": "ing_cor_nd",
+                        "description": "Quantidade de ingressantes - Cor/Raça não dispõe da informação ou não declarada"
+                    },
+                    {
+                        "name": "ing_deficiencia",
+                        "description": "Quantidade de ingressantes - alunos com deficiência, transtorno global do desenvolvimento ou altas habilidades/superdotação"
+                    },
+                    {
+                        "name": "ing_diurno",
+                        "description": "Quantidade de ingressantes no turno diurno"
+                    },
+                    {
+                        "name": "ing_egressos",
+                        "description": "Quantidade de alunos que se formaram em um curso de Bacharelado Interdisciplinar ou Licenciatura Interdisciplinar e que ingressaram em um curso de terminalidade"
+                    },
+                    {
+                        "name": "ing_em_nao_informada",
+                        "description": "Quantidade de ingressantes que não informaram o tipo de escola que terminaram o ensino médio"
+                    },
+                    {
+                        "name": "ing_em_rede_privada",
+                        "description": "Quantidade de ingressantes que terminaram o ensino médio em escolas privadas"
+                    },
+                    {
+                        "name": "ing_em_rede_publica",
+                        "description": "Quantidade de ingressantes que terminaram o ensino médio em escolas públicas"
+                    },
+                    {
+                        "name": "ing_enem",
+                        "description": "Quantidade de ingressantes pelo ENEM"
+                    },
+                    {
+                        "name": "ing_estrangeiro",
+                        "description": "Quantidade de ingressantes - nacionalidade estrangeira"
+                    },
+                    {
+                        "name": "ing_feminino",
+                        "description": "Quantidade de ingressantes do sexo feminino"
+                    },
+                    {
+                        "name": "ing_financ",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil"
+                    },
+                    {
+                        "name": "ing_financ_nreemb",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil não reembolsável"
+                    },
+                    {
+                        "name": "ing_financ_nreemb_inst",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil não reembolsável - administrado pela instituição"
+                    },
+                    {
+                        "name": "ing_financ_nreemb_outros",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil não reembolsável - pelo governo estadual, municipal, entidades externas à IES e outras entidades"
+                    },
+                    {
+                        "name": "ing_financ_nreemb_prouni_i",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil não reembolsável - PROUNI Integral"
+                    },
+                    {
+                        "name": "ing_financ_nreemb_prouni_p",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil não reembolsável - PROUNI Parcial"
+                    },
+                    {
+                        "name": "ing_financ_reemb",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil reembolsável"
+                    },
+                    {
+                        "name": "ing_financ_reemb_fies",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil reembolsável - FIES"
+                    },
+                    {
+                        "name": "ing_financ_reemb_inst",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil reembolsável - administrado pela instituição"
+                    },
+                    {
+                        "name": "ing_financ_reemb_outros",
+                        "description": "Quantidade de ingressantes - alunos que utilizam financiamento estudantil reembolsável - pelo governo estadual, municipal, entidades externas à IES e outras entidades"
+                    },
+                    {
+                        "name": "ing_indigena",
+                        "description": "Quantidade de ingressantes - Cor/Raça Indígena"
+                    },
+                    {
+                        "name": "ing_masculino",
+                        "description": "Quantidade de ingressantes do sexo masculino"
+                    },
+                    {
+                        "name": "ing_mob_academica",
+                        "description": "Quantidade de ingressantes que se vincularam temporariamente a outra instituição, sendo ela nacional ou internacional"
+                    },
+                    {
+                        "name": "ing_noturno",
+                        "description": "Quantidade de ingressantes no turno noturno"
+                    },
+                    {
+                        "name": "ing_outras_formas",
+                        "description": "Quantidade de ingressantes por outras formas de ingresso"
+                    },
+                    {
+                        "name": "ing_outro_tipo_selecao",
+                        "description": "Quantidade de ingressantes em outro tipo de seleção"
+                    },
+                    {
+                        "name": "ing_parda",
+                        "description": "Quantidade de ingressantes - Cor/Raça Parda"
+                    },
+                    {
+                        "name": "ing_parfor",
+                        "description": "Quantidade de ingressantes que participam do programa especial para a formação de professores em exercício na rede pública de educação básica (PARFOR)"
+                    },
+                    {
+                        "name": "ing_preta",
+                        "description": "Quantidade de ingressantes - Cor/Raça Preta"
+                    },
+                    {
+                        "name": "ing_processos_seletivos",
+                        "description": "Quantidade de ingressantes nos processos seletivos"
+                    },
+                    {
+                        "name": "ing_programas_especiais",
+                        "description": "Quantidade de ingressantes por meio de vagas para programas especiais"
+                    },
+                    {
+                        "name": "ing_remanescentes",
+                        "description": "Quantidade de ingressantes por meio de vagas remanescentes"
+                    },
+                    {
+                        "name": "ing_rv",
+                        "description": "Quantidade de ingressantes - alunos que participam do programa de reserva de vagas"
+                    },
+                    {
+                        "name": "ing_rv_deficiencia",
+                        "description": "Quantidade de ingressantes - alunos que participam do programa de reserva de vagas - pessoas com deficiência"
+                    },
+                    {
+                        "name": "ing_rv_etnico",
+                        "description": "Quantidade de ingressantes - alunos que participam do programa de reserva de vagas - cunho étnico"
+                    },
+                    {
+                        "name": "ing_rv_outros",
+                        "description": "Quantidade de ingressantes - alunos que participam do programa de reserva de vagas - outros tipos"
+                    },
+                    {
+                        "name": "ing_rv_rede_publica",
+                        "description": "Quantidade de ingressantes - alunos que participam do programa de reserva de vagas - escola pública"
+                    },
+                    {
+                        "name": "ing_rv_social_rf",
+                        "description": "Quantidade de ingressantes - alunos que participam do programa de reserva de vagas - cunho social/renda familiar"
+                    },
+                    {
+                        "name": "ing_selecao_simplificada",
+                        "description": "Quantidade de ingressantes por meio de seleção simplificada"
+                    },
+                    {
+                        "name": "ing_vagas_novas",
+                        "description": "Quantidade de ingressantes em vagas novas"
+                    },
+                    {
+                        "name": "ing_vestibular",
+                        "description": "Quantidade de ingressantes por vestibular"
+                    },
+                    {
+                        "name": "ins",
+                        "description": "Quantidade total de inscritos"
+                    },
+                    {
+                        "name": "ins_diurno",
+                        "description": "Quantidade total de inscritos no turno diurno"
+                    },
+                    {
+                        "name": "ins_ead",
+                        "description": "Quantidade total de inscritos no curso a distância"
+                    },
+                    {
+                        "name": "ins_noturno",
+                        "description": "Quantidade total de inscritos no turno noturno"
+                    },
+                    {
+                        "name": "ins_processos_seletivos",
+                        "description": "Quantidade de inscritos nos processos seletivos"
+                    },
+                    {
+                        "name": "ins_programas_especiais",
+                        "description": "Quantidade de inscritos no processo seletivo de vagas oferecidas para programas especiais"
+                    },
+                    {
+                        "name": "ins_remanescentes",
+                        "description": "Quantidade de inscritos no processo seletivo de vagas remanescentes"
+                    },
+                    {
+                        "name": "ins_vagas_novas",
+                        "description": "Quantidade de inscritos no processo seletivo de vagas novas"
+                    },
+                    {
+                        "name": "mat",
+                        "description": "Quantidade de matrículas"
+                    },
+                    {
+                        "name": "mat_0_17",
+                        "description": "Quantidade de matrículas - Até 17 anos de idade"
+                    },
+                    {
+                        "name": "mat_18_24",
+                        "description": "Quantidade de matrículas - De 18 a 24 anos de idade"
+                    },
+                    {
+                        "name": "mat_25_29",
+                        "description": "Quantidade de matrículas - De 25 a 29 anos de idade"
+                    },
+                    {
+                        "name": "mat_30_34",
+                        "description": "Quantidade de matrículas - De 30 a 34 anos de idade"
+                    },
+                    {
+                        "name": "mat_35_39",
+                        "description": "Quantidade de matrículas - De 35 a 39 anos de idade"
+                    },
+                    {
+                        "name": "mat_40_49",
+                        "description": "Quantidade de matrículas - De 40 a 49 anos de idade"
+                    },
+                    {
+                        "name": "mat_50_59",
+                        "description": "Quantidade de matrículas - De 50 a 59 anos de idade"
+                    },
+                    {
+                        "name": "mat_60_mais",
+                        "description": "Quantidade de matrículas - De 60 ou mais anos de idade"
+                    },
+                    {
+                        "name": "mat_amarela",
+                        "description": "Quantidade de matrículas - Cor/Raça Amarela"
+                    },
+                    {
+                        "name": "mat_apoio_social",
+                        "description": "Quantidade de matrículas de alunos que recebem algum tipo de apoio social"
+                    },
+                    {
+                        "name": "mat_ativ_extracurricular",
+                        "description": "Quantidade de matrículas de alunos que participam de algum tipo de atividade extracurricular"
+                    },
+                    {
+                        "name": "mat_branca",
+                        "description": "Quantidade de matrículas - Cor/Raça Branca"
+                    },
+                    {
+                        "name": "mat_brasileiro",
+                        "description": "Quantidade de matrículas - nacionalidade brasileira ou brasileira - nascido no exterior ou naturalizado"
+                    },
+                    {
+                        "name": "mat_cor_nd",
+                        "description": "Quantidade de matrículas - Cor/Raça não dispõe da informação ou não declarada"
+                    },
+                    {
+                        "name": "mat_deficiencia",
+                        "description": "Quantidade de matrículas - alunos com deficiência, transtorno global do desenvolvimento ou altas habilidades/superdotação"
+                    },
+                    {
+                        "name": "mat_diurno",
+                        "description": "Quantidade de matrículas - turno diurno"
+                    },
+                    {
+                        "name": "mat_em_nao_informada",
+                        "description": "Quantidade de matrículas de alunos que não informaram o tipo de escola que terminaram o ensino médio"
+                    },
+                    {
+                        "name": "mat_em_rede_privada",
+                        "description": "Quantidade de matrículas de alunos que terminaram o ensino médio em escolas privadas"
+                    },
+                    {
+                        "name": "mat_em_rede_publica",
+                        "description": "Quantidade de matrículas de alunos que terminaram o ensino médio em escolas públicas"
+                    },
+                    {
+                        "name": "mat_estrangeiro",
+                        "description": "Quantidade de matrículas - nacionalidade estrangeira"
+                    },
+                    {
+                        "name": "mat_feminino",
+                        "description": "Quantidade de matrículas do sexo feminino"
+                    },
+                    {
+                        "name": "mat_financ",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil"
+                    },
+                    {
+                        "name": "mat_financ_nreemb",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil não reembolsável"
+                    },
+                    {
+                        "name": "mat_financ_nreemb_inst",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil não reembolsável - administrado pela instituição"
+                    },
+                    {
+                        "name": "mat_financ_nreemb_outros",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil não reembolsável - pelo governo estadual, municipal, entidades externas à IES e outras entidades"
+                    },
+                    {
+                        "name": "mat_financ_nreemb_prouni_i",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil não reembolsável - PROUNI Integral"
+                    },
+                    {
+                        "name": "mat_financ_nreemb_prouni_p",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil não reembolsável - PROUNI Parcial"
+                    },
+                    {
+                        "name": "mat_financ_reemb",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil reembolsável"
+                    },
+                    {
+                        "name": "mat_financ_reemb_fies",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil reembolsável - FIES"
+                    },
+                    {
+                        "name": "mat_financ_reemb_inst",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil reembolsável - administrado pela instituição"
+                    },
+                    {
+                        "name": "mat_financ_reemb_outros",
+                        "description": "Quantidade de matrículas - alunos que utilizam financiamento estudantil reembolsável - pelo governo estadual, municipal, entidades externas à IES e outras entidades"
+                    },
+                    {
+                        "name": "mat_indigena",
+                        "description": "Quantidade de matrículas - Cor/Raça Indígena"
+                    },
+                    {
+                        "name": "mat_masculino",
+                        "description": "Quantidade de matrículas do sexo masculino"
+                    },
+                    {
+                        "name": "mat_mob_academica",
+                        "description": "Quantidade de alunos regularmente matriculados que se vincularam temporariamente a outra instituição, sendo ela nacional ou internacional"
+                    },
+                    {
+                        "name": "mat_noturno",
+                        "description": "Quantidade de matrículas - turno noturno"
+                    },
+                    {
+                        "name": "mat_parda",
+                        "description": "Quantidade de matrículas - Cor/Raça Parda"
+                    },
+                    {
+                        "name": "mat_parfor",
+                        "description": "Quantidade de matrículas de alunos que participam do programa especial para a formação de professores em exercício na rede pública de educação básica (PARFOR)"
+                    },
+                    {
+                        "name": "mat_preta",
+                        "description": "Quantidade de matrículas - Cor/Raça Preta"
+                    },
+                    {
+                        "name": "mat_rv",
+                        "description": "Quantidade de matrículas - alunos que participam do programa de reserva de vagas"
+                    },
+                    {
+                        "name": "mat_rv_deficiencia",
+                        "description": "Quantidade de matrículas - alunos que participam do programa de reserva de vagas - pessoas com deficiência"
+                    },
+                    {
+                        "name": "mat_rv_etnico",
+                        "description": "Quantidade de matrículas - alunos que participam do programa de reserva de vagas - cunho étnico"
+                    },
+                    {
+                        "name": "mat_rv_outros",
+                        "description": "Quantidade de matrículas - alunos que participam do programa de reserva de vagas - outros tipos"
+                    },
+                    {
+                        "name": "mat_rv_rede_publica",
+                        "description": "Quantidade de matrículas - alunos que participam do programa de reserva de vagas - escola pública"
+                    },
+                    {
+                        "name": "mat_rv_social_rf",
+                        "description": "Quantidade de matrículas - alunos que participam do programa de reserva de vagas - cunho social/renda familiar"
+                    },
+                    {
+                        "name": "nome_area_detalhada",
+                        "description": "Nome da área detalhada, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "nome_area_especifica",
+                        "description": "Nome da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "nome_area_geral",
+                        "description": "Nome da área geral, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "nome_curso",
+                        "description": "Nome do Curso"
+                    },
+                    {
+                        "name": "nome_curso_cine",
+                        "description": "Nome do curso, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco"
+                    },
+                    {
+                        "name": "rede",
+                        "description": "Rede de Ensino"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação do local de oferta do curso"
+                    },
+                    {
+                        "name": "tipo_dimensao",
+                        "description": "Tipo de dimensão geográfica dos cursos presenciais e a distância ofertados no Brasil e também por instituições brasileiras no exterior"
+                    },
+                    {
+                        "name": "tipo_grau_academico",
+                        "description": "Tipo do grau acadêmico conferido ao aluno pela conclusão dos requisitos exigidos pelo curso"
+                    },
+                    {
+                        "name": "tipo_modalidade_ensino",
+                        "description": "Tipo de modalidade de ensino do curso"
+                    },
+                    {
+                        "name": "tipo_nivel_academico",
+                        "description": "Tipo de nível acadêmico do curso"
+                    },
+                    {
+                        "name": "tipo_organizacao_academica",
+                        "description": "Tipo de Organização Acadêmica da IES"
+                    },
+                    {
+                        "name": "tipo_organizacao_administrativa",
+                        "description": "Tipo de Categoria Administrativa da IES"
+                    },
+                    {
+                        "name": "vag",
+                        "description": "Quantidade total de vagas oferecidas"
+                    },
+                    {
+                        "name": "vag_diurno",
+                        "description": "Quantidade total de vagas oferecidas no turno diurno"
+                    },
+                    {
+                        "name": "vag_ead",
+                        "description": "Quantidade total de vagas oferecidas no curso a distância"
+                    },
+                    {
+                        "name": "vag_noturno",
+                        "description": "Quantidade total de vagas oferecidas no turno noturno"
+                    },
+                    {
+                        "name": "vag_novas",
+                        "description": "Quantidade de vagas novas oferecidas"
+                    },
+                    {
+                        "name": "vag_processos_seletivos",
+                        "description": "Quantidade de vagas nos processos seletivos"
+                    },
+                    {
+                        "name": "vag_programas_especiais",
+                        "description": "Quantidade de vagas oferecidas para programas especiais"
+                    },
+                    {
+                        "name": "vag_remanescentes",
+                        "description": "Quantidade de vagas remanescentes"
+                    }
+                ]
+            },
+            {
+                "slug": "ies",
+                "name": "ies",
+                "description": "IES",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_inep_censo_educacao_superior",
+                        "gcpTableId": "ies"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleaningDescription": "Renomeação e reordenação de colunas.",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1C_hWq-ZfrI9Mq_xDU7j177rIJruNnLzdcAXooNctuXs/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano de referência do Censo da Educação Superior"
+                    },
+                    {
+                        "name": "bairro",
+                        "description": "Bairro"
+                    },
+                    {
+                        "name": "bib_acesso_outras_bases",
+                        "description": "Informa se as bibliotecas da IES têm acesso a outras bases de dados licenciadas ou compradas"
+                    },
+                    {
+                        "name": "bib_acesso_portal_capes",
+                        "description": "Informa se as bibliotecas da IES têm acesso ao portal Capes de periódicos"
+                    },
+                    {
+                        "name": "bib_assina_outras_bases",
+                        "description": "Informa se as bibliotecas da IES assinam outras bases de dados licenciadas ou compradas"
+                    },
+                    {
+                        "name": "bib_busca_integrada",
+                        "description": "Informa se a IES oferece ferramenta eletrônica que possibilita pesquisar simultaneamente diversas fontes de informação e obter resultado em uma única interface"
+                    },
+                    {
+                        "name": "bib_catalogo_online",
+                        "description": "Informa se a IES possui ferramenta de recuperação de informação que permite ao usuário consultar, de forma local ou remota, a existência e disponibilidade de itens do acervo das bibliotecas"
+                    },
+                    {
+                        "name": "bib_internet",
+                        "description": "Informa se as bibliotecas da IES oferecem serviços pela internet"
+                    },
+                    {
+                        "name": "bib_livro_eletronico",
+                        "description": "Quantidade de títulos de livros eletrônicos disponibilizados pelas bibliotecas convertidos ao formato digital ou originalmente produzidos nesse formato para serem lidos em computador ou outros dispositivos"
+                    },
+                    {
+                        "name": "bib_periodico_eletronico",
+                        "description": "Quantidade de títulos de periódicos eletrônicos adquiridos pelas bibliotecas por meio de compra, doação ou permuta"
+                    },
+                    {
+                        "name": "bib_rede_social",
+                        "description": "Informa se as bibliotecas participam de Redes Sociais"
+                    },
+                    {
+                        "name": "bib_repositorio_institucional",
+                        "description": "Informa se a IES possui base de dados online que reúne de maneira organizada a produção científica da instituição"
+                    },
+                    {
+                        "name": "cep",
+                        "description": "CEP"
+                    },
+                    {
+                        "name": "complemento",
+                        "description": "Complemento do endereço"
+                    },
+                    {
+                        "name": "doc",
+                        "description": "Quantidade total de docentes (em exercício e afastados)"
+                    },
+                    {
+                        "name": "doc_exercicio",
+                        "description": "Quantidade total de docentes em exercício"
+                    },
+                    {
+                        "name": "doc_exercicio_0_29",
+                        "description": "Quantidade de docentes em exercício - até 29 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_30_34",
+                        "description": "Quantidade de docentes em exercício - de 30 a 34 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_35_39",
+                        "description": "Quantidade de docentes em exercício - de 35 a 39 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_40_44",
+                        "description": "Quantidade de docentes em exercício - de 40 a 44 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_45_49",
+                        "description": "Quantidade de docentes em exercício - de 45 a 49 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_50_54",
+                        "description": "Quantidade de docentes em exercício - de 50 a 54 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_55_59",
+                        "description": "Quantidade de docentes em exercício - de 55 a 59 anos"
+                    },
+                    {
+                        "name": "doc_exercicio_60_mais",
+                        "description": "Quantidade de docentes em exercício - de 60 anos ou mais"
+                    },
+                    {
+                        "name": "doc_exercicio_amarela",
+                        "description": "Quantidade de docentes em exercício - Cor/Raça amarela"
+                    },
+                    {
+                        "name": "doc_exercicio_branca",
+                        "description": "Quantidade de docentes em exercício - Cor/Raça branca"
+                    },
+                    {
+                        "name": "doc_exercicio_brasileiro",
+                        "description": "Quantidade de docentes em exercício - nacionalidade brasileira ou brasileira - nascido no exterior ou naturalizado"
+                    },
+                    {
+                        "name": "doc_exercicio_cor_nd",
+                        "description": "Quantidade de docentes em exercício - Cor/Raça não dispõe da informação ou não declarada"
+                    },
+                    {
+                        "name": "doc_exercicio_deficiencia",
+                        "description": "Quantidade de docentes em exercício - com deficiência"
+                    },
+                    {
+                        "name": "doc_exercicio_doutorado",
+                        "description": "Quantidade de docentes em exercício com doutorado"
+                    },
+                    {
+                        "name": "doc_exercicio_especializacao",
+                        "description": "Quantidade de docentes em exercício com especialização"
+                    },
+                    {
+                        "name": "doc_exercicio_estrangeiro",
+                        "description": "Quantidade de docentes em exercício - nacionalidade estrangeira"
+                    },
+                    {
+                        "name": "doc_exercicio_feminino",
+                        "description": "Quantidade de docentes em exercício do sexo feminino"
+                    },
+                    {
+                        "name": "doc_exercicio_graduacao",
+                        "description": "Quantidade de docentes em exercício com curso de graduação"
+                    },
+                    {
+                        "name": "doc_exercicio_horista",
+                        "description": "Quantidade de docentes em exercício horista"
+                    },
+                    {
+                        "name": "doc_exercicio_indigena",
+                        "description": "Quantidade de docentes em exercício - Cor/Raça indígena"
+                    },
+                    {
+                        "name": "doc_exercicio_integral",
+                        "description": "Quantidade de docentes em exercício em tempo integral"
+                    },
+                    {
+                        "name": "doc_exercicio_integral_de",
+                        "description": "Quantidade de docentes em exercício em tempo integral com dedicação exclusiva"
+                    },
+                    {
+                        "name": "doc_exercicio_integral_sem_de",
+                        "description": "Quantidade de docentes em exercício em tempo integral sem dedicação exclusiva"
+                    },
+                    {
+                        "name": "doc_exercicio_masculino",
+                        "description": "Quantidade de docentes em exercício do sexo masculino"
+                    },
+                    {
+                        "name": "doc_exercicio_mestrado",
+                        "description": "Quantidade de docentes em exercício com mestrado"
+                    },
+                    {
+                        "name": "doc_exercicio_parcial",
+                        "description": "Quantidade de docentes em exercício em tempo parcial"
+                    },
+                    {
+                        "name": "doc_exercicio_parda",
+                        "description": "Quantidade de docentes em exercício - Cor/Raça parda"
+                    },
+                    {
+                        "name": "doc_exercicio_preta",
+                        "description": "Quantidade de docentes em exercício - Cor/Raça preta"
+                    },
+                    {
+                        "name": "doc_exercicio_sem_graduacao",
+                        "description": "Quantidade de docentes em exercício sem curso de graduação"
+                    },
+                    {
+                        "name": "endereco",
+                        "description": "Endereço da sede administrativa/reitoria da IES"
+                    },
+                    {
+                        "name": "id_ies",
+                        "description": "Código único de identificação da IES"
+                    },
+                    {
+                        "name": "id_mantenedora",
+                        "description": "Código único de identificação da mantenedora da IES"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "Código do Município da sede administrativa ou reitoria da IES"
+                    },
+                    {
+                        "name": "nome",
+                        "description": "Nome da IES"
+                    },
+                    {
+                        "name": "nome_mantenedora",
+                        "description": "Nome da mantenedora da IES"
+                    },
+                    {
+                        "name": "numero",
+                        "description": "Número do endereço"
+                    },
+                    {
+                        "name": "sigla",
+                        "description": "Sigla da IES"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação da sede administrativa ou reitoria da IES"
+                    },
+                    {
+                        "name": "tec",
+                        "description": "Quantidade de funcionários técnico-administrativos"
+                    },
+                    {
+                        "name": "tec_doutorado_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com doutorado"
+                    },
+                    {
+                        "name": "tec_doutorado_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com doutorado"
+                    },
+                    {
+                        "name": "tec_ef_comp_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com ensino fundamental completo"
+                    },
+                    {
+                        "name": "tec_ef_comp_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com ensino fundamental completo"
+                    },
+                    {
+                        "name": "tec_ef_incomp_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com ensino fundamental incompleto"
+                    },
+                    {
+                        "name": "tec_ef_incomp_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com ensino fundamental incompleto"
+                    },
+                    {
+                        "name": "tec_em_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com ensino médio"
+                    },
+                    {
+                        "name": "tec_em_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com ensino médio"
+                    },
+                    {
+                        "name": "tec_es_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com nível superior"
+                    },
+                    {
+                        "name": "tec_es_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com nível superior"
+                    },
+                    {
+                        "name": "tec_especializacao_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com especialização"
+                    },
+                    {
+                        "name": "tec_especializacao_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com especialização"
+                    },
+                    {
+                        "name": "tec_mestrado_feminino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo feminino com mestrado"
+                    },
+                    {
+                        "name": "tec_mestrado_masculino",
+                        "description": "Quantidade de funcionários técnico-administrativos do sexo masculino com mestrado"
+                    },
+                    {
+                        "name": "tipo_categoria_administrativa",
+                        "description": "Tipo de Categoria Administrativa da IES"
+                    },
+                    {
+                        "name": "tipo_organizacao_academica",
+                        "description": "Tipo de Organização Acadêmica da IES"
+                    }
+                ]
+            }
+        ]
     }
 }
