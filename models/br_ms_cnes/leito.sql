@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='incremental',
+    materialized='table',
      partition_by={
       "field": "ano",
       "data_type": "int64",
