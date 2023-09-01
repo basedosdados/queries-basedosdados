@@ -1,0 +1,56 @@
+version: 2
+models :
+  - name: empenho
+    description: Dados a nível de empenho.
+    columns:
+      - name: acao
+        description: Descrição da ação orçamentária.
+      - name: ano
+        description: Número do ano de referência da informação.
+      - name: data
+        description: Data do empenho.
+      - name: descricao
+        description: Descrição do empenho
+      - name: elemento_despesa
+        description: Descrição da natureza de despesa.
+      - name: funcao
+        description: Descrição da função orçamentária.
+      - name: id_empenho
+        description: Sequencial identificador do empenho
+      - name: id_empenho_bd
+        description: Código único de identificação
+      - name: id_licitacao
+        description: Sequencial identificador da licitação
+      - name: id_licitacao_bd
+        description: Sequencial identificador único da licitação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_unidade_gestora
+        description: Código da unidade orçamentária.
+      - name: mes
+        description: Número do mês de referência da informação.
+      - name: modalidade
+        description: Descrição da modalidade do empenho
+      - name: modalidade_licitacao
+        description: Indica modalidade da licitação realizada
+      - name: numero_empenho
+        description: Número do empenho
+      - name: orgao
+        description: Sequencial identificador do órgão.
+      - name: programa
+        description: Descrição do programa orçamentário.
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: subfuncao
+        description: Descrição da subfunção orçamentária.
+      - name: valor_ajuste
+        description: Valor de correção entre o valor final e valor inicial na ausência
+          da identificação da despesa
+      - name: valor_anulacao
+        description: Valor da anulação, caso haja deduções
+      - name: valor_final
+        description: Resultado dos valores em relação ao empenho no exercício
+      - name: valor_inicial
+        description: Valor bruto do empenho
+      - name: valor_reforco
+        description: Valor do reforço, caso haja incrementos
