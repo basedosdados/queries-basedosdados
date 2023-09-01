@@ -5151,5 +5151,170 @@
                 ]
             }
         ]
+    },
+    "world_wb_mides": {
+        "name": "Microdados de Despesas de Entes Subnacionais (MiDES)",
+        "description": "Microdados sobre compras públicas e execução orçamentária de entes subnacionais brasileiros. Desenvolvido e explicado por Dahis, Ricca, Scot, Sales e Nascimento (2023).",
+        "themes": [
+            {
+                "slug": "economia",
+                "name": "Economia"
+            },
+            {
+                "slug": "gov-fin-pub",
+                "name": "Governo e Finanças Públicas"
+            },
+            {
+                "slug": "politica",
+                "name": "Política"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "compra",
+                "name": "compra"
+            },
+            {
+                "slug": "despesa",
+                "name": "despesa"
+            },
+            {
+                "slug": "gasto",
+                "name": "gasto"
+            },
+            {
+                "slug": "orcamento",
+                "name": "orcamento"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "empenho",
+                "name": "empenho",
+                "description": "Dados a nível de empenho.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "world_wb_mides",
+                        "gcpTableId": "empenho"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": null,
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1YYGqWHAH_ErI4424tfGQTng6z0PABe1DAjv-EoIfwjk/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "acao",
+                        "description": "Descrição da ação orçamentária."
+                    },
+                    {
+                        "name": "ano",
+                        "description": "Número do ano de referência da informação."
+                    },
+                    {
+                        "name": "data",
+                        "description": "Data do empenho."
+                    },
+                    {
+                        "name": "descricao",
+                        "description": "Descrição do empenho"
+                    },
+                    {
+                        "name": "elemento_despesa",
+                        "description": "Descrição da natureza de despesa."
+                    },
+                    {
+                        "name": "funcao",
+                        "description": "Descrição da função orçamentária."
+                    },
+                    {
+                        "name": "id_empenho",
+                        "description": "Sequencial identificador do empenho"
+                    },
+                    {
+                        "name": "id_empenho_bd",
+                        "description": "Código único de identificação"
+                    },
+                    {
+                        "name": "id_licitacao",
+                        "description": "Sequencial identificador da licitação"
+                    },
+                    {
+                        "name": "id_licitacao_bd",
+                        "description": "Sequencial identificador único da licitação"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_unidade_gestora",
+                        "description": "Código da unidade orçamentária."
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Número do mês de referência da informação."
+                    },
+                    {
+                        "name": "modalidade",
+                        "description": "Descrição da modalidade do empenho"
+                    },
+                    {
+                        "name": "modalidade_licitacao",
+                        "description": "Indica modalidade da licitação realizada"
+                    },
+                    {
+                        "name": "numero_empenho",
+                        "description": "Número do empenho"
+                    },
+                    {
+                        "name": "orgao",
+                        "description": "Sequencial identificador do órgão."
+                    },
+                    {
+                        "name": "programa",
+                        "description": "Descrição do programa orçamentário."
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "subfuncao",
+                        "description": "Descrição da subfunção orçamentária."
+                    },
+                    {
+                        "name": "valor_ajuste",
+                        "description": "Valor de correção entre o valor final e valor inicial na ausência da identificação da despesa"
+                    },
+                    {
+                        "name": "valor_anulacao",
+                        "description": "Valor da anulação, caso haja deduções"
+                    },
+                    {
+                        "name": "valor_final",
+                        "description": "Resultado dos valores em relação ao empenho no exercício"
+                    },
+                    {
+                        "name": "valor_inicial",
+                        "description": "Valor bruto do empenho"
+                    },
+                    {
+                        "name": "valor_reforco",
+                        "description": "Valor do reforço, caso haja incrementos"
+                    }
+                ]
+            }
+        ]
     }
 }
