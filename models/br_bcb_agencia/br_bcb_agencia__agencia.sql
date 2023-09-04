@@ -1,7 +1,28 @@
-{{ config(
-    alias = 'agencia', 
-    schema = 'br_bcb_agencia')
-}}
+{{ 
+  config(
+    schema='br_bcb_agencia',
+    materialized='incremental',
+     partition_by={
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2007,
+        "end": 2024,
+        "interval": 1}
+     },
+     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+     post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ]   
+    )
+ }}
 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -23,4 +44,6 @@ SAFE_CAST(ddd AS STRING) ddd,
 SAFE_CAST(fone AS STRING) fone,
 SAFE_CAST(id_instalacao AS STRING) id_instalacao
 FROM basedosdados-staging.br_bcb_agencia_staging.agencia AS t
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)<= DATE(2023,2,1)
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}
