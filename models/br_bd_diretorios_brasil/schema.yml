@@ -134,8 +134,6 @@ models:
         description: ID Mesorregião - IBGE
       - name: nome_mesorregiao
         description: Nome da Mesorregião
-      - name: id_regiao_metropolitana
-        description: ID Região Metropolitana - IBGE  
       - name: ddd
         description: Código de Discagem Direta a Distância (DDD)
       - name: id_uf
