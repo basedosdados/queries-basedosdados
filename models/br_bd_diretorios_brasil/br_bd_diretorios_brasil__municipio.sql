@@ -30,4 +30,4 @@ SAFE_CAST(nome_uf AS STRING) nome_uf,
 SAFE_CAST(nome_regiao AS STRING) nome_regiao,
 SAFE_CAST(amazonia_legal AS INT64) amazonia_legal,
 SAFE.ST_GEOGFROMTEXT(centroide) centroide
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.municipio AS t
+FROM basedosdados-staging.br_bd_diretorios_brasil_staging.municipio AS t
