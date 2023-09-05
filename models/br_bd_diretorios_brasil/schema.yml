@@ -148,3 +148,24 @@ models:
         description: Indicador se o município faz parte da Amazônia Legal
       - name: centroide
         description: Centróide do município
+  - name: regiao_metropolitana
+    description: 'A tabela contém os códigos identificadores e nomes de Região Metropolitana (RM), Aglomeração Urbana (AU), Região Integrada de Desenvolvimento (RIDE) entre outros recortes reunidas pelo IBGE'
+    columns:
+      - name: id_regiao_metropolitana
+        description: ID Região Metropolitana - IBGE 
+      - name: nome
+        description: Nome da Região Metropolitana
+      - name: id_recorte_metropolitano
+        description: ID Recorte Metropolitano - IBGE
+      - name: nome_recorte_metropolitano
+        description: Nome do Recorte Metropolitano
+      - name: id_subcategoria_metropolitana
+        description: ID Subcategoria Metropolitana - IBGE
+      - name: nome_subcategoria_metropolitana
+        description: Nome Subcategoria Metropolitana    
+      - name: tipo
+        description: Tipo da Região 
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação 
+      - name: nome_regiao
+        description: Nome da Grande Região
