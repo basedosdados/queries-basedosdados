@@ -13,4 +13,4 @@ SAFE_CAST(nome_subcategoria_metropolitana AS STRING) nome_subcategoria_metropoli
 SAFE_CAST(tipo AS INT64) tipo,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(nome_regiao AS STRING) nome_regiao,
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.regiao_metropolitana AS t
+FROM basedosdados-staging.br_bd_diretorios_brasil_staging.regiao_metropolitana AS t
