@@ -1,6 +1,6 @@
 version: 2
 models :
-  - name: microdados
+  - name: br_inep_enem__microdados
     description: Microdados de notas.
     columns:
       - name: ano
