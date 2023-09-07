@@ -1,6 +1,6 @@
 {{config(alias='microdados', schema='br_inep_enem')}}
 
-SELECT 
+SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_inscricao AS STRING) id_inscricao,
 SAFE_CAST(faixa_etaria AS STRING) faixa_etaria,
