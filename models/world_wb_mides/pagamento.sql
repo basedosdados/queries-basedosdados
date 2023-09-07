@@ -13,7 +13,6 @@
     cluster_by = ["mes", "sigla_uf"],
     labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'}
  }}
-SELECT
 SELECT 
   SAFE_CAST(ano AS INT64) ano,
   SAFE_CAST(mes AS INT64) mes,
