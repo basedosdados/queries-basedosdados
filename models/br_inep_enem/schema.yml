@@ -1779,443 +1779,443 @@ models :
       - name: id_inscricao
         description: Número de inscrição no ENEM
       - name: Q1
-        description:
+        description: NA
       - name: Q10
-        description:
+        description: NA
       - name: Q11
-        description:
+        description: NA
       - name: Q12
-        description:
+        description: NA
       - name: Q13
-        description:
+        description: NA
       - name: Q14
-        description:
+        description: NA
       - name: Q15
-        description:
+        description: NA
       - name: Q16_1
-        description:
+        description: NA
       - name: Q16_10
-        description:
+        description: NA
       - name: Q16_2
-        description:
+        description: NA
       - name: Q16_3
-        description:
+        description: NA
       - name: Q16_4
-        description:
+        description: NA
       - name: Q16_5
-        description:
+        description: NA
       - name: Q16_6
-        description:
+        description: NA
       - name: Q16_7
-        description:
+        description: NA
       - name: Q16_8
-        description:
+        description: NA
       - name: Q16_9
-        description:
+        description: NA
       - name: Q17_1
-        description:
+        description: NA
       - name: Q17_2
-        description:
+        description: NA
       - name: Q17_3
-        description:
+        description: NA
       - name: Q17_4
-        description:
+        description: NA
       - name: Q17_5
-        description:
+        description: NA
       - name: Q18
-        description:
+        description: NA
       - name: Q19
-        description:
+        description: NA
       - name: Q2
-        description:
+        description: NA
       - name: Q20
-        description:
+        description: NA
       - name: Q21
-        description:
+        description: NA
       - name: Q22
-        description:
+        description: NA
       - name: Q23
-        description:
+        description: NA
       - name: Q24
-        description:
+        description: NA
       - name: Q25
-        description:
+        description: NA
       - name: Q26
-        description:
+        description: NA
       - name: Q27
-        description:
+        description: NA
       - name: Q28
-        description:
+        description: NA
       - name: Q29
-        description:
+        description: NA
       - name: Q3
-        description:
+        description: NA
       - name: Q30_1
-        description:
+        description: NA
       - name: Q30_2
-        description:
+        description: NA
       - name: Q30_3
-        description:
+        description: NA
       - name: Q30_4
-        description:
+        description: NA
       - name: Q31
-        description:
+        description: NA
       - name: Q32
-        description:
+        description: NA
       - name: Q33_1
-        description:
+        description: NA
       - name: Q33_2
-        description:
+        description: NA
       - name: Q33_3
-        description:
+        description: NA
       - name: Q33_4
-        description:
+        description: NA
       - name: Q33_5
-        description:
+        description: NA
       - name: Q33_6
-        description:
+        description: NA
       - name: Q33_7
-        description:
+        description: NA
       - name: Q34_1
-        description:
+        description: NA
       - name: Q34_2
-        description:
+        description: NA
       - name: Q34_3
-        description:
+        description: NA
       - name: Q34_4
-        description:
+        description: NA
       - name: Q34_5
-        description:
+        description: NA
       - name: Q34_6
-        description:
+        description: NA
       - name: Q34_7
-        description:
+        description: NA
       - name: Q35
-        description:
+        description: NA
       - name: Q36
-        description:
+        description: NA
       - name: Q37
-        description:
+        description: NA
       - name: Q38
-        description:
+        description: NA
       - name: Q39
-        description:
+        description: NA
       - name: Q4
-        description:
+        description: NA
       - name: Q40
-        description:
+        description: NA
       - name: Q41
-        description:
+        description: NA
       - name: Q42_1
-        description:
+        description: NA
       - name: Q42_2
-        description:
+        description: NA
       - name: Q42_3
-        description:
+        description: NA
       - name: Q42_4
-        description:
+        description: NA
       - name: Q42_5
-        description:
+        description: NA
       - name: Q43_1
-        description:
+        description: NA
       - name: Q43_2
-        description:
+        description: NA
       - name: Q43_3
-        description:
+        description: NA
       - name: Q43_4
-        description:
+        description: NA
       - name: Q43_5
-        description:
+        description: NA
       - name: Q44_1
-        description:
+        description: NA
       - name: Q44_10
-        description:
+        description: NA
       - name: Q44_11
-        description:
+        description: NA
       - name: Q44_12
-        description:
+        description: NA
       - name: Q44_13
-        description:
+        description: NA
       - name: Q44_14
-        description:
+        description: NA
       - name: Q44_15
-        description:
+        description: NA
       - name: Q44_16
-        description:
+        description: NA
       - name: Q44_2
-        description:
+        description: NA
       - name: Q44_3
-        description:
+        description: NA
       - name: Q44_4
-        description:
+        description: NA
       - name: Q44_5
-        description:
+        description: NA
       - name: Q44_6
-        description:
+        description: NA
       - name: Q44_7
-        description:
+        description: NA
       - name: Q44_8
-        description:
+        description: NA
       - name: Q44_9
-        description:
+        description: NA
       - name: Q45_1
-        description:
+        description: NA
       - name: Q45_2
-        description:
+        description: NA
       - name: Q45_3
-        description:
+        description: NA
       - name: Q45_4
-        description:
+        description: NA
       - name: Q45_5
-        description:
+        description: NA
       - name: Q45_6
-        description:
+        description: NA
       - name: Q45_7
-        description:
+        description: NA
       - name: Q45_8
-        description:
+        description: NA
       - name: Q46
-        description:
+        description: NA
       - name: Q47_1
-        description:
+        description: NA
       - name: Q47_2
-        description:
+        description: NA
       - name: Q47_3
-        description:
+        description: NA
       - name: Q47_4
-        description:
+        description: NA
       - name: Q47_5
-        description:
+        description: NA
       - name: Q47_6
-        description:
+        description: NA
       - name: Q47_7
-        description:
+        description: NA
       - name: Q48_1
-        description:
+        description: NA
       - name: Q48_10
-        description:
+        description: NA
       - name: Q48_11
-        description:
+        description: NA
       - name: Q48_12
-        description:
+        description: NA
       - name: Q48_2
-        description:
+        description: NA
       - name: Q48_3
-        description:
+        description: NA
       - name: Q48_4
-        description:
+        description: NA
       - name: Q48_5
-        description:
+        description: NA
       - name: Q48_6
-        description:
+        description: NA
       - name: Q48_7
-        description:
+        description: NA
       - name: Q48_8
-        description:
+        description: NA
       - name: Q48_9
-        description:
+        description: NA
       - name: Q49
-        description:
+        description: NA
       - name: Q5
-        description:
+        description: NA
       - name: Q50
-        description:
+        description: NA
       - name: Q51
-        description:
+        description: NA
       - name: Q52
-        description:
+        description: NA
       - name: Q53
-        description:
+        description: NA
       - name: Q54_1
-        description:
+        description: NA
       - name: Q54_2
-        description:
+        description: NA
       - name: Q54_3
-        description:
+        description: NA
       - name: Q54_4
-        description:
+        description: NA
       - name: Q54_5
-        description:
+        description: NA
       - name: Q54_6
-        description:
+        description: NA
       - name: Q54_7
-        description:
+        description: NA
       - name: Q54_8
-        description:
+        description: NA
       - name: Q55
-        description:
+        description: NA
       - name: Q56
-        description:
+        description: NA
       - name: Q57_1
-        description:
+        description: NA
       - name: Q57_2
-        description:
+        description: NA
       - name: Q57_3
-        description:
+        description: NA
       - name: Q57_4
-        description:
+        description: NA
       - name: Q57_5
-        description:
+        description: NA
       - name: Q57_6
-        description:
+        description: NA
       - name: Q57_7
-        description:
+        description: NA
       - name: Q58_1
-        description:
+        description: NA
       - name: Q58_10
-        description:
+        description: NA
       - name: Q58_2
-        description:
+        description: NA
       - name: Q58_3
-        description:
+        description: NA
       - name: Q58_4
-        description:
+        description: NA
       - name: Q58_5
-        description:
+        description: NA
       - name: Q58_6
-        description:
+        description: NA
       - name: Q58_7
-        description:
+        description: NA
       - name: Q58_8
-        description:
+        description: NA
       - name: Q58_9
-        description:
+        description: NA
       - name: Q59_1
-        description:
+        description: NA
       - name: Q59_2
-        description:
+        description: NA
       - name: Q60_1
-        description:
+        description: NA
       - name: Q60_2
-        description:
+        description: NA
       - name: Q6_1
-        description:
+        description: NA
       - name: Q61_1
-        description:
+        description: NA
       - name: Q61_2
-        description:
+        description: NA
       - name: Q6_2
-        description:
+        description: NA
       - name: Q62_1
-        description:
+        description: NA
       - name: Q62_2
-        description:
+        description: NA
       - name: Q6_3
-        description:
+        description: NA
       - name: Q63_1
-        description:
+        description: NA
       - name: Q63_2
-        description:
+        description: NA
       - name: Q6_4
-        description:
+        description: NA
       - name: Q64_1
-        description:
+        description: NA
       - name: Q64_10
-        description:
+        description: NA
       - name: Q64_11
-        description:
+        description: NA
       - name: Q64_12
-        description:
+        description: NA
       - name: Q64_13
-        description:
+        description: NA
       - name: Q64_2
-        description:
+        description: NA
       - name: Q64_3
-        description:
+        description: NA
       - name: Q64_4
-        description:
+        description: NA
       - name: Q64_5
-        description:
+        description: NA
       - name: Q64_6
-        description:
+        description: NA
       - name: Q64_7
-        description:
+        description: NA
       - name: Q64_8
-        description:
+        description: NA
       - name: Q64_9
-        description:
+        description: NA
       - name: Q6_5
-        description:
+        description: NA
       - name: Q65_1
-        description:
+        description: NA
       - name: Q65_2
-        description:
+        description: NA
       - name: Q65_3
-        description:
+        description: NA
       - name: Q66
-        description:
+        description: NA
       - name: Q6_6
-        description:
+        description: NA
       - name: Q67
-        description:
+        description: NA
       - name: Q6_7
-        description:
+        description: NA
       - name: Q68
-        description:
+        description: NA
       - name: Q6_8
-        description:
+        description: NA
       - name: Q69_1
-        description:
+        description: NA
       - name: Q69_2
-        description:
+        description: NA
       - name: Q69_3
-        description:
+        description: NA
       - name: Q69_4
-        description:
+        description: NA
       - name: Q69_5
-        description:
+        description: NA
       - name: Q69_6
-        description:
+        description: NA
       - name: Q69_7
-        description:
+        description: NA
       - name: Q69_8
-        description:
+        description: NA
       - name: Q7
-        description:
+        description: NA
       - name: Q70
-        description:
+        description: NA
       - name: Q71_1
-        description:
+        description: NA
       - name: Q71_2
-        description:
+        description: NA
       - name: Q71_3
-        description:
+        description: NA
       - name: Q71_4
-        description:
+        description: NA
       - name: Q71_5
-        description:
+        description: NA
       - name: Q71_6
-        description:
+        description: NA
       - name: Q72_1
-        description:
+        description: NA
       - name: Q72_2
-        description:
+        description: NA
       - name: Q72_3
-        description:
+        description: NA
       - name: Q72_4
-        description:
+        description: NA
       - name: Q72_5
-        description:
+        description: NA
       - name: Q72_6
-        description:
+        description: NA
       - name: Q72_7
-        description:
+        description: NA
       - name: Q73_1
-        description:
+        description: NA
       - name: Q73_2
-        description:
+        description: NA
       - name: Q73_3
-        description:
+        description: NA
       - name: Q73_4
-        description:
+        description: NA
       - name: Q73_5
-        description:
+        description: NA
       - name: Q73_6
-        description:
+        description: NA
       - name: Q8
-        description:
+        description: NA
       - name: Q9
-        description:
+        description: NA
   - name: questionario_socioeconomico_2003
     description: Respostas do questionário socioeconômico de 2003.
     columns:
