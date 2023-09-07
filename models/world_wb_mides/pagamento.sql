@@ -11,36 +11,35 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'},
-    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
-                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
+    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'}
  }}
 SELECT
-  ano                    INT64,
-  mes                    INT64,
-  data                   DATE,
-  sigla_uf               STRING,
-  id_municipio           STRING,
-  orgao                  STRING,
-  id_unidade_gestora     STRING,
-  id_empenho_bd          STRING,
-  id_empenho             STRING,
-  numero_empenho         STRING,
-  id_liquidacao_bd       STRING,
-  id_liquidacao          STRING,
-  numero_liquidacao      STRING,
-  id_pagamento_bd        STRING,
-  id_pagamento           STRING,
-  numero                 STRING,
-  nome_credor            STRING,
-  documento_credor       STRING,
-  indicador_restos_pagar BOOL,
-  fonte                  STRING,
-  valor_inicial          FLOAT64,
-  valor_anulacao         FLOAT64,
-  valor_ajuste           FLOAT64,
-  valor_final            FLOAT64,
-  valor_liquido_recebido FLOAT64
+SELECT 
+  SAFE_CAST(ano AS INT64) ano,
+  SAFE_CAST(mes AS INT64) mes,
+  SAFE_CAST(data AS DATE) data,
+  SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+  SAFE_CAST(id_municipio AS STRING) id_municipio,
+  SAFE_CAST(orgao AS STRING) orgao,
+  SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
+  SAFE_CAST(id_empenho_bd AS STRING) id_empenho_bd,
+  SAFE_CAST(id_empenho AS STRING) id_empenho,
+  SAFE_CAST(numero_empenho AS STRING) numero_empenho,
+  SAFE_CAST(id_liquidacao_bd AS STRING) id_liquidacao_bd,
+  SAFE_CAST(id_liquidacao AS STRING) id_liquidacao,
+  SAFE_CAST(numero_liquidacao AS STRING) numero_liquidacao,
+  SAFE_CAST(id_pagamento_bd AS STRING) id_pagamento_bd,
+  SAFE_CAST(id_pagamento AS STRING) id_pagamento,
+  SAFE_CAST(numero AS STRING) numero,
+  SAFE_CAST(nome_credor AS STRING) nome_credor,
+  SAFE_CAST(documento_credor AS STRING) documento_credor, 
+  SAFE_CAST(indicador_restos_pagar AS BOOL) indicador_restos_pagar,
+  SAFE_CAST(fonte AS STRING) fonte,
+  SAFE_CAST(valor_inicial AS FLOAT64) valor_inicial,
+  SAFE_CAST(valor_anulacao AS FLOAT64) valor_anulacao,
+  SAFE_CAST(valor_ajuste AS FLOAT64) valor_ajuste,
+  SAFE_CAST(valor_final AS FLOAT64) valor_final,
+  SAFE_CAST(valor_liquido_recebido AS FLOAT64) valor_liquido_recebido
 FROM(
 WITH empenho_ce AS (
   SELECT
