@@ -135,16 +135,17 @@ def save_header_files(dataset_id, table_id):
     ## only needs the first bloob
     partitions = []
     for blob in blobs:
-        blob_path = str(blob.name).replace(
-            f"staging/{dataset_id}/{table_id}/", "./downloaded_data/"
-        )
-        for folder in blob.name.split("/"):
-            if "=" in folder:
-                partitions.append(folder.split("=")[0])
-        print("Found blob: ", str(blob.name))
-        print("Renamed blob: ", blob_path)
-
-        break
+        blob_name = str(blob.name)
+        if blob_name.endswith((".csv", ".parquet")):
+            blob_path = blob_name.replace(
+                f"staging/{dataset_id}/{table_id}/", "./downloaded_data/"
+            )
+            for folder in blob.name.split("/"):
+                if "=" in folder:
+                    partitions.append(folder.split("=")[0])
+            print("Found blob: ", str(blob.name))
+            print("Renamed blob: ", blob_path)
+            break
     ### save table header in storage
 
     print(f"DOWNLOAD HEADER FILE FROM basedosdados-dev.{dataset_id}_staging.{table_id}")
