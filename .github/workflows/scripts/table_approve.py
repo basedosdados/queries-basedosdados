@@ -141,6 +141,9 @@ def save_header_files(dataset_id, table_id):
         for folder in blob.name.split("/"):
             if "=" in folder:
                 partitions.append(folder.split("=")[0])
+        print("Found blob: ", str(blob.name))
+        print("Renamed blob: ", blob_path)
+
         break
     ### save table header in storage
 
