@@ -1,7 +1,7 @@
 SELECT 
     SAFE_CAST(ano AS INT64) ano,
     SAFE_CAST(mes AS INT64) mes,
-    SAFE_CAST(sigla_uf AS STRING) sigla_uf
+    SAFE_CAST(sigla_uf AS STRING) sigla_uf,
     SAFE_CAST(id_municipio AS STRING) id_municipio,
     SAFE_CAST(orgao AS STRING) orgao,
     SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
