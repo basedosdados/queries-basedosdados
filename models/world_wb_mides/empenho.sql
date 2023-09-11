@@ -133,10 +133,10 @@ empenhado_mg AS (
     SAFE_CAST (CAST(LEFT(dsc_acao, 4) AS INT64) AS STRING) AS acao,
     SAFE_CAST (REPLACE(LEFT(elemento_despesa, 12), '.', '') AS STRING) AS elemento_despesa,
     ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64),2) AS valor_inicial,
-    ROUND(SAFE_CAST (IFNULL(valor_reforco,0) AS FLOAT64),2) AS valor_reforco,
-    ROUND(SAFE_CAST (IFNULL(valor_anulacao,0) AS FLOAT64),2) AS valor_anulacao,
+    ROUND(SAFE_CAST (valor_reforco AS FLOAT64),2) AS valor_reforco,
+    ROUND(SAFE_CAST (valor_anulacao AS FLOAT64),2) AS valor_anulacao,
     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64) + SAFE_CAST (IFNULL(valor_reforco,0) AS FLOAT64) - SAFE_CAST (IFNULL(valor_anulacao,0) AS FLOAT64),2) AS valor_final
+    ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64) + SAFE_CAST (valor_reforco AS FLOAT64) - SAFE_CAST (valor_anulacao AS FLOAT64),2) AS valor_final
   FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_mg
 ),
   dlic AS (
