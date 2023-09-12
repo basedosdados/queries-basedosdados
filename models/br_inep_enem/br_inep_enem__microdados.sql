@@ -10,7 +10,8 @@
         "end": 2022,
         "interval": 1}
     },
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'educacao'}
+    labels = {'project_id': 'basedosdados', 'tema': 'educacao'}
+  )
 }}
 
 SELECT
