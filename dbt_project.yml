@@ -214,6 +214,9 @@ models:
     br_tse_eleicoes_2022:
       +materialized: table
       +schema: br_tse_eleicoes_2022
+    br_rf_cafir:
+      +materialized: table
+      +schema: br_rf_cafir
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
