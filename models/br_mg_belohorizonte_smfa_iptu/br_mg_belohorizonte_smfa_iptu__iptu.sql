@@ -10,7 +10,7 @@
         "end": 2023,
         "interval": 1}
     },
-    cluster_by=['tipo_construtivo', 'tipo_ocupacao', 'tipologia'],
+    cluster_by=['mes'],
     labels = {'project_id' : 'basedosdados'}
 )}}
 SELECT 
@@ -42,5 +42,5 @@ SAFE_CAST(area_terreno AS FLOAT64) area_terreno,
 SAFE_CAST(area_construida AS FLOAT64) area_construida
 FROM basedosdados-staging.br_mg_belohorizonte_smfa_iptu_staging.iptu AS t
 {% if is_incremental() %} 
-WHERE CONCAT(ano,mes) > (SELECT MAX(CONCAT(ano,mes)) FROM {{ this }} )
+WHERE (CONCAT(ano,'-', mes)) > (SELECT MAX(CONCAT(ano, '-', mes)) FROM {{ this }} )
 {% endif %}

@@ -61,7 +61,7 @@ models:
     description: "Dicionário de dados da tabela de IPTU da cidade de Belo Horizonte"
     columns: 
       - name: id_tabela
-        description: ID da coluna
+        description: ID da tabela
       - name: nome_coluna
         description: Nome da coluna
       - name: chave
