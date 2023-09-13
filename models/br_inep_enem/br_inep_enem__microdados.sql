@@ -1,4 +1,18 @@
-{{config(alias='microdados', schema='br_inep_enem')}}
+{{ 
+  config(
+    alias = 'microdados',
+    schema='br_inep_enem',
+    partition_by={
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 1998,
+        "end": 2022,
+        "interval": 1}
+    },
+    labels = {'project_id': 'basedosdados', 'tema': 'educacao'}
+  )
+}}
 
 SELECT
 SAFE_CAST(ano AS INT64) ano,
