@@ -1,15 +1,26 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
       "range": {
-        "start": 2005,
+        "start": 2007,
         "end": 2023,
         "interval": 1}
-     }  
+     },
+     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+     post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ]  
     )
  }}
 
@@ -22,14 +33,6 @@ WITH raw_cnes_leito AS (
 cnes_leito_without_duplicates AS (
     SELECT DISTINCT *
     FROM raw_cnes_leito
-),
-leito_x_estabelecimento as(
-  --3. Adicionar id_municipio de 7 dígitos fazendo join com a tabela estabalecimento
-  -- ps: a coluna id_municipio não vem por padrão na tabela leito extraída do FTP do Datasus
-  SELECT *
-  FROM cnes_leito_without_duplicates as lt
-  LEFT JOIN (SELECT id_municipio, CAST(ano as STRING) ano1,CAST(mes as STRING) mes1, id_estabelecimento_cnes,id_municipio AS IDDD from `basedosdados.br_ms_cnes.estabelecimento`) as st
-  ON lt.CNES = st.IDDD AND lt.ano = st.ano1 AND lt.mes = st.mes1 
 )
 
 SELECT 
@@ -42,5 +45,7 @@ SAFE_CAST(TP_LEITO AS STRING) AS tipo_leito,
 SAFE_CAST(QT_EXIST AS STRING) AS quantidade_total,
 SAFE_CAST(QT_CONTR AS STRING) AS quantidade_contratado,
 SAFE_CAST(QT_SUS AS STRING) AS quantidade_sus
-FROM leito_x_estabelecimento
-WHERE concat(ano,mes) NOT IN ('20233','20234', '20235', '20236', '20237', '20238','20239','202310')
+FROM cnes_leito_without_duplicates
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}

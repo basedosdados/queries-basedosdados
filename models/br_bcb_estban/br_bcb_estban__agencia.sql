@@ -2,7 +2,7 @@
   config(
     alias = 'agencia',
     schema='br_bcb_estban',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -12,7 +12,19 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'},
+    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+    post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ] 
+    )
  }}
 SELECT 
     SAFE_CAST(ano AS INT64) ano,
@@ -25,5 +37,7 @@ SELECT
     SAFE_CAST(id_verbete AS STRING) id_verbete,
     SAFE_CAST(valor AS FLOAT64) valor
 FROM basedosdados-staging.br_bcb_estban_staging.agencia AS t
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)<= DATE(2023,3,1)
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}
 

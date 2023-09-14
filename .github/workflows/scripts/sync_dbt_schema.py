@@ -259,15 +259,19 @@ def update_metadata_json(
         json.dump(metadata, f, indent=4, ensure_ascii=False)
 
 
-def update_schema_yaml_files():
+def update_schema_yaml_files_for_modified_datasets(existing_datasets_tables):
     """
     Reads the current `metadata.json` file and generates the corresponding `schema.yml` file for
     each dataset.
     """
     # Read the metadata file
     with open("metadata.json", "r", encoding="utf-8") as f:
-        metadata = json.load(f)
+        original_metadata = json.load(f)
 
+    # Get metadata only for datasets that are in the list of modified datasets
+    metadata = {}
+    for dataset_id, _ in existing_datasets_tables:
+        metadata[dataset_id] = original_metadata.get(dataset_id, {})
     # Instantiate the YAML object
     ruamel = load_ruamel()
 
@@ -340,7 +344,8 @@ if __name__ == "__main__":
     datasets_tables = get_datasets_tables_from_modified_files(
         modified_files, show_details=True
     )
-
+    print(datasets_tables)
+    # raise (Exception("STOP"))
     # Split deleted datasets and tables
     deleted_datasets_tables = []
     existing_datasets_tables = []
@@ -362,10 +367,11 @@ if __name__ == "__main__":
         metadatas.extend(metadata)
 
     # Merge metadatas
+
     final_metadata = merge_metadatas(metadatas)
 
     # Update metadata.json file
     update_metadata_json(final_metadata, deleted_datasets_tables)
 
     # Update `schema.yml` files
-    update_schema_yaml_files()
+    update_schema_yaml_files_for_modified_datasets(existing_datasets_tables)

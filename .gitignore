@@ -1,7 +1,15 @@
+**/test.py
 target/
 dbt_modules/
 logs/
 .vscode/
 .env
-tmp/
+.venv
 .DS_store
+pyproject.toml
+__pycache__/
+
+models/*/tmp/
+models/*/input/
+models/*/output/
+models/*/extra/
