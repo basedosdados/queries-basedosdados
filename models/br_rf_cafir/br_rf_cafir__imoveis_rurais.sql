@@ -9,6 +9,7 @@
       "granularity": "day"
      },
     cluster_by=['sigla_uf'],
+    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
                     GRANT TO ("allUsers")
@@ -74,9 +75,8 @@ fixed_names as (
     from lower_munis
     LEFT JOIN (SELECT LOWER(REGEXP_REPLACE(NORMALIZE(nome, NFD), r"\pM", '')) nome_municipio, id_municipio, sigla_uf as sigla_uf1 FROM basedosdados.br_bd_diretorios_brasil. 
     municipio) as mun
-    ON lower_munis.nome_mun = mun.nome_municipio AND lower_munis.sigla_uf = mun.sigla_uf1)
-
-SELECT
+    ON lower_munis.nome_mun = mun.nome_municipio AND lower_munis.sigla_uf = mun.sigla_uf1),
+final as (SELECT
     SAFE_CAST(data as DATE) data_referencia,
     SAFE_CAST(FORMAT_DATE('%Y-%m-%d', safe.PARSE_DATE('%Y%m%d', data_inscricao))as DATE) AS data_inscricao,
     SAFE_CAST(id_imovel_receita_federal as STRING) id_imovel_receita_federal,
@@ -93,7 +93,9 @@ SELECT
     SAFE_CAST(sigla_uf as STRING) sigla_uf,
     --- esta coluna não é identifica no dicionário nem nomeada nos arquivos
     --- SAFE_CAST(LOWER(status_rever) as STRING) coluna_nao_identificada,
-FROM fixed_names AS t
+FROM fixed_names AS t)
+select * from
+final
 {% if is_incremental() %} 
 WHERE data_referencia > (SELECT MAX(data_referencia) FROM {{ this }} )
 {% endif %}
