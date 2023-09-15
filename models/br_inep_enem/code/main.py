@@ -50,6 +50,7 @@ def extract_dicts() -> tuple[str, str]:
 
 dir_dicts, template_file = extract_dicts()
 
+
 def build_dictionary(year: int, path: str) -> pd.DataFrame:
     # dict_folder_name = [
     #     folder for folder in os.listdir(f"{INPUT}/{year}") if folder.startswith("DICIO")
@@ -72,7 +73,6 @@ def build_dictionary(year: int, path: str) -> pd.DataFrame:
 
     start_line = df[df[first_col].str.contains(line_separator, na=False)].index[0]
 
-    # Drop last 6 lines
     df = df[df.index > start_line]
 
     assert isinstance(df, pd.DataFrame)
@@ -109,13 +109,25 @@ def build_dictionary(year: int, path: str) -> pd.DataFrame:
     df = df[df["coluna"] != "IN_QSE"]
 
     # Some records contains multiple values
-    df["chave"] = df["chave"].apply(lambda value: value.split("\n") if isinstance(value, str) and "\n" in value else value)
+    df["chave"] = df["chave"].apply(lambda value: value.split("\n") if isinstance(value, str) and "\n" in value else value)  # type: ignore
 
     assert isinstance(df, pd.DataFrame)
-    return df.explode("chave")
+    df = df.explode("chave")
+
+    cols_with_empty_value = df[df["valor"].isna()]["coluna"].unique()  # type: ignore
+
+    for col in cols_with_empty_value:
+        valid_value = df.loc[
+            (df["coluna"] == col) & (df["valor"].notna()), "valor"
+        ].values
+        assert len(valid_value) == 1
+        df.loc[df["coluna"] == col, "valor"] = valid_value[0]
+
+    return df
+
 
 dict_by_table = [
     build_dictionary(year, f"{dir_dicts}/{template_file}{year}.xlsx") for year in YEARS
 ]
 
-pd.concat(dict_by_table).to_csv(f"{OUTPUT}/dicionario_questionarios.csv", index = False)
+pd.concat(dict_by_table).to_csv(f"{OUTPUT}/dicionario_questionarios.csv", index=False)
