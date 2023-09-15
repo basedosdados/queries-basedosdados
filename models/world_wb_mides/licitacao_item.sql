@@ -1,3 +1,19 @@
+{{
+  config(
+    schema = "world_wb_mides",
+    materialized = "table",
+    partition_by = {
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2009,
+        "end": 2022,
+        "interval": 1}
+    },
+    cluster_by = ["sigla_uf"],
+    labels = {"project_id": "basedosdados", "tema": "economia"}
+  )
+ }}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -23,4 +39,4 @@ SAFE_CAST(valor_proposta AS FLOAT64) valor_proposta,
 SAFE_CAST(valor_vencedor AS FLOAT64) valor_vencedor,
 SAFE_CAST(nome_vencedor AS STRING) nome_vencedor,
 SAFE_CAST(documento AS STRING) documento
-FROM basedosdados-staging.world_wb_mides_staging.licitacao_item AS t
+FROM basedosdados-dev.world_wb_mides_staging.licitacao_item AS t

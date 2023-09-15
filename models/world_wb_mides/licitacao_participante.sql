@@ -1,4 +1,20 @@
-SELECT 
+{{
+  config(
+    schema = "world_wb_mides",
+    materialized = "table",
+    partition_by = {
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2009,
+        "end": 2021,
+        "interval": 1}
+    },
+    cluster_by = ["sigla_uf"],
+    labels = {"project_id": "basedosdados", "tema": "economia"}
+  )
+ }}
+SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
