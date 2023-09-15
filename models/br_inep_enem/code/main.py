@@ -131,3 +131,70 @@ dict_by_table = [
 ]
 
 pd.concat(dict_by_table).to_csv(f"{OUTPUT}/dicionario_questionarios.csv", index=False)
+
+
+def read_remote_sheet(url):
+    url = url.replace("edit#gid=", "export?format=csv&gid=")
+    return pd.read_csv(
+        io.StringIO(requests.get(url, timeout=10).content.decode("utf-8"))
+    )
+
+
+microdados_arch = read_remote_sheet(
+    "https://docs.google.com/spreadsheets/d/1EUhqjdB6BDGlksgy4UY8cwTF7pQBavP7Mrhgi-y3GRI/edit#gid=0"
+)
+microdados_arch = microdados_arch[microdados_arch["covered_by_dictionary"] == "yes"]
+
+
+def build_dictionary_microdados(year: int, path: str, cols_filled: list[str]):
+    df = pd.read_excel(path)
+
+    first_col = df.columns[0]
+    assert isinstance(first_col, str) and first_col.startswith("DICIONÁRIO")
+
+    line_end_separator = (
+        f"QUESTIONÁRIO SOCIOECONÔMICO DO ENEM"
+        if year < 2010
+        else "DADOS DO QUESTIONÁRIO SOCIOECONÔMICO"
+    )
+
+    start_line = df[df[first_col].str.contains("NU_INSCRICAO", na=False)].index[0]
+    end_line = df[df[first_col].str.contains(line_end_separator, na=False)].index[0]
+
+    df = df[(df.index >= start_line) & (df.index < end_line)]
+
+    columns = {
+        "Unnamed: 1": "descricao",
+        "Unnamed: 2": "chave",
+        "Unnamed: 3": "valor",
+        "Unnamed: 4": "tamanho",
+        "Unnamed: 5": "tipo",
+    }
+    columns[first_col] = "variavel"
+
+    df = df.rename(columns=columns, errors="raise")  # type: ignore
+
+    cols_filled = df["variavel"].to_list()
+
+    for index in range(0, len(cols_filled) + 1):
+        next_index = index + 1
+        if next_index < len(cols_filled) and pd.isna(cols_filled[next_index]):
+            cols_filled[next_index] = cols_filled[index]
+
+    df["variavel"] = cols_filled
+
+    assert isinstance(df, pd.DataFrame)
+    return df
+
+
+a = build_dictionary_microdados(
+    1998, f"{dir_dicts}/{template_file}{1998}.xlsx", microdados_arch["name"].to_list()
+)
+a["variavel"].to_list()
+
+a.tail()
+a.columns
+
+a[a["variavel"] == "TP_FAIXA_ETARIA"]
+
+microdados_arch["name"].to_list()
