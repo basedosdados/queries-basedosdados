@@ -51,17 +51,6 @@ models :
         description: Family wealth index
       - name: year
         description: Year of the PISA data
-  - name: test_table
-    description: Test table description
-    columns:
-      - name: ano
-        description: ano description
-      - name: dado
-        description: dado description
-      - name: mes
-        description: mes description
-      - name: sigla_uf
-        description: sigla_uf description
   - name: test_table_laura
     description: descrição da tabela
     columns:
@@ -96,3 +85,14 @@ models :
         description: Variedade do empreendimento
       - name: zoneamento
         description: Zoneamento do empreendimento
+  - name: test_table
+    description: Test table description
+    columns:
+      - name: ano
+        description: ano description
+      - name: dado
+        description: dado description
+      - name: mes
+        description: mes description
+      - name: sigla_uf
+        description: sigla_uf description
