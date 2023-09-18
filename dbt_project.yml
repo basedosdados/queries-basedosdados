@@ -163,6 +163,12 @@ models:
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_mg_belohorizonte_smfa_iptu:
+      +materialized: table
+      +schema: br_mg_belohorizonte_smfa_iptu
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_mp_pep:
       +materialized: table
       +schema: br_mp_pep
@@ -208,6 +214,9 @@ models:
     br_tse_eleicoes_2022:
       +materialized: table
       +schema: br_tse_eleicoes_2022
+    br_rf_cafir:
+      +materialized: table
+      +schema: br_rf_cafir
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
