@@ -237,7 +237,6 @@ models:
         description: Número da gleba
       - name: indice_ponto
         description: Número do ponto
-      #todo: latitue e longetude serão convertidas para uma coluna geography
       - name: ponto
         description: ponto
   - name: br_bcb_sicor__recurso_publico_cooperado
