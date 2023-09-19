@@ -69,7 +69,10 @@ models:
       +schema: br_bcb_agencia
     br_bcb_estban:
       +materialized: table
-      +schema: br_bcb_estban 
+      +schema: br_bcb_estban
+    br_bcb_sicor:
+      +materialized: table
+      +schema: br_bcb_sicor  
     br_bcb_taxa_cambio:
       +materialized: table
       +schema: br_bcb_taxa_cambio 
