@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import requests
 import zipfile
 import io
@@ -38,8 +39,8 @@ def download_file(year: int) -> None:
     return None
 
 
-for year in YEARS:
-    download_file(year)
+# for year in YEARS:
+#     download_file(year)
 
 
 def extract_dicts() -> tuple[str, str]:
@@ -146,11 +147,32 @@ microdados_arch = read_remote_sheet(
 microdados_arch = microdados_arch[microdados_arch["covered_by_dictionary"] == "yes"]
 
 
-def build_dictionary_microdados(year: int, path: str, cols_filled: list[str]):
+def get_original_name(col_name: str, year: int) -> str:
+    target_col_year = f"original_name_{year}"
+    values = microdados_arch.loc[
+        microdados_arch["name"] == col_name, target_col_year
+    ].values
+    assert len(values) == 1
+    return values[0]
+
+
+def get_value_and_keys(df: pd.DataFrame, col_name: str, year: int) -> pd.DataFrame:
+    original_col_name = get_original_name(col_name, year)
+    df = df.loc[df["variavel"] == original_col_name][["chave", "valor"]]
+    df["nome_coluna"] = col_name
+    df["ano"] = str(year)
+    return df
+
+
+def build_dictionary_microdados(
+    year: int, path: str, cols_covered_by_dictionary: list[str]
+):
     df = pd.read_excel(path)
 
     first_col = df.columns[0]
-    assert isinstance(first_col, str) and first_col.startswith("DICIONÁRIO")
+    assert isinstance(first_col, str) and first_col.startswith(
+        "DICIONÁRIO"
+    ), f"First column should be a string, {path}="
 
     line_end_separator = (
         f"QUESTIONÁRIO SOCIOECONÔMICO DO ENEM"
@@ -183,18 +205,78 @@ def build_dictionary_microdados(year: int, path: str, cols_filled: list[str]):
 
     df["variavel"] = cols_filled
 
-    assert isinstance(df, pd.DataFrame)
-    return df
+    result = [
+        get_value_and_keys(df, col_name, year)
+        for col_name in cols_covered_by_dictionary
+    ]
+
+    return pd.concat(result).map(lambda x: x.strip() if isinstance(x, str) else x)
 
 
-a = build_dictionary_microdados(
-    1998, f"{dir_dicts}/{template_file}{1998}.xlsx", microdados_arch["name"].to_list()
+dict_microdados_by_year = pd.concat(
+    [
+        build_dictionary_microdados(year, f"{dir_dicts}/{template_file}{year}.xlsx", microdados_arch["name"].to_list()) for year in YEARS  # type: ignore
+    ]
 )
-a["variavel"].to_list()
 
-a.tail()
-a.columns
 
-a[a["variavel"] == "TP_FAIXA_ETARIA"]
+# Para cada coluna vamos verificar se o par chave/valor são iguais entre todos os anos
+def gen_unique_key_value(col_name: str, df: pd.DataFrame):
+    def create_intervals(years):
+        if len(years) == 1:
+            return [years]
 
-microdados_arch["name"].to_list()
+        intervals = []
+        current_interval = [years[0]]
+
+        for i in range(1, len(years)):
+            if years[i] - years[i - 1] != 1:
+                current_interval.append(years[i - 1])
+                intervals.append(current_interval)
+                current_interval = [years[i]]
+
+        current_interval.append(years[-1])
+        intervals.append(current_interval)
+
+        return intervals
+
+    def make_ranges(key, value):
+        values_by_key = df.loc[
+            (df["chave"] == key) & (df["valor"] == value), "valor"
+        ].values
+        assert len(set(values_by_key)) == 1, f"{col_name=}, {values_by_key=}"
+
+        years = df.loc[
+            (df["chave"] == key) & (df["valor"] == value), "ano"
+        ].values.astype(int)
+
+        intervals = [list(set(interval)) for interval in create_intervals(years)]
+
+        cobertura_temporal = [
+            "(1)".join(map(str, np.sort(interval))) for interval in intervals
+        ]
+
+        return (key, values_by_key[0], ",".join(cobertura_temporal))
+
+    ranges = [
+        make_ranges(key, value) for (key, value), _ in df.groupby(["chave", "valor"])  # type: ignore
+    ]
+
+    basic_cols = ["chave", "cobertura_temporal", "valor"]
+
+    dict_df = pd.DataFrame(ranges, columns=basic_cols)
+
+    dict_df["nome_coluna"] = col_name
+    dict_df["id_tabela"] = "microdados"
+
+    all_cols = [*["id_tabela", "nome_coluna"], *basic_cols]
+
+    return dict_df[all_cols]
+
+
+pd.concat(
+    [
+        gen_unique_key_value(col_name, df)  # type: ignore
+        for col_name, df in dict_microdados_by_year.groupby("nome_coluna")
+    ]
+).to_csv(f"{OUTPUT}/dicionario_microdados.csv", index=False)
