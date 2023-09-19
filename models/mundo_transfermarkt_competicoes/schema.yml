@@ -80,3 +80,83 @@ Fonte: https://www.transfermarkt.com/campeonato-brasileiro-serie-a/startseite/we
         description: Chutes fora do time mandante
       - name: chutes_fora_vis
         description: Chutes fora do time visitante
+
+  - name: copa_brasil
+    description: "Com dados coletados via webscraping, a tabela abrange edições a partir de 2020, quando a fonte dos dados, o site da Transfermarkt, começou a fornecer informações detalhadas sobre vencedores e estatísticas de partidas. Entre 2017 e 2020, 91 equipes competiram, com onze já nas oitavas de final, enquanto a edição de 2021 trouxe 92 equipes. A presença de valores nulos reflete a natureza variável da fonte de dados."
+    columns:
+      - name: ano_campeonato
+        description: Ano do campeonato
+      - name: data
+        description: Data da partida
+      - name: horario
+        description: Horário da partida
+      - name: fase
+        description: Fase do campeonato
+      - name: tipo_fase
+        description: Tipo de jogo na fase
+      - name: estadio
+        description: Estádio
+      - name: arbitro
+        description: Árbitro
+      - name: publico
+        description: Público presente
+      - name: publico_max
+        description: Público máximo
+      - name: time_man
+        description: Time mandante
+      - name: time_vis
+        description: Time visitante
+      - name: tecnico_man
+        description: Técnico do time mandante
+      - name: tecnico_vis
+        description: Técnico do time visitante
+      - name: valor_equipe_titular_man
+        description: Valor da equipe titular do time mandante
+      - name: valor_equipe_titular_vis
+        description: Valor da equipe titular do time visitante
+      - name: idade_media_titular_man
+        description: Idade média da equipe titular do time mandante
+      - name: idade_media_titular_vis
+        description: Idade média da equipe titular do time visitante
+      - name: gols_man
+        description: Gols do time mandante
+      - name: gols_vis
+        description: Gols do time visitante
+      - name: gols_1_tempo_man
+        description: Gols no primeiro tempo do time mandante
+      - name: gols_1_tempo_vis
+        description: Gols no primeiro tempo do time visitante
+      - name: penalti
+        description: Indicador se o jogo foi para os pênaltis
+      - name: gols_penalti_man
+        description: Gols nos pênaltis do time mandante
+      - name: gols_penalti_vis
+        description: Gols nos pênaltis do time visitante
+      - name: escanteios_man
+        description: Escanteios do time mandante
+      - name: escanteios_vis
+        description: Escanteios do time visitante
+      - name: faltas_man
+        description: Faltas feitas pelo time mandante
+      - name: faltas_vis
+        description: Faltas feitas pelo time visitante
+      - name: chutes_bola_parada_man
+        description: Chutes de bola parada do time mandante
+      - name: chutes_bola_parada_vis
+        description: Chutes de bola parada do time visitante
+      - name: defesas_man
+        description: Defesas do time mandante
+      - name: defesas_vis
+        description: Defesas do time visitante
+      - name: impedimentos_man
+        description: Impedimentos do time mandante
+      - name: impedimentos_vis
+        description: Impedimentos do time visitante
+      - name: chutes_man
+        description: Chutes do time mandante
+      - name: chutes_vis
+        description: Chutes do time visitante
+      - name: chutes_fora_man
+        description: Chutes fora do time mandante
+      - name: chutes_fora_vis
+        description: Chutes fora do time visitante
