@@ -19,7 +19,7 @@
                     FILTER USING DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data_registro), MONTH) =< 6)']
  }}
 
-SELECT 
+WITH tabela as(SELECT 
 SAFE_CAST(numero_processo AS STRING) numero_processo,
 SAFE_CAST(numero_registro_oferta AS STRING) numero_registro_oferta,
 SAFE_CAST(tipo_oferta AS STRING) tipo_oferta,
@@ -64,7 +64,9 @@ SAFE_CAST(tipo_societario_emissor AS STRING) tipo_societario_emissor,
 SAFE_CAST(tipo_fundo_investimento AS STRING) tipo_fundo_investimento,
 SAFE_CAST(ultimo_comunicado AS STRING) ultimo_comunicado,
 SAFE_CAST(data_comunicado AS DATE) data_comunicado
-FROM basedosdados-staging.br_cvm_oferta_publica_distribuicao_staging.dia AS t
+FROM basedosdados-staging.br_cvm_oferta_publica_distribuicao_staging.dia AS t)
+SELECT *
+FROM tabela
 {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run

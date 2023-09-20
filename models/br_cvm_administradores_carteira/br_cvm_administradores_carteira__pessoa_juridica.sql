@@ -20,7 +20,7 @@
     )
  }}
 
-SELECT 
+WITH tabela as(SELECT 
 SAFE_CAST(cnpj AS STRING) cnpj,
 SAFE_CAST(denominacao_social AS STRING) denominacao_social,
 SAFE_CAST(denominacao_comercial AS STRING) denominacao_comercial,
@@ -45,7 +45,9 @@ SAFE_CAST(valor_patrimonial_liquido AS STRING) valor_patrimonial_liquido,
 SAFE_CAST(data_patrimonio_liquido AS DATE) data_patrimonio_liquido,
 SAFE_CAST(email AS STRING) email,
 SAFE_CAST(website AS STRING) website
-FROM basedosdados-staging.br_cvm_administradores_carteira_staging.pessoa_juridica AS t
+FROM basedosdados-staging.br_cvm_administradores_carteira_staging.pessoa_juridica AS t)
+select * 
+from tabela
 {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
