@@ -1,5 +1,6 @@
 {{
   config(
+    alias = 'dicionario',
     schema = "world_wb_mides",
     materialized = "table"
   )
