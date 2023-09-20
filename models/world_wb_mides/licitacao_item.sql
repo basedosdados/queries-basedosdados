@@ -1,4 +1,4 @@
-{{ 
+{{
   config(
     schema = "world_wb_mides",
     materialized = "table",
