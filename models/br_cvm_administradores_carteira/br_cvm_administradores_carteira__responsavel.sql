@@ -1,3 +1,10 @@
+{{ 
+  config(
+    alias = 'responsavel',
+    schema='br_cvm_administradores_carteira',
+    materialized='incremental', 
+    )
+ }}
 SELECT 
 SAFE_CAST(cnpj AS STRING) cnpj,
 SAFE_CAST(nome AS STRING) nome,

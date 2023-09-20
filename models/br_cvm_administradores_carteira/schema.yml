@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: pessoa_fisica
-    description: "dbt model for pessoa_fisica"
+  - name: br_cvm_administradores_carteira__pessoa_fisica
+    description: Dados Cadastrais de Administradores de Carteira da CVM (Pessoa Física)
     columns:
       - name: nome
         description: Nome
@@ -18,8 +18,8 @@ models:
         description: Data de início da situação
       - name: categoria_registro
         description: Categoria de registro
-  - name: pessoa_juridica
-    description: "dbt model for pessoa_juridica"
+  - name: br_cvm_administradores_carteira__pessoa_juridica
+    description: Dados Cadastrais de Administradores de Carteira da CVM (Pessoa Jurídica)
     columns:
       - name: cnpj
         description: Cadastro Nacional de Pessoas Jurídicas (CNPJ)
@@ -69,8 +69,8 @@ models:
         description: Email
       - name: website
         description: Website
-  - name: responsavel
-    description: "dbt model for responsavel"
+  - name: br_cvm_administradores_carteira__responsavel
+    description: Dados Cadastrais de Administradores de Carteira da CVM.
     columns:
       - name: cnpj
         description: Cadastro Nacional de Pessoas Jurídicas (CNPJ)
