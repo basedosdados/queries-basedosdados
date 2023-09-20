@@ -71,6 +71,6 @@ FROM tabela
 
   -- this filter will only be applied on an incremental run
   -- (uses > to include records whose timestamp occurred since the last run of this model)
-  where data_registro > (select max(data_registro) from {{ this }})
+  where data_abertura_processo > (select max(data_abertura_processo) from {{ this }})
 
 {% endif %}
