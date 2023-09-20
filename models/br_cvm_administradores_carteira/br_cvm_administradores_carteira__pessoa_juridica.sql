@@ -16,7 +16,7 @@
               'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
                     ON  {{this}}
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (EXTRACT(YEAR from data_registro) = EXTRACT(YEAR from  DATE("{{ run_started_at.strftime("%Y-%m-%d") }}")))' ] 
+                    FILTER USING DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data_registro), MONTH) =< 6)' ] 
     )
  }}
 
@@ -46,3 +46,10 @@ SAFE_CAST(data_patrimonio_liquido AS DATE) data_patrimonio_liquido,
 SAFE_CAST(email AS STRING) email,
 SAFE_CAST(website AS STRING) website
 FROM basedosdados-staging.br_cvm_administradores_carteira_staging.pessoa_juridica AS t
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  -- (uses > to include records whose timestamp occurred since the last run of this model)
+  where data_registro > (select max(data_registro) from {{ this }})
+
+{% endif %}

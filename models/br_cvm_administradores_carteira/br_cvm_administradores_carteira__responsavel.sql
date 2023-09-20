@@ -2,7 +2,7 @@
   config(
     alias = 'responsavel',
     schema='br_cvm_administradores_carteira',
-    materialized='incremental', 
+    materialized='table', 
     )
  }}
 SELECT 
