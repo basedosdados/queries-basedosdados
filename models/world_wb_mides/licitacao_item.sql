@@ -39,4 +39,4 @@ SAFE_CAST(valor_proposta AS FLOAT64) valor_proposta,
 SAFE_CAST(valor_vencedor AS FLOAT64) valor_vencedor,
 SAFE_CAST(nome_vencedor AS STRING) nome_vencedor,
 SAFE_CAST(documento AS STRING) documento
-FROM basedosdados-dev.world_wb_mides_staging.licitacao_item AS t
+FROM basedosdados-staging.world_wb_mides_staging.licitacao_item AS t
