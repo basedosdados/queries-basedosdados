@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: dia
-    description: "dbt model for table dia"
+  - name: br_cvm_oferta_publica_distribuicao__dia
+    description: Ofertas de distribuição (ações, fundos, debêntures, CRI, etc) registradas ou dispensadas de registro.
     columns:
       - name: numero_processo
         description: Número do processo administrativo
