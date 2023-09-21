@@ -305,7 +305,7 @@ pago_pb AS (
     FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
     LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
     LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m ON m.id_municipio = a.id_municipio
-    WHERE tipo_operacao = 'P' AND (SAFE_CAST(vl_liquidacao AS FLOAT64) >= 0)
+    WHERE tipo_operacao = 'P' AND (SAFE_CAST(vl_pagamento AS FLOAT64) >= 0)
     GROUP BY 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
 ),
   estorno_rs AS (
@@ -315,7 +315,7 @@ pago_pb AS (
     FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
     LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
     LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m ON m.id_municipio = a.id_municipio
-    WHERE tipo_operacao = 'P' AND (SAFE_CAST(vl_liquidacao AS FLOAT64) < 0)
+    WHERE tipo_operacao = 'P' AND (SAFE_CAST(vl_pagamento AS FLOAT64) < 0)
     GROUP BY 1
 ),
   frequencia_rs AS (

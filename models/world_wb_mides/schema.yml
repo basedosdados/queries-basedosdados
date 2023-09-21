@@ -44,7 +44,8 @@ models :
       - name: subfuncao
         description: Descrição da subfunção orçamentária.
       - name: valor_ajuste
-        description: Valor de correção entre o valor final e valor inicial na ausência da identificação da despesa
+        description: Valor de correção entre o valor final e valor inicial na ausência
+          da identificação da despesa
       - name: valor_anulacao
         description: Valor da anulação, caso haja deduções
       - name: valor_final
@@ -53,6 +54,19 @@ models :
         description: Valor bruto do empenho
       - name: valor_reforco
         description: Valor do reforço, caso haja incrementos
+  - name: world_wb_mides__dicionario
+    description: Dicionário
+    columns:
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: coluna
+        description: Coluna
+      - name: id_tabela
+        description: ID Tabela
+      - name: valor
+        description: Valor
   - name: licitacao
     description: Dados a nível de licitação.
     columns:
@@ -103,7 +117,8 @@ models :
       - name: orgao
         description: Órgão
       - name: preferencia_micro_pequena
-        description: Preferência de contratação para as microempresas e empresas de pequeno porte
+        description: Preferência de contratação para as microempresas e empresas de
+          pequeno porte
       - name: quantidade_convidados
         description: Número de convidados (modalidade convite)
       - name: sigla_uf
@@ -208,108 +223,23 @@ models :
         description: PF ou PJ
       - name: vencedor
         description: Participante Vencedor
-  - name: liquidacao
-    description: Dados a nível de liquidação.
+  - name: orgao_unidade_gestora
+    description: Dados auxiliares a nível de órgão e unidade gestora.
     columns:
       - name: ano
         description: Ano
-      - name: data
-        description: Data
-      - name: documento_responsavel
-        description: Número do documento do liquidante
-      - name: id_empenho
-        description: Sequencial identificador do empenho
-      - name: id_empenho_bd
-        description: Código único de identificação do empenho
-      - name: id_liquidacao
-        description: Sequencial identificador da liquidação
-      - name: id_liquidacao_bd
-        description: Código único de identificação da liquidação
+      - name: esfera
+        description: Esfera (e.g. municipal, intermunicipal, estadual, federal)
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
       - name: id_unidade_gestora
-        description: ID Unidade Gestora
-      - name: indicador_restos_pagar
-        description: Indica se o pagamento é realizado em exercício diferente
-      - name: mes
-        description: Mês
-      - name: nome_responsavel
-        description: Nome do liquidante
-      - name: numero_liquidacao
-        description: Número da liquidação
+        description: Código da unidade gestora a qual a operação está vinculada
+      - name: nome_orgao
+        description: Nome do órgão
+      - name: nome_unidade_gestora
+        description: Nome da unidade gestora
       - name: orgao
-        description: Órgão Adminsitrativo
+        description: Código do órgão ao qual a operação (empenho, liquidação, pagamento
+          ou licitação) está vinculada
       - name: sigla_uf
         description: Sigla da Unidade da Federação
-      - name: valor_anulacao
-        description: Valor da anulação ou estorno caso haja deduções
-      - name: valor_liquidacao
-        description: Valor líquido da liquidação
-      - name: valor_liquidacao_original
-        description: Valor bruto liquidado
-  - name: pagamento
-    description: Dados a nível de pagamento.
-    columns:
-      - name: ano
-        description: Ano
-      - name: credor
-        description: Nome/Razão Social do credor
-      - name: data
-        description: Data
-      - name: documento_credor
-        description: Número do documento do credor
-      - name: fonte
-        description: Fonte do recurso
-      - name: id_empenho
-        description: Sequencial identificador do empenho
-      - name: id_empenho_bd
-        description: Código único de identificação do empenho
-      - name: id_liquidacao
-        description: Sequencial identificador da liquidação
-      - name: id_liquidacao_bd
-        description: Código único de identificação da licitação
-      - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-      - name: id_pagamento
-        description: Sequencial identificador do pagamento
-      - name: id_pagamento_bd
-        description: Código único de identificação do pagamento
-      - name: id_unidade_gestora
-        description: Descrição Unidade Gestora
-      - name: indicador_restos_pagar
-        description: Indica se o pagamento é realizado em exercício diferente
-      - name: mes
-        description: Mês
-      - name: numero_empenho
-        description: Número do empenho
-      - name: numero_liquidacao
-        description: Número da liquidação
-      - name: numero_pagamento
-        description: Número do pagamento
-      - name: orgao
-        description: Órgão Adminsitrativo
-      - name: sigla_uf
-        description: Sigla da Unidade da Federação
-      - name: valor_ajuste
-        description: Valor ajuste
-      - name: valor_anulacao
-        description: Somatório de deduções e anulações
-      - name: valor_final
-        description: Resultado do valor original descontado das deduções
-      - name: valor_inicial
-        description: Valor pago na fonte
-      - name: valor_liquido_recebido
-        description: Resultado do valor original descontado das deduções
-  - name: relacionamentos
-    description: Dados a nível de relacionamento.
-    columns:
-      - name: ano
-        description: Ano
-      - name: id_empenho
-        description: Código do Empenho
-      - name: id_licitacao
-        description: Código da Licitação
-      - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-      - name: sigla_uf
-        description: Sigla da Unidade de Federação
