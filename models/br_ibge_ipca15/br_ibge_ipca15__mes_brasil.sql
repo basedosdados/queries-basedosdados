@@ -3,14 +3,6 @@
       alias='mes_brasil', 
       schema='br_ibge_ipca15',
       materialized='incremental',
-  partition_by = {
-    "field": "ano",
-    "data_type": "int64",
-    "range": {
-      "start": 2000,
-      "end": 2024,
-      "interval": 1}
-    },
   pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
   post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                   ON {{this}}
