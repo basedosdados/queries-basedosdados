@@ -1,3 +1,4 @@
+**/test.py
 target/
 dbt_modules/
 logs/
