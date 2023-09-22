@@ -5,10 +5,8 @@ import zipfile
 import io
 import os
 
-BASE_URL = "https://download.inep.gov.br/microdados"
 YEARS = range(1998, 2022 + 1)
 
-# CWD = os.path.dirname(os.getcwd())
 CWD = os.getcwd()
 INPUT = os.path.join(CWD, "input")
 TMP = os.path.join(CWD, "tmp")
@@ -24,27 +22,9 @@ if not os.path.exists(OUTPUT):
     os.mkdir(OUTPUT)
 
 
-def make_url(year: int) -> str:
-    return f"{BASE_URL}/microdados_enem_{year}.zip"
-
-
-def download_file(year: int) -> None:
-    if os.path.exists(f"{INPUT}/{year}"):
-        print(f"Data for {year} already exists")
-        return None
-    url = make_url(year)
-    r = requests.get(url, verify=False)
-    z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall(f"{INPUT}/{year}")
-    return None
-
-
-# for year in YEARS:
-#     download_file(year)
-
-
 def extract_dicts() -> tuple[str, str]:
-    z = zipfile.ZipFile(f"{INPUT}/dicionarios-20230914T203333Z-001.zip")
+    zip_file = [file for file in os.listdir(INPUT) if file.endswith(".zip")][0]
+    z = zipfile.ZipFile(f"{INPUT}/{zip_file}")
     z.extractall(TMP)
     return (f"{TMP}/dicionarios", "Dicionário_Microdados_ENEM_")
 
@@ -53,12 +33,6 @@ dir_dicts, template_file = extract_dicts()
 
 
 def build_dictionary(year: int, path: str) -> pd.DataFrame:
-    # dict_folder_name = [
-    #     folder for folder in os.listdir(f"{INPUT}/{year}") if folder.startswith("DICIO")
-    # ]
-
-    # folder = dict_folder_name[0]
-
     df = pd.read_excel(path)
 
     first_col = df.columns[0]
@@ -69,8 +43,6 @@ def build_dictionary(year: int, path: str) -> pd.DataFrame:
         if year < 2010
         else "DADOS DO QUESTIONÁRIO SOCIOECONÔMICO"
     )
-
-    # print(f"{first_col=}, {line_separator=}")
 
     start_line = df[df[first_col].str.contains(line_separator, na=False)].index[0]
 
@@ -102,12 +74,12 @@ def build_dictionary(year: int, path: str) -> pd.DataFrame:
         if next_index < len(cols) and pd.isna(cols[next_index]):
             cols[next_index] = cols[index]
 
-    df["coluna"] = cols
-    df["cobertura_temporal"] = str(year)
+    df["nome_coluna"] = cols
+    df["cobertura_temporal"] = None
     df["id_tabela"] = f"questionario_socioeconomico_{year}"
 
-    df = df[["id_tabela", "coluna", "chave", "cobertura_temporal", "valor"]]
-    df = df[df["coluna"] != "IN_QSE"]
+    df = df[["id_tabela", "nome_coluna", "chave", "cobertura_temporal", "valor"]]
+    df = df[df["nome_coluna"] != "IN_QSE"]
 
     # Some records contains multiple values
     df["chave"] = df["chave"].apply(lambda value: value.split("\n") if isinstance(value, str) and "\n" in value else value)  # type: ignore
@@ -115,23 +87,26 @@ def build_dictionary(year: int, path: str) -> pd.DataFrame:
     assert isinstance(df, pd.DataFrame)
     df = df.explode("chave")
 
-    cols_with_empty_value = df[df["valor"].isna()]["coluna"].unique()  # type: ignore
+    cols_with_empty_value = df[df["valor"].isna()]["nome_coluna"].unique()  # type: ignore
 
     for col in cols_with_empty_value:
         valid_value = df.loc[
-            (df["coluna"] == col) & (df["valor"].notna()), "valor"
+            (df["nome_coluna"] == col) & (df["valor"].notna()), "valor"
         ].values
         assert len(valid_value) == 1
-        df.loc[df["coluna"] == col, "valor"] = valid_value[0]
+        df.loc[df["nome_coluna"] == col, "valor"] = valid_value[0]
 
     return df
 
 
-dict_by_table = [
-    build_dictionary(year, f"{dir_dicts}/{template_file}{year}.xlsx") for year in YEARS
-]
+dict_by_table = pd.concat(
+    [
+        build_dictionary(year, f"{dir_dicts}/{template_file}{year}.xlsx")
+        for year in YEARS
+    ]
+)
 
-pd.concat(dict_by_table).to_csv(f"{OUTPUT}/dicionario_questionarios.csv", index=False)
+dict_by_table.to_csv(f"{OUTPUT}/dicionario_questionarios.csv", index=False)
 
 
 def read_remote_sheet(url):
@@ -252,11 +227,20 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
 
         intervals = [list(set(interval)) for interval in create_intervals(years)]
 
-        cobertura_temporal = [
-            "(1)".join(map(str, np.sort(interval))) for interval in intervals
-        ]
+        def make_temporal_cov(interval):
+            interval_sort = list(
+                map(
+                    lambda year: ""
+                    if year == max(YEARS) or year == min(YEARS)
+                    else str(year),
+                    np.sort(interval),
+                ),
+            )
+            return "(1)".join(interval_sort)
 
-        return (key, values_by_key[0], ",".join(cobertura_temporal))
+        cobertura_temporal = [make_temporal_cov(interval) for interval in intervals]
+
+        return (key, ",".join(cobertura_temporal), values_by_key[0])
 
     ranges = [
         make_ranges(key, value) for (key, value), _ in df.groupby(["chave", "valor"])  # type: ignore
@@ -266,6 +250,24 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
 
     dict_df = pd.DataFrame(ranges, columns=basic_cols)
 
+    unique_keys = [i for (i, v) in dict_df["chave"].value_counts().items() if v == 1]
+
+    # Drop temporal coverage if key is unique
+    def drop_temporal_cov(key, temporal_cov):
+        return None if key in unique_keys else temporal_cov
+
+    dict_df["cobertura_temporal"] = dict_df[["chave", "cobertura_temporal"]].apply(
+        lambda values: drop_temporal_cov(*values), axis=1
+    )
+
+    # Last edits
+    if col_name in [
+        "tipo_prova_matematica",
+        "tipo_prova_ciencias_natureza",
+        "tipo_prova_ciencias_humanas",
+    ]:
+        dict_df["valor"] = dict_df["valor"].apply(lambda value: value.title())
+
     dict_df["nome_coluna"] = col_name
     dict_df["id_tabela"] = "microdados"
 
@@ -274,9 +276,14 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
     return dict_df[all_cols]
 
 
-pd.concat(
+dict_microdados = pd.concat(
     [
         gen_unique_key_value(col_name, df)  # type: ignore
         for col_name, df in dict_microdados_by_year.groupby("nome_coluna")
     ]
-).to_csv(f"{OUTPUT}/dicionario_microdados.csv", index=False)
+)
+
+dict_microdados.to_excel(f"{OUTPUT}/dicionario_microdados.xlsx", index=False)
+
+
+pd.concat([dict_microdados, dict_by_table]).to_excel(f"{OUTPUT}/dicionario.xlsx", index=False)  # type: ignore
