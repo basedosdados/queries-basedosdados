@@ -265,6 +265,7 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
         "tipo_prova_matematica",
         "tipo_prova_ciencias_natureza",
         "tipo_prova_ciencias_humanas",
+        "tipo_prova_linguagens_codigos"
     ]:
         dict_df["valor"] = dict_df["valor"].apply(lambda value: value.title())
 
