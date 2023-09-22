@@ -97,6 +97,8 @@ def build_dictionary(year: int, path: str) -> pd.DataFrame:
         assert len(valid_value) == 1
         df.loc[df["nome_coluna"] == col, "valor"] = valid_value[0]
 
+    df["chave"] = df["chave"].astype(str)
+    df["valor"] = df["valor"].astype(str)
     return df
 
 
@@ -241,7 +243,7 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
 
         cobertura_temporal = [make_temporal_cov(interval) for interval in intervals]
 
-        return (key, ",".join(cobertura_temporal), values_by_key[0])
+        return (str(key), ",".join(cobertura_temporal), str(values_by_key[0]))
 
     ranges = [
         make_ranges(key, value) for (key, value), _ in df.groupby(["chave", "valor"])  # type: ignore
@@ -285,19 +287,14 @@ dict_microdados = pd.concat(
     ]
 )
 
-dict_microdados.to_excel(f"{OUTPUT}/dicionario_microdados.xlsx", index=False)
-
-
-pd.concat([dict_microdados, dict_by_table]).to_excel(f"{OUTPUT}/dicionario.xlsx", index=False)  # type: ignore
-
-pd.concat([dict_microdados, dict_by_table]).to_excel(f"{OUTPUT}/dicionario.parquet", index=False)  # type: ignore
+pd.concat([dict_microdados, dict_by_table]).to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)  # type: ignore
 
 # Upload dictionary
-# tb = bd.Table(dataset_id="br_inep_enem", table_id="dicionario")
+tb = bd.Table(dataset_id="br_inep_enem", table_id="dicionario")
 
-# tb.create(
-#     path=f"{OUTPUT}/dicionario.parquet",
-#     if_table_exists="replace",
-#     if_storage_data_exists="replace",
-#     source_format="parquet",
-# )
+tb.create(
+    path=f"{OUTPUT}/dicionario.parquet",
+    if_table_exists="replace",
+    if_storage_data_exists="replace",
+    source_format="parquet",
+)
