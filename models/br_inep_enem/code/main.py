@@ -4,6 +4,7 @@ import requests
 import zipfile
 import io
 import os
+import basedosdados as bd
 
 YEARS = range(1998, 2022 + 1)
 
@@ -265,7 +266,7 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
         "tipo_prova_matematica",
         "tipo_prova_ciencias_natureza",
         "tipo_prova_ciencias_humanas",
-        "tipo_prova_linguagens_codigos"
+        "tipo_prova_linguagens_codigos",
     ]:
         dict_df["valor"] = dict_df["valor"].apply(lambda value: value.title())
 
@@ -288,3 +289,15 @@ dict_microdados.to_excel(f"{OUTPUT}/dicionario_microdados.xlsx", index=False)
 
 
 pd.concat([dict_microdados, dict_by_table]).to_excel(f"{OUTPUT}/dicionario.xlsx", index=False)  # type: ignore
+
+pd.concat([dict_microdados, dict_by_table]).to_excel(f"{OUTPUT}/dicionario.parquet", index=False)  # type: ignore
+
+# Upload dictionary
+# tb = bd.Table(dataset_id="br_inep_enem", table_id="dicionario")
+
+# tb.create(
+#     path=f"{OUTPUT}/dicionario.parquet",
+#     if_table_exists="replace",
+#     if_storage_data_exists="replace",
+#     source_format="parquet",
+# )
