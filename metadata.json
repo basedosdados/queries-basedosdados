@@ -5314,6 +5314,505 @@
                         "description": "Valor do reforço, caso haja incrementos"
                     }
                 ]
+            },
+            {
+                "slug": "dicionario",
+                "name": "dicionario",
+                "description": "Dicionário",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "world_wb_mides",
+                        "gcpTableId": "dicionario"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1u9WCJHFFT5U1ZBlhR0TsiNke7wou4p_GaDsjTkhE33Q/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "chave",
+                        "description": "Chave"
+                    },
+                    {
+                        "name": "cobertura_temporal",
+                        "description": "Cobertura Temporal"
+                    },
+                    {
+                        "name": "coluna",
+                        "description": "Coluna"
+                    },
+                    {
+                        "name": "id_tabela",
+                        "description": "ID Tabela"
+                    },
+                    {
+                        "name": "valor",
+                        "description": "Valor"
+                    }
+                ]
+            },
+            {
+                "slug": "licitacao",
+                "name": "licitacao",
+                "description": "Dados a nível de licitação.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "world_wb_mides",
+                        "gcpTableId": "licitacao"
+                    }
+                ],
+                "status": {
+                    "name": "Publicado",
+                    "slug": "published"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1TEndIhxUmHeSadsSOFVI0ejyr-gqUIIZPsLVDqqOtxU/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "ano_processo",
+                        "description": "Ano do processo"
+                    },
+                    {
+                        "name": "carona",
+                        "description": "Licitação Carona"
+                    },
+                    {
+                        "name": "contratacao",
+                        "description": "Contratação por Itens ou Lotes"
+                    },
+                    {
+                        "name": "covid_19",
+                        "description": "Licitação ou dispensa no âmbito da COVID-19"
+                    },
+                    {
+                        "name": "data_abertura",
+                        "description": "Data de Abertura"
+                    },
+                    {
+                        "name": "data_edital",
+                        "description": "Data de Emissão do Edital"
+                    },
+                    {
+                        "name": "data_homologacao",
+                        "description": "Data de Publicação da Homologação"
+                    },
+                    {
+                        "name": "data_publicacao_dispensa",
+                        "description": "Data de Publicação da Dispensa"
+                    },
+                    {
+                        "name": "descricao_objeto",
+                        "description": "Especificação do Objeto Licitado"
+                    },
+                    {
+                        "name": "estagio",
+                        "description": "Estágio da Licitação"
+                    },
+                    {
+                        "name": "exclusiva_micro_pequena",
+                        "description": "Destinação exclusiva a Microempresas e empresas de pequeno porte"
+                    },
+                    {
+                        "name": "forma_pagamento",
+                        "description": "Forma de Pagamento"
+                    },
+                    {
+                        "name": "id_dispensa",
+                        "description": "Código da Dispensa"
+                    },
+                    {
+                        "name": "id_licitacao",
+                        "description": "Código da Licitação"
+                    },
+                    {
+                        "name": "id_licitacao_bd",
+                        "description": "ID Licitação"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_unidade_gestora",
+                        "description": "ID Unidade Gestora"
+                    },
+                    {
+                        "name": "mes",
+                        "description": "Mês"
+                    },
+                    {
+                        "name": "modalidade",
+                        "description": "Modalidade da Licitação"
+                    },
+                    {
+                        "name": "natureza_objeto",
+                        "description": "Natureza do Objeto"
+                    },
+                    {
+                        "name": "natureza_processo",
+                        "description": "Natureza do Processo"
+                    },
+                    {
+                        "name": "orgao",
+                        "description": "Órgão"
+                    },
+                    {
+                        "name": "preferencia_micro_pequena",
+                        "description": "Preferência de contratação para as microempresas e empresas de pequeno porte"
+                    },
+                    {
+                        "name": "quantidade_convidados",
+                        "description": "Número de convidados (modalidade convite)"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade de Federação"
+                    },
+                    {
+                        "name": "situacao",
+                        "description": "Situação da Licitação"
+                    },
+                    {
+                        "name": "tipo",
+                        "description": "Tipo de Licitação - Critério de Julgamento"
+                    },
+                    {
+                        "name": "tipo_cadastro",
+                        "description": "Tipo Cadastro (inicial ou retificação)"
+                    },
+                    {
+                        "name": "valor",
+                        "description": "Valor da Licitação"
+                    },
+                    {
+                        "name": "valor_corrigido",
+                        "description": "Valor Corrigido"
+                    },
+                    {
+                        "name": "valor_orcamento",
+                        "description": "Valor do Orçamento"
+                    }
+                ]
+            },
+            {
+                "slug": "licitacao_item",
+                "name": "licitacao_item",
+                "description": "Dados a nível de licitação-item.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "world_wb_mides",
+                        "gcpTableId": "licitacao_item"
+                    }
+                ],
+                "status": {
+                    "name": "Publicado",
+                    "slug": "published"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/130eUmTWz4hm1v5QyY47j4JVQ5KQfMXOtOun5Mo1GeJU/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "descricao",
+                        "description": "Descrição do Item"
+                    },
+                    {
+                        "name": "documento",
+                        "description": "CPF/CNPJ do vencedor"
+                    },
+                    {
+                        "name": "id_dispensa",
+                        "description": "Código da Dispensa"
+                    },
+                    {
+                        "name": "id_item",
+                        "description": "Código do Item"
+                    },
+                    {
+                        "name": "id_item_bd",
+                        "description": "ID Item"
+                    },
+                    {
+                        "name": "id_licitacao",
+                        "description": "Código da Licitação"
+                    },
+                    {
+                        "name": "id_licitacao_bd",
+                        "description": "ID Licitação"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_unidade_gestora",
+                        "description": "ID Unidade Gestora"
+                    },
+                    {
+                        "name": "nome_vencedor",
+                        "description": "Nome do vencedor"
+                    },
+                    {
+                        "name": "numero",
+                        "description": "Número do item"
+                    },
+                    {
+                        "name": "numero_lote",
+                        "description": "Número do lote"
+                    },
+                    {
+                        "name": "orgao",
+                        "description": "ID Órgão"
+                    },
+                    {
+                        "name": "quantidade",
+                        "description": "Quantidade Homologada"
+                    },
+                    {
+                        "name": "quantidade_cotada",
+                        "description": "Quantidade Cotada"
+                    },
+                    {
+                        "name": "quantidade_proposta",
+                        "description": "Quantidade da proposta"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade de Federação"
+                    },
+                    {
+                        "name": "unidade_medida",
+                        "description": "Unidade de medida"
+                    },
+                    {
+                        "name": "valor_proposta",
+                        "description": "Valor unitário da proposta"
+                    },
+                    {
+                        "name": "valor_total",
+                        "description": "Valor Total"
+                    },
+                    {
+                        "name": "valor_unitario",
+                        "description": "Valor Unitário Homologado"
+                    },
+                    {
+                        "name": "valor_unitario_cotacao",
+                        "description": "Valor Unitário Cotação"
+                    },
+                    {
+                        "name": "valor_vencedor",
+                        "description": "Valor Homologado"
+                    }
+                ]
+            },
+            {
+                "slug": "licitacao_participante",
+                "name": "licitacao_participante",
+                "description": "Dados a nível de licitação-participante.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "world_wb_mides",
+                        "gcpTableId": "licitacao_participante"
+                    }
+                ],
+                "status": {
+                    "name": "Publicado",
+                    "slug": "published"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/1vN4wnDt7lMA_osNLFe6C3mxGaDprg8fLemoxnLOYc9s/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "cep",
+                        "description": "CEP"
+                    },
+                    {
+                        "name": "classificado",
+                        "description": "Participante classificado"
+                    },
+                    {
+                        "name": "documento",
+                        "description": "CPF/CNPJ do participante"
+                    },
+                    {
+                        "name": "endereco",
+                        "description": "Endereço"
+                    },
+                    {
+                        "name": "habilitado",
+                        "description": "Participante habilitado"
+                    },
+                    {
+                        "name": "id_dispensa",
+                        "description": "Código da Dispensa"
+                    },
+                    {
+                        "name": "id_licitacao",
+                        "description": "Código da Licitação"
+                    },
+                    {
+                        "name": "id_licitacao_bd",
+                        "description": "ID Licitação"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_unidade_gestora",
+                        "description": "ID Unidade Gestora"
+                    },
+                    {
+                        "name": "municipio_participante",
+                        "description": "Município do Participante"
+                    },
+                    {
+                        "name": "orgao",
+                        "description": "Órgão"
+                    },
+                    {
+                        "name": "razao_social",
+                        "description": "Razão Social"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade de Federação"
+                    },
+                    {
+                        "name": "tipo",
+                        "description": "PF ou PJ"
+                    },
+                    {
+                        "name": "vencedor",
+                        "description": "Participante Vencedor"
+                    }
+                ]
+            },
+            {
+                "slug": "orgao_unidade_gestora",
+                "name": "orgao_unidade_gestora",
+                "description": "Dados auxiliares a nível de órgão e unidade gestora.",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados-dev",
+                        "gcpDatasetId": "world_wb_mides",
+                        "gcpTableId": "orgao_unidade_gestora"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Ricardo",
+                    "lastName": "Dahis",
+                    "email": "rdahis@basedosdados.org"
+                },
+                "dataCleanedBy": null,
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": "https://docs.google.com/spreadsheets/d/18LUGzMtU0qxQ1CKAR0LJn9DbMpUI0tJsgNRMXumtg28/edit#gid=0",
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "esfera",
+                        "description": "Esfera (e.g. municipal, intermunicipal, estadual, federal)"
+                    },
+                    {
+                        "name": "id_municipio",
+                        "description": "ID Município - IBGE 7 Dígitos"
+                    },
+                    {
+                        "name": "id_unidade_gestora",
+                        "description": "Código da unidade gestora a qual a operação está vinculada"
+                    },
+                    {
+                        "name": "nome_orgao",
+                        "description": "Nome do órgão"
+                    },
+                    {
+                        "name": "nome_unidade_gestora",
+                        "description": "Nome da unidade gestora"
+                    },
+                    {
+                        "name": "orgao",
+                        "description": "Código do órgão ao qual a operação (empenho, liquidação, pagamento ou licitação) está vinculada"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    }
+                ]
             }
         ]
     },
