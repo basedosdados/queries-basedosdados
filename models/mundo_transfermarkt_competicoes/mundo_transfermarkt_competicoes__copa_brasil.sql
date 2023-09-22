@@ -19,10 +19,9 @@
           'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
                 ON  {{this}}
                 GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), MONTH) <= 6)' ]
+                FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), MONTH) <= 6)' ],
     )
  }}
-
 SELECT 
   SAFE_CAST(REPLACE (ano_campeonato,".0","") AS INT64) ano_campeonato,
   SAFE_CAST(data AS DATE) data,
