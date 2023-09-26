@@ -127,6 +127,9 @@ models:
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
+    br_geobr_mapas:
+      +materialized: table
+      +schema: br_geobr_mapas
     br_ibge_ipca:
       +materialized: table
       +schema: br_ibge_ipca
