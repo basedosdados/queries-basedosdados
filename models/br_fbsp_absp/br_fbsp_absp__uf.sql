@@ -1,4 +1,9 @@
-CREATE OR REPLACE VIEW br-fbsp-absp.br_fbsp_absp.uf AS
+{{
+    config(
+        alias='uf',
+        schema='br_fbsp_absp'
+    )
+}}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
