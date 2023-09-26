@@ -1,0 +1,168 @@
+version: 2
+
+models:
+  - name: br_geobr_mapas__municipio
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: sigla_uf
+        description: Sigla da Unidade de Federação
+      - name: geometria
+        description: Multipoligono
+
+  - name: br_geobr_mapas__microrregiao
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_uf
+        description: ID da Unidade de Federação
+      - name: sigla_uf
+        description: Sigla da Unidade de Federação
+      - name: id_microrregiao
+        description: ID da Microrregião - IBGE
+      - name: geometria
+        description: Polígono da microrregião
+
+  - name: br_geobr_mapas__estabelecimentos_saude
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: ano
+        description: Ano
+      - name: sigla_uf
+        description: Sigla da Unidade de Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_cnes
+        description: Id estabelecimento - CNES
+      - name: geometria
+        description: Coordenadas do Estabelecimento de Saúde
+
+  - name: br_geobr_mapas__escola
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação - IBGE
+      - name: id_escola
+        description: ID Escola - INEP
+      - name: geometria
+        description: Latitude e Longitude da Escola
+
+  - name: br_geobr_mapas__regiao
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_regiao
+        description: Código da Região - IBGE
+      - name: nome_regiao
+        description: Nome da Região
+      - name: geometria
+        description: Polígonos das Regiões Brasileiras
+
+  - name: br_geobr_mapas__regiao_intermediaria
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_uf
+        description: ID da Unidade da Federação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_regiao_intermediaria
+        description: ID da Região Intermediária - IBGE
+      - name: geometria
+        description: Polígono da Região Intermediária
+
+  - name: br_geobr_mapas__saude
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_regiao_saude
+        description: ID Região de Saúde
+      - name: id_uf
+        description: ID da Unidade da Federação - IBGE
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: geometria
+        description: Polígonos das regiões de saúde
+
+  - name: br_geobr_mapas__semiarido
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+      - name: sigla_uf
+        description: Sigla da Unidade de Federação
+      - name: geometria
+        description: Multipoligono da região do Semiárido
+
+  - name: br_geobr_mapas__setor_censitario_2010
+    description: Setores censitarios do Censo Brasileiro de 2010
+    columns:
+      - name: id_setor_censitario
+        description: Identificador do setor censitário
+      - name: zona
+        description: Zona
+      - name: id_uf
+        description: ID da Unidade da Federação
+      - name: id_municipio
+        description: Identificador do município IBGE
+      - name: nome_municipio
+        description: Nome do município
+      - name: id_vizinhanca
+        description: Identificador da vizinhança
+      - name: nome_vizinhanca
+        description: Nome da vizinhança
+      - name: id_subdistrito
+        description: Identificador do substrito
+      - name: nome_subdistrito
+        description: Nome do substrito
+      - name: id_distrito
+        description: Identificador do distrito
+      - name: nome_distrito
+        description: Nome do distrito
+      - name: geometria
+        description: Polígono do setor censitário
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+
+  - name: br_geobr_mapas__uf
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:
+      - name: id_uf
+        description: ID da Unidade da Federação - IBGE
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: geometria
+        description: Polígono da Unidade da Federação
+
+  - name: br_geobr_mapas__bioma
+    description: Polígonos de todos o biomas presentes no território brasileiro e área costeira.
+    columns:  
+      - name: id_bioma
+        description: Código do bioma
+      - name: nome_bioma
+        description: Nome do bioma
+      - name: geometria
+        description: Geometria
+      - name: ano
+        description: Ano
+
+  - name: br_geobr_mapas__mesorregiao
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:  
+      - name: id_uf
+        description: ID da Unidade da Federação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_mesorregiao
+        description: ID da Mesorregião - IBGE
+      - name: geometria
+        description: Polígono da Mesorregião
+
+  - name: br_geobr_mapas__regiao_imediata
+    description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
+    columns:  
+      - name: id_uf
+        description: ID da Unidade da Federação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_regiao_imediata
+        description: ID da Região Imediata - IBGE
+      - name: geometria
+        description: Polígono da região imediata
