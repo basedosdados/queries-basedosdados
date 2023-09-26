@@ -288,14 +288,13 @@ dict_microdados = pd.concat(
     ]
 )
 
-pd.concat([dict_microdados, dict_by_table]).to_parquet(f"{OUTPUT}/dicionario.parquet", index=False)  # type: ignore
+pd.concat([dict_microdados, dict_by_table]).to_csv(f"{OUTPUT}/dicionario.csv", index=False)  # type: ignore
 
 # Upload dictionary
 tb = bd.Table(dataset_id="br_inep_enem", table_id="dicionario")
 
 tb.create(
-    path=f"{OUTPUT}/dicionario.parquet",
+    path=f"{OUTPUT}/dicionario.csv",
     if_table_exists="replace",
     if_storage_data_exists="replace",
-    source_format="parquet",
 )
