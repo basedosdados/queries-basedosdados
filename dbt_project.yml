@@ -121,6 +121,9 @@ models:
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
+    br_fbsp_absp:
+      +materialized: table
+      +schema: br_fbsp_absp
     br_fgv_igp:
       +materialized: table
       +schema: br_fgv_igp
