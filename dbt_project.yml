@@ -69,7 +69,10 @@ models:
       +schema: br_bcb_agencia
     br_bcb_estban:
       +materialized: table
-      +schema: br_bcb_estban 
+      +schema: br_bcb_estban
+    br_bcb_sicor:
+      +materialized: table
+      +schema: br_bcb_sicor  
     br_bcb_taxa_cambio:
       +materialized: table
       +schema: br_bcb_taxa_cambio 
@@ -118,12 +121,18 @@ models:
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
+    br_fbsp_absp:
+      +materialized: table
+      +schema: br_fbsp_absp
     br_fgv_igp:
       +materialized: table
       +schema: br_fgv_igp
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
+    br_geobr_mapas:
+      +materialized: table
+      +schema: br_geobr_mapas
     br_ibge_ipca:
       +materialized: table
       +schema: br_ibge_ipca
