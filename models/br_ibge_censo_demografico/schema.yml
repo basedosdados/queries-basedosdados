@@ -12037,7 +12037,7 @@ models:
         description: Total do rendimento nominal mensal das pessoas  responsáveis moradoras
           em domicílios particulares  permanentes do sexo feminino
 
-  - name: br_me_cnpj__dicionario
+  - name: br_ibge_censo_demografico__dicionario
     description: Dicionário
     columns:
       - name: id_tabela
