@@ -36,9 +36,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-actions.txt
 
-      - name: Run script for syncing DBT schema
+      - name: Run script to test DBT model
         run: |
-          python .github/workflows/scripts/table_test.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }}
+          python .github/workflows/scripts/table_test.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }}
 
       - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v4

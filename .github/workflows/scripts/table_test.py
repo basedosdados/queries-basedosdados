@@ -134,7 +134,8 @@ if __name__ == "__main__":
     arg_parser.add_argument(
         "--materialization-label",
         type=str,
-        required=True,
+        required=False,
+        default="basedosdados-dev",
         help="Materialization label.",
     )
 
