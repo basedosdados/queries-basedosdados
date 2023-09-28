@@ -220,9 +220,6 @@ models:
     br_stf_corte_aberta:
       +materialized: table
       +schema: br_stf_corte_aberta
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_tse_eleicoes:
       +materialized: table
       +schema: br_tse_eleicoes
