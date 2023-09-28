@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias = 'diaria',
     schema='br_bcb_taxa_cambio',
     materialized='table',
     labels = {'tema': 'economia'})
