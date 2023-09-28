@@ -10,7 +10,7 @@ on:
       - '.github/workflows/test_dbt_model.yaml'
 
 jobs:
-  sync-dbt-schema:
+  test_dbt_model:
     if: contains(github.event.pull_request.labels.*.name, 'test-dev-model')
     name: Test DBT dev model
     runs-on: ubuntu-latest

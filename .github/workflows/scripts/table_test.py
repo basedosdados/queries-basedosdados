@@ -245,8 +245,11 @@ if __name__ == "__main__":
                 auth_token=args.prefect_backend_token,
             )
 
-            if test_results['warn'] > 1:
-                print(f"Test got {test_results['warn']} warns")
+            if test_results['warn'] > 0:
+                raise Exception(
+                    f"Test got {test_results['warn']} warns"
+                    f"Check the logs at {args.prefect_base_url}/flow-run/{launched_flow_run_id}"
+                    )
             
             else:
                 print(f"{test_results['pass']} tests passed")
