@@ -1,0 +1,37 @@
+{{
+    config(
+        alias='uf',
+        schema='br_fbsp_absp'
+    )
+}}
+SELECT 
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(quantidade_cvli AS INT64) quantidade_cvli,
+SAFE_CAST(quantidade_feminicidio AS INT64) quantidade_feminicidio,
+SAFE_CAST(quantidade_ocorrencia_homicidio_doloso AS INT64) quantidade_ocorrencia_homicidio_doloso,
+SAFE_CAST(quantidade_vitima_homicidio_doloso AS INT64) quantidade_vitima_homicidio_doloso,
+SAFE_CAST(quantidade_latrocinio AS INT64) quantidade_latrocinio,
+SAFE_CAST(quantidade_lesao_corporal_seguida_de_morte AS INT64) quantidade_lesao_corporal_seguida_de_morte,
+SAFE_CAST(quantidade_morte_a_esclarecer AS INT64) quantidade_morte_a_esclarecer,
+SAFE_CAST(quantidade_morte_intervencao_policial_civil_servico AS INT64) quantidade_morte_intervencao_policial_civil_servico,
+SAFE_CAST(quantidade_morte_intervencao_policial_civil_fora_servico AS INT64) quantidade_morte_intervencao_policial_civil_fora_servico,
+SAFE_CAST(quantidade_morte_intervencao_policial_militar_servico AS INT64) quantidade_morte_intervencao_policial_militar_servico,
+SAFE_CAST(quantidade_morte_intervencao_policial_militar_fora_servico AS INT64) quantidade_morte_intervencao_policial_militar_fora_servico,
+SAFE_CAST(quantidade_morte_violenta_intencional AS INT64) quantidade_morte_violenta_intencional,
+SAFE_CAST(quantidade_policial_civil_morto_confronto_servico AS INT64) quantidade_policial_civil_morto_confronto_servico,
+SAFE_CAST(quantidade_policial_civil_morto_confronto_fora_servico AS INT64) quantidade_policial_civil_morto_confronto_fora_servico,
+SAFE_CAST(quantidade_policial_militar_morto_confronto_servico AS INT64) quantidade_policial_militar_morto_confronto_servico,
+SAFE_CAST(quantidade_policial_militar_morto_confronto_fora_servico AS INT64) quantidade_policial_militar_morto_confronto_fora_servico,
+SAFE_CAST(quantidade_suicidio AS INT64) quantidade_suicidio,
+SAFE_CAST(quantidade_estupro AS INT64) quantidade_estupro,
+SAFE_CAST(quantidade_tentativa_estupro AS INT64) quantidade_tentativa_estupro,
+SAFE_CAST(quantidade_furto_veiculo AS INT64) quantidade_furto_veiculo,
+SAFE_CAST(quantidade_roubo_instituicao_financeira AS INT64) quantidade_roubo_instituicao_financeira,
+SAFE_CAST(quantidade_roubo_carga AS INT64) quantidade_roubo_carga,
+SAFE_CAST(quantidade_roubo_de_veiculo AS INT64) quantidade_roubo_de_veiculo,
+SAFE_CAST(quantidade_arma_fogo_apreendida AS INT64) quantidade_arma_fogo_apreendida,
+SAFE_CAST(quantidade_registro_pessoa_desaparecida AS INT64) quantidade_registro_pessoa_desaparecida,
+SAFE_CAST(quantidade_populacao_sistema_penitenciario AS INT64) quantidade_populacao_sistema_penitenciario,
+SAFE_CAST(despesa_empenhada_seguranca_publica AS FLOAT64) despesa_empenhada_seguranca_publica
+FROM basedosdados-staging.br_fbsp_absp_staging.uf AS t
