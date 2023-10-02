@@ -127,12 +127,15 @@ models:
     br_fgv_igp:
       +materialized: table
       +schema: br_fgv_igp
-    br_ibge_inpc:
-      +materialized: table
-      +schema: br_ibge_inpc
     br_geobr_mapas:
       +materialized: table
       +schema: br_geobr_mapas
+    br_ibge_censo_demografico:
+      +materialized: table
+      +schema: br_ibge_censo_demografico     
+    br_ibge_inpc:
+      +materialized: table
+      +schema: br_ibge_inpc
     br_ibge_ipca:
       +materialized: table
       +schema: br_ibge_ipca
