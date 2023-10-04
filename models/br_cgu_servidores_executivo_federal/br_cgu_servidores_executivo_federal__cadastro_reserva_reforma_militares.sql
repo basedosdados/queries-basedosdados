@@ -86,6 +86,6 @@ select
         diploma_ingresso_servico_publico as string
     ) diploma_ingresso_servico_publico,
 from
-    `basedosdados-dev.br_cgu_servidores_executivo_federal_staging.cadastro_reserva_reforma_militares`
+    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.cadastro_reserva_reforma_militares`
     as t
 

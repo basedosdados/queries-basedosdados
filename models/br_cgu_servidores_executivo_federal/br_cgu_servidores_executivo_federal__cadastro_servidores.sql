@@ -114,5 +114,5 @@ select
     (case when sigla_uf in ("-1", "-3") then null else sigla_uf end) as sigla_uf,
     safe_cast(origem as string) origem,
 from
-    `basedosdados-dev.br_cgu_servidores_executivo_federal_staging.cadastro_servidores`
+    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.cadastro_servidores`
     as t

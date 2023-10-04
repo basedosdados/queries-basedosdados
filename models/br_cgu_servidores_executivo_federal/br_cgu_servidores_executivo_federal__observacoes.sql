@@ -34,4 +34,4 @@ select
     safe_cast(cpf as string) cpf,
     safe_cast(observacao as string) observacao,
     safe_cast(origem as string) origem,
-from `basedosdados-dev.br_cgu_servidores_executivo_federal_staging.observacoes` as t
+from `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.observacoes` as t

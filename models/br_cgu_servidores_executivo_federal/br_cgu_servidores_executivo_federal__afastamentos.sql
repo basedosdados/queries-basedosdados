@@ -48,4 +48,4 @@ select
     ) as data_final,
     safe_cast(origem as string) origem,
 from
-    `basedosdados-dev.br_cgu_servidores_executivo_federal_staging.afastamentos` as t
+    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.afastamentos` as t
