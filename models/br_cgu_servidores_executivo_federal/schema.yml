@@ -23,7 +23,7 @@ models:
         description: Data final do afastamento
       - name: origem
         description: Origem do dado enviado à CGU (SIAPE ou BACEN)
-  - name: aposentados_cadastro
+  - name: cadastro_aposentados
     description: Informações do cadastro de apossentadorias dos servidores
     columns:
       - name: ano
@@ -111,7 +111,7 @@ models:
       - name: origem
         description: Origem do dado enviado à CGU (Servidores SIAPE, Servidores BACEN,
             Aposentados BACEN, Pensionistas BACEN, etc)
-  - name: pensionistas_cadastro
+  - name: cadastro_pensionistas
     description: Informações sobre o cadastro de pensionistas
     columns:
       - name: ano
@@ -281,7 +281,7 @@ models:
       - name: origem
         description: Origem do dado enviado à CGU (Servidores SIAPE, Servidores BACEN,
             Militares, Pensionistas BACEN, etc)
-  - name: reserva_reforma_militares_cadastro
+  - name: cadastro_reserva_reforma_militares
     description: Informações de cadastro de militares na reserva e reforma
     columns:
       - name: ano
@@ -346,7 +346,7 @@ models:
         description: Diploma de ingresso do servidor no órgão
       - name: diploma_ingresso_servico_publico
         description: Diploma de ingresso do servidor no serviço público
-  - name: servidores_cadastro
+  - name: cadastro_servidores
     description: Informações de cadastro dos servidores civis e militares
     columns:
       - name: ano

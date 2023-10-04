@@ -1,6 +1,7 @@
 {{
     config(
         schema = 'br_cgu_servidores_executivo_federal',
+        alias = 'remuneracao',
         materialized='table',
         partition_by={
             'field': 'ano',
@@ -106,4 +107,4 @@ select
         replace(total_verba_indenizatoria_usd, ",", ".") as float64
     ) total_verba_indenizatoria_usd,
     safe_cast(origem as string) origem,
-from `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.remuneracao` as t
+from `basedosdados-dev.br_cgu_servidores_executivo_federal_staging.remuneracao` as t

@@ -1,6 +1,7 @@
 {{
     config(
         schema = 'br_cgu_servidores_executivo_federal',
+        alias = 'cadastro_servidores',
         materialized='table',
         partition_by={
             'field': 'ano',
@@ -113,5 +114,5 @@ select
     (case when sigla_uf in ("-1", "-3") then null else sigla_uf end) as sigla_uf,
     safe_cast(origem as string) origem,
 from
-    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.servidores_cadastro`
+    `basedosdados-dev.br_cgu_servidores_executivo_federal_staging.cadastro_servidores`
     as t
