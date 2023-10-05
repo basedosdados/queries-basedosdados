@@ -49,7 +49,15 @@ select
     safe_cast(padrao_cargo as string) padrao_cargo,
     safe_cast(safe_cast(nivel_cargo as float64) as string) nivel_cargo,
     safe_cast(sigla_funcao as string) sigla_funcao,
-    safe_cast(nivel_funcao as string) nivel_funcao,
+    safe_cast(
+        (
+            case
+                when safe_cast(safe_cast(nivel_funcao as float64) as string) is null
+                then nivel_funcao
+                else cast(cast(nivel_funcao as float64) as string)
+            end
+        ) as string
+    ) nivel_funcao,
     safe_cast(funcao as string) funcao,
     safe_cast(id_atividade as string) id_atividade,
     safe_cast(atividade as string) atividade,
