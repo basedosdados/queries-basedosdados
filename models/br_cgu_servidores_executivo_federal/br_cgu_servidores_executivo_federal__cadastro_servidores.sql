@@ -35,9 +35,19 @@ select
     safe_cast(matricula as string) matricula,
     safe_cast(descricao_cargo as string) descricao_cargo,
     safe_cast(classe_cargo as string) classe_cargo,
-    safe_cast(referencia_cargo as string) referencia_cargo,
+    safe_cast(
+        (
+            case
+                when referencia_cargo = "-1.0"
+                then "-1"
+                when referencia_cargo = "0.0"
+                then "0"
+                else referencia_cargo
+            end
+        ) as string
+    ) referencia_cargo,
     safe_cast(padrao_cargo as string) padrao_cargo,
-    safe_cast(nivel_cargo as string) nivel_cargo,
+    safe_cast(safe_cast(nivel_cargo as float64) as string) nivel_cargo,
     safe_cast(sigla_funcao as string) sigla_funcao,
     safe_cast(nivel_funcao as string) nivel_funcao,
     safe_cast(funcao as string) funcao,
