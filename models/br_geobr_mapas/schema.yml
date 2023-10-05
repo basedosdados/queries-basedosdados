@@ -359,11 +359,11 @@ models:
       - name: indicador_faixa_fronteira
         description: Indica se é faixa de fronteira
       - name: id_unidade_administrativa
-        description: ID da Unidade Admininistrativa
+        description: ID da Unidade Administrativa
       - name: sigla_unidade_administrativa
-        description: Sigla da Unidade Admininistrativa
+        description: Sigla da Unidade Administrativa
       - name: unidade_administrativa
-        description: Nome da Unidade Admininistrativa   
+        description: Nome da Unidade Administrativa   
       - name: geometria
         description: Polígono da Terra Indígena
 
