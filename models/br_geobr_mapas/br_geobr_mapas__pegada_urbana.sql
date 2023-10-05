@@ -6,8 +6,8 @@
     )
  }}
 SELECT 
-SAFE_CAST(id_pegada_urbana AS STRING) id_pegada_urbana,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(REPLACE(id_pegada_urbana,".0","") AS STRING) id_pegada_urbana,
+SAFE_CAST(REPLACE(id_municipio,".0","") AS STRING) id_municipio,
 SAFE_CAST(densidade AS STRING) densidade,
 SAFE_CAST(tipo AS STRING) tipo,
 SAFE_CAST(area AS FLOAT64) area,

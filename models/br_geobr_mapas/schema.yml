@@ -347,7 +347,7 @@ models:
       - name: nome_municipio
         description: Lista de nome dos Municípios IBGE - 7 Dígitos
       - name: sigla_uf
-        description: Sigla da Unidade da Federação
+        description: Lista de Siglas da Unidade da Federação
       - name: area
         description: Área da região
       - name: fase
