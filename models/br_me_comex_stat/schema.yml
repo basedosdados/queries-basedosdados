@@ -20,27 +20,6 @@ models:
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
-
-  - name: municipio_exportacao_atualizado
-    description: Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4)
-    columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: id_sh4
-        description: ID Sistema Harmonizado
-      - name: id_pais
-        description: ID País
-      - name: sigla_uf
-        description: Sigla da Unidade da Federação
-      - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos	
-      - name: peso_liquido_kg
-        description: Peso Líquido
-      - name: valor_fob_dolar
-        description: Valor Livre a Bordo
-
   - name: municipio_importacao
     description: Base de dados detalhada por município da empresa importadora e Posição do Sistema Harmonizado (SH4)
     columns:
@@ -60,27 +39,6 @@ models:
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
-
-  - name: municipio_importacao_atualizado
-    description: Base de dados detalhada por município da empresa importadora e Posição do Sistema Harmonizado (SH4)
-    columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: id_sh4
-        description: ID Sistema Harmonizado
-      - name: id_pais
-        description: ID País
-      - name: sigla_uf
-        description: Sigla da Unidade da Federação
-      - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos	
-      - name: peso_liquido_kg
-        description: Peso Líquido
-      - name: valor_fob_dolar
-        description: Valor Livre a Bordo
-
   - name: ncm_importacao
     description: Base de dados dos produtos importados pelo Brasil segundo a Nomenclatura Comum do Mercosul
     columns:
@@ -110,37 +68,6 @@ models:
         description: Valor do Frete
       - name: valor_seguro
         description: Valor do Seguro
-        
-  - name: ncm_importacao_atualizado
-    description: Base de dados dos produtos importados pelo Brasil segundo a Nomenclatura Comum do Mercosul
-    columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: id_ncm
-        description: 	ID Produto - Nomenclatura Comum do Mercosul
-      - name: id_unidade
-        description: ID Unidade
-      - name: id_pais
-        description: ID País	
-      - name: sigla_uf_ncm
-        description: 	Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
-      - name: id_via
-        description: ID Via de Transporte
-      - name: id_urf
-        description: ID da URF de embarque/desembarque
-      - name: quantidade_estatistica
-        description: Quantidade Estatística
-      - name: peso_liquido_kg
-        description: Peso Líquido
-      - name: valor_fob_dolar
-        description: Valor Livre a Bordo
-      - name: valor_frete
-        description: Valor do Frete
-      - name: valor_seguro
-        description: Valor do Seguro
-        
   - name: ncm_exportacao
     description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
     columns:
@@ -166,33 +93,6 @@ models:
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
-
-  - name: ncm_exportacao_atualizado
-    description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
-    columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: id_ncm
-        description: 	ID Produto - Nomenclatura Comum do Mercosul
-      - name: id_unidade
-        description: ID Unidade
-      - name: id_pais
-        description: ID País	
-      - name: sigla_uf_ncm
-        description: 	Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
-      - name: id_via
-        description: ID Via de Transporte
-      - name: id_urf
-        description: ID da URF de embarque/desembarque
-      - name: quantidade_estatistica
-        description: Quantidade Estatística
-      - name: peso_liquido_kg
-        description: Peso Líquido
-      - name: valor_fob_dolar
-        description: Valor Livre a Bordo
-
   - name: dicionario
     description: Dicionário de dados.
     columns:
