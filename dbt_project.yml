@@ -69,7 +69,22 @@ models:
       +schema: br_bcb_agencia
     br_bcb_estban:
       +materialized: table
-      +schema: br_bcb_estban 
+      +schema: br_bcb_estban
+    br_bcb_sicor:
+      +materialized: table
+      +schema: br_bcb_sicor  
+    br_bcb_taxa_cambio:
+      +materialized: table
+      +schema: br_bcb_taxa_cambio 
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_bcb_taxa_selic:
+      +materialized: table
+      +schema: br_bcb_taxa_selic 
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
@@ -82,6 +97,12 @@ models:
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
+    br_ce_fortaleza_sefin_iptu:
+      +materialized: table
+      +schema: br_ce_fortaleza_sefin_iptu
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
@@ -100,9 +121,18 @@ models:
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
+    br_fbsp_absp:
+      +materialized: table
+      +schema: br_fbsp_absp
     br_fgv_igp:
       +materialized: table
       +schema: br_fgv_igp
+    br_geobr_mapas:
+      +materialized: table
+      +schema: br_geobr_mapas
+    br_ibge_censo_demografico:
+      +materialized: table
+      +schema: br_ibge_censo_demografico     
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
@@ -115,6 +145,12 @@ models:
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
+    br_inep_censo_educacao_superior:
+      +materialized: table
+      +schema: br_inep_censo_educacao_superior
+    br_inep_enem:
+      +materialized: table
+      +schema: br_inep_enem
     br_inep_saeb:
       +materialized: table
       +schema: br_inep_saeb
@@ -136,6 +172,12 @@ models:
     br_mercadolivre_ofertas:
       +materialized: table
       +schema: br_mercadolivre_ofertas
+      +post-hook: 
+        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
+        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_mg_belohorizonte_smfa_iptu:
+      +materialized: table
+      +schema: br_mg_belohorizonte_smfa_iptu
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
@@ -178,12 +220,18 @@ models:
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_stf_corte_aberta:
+      +materialized: table
+      +schema: br_stf_corte_aberta
     br_tse_eleicoes:
       +materialized: table
       +schema: br_tse_eleicoes
     br_tse_eleicoes_2022:
       +materialized: table
       +schema: br_tse_eleicoes_2022
+    br_rf_cafir:
+      +materialized: table
+      +schema: br_rf_cafir
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
@@ -193,6 +241,9 @@ models:
     world_iea_pirls:
       +materialized: table
       +schema: world_iea_pirls
+    world_wb_mides:
+      +materialized: table
+      +schema: world_wb_mides
     test_dataset:
       +materialized: table
       +schema: test_dataset

@@ -11,7 +11,16 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    labels = {'project_id': 'basedosdados', 'tema': 'economia'},
+    post_hook = [
+        'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)',
+        'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                    ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 0)']              )
 }} 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -43,4 +52,3 @@ SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
 FROM `basedosdados-staging.br_me_caged_staging.microdados_movimentacao_excluida` a
 LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` b
   ON a.id_municipio =  b.id_municipio_6
-WHERE (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)  

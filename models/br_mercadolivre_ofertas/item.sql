@@ -92,12 +92,11 @@ FROM
   FROM 
     tabela_ordenada 
 
-)
+), tabela_desconto_calculado AS
 
-SELECT 
+(SELECT 
   data_consulta,
   hora_consulta,
-  secao_site,
   id_item,
   titulo,
   id_vendor as id_vendedor,
@@ -120,6 +119,7 @@ SELECT
       ELSE desconto
     END AS INT
   ) AS desconto,
+  CAST(100 - (100 * preco_final / preco_original) AS int64) desconto_caclculado,
   ROUND(
     CASE
       WHEN preco_final IS NULL THEN preco_original * (100 - desconto) / 100
@@ -140,4 +140,24 @@ FROM
 ON a.vendedor = b.nome and data_consulta = PARSE_DATE('%Y-%m-%d', dia)
 WHERE NOT (preco_original IS NULL AND preco_final IS NULL)
   AND NOT (preco_final IS NULL AND desconto IS NULL)
-  AND NOT (preco_original IS NULL AND desconto IS NULL)
+  AND NOT (preco_original IS NULL AND desconto IS NULL))
+SELECT 
+  data_consulta,
+  hora_consulta,
+  id_item,
+  titulo,
+  id_vendedor,
+  vendedor,
+  categoria_principal,
+  outras_categorias,
+  caracteristicas,
+  envio_nacional,
+  quantidade_avaliacao,
+  avaliacao, 
+  preco_original,
+  CASE 
+    WHEN ABS(desconto_caclculado - desconto) > 3 THEN desconto_caclculado
+    ELSE desconto
+  END as desconto,
+  preco_final
+FROM tabela_desconto_calculado

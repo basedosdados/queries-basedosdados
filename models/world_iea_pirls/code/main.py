@@ -4,6 +4,7 @@ import requests
 import zipfile
 import io
 import os
+from pathlib import Path
 import basedosdados as bd
 
 from pirls_utils import LABELS_FROM_CONTEXT_QUESTIONNAIRES, COUNTRY_CODES, RENAMES
@@ -432,4 +433,28 @@ tb.create(
     if_table_exists="replace",
     if_storage_data_exists="replace",
     source_format="parquet",
+)
+
+# Upload auxiliares files
+st = bd.Storage(dataset_id="world_iea_pirls", table_id="")
+
+if not os.path.exists(f"{CWD}/extra/auxiliary_files/"):
+    os.mkdir(f"{CWD}/extra/auxiliary_files/")
+
+with zipfile.ZipFile(
+    f"{CWD}/extra/auxiliary_files/auxiliary_files.zip", "w", zipfile.ZIP_DEFLATED
+) as zipf:
+    for file in [
+        Path(f"{INPUT}/{file}")
+        for file in [
+            "item_information.xlsx",
+            "P21_Codebook.xlsx",
+            "P21Br_Codebook.xlsx",
+        ]
+    ]:
+        zipf.write(file, file.relative_to(Path(INPUT)))
+
+st.upload(
+    f"{CWD}/extra/auxiliary_files/auxiliary_files.zip",
+    mode="auxiliary_files",
 )

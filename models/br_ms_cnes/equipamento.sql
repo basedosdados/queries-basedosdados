@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -9,7 +9,18 @@
         "start": 2005,
         "end": 2023,
         "interval": 1}
-     }  
+     },
+     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+     post_hook = [ 
+      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+       ON  {{this}}
+                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
+     ]   
     )
  }}
 
@@ -24,7 +35,7 @@ cnes_add_muni AS (
   SELECT *
   FROM raw_cnes_equipamento  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
-  FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio`) as mun
+  FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
   ON raw_cnes_equipamento.CODUFMUN = mun.id_municipio_6
 )
 SELECT 
@@ -40,7 +51,8 @@ SAFE_CAST(QT_USO AS STRING) AS quantidade_equipamentos_ativos,
 SAFE_CAST(IND_SUS AS INT64) AS indicador_equipamento_disponivel_sus,
 SAFE_CAST(IND_NSUS AS INT64) AS indicador_equipamento_indisponivel_sus
 FROM cnes_add_muni 
-WHERE concat(ano,mes) NOT IN ('20233','20234', '20235', '20236', '20237', '20238','20239','202310')
-
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}
 
 
