@@ -17,6 +17,7 @@
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
                     FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]) 
 }}
+
 SELECT 
   SAFE_CAST(data AS DATE) data,
   SAFE_CAST(lpad(cnpj,14,"0") AS STRING) cnpj,
