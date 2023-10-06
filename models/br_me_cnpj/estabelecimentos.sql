@@ -1,7 +1,7 @@
 {{
   config(
     schema='br_me_cnpj',
-    materialized='incremental',
+    materialized='table',
     partition_by={
       "field": "data",
       "data_type": "date",
@@ -17,8 +17,8 @@
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
                     FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]) 
 }}
-WITH cnpj_estabelecimentos AS 
-(SELECT 
+
+SELECT 
   SAFE_CAST(data AS DATE) data,
   SAFE_CAST(lpad(cnpj,14,"0") AS STRING) cnpj,
   SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
@@ -26,7 +26,7 @@ WITH cnpj_estabelecimentos AS
   SAFE_CAST(lpad(cnpj_dv, 2, '0') AS STRING) cnpj_dv,
   SAFE_CAST(identificador_matriz_filial AS STRING) identificador_matriz_filial,
   SAFE_CAST(nome_fantasia AS STRING) nome_fantasia,
-  SAFE_CAST(situacao_cadastral AS STRING) situacao_cadastral,
+  SAFE_CAST(CAST(situacao_cadastral AS INT64) AS STRING) situacao_cadastral,
   SAFE_CAST(data_situacao_cadastral AS DATE) data_situacao_cadastral,
   SAFE_CAST(motivo_situacao_cadastral AS STRING) motivo_situacao_cadastral,
   SAFE_CAST(nome_cidade_exterior AS STRING) nome_cidade_exterior,
@@ -54,8 +54,5 @@ WITH cnpj_estabelecimentos AS
   SAFE_CAST(data_situacao_especial AS DATE) data_situacao_especial
 FROM basedosdados-staging.br_me_cnpj_staging.estabelecimentos a
 LEFT JOIN basedosdados.br_bd_diretorios_brasil.municipio b
-    ON a.id_municipio_rf = b.id_municipio_rf)
-SELECT * FROM cnpj_estabelecimentos
-{% if is_incremental() %} 
-WHERE data > (SELECT MAX(data) FROM {{ this }} )
-{% endif %}
+    ON a.id_municipio_rf = b.id_municipio_rf
+
