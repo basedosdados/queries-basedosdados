@@ -12,15 +12,16 @@
     },
     cluster_by = ["mes", "sigla_uf"],
     labels = {'project_id': 'basedosdados', 'tema': 'economia'},
+    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     post_hook = [
         'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
                     GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)',
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)',
         'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
                     ON  {{this}}
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 0)']              )
+                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 0)']              )
 }} 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -34,7 +35,10 @@ SAFE_CAST(cbo_2002 AS STRING) cbo_2002,
 SAFE_CAST(categoria AS STRING) categoria,
 SAFE_CAST(grau_instrucao AS STRING) grau_instrucao,
 SAFE_CAST(REPLACE(idade,'.0','') AS INT64) idade,
-SAFE_CAST(REPLACE(horas_contratuais,',00','') AS INT64) horas_contratuais,
+CASE
+  WHEN horas_contratuais LIKE '%,%' THEN CAST(REPLACE(horas_contratuais, ',', '.') AS FLOAT64)
+  ELSE CAST(horas_contratuais AS FLOAT64)
+END AS horas_contratuais,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(tipo_empregador AS STRING) tipo_empregador,
