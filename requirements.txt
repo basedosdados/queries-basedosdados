@@ -1,3 +1,4 @@
-dbt==0.21.1
+dbt-core==1.5.6
+dbt-bigquery==1.5.6
+dbt-rpc==0.4.2
 markupsafe==2.0.1
-json-rpc<1.14.0
