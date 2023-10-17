@@ -8,6 +8,11 @@ models:
         description: Anos da temporada do campeonato
       - name: data
         description: Data da partida
+        tests:
+          - not_null
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: horario
         description: Horário da partida
       - name: fase
