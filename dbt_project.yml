@@ -156,7 +156,10 @@ models:
       +schema: br_inep_saeb
     br_inmet_bdmep:
       +materialized: table
-      +schema: br_inmet_bdmep     
+      +schema: br_inmet_bdmep
+    br_inpe_prodes:
+      +materialized: table
+      +schema: br_inpe_prodes
     br_jota:
       +materialized: table
       +schema: br_jota

@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: desmatamento_municipio
+    description: Insert `desmatamento_municipio` table description here
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: bioma
+        description: Bioma
+      - name: area
+        description: Área
+      - name: desmatamento
+        description: Área Desmatada Total
+      - name: floresta
+        description: Área de Floresta
+      - name: nao_floresta
+        description: Área de Não-Floresta
+      - name: hidrografia
+        description: Área de Hidrografia
