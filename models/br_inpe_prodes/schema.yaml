@@ -7,16 +7,16 @@ models:
       - name: ano
         description: Ano
       - name: id_municipio
-        description: ID Munic�pio - IBGE 7 D�gitos
+        description: ID Município - IBGE 7 Dígitos
       - name: bioma
         description: Bioma
       - name: area
-        description: �rea
+        description: Área
       - name: desmatamento
-        description: �rea Desmatada Total
+        description: Área Desmatada Total
       - name: floresta
-        description: �rea de Floresta
+        description: Área de Floresta
       - name: nao_floresta
-        description: �rea de N�o-Floresta
+        description: Área de Não-Floresta
       - name: hidrografia
-        description: �rea de Hidrografia
+        description: Área de Hidrografia
