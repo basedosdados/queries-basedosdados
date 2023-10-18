@@ -1,70 +1,70 @@
 version: 2
 
 models:
-  - name: br_fbsp_absp
-    description: A base contempla as informa√ß√µes do Anu√°rio de Seguran√ßa P√∫blica a partir de 2007 com as estat√≠sticas criminais compatibilizadas entre anos, com informa√ß√µes acerca dos homic√≠dios, tr√°fico, furto e roubo, al√©m da for√ßa policial, entre outros ao n√≠vel das unidades da federa√ß√£o.
+  - name: uf
+    description: Insert `uf` table description here
     columns:
       - name: ano
         description: Ano
       - name: sigla_uf
-        description: Sigla da Unidade da Federa√ß√£o
+        description: Sigla da Unidade da FederaÁ„o
       - name: quantidade_cvli
         description: Quantidade de Crimes violentos letais intencionais (CVLI)
       - name: quantidade_feminicidio
-        description: Quantidade de Feminic√≠dios
+        description: Quantidade de FeminicÌdios
       - name: quantidade_ocorrencia_homicidio_doloso
-        description: Quantidade de Homic√≠dio doloso - N¬∞ ocorr√™ncias
+        description: Quantidade de HomicÌdio doloso - N∞ ocorrÍncias
       - name: quantidade_vitima_homicidio_doloso
-        description: Quantidade de Homic√≠dio doloso - N¬∞ v√≠timas
+        description: Quantidade de HomicÌdio doloso - N∞ vÌtimas
       - name: quantidade_latrocinio
-        description: Quantidade de Latroc√≠nio
+        description: Quantidade de LatrocÌnio
       - name: quantidade_lesao_corporal_seguida_de_morte
-        description: Quantidade de Les√£o corporal seguida de morte
+        description: Quantidade de Les„o corporal seguida de morte
       - name: quantidade_morte_a_esclarecer
         description: Quantidade de Mortes a esclarecer
       - name: quantidade_morte_intervencao_policial_civil_servico
-        description: Quantidade de Mortes decorrentes de interven√ß√µes de Policiais
+        description: Quantidade de Mortes decorrentes de intervenÁıes de Policiais
             Civis em servico
       - name: quantidade_morte_intervencao_policial_civil_fora_servico
-        description: Quantidade de Mortes decorrentes de interven√ß√µes de Policiais
+        description: Quantidade de Mortes decorrentes de intervenÁıes de Policiais
             Civis fora de servico
       - name: quantidade_morte_intervencao_policial_militar_servico
-        description: Quantidade de Mortes decorrentes de interven√ß√µes de Policiais
+        description: Quantidade de Mortes decorrentes de intervenÁıes de Policiais
             Militares em servico
       - name: quantidade_morte_intervencao_policial_militar_fora_servico
-        description: Quantidade de Mortes decorrentes de interven√ß√µes de Policiais
+        description: Quantidade de Mortes decorrentes de intervenÁıes de Policiais
             Militares fora de servico
       - name: quantidade_morte_violenta_intencional
         description: Quantidade de Mortes Violentas Intencionais
       - name: quantidade_policial_civil_morto_confronto_servico
         description: Quantidade de Policiais Civis mortos em confronto em servico
       - name: quantidade_policial_civil_morto_confronto_fora_servico
-        description: Quantidade de Policiais Civis mortos em confronto ou por les√£o
-            n√£o natural fora de servico
+        description: Quantidade de Policiais Civis mortos em confronto ou por les„o
+            n„o natural fora de servico
       - name: quantidade_policial_militar_morto_confronto_servico
         description: Quantidade de Policiais Militares mortos em confronto em servico
       - name: quantidade_policial_militar_morto_confronto_fora_servico
         description: Quantidade de Policiais Militares mortos em confronto ou por
-            les√£o n√£o natural fora de servico
+            les„o n„o natural fora de servico
       - name: quantidade_suicidio
-        description: Quantidade de Suic√≠dio
+        description: Quantidade de SuicÌdio
       - name: quantidade_estupro
-        description: Quantidade de Estupro (incluindo Estupro de Vulner√°vel)
+        description: Quantidade de Estupro (incluindo Estupro de Vulner·vel)
       - name: quantidade_tentativa_estupro
         description: Quantidade de Tentativa de estupro
       - name: quantidade_furto_veiculo
-        description: Quantidade de Furto de ve√≠culo
+        description: Quantidade de Furto de veÌculo
       - name: quantidade_roubo_instituicao_financeira
-        description: Quantidade de Roubo a institui√ß√£o financeira
+        description: Quantidade de Roubo a instituiÁ„o financeira
       - name: quantidade_roubo_carga
         description: Quantidade de Roubo de carga
       - name: quantidade_roubo_de_veiculo
-        description: Quantidade de Roubo de ve√≠culo
+        description: Quantidade de Roubo de veÌculo
       - name: quantidade_arma_fogo_apreendida
         description: Quantidade de Armas de fogo apreendidas
       - name: quantidade_registro_pessoa_desaparecida
         description: Quantidade de Registros de pessoas desaparecidas
       - name: quantidade_populacao_sistema_penitenciario
-        description: Quantidade de Popula√ß√£o do sistema penitenci√°rio
+        description: Quantidade de PopulaÁ„o do sistema penitenci·rio
       - name: despesa_empenhada_seguranca_publica
-        description: Quantidade de Despesas empenhadas na Fun√ß√£o Seguran√ßa P√∫blica
+        description: Quantidade de Despesas empenhadas na FunÁ„o SeguranÁa P˙blica
