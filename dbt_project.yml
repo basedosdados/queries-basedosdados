@@ -11,10 +11,10 @@ profile: "default"
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-source-paths: ["models"]
+model-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
-data-paths: ["data"]
+seed-paths: ["data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
@@ -241,6 +241,9 @@ models:
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
+    mundo_transfermarkt_competicoes_internacionais:
+      +materialized: table
+      +schema: mundo_transfermarkt_competicoes_internacionais
     world_iea_pirls:
       +materialized: table
       +schema: world_iea_pirls
