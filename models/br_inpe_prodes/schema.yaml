@@ -2,21 +2,21 @@ version: 2
 
 models:
   - name: desmatamento_municipio
-    description: Insert `desmatamento_municipio` table description here
+    description: Apresenta o desmatamento dos municipios e outras variÃ¡veis na AmazÃ´nia Legal a partir do ano 2000
     columns:
       - name: ano
         description: Ano
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
+        description: ID Municï¿½pio - IBGE 7 Dï¿½gitos
       - name: bioma
         description: Bioma
       - name: area
-        description: Área
+        description: ï¿½rea
       - name: desmatamento
-        description: Área Desmatada Total
+        description: ï¿½rea Desmatada Total
       - name: floresta
-        description: Área de Floresta
+        description: ï¿½rea de Floresta
       - name: nao_floresta
-        description: Área de Não-Floresta
+        description: ï¿½rea de Nï¿½o-Floresta
       - name: hidrografia
-        description: Área de Hidrografia
+        description: ï¿½rea de Hidrografia
