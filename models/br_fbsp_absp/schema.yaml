@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: br_fbsp_absp
+  - name: br_fbsp_absp__uf
     description: A base contempla as informações do Anuário de Segurança Pública a partir de 2007 com as estatísticas criminais compatibilizadas entre anos, com informações acerca dos homicídios, tráfico, furto e roubo, além da força policial, entre outros ao nível das unidades da federação.
     columns:
       - name: ano
