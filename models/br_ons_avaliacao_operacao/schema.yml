@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: reservatorio
-    description: Dados cadastrais dos reservatórios
+    description: Dados cadastrais dos reservatórios.
     columns:
       - name: data
         description: Data de entrada em operação do reservatório
@@ -292,4 +292,40 @@ models:
       - name: proporcao_contribuicao_energia_armazenada_maxima_sin
         description: Percentual da contribuição do reservatório para a Energia Armazenada
             (EAR) máxima do Sistema Interligado Nacional (SIN)
-  
+  - name: restricao_operacao_usinas_eolicas
+    description: Informações associadas à apuração das restrições de operação por Constrained-off nas usinas eólicas classificadas nas modalidades Tipo I, Tipo II-B e Tipo II-C
+    columns:
+      - name: data
+        description: Data de referência da medição
+      - name: hora
+        description: Hora de referência da medição
+      - name: ano
+        description: Ano de refêrencia da medição
+      - name: mes
+        description: Mês de referência da medição
+      - name: sigla_uf
+        description: Sigla da unidade da federação da usina
+      - name: id_subsistema
+        description: Identificador do subsistema da usina
+      - name: subsistema
+        description: Nome do subsistema da usina
+      - name: id_ons
+        description: Identificador da usina ou conjunto do Operador Nacional do Sistema Elétrico (ONS)
+      - name: id_empreendimento_aneel
+        description: Identificador único do empreendimento de geração da Agência Nacional de Energia Elétrica (ANEEL)
+      - name: usina
+        description: Nome da usina
+      - name: tipo_razao_restricao
+        description: Código do tipo de razão da restrição
+      - name: tipo_origem_restricao
+        description: Código do tipo de origem da restrição
+      - name: geracao
+        description: Valor da geração de energia
+      - name: geracao_limitada
+        description: Valor da geração limitada por alguma restrição
+      - name: disponibilidade
+        description: Valor da disponibilidade verificada no tempo real
+      - name: geracao_referencia
+        description: Valor da geração de referência (ou estimada)
+      - name: geracao_referencia_final
+        description: Valor da geração de referência final  

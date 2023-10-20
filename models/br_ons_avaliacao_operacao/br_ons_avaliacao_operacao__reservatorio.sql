@@ -1,3 +1,8 @@
+{{ config(
+    alias='reservatorio', 
+    schema='br_ons_avaliacao_operacao') 
+}}
+
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,

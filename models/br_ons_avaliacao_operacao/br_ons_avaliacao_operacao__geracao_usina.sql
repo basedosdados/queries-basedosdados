@@ -1,3 +1,15 @@
+{{ config(
+    alias='geracao_usina', 
+    schema='br_ons_avaliacao_operacao',
+    partition_by={
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2000,
+        "end": 2024,
+        "interval": 1}
+     }) 
+}}
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
