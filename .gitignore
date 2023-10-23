@@ -1,14 +1,18 @@
-**/test.py
-target/
-dbt_modules/
-logs/
+# Generic
 .vscode/
 .env
 .venv
 .DS_store
-pyproject.toml
+logs/
+# dbt
+target/
+dbt_modules/
+dbt_packages/
+# Python
+**/test.py
 __pycache__/
-
+pyproject.toml
+#
 models/*/tmp/
 models/*/input/
 models/*/output/
