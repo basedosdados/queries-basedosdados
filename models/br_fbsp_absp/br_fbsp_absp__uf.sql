@@ -1,8 +1,5 @@
 {{
-    config(
-        alias='uf',
-        schema='br_fbsp_absp'
-    )
+    config(alias='uf', schema='br_fbsp_absp')
 }}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,

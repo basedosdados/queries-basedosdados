@@ -31,8 +31,8 @@ spec:
               mountPath: /credentials-prod/
               readOnly: true
           command: 
-            - "dbt"
-            - "rpc"
+            - "dbt-rpc"
+            - "serve"
             - "--profiles-dir"
             - "."
             - "--profile"
@@ -85,8 +85,8 @@ spec:
               mountPath: /credentials-prod/
               readOnly: true
           command: 
-            - "dbt"
-            - "rpc"
+            - "dbt-rpc"
+            - "serve"
             - "--profiles-dir"
             - "."
             - "--profile"
