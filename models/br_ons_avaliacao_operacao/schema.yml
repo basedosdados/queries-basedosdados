@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: reservatorio
+  - name: br_ons_avaliacao_operacao__reservatorio
     description: Dados cadastrais dos reservatórios.
     columns:
       - name: data
@@ -57,7 +57,7 @@ models:
         description: Latitude do reservatório
       - name: longitude
         description: Longitude do reservatório
-  - name: geracao_usina
+  - name: br_ons_avaliacao_operacao__geracao_usina
     description: Geração verificada de usinas, conjuntos de usinas e grupos de pequenas usinas em base horária. Os Conjuntos são formados por usinas classificadas na modalidade Tipo II-C, conforme Submódulo 7.2 dos Procedimentos de Rede e são estabelecidos em Ajustamentos Operativos, disponíveis no MPO. Os grupos de pequenas usinas são formados por usinas Tipo III, que não possuem relacionamento com o ONS, e os dados são referentes a previsões de geração.
     columns:
       - name: data
@@ -87,7 +87,7 @@ models:
         description: Tipo de combustível utilizado pela usina
       - name: geracao
         description: Geração de Energia
-  - name: geracao_termica_motivo_despacho
+  - name: br_ons_avaliacao_operacao__geracao_termica_motivo_despacho
     description: Dados programados e verificados de geração de usinas térmicas despachadas pelo ONS por motivo de despacho em base horária.
     columns:
       - name: data
@@ -188,11 +188,11 @@ models:
       - name: geracao_constrained_off_verificada
         description: Restrição verificada de geração em usina despachada por ordem
             de mérito.
-  - name: energia_natural_afluente
+  - name: br_ons_avaliacao_operacao__energia_natural_afluente
     description: Dados das grandezas de energia natural afluente (ENA) com periodicidade diária por Reservatório. A Energia Natural Afluente (ENA) Bruta representa a energia produzível pela usina e é calculada pelo produto das vazões naturais aos reservatórios com as produtividades a 65% dos volumes úteis. A ENA Armazenável considera as vazões naturais descontadas das vazões vertidas nos reservatórios.
     columns:
       - name: data
-        description: 'Data '
+        description: Data
       - name: ano
         description: Ano
       - name: mes
@@ -225,7 +225,7 @@ models:
       - name: proporcao_energia_natural_afluente_armazenavel
         description: Valor de Energia Natural Afluente (ENA) armazenável, em % da
             média de longo termo (MLT)
-  - name: energia_armazenada_reservatorio
+  - name: br_ons_avaliacao_operacao__energia_armazenada_reservatorio
     description: Dados das grandezas de energia armazenada (EAR) em periodicidade diária por Reservatórios. A Energia Armazenada (EAR) representa a energia associada ao volume de água disponível nos reservatórios que pode ser convertido em geração na própria usina e em todas as usinas à jusante na cascata. A grandeza de EAR leva em conta nível verificado nos reservatórios na data de referência. A grandeza de EAR máxima representa a capacidade de armazenamento caso todos os reservatórios do sistema estivessem cheios. A grandeza de EAR para o subsistema à jusante considera a utilização da água do reservatório para produzir energia em uma usina à jusante que está em um subsistema diferente.
     columns:
       - name: data
@@ -292,7 +292,7 @@ models:
       - name: proporcao_contribuicao_energia_armazenada_maxima_sin
         description: Percentual da contribuição do reservatório para a Energia Armazenada
             (EAR) máxima do Sistema Interligado Nacional (SIN)
-  - name: restricao_operacao_usinas_eolicas
+  - name: br_ons_avaliacao_operacao__restricao_operacao_usinas_eolicas
     description: Informações associadas à apuração das restrições de operação por Constrained-off nas usinas eólicas classificadas nas modalidades Tipo I, Tipo II-B e Tipo II-C
     columns:
       - name: data
