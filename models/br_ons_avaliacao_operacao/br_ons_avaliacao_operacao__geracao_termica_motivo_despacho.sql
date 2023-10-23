@@ -1,6 +1,7 @@
 {{ config(
     alias='geracao_termica_motivo_despacho', 
     schema='br_ons_avaliacao_operacao',
+    materialized = 'incremental',
     partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -10,6 +11,8 @@
         "interval": 1}
      }) 
 }}
+
+WITH ons as (
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
@@ -47,3 +50,9 @@ SAFE_CAST(geracao_substituicao_verificada AS FLOAT64) geracao_substituicao_verif
 SAFE_CAST(geracao_unit_commitment_verificada AS FLOAT64) geracao_unit_commitment_verificada,
 SAFE_CAST(geracao_constrained_off_verificada AS FLOAT64) geracao_constrained_off_verificada
 FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_termica_motivo_despacho AS t
+)
+SELECT *
+FROM ons
+{% if is_incremental() %} 
+WHERE data > (SELECT max(data) FROM {{ this }} )
+{% endif %}

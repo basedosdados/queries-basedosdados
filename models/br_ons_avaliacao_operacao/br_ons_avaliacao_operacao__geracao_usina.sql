@@ -1,6 +1,7 @@
 {{ config(
     alias='geracao_usina', 
     schema='br_ons_avaliacao_operacao',
+    materialized = 'incremental',
     partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -10,6 +11,7 @@
         "interval": 1}
      }) 
 }}
+WITH ons as (
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
@@ -25,3 +27,9 @@ SAFE_CAST(tipo_modalidade_operacao AS STRING) tipo_modalidade_operacao,
 SAFE_CAST(tipo_combustivel AS STRING) tipo_combustivel,
 SAFE_CAST(geracao AS FLOAT64) geracao
 FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_usina AS t
+)
+SELECT *
+FROM ons
+{% if is_incremental() %} 
+WHERE data > (SELECT max(data) FROM {{ this }} )
+{% endif %}

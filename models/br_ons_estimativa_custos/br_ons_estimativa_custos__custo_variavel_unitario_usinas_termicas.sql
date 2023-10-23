@@ -1,7 +1,17 @@
 {{ config(
     alias='custo_variavel_unitario_usinas_termicas', 
-    schema='br_ons_estimativa_custos') 
+    schema='br_ons_estimativa_custos',
+    materialized = 'incremental',
+    partition_by={
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2019,
+        "end": 2024,
+        "interval": 1}
+     })  
 }}
+WITH ons as (
 SELECT
 SAFE_CAST(data_inicio AS DATE) data_inicio,
 SAFE_CAST(ano AS INT64) ano,
@@ -17,3 +27,9 @@ SAFE_CAST(subsistema AS STRING) subsistema,
 SAFE_CAST(usina AS STRING) usina,
 SAFE_CAST(custo_variavel_unitario AS FLOAT64) custo_variavel_unitario
 FROM basedosdados-staging.br_ons_estimativa_custos_staging.custo_variavel_unitario_usinas_termicas AS t
+)
+SELECT *
+FROM ons
+{% if is_incremental() %} 
+WHERE data_inicio > (SELECT max(data_inicio) FROM {{ this }} )
+{% endif %}

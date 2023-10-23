@@ -1,6 +1,7 @@
 {{ config(
     alias='restricao_operacao_usinas_eolicas', 
     schema='br_ons_avaliacao_operacao',
+    materialized = 'incremental',
     partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -10,6 +11,7 @@
         "interval": 1}
      }) 
 }}
+WITH ons as (
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
@@ -29,3 +31,9 @@ SAFE_CAST(disponibilidade AS FLOAT64) disponibilidade,
 SAFE_CAST(geracao_referencia AS FLOAT64) geracao_referencia,
 SAFE_CAST(geracao_referencia_final AS FLOAT64) geracao_referencia_final
 FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.restricao_operacao_usinas_eolicas AS t
+)
+SELECT *
+FROM ons
+{% if is_incremental() %} 
+WHERE data > (SELECT max(data) FROM {{ this }} )
+{% endif %}
