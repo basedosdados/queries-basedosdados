@@ -41,7 +41,8 @@ def get_flow_status_logs(flow_run_id: str, backend: Backend, auth_token: str):
         variables={"flow_run_id": flow_run_id},
         headers={"Authorization": f"Bearer {auth_token}"},
     )
-    message = response['log'][0]['message']
+    print(response)
+    message = response['log']['message']
     result = {}
     result['pass'] = int(re.findall("PASS=\d+", message)[0].split('=')[1])
     result['skip'] = int(re.findall("SKIP=\d+", message)[0].split('=')[1])
