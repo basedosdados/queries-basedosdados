@@ -11,35 +11,36 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'}
-  )
+    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'},
+    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
+                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
  }}
 SELECT
-  SAFE_CAST(ano AS INT64) ano,
-  SAFE_CAST(mes AS INT64) mes,
-  SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-  SAFE_CAST(id_municipio AS STRING) id_municipio,
-  SAFE_CAST(orgao AS STRING) orgao,
-  SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
-  SAFE_CAST(id_licitacao_bd AS STRING) id_licitacao_bd,
-  SAFE_CAST(id_licitacao AS STRING) id_licitacao,
-  SAFE_CAST(modalidade_licitacao AS STRING) modalidade_licitacao,
-  SAFE_CAST(id_empenho_bd AS STRING) id_empenho_bd,
-  SAFE_CAST(id_empenho AS STRING) id_empenho,
-  SAFE_CAST(numero AS STRING) numero,
-  SAFE_CAST(descricao AS STRING) descricao,
-  SAFE_CAST(modalidade AS STRING) modalidade,
-  SAFE_CAST(funcao AS STRING) funcao,
-  SAFE_CAST(subfuncao AS STRING) subfuncao,
-  SAFE_CAST(programa AS STRING) programa,
-  SAFE_CAST(acao AS STRING) acao,
-  SAFE_CAST(elemento_despesa AS STRING) elemento_despesa,
-  SAFE_CAST(valor_inicial AS FLOAT64) valor_inicial,
-  SAFE_CAST(valor_reforco AS FLOAT64) valor_reforco,
-  SAFE_CAST(valor_anulacao AS FLOAT64) valor_anulacao,
-  SAFE_CAST(valor_ajuste AS FLOAT64) valor_ajuste,
-  SAFE_CAST(valor_final AS FLOAT64) valor_final
+  ano                    INT64,
+  mes                    INT64,
+  data                   DATE,
+  sigla_uf               STRING,
+  id_municipio           STRING,
+  orgao                  STRING,
+  id_unidade_gestora     STRING,
+  id_licitacao_bd        STRING,
+  id_licitacao           STRING,
+  modalidade_licitacao   STRING,
+  id_empenho_bd          STRING,
+  id_empenho             STRING,
+  numero                 STRING,
+  descricao              STRING,
+  modalidade             STRING,
+  funcao                 STRING,
+  subfuncao              STRING,
+  programa               STRING,
+  acao                   STRING,
+  elemento_despesa       STRING,
+  valor_inicial          FLOAT64,
+  valor_reforco          FLOAT64,
+  valor_anulacao         FLOAT64,
+  valor_ajuste           FLOAT64,
+  valor_final            FLOAT64
 FROM (
 WITH empenhado_ce AS (
   SELECT
@@ -58,19 +59,19 @@ WITH empenhado_ce AS (
     SAFE_CAST (numero_empenho AS STRING) AS numero,
     SAFE_CAST (LOWER (descricao_empenho) AS STRING) AS descricao,
     SAFE_CAST (modalidade_empenho AS STRING) AS modalidade,
-    SAFE_CAST (codigo_funcao AS STRING) AS funcao,
-    SAFE_CAST (codigo_subfuncao AS STRING) AS subfuncao,
-    SAFE_CAST (codigo_programa AS STRING) AS programa,
-    SAFE_CAST (codigo_projeto_atividade AS STRING) AS acao,
-    SAFE_CAST (codigo_elemento_despesa AS STRING) AS modalidade_despesa,
+    SAFE_CAST (SAFE_CAST (codigo_funcao AS INT64) AS STRING) AS funcao,
+    SAFE_CAST (SAFE_CAST (codigo_subfuncao AS INT64) AS STRING) AS subfuncao,
+    SAFE_CAST (SAFE_CAST (codigo_programa AS INT64) AS STRING) AS programa,
+    SAFE_CAST (SAFE_CAST (codigo_projeto_atividade AS INT64) AS STRING) AS acao,
+    SAFE_CAST (SAFE_CAST (codigo_elemento_despesa AS INT64) AS STRING) AS modalidade_despesa,
     ROUND(SAFE_CAST (valor_empenhado AS FLOAT64),2) AS valor_inicial,
-  FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_ce e
+  FROM basedosdados-dev.world_wb_mides_staging.raw_empenho_ce e
 ),
   anulacao_ce AS (
     SELECT 
       SAFE_CAST (CONCAT(numero_empenho, ' ', TRIM(codigo_orgao), ' ', TRIM(codigo_unidade), ' ', geoibgeId, ' ', (SUBSTRING(data_emissao_empenho,6,2)), ' ', (SUBSTRING(data_emissao_empenho,3,2))) AS STRING) AS id_empenho_bd, 
       ROUND(SUM(SAFE_CAST (valor_anulacao AS FLOAT64)),2) AS valor_anulacao   
-    FROM basedosdados-staging.world_wb_mides_staging.raw_anulacao_ce
+    FROM basedosdados-dev.world_wb_mides_staging.raw_anulacao_ce
     GROUP BY 1
 ),
   frequencia_ce AS (
@@ -125,7 +126,7 @@ empenhado_mg AS (
     SAFE_CAST (CONCAT(id_empenho, ' ', orgao, ' ', id_municipio, ' ', (RIGHT(ano,2))) AS STRING) AS id_empenho_bd,
     SAFE_CAST (id_empenho AS STRING) AS id_empenho,
     SAFE_CAST (numero_empenho AS STRING) AS numero,
-    SAFE_CAST (descricao AS STRING) AS descricao,
+    SAFE_CAST (LOWER (descricao) AS STRING) AS descricao,
     SAFE_CAST (SUBSTRING (dsc_modalidade, 5,1) AS STRING) AS modalidade,
     SAFE_CAST (CAST(LEFT(dsc_funcao, 2) AS INT64) AS STRING) AS funcao,
     SAFE_CAST (CAST(LEFT(dsc_subfuncao, 3) AS INT64) AS STRING) AS subfuncao,
@@ -133,11 +134,11 @@ empenhado_mg AS (
     SAFE_CAST (CAST(LEFT(dsc_acao, 4) AS INT64) AS STRING) AS acao,
     SAFE_CAST (REPLACE(LEFT(elemento_despesa, 12), '.', '') AS STRING) AS elemento_despesa,
     ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64),2) AS valor_inicial,
-    ROUND(SAFE_CAST (valor_reforco AS FLOAT64),2) AS valor_reforco,
-    ROUND(SAFE_CAST (valor_anulacao AS FLOAT64),2) AS valor_anulacao,
+    ROUND(SAFE_CAST (IFNULL(valor_reforco,0) AS FLOAT64),2) AS valor_reforco,
+    ROUND(SAFE_CAST (IFNULL(valor_anulacao,0) AS FLOAT64),2) AS valor_anulacao,
     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64) + SAFE_CAST (valor_reforco AS FLOAT64) - SAFE_CAST (valor_anulacao AS FLOAT64),2) AS valor_final
-  FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_mg
+    ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64) + SAFE_CAST (IFNULL(valor_reforco,0) AS FLOAT64) - SAFE_CAST (IFNULL(valor_anulacao,0) AS FLOAT64),2) AS valor_final
+  FROM basedosdados-dev.world_wb_mides_staging.raw_empenho_mg
 ),
   dlic AS (
     SELECT 
@@ -193,8 +194,8 @@ empenhado_mg AS (
       SAFE_CAST (nu_Empenho AS STRING) AS numero,
       SAFE_CAST (LOWER (de_Historico) AS STRING) AS descricao,
       SAFE_CAST (NULL AS STRING) AS modalidade,
-      SAFE_CAST (funcao AS STRING) AS funcao,
-      SAFE_CAST (subfuncao AS STRING) AS subfuncao,
+      SAFE_CAST (SAFE_CAST (funcao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (SAFE_CAST (subfuncao AS INT64) AS STRING) AS subfuncao,
       SAFE_CAST (de_Programa AS STRING) AS programa, --substituir por código
       SAFE_CAST (de_Acao AS STRING) AS acao, -- substituir por código
       CONCAT (
@@ -233,17 +234,17 @@ empenhado_mg AS (
              END,
         cd_elemento) AS elemento_despesa,
       SAFE_CAST (vl_Empenho AS FLOAT64) AS valor_inicial    
-    FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_pb e
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_pb m ON e.cd_ugestora = SAFE_CAST(m.id_unidade_gestora AS STRING)
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_funcao f ON e.de_Funcao = f.nome_funcao
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_subfuncao sf ON e.de_Subfuncao = sf.nome_subfuncao
+    FROM basedosdados-dev.world_wb_mides_staging.raw_empenho_pb e
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_municipio_pb m ON e.cd_ugestora = SAFE_CAST(m.id_unidade_gestora AS STRING)
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_funcao f ON e.de_Funcao = f.nome_funcao
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_subfuncao sf ON e.de_Subfuncao = sf.nome_subfuncao
 ),
   anulacao_pb AS (
     SELECT
       SAFE_CAST (CONCAT(nu_Empenho, ' ', a.cd_ugestora, ' ', m.id_municipio, ' ', (RIGHT(dt_Ano,2))) AS STRING) AS id_empenho_bd,
       SUM(SAFE_CAST (vl_Estorno AS FLOAT64)) AS valor_anulacao
-    FROM basedosdados-staging.world_wb_mides_staging.raw_estorno_pb a
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_pb m ON a.cd_ugestora = SAFE_CAST(m.id_unidade_gestora AS STRING)
+    FROM basedosdados-dev.world_wb_mides_staging.raw_estorno_pb a
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_municipio_pb m ON a.cd_ugestora = SAFE_CAST(m.id_unidade_gestora AS STRING)
     GROUP BY 1
 ),
   frequencia_pb AS (
@@ -329,8 +330,8 @@ empenhado_mg AS (
       SAFE_CAST (e.NUMEROEMPENHO AS STRING) AS numero,
       SAFE_CAST (LOWER(HISTORICO) AS STRING) AS descricao,
       SAFE_CAST (LEFT(TIPO_EMPENHO, 1) AS STRING) AS modalidade,
-      SAFE_CAST (fun.funcao AS STRING) AS funcao,
-      SAFE_CAST (sub.subfuncao AS STRING) AS subfuncao,
+      SAFE_CAST (SAFE_CAST (fun.funcao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (SAFE_CAST (sub.subfuncao AS INT64) AS STRING) AS subfuncao,
       SAFE_CAST (PROGRAMA AS STRING) AS programa,
       SAFE_CAST (CODIGO_TIPO_ACAO AS STRING) AS acao,
       CONCAT (
@@ -433,10 +434,10 @@ empenhado_mg AS (
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
       ROUND(SAFE_CAST (VALOREMPENHADO AS FLOAT64),2) AS valor_final
-    FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_pe e
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_pe m ON e.NOMEUNIDADEGESTORA = m.NOMEUNIDADEGESTORA
-    LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_funcao` fun ON UPPER(TRIM(REPLACE(REPLACE(e.FUNCAO, 'Encargos Especias', 'Encargos Especiais'), 'Assistêncial Social', 'Assistência Social'))) = UPPER(nome_funcao) 
-    LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_subfuncao` sub ON UPPER(TRIM(e.SUBFUNCAO)) = UPPER(nome_subfuncao)
+    FROM basedosdados-dev.world_wb_mides_staging.raw_empenho_pe e
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_municipio_pe m ON e.NOMEUNIDADEGESTORA = m.NOMEUNIDADEGESTORA
+    LEFT JOIN `basedosdados-dev.world_wb_mides_staging.aux_funcao` fun ON UPPER(TRIM(REPLACE(REPLACE(e.FUNCAO, 'Encargos Especias', 'Encargos Especiais'), 'Assistêncial Social', 'Assistência Social'))) = UPPER(nome_funcao) 
+    LEFT JOIN `basedosdados-dev.world_wb_mides_staging.aux_subfuncao` sub ON UPPER(TRIM(e.SUBFUNCAO)) = UPPER(nome_subfuncao)
 ),
   empenho_pr AS (
     SELECT
@@ -455,17 +456,17 @@ empenhado_mg AS (
       SAFE_CAST (nrEmpenho AS STRING) AS numero,
       SAFE_CAST (LOWER (dsHistorico) AS STRING) AS descricao,
       SAFE_CAST (LEFT(dsTipoEmpenho, 1) AS STRING) AS modalidade,
-      SAFE_CAST (CAST(cdFuncao AS INT64) AS STRING) AS funcao,
-      SAFE_CAST (cdSubFuncao AS STRING) AS subfuncao,
-      SAFE_CAST (cdPrograma AS STRING) AS programa,
-      SAFE_CAST (cdProjetoAtividade AS STRING) AS acao,
+      SAFE_CAST (SAFE_CAST (cdFuncao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (SAFE_CAST (cdSubFuncao AS INT64) AS STRING) AS subfuncao,
+      SAFE_CAST (SAFE_CAST (cdPrograma AS INT64) AS STRING) AS programa,
+      SAFE_CAST (SAFE_CAST (cdProjetoAtividade AS INT64) AS STRING) AS acao,
       SAFE_CAST (CONCAT (cdCategoriaEconomica, cdGrupoNatureza, cdModalidade, cdElemento) AS STRING) AS elemento_despesa,
       ROUND(SAFE_CAST (vlEmpenho AS FLOAT64),2) AS valor_inicial,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
       ROUND(SAFE_CAST (vlEstornoEmpenho AS FLOAT64),2) AS valor_anulacao,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
       ROUND(SAFE_CAST (vlEmpenho AS FLOAT64) - IFNULL(SAFE_CAST (vlEstornoEmpenho AS FLOAT64),0),2) AS valor_final
-    FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_pr e
+    FROM basedosdados-dev.world_wb_mides_staging.raw_empenho_pr e
     LEFT JOIN basedosdados.br_bd_diretorios_brasil.municipio m ON e.cdIBGE = m.id_municipio_6
 ),
   empenhado_rs AS (
@@ -484,16 +485,16 @@ empenhado_mg AS (
        SAFE_CAST(CONCAT(nr_empenho, ' ', c.cd_orgao, ' ', m.id_municipio, ' ', (RIGHT(ano_empenho,2))) AS STRING) AS id_empenho_bd,
        SAFE_CAST(NULL AS STRING) AS id_empenho,
        SAFE_CAST(nr_empenho AS STRING) AS numero,
-       SAFE_CAST(UPPER(historico) AS STRING) AS descricao,
+       SAFE_CAST(LOWER (historico) AS STRING) AS descricao,
        SAFE_CAST(NULL AS STRING) AS modalidade,
-       SAFE_CAST(cd_funcao AS STRING) AS funcao,
-       SAFE_CAST(cd_subfuncao AS STRING) AS subfuncao,
-       SAFE_CAST(cd_programa AS STRING) AS programa,
-       SAFE_CAST(cd_projeto AS STRING) AS acao,
+       SAFE_CAST(SAFE_CAST (cd_funcao AS INT64) AS STRING) AS funcao,
+       SAFE_CAST(SAFE_CAST (cd_subfuncao AS INT64) AS STRING) AS subfuncao,
+       SAFE_CAST(SAFE_CAST (cd_programa AS INT64) AS STRING) AS programa,
+       SAFE_CAST(SAFE_CAST (cd_projeto AS INT64) AS STRING) AS acao,
        SAFE_CAST(REPLACE(cd_elemento, '.','') AS STRING) AS elemento_despesa,
        SAFE_CAST(vl_empenho AS FLOAT64) AS valor_inicial     
-     FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
-     LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
+     FROM `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` AS c
+     LEFT JOIN `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
      LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m ON m.id_municipio = a.id_municipio
      WHERE tipo_operacao = 'E' AND (SAFE_CAST(vl_empenho AS FLOAT64) >= 0)
      GROUP BY 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
@@ -509,8 +510,8 @@ empenhado_mg AS (
     SELECT 
       SAFE_CAST(CONCAT(nr_empenho, ' ', c.cd_orgao, ' ', m.id_municipio, ' ', (RIGHT(ano_empenho,2))) AS STRING) AS id_empenho_bd,
       -1*SUM(SAFE_CAST(vl_empenho AS FLOAT64)) AS valor_anulacao
-    FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
-    LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
+    FROM `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` AS c
+    LEFT JOIN `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
     LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m ON m.id_municipio = a.id_municipio
     WHERE tipo_operacao='E' AND (SAFE_CAST(vl_empenho AS FLOAT64) < 0)
     GROUP BY 1   
@@ -659,18 +660,18 @@ empenhado_mg AS (
      SAFE_CAST (CONCAT(LEFT(nr_empenho, LENGTH(nr_empenho) - 5), ' ', codigo_orgao, ' ', id_municipio, ' ', (RIGHT(ano_exercicio,2))) AS STRING) AS id_empenho_bd,
      SAFE_CAST (NULL AS STRING) AS id_empenho,
      SAFE_CAST (nr_empenho AS STRING) AS numero,
-     SAFE_CAST (UPPER(historico_despesa) AS STRING) AS descricao,
+     SAFE_CAST (LOWER (historico_despesa) AS STRING) AS descricao,
      SAFE_CAST (NULL AS STRING) AS modalidade,
-     SAFE_CAST (funcao AS STRING) AS funcao,
-     SAFE_CAST (subfuncao AS STRING) AS subfuncao,
-     SAFE_CAST (cd_programa AS STRING) AS programa,
-     SAFE_CAST (cd_acao AS STRING) AS acao,
+     SAFE_CAST (SAFE_CAST (funcao AS INT64) AS STRING) AS funcao,
+     SAFE_CAST (SAFE_CAST (subfuncao AS INT64) AS STRING) AS subfuncao,
+     SAFE_CAST (SAFE_CAST (cd_programa AS INT64) AS STRING) AS programa,
+     SAFE_CAST (SAFE_CAST (cd_acao AS INT64) AS STRING) AS acao,
      SAFE_CAST ((LEFT(ds_elemento,8)) AS STRING) AS elemento_despesa,
      SAFE_CAST (REPLACE(vl_despesa, ',', '.') AS FLOAT64) AS valor_inicial
-   FROM basedosdados-staging.world_wb_mides_staging.raw_despesa_sp e
-   LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = e.ds_orgao
-   LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_funcao` ON ds_funcao_governo = UPPER(nome_funcao)
-   LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_subfuncao` ON ds_subfuncao_governo = UPPER(nome_subfuncao)
+   FROM basedosdados-dev.world_wb_mides_staging.raw_despesa_sp e
+   LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = e.ds_orgao
+   LEFT JOIN `basedosdados-dev.world_wb_mides_staging.aux_funcao` ON ds_funcao_governo = UPPER(nome_funcao)
+   LEFT JOIN `basedosdados-dev.world_wb_mides_staging.aux_subfuncao` ON ds_subfuncao_governo = UPPER(nome_subfuncao)
    WHERE tp_despesa = 'Empenhado'
 ),
   frequencia_sp AS (
@@ -683,8 +684,8 @@ empenhado_mg AS (
     SELECT
       SAFE_CAST (CONCAT(LEFT(nr_empenho, LENGTH(nr_empenho) - 5), ' ', codigo_orgao, ' ', id_municipio, ' ', (RIGHT(ano_exercicio,2))) AS STRING) AS id_empenho_bd,           
       SUM(SAFE_CAST (REPLACE(vl_despesa, ',', '.') AS FLOAT64)) AS valor_anulacao
-    FROM basedosdados-staging.world_wb_mides_staging.raw_despesa_sp a
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = a.ds_orgao
+    FROM basedosdados-dev.world_wb_mides_staging.raw_despesa_sp a
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = a.ds_orgao
     WHERE tp_despesa = 'Anulação'
     GROUP BY 1
 ),
@@ -692,8 +693,8 @@ empenhado_mg AS (
     SELECT
       SAFE_CAST (CONCAT(LEFT(nr_empenho, LENGTH(nr_empenho) - 5), ' ', codigo_orgao, ' ', id_municipio, ' ', (RIGHT(ano_exercicio,2))) AS STRING) AS id_empenho_bd,
       SUM(SAFE_CAST (REPLACE(vl_despesa, ',', '.') AS FLOAT64)) AS valor_reforco
-    FROM basedosdados-staging.world_wb_mides_staging.raw_despesa_sp r
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = r.ds_orgao
+    FROM basedosdados-dev.world_wb_mides_staging.raw_despesa_sp r
+    LEFT JOIN basedosdados-dev.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = r.ds_orgao
     WHERE tp_despesa = 'Reforço'
     GROUP BY 1
 ),
