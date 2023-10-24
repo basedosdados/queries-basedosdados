@@ -10,7 +10,7 @@
         "end": 2025,
         "interval": 1}
     },
-    cluster_by = ["ano", "sigla_uf"],
+    cluster_by = ["sigla_uf"],
     labels = {'project_id': 'basedosdados', 'tema': 'economia'})
 }}
 SELECT 

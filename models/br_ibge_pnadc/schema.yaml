@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: br_ibge_pnadc
+  - name: br_ibge_pnadc__microdados
     description: "Microdados PNADC"
     columns:
       - name: ano
@@ -850,3 +850,607 @@ models:
         description: Habitual (campo derivado)
       - name: efetivo
         description: Efetivo (campo derivado)
+
+  - name: br_ibge_pnadc__rendimentos_outras_fontes
+    description: "Microdados da Pesquisa Suplementar Anual referentes aos rendimentos de outras fontes"
+    columns:
+      - name: ano
+        description: Ano
+      - name: trimestre
+        description: Trimestre
+      - name: id_uf
+        description: ID Unidade da Federação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: capital
+        description: Município da Capital
+      - name: rm_ride
+        description: Região Metropolitana e Região Administrativa Integrada
+      - name: id_upa
+        description: ID Unidade Primária de Amostragem (UPA)
+      - name: id_estrato
+        description: ID Estrato (As 2 primeiras posições representam o código da Unidade da Federação)
+      - name: id_domicilio
+        description: ID Domicílio
+      - name: id_pessoa
+        description: ID Pessoa Entrevistada
+      - name: V1008
+        description: Número de seleção do domicílio
+      - name: V1014
+        description: Painel
+      - name: V1022
+        description: Situação do domicílio
+      - name: V1023
+        description: Tipo de área
+      - name: V1030
+        description: Projeção da população por níveis geográficos (Projeção da população de 1º de julho por níveis geográficos)
+      - name: V1031
+        description: Peso do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista sem calibração pela projeção de população)
+      - name: V1032
+        description: Peso do domicílio e das pessoas (Peso  anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1034
+        description: Projeção da população por sexo e idade (Projeção da população de 1º de julho por sexo e idade)
+      - name: posest
+        description: Domínios de projeção (As 2 primeiras posições representam o código da Unidade da Federação e a última, o tipo de área UF(2) + V1023(1))
+      - name: posest_sxi
+        description: Domínios de projeção por sexo e idade (A primeira posição representa o sexo (1- Homens; 2-Mulheres) e as 2 últimas representam os grupos etários. Sexo(1) + Idade(2))
+      - name: V2001
+        description: Número de pessoas no domicílio
+      - name: V2003
+        description: Número de ordem
+      - name: V5001
+        description: Alguma pessoa do domicílio em que... reside recebeu aposentadoria de instituto de previdência (...)?
+      - name: V50011
+        description: ... recebeu aposentadoria de instituto de previdência (...)
+      - name: V500111
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5002
+        description: Alguma pessoa do domicílio em que... reside recebeu pensão de instituto de previdência (...)?
+      - name: V50021
+        description: ... recebeu pensão de instituto de previdência (...)
+      - name: V500211
+        description: Valor efetivamente recebido pela pessoa  
+      - name: V5003
+        description: Alguma pessoa do domicílio em que... reside recebeu complementação de aposentadoria (...)?
+      - name: V50031
+        description: ... recebeu complementação ou  suplementação de aposentadoria paga por entidade seguradora ou fundo de pensão
+      - name: V500311
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5004
+        description: Alguma pessoa do domicílio em que... reside recebeu pensão paga por caixa de assistência social (...)?
+      - name: V50041
+        description: ... recebeu pensão paga por caixa de assistência social, entidade seguradora ou fundo de pensão, como beneficiária de outra pessoa
+      - name: V500411
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5005
+        description: Alguma pessoa do domicílio em que... reside recebeu pensão alimentícia?
+      - name: V50051
+        description: ... recebeu pensão alimentícia
+      - name: V500511
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5006
+        description: Alguma pessoa do domicílio em que... reside recebeu aluguel ou arrendamento?
+      - name: V50061
+        description: ... recebeu aluguel ou arrendamento
+      - name: V500611
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5007
+        description: Alguma pessoa do domicílio em que... reside recebeu doação em dinheiro?
+      - name: V50071
+        description: ... recebeu doação de pessoa que não morava no domicílio
+      - name: V500711
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5008
+        description: Alguma pessoa do domicílio em que... reside recebeu seguro desemprego?
+      - name: V50081
+        description: ... recebeu seguro desemprego
+      - name: V500811
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5009
+        description: Alguma pessoa do domicílio em que... reside recebeu BPC -LOAS?
+      - name: V50091
+        description: .. recebeu Benefício Assistencial de Prestação Continuada - BPC - LOAS?
+      - name: V500911
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5010
+        description: Alguma pessoa do domicílio em que... reside recebeu Bolsa família ou do Programa de Erradicação do Trabalho Infantil - PETI?
+      - name: V50101
+        description: Alguma pessoa do domicílio em que... reside recebeu Bolsa família ou do Programa de Erradicação do Trabalho Infantil - PETI?
+      - name: V501011
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5011
+        description: Alguma pessoa do domicílio em que... reside recebeu rendimentos de outro programa social?
+      - name: V50111
+        description: .... recebeu rendimentos de algum outro programa social, público ou privado
+      - name: V501111
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5012
+        description: Alguma pessoa do domicílio em que... reside recebeu rendimentos de caderneta de poupança (...)?
+      - name: V50121
+        description: ... recebeu rendimentos de caderneta de poupança (...)?
+      - name: V501211
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5013
+        description: Alguma pessoa do domicílio em que... reside recebeu rendimentos de parceria, direitos autoriais (...)?
+      - name: V50131
+        description: ...recebeu outros rendimentos como, por exemplo, parceria, direitos autorais, exploração de patentes, etc
+      - name: V501311
+        description: Valor efetivamente recebido pela pessoa
+      - name: V5001A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de Benefício Assistencial de Prestação Continuada – BPC-LOAS?
+      - name: V5001A2
+        description: Valor efetivamente recebido
+      - name: V5002A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de Programa Bolsa Família?
+      - name: V5002A2
+        description: Valor efetivamente recebido
+      - name: V5003A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de outros programas sociais do governo?
+      - name: V5003A2
+        description: Valor efetivamente recebido
+      - name: V5004A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de aposentadoria ou pensão de instituto de previdência federal (INSS), estadual, municipal, ou do governo federal, estadual, municipal?
+      - name: V5004A2
+        description: Valor efetivamente recebido
+      - name: V5005A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de seguro-desemprego, seguro-defeso?
+      - name: V5005A2
+        description: Valor efetivamente recebido
+      - name: V5006A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de pensão alimentícia, doação ou mesada em dinheiro de pessoa que não morava no domicílio?
+      - name: V5006A2
+        description: Valor efetivamente recebido
+      - name: V5007A
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de aluguel ou arrendamento?
+      - name: V5007A2
+        description: Valor efetivamente recebido
+      - name: V5008A
+        description: No mês de ... (mês de referência), ... recebeu outros rendimentos (bolsa de estudos, rendimento de caderneta de poupança, aplicações financeiras, etc.).
+      - name: V5008A2
+        description: Valor efetivamente recebido
+      - name: VD4046
+        description: Rendimento recebido em todas as fontes (habitual de todos os trabalhos e efetivo de outras fontes apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho ou que receberam rendimentos em dinheiro de outras fontes)
+      - name: VD4047
+        description: Rendimento efetivo recebido de programas sociais, seguro-desemprego, seguro-defeso, bolsa de estudos, rendimento de caderneta de poupança e outras aplicações financeiras
+      - name: VD4048
+        description: Rendimento efetivo recebido de outras fontes
+      - name: VD4052
+        description: Rendimento recebido em todas as fontes (habitual de todos os trabalhos e efetivo de outras fontes apenas para pessoas que receberam em dinheiro, produtos, mercadorias, cartão/tíquete transporte ou alimentação em qualquer trabalho ou que receberam rendimentos em dinheiro de outras fontes)
+      - name: VD5001
+        description: Rendimento (efetivo) domiciliar (exclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5002
+        description: Rendimento (efetivo) domiciliar per capita (exclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5003
+        description: Faixa de rendimento (efetivo) domiciliar per capita (exclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5004
+        description: Rendimento (efetivo) domiciliar (inclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5005
+        description: Rendimento (efetivo) domiciliar per capita (inclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5006
+        description: Faixa de rendimento (efetivo) domiciliar per capita (inclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5007
+        description: Rendimento domiciliar (habitual de todos os trabalhos e efetivo de outras fontes e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5008
+        description: Rendimento domiciliar per capita (habitual de todos os trabalho e efetivo de outras fontes e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5009
+        description: Faixa de rendimento domiciliar per capita (habitual de todos os trabalho e efetivo de outras fontes e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5010
+        description: Rendimento domiciliar (habitual de todos os trabalhos e efetivo de outras fontes, inclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5011
+        description: Rendimento domiciliar per capita (habitual de todos os trabalhos e efetivo de outras fontes, inclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: VD5012
+        description: Faixa de rendimento domiciliar per capita (habitual de todos os trabalhos e efetivo de outras fontes, inclusive rendimentos em cartão/tíquete transporte ou alimentação e exclusive o rendimento das pessoas cuja condição na unidade domiciliar era pensionista, empregado doméstico ou parente do empregado doméstico)
+      - name: V1032001
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032002
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032003
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032004
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032005
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032006
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032007
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032008
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032009
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032010
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032011
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032012
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032013
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032014
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032015
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032016
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032017
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032018
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032019
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032020
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032021
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032022
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032023
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032024
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032025
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032026
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032027
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032028
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032029
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032030
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032031
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032032
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032033
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032034
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032035
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032036
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032037
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032038
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032039
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032040
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032041
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032042
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032043
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032044
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032045
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032046
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032047
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032048
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032049
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032050
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032051
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032052
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032053
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032054
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032055
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032056
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032057
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032058
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032059
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032060
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032061
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032062
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032063
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032064
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032065
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032066
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032067
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032068
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032069
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032070
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032071
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032072
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032073
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032074
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032075
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032076
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032077
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032078
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032079
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032080
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032081
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032082
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032083
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032084
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032085
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032086
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032087
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032088
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032089
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032090
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032091
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032092
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032093
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032094
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032095
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032096
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032097
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032098
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032099
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032100
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032101
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032102
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032103
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032104
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032105
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032106
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032107
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032108
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032109
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032110
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032111
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032112
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032113
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032114
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032115
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032116
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032117
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032118
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032119
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032120
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032121
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032122
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032123
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032124
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032125
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032126
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032127
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032128
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032129
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032130
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032131
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032132
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032133
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032134
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032135
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032136
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032137
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032138
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032139
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032140
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032141
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032142
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032143
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032144
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032145
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032146
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032147
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032148
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032149
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032150
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032151
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032152
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032153
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032154
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032155
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032156
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032157
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032158
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032159
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032160
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032161
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032162
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032163
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032164
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032165
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032166
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032167
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032168
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032169
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032170
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032171
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032172
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032173
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032174
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032175
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032176
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032177
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032178
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032179
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032180
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032181
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032182
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032183
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032184
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032185
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032186
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032187
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032188
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032189
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032190
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032191
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032192
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032193
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032194
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032195
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032196
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032197
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032198
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032199
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+      - name: V1032200
+        description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita com correção de não entrevista com calibração pela projeção de população)
+  
+  - name: br_ibge_pnadc__dicionario
+    description: Dicionário
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna        
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor
