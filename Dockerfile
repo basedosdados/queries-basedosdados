@@ -14,5 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 WORKDIR /dbt
 COPY . .
 
-# Run dbt rpc
-CMD ["dbt-rpc", "serve", "--profiles-dir", ".", "--host", "0.0.0.0", "--port", "8580"]
+# Run dbt deps and dbt rpc
+CMD ["/dbt/start-server.sh"]
