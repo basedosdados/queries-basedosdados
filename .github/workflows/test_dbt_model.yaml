@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [labeled, opened]
     branches:
-      - master
+      - main
     paths:
       - 'models/**'
       - '.github/workflows/test_dbt_model.yaml'
