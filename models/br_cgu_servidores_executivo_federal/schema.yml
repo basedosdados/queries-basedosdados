@@ -91,7 +91,7 @@ models:
       - name: origem
         description: Origem do dado (BACEN ou SIAPE)
   - name: observacoes
-    description: Observações para cada servidor, como atraso em pagamentos, entre outros
+    description: Caracteriza eventuais observações para situações excepcionais na remuneração dos Servidores, Aposentados e Pensionistas
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
