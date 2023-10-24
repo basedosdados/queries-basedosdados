@@ -97,6 +97,9 @@ models:
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
+    br_camara_dados_abertos:
+      +materialized: table
+      +schema: br_camara_dados_abertos
     br_ce_fortaleza_sefin_iptu:
       +materialized: table
       +schema: br_ce_fortaleza_sefin_iptu
