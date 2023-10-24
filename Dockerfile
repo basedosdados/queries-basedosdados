@@ -8,12 +8,11 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 # Copy and install dependencies
 WORKDIR /tmp
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && \
-    rm requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 
 # Copy dbt project and profiles
 WORKDIR /dbt
 COPY . .
 
-# Run dbt rpc
-CMD ["dbt", "rpc", "--profiles-dir", ".", "--host", "0.0.0.0", "--port", "8580"]
+# Run dbt deps and dbt rpc
+CMD ["/dbt/start-server.sh"]

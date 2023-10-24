@@ -30,19 +30,13 @@ spec:
             - name: credentials-prod
               mountPath: /credentials-prod/
               readOnly: true
-          command: 
-            - "dbt"
-            - "rpc"
-            - "--profiles-dir"
-            - "."
-            - "--profile"
-            - "default"
-            - "--target"
-            - "dev"
-            - "--host"
-            - "0.0.0.0"
-            - "--port"
-            - "8580"
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - >
+              dbt deps;
+              dbt-rpc serve --profiles-dir . --profile default --target dev --host 0.0.0.0 --port 8580
       volumes:
         - name: credentials-dev
           secret:
@@ -84,19 +78,14 @@ spec:
             - name: credentials-prod
               mountPath: /credentials-prod/
               readOnly: true
-          command: 
-            - "dbt"
-            - "rpc"
-            - "--profiles-dir"
-            - "."
-            - "--profile"
-            - "default"
-            - "--target"
-            - "prod"
-            - "--host"
-            - "0.0.0.0"
-            - "--port"
-            - "8580"
+
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - >
+              dbt deps;
+              dbt-rpc serve --profiles-dir . --profile default --target prod --host 0.0.0.0 --port 8580
       volumes:
         - name: credentials-dev
           secret:

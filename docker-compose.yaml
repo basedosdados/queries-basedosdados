@@ -1,0 +1,11 @@
+version: '3'
+services:
+  dbt:
+    container_name: dbt
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/dbt
+    environment:
+      - DBT_PROFILES_DIR=/dbt
