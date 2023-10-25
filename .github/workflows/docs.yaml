@@ -9,7 +9,7 @@ env:
 
 jobs:
   docs:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     name: Deploy docs
     runs-on: ubuntu-latest
     steps:
