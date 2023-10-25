@@ -22,6 +22,8 @@ models:
         description: ID Estrato (As 2 primeiras posições representam o código da Unidade da Federação)
       - name: id_domicilio
         description: ID Domicílio
+      - name: id_pessoa
+        description: ID Pessoa Entrevistada
       - name: V1008
         description: Número de seleção do domicílio
       - name: V1014

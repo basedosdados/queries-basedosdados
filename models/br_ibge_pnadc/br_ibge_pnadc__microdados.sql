@@ -10,10 +10,11 @@
         "end": 2025,
         "interval": 1}
     },
-    cluster_by = ["sigla_uf"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
+    cluster_by = "sigla_uf",
+    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'})
 }}
-SELECT 
+
+SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(trimestre AS INT64) trimestre,
 SAFE_CAST(id_uf AS STRING) id_uf,
@@ -22,9 +23,10 @@ SAFE_CAST(capital AS STRING) capital,
 SAFE_CAST(rm_ride AS STRING) rm_ride,
 SAFE_CAST(id_upa AS STRING) id_upa,
 SAFE_CAST(id_estrato AS STRING) id_estrato,
-SAFE_CAST(id_domicilio AS STRING) id_domicilio,
-SAFE_CAST(V1008 AS INT64) V1008,
-SAFE_CAST(V1014 AS INT64) V1014,
+SAFE_CAST(CONCAT(id_upa,lpad(V1008,2,'0'),lpad(V1014,2,'0')) AS STRING) id_domicilio,
+SAFE_CAST(CONCAT(id_upa,lpad(V1008,2,'0'),lpad(V1014,2,'0'), lpad(V2003,2,'0')) AS STRING) id_pessoa,
+SAFE_CAST(lpad(V1008,2,'0') AS STRING) V1008,
+SAFE_CAST(lpad(V1014,2,'0') AS STRING) V1014,
 SAFE_CAST(V1016 AS INT64) V1016,
 SAFE_CAST(V1022 AS STRING) V1022,
 SAFE_CAST(V1023 AS STRING) V1023,
@@ -437,4 +439,4 @@ SAFE_CAST(V1028199 AS FLOAT64) V1028199,
 SAFE_CAST(V1028200 AS FLOAT64) V1028200,
 SAFE_CAST(habitual AS FLOAT64) habitual,
 SAFE_CAST(efetivo AS FLOAT64) efetivo
-FROM basedosdados-staging.br_ibge_pnadc_staging.microdados AS t
+FROM basedosdados-dev.br_ibge_pnadc_staging.microdados AS t
