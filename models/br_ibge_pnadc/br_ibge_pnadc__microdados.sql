@@ -439,4 +439,4 @@ SAFE_CAST(V1028199 AS FLOAT64) V1028199,
 SAFE_CAST(V1028200 AS FLOAT64) V1028200,
 SAFE_CAST(habitual AS FLOAT64) habitual,
 SAFE_CAST(efetivo AS FLOAT64) efetivo
-FROM basedosdados-dev.br_ibge_pnadc_staging.microdados AS t
+FROM basedosdados-staging.br_ibge_pnadc_staging.microdados AS t
