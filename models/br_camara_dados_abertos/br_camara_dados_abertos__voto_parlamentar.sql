@@ -18,7 +18,7 @@ SELECT
   SAFE_CAST(id_votacao AS STRING) id_votacao,
   SAFE_CAST(data_hora AS DATETIME) data_hora,
   SAFE_CAST(voto AS STRING) voto,
-  SAFE_CAST(id_deputado AS STRING) id_deputado,
+  SAFE_CAST(REPLACE(id_deputado, ".0", "") AS STRING) id_deputado,
   SAFE_CAST(nome AS STRING) nome,
   SAFE_CAST(sigla_partido AS STRING) sigla_partido,
   SAFE_CAST(sigla_uf AS STRING) sigla_uf,

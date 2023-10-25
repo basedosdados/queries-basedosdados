@@ -18,11 +18,11 @@ SELECT
   SAFE_CAST(ano AS INT64) ano,
   SAFE_CAST(id_votacao AS STRING) id_votacao,
   SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(horario AS TIME) horario,
+  TIME(TIMESTAMP(horario)) AS horario
   SAFE_CAST(id_orgao AS STRING) id_orgao,
   SAFE_CAST(sigla_orgao AS STRING) sigla_orgao,
   SAFE_CAST(id_evento AS STRING) id_evento,
-  SAFE_CAST(aprovacao AS INT64) aprovacao,
+  SAFE_CAST(REPLACE(aprovacao, ".0", "") AS INT64) aprovacao,
   SAFE_CAST(voto_sim AS INT64) voto_sim,
   SAFE_CAST(voto_nao AS INT64) voto_nao,
   SAFE_CAST(voto_outro AS INT64) voto_outro,

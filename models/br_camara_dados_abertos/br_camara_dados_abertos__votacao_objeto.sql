@@ -23,6 +23,6 @@ SELECT
   SAFE_CAST(ementa AS STRING) ementa,
   SAFE_CAST(codigo_tipo AS STRING) codigo_tipo,
   SAFE_CAST(sigla_tipo AS STRING) sigla_tipo,
-  SAFE_CAST(numero AS STRING) numero,
+  SAFE_CAST(REPLACE(numero, ".0", "") AS STRING) numero,
   SAFE_CAST(titulo AS STRING) titulo
 FROM basedosdados-staging.br_camara_dados_abertos_staging.votacao_objeto AS t
