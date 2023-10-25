@@ -21,10 +21,10 @@ SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,
 SAFE_CAST(id_ons AS STRING) id_ons,
-SAFE_CAST(id_empreendimento_aneel AS STRING) id_empreendimento_aneel,
+SAFE_CAST(REPLACE(id_empreendimento_aneel, '-', '') AS STRING) id_empreendimento_aneel,
 SAFE_CAST(usina AS STRING) usina,
-SAFE_CAST(tipo_razao_restricao AS STRING) tipo_razao_restricao,
-SAFE_CAST(tipo_origem_restricao AS STRING) tipo_origem_restricao,
+SAFE_CAST(REPLACE(tipo_razao_restricao, 'nan', '') AS STRING) tipo_razao_restricao,
+SAFE_CAST(REPLACE(tipo_origem_restricao, 'nan', '') AS STRING) tipo_origem_restricao,
 SAFE_CAST(geracao AS FLOAT64) geracao,
 SAFE_CAST(geracao_limitada AS FLOAT64) geracao_limitada,
 SAFE_CAST(disponibilidade AS FLOAT64) disponibilidade,
@@ -32,7 +32,7 @@ SAFE_CAST(geracao_referencia AS FLOAT64) geracao_referencia,
 SAFE_CAST(geracao_referencia_final AS FLOAT64) geracao_referencia_final
 FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.restricao_operacao_usinas_eolicas AS t
 )
-SELECT *
+SELECT DISTINCT *
 FROM ons
 {% if is_incremental() %} 
 WHERE data > (SELECT max(data) FROM {{ this }} )

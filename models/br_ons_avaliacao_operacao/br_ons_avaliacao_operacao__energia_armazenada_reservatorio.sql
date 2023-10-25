@@ -8,7 +8,8 @@
         "start": 2000,
         "end": 2024,
         "interval": 1}
-     }) 
+     },
+    cluster_by=['ano', 'mes']) 
 }}
 
 SELECT
@@ -17,7 +18,7 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(reservatorio AS STRING) reservatorio,
 SAFE_CAST(tipo_reservatorio AS STRING) tipo_reservatorio,
-SAFE_CAST(id_reservatorio_planejamento AS STRING) id_reservatorio_planejamento,
+SAFE_CAST(REPLACE(id_reservatorio_planejamento, '.0', '') AS STRING) id_reservatorio_planejamento,
 SAFE_CAST(reservatorio_equivalente_energia AS STRING) reservatorio_equivalente_energia,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,

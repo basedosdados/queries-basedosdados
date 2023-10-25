@@ -20,7 +20,7 @@ SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,
-SAFE_CAST(id_empreendimento_aneel AS STRING) id_empreendimento_aneel,
+SAFE_CAST(REPLACE(id_empreendimento_aneel, '-', '') AS STRING) id_empreendimento_aneel,
 SAFE_CAST(usina AS STRING) usina,
 SAFE_CAST(tipo_usina AS STRING) tipo_usina,
 SAFE_CAST(tipo_modalidade_operacao AS STRING) tipo_modalidade_operacao,
@@ -28,7 +28,7 @@ SAFE_CAST(tipo_combustivel AS STRING) tipo_combustivel,
 SAFE_CAST(geracao AS FLOAT64) geracao
 FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_usina AS t
 )
-SELECT *
+SELECT DISTINCT *
 FROM ons
 {% if is_incremental() %} 
 WHERE data > (SELECT max(data) FROM {{ this }} )

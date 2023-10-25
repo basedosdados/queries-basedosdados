@@ -8,7 +8,8 @@
         "start": 2000,
         "end": 2024,
         "interval": 1}
-     }) 
+     },
+    cluster_by=['ano', 'mes']) 
 }}
 SELECT
 SAFE_CAST(data AS DATE) data,

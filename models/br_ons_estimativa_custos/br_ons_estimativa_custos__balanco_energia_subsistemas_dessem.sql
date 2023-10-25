@@ -1,6 +1,8 @@
 {{ config(
     alias='balanco_energia_subsistemas_dessem', 
-    schema='br_ons_estimativa_custos') 
+    schema='br_ons_estimativa_custos',
+    cluster_by=['ano', 'mes']
+    ) 
 }}
 
 SELECT

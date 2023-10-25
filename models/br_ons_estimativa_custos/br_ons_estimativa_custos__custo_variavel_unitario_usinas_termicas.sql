@@ -8,8 +8,9 @@
       "range": {
         "start": 2019,
         "end": 2024,
-        "interval": 1}
-     })  
+        "interval": 1}},
+    cluster_by=['ano', 'mes'])
+       
 }}
 WITH ons as (
 SELECT

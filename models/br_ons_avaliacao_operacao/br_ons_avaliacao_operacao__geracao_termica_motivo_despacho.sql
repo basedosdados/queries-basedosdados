@@ -9,7 +9,8 @@
         "start": 2013,
         "end": 2024,
         "interval": 1}
-     }) 
+     },
+    cluster_by=['ano', 'mes']) 
 }}
 
 WITH ons as (
@@ -20,7 +21,7 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,
-SAFE_CAST(id_usina_planejamento AS STRING) id_usina_planejamento,
+SAFE_CAST(REPLACE(id_usina_planejamento, '.0', '') AS STRING) id_usina_planejamento,
 SAFE_CAST(usina AS STRING) usina,
 SAFE_CAST(tipo_patamar AS STRING) tipo_patamar,
 SAFE_CAST(atendimento_satisfatorio AS INT64) atendimento_satisfatorio,
