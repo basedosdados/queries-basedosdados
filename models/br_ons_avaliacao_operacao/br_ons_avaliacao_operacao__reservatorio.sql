@@ -1,10 +1,15 @@
+{{ config(
+    alias='reservatorio', 
+    schema='br_ons_avaliacao_operacao') 
+}}
+
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,
 SAFE_CAST(id_empreendimento_aneel AS STRING) id_empreendimento_aneel,
-SAFE_CAST(id_reservatorio_planejamento AS STRING) id_reservatorio_planejamento,
-SAFE_CAST(id_posto_vazao AS STRING) id_posto_vazao,
+SAFE_CAST(REPLACE(id_reservatorio_planejamento, 'nan', '') AS STRING) id_reservatorio_planejamento,
+SAFE_CAST(REPLACE(id_posto_vazao, 'nan', '') AS STRING) id_posto_vazao,
 SAFE_CAST(reservatorio_equivalente AS STRING) reservatorio_equivalente,
 SAFE_CAST(reservatorio AS STRING) reservatorio,
 SAFE_CAST(tipo_reservatorio AS STRING) tipo_reservatorio,
