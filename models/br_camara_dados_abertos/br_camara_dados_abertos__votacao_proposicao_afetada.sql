@@ -19,10 +19,10 @@ SELECT
   SAFE_CAST(data AS DATE) data,
   SAFE_CAST(descricao AS STRING) descricao,
   SAFE_CAST(id_proposicao AS STRING) id_proposicao,
-  SAFE_CAST(ano_proposicao AS INT64) ano_proposicao,
+  SAFE_CAST(REPLACE(ano_proposicao, ".0", "") AS INT64) ano_proposicao,
   SAFE_CAST(titulo AS STRING) titulo,
   SAFE_CAST(ementa AS STRING) ementa,
   SAFE_CAST(codigo_tipo AS STRING) codigo_tipo,
   SAFE_CAST(sigla_tipo AS STRING) sigla_tipo,
-  SAFE_CAST(numero AS STRING) numero,
+  SAFE_CAST(REPLACE(numero, ".0", "") AS STRING) numero,
 FROM basedosdados-staging.br_camara_dados_abertos_staging.votacao_proposicao_afetada AS t

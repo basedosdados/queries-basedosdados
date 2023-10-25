@@ -19,7 +19,7 @@ SELECT
   SAFE_CAST(data AS DATE) data,
   SAFE_CAST(descricao AS STRING) descricao,
   SAFE_CAST(id_proposicao AS STRING) id_proposicao,
-  SAFE_CAST(ano_proposicao AS INT64) ano_proposicao,
+  SAFE_CAST(REPLACE(ano_proposicao, ".0", "") AS INT64) ano_proposicao,
   SAFE_CAST(ementa AS STRING) ementa,
   SAFE_CAST(codigo_tipo AS STRING) codigo_tipo,
   SAFE_CAST(sigla_tipo AS STRING) sigla_tipo,
