@@ -7,19 +7,18 @@
     "data_type": "int64",
     "range": {
         "start": 2012,
-        "end": 2022,
+        "end": 2025,
         "interval": 1}
     },
-    cluster_by = "sigla_uf",
-    labels = {'project_id': 'basedosdados-dev'})
+    cluster_by = "sigla_uf")
 }}
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(trimestre AS INT64) trimestre,
 SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(CASE WHEN capital IS NULL THEN id_uf ELSE capital END AS STRING) capital,
-SAFE_CAST(CASE WHEN id_uf IN ('13','15','16','21','22','23','24','25','26','27','28','29','31','32','33','35','41','42','43','51','52') THEN id_uf ELSE NULL END AS STRING) rm_ride,
+SAFE_CAST(capital AS STRING) capital,
+SAFE_CAST(rm_ride AS STRING) rm_ride,
 SAFE_CAST(id_upa AS STRING) id_upa,
 SAFE_CAST(id_estrato AS STRING) id_estrato,
 SAFE_CAST(id_domicilio AS STRING) id_domicilio,
