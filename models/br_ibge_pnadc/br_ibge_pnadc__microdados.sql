@@ -2,15 +2,15 @@
     alias='microdados',
     schema='br_ibge_pnadc',
     materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
+    partition_by={
+    "field": "ano",
+    "data_type": "int64",
+    "range": {
         "start": 2012,
         "end": 2025,
         "interval": 1}
     },
-    cluster_by = ["ano", "sigla_uf"],
+    cluster_by = ["sigla_uf"],
     labels = {'project_id': 'basedosdados', 'tema': 'economia'})
 }}
 SELECT 
