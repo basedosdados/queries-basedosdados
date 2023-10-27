@@ -4,6 +4,7 @@
     schema='world_oceanos_mapeamento',
     materialized='table' )
  }}
+ 
 SELECT
 SAFE_CAST(id AS STRING) id,
 SAFE_CAST(livro_titulo AS STRING) titulo,

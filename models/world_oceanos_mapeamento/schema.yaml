@@ -99,7 +99,7 @@ models:
       - name: indicador_vencedor
         description: Indica se a Obra foi vencedora do prêmio
   - name: world_oceanos_mapeamento__mapeamento
-    description: Insert `mapeamento` table description here
+    description: 
     columns:
       - name: id
         description: Id
