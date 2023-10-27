@@ -1,3 +1,11 @@
+{{
+  config(
+    alias = 'relacionamentos',
+    schema = "world_wb_mides",
+    materialized = "table",
+    labels = {"project_id": "basedosdados", "tema": "economia"}
+  )
+ }}
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,

@@ -1,5 +1,6 @@
 {{
   config(
+    alias = 'orgao_unidade_gestora',
     schema = "world_wb_mides",
     materialized = "table",
     cluster_by = ["sigla_uf"],

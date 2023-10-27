@@ -1,5 +1,6 @@
 {{
   config(
+    alias = 'licitacao_participante',
     schema = "world_wb_mides",
     materialized = "table",
     partition_by = {
