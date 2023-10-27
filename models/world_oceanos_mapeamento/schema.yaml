@@ -14,8 +14,6 @@ models:
         description: Sigla da UF
       - name: nome_municipio_origem
         description: Nome do Município de Origem do Inscrito
-      - name: nome_municipio_moradia
-        description: Nome do Município de Moradia do Inscrito
       - name: genero
         description: Gênero
       - name: ocupacao
@@ -23,15 +21,11 @@ models:
       - name: instituicao
         description: Instituição
       - name: categoria
-        description: Categoria do Gênero Literário
-      - name: indicador_mapeamento
-        description: Indica se o inscrito está no Mapeamento
-      - name: indicador_nota_discrepante
-        description: Indica se a nota dada pelo Inscrito é discrepante
+        description: Categoria avalidada pelo jurado
       - name: indicador_juri_intermediario
-        description: Indica se o inscrito fez parte do Júri Intermediário
+        description: Indica se o jurado fez parte do Júri Intermediário
       - name: indicador_juri_final
-        description: Indica se o inscrito fez parte do Júri Final
+        description: Indica se o jurado fez parte do Júri Final
   - name: world_oceanos_mapeamento__historico_inscritos
     description: A tabela apresenta informações sobre os livros inscritos a cada ano no prêmio, incluindo detalhes sobre autores e editoras. 
     columns:
@@ -98,12 +92,6 @@ models:
         description: Ano da publicação, no caso da existência de outras publicações
       - name: outras_edicoes_nome_pais
         description: País da edição, no caso da existência de outras edições
-      - name: indicador_aceite_regras
-        description: Indica se o usuário aceitou as regras de submissão
-      - name: indicador_aceite_envio_pdf
-        description: Indica se o usuário aceitou o envio via PDF
-      - name: indicacor_aceite_mapeamento
-        description: Indica se o usuário aceitou participar do Mapeamento
       - name: indicador_semifinalista
         description: Indica se a Obra foi semifinalista do prêmio
       - name: indicador_finalista
