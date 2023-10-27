@@ -256,6 +256,9 @@ models:
     world_wb_mides:
       +materialized: table
       +schema: world_wb_mides
+    world_oceanos_mapeamento:
+      +materialized: table
+      +schema: world_oceanos_mapeamento
     test_dataset:
       +materialized: table
       +schema: test_dataset
