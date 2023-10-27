@@ -1,6 +1,13 @@
+{{ config(
+    alias='balanco_energia_subsistemas', 
+    schema='br_ons_estimativa_custos') 
+}}
+
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,
 SAFE_CAST(geracao_hidraulica_verificada AS FLOAT64) geracao_hidraulica_verificada,
