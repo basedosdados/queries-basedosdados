@@ -25,7 +25,7 @@ SAFE_CAST(indicador_publicacao_outras_obras AS BOOLEAN) autor_indicador_publicac
 SAFE_CAST(quantidade_obras_publicadas AS INT64) autor_quantidade_obras_publicadas,
 SAFE_CAST(nome_editora_final_3 AS STRING) editora_nome,
 SAFE_CAST(pais_origem_editora AS STRING) editora_pais_origem,
-SAFE_CAST(local_sede_editora AS STRING) editora_local_sede,
+SAFE_CAST(local_sede_editora_normalizado AS STRING) editora_local_sede,
 SAFE_CAST(ano_criacao_editora AS INT64) editora_ano_criacao,
 SAFE_CAST(linha_predominante_editora AS STRING) editora_linha_predominante,
 SAFE_CAST(canal_distribuicao_editora AS STRING) editora_canal_distribuicao,
