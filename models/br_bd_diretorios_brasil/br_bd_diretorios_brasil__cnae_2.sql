@@ -13,4 +13,4 @@ SELECT
   SAFE_CAST(descricao_divisao AS STRING) AS descricao_divisao,
   SAFE_CAST(secao AS STRING) AS secao,
   SAFE_CAST(descricao_secao AS STRING) AS descricao_secao
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.cnae_2 AS t
+FROM basedosdados-staging.br_bd_diretorios_brasil_staging.cnae_2 AS t
