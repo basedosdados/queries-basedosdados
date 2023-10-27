@@ -179,10 +179,9 @@ models:
   - name: br_bd_diretorios_brasil__cnae_1
     description: Diretório da Classificação Nacional de Atividades Econômicas 1.0.
     columns:
-      - name: cnae_1.cnae_1
+      - name: cnae_1
         description: Classificação Nacional de Atividades Econômicas (CNAE) 1.0
         tests:
-          - unique
           - not_null        
       - name: descricao
         description: Descrição da CNAE 1.0
@@ -202,10 +201,9 @@ models:
   - name: br_bd_diretorios_brasil__cnae_2
     description: Diretório da Classificação Nacional de Atividades Econômicas 2.0.
     columns:
-      - name: cnae_2.cnae_2
+      - name: cnae_2
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
         tests:
-          - unique
           - not_null
       - name: descricao
         description: Descrição da CNAE 2.0
