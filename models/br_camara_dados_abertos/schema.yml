@@ -1,0 +1,171 @@
+version: 2
+
+models:
+  - name: br_camara_dados_abertos__votacao_microdados
+    description: Identificadores e informações sobre as votações das comissões e do Plenário da Câmara, por ano em que tenham ocorrido.
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - not_null
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano        
+      - name: id_votacao
+        description: ID da votação
+      - name: data
+        description: Data
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: horario
+        description: Horário
+      - name: id_orgao
+        description: ID do órgão
+      - name: sigla_orgao
+        description: Sigla do órgão
+      - name: id_evento
+        description: ID do evento
+      - name: aprovacao
+        description: Indicador se ocorreu a aprovação
+      - name: voto_sim
+        description: Quantidade de votos - Sim
+      - name: voto_nao
+        description: Quantidade de votos - Não
+      - name: voto_outro
+        description: Quantidade de votos - Outros
+      - name: descricao
+        description: Descrição sobre a votação
+      - name: data_hora_ultima_votacao
+        description: Data e hora da última abertura da votação
+      - name: descricao_ultima_votacao
+        description: Descrição da última abertura da votação
+      - name: data_hora_ultima_proposicao
+        description: Data e hora da última apresentação da proposição
+      - name: descricao_ultima_proposicao
+        description: Descrição da última apresentação da proposição
+      - name: id_ultima_proposicao
+        description: ID da última proposição apresentada
+
+  - name: br_camara_dados_abertos__votacao_objeto
+    description: Cada votação é uma decisão sobre uma e somente uma Proposição, que no Dados Abertos é o chamado objeto da votação. Muitas vezes, porém, a proposição que realmente é votada não é identificada, e em alguns casos não é nem mesmo cadastrada.
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - not_null
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano   
+      - name: id_votacao
+        description: ID da votação
+      - name: data
+        description: Data
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: descricao
+        description: Descrição sobre a votação
+      - name: id_proposicao
+        description: ID proposição
+      - name: ano_proposicao
+        description: Ano da proposição
+      - name: ementa
+        description: Ementa da proposição
+      - name: codigo_tipo
+        description: Código do tipo da proposição
+      - name: sigla_tipo
+        description: Sigla do tipo da proposição
+      - name: numero
+        description: Número da proposição
+      - name: titulo
+        description: Título da proposição
+
+  - name: br_camara_dados_abertos__voto_parlamentar
+    description: Separados por ano de ocorrência das votações, estes arquivos têm, em cada linha/registro, identificadores de uma votação, os identificadores básicos de cada Deputado, o voto (ou posicionamento de obstrução) registrado pelo parlamentar e o horário de registro do voto.
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - not_null
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: id_votacao
+        description: ID da votação
+      - name: data_hora
+        description: Data e hora
+      - name: voto
+        description: Voto
+      - name: id_deputado
+        description: ID do deputado
+      - name: nome
+        description: Nome do deputado
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_legislatura
+        description: ID da legislatura
+
+  - name: br_camara_dados_abertos__votacao_orientacao_bancada
+    description: Para votações de qualquer tipo, os Partidos e Blocos, bem como as lideranças de Governo, Minoria, Maioria e Oposição, podem recomendar a seus Deputados que votem de um jeito ou de outro, ou podem "liberar a bancada".
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - not_null
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: id_votacao
+        description: ID da votação
+      - name: sigla_orgao
+        description: Sigla do órgão
+      - name: descricao
+        description: Descrição sobre a votação 
+      - name: id_proposicao
+        description: ID proposição
+      - name: orientacao
+        description: Orientação da bancada
+
+  - name: br_camara_dados_abertos__votacao_proposicao_afetada
+    description: Quando alguém fala algo como "a votação do PL 1234", o significado no Dados Abertos é "as várias votações de proposições relacionadas ao PL 1234". O tal PL 1234 é, portanto, a proposição afetada por essas votações.
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - not_null
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: id_votacao
+        description: ID da votação
+      - name: data
+        description: Data
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: descricao
+        description: Descrição sobre a votação
+      - name: id_proposicao
+        description: ID proposição
+      - name: ano_proposicao
+        description: Ano da proposição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: titulo
+        description: Título da proposição
+      - name: ementa
+        description: Ementa da proposição
+      - name: codigo_tipo
+        description: Código do tipo da proposição
+      - name: sigla_tipo
+        description: Sigla do tipo da proposição
+      - name: numero
+        description: Número da proposição

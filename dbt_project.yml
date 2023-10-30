@@ -97,12 +97,18 @@ models:
     br_bd_metadados:
       +materialized: table
       +schema: br_bd_metadados
+    br_camara_dados_abertos:
+      +materialized: table
+      +schema: br_camara_dados_abertos
     br_ce_fortaleza_sefin_iptu:
       +materialized: table
       +schema: br_ce_fortaleza_sefin_iptu
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_cgu_servidores_executivo_federal:
+      +materialized: table
+      +schema: br_cgu_servidores_executivo_federal
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
@@ -250,6 +256,9 @@ models:
     world_wb_mides:
       +materialized: table
       +schema: world_wb_mides
+    world_oceanos_mapeamento:
+      +materialized: table
+      +schema: world_oceanos_mapeamento
     test_dataset:
       +materialized: table
       +schema: test_dataset
