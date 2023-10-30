@@ -4,6 +4,7 @@
     schema='world_oceanos_mapeamento',
     materialized='table' )
  }}
+ 
 SELECT
 SAFE_CAST(ano AS INTEGER) ano,
 SAFE_CAST(nome_final AS STRING) nome,
