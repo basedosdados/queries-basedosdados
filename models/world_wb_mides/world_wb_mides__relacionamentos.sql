@@ -3,7 +3,7 @@
     alias = 'relacionamentos',
     schema = "world_wb_mides",
     materialized = "table",
-    labels = {"project_id": "basedosdados", "tema": "economia"}
+    labels = {"tema": "economia"}
   )
  }}
 SELECT

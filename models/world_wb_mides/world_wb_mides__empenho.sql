@@ -12,10 +12,8 @@
         "interval": 1}
     },
     cluster_by = ["ano", "sigla_uf"],
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'},
-    post_hook=['REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"',
-                'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'])
- }}
+    labels = {'tema': 'economia'},
+}}
 SELECT
   ano,
   mes,
