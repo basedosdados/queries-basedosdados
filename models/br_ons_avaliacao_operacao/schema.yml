@@ -1,8 +1,13 @@
 version: 2
 
 models:
-  - name: reservatorio
-    description: Dados cadastrais dos reservatórios
+  - name: br_ons_avaliacao_operacao__reservatorio
+    description: Dados cadastrais dos reservatórios.
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - data
+              - id_reservatorio_planejamento
     columns:
       - name: data
         description: Data de entrada em operação do reservatório
@@ -57,8 +62,15 @@ models:
         description: Latitude do reservatório
       - name: longitude
         description: Longitude do reservatório
-  - name: geracao_usina
+  - name: br_ons_avaliacao_operacao__geracao_usina
     description: Geração verificada de usinas, conjuntos de usinas e grupos de pequenas usinas em base horária. Os Conjuntos são formados por usinas classificadas na modalidade Tipo II-C, conforme Submódulo 7.2 dos Procedimentos de Rede e são estabelecidos em Ajustamentos Operativos, disponíveis no MPO. Os grupos de pequenas usinas são formados por usinas Tipo III, que não possuem relacionamento com o ONS, e os dados são referentes a previsões de geração.
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - data
+              - hora
+              - usina
+              - id_empreendimento_aneel
     columns:
       - name: data
         description: Data de referência da medição
@@ -87,8 +99,14 @@ models:
         description: Tipo de combustível utilizado pela usina
       - name: geracao
         description: Geração de Energia
-  - name: geracao_termica_motivo_despacho
+  - name: br_ons_avaliacao_operacao__geracao_termica_motivo_despacho
     description: Dados programados e verificados de geração de usinas térmicas despachadas pelo ONS por motivo de despacho em base horária.
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - data
+              - hora
+              - usina
     columns:
       - name: data
         description: Data de referência da medição
@@ -188,11 +206,16 @@ models:
       - name: geracao_constrained_off_verificada
         description: Restrição verificada de geração em usina despachada por ordem
             de mérito.
-  - name: energia_natural_afluente
+  - name: br_ons_avaliacao_operacao__energia_natural_afluente
     description: Dados das grandezas de energia natural afluente (ENA) com periodicidade diária por Reservatório. A Energia Natural Afluente (ENA) Bruta representa a energia produzível pela usina e é calculada pelo produto das vazões naturais aos reservatórios com as produtividades a 65% dos volumes úteis. A ENA Armazenável considera as vazões naturais descontadas das vazões vertidas nos reservatórios.
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - data
+              - reservatorio
     columns:
       - name: data
-        description: 'Data '
+        description: Data 
       - name: ano
         description: Ano
       - name: mes
@@ -225,8 +248,13 @@ models:
       - name: proporcao_energia_natural_afluente_armazenavel
         description: Valor de Energia Natural Afluente (ENA) armazenável, em % da
             média de longo termo (MLT)
-  - name: energia_armazenada_reservatorio
+  - name: br_ons_avaliacao_operacao__energia_armazenada_reservatorio
     description: Dados das grandezas de energia armazenada (EAR) em periodicidade diária por Reservatórios. A Energia Armazenada (EAR) representa a energia associada ao volume de água disponível nos reservatórios que pode ser convertido em geração na própria usina e em todas as usinas à jusante na cascata. A grandeza de EAR leva em conta nível verificado nos reservatórios na data de referência. A grandeza de EAR máxima representa a capacidade de armazenamento caso todos os reservatórios do sistema estivessem cheios. A grandeza de EAR para o subsistema à jusante considera a utilização da água do reservatório para produzir energia em uma usina à jusante que está em um subsistema diferente.
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - data
+              - id_reservatorio_planejamento
     columns:
       - name: data
         description: Data 
@@ -292,4 +320,47 @@ models:
       - name: proporcao_contribuicao_energia_armazenada_maxima_sin
         description: Percentual da contribuição do reservatório para a Energia Armazenada
             (EAR) máxima do Sistema Interligado Nacional (SIN)
-  
+  - name: br_ons_avaliacao_operacao__restricao_operacao_usinas_eolicas
+    description: Informações associadas à apuração das restrições de operação por Constrained-off nas usinas eólicas classificadas nas modalidades Tipo I, Tipo II-B e Tipo II-C
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - data
+              - hora
+              - usina
+              - id_ons
+    columns:
+      - name: data
+        description: Data de referência da medição
+      - name: hora
+        description: Hora de referência da medição
+      - name: ano
+        description: Ano de refêrencia da medição
+      - name: mes
+        description: Mês de referência da medição
+      - name: sigla_uf
+        description: Sigla da unidade da federação da usina
+      - name: id_subsistema
+        description: Identificador do subsistema da usina
+      - name: subsistema
+        description: Nome do subsistema da usina
+      - name: id_ons
+        description: Identificador da usina ou conjunto do Operador Nacional do Sistema Elétrico (ONS)
+      - name: id_empreendimento_aneel
+        description: Identificador único do empreendimento de geração da Agência Nacional de Energia Elétrica (ANEEL)
+      - name: usina
+        description: Nome da usina
+      - name: tipo_razao_restricao
+        description: Código do tipo de razão da restrição
+      - name: tipo_origem_restricao
+        description: Código do tipo de origem da restrição
+      - name: geracao
+        description: Valor da geração de energia
+      - name: geracao_limitada
+        description: Valor da geração limitada por alguma restrição
+      - name: disponibilidade
+        description: Valor da disponibilidade verificada no tempo real
+      - name: geracao_referencia
+        description: Valor da geração de referência (ou estimada)
+      - name: geracao_referencia_final
+        description: Valor da geração de referência final  
