@@ -3,6 +3,13 @@ version: 2
 models:
   - name: br_ms_sinasc__microdados
     description: Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio_nascimento
+            - sequencial_nascimento
+            - id_municipio_residencia
     columns:
       - name: ano
         description: Ano
