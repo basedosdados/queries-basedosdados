@@ -1,6 +1,15 @@
+{{ config(
+    alias='balanco_energia_subsistemas_dessem', 
+    schema='br_ons_estimativa_custos',
+    cluster_by=['ano', 'mes']
+    ) 
+}}
+
 SELECT
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_subsistema AS STRING) id_subsistema,
 SAFE_CAST(subsistema AS STRING) subsistema,
 SAFE_CAST(valor_demanda AS FLOAT64) valor_demanda,

@@ -16,7 +16,7 @@ Esse é um template para um pacote DBT a ser importado no [repositório principa
 - Acesse o arquivo `profiles.yml` e se atente aos comentários, eles indicam os campos que devem ser alterados.
 - Usando os arquivos de credencial, crie os secrets `credentials-dev` e `credentials-prod` [usando a flag `--from-file`](https://cloud.google.com/kubernetes-engine/docs/concepts/secret#creating_secrets_from_files).
 - Faça o upload das alterações realizadas em seu repositório.
-- Toda vez que houver uma alteração de código na branch `master`, uma instância atualizada do servidor RPC do DBT será criada em seu cluster, no devido namespace.
+- Toda vez que houver uma alteração de código na branch `main`, uma instância atualizada do servidor RPC do DBT será criada em seu cluster, no devido namespace.
 
 ### Resources:
 
