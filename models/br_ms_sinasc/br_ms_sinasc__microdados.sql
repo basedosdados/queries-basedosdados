@@ -13,6 +13,12 @@
     cluster_by = "sigla_uf",
     ) 
 }}
+WITH municipio_mae_6 AS (
+  SELECT DISTINCT id_municipio, id_municipio_6
+  FROM `basedosdados-staging.br_ms_sinasc_staging.microdados` mm6
+  LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m
+  ON m.id_municipio_6 = mm6.id_municipio_mae  
+)
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -42,7 +48,14 @@ SAFE_CAST(quantidade_filhos_vivos AS INT64) quantidade_filhos_vivos,
 SAFE_CAST(quantidade_filhos_mortos AS INT64) quantidade_filhos_mortos,
 SAFE_CAST(id_pais_mae AS STRING) id_pais_mae,
 SAFE_CAST(id_uf_mae AS STRING) id_uf_mae,
-SAFE_CAST(id_municipio_mae AS STRING) id_municipio_mae,
+SAFE_CAST(
+    CASE 
+        WHEN LENGTH(id_municipio_mae) = 6 THEN  (SELECT id_municipio FROM municipio_mae_6 m1 
+                                                    WHERE m1.id_municipio_6 = t.id_municipio_mae)
+        WHEN LENGTH(id_municipio_mae) = 7 then id_municipio_mae
+      ELSE null 
+    END 
+    AS STRING) id_municipio_mae,
 SAFE_CAST(id_pais_residencia AS STRING) id_pais_residencia,
 SAFE_CAST(id_municipio_residencia AS STRING) id_municipio_residencia,
 SAFE_CAST(data_nascimento_mae AS DATE) data_nascimento_mae,

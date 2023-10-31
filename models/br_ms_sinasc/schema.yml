@@ -20,16 +20,28 @@ models:
               field: ano.ano 
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: sequencial_nascimento
         description: Sequencial do Nascimento
       - name: id_municipio_nascimento
         description: ID do município de nascimento - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: local_nascimento
         description: Local onde ocorreu o nascimento
       - name: codigo_estabelecimento
         description: Código do Cadastro Nacional de estabelecimento onde ocorreu o nascimento
       - name: data_nascimento
         description: Data do nascimento do recém nascido
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: hora_nascimento
         description: Horário exato ou aproximado do nascimento do recém nascido
       - name: sexo
@@ -74,12 +86,24 @@ models:
         description: Código da UF de naturalidade da mãe
       - name: id_municipio_mae
         description: Código do município de naturalidade da mãe
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_pais_residencia
         description: Código do país de residência
       - name: id_municipio_residencia
         description: ID Município de Residência - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: data_nascimento_mae
         description: Data de nascimento da mãe
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: idade_mae
         description: Idade da mãe
       - name: escolaridade_mae
@@ -104,6 +128,10 @@ models:
         description: Número de partos cesáreos
       - name: data_ultima_menstruacao
         description: Data da última menstruação (DUM)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: tipo_apresentacao
         description: Tipo de apresentação do recém nascido
       - name: inducao_parto
@@ -120,6 +148,10 @@ models:
         description: Identificação do registro realizado em cartório
       - name: data_registro_cartorio
         description: Data de registro do recém nascido no cartório
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: origem
         description: Banco de dados de Origem
       - name: numero_lote
@@ -128,14 +160,30 @@ models:
         description: Versão do sistema
       - name: data_cadastro
         description: Data da declaração do nascido vivo no sistema
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_recebimento
         description: Data do último recebimento do lote (Sisnet)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_recebimento_original
         description: Data de recebimento original calculado pelo sistema
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: diferenca_data
         description: Diferença entre a data de óbito e data do recebimento original da DO
       - name: data_declaracao
         description: Data do preenchimento da declaração
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: funcao_responsavel
         description: Função exercida pelo responsável pelo preenchimento da declaração
       - name: documento_responsavel
