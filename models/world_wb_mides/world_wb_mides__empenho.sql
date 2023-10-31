@@ -12,7 +12,7 @@
         "interval": 1}
     },
     cluster_by = ["ano", "sigla_uf"],
-    labels = {'tema': 'economia'},
+    labels = {'tema': 'economia'})
 }}
 SELECT
   ano,
