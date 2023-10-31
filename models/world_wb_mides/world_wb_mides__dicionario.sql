@@ -2,7 +2,8 @@
   config(
     alias = 'dicionario',
     schema = "world_wb_mides",
-    materialized = "table"
+    materialized = "table",
+    labels = {"tema": "economia"}
   )
  }}
 SELECT 

@@ -1,9 +1,10 @@
 {{
   config(
+    alias = 'orgao_unidade_gestora',
     schema = "world_wb_mides",
     materialized = "table",
     cluster_by = ["sigla_uf"],
-    labels = {"project_id": "basedosdados", "tema": "economia"}
+    labels = {"tema": "economia"}
   )
  }}
 SELECT 
