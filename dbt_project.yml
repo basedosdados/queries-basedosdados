@@ -201,7 +201,10 @@ models:
       +schema: br_ms_sim
     br_ms_sinan:
       +materialized: table
-      +schema: br_ms_sinan    
+      +schema: br_ms_sinan 
+    br_ms_sinasc:
+      +materialized: table
+      +schema: br_ms_sinasc    
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao
