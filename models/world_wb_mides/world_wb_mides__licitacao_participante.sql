@@ -1,5 +1,6 @@
 {{
   config(
+    alias = 'licitacao_participante',
     schema = "world_wb_mides",
     materialized = "table",
     partition_by = {
@@ -11,7 +12,7 @@
         "interval": 1}
     },
     cluster_by = ["sigla_uf"],
-    labels = {"project_id": "basedosdados", "tema": "economia"}
+    labels = {"tema": "economia"}
   )
  }}
 SELECT
