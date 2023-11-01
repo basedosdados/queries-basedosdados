@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias = 'empenho',
     schema='world_wb_mides',
     materialized='table',
      partition_by={
@@ -10,36 +11,35 @@
         "end": 2022,
         "interval": 1}
     },
-    cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'}
-  )
- }}
+    cluster_by = ["ano", "sigla_uf"],
+    labels = {'tema': 'economia'})
+}}
 SELECT
-  SAFE_CAST(ano AS INT64) ano,
-  SAFE_CAST(mes AS INT64) mes,
-  SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-  SAFE_CAST(id_municipio AS STRING) id_municipio,
-  SAFE_CAST(orgao AS STRING) orgao,
-  SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
-  SAFE_CAST(id_licitacao_bd AS STRING) id_licitacao_bd,
-  SAFE_CAST(id_licitacao AS STRING) id_licitacao,
-  SAFE_CAST(modalidade_licitacao AS STRING) modalidade_licitacao,
-  SAFE_CAST(id_empenho_bd AS STRING) id_empenho_bd,
-  SAFE_CAST(id_empenho AS STRING) id_empenho,
-  SAFE_CAST(numero AS STRING) numero,
-  SAFE_CAST(descricao AS STRING) descricao,
-  SAFE_CAST(modalidade AS STRING) modalidade,
-  SAFE_CAST(funcao AS STRING) funcao,
-  SAFE_CAST(subfuncao AS STRING) subfuncao,
-  SAFE_CAST(programa AS STRING) programa,
-  SAFE_CAST(acao AS STRING) acao,
-  SAFE_CAST(elemento_despesa AS STRING) elemento_despesa,
-  SAFE_CAST(valor_inicial AS FLOAT64) valor_inicial,
-  SAFE_CAST(valor_reforco AS FLOAT64) valor_reforco,
-  SAFE_CAST(valor_anulacao AS FLOAT64) valor_anulacao,
-  SAFE_CAST(valor_ajuste AS FLOAT64) valor_ajuste,
-  SAFE_CAST(valor_final AS FLOAT64) valor_final
+  ano,
+  mes,
+  data,
+  sigla_uf ,
+  id_municipio,
+  orgao,
+  id_unidade_gestora,
+  id_licitacao_bd,
+  id_licitacao,
+  modalidade_licitacao,
+  id_empenho_bd,
+  id_empenho,
+  numero,
+  descricao,
+  modalidade,
+  funcao,
+  subfuncao,
+  programa,
+  acao,
+  elemento_despesa,
+  valor_inicial,
+  valor_reforco,
+  valor_anulacao,
+  valor_ajuste,
+  valor_final
 FROM (
 WITH empenhado_ce AS (
   SELECT
@@ -58,11 +58,11 @@ WITH empenhado_ce AS (
     SAFE_CAST (numero_empenho AS STRING) AS numero,
     SAFE_CAST (LOWER (descricao_empenho) AS STRING) AS descricao,
     SAFE_CAST (modalidade_empenho AS STRING) AS modalidade,
-    SAFE_CAST (codigo_funcao AS STRING) AS funcao,
-    SAFE_CAST (codigo_subfuncao AS STRING) AS subfuncao,
-    SAFE_CAST (codigo_programa AS STRING) AS programa,
-    SAFE_CAST (codigo_projeto_atividade AS STRING) AS acao,
-    SAFE_CAST (codigo_elemento_despesa AS STRING) AS modalidade_despesa,
+    SAFE_CAST (SAFE_CAST (codigo_funcao AS INT64) AS STRING) AS funcao,
+    SAFE_CAST (SAFE_CAST (codigo_subfuncao AS INT64) AS STRING) AS subfuncao,
+    SAFE_CAST (SAFE_CAST (codigo_programa AS INT64) AS STRING) AS programa,
+    SAFE_CAST (SAFE_CAST (codigo_projeto_atividade AS INT64) AS STRING) AS acao,
+    SAFE_CAST (SAFE_CAST (codigo_elemento_despesa AS INT64) AS STRING) AS modalidade_despesa,
     ROUND(SAFE_CAST (valor_empenhado AS FLOAT64),2) AS valor_inicial,
   FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_ce e
 ),
@@ -125,7 +125,7 @@ empenhado_mg AS (
     SAFE_CAST (CONCAT(id_empenho, ' ', orgao, ' ', id_municipio, ' ', (RIGHT(ano,2))) AS STRING) AS id_empenho_bd,
     SAFE_CAST (id_empenho AS STRING) AS id_empenho,
     SAFE_CAST (numero_empenho AS STRING) AS numero,
-    SAFE_CAST (descricao AS STRING) AS descricao,
+    SAFE_CAST (LOWER (descricao) AS STRING) AS descricao,
     SAFE_CAST (SUBSTRING (dsc_modalidade, 5,1) AS STRING) AS modalidade,
     SAFE_CAST (CAST(LEFT(dsc_funcao, 2) AS INT64) AS STRING) AS funcao,
     SAFE_CAST (CAST(LEFT(dsc_subfuncao, 3) AS INT64) AS STRING) AS subfuncao,
@@ -133,10 +133,10 @@ empenhado_mg AS (
     SAFE_CAST (CAST(LEFT(dsc_acao, 4) AS INT64) AS STRING) AS acao,
     SAFE_CAST (REPLACE(LEFT(elemento_despesa, 12), '.', '') AS STRING) AS elemento_despesa,
     ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64),2) AS valor_inicial,
-    ROUND(SAFE_CAST (valor_reforco AS FLOAT64),2) AS valor_reforco,
-    ROUND(SAFE_CAST (valor_anulacao AS FLOAT64),2) AS valor_anulacao,
+    ROUND(SAFE_CAST (IFNULL(SAFE_CAST(valor_reforco AS FLOAT64),0) AS FLOAT64),2) AS valor_reforco,
+    ROUND(SAFE_CAST (IFNULL(SAFE_CAST(valor_anulacao AS FLOAT64),0) AS FLOAT64),2) AS valor_anulacao,
     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64) + SAFE_CAST (valor_reforco AS FLOAT64) - SAFE_CAST (valor_anulacao AS FLOAT64),2) AS valor_final
+    ROUND(SAFE_CAST (valor_empenho_original AS FLOAT64) + SAFE_CAST (IFNULL(SAFE_CAST(valor_reforco AS FLOAT64),0) AS FLOAT64) - SAFE_CAST (IFNULL(SAFE_CAST(valor_anulacao AS FLOAT64),0) AS FLOAT64),2) AS valor_final
   FROM basedosdados-staging.world_wb_mides_staging.raw_empenho_mg
 ),
   dlic AS (
@@ -193,8 +193,8 @@ empenhado_mg AS (
       SAFE_CAST (nu_Empenho AS STRING) AS numero,
       SAFE_CAST (LOWER (de_Historico) AS STRING) AS descricao,
       SAFE_CAST (NULL AS STRING) AS modalidade,
-      SAFE_CAST (funcao AS STRING) AS funcao,
-      SAFE_CAST (subfuncao AS STRING) AS subfuncao,
+      SAFE_CAST (SAFE_CAST (funcao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (SAFE_CAST (subfuncao AS INT64) AS STRING) AS subfuncao,
       SAFE_CAST (de_Programa AS STRING) AS programa, --substituir por código
       SAFE_CAST (de_Acao AS STRING) AS acao, -- substituir por código
       CONCAT (
@@ -329,8 +329,8 @@ empenhado_mg AS (
       SAFE_CAST (e.NUMEROEMPENHO AS STRING) AS numero,
       SAFE_CAST (LOWER(HISTORICO) AS STRING) AS descricao,
       SAFE_CAST (LEFT(TIPO_EMPENHO, 1) AS STRING) AS modalidade,
-      SAFE_CAST (fun.funcao AS STRING) AS funcao,
-      SAFE_CAST (sub.subfuncao AS STRING) AS subfuncao,
+      SAFE_CAST (SAFE_CAST (fun.funcao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (SAFE_CAST (sub.subfuncao AS INT64) AS STRING) AS subfuncao,
       SAFE_CAST (PROGRAMA AS STRING) AS programa,
       SAFE_CAST (CODIGO_TIPO_ACAO AS STRING) AS acao,
       CONCAT (
@@ -455,10 +455,10 @@ empenhado_mg AS (
       SAFE_CAST (nrEmpenho AS STRING) AS numero,
       SAFE_CAST (LOWER (dsHistorico) AS STRING) AS descricao,
       SAFE_CAST (LEFT(dsTipoEmpenho, 1) AS STRING) AS modalidade,
-      SAFE_CAST (CAST(cdFuncao AS INT64) AS STRING) AS funcao,
-      SAFE_CAST (cdSubFuncao AS STRING) AS subfuncao,
-      SAFE_CAST (cdPrograma AS STRING) AS programa,
-      SAFE_CAST (cdProjetoAtividade AS STRING) AS acao,
+      SAFE_CAST (SAFE_CAST (cdFuncao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (SAFE_CAST (cdSubFuncao AS INT64) AS STRING) AS subfuncao,
+      SAFE_CAST (SAFE_CAST (cdPrograma AS INT64) AS STRING) AS programa,
+      SAFE_CAST (SAFE_CAST (cdProjetoAtividade AS INT64) AS STRING) AS acao,
       SAFE_CAST (CONCAT (cdCategoriaEconomica, cdGrupoNatureza, cdModalidade, cdElemento) AS STRING) AS elemento_despesa,
       ROUND(SAFE_CAST (vlEmpenho AS FLOAT64),2) AS valor_inicial,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
@@ -484,12 +484,12 @@ empenhado_mg AS (
        SAFE_CAST(CONCAT(nr_empenho, ' ', c.cd_orgao, ' ', m.id_municipio, ' ', (RIGHT(ano_empenho,2))) AS STRING) AS id_empenho_bd,
        SAFE_CAST(NULL AS STRING) AS id_empenho,
        SAFE_CAST(nr_empenho AS STRING) AS numero,
-       SAFE_CAST(UPPER(historico) AS STRING) AS descricao,
+       SAFE_CAST(LOWER (historico) AS STRING) AS descricao,
        SAFE_CAST(NULL AS STRING) AS modalidade,
-       SAFE_CAST(cd_funcao AS STRING) AS funcao,
-       SAFE_CAST(cd_subfuncao AS STRING) AS subfuncao,
-       SAFE_CAST(cd_programa AS STRING) AS programa,
-       SAFE_CAST(cd_projeto AS STRING) AS acao,
+       SAFE_CAST(SAFE_CAST (cd_funcao AS INT64) AS STRING) AS funcao,
+       SAFE_CAST(SAFE_CAST (cd_subfuncao AS INT64) AS STRING) AS subfuncao,
+       SAFE_CAST(SAFE_CAST (cd_programa AS INT64) AS STRING) AS programa,
+       SAFE_CAST(SAFE_CAST (cd_projeto AS INT64) AS STRING) AS acao,
        SAFE_CAST(REPLACE(cd_elemento, '.','') AS STRING) AS elemento_despesa,
        SAFE_CAST(vl_empenho AS FLOAT64) AS valor_inicial     
      FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
@@ -659,12 +659,12 @@ empenhado_mg AS (
      SAFE_CAST (CONCAT(LEFT(nr_empenho, LENGTH(nr_empenho) - 5), ' ', codigo_orgao, ' ', id_municipio, ' ', (RIGHT(ano_exercicio,2))) AS STRING) AS id_empenho_bd,
      SAFE_CAST (NULL AS STRING) AS id_empenho,
      SAFE_CAST (nr_empenho AS STRING) AS numero,
-     SAFE_CAST (UPPER(historico_despesa) AS STRING) AS descricao,
+     SAFE_CAST (LOWER (historico_despesa) AS STRING) AS descricao,
      SAFE_CAST (NULL AS STRING) AS modalidade,
-     SAFE_CAST (funcao AS STRING) AS funcao,
-     SAFE_CAST (subfuncao AS STRING) AS subfuncao,
-     SAFE_CAST (cd_programa AS STRING) AS programa,
-     SAFE_CAST (cd_acao AS STRING) AS acao,
+     SAFE_CAST (SAFE_CAST (funcao AS INT64) AS STRING) AS funcao,
+     SAFE_CAST (SAFE_CAST (subfuncao AS INT64) AS STRING) AS subfuncao,
+     SAFE_CAST (SAFE_CAST (cd_programa AS INT64) AS STRING) AS programa,
+     SAFE_CAST (SAFE_CAST (cd_acao AS INT64) AS STRING) AS acao,
      SAFE_CAST ((LEFT(ds_elemento,8)) AS STRING) AS elemento_despesa,
      SAFE_CAST (REPLACE(vl_despesa, ',', '.') AS FLOAT64) AS valor_inicial
    FROM basedosdados-staging.world_wb_mides_staging.raw_despesa_sp e

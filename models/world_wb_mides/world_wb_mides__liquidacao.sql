@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias = 'liquidacao',
     schema='world_wb_mides',
     materialized='table',
      partition_by={
@@ -11,30 +12,29 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'}
-  )
- }}
+    labels = {'tema': 'economia'})
+}}
 SELECT
-  SAFE_CAST(ano AS INT64) ano,
-  SAFE_CAST(mes AS INT64) mes,
-  SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-  SAFE_CAST(id_municipio AS STRING) id_municipio,
-  SAFE_CAST(orgao AS STRING) orgao,
-  SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
-  SAFE_CAST(id_empenho_bd AS STRING) id_empenho_bd,
-  SAFE_CAST(id_empenho AS STRING) id_empenho,
-  SAFE_CAST(numero_empenho AS STRING) numero_empenho,
-  SAFE_CAST(id_liquidacao_bd AS STRING) id_liquidacao_bd,
-  SAFE_CAST(id_liquidacao AS STRING) id_liquidacao,
-  SAFE_CAST(numero AS STRING) numero,
-  SAFE_CAST(nome_responsavel AS STRING) nome_responsavel,
-  SAFE_CAST(documento_responsavel AS STRING) documento_responsavel,
-  SAFE_CAST(indicador_restos_pagar AS BOOL) indicador_restos_pagar,
-  SAFE_CAST(valor_inicial AS FLOAT64) valor_inicial,
-  SAFE_CAST(valor_anulacao AS FLOAT64) valor_anulacao,
-  SAFE_CAST(valor_ajuste  AS FLOAT64) valor_ajuste,
-  SAFE_CAST(valor_final AS FLOAT64) valor_final
+  ano,
+  mes,
+  data,
+  sigla_uf,
+  id_municipio,
+  orgao,
+  id_unidade_gestora,
+  id_empenho_bd,
+  id_empenho,
+  numero_empenho,
+  id_liquidacao_bd,
+  id_liquidacao,
+  numero,
+  nome_responsavel,
+  documento_responsavel,
+  indicador_restos_pagar,
+  valor_inicial,
+  valor_anulacao,
+  valor_ajuste,
+  valor_final
 FROM (  
 WITH liquidacao_ce AS (
       SELECT
@@ -72,7 +72,7 @@ WITH liquidacao_ce AS (
       SAFE_CAST (l.id_unidade_gestora AS STRING) AS id_unidade_gestora,
       SAFE_CAST ((CASE 
         WHEN id_empenho != '-1' THEN CONCAT(id_empenho, ' ', l.orgao, ' ', l.id_municipio, ' ', (RIGHT(ano,2)))
-        WHEN id_empenho = '-1'  THEN CONCAT(id_empenho_origem, ' ', r.orgao, ' ', r.id_municipio, ' ', (RIGHT(ano,2)))
+        WHEN id_empenho = '-1'  THEN CONCAT(id_empenho_origem, ' ', r.orgao, ' ', r.id_municipio, ' ', (RIGHT(num_ano_emp_origem,2)))
         END) AS STRING) AS id_empenho_bd,
       SAFE_CAST ((CASE 
         WHEN id_empenho = '-1' THEN REPLACE (id_empenho, '-1', id_empenho_origem) END) AS STRING) AS id_empenho,
@@ -298,7 +298,7 @@ WITH liquidacao_ce AS (
           WHEN ds_modalidade_lic = 'RDC'                                                THEN '12'
           WHEN ds_modalidade_lic = 'OUTROS/NÃO APLICÁVEL'                               THEN '99'
      END AS modalidade_licitacao,
-     SAFE_CAST (UPPER(historico_despesa) AS STRING) AS descricao,
+     SAFE_CAST (LOWER(historico_despesa) AS STRING) AS descricao,
      SAFE_CAST (NULL AS STRING) AS modalidade,
      SAFE_CAST (funcao AS STRING) AS funcao,
      SAFE_CAST (subfuncao AS STRING) AS subfuncao,

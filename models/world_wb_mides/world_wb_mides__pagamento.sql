@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias = 'pagamento',
     schema='world_wb_mides',
     materialized='table',
      partition_by={
@@ -11,35 +12,34 @@
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
-    labels = {'project_id': 'basedosdados-dev', 'tema': 'economia'}
-  )
- }}
-SELECT 
-  SAFE_CAST(ano AS INT64) ano,
-  SAFE_CAST(mes AS INT64) mes,
-  SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-  SAFE_CAST(id_municipio AS STRING) id_municipio,
-  SAFE_CAST(orgao AS STRING) orgao,
-  SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
-  SAFE_CAST(id_empenho_bd AS STRING) id_empenho_bd,
-  SAFE_CAST(id_empenho AS STRING) id_empenho,
-  SAFE_CAST(numero_empenho AS STRING) numero_empenho,
-  SAFE_CAST(id_liquidacao_bd AS STRING) id_liquidacao_bd,
-  SAFE_CAST(id_liquidacao AS STRING) id_liquidacao,
-  SAFE_CAST(numero_liquidacao AS STRING) numero_liquidacao,
-  SAFE_CAST(id_pagamento_bd AS STRING) id_pagamento_bd,
-  SAFE_CAST(id_pagamento AS STRING) id_pagamento,
-  SAFE_CAST(numero AS STRING) numero,
-  SAFE_CAST(nome_credor AS STRING) nome_credor,
-  SAFE_CAST(documento_credor AS STRING) documento_credor, 
-  SAFE_CAST(indicador_restos_pagar AS BOOL) indicador_restos_pagar,
-  SAFE_CAST(fonte AS STRING) fonte,
-  SAFE_CAST(valor_inicial AS FLOAT64) valor_inicial,
-  SAFE_CAST(valor_anulacao AS FLOAT64) valor_anulacao,
-  SAFE_CAST(valor_ajuste AS FLOAT64) valor_ajuste,
-  SAFE_CAST(valor_final AS FLOAT64) valor_final,
-  SAFE_CAST(valor_liquido_recebido AS FLOAT64) valor_liquido_recebido
+    labels = {'tema': 'economia'})
+}}
+SELECT
+  ano,
+  mes,
+  data,
+  sigla_uf,
+  id_municipio,
+  orgao,
+  id_unidade_gestora,
+  id_empenho_bd,
+  id_empenho,
+  numero_empenho,
+  id_liquidacao_bd,
+  id_liquidacao,
+  numero_liquidacao,
+  id_pagamento_bd,
+  id_pagamento,
+  numero,
+  nome_credor,
+  documento_credor,
+  indicador_restos_pagar,
+  fonte,
+  valor_inicial,
+  valor_anulacao,
+  valor_ajuste,
+  valor_final,
+  valor_liquido_recebido
 FROM(
 WITH empenho_ce AS (
   SELECT
@@ -125,7 +125,7 @@ WITH empenho_ce AS (
     SAFE_CAST (p.id_unidade_gestora AS STRING) AS id_unidade_gestora,
     SAFE_CAST (CASE
       WHEN id_empenho != '-1' THEN CONCAT(id_empenho, ' ', p.orgao, ' ', p.id_municipio, ' ', (RIGHT(ano,2)))
-      WHEN id_empenho = '-1'  THEN CONCAT(id_empenho_origem, ' ', r.orgao, ' ', r.id_municipio, ' ', (RIGHT(ano,2)))
+      WHEN id_empenho = '-1'  THEN CONCAT(id_empenho_origem, ' ', r.orgao, ' ', r.id_municipio, ' ', (RIGHT(num_ano_emp_origem,2)))
       END AS STRING) AS id_empenho_bd,
     SAFE_CAST (CASE
       WHEN p.id_empenho = '-1' THEN REPLACE (p.id_empenho, '-1', id_empenho_origem) END AS STRING) AS id_empenho,
@@ -469,7 +469,7 @@ pago_pb AS (
           WHEN ds_modalidade_lic = 'RDC'                                                THEN '12'
           WHEN ds_modalidade_lic = 'OUTROS/NÃO APLICÁVEL'                               THEN '99'
      END AS modalidade_licitacao,
-     SAFE_CAST (UPPER(historico_despesa) AS STRING) AS descricao,
+     SAFE_CAST (LOWER(historico_despesa) AS STRING) AS descricao,
      SAFE_CAST (NULL AS STRING) AS modalidade,
      SAFE_CAST (funcao AS STRING) AS funcao,
      SAFE_CAST (subfuncao AS STRING) AS subfuncao,
@@ -481,6 +481,7 @@ pago_pb AS (
    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = e.ds_orgao
    LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_funcao` ON ds_funcao_governo = UPPER(nome_funcao)
    LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_subfuncao` ON ds_subfuncao_governo = UPPER(nome_subfuncao)
+   WHERE tp_despesa = 'Valor Pago'
 ),
   frequencia AS (
      SELECT id_empenho_bd, COUNT (id_empenho_bd) AS frequencia_id
