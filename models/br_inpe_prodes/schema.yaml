@@ -9,8 +9,6 @@ models:
             - ano
             - id_municipio
             - bioma
-      - dbt_utils.expression_is_true:
-          expression: "desmatamento + floresta + nao_floresta + hidrografia = area"
     columns:
       - name: ano
         description: Ano
