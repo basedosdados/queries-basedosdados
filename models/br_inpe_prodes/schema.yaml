@@ -22,9 +22,9 @@ models:
               field: id_municipio
       - name: bioma
         description: Bioma
-      - name: area
-        description: Área
-      - name: desmatamento
+      - name: area_total
+        description: Área total do bioma no município
+      - name: desmatado
         description: Área Desmatada Total
       - name: vegetacao_natural
         description: Área de Vegetação Natural
