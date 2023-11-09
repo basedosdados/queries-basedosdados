@@ -95,3 +95,153 @@ models:
         description: Longitude do CEP
       - name: centroide
         description: Centróide do CEP
+  - name: br_bd_diretorios_brasil__municipio
+    description: 'Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.'
+    columns:
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos 
+      - name: id_municipio_6
+        description: ID Município - IBGE 6 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - Tribunal Superior Eleitoral (TSE)
+      - name: id_municipio_rf
+        description: ID Município - Receita Federal (RF) 
+      - name: id_municipio_bcb
+        description: ID Município - Banco Central do Brasil (BCB)
+      - name: nome
+        description: Nome do Município    
+      - name: capital_uf
+        description: Município é a Capital da Unidade da Federação
+      - name: id_comarca
+        description: ID Sede Comarca  
+      - name: id_regiao_saude
+        description: ID Região de Saúde
+      - name: nome_regiao_saude
+        description: Nome da Região de Saúde
+      - name: id_regiao_imediata
+        description: ID Região Imediata - IBGE  
+      - name: nome_regiao_imediata
+        description: Nome da Região Imediata
+      - name: id_regiao_intermediaria
+        description: ID Região Intermediária - IBGE
+      - name: nome_regiao_intermediaria
+        description: Nome da Região Intermediária 
+      - name: id_microrregiao
+        description: ID Microrregião - IBGE
+      - name: nome_microrregiao
+        description: Nome da Microrregião  
+      - name: id_mesorregiao
+        description: ID Mesorregião - IBGE
+      - name: nome_mesorregiao
+        description: Nome da Mesorregião
+      - name: id_regiao_metropolitana
+        description: ID Região Metropolitana - IBGE 
+      - name: nome_regiao_metropolitana
+        description: Nome da Região Metropolitana
+      - name: ddd
+        description: Código de Discagem Direta a Distância (DDD)
+      - name: id_uf
+        description: ID da Unidade da Federação - IBGE
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: nome_uf
+        description: Nome da Unidade da Federação
+      - name: nome_regiao
+        description: Nome da Grande Região Brasileira
+      - name: amazonia_legal
+        description: Indicador se o município faz parte da Amazônia Legal
+      - name: centroide
+        description: Centróide do município
+  - name: regiao_metropolitana
+    description: 'A tabela contém os códigos identificadores e nomes de Região Metropolitana (RM), Aglomeração Urbana (AU), Região Integrada de Desenvolvimento (RIDE) entre outros recortes reunidas pelo IBGE'
+    columns:
+      - name: id_regiao_metropolitana
+        description: ID Região Metropolitana - IBGE 
+      - name: nome
+        description: Nome da Região Metropolitana
+      - name: id_recorte_metropolitano
+        description: ID Recorte Metropolitano - IBGE
+      - name: nome_recorte_metropolitano
+        description: Nome do Recorte Metropolitano
+      - name: id_subcategoria_metropolitana
+        description: ID Subcategoria Metropolitana - IBGE
+      - name: nome_subcategoria_metropolitana
+        description: Nome Subcategoria Metropolitana    
+      - name: tipo
+        description: Tipo da Região
+      - name: id_municipio
+        description: Lista com ID Município - IBGE 7 Dígitos
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação 
+      - name: nome_regiao
+        description: Nome da Grande Região
+
+  - name: br_bd_diretorios_brasil__cnae_1
+    description: Diretório da Classificação Nacional de Atividades Econômicas 1.0.
+    columns:
+      - name: cnae_1
+        description: Classificação Nacional de Atividades Econômicas (CNAE) 1.0
+        tests:
+          - not_null        
+      - name: descricao
+        description: Descrição da CNAE 1.0
+      - name: grupo
+        description: Grupo
+      - name: descricao_grupo
+        description: Descrição do Grupo
+      - name: divisao
+        description: Divisão
+      - name: descricao_divisao
+        description: Descrição da Divisão
+      - name: secao
+        description: Seção
+      - name: descricao_secao
+        description: Descrição da Seção
+
+  - name: br_bd_diretorios_brasil__cnae_2
+    description: Diretório da Classificação Nacional de Atividades Econômicas 2.0.
+    columns:
+      - name: cnae_2
+        description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
+        tests:
+          - not_null
+      - name: descricao
+        description: Descrição da CNAE 2.0
+      - name: grupo
+        description: Grupo
+      - name: descricao_grupo
+        description: Descrição do Grupo
+      - name: divisao
+        description: Divisão
+      - name: descricao_divisao
+        description: Descrição da Divisão
+      - name: secao
+        description: Seção
+      - name: descricao_secao
+        description: Descrição da Seção 
+
+  - name: br_bd_diretorios_brasil__cnae_2_3_subclasses
+    description: Diretório da Classificação Nacional de Atividades Econômicas - Subclasses 2.3.
+    columns:
+      - name: cnae_2_3_subclasses
+        description: Classificação Nacional de Atividades Econômicas (CNAE) - Subclasses 2.3
+        tests:
+          - not_null
+      - name: descricao
+        description: Descrição da CNAE - Subclasses 2.3   
+      - name: cnae_2
+        description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
+      - name: descricao_cnae_2
+        description: Descrição da CNAE 2.0
+      - name: grupo
+        description: Grupo
+      - name: descricao_grupo
+        description: Descrição do Grupo
+      - name: divisao
+        description: Divisão
+      - name: descricao_divisao
+        description: Descrição da Divisão
+      - name: secao
+        description: Seção
+      - name: descricao_secao
+        description: Descrição da Seção   
