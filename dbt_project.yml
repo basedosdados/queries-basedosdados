@@ -166,6 +166,9 @@ models:
     br_inpe_prodes:
       +materialized: table
       +schema: br_inpe_prodes
+    br_inpe_queimadas:
+      +materialized: table
+      +schema: br_inpe_queimadas
     br_jota:
       +materialized: table
       +schema: br_jota
