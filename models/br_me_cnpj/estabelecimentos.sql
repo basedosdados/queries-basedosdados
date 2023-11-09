@@ -20,13 +20,13 @@
 WITH cnpj_estabelecimentos AS 
 (SELECT 
   SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(lpad(cnpj,14,"0") AS STRING) cnpj,
+  SAFE_CAST(lpad(cnpj,16,"0") AS STRING) cnpj,
   SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
-  SAFE_CAST(lpad(cnpj_ordem, 4, '0') AS STRING) cnpj_ordem,
+  SAFE_CAST(lpad(cnpj_ordem, 6, '0') AS STRING) cnpj_ordem,
   SAFE_CAST(lpad(cnpj_dv, 2, '0') AS STRING) cnpj_dv,
   SAFE_CAST(identificador_matriz_filial AS STRING) identificador_matriz_filial,
   SAFE_CAST(nome_fantasia AS STRING) nome_fantasia,
-  SAFE_CAST(CAST(situacao_cadastral AS INT64) AS STRING) situacao_cadastral,
+  SAFE_CAST(situacao_cadastral AS STRING) situacao_cadastral,
   SAFE_CAST(data_situacao_cadastral AS DATE) data_situacao_cadastral,
   SAFE_CAST(motivo_situacao_cadastral AS STRING) motivo_situacao_cadastral,
   SAFE_CAST(nome_cidade_exterior AS STRING) nome_cidade_exterior,
@@ -36,7 +36,7 @@ WITH cnpj_estabelecimentos AS
   SAFE_CAST(cnae_fiscal_secundaria AS STRING) cnae_fiscal_secundaria,
   SAFE_CAST(a.sigla_uf AS STRING) sigla_uf,
   SAFE_CAST(b.id_municipio AS STRING) id_municipio,
-  SAFE_CAST(a.id_municipio_rf AS STRING) id_municipio_rf,
+  SAFE_CAST(SAFE_CAST(a.id_municipio_rf AS NUMERIC)AS STRING) id_municipio_rf,
   SAFE_CAST(tipo_logradouro AS STRING) tipo_logradouro,
   SAFE_CAST(logradouro AS STRING) logradouro,
   SAFE_CAST(numero AS STRING) numero,
@@ -54,7 +54,7 @@ WITH cnpj_estabelecimentos AS
   SAFE_CAST(data_situacao_especial AS DATE) data_situacao_especial
 FROM basedosdados-staging.br_me_cnpj_staging.estabelecimentos a
 LEFT JOIN basedosdados.br_bd_diretorios_brasil.municipio b
-    ON a.id_municipio_rf = b.id_municipio_rf)
+    ON SAFE_CAST(SAFE_CAST(a.id_municipio_rf AS NUMERIC)AS STRING)  = b.id_municipio_rf)
 SELECT * FROM cnpj_estabelecimentos
 {% if is_incremental() %} 
 WHERE data > (SELECT MAX(data) FROM {{ this }} )
