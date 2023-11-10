@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: novo_bolsa_familia
+    description: Números do Novo Bolsa Família
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: data_referencia
+        description: Mês da folha de pagamento, no formato AAAAMM
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipios')
+              field: id_municipio        
+      - name: nome_municipio
+        description: Nome do município do beneficiário do Novo Bolsa Família        
+      - name: sigla_uf
+        description: Sigla da Unidade Federativa do beneficiário do Novo Bolsa Família
+      - name: cpf_favorecido
+        description: Número do Cadastro de Pessoas Físicas (CPF) do beneficiário do Novo
+            Bolsa Família, caso possua
+      - name: nis_favorecido
+        description: Número de Identificação Social (NIS) do beneficiário do Novo
+            Bolsa Família, caso possua
+      - name: nome_favorecido
+        description: Nome do beneficiário do Novo Bolsa Família
+      - name: valor_parcela
+        description: Valor da parcela do benefício
+        tests:
+          - not_null        
+  - name: garantia_safra
+    description: Números do Garantia Safra
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: data_referencia
+        description: Mês da folha de pagamento, no formato AAAAMM
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipios')        
+      - name: nome_municipio
+        description: Nome do município do beneficiário do Garantia Safra
+      - name: sigla_uf
+        description: Sigla da Unidade Federativa do beneficiário do Garantia Safra
+      - name: nis_favorecido
+        description: Número de Identificação Social (NIS) do beneficiário do Garantia Safra, caso possua
+      - name: nome_favorecido
+        description: Nome do beneficiário do Garantia Safra
+      - name: valor_parcela
+        description: Valor da parcela do benefício  
+        tests:
+          - not_null                 
+  - name: bpc
+    description: Números do Benefício de Prestação Continuada
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: data_referencia
+        description: Mês da folha de pagamento, no formato AAAAMM
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipios')                
+      - name: nome_municipio
+        description: Nome do município do beneficiário do BPC
+      - name: sigla_uf
+        description: Sigla da Unidade Federativa do beneficiário do BPC
+      - name: nis_favorecido
+        description: NIS do beneficiário do BPC
+      - name: cpf_favorecido
+        description: Número no Cadastro de Pessoas Físicas (CPF) do beneficiário do
+            BPC, caso possua
+      - name: nome_favorecido
+        description: Nome do beneficiário do BPC
+      - name: nis_representante
+        description: NIS do Representante Legal do Beneficiário
+      - name: cpf_representante
+        description: CPF do Representante Legal do Beneficiário
+      - name: nome_representante
+        description: Nome do Representante Legal do Beneficiário
+      - name: numero_beneficio
+        description: "Número do Benefício"
+      - name: concedido_judicialmente
+        description: "Indica se o benefício foi concedido judicialmente (“SIM” ou
+            “NÃO”)"
+      - name: valor_parcela
+        description: Valor da parcela do benefício
+        tests:
+          - not_null           

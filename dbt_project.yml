@@ -106,6 +106,9 @@ models:
       +post-hook: 
         - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
         - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+    br_cgu_beneficios_cidadao:
+      +materialized: incremental
+      +schema: br_cgu_beneficios_cidadao
     br_cgu_servidores_executivo_federal:
       +materialized: table
       +schema: br_cgu_servidores_executivo_federal
