@@ -258,6 +258,7 @@ models:
           combination_of_columns:
             - year
             - refining_facility_id
+            - company
     columns:
       - name: year
         description: Year
@@ -290,6 +291,7 @@ models:
           combination_of_columns:
             - year
             - crushing_facility_Id
+            - cnpj
     columns:
       - name: year
         description: Year
