@@ -2,6 +2,12 @@ version: 2
 
 models:
   - name: novo_bolsa_familia
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - nis_favorecido
     description: Números do Novo Bolsa Família
     columns:
       - name: ano
@@ -33,6 +39,12 @@ models:
         tests:
           - not_null        
   - name: garantia_safra
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - nis_favorecido  
     description: Números do Garantia Safra
     columns:
       - name: ano
@@ -59,6 +71,12 @@ models:
         tests:
           - not_null                 
   - name: bpc
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - nis_favorecido  
     description: Números do Benefício de Prestação Continuada
     columns:
       - name: ano
