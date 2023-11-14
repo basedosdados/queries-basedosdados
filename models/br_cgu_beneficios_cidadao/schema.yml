@@ -6,24 +6,24 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - ano
-            - mes
+            - ano_competencia
+            - mes_competencia
             - nis_favorecido    
     columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: data_referencia
-        description: Mês da folha de pagamento, no formato AAAAMM
+      - name: ano_competencia
+        description: Ano a que se refere a parcela
+      - name: mes_competencia
+        description: Mês a que se refere a parcela
+      - name: ano_referencia
+        description: Ano da folha de pagamento
+      - name: mes_referencia
+        description: Mês da folha de pagamento
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipios')
-              field: id_municipio        
-      - name: nome_municipio
-        description: Nome do município do beneficiário do Novo Bolsa Família        
+              field: id_municipio               
       - name: sigla_uf
         description: Sigla da Unidade Federativa do beneficiário do Novo Bolsa Família
       - name: cpf_favorecido
@@ -43,23 +43,19 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - ano
-            - mes
+            - ano_referencia
+            - mes_referencia
             - nis_favorecido  
     columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: data_referencia
-        description: Mês da folha de pagamento, no formato AAAAMM
+      - name: ano_referencia
+        description: Ano da folha de pagamento
+      - name: mes_referencia
+        description: Mês da folha de pagamento
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipios')        
-      - name: nome_municipio
-        description: Nome do município do beneficiário do Garantia Safra
       - name: sigla_uf
         description: Sigla da Unidade Federativa do beneficiário do Garantia Safra
       - name: nis_favorecido
@@ -75,23 +71,23 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - ano
-            - mes
-            - nis_favorecido  
+            - ano_competencia
+            - mes_competencia
+            - nis_favorecido    
     columns:
-      - name: ano
-        description: Ano
-      - name: mes
-        description: Mês
-      - name: data_referencia
-        description: Mês da folha de pagamento, no formato AAAAMM
+      - name: ano_competencia
+        description: Ano a que se refere a parcela
+      - name: mes_competencia
+        description: Mês a que se refere a parcela
+      - name: ano_referencia
+        description: Ano da folha de pagamento
+      - name: mes_referencia
+        description: Mês da folha de pagamento   
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipios')                
-      - name: nome_municipio
-        description: Nome do município do beneficiário do BPC
       - name: sigla_uf
         description: Sigla da Unidade Federativa do beneficiário do BPC
       - name: nis_favorecido
