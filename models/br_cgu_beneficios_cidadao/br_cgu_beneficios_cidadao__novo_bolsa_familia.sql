@@ -17,12 +17,12 @@
         'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
                     GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano_competencia AS INT64),CAST(mes_competencia AS INT64),1), MONTH) > 6)',
+                    FILTER USING (DATE_DIFF(DATE(2023,11,16),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,6,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)',
         'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
                     ON  {{this}}
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano_competencia AS INT64),CAST(mes_competencia AS INT64),1), MONTH) <= 6)']      )
-}}
+                    FILTER USING (DATE_DIFF(DATE(2023,11,16),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 6 OR  DATE_DIFF(DATE(2023,6,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 0)']              )
+ }}
 with novo_bolsa_familia as (
 SELECT 
 SAFE_CAST(SUBSTR(mes_competencia, 1, 4) AS INT64) ano_competencia,
