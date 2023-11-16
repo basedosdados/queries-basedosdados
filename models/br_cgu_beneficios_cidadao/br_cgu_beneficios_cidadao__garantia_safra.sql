@@ -12,6 +12,7 @@
         "interval": 1}
     },
     cluster_by = ["mes_referencia", "sigla_uf"] ,
+    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     post_hook = [
         'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
