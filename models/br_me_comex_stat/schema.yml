@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: municipio_exportacao
+  - name: br_me_comex_stat__municipio_exportacao
     description: Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4)
     columns:
       - name: ano
@@ -20,7 +20,7 @@ models:
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
-  - name: municipio_importacao
+  - name: br_me_comex_stat__municipio_importacao
     description: Base de dados detalhada por município da empresa importadora e Posição do Sistema Harmonizado (SH4)
     columns:
       - name: ano
@@ -39,7 +39,7 @@ models:
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
-  - name: ncm_importacao
+  - name: br_me_comex_stat__ncm_importacao
     description: Base de dados dos produtos importados pelo Brasil segundo a Nomenclatura Comum do Mercosul
     columns:
       - name: ano
@@ -68,7 +68,7 @@ models:
         description: Valor do Frete
       - name: valor_seguro
         description: Valor do Seguro
-  - name: ncm_exportacao
+  - name: br_me_comex_stat__ncm_exportacao
     description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
     columns:
       - name: ano
@@ -93,7 +93,7 @@ models:
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
-  - name: dicionario
+  - name: br_me_comex_stat__dicionario
     description: Dicionário de dados.
     columns:
       - name: id_tabela

@@ -1,7 +1,7 @@
 {{ config(
     alias='ncm_importacao',
     schema='br_me_comex_stat',
-    materialized='table',
+    materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
@@ -12,6 +12,7 @@
     },
     cluster_by = ["mes","sigla_uf_ncm"],
     labels = {'project_id': 'basedosdados', 'tema': 'economia'},
+    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     post_hook = [
         'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
@@ -38,3 +39,6 @@ SAFE_CAST(valor_fob_dolar AS FLOAT64) valor_fob_dolar,
 SAFE_CAST(valor_frete AS FLOAT64) valor_frete,
 SAFE_CAST(valor_seguro AS FLOAT64) valor_seguro
 FROM basedosdados-staging.br_me_comex_stat_staging.ncm_importacao AS t
+{% if is_incremental() %} 
+WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+{% endif %}
