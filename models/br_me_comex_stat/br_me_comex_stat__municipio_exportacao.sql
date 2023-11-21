@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias='municipio_exportacao',
     schema='br_me_comex_stat',
     materialized='table',
      partition_by={
