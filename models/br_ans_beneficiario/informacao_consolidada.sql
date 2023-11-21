@@ -11,6 +11,7 @@
     },    
     cluster_by = ["id_municipio", "mes", "sigla_uf"],    
     labels = {'project_id': 'basedosdados'}, 
+    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     post_hook = [
             'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                         ON {{this}}
