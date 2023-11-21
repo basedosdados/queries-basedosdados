@@ -1,6 +1,7 @@
-config{{
+{{config(
+    alias='dicionario',
     schema='br_me_comex_stat',
-    alias='dicionario'
+    )
 }}
 SELECT 
 SAFE_CAST(id_tabela AS STRING) id_tabela,
