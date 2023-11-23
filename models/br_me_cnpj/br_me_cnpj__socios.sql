@@ -1,6 +1,7 @@
 {{
   config(
     schema='br_me_cnpj',
+    alias = 'socios',
     materialized='incremental',
     partition_by={
       "field": "data",
@@ -10,11 +11,12 @@
     post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
                     ON {{this}}
                     GRANT TO ("allUsers")
-                FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(data), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(data), MONTH) > 0)',
+                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) > 6)',
               'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
                     ON  {{this}}
                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (EXTRACT(YEAR from data) = EXTRACT(YEAR from  CURRENT_DATE()))' ]) 
+                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) <= 6)']
+  )
 }}
 WITH cnpj_socios AS (SELECT 
     SAFE_CAST(data AS DATE) data,
