@@ -1,5 +1,6 @@
 {{ 
   config(
+    alias='agencia',
     schema='br_bcb_agencia',
     materialized='incremental',
      partition_by={
