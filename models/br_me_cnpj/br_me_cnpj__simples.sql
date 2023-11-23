@@ -1,9 +1,11 @@
 {{
   config(
     schema='br_me_cnpj',
+    alias = 'simples',
     materialized='table',
   )
 }}
+
 SELECT 
   SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
   SAFE_CAST(opcao_simples AS INT64) opcao_simples,
