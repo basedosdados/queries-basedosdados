@@ -3,6 +3,7 @@
     schema='br_trase_supply_chain') 
 }}
 
+
 SELECT
 SAFE_CAST(year AS INT64) year,
 SAFE_CAST(the_geom AS STRING) geom_id,

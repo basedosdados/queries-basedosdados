@@ -1,5 +1,6 @@
 version: 2
 
+
 models:
   - name: br_trase_supply_chain__beef
     description: This dataset is the Trase beef supply chain (v2.0.1). Trase maps supply chains for agricultural commodities, making it possible to link products and supply chain actors with specific areas of production, and associated sustainability risks and opportunities. 
