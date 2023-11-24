@@ -12,6 +12,7 @@
 }}
 
 
+
 -- padronizar iso3
 with inserir_id_iso3 as (
 --padronizar colunas que precisam ser tratadas

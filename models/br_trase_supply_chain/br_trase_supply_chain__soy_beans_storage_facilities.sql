@@ -3,6 +3,7 @@
     schema='br_trase_supply_chain') 
 }}
 
+
 SELECT
 SAFE_CAST(the_geom AS STRING) geom_id,
 SAFE_CAST(cartodb_id AS STRING) cartodb_id,
