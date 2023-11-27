@@ -2,15 +2,14 @@
   config(
     alias='garantia_safra',    
     schema='br_cgu_beneficios_cidadao',
-    materialized='incremental',
+    materialized='table',
      partition_by={
       "field": "ano_referencia",
       "data_type": "int64",
       "range": {
         "start": 2013,
         "end": 2024,
-        "interval": 1}
-    },
+        "interval": 1}},
     cluster_by = ["mes_referencia", "sigla_uf"] ,
     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     post_hook = [
@@ -37,6 +36,3 @@ FROM `basedosdados-staging.br_cgu_beneficios_cidadao_staging.garantia_safra` t1
 left join `basedosdados.br_bd_diretorios_brasil.municipio` t2
 on SAFE_CAST(t1.id_municipio_siafi AS INT64) = SAFE_CAST(t2.id_municipio_rf AS INT64))
 select * except(data) from garantia_safra
-{% if is_incremental() %} 
-WHERE data > (SELECT MAX(data) FROM {{ this }} )
-{% endif %}
