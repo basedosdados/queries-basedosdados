@@ -2,7 +2,7 @@
   config(
     alias='novo_bolsa_familia',    
     schema='br_cgu_beneficios_cidadao',
-    materialized='incremental',
+    materialized='table',
      partition_by={
       "field": "ano_competencia",
       "data_type": "int64",
@@ -40,6 +40,3 @@ FROM `basedosdados-staging.br_cgu_beneficios_cidadao_staging.novo_bolsa_familia`
 left join `basedosdados.br_bd_diretorios_brasil.municipio` t2
 on SAFE_CAST(t1.id_municipio_siafi AS INT64) = SAFE_CAST(t2.id_municipio_rf AS INT64))
 select * except(data) from novo_bolsa_familia
-{% if is_incremental() %} 
-WHERE data > (SELECT MAX(data) FROM {{ this }} )
-{% endif %}
