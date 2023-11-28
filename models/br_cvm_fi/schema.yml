@@ -10,6 +10,8 @@ models:
         description: Mês            
       - name: cnpj
         description: CNPJ do fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do fundo        
       - name: data_competencia
         description: Data de competência
       - name: plano_contabil_balancete
@@ -156,6 +158,8 @@ models:
         description: Mês       
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: denominacao_social
         description: Denominação Social
       - name: data_competencia
@@ -393,6 +397,8 @@ models:
         description: Tipo do Fundo
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: denominacao_social
         description: Denominação Social
       - name: data_registro
@@ -503,6 +509,8 @@ models:
         description: Mês    
       - name: cnpj
         description: CNPJ do fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do fundo        
       - name: denominacao_social
         description: Denominacao Social
       - name: data_competencia

@@ -15,7 +15,8 @@
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(cnpj AS STRING) cnpj,
+REGEXP_REPLACE(cnpj, r'[^0-9]', '') AS cnpj,
+SUBSTR(REGEXP_REPLACE(cnpj, r'[^0-9]', ''), 1, 8) AS cnpj_basico
 SAFE_CAST(denominacao_social AS STRING) denominacao_social,
 SAFE_CAST(data_competencia AS DATE) data_competencia,
 SAFE_CAST(versao AS STRING) versao,
