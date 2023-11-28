@@ -3,6 +3,12 @@ version: 2
 models:
   - name: br_bcb_agencia__agencia
     description: Esta tabela apresenta o cadastro de agências bancárias do Banco Central do Brasil (BCB)
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - ano
+              - mes
+              - cnpj
     columns:
       - name: ano
         description: Ano
@@ -10,12 +16,24 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
       - name: data_inicio
         description: Data de criação da agência
       - name: cnpj
         description: Cadastro Nacional de Pessoa Júridica (CNPJ)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: nome_agencia	
         description: Nome da Agência  
       - name: instituicao
@@ -26,8 +44,6 @@ models:
         description: Identificador do Sistema de Operações Monetárias e Compensações de Outros Papéis (COMPE) do Banco Central da agência
       - name: id_compe_bcb_instituicao
         description: Identificador do Sistema de Operações Monetárias e Compensações de Outros Papéis (COMPE) do Banco Central da instituição
-      - name: nome_agencia	
-        description: Nome da Agência  
       - name: cep
         description: CEP
       - name: endereco
