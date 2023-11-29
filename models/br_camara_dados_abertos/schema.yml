@@ -95,8 +95,10 @@ models:
               field: ano.ano
       - name: id_votacao
         description: ID da votação
-      - name: data_hora
-        description: Data e hora
+      - name: data
+        description: Data
+      - name: horario
+        description: Horário
       - name: voto
         description: Voto
       - name: id_deputado
