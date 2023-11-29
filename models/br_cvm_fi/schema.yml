@@ -2,6 +2,13 @@ version: 2
 
 models:
   - name: documentos_balancete
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - data_competencia
+            - plano_contabil_balancete
+            - codigo_conta
+            - cnpj
     description: O balancete é um documento gerado mensalmente pela contabilidade do fundo.
     columns:
       - name: ano
@@ -484,6 +491,12 @@ models:
       - name: indicador_aplicacao_total_recursos_exterior
         description: Indica se o fundo pode aplicar 100% dos recursos no exterior
   - name: documentos_informe_diario
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - data_competencia
+            - id_fundo
+            - cnpj
     description: O Informe Diário é um demonstrativo que contém as seguintes informações do fundo, relativas à data de competência - Valor total da carteira do fundo; Patrimônio líquido; Valor da cota; Captações realizadas no dia; Resgates pagos no dia; Número de cotistas.
     columns:
       - name: ano
@@ -494,6 +507,8 @@ models:
         description: Tipo do Fundo
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: data_competencia
         description: Data de Competência
       - name: valor_total
