@@ -34,16 +34,20 @@ SAFE_CAST(informacoes_adicionais_taxa_administracao AS STRING) informacoes_adici
 SAFE_CAST(valor_patrimonio_liquido AS FLOAT64) valor_patrimonio_liquido,
 SAFE_CAST(data_patrimonio_liquido AS DATE) data_patrimonio_liquido,
 SAFE_CAST(nome_diretor AS STRING) nome_diretor,
-SAFE_CAST(cnpj_administrador AS STRING) cnpj_administrador,
+REGEXP_REPLACE(cnpj_administrador, r'[^0-9]', '') AS cnpj_administrador,
+SUBSTR(REGEXP_REPLACE(cnpj_administrador, r'[^0-9]', ''), 1, 8) AS cnpj_basico_administrador
 SAFE_CAST(nome_administrador AS STRING) nome_administrador,
 SAFE_CAST(indicador_pessoa_fisica_ou_juridica AS STRING) indicador_pessoa_fisica_ou_juridica,
 SAFE_CAST(cpf_cnpj_gestor AS STRING) cpf_cnpj_gestor,
 SAFE_CAST(nome_gestor AS STRING) nome_gestor,
-SAFE_CAST(cnpj_auditor AS STRING) cnpj_auditor,
+REGEXP_REPLACE(cnpj_auditor, r'[^0-9]', '') AS cnpj_auditor,
+SUBSTR(REGEXP_REPLACE(cnpj_auditor, r'[^0-9]', ''), 1, 8) AS cnpj_basico_auditor
 SAFE_CAST(nome_auditor AS STRING) nome_auditor,
-SAFE_CAST(cnpj_custodiante AS STRING) cnpj_custodiante,
+REGEXP_REPLACE(cnpj_custodiante, r'[^0-9]', '') AS cnpj_custodiante,
+SUBSTR(REGEXP_REPLACE(cnpj_custodiante, r'[^0-9]', ''), 1, 8) AS cnpj_basico_custodiante
 SAFE_CAST(nome_custodiante AS STRING) nome_custodiante,
-SAFE_CAST(cnpj_controlador AS STRING) cnpj_controlador,
+REGEXP_REPLACE(cnpj_controlador, r'[^0-9]', '') AS cnpj_controlador,
+SUBSTR(REGEXP_REPLACE(cnpj_controlador, r'[^0-9]', ''), 1, 8) AS cnpj_basico_controlador
 SAFE_CAST(nome_controlador AS STRING) nome_controlador,
 SAFE_CAST(indicador_aplicacao_total_recursos_exterior AS INT64) indicador_aplicacao_total_recursos_exterior,
 FROM basedosdados-staging.br_cvm_fi_staging.documentos_informacao_cadastral AS t

@@ -453,6 +453,8 @@ models:
         description: Nome do Diretor Responsável
       - name: cnpj_administrador
         description: CNPJ do Administrador
+      - name: cnpj_basico_administrador
+        description: CNPJ Básico do Administrador        
       - name: nome_administrador
         description: Nome do Administrador
       - name: indicador_pessoa_fisica_ou_juridica
@@ -463,14 +465,20 @@ models:
         description: Nome do Gestor
       - name: cnpj_auditor
         description: CNPJ do Auditor
+      - name: cnpj_basico_auditor
+        description: CNPJ do Auditor        
       - name: nome_auditor
         description: Nome do Auditor
       - name: cnpj_custodiante
         description: CNPJ do Custodiante
+      - name: cnpj_basico_custodiante
+        description: CNPJ Básico do Custodiante        
       - name: nome_custodiante
         description: Nome do Custodiante
       - name: cnpj_controlador
         description: CNPJ do Controlador
+      - name: cnpj_basico_controlador
+        description: CNPJ Básico do Controlador        
       - name: nome_controlador
         description: Nome do Controlador
       - name: indicador_aplicacao_total_recursos_exterior
