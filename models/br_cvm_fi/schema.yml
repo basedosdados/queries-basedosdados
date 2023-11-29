@@ -494,6 +494,8 @@ models:
         description: Tipo do Fundo
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: data_competencia
         description: Data de Competência
       - name: valor_total
