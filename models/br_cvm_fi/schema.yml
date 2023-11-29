@@ -10,6 +10,8 @@ models:
         description: Mês            
       - name: cnpj
         description: CNPJ do fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do fundo        
       - name: data_competencia
         description: Data de competência
       - name: plano_contabil_balancete
@@ -31,6 +33,8 @@ models:
         description: Bloco   
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: denominacao_social
         description: Denominação Social
       - name: data_competencia
@@ -71,6 +75,8 @@ models:
         description: Data de vencimento
       - name: cnpj_fundo_investido
         description: CNPJ do fundo investido
+      - name: cnpj_basico_fundo_investido
+        description: CNPJ Básico do fundo investido        
       - name: denominacao_social_fundo_investido
         description: Denominação social do fundo investido
       - name: codigo_swap
@@ -87,6 +93,8 @@ models:
         description: Data fim da vigência
       - name: cnpj_emissor
         description: CNPJ do emissor
+      - name: cnpj_basico_emissor
+        description: CNPJ Básico do emissor        
       - name: nome_emissor
         description: Nome do Emissor
       - name: indicador_titulo_pos_fixado
@@ -119,6 +127,8 @@ models:
         description: Indica se o título possui garantia ou seguro
       - name: cnpj_instituicao_financeira_coobrigacao
         description: CNPJ da instituição financeira com coobrigação
+      - name: cnpj_basico_instituicao_financeira_coobrigacao
+        description: CNPJ Básico da instituição financeira com coobrigação        
       - name: indicador_investimento_coletivo
         description: Indica se é veículo de investimento coletivo
       - name: indicador_gestao_carteira_influencia_gestor
@@ -148,6 +158,8 @@ models:
         description: Mês       
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: denominacao_social
         description: Denominação Social
       - name: data_competencia
@@ -385,6 +397,8 @@ models:
         description: Tipo do Fundo
       - name: cnpj
         description: CNPJ do Fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do Fundo        
       - name: denominacao_social
         description: Denominação Social
       - name: data_registro
@@ -439,6 +453,8 @@ models:
         description: Nome do Diretor Responsável
       - name: cnpj_administrador
         description: CNPJ do Administrador
+      - name: cnpj_basico_administrador
+        description: CNPJ Básico do Administrador        
       - name: nome_administrador
         description: Nome do Administrador
       - name: indicador_pessoa_fisica_ou_juridica
@@ -449,14 +465,20 @@ models:
         description: Nome do Gestor
       - name: cnpj_auditor
         description: CNPJ do Auditor
+      - name: cnpj_basico_auditor
+        description: CNPJ do Auditor        
       - name: nome_auditor
         description: Nome do Auditor
       - name: cnpj_custodiante
         description: CNPJ do Custodiante
+      - name: cnpj_basico_custodiante
+        description: CNPJ Básico do Custodiante        
       - name: nome_custodiante
         description: Nome do Custodiante
       - name: cnpj_controlador
         description: CNPJ do Controlador
+      - name: cnpj_basico_controlador
+        description: CNPJ Básico do Controlador        
       - name: nome_controlador
         description: Nome do Controlador
       - name: indicador_aplicacao_total_recursos_exterior
@@ -495,6 +517,8 @@ models:
         description: Mês    
       - name: cnpj
         description: CNPJ do fundo
+      - name: cnpj_basico
+        description: CNPJ Básico do fundo        
       - name: denominacao_social
         description: Denominacao Social
       - name: data_competencia
