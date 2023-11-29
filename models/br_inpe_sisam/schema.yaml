@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: br_inpe_sisam__microdados
+    description: Dados do Sistema de Informações Ambientais integrado à saúde
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_municipio
+            - data_hora
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: sigla_uf
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: data_hora
+        description: Data e hora do registro
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: co_ppb
+        description: Concentração de CO
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: no2_ppb
+        description: Concentração de NO2
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: o3_ppb
+        description: Concentração de O3
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: pm25_ugm3
+        description: PM2.5 em μg/m³
+      - name: so2_ugm3
+        description: SO2 em μg/m³
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: precipitacao_dia
+        description: Total de precipitação no momento do registro
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: temperatura
+        description: Temperatura
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: umidade_relativa
+        description: Umidade relativa do ar
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: vento_direcao
+        description: Direção do vento
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: vento_velocidade
+        description: Velocidade do vento
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
