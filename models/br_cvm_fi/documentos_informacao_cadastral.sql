@@ -6,12 +6,8 @@
  }}
 SELECT
 SAFE_CAST(id_fundo AS STRING) id_fundo,
-<<<<<<< HEAD
-SAFE_CAST(cnpj AS STRING) cnpj,
-=======
 REGEXP_REPLACE(cnpj, r'[^0-9]', '') AS cnpj,
 SUBSTR(REGEXP_REPLACE(cnpj, r'[^0-9]', ''), 1, 8) AS cnpj_basico,
->>>>>>> a58bec35d868cf33544879135c2ac4fcb2c8e480
 SAFE_CAST(denominacao_social AS STRING) denominacao_social,
 SAFE_CAST(data_registro AS DATE) data_registro,
 SAFE_CAST(data_constituicao AS DATE) data_constituicao,
@@ -38,23 +34,12 @@ SAFE_CAST(informacoes_adicionais_taxa_administracao AS STRING) informacoes_adici
 SAFE_CAST(valor_patrimonio_liquido AS FLOAT64) valor_patrimonio_liquido,
 SAFE_CAST(data_patrimonio_liquido AS DATE) data_patrimonio_liquido,
 SAFE_CAST(nome_diretor AS STRING) nome_diretor,
-<<<<<<< HEAD
-SAFE_CAST(cnpj_administrador AS STRING) cnpj_administrador,
-=======
 REGEXP_REPLACE(cnpj_administrador, r'[^0-9]', '') AS cnpj_administrador,
 SUBSTR(REGEXP_REPLACE(cnpj_administrador, r'[^0-9]', ''), 1, 8) AS cnpj_basico_administrador,
->>>>>>> a58bec35d868cf33544879135c2ac4fcb2c8e480
 SAFE_CAST(nome_administrador AS STRING) nome_administrador,
 SAFE_CAST(indicador_pessoa_fisica_ou_juridica AS STRING) indicador_pessoa_fisica_ou_juridica,
 SAFE_CAST(cpf_cnpj_gestor AS STRING) cpf_cnpj_gestor,
 SAFE_CAST(nome_gestor AS STRING) nome_gestor,
-<<<<<<< HEAD
-SAFE_CAST(cnpj_auditor AS STRING) cnpj_auditor,
-SAFE_CAST(nome_auditor AS STRING) nome_auditor,
-SAFE_CAST(cnpj_custodiante AS STRING) cnpj_custodiante,
-SAFE_CAST(nome_custodiante AS STRING) nome_custodiante,
-SAFE_CAST(cnpj_controlador AS STRING) cnpj_controlador,
-=======
 REGEXP_REPLACE(cnpj_auditor, r'[^0-9]', '') AS cnpj_auditor,
 SUBSTR(REGEXP_REPLACE(cnpj_auditor, r'[^0-9]', ''), 1, 8) AS cnpj_basico_auditor,
 SAFE_CAST(nome_auditor AS STRING) nome_auditor,
@@ -63,7 +48,6 @@ SUBSTR(REGEXP_REPLACE(cnpj_custodiante, r'[^0-9]', ''), 1, 8) AS cnpj_basico_cus
 SAFE_CAST(nome_custodiante AS STRING) nome_custodiante,
 REGEXP_REPLACE(cnpj_controlador, r'[^0-9]', '') AS cnpj_controlador,
 SUBSTR(REGEXP_REPLACE(cnpj_controlador, r'[^0-9]', ''), 1, 8) AS cnpj_basico_controlador,
->>>>>>> a58bec35d868cf33544879135c2ac4fcb2c8e480
 SAFE_CAST(nome_controlador AS STRING) nome_controlador,
 SAFE_CAST(indicador_aplicacao_total_recursos_exterior AS INT64) indicador_aplicacao_total_recursos_exterior,
 FROM basedosdados-staging.br_cvm_fi_staging.documentos_informacao_cadastral AS t
