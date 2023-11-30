@@ -17,7 +17,12 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_fundo AS STRING) id_fundo,
 SAFE_CAST(bloco AS STRING) bloco,
+<<<<<<< HEAD
 SAFE_CAST(cnpj AS STRING) cnpj,
+=======
+REGEXP_REPLACE(cnpj, r'[^0-9]', '') AS cnpj,
+SUBSTR(REGEXP_REPLACE(cnpj, r'[^0-9]', ''), 1, 8) AS cnpj_basico,
+>>>>>>> a58bec35d868cf33544879135c2ac4fcb2c8e480
 SAFE_CAST(denominacao_social AS STRING) denominacao_social,
 SAFE_CAST(data_competencia AS DATE) data_competencia,
 SAFE_CAST(tipo_aplicacao AS STRING) tipo_aplicacao,
@@ -45,7 +50,12 @@ SAFE_CAST(codigo_ativo AS STRING) codigo_ativo,
 SAFE_CAST(descricao_ativo AS STRING) descricao_ativo,
 SAFE_CAST(data_inicio_vigencia AS DATE) data_inicio_vigencia,
 SAFE_CAST(data_fim_vigencia AS DATE) data_fim_vigencia,
+<<<<<<< HEAD
 SAFE_CAST(cnpj_emissor AS STRING) cnpj_emissor,
+=======
+REGEXP_REPLACE(cnpj_emissor, r'[^0-9]', '') AS cnpj_emissor,
+SUBSTR(REGEXP_REPLACE(cnpj_emissor, r'[^0-9]', ''), 1, 8) AS cnpj_basico_emissor,
+>>>>>>> a58bec35d868cf33544879135c2ac4fcb2c8e480
 SAFE_CAST(nome_emissor AS STRING) nome_emissor,
 SAFE_CAST(REPLACE(indicador_titulo_pos_fixado,'.0','') AS INT64) indicador_titulo_pos_fixado,
 SAFE_CAST(codigo_indexador_pos_fixados AS STRING) codigo_indexador_pos_fixados,
@@ -61,7 +71,12 @@ SAFE_CAST(REPLACE(indicador_emissor_pessoa_fisica_juridica,'.0','') AS INT64) in
 SAFE_CAST(REPLACE(indicador_codigo_identificacao_emissor_pessoa_fisica_juridica,'.0','') AS INT64) indicador_codigo_identificacao_emissor_pessoa_fisica_juridica,
 SAFE_CAST(REPLACE(indicador_titulo_registrado_cetip,'.0','') AS INT64) indicador_titulo_registrado_cetip,
 SAFE_CAST(REPLACE(indicador_titulo_possui_garantia_seguro,'.0','') AS INT64) indicador_titulo_possui_garantia_seguro,
+<<<<<<< HEAD
 SAFE_CAST(cnpj_instituicao_financeira_coobrigacao AS STRING) cnpj_instituicao_financeira_coobrigacao,
+=======
+REGEXP_REPLACE(cnpj_instituicao_financeira_coobrigacao, r'[^0-9]', '') AS cnpj_instituicao_financeira_coobrigacao,
+SUBSTR(REGEXP_REPLACE(cnpj_instituicao_financeira_coobrigacao, r'[^0-9]', ''), 1, 8) AS cnpj_basico_instituicao_financeira_coobrigacao,
+>>>>>>> a58bec35d868cf33544879135c2ac4fcb2c8e480
 SAFE_CAST(REPLACE(indicador_investimento_coletivo,'.0','') AS INT64) indicador_investimento_coletivo,
 SAFE_CAST(REPLACE(indicador_gestao_carteira_influencia_gestor,'.0','') AS INT64) indicador_gestao_carteira_influencia_gestor,
 SAFE_CAST(codigo_pais AS STRING) codigo_pais,
