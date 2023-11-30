@@ -3,6 +3,14 @@ version: 2
 models:
   - name: br_camara_dados_abertos__votacao_microdados
     description: Identificadores e informações sobre as votações das comissões e do Plenário da Câmara, por ano em que tenham ocorrido.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - ano
+          - id_votacao
+          - data
+          - horario
+          - sigla_orgao
     columns:
       - name: ano
         description: Ano
@@ -50,6 +58,11 @@ models:
 
   - name: br_camara_dados_abertos__votacao_objeto
     description: Cada votação é uma decisão sobre uma e somente uma Proposição, que no Dados Abertos é o chamado objeto da votação. Muitas vezes, porém, a proposição que realmente é votada não é identificada, e em alguns casos não é nem mesmo cadastrada.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - id_votacao
+          - id_proposicao   
     columns:
       - name: ano
         description: Ano
@@ -85,6 +98,11 @@ models:
 
   - name: br_camara_dados_abertos__voto_parlamentar
     description: Separados por ano de ocorrência das votações, estes arquivos têm, em cada linha/registro, identificadores de uma votação, os identificadores básicos de cada Deputado, o voto (ou posicionamento de obstrução) registrado pelo parlamentar e o horário de registro do voto.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - id_votacao
+          - id_deputado 
     columns:
       - name: ano
         description: Ano
@@ -97,6 +115,10 @@ models:
         description: ID da votação
       - name: data
         description: Data
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: horario
         description: Horário
       - name: voto
@@ -109,11 +131,20 @@ models:
         description: Sigla do partido
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla_uf     
       - name: id_legislatura
         description: ID da legislatura
 
   - name: br_camara_dados_abertos__votacao_orientacao_bancada
     description: Para votações de qualquer tipo, os Partidos e Blocos, bem como as lideranças de Governo, Minoria, Maioria e Oposição, podem recomendar a seus Deputados que votem de um jeito ou de outro, ou podem "liberar a bancada".
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - id_votacao
+          - id_proposicao
     columns:
       - name: ano
         description: Ano
@@ -128,13 +159,18 @@ models:
         description: Sigla do órgão
       - name: descricao
         description: Descrição sobre a votação 
-      - name: id_proposicao
-        description: ID proposição
+      - name: sigla_bancada
+        description: Sigla da bancada
       - name: orientacao
         description: Orientação da bancada
 
   - name: br_camara_dados_abertos__votacao_proposicao_afetada
     description: Quando alguém fala algo como "a votação do PL 1234", o significado no Dados Abertos é "as várias votações de proposições relacionadas ao PL 1234". O tal PL 1234 é, portanto, a proposição afetada por essas votações.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - id_votacao
+          - id_proposicao    
     columns:
       - name: ano
         description: Ano
