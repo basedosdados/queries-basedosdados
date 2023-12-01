@@ -94,7 +94,7 @@ SELECT
     WHEN sigla_uf = 'SP' AND nome = 'salmorao' THEN '3545100'
     WHEN sigla_uf = 'MG' AND nome = 'gouveia' THEN '3127602'
     WHEN sigla_uf = 'MT' AND nome = 'poxoreu' THEN '5107008'
-    WHEN sigla_uf = 'GO' AND nome = 'portolandia' THEN '5218102 '
+    WHEN sigla_uf = 'GO' AND nome = 'portolandia' THEN '5218102'
     WHEN sigla_uf = 'TO' AND nome = 'alianca do norte' THEN '1700350'
     WHEN sigla_uf = 'MA' AND nome = 'sao luiz gonzaga maranhao' THEN '2111409'
     WHEN sigla_uf = 'MG' AND nome = 'cachoeira do pajeu' THEN '3102704'
