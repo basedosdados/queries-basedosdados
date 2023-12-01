@@ -59,4 +59,4 @@ SAFE_CAST(REPLACE (chutes_vis,".0","") AS INT64) chutes_visitante,
 SAFE_CAST(REPLACE (chutes_fora_man,".0","") AS INT64) chutes_fora_mandante,
 SAFE_CAST(REPLACE (chutes_fora_vis,".0","") AS INT64) chutes_fora_visitante
 FROM basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
-WHERE SAFE_CAST(ano_campeonato AS NUMERIC) != 2023 OR SAFE_CAST(rodada AS NUMERIC) < 30 
+where data is not null

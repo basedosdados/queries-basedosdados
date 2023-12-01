@@ -8,11 +8,20 @@
       "data_type": "int64",
       "range": {
         "start": 1935,
-        "end": 2022,
+        "end": 2023,
         "interval": 1}
     },    
-  )
+    post_hook = ['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
+                    ON {{this}}
+                    GRANT TO ("allUsers")
+                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) > 6)',
+          'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
+                ON  {{this}}
+                GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
+                FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) <= 6)' ]
+    )
 }}
+
 
 SELECT 
   SAFE_CAST(ano AS INT64) ano,
