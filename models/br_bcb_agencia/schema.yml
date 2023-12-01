@@ -12,16 +12,8 @@ models:
     columns:
       - name: ano
         description: Ano
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: ano
       - name: mes
         description: Mês
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: mes
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
@@ -42,6 +34,9 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__empresa')
+                field: cnpj
       - name: nome_agencia	
         description: Nome da Agência  
       - name: instituicao
@@ -56,8 +51,8 @@ models:
         description: CEP
         tests:
           - relationships:
-                to: ref('cep')
-                field: cep
+                to: ref('br_bd_diretorios_brasil__cep')
+                field: cep.cep
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: endereco
