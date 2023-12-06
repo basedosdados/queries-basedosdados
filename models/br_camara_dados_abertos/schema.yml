@@ -203,3 +203,161 @@ models:
         description: Sigla do tipo da proposição
       - name: numero
         description: Número da proposição
+        
+  - name: br_camara_dados_abertos__deputado
+    description: Lista com identificadores e informações sobre todos os parlamentares que já estiveram em exercício em algum momento na história da Câmara.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id_deputado
+    columns:
+      - name: nome
+        description: Nome
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: nome_civil
+        description: Nome cívil
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: data_nascimento
+        description: Data de Nascimento
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data
+      - name: data_falecimento
+        description: Data de Falecimento
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data
+      - name: id_municipio_nascimento
+        description: ID Município - IBGE 7 Dígitos referente ao nascimento
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
+      - name: sigla_uf_nascimento
+        description: Sigla da Unidade da Federação referente ao nascimento
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: sexo
+        description: Sexo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_inicial_legislatura
+        description: ID inicial da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_final_legislatura
+        description: ID final da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_site
+        description: 'URL do site '
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_rede_social
+        description: URL das redes sociais
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+
+  - name: br_camara_dados_abertos__deputado_ocupacao
+    description: Lista com identificadores e informações sobre as atividades profissionais ou ocupacionais que o deputado já teve em sua carreira e declarou à Câmara dos Deputados.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id_deputado
+    columns:
+      - name: ano_inicio
+        description: Ano início
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano
+      - name: ano_fim
+        description: Ano fim
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano
+      - name: id_deputado
+        description: ID deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: entidade
+        description: Entidade
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: titulo
+        description: Título da ocupação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+
+  - name: br_camara_dados_abertos__deputado_profissao
+    description: Lista com identificadores e informações sobre as profissões que o parlamentar declarou à Câmara que já exerceu ou que pode exercer pela sua formação e/ou experiência.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id_deputado
+    columns:
+      - name: id_deputado
+        description: ID do deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: data
+        description: Data
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data
+      - name: horario
+        description: Horario
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_profissao
+        description: ID da profissão
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: titulo
+        description: Título da profissão
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
