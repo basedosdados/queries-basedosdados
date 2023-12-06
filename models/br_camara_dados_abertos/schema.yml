@@ -253,6 +253,11 @@ models:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__uf')
                 field: sigla
+      - name: id_deputado
+        description: ID deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
       - name: sexo
         description: Sexo
         tests:

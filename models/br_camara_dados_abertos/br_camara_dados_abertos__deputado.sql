@@ -30,7 +30,11 @@ WITH
     END
     AS id_municipio_nascimento,
     SAFE_CAST(sigla_uf_nascimento AS STRING) sigla_uf_nascimento,
-    REPLACE(REPLACE(SAFE_CAST(sexo AS STRING), 'M', 'Masculino'), 'F', 'Feminino') sexo,
+    CASE  
+      WHEN sexo = 'M' THEN 'Masculino'  
+      WHEN sexo = 'F' THEN 'Feminino'  
+      ELSE sexo  
+    END AS sexo,
     SAFE_CAST(id_inicial_legislatura AS STRING) id_inicial_legislatura,
     SAFE_CAST(id_final_legislatura AS STRING) id_final_legislatura,
     SAFE_CAST(url_site AS STRING) url_site,
