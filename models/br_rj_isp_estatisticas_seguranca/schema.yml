@@ -1,7 +1,7 @@
 version: 2
 # ! modelo dbt armas_apreendidas_mensal
 models: 
-  - name: armas_apreendidas_mensal
+  - name: br_rj_isp_estatisticas_seguranca__armas_apreendidas_mensal
     description: "Série histórica mensal por área de delegacia desde 01/2007"
     columns:
       - name: ano
@@ -41,7 +41,7 @@ models:
 
 
 # ! modelo dbt evolucao_mensal_cisp
-  - name: evolucao_mensal_cisp
+  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_cisp
     description: "Evolução mensal CISP"
     columns:
       - name: ano
@@ -169,7 +169,7 @@ models:
 
 
 # ! modelo dbt evolucao_mensal_municipio
-  - name: evolucao_mensal_municipio
+  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_municipio
     description: "Série histórica mensal por município desde 2014"
     columns:
       - name: ano
@@ -291,7 +291,7 @@ models:
 
 
 # ! modelo dbt evolucao_mensal_uf
-  - name: evolucao_mensal_uf
+  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_uf
     description: "Série histórica mensal no estado desde 01/1991"
     columns:
       - name: ano
@@ -409,7 +409,7 @@ models:
 
 
 # ! modelo dbt evolucao_policial_morto_servico_mensal
-  - name: evolucao_policial_morto_servico_mensal
+  - name: br_rj_isp_estatisticas_seguranca__evolucao_policial_morto_servico_mensal
     description: Série histórica mensal por área de delegacia desde 01/2003
     columns:
       - name: ano
@@ -425,7 +425,7 @@ models:
 
 
 # ! modelo dbt feminicidio_mensal_cisp
-  - name: feminicidio_mensal_cisp
+  - name: br_rj_isp_estatisticas_seguranca__feminicidio_mensal_cisp
     description: "Feminicídio (Lei 7.448/2016) série histórica mensal por área de delegacia desde 10/2016"
     columns:
       - name: ano
@@ -443,7 +443,7 @@ models:
 
 
 # ! modelo dbt taxa_evolucao_mensal_municipio
-  - name: taxa_evolucao_mensal_municipio
+  - name: br_rj_isp_estatisticas_seguranca__taxa_evolucao_mensal_municipio
     description: "Série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)"
     columns:
       - name: ano
@@ -565,7 +565,7 @@ models:
 
 # ! model dbt taxa_letalidade
 
-  - name: taxa_letalidade
+  - name: br_rj_isp_estatisticas_seguranca__taxa_letalidade
     description: "Taxa de evolução mensal no Estado por 100 mil habitantes"
     columns:
       - name: ano
@@ -583,7 +583,7 @@ models:
 
 
 # ! modelo dbt taxa_evolucao_mensal_uf
-  - name: taxa_evolucao_mensal_uf
+  - name: br_rj_isp_estatisticas_seguranca__taxa_evolucao_mensal_uf
     description: "Taxa de evolução mensal no Estado por 100 mil habitantes"
     columns:
       - name: ano
@@ -700,7 +700,7 @@ models:
         description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
 
 # ! armas_fogo_apreendidas_mensal
-  - name: armas_fogo_apreendidas_mensal
+  - name: br_rj_isp_estatisticas_seguranca__armas_fogo_apreendidas_mensal
     description: "Série histórica mensal por área de delegacia (01/2003 a 12/2006)"
     columns: 
       - name: ano
@@ -719,7 +719,7 @@ models:
         description: Quantidade de armas de fogo apreendidas mensalmente
 
 # ! evolucao_mensal_upp
-  - name: evolucao_mensal_upp
+  - name: br_rj_isp_estatisticas_seguranca__evolucao_mensal_upp
     description: Série histórica mensal por área de Unidade de Polícia Pacificadora (01/2007 a 06/2021)
     columns: 
       - name: ano
@@ -803,7 +803,7 @@ models:
       - name: quantidade_registro_ocorrencia
         description: Registro de ocorrências
 
-  - name: relacao_cisp_aisp_risp
+  - name: br_rj_isp_estatisticas_seguranca__relacao_cisp_aisp_risp
     description: "Relação entre Circunscrição Integrada de Segurança Pública (CISP), Área Integrada de Segurança Pública (AISP) e Região Integrada de Segurança Pública (RISP) no estado do Rio de Janeiro"
     columns:
       - name: id_aisp
@@ -821,7 +821,7 @@ models:
 
 
 # ! modelo dbt taxa_evolucao_anual_uf
-  - name: taxa_evolucao_anual_uf
+  - name: br_rj_isp_estatisticas_seguranca__taxa_evolucao_anual_uf
     description: "Série histórica anual no estado desde 1991 (taxas por 100 mil habitantes)"
     columns:
       - name: ano
@@ -936,7 +936,7 @@ models:
         description: Tipo de fase (e.g. Consolidado sem errata, Consolidado com errata)
 
 # ! modelo dbt taxa_evolucao_anual_municipio
-  - name: taxa_evolucao_anual_municipio
+  - name: br_rj_isp_estatisticas_seguranca__taxa_evolucao_anual_municipio
     description: "Série histórica anual por município desde 2014 (taxas por 100 mil habitantes)"
     columns:
       - name: ano

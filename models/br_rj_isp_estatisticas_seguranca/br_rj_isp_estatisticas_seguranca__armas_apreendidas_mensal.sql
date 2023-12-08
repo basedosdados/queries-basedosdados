@@ -1,3 +1,5 @@
+{{ config(alias='armas_apreendidas_mensal',schema='br_rj_isp_estatisticas_seguranca') }}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
