@@ -1,6 +1,10 @@
+{{ config(alias='taxa_evolucao_mensal_municipio',schema='br_rj_isp_estatisticas_seguranca') }}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(taxa_homicidio_doloso AS FLOAT64) taxa_homicidio_doloso,
 SAFE_CAST(taxa_latrocinio AS FLOAT64) taxa_latrocinio,
 SAFE_CAST(taxa_lesao_corporal_morte AS FLOAT64) taxa_lesao_corporal_morte,
@@ -53,6 +57,6 @@ SAFE_CAST(taxa_encontro_cadaver AS FLOAT64) taxa_encontro_cadaver,
 SAFE_CAST(taxa_encontro_ossada AS FLOAT64) taxa_encontro_ossada,
 SAFE_CAST(taxa_policial_militar_morto_servico AS FLOAT64) taxa_policial_militar_morto_servico,
 SAFE_CAST(taxa_policial_civil_morto_servico AS FLOAT64) taxa_policial_civil_morto_servico,
-SAFE_CAST(taxa_registro_ocorrencia AS FLOAT64) taxa_registro_ocorrencia,
+SAFE_CAST(taxa_registro_ocorrencia AS INT64) taxa_registro_ocorrencia,
 SAFE_CAST(tipo_fase AS STRING) tipo_fase
-FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_mensal_uf AS t
+FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_mensal_municipio AS t

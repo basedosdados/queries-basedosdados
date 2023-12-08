@@ -1,7 +1,7 @@
-SELECT 
+{{ config(alias='taxa_evolucao_anual_uf',schema='br_rj_isp_estatisticas_seguranca') }}
+
+SELECT
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(taxa_homicidio_doloso AS INT64) taxa_homicidio_doloso,
 SAFE_CAST(taxa_latrocinio AS INT64) taxa_latrocinio,
 SAFE_CAST(taxa_lesao_corporal_morte AS INT64) taxa_lesao_corporal_morte,
@@ -17,6 +17,7 @@ SAFE_CAST(taxa_roubo_transeunte AS INT64) taxa_roubo_transeunte,
 SAFE_CAST(taxa_roubo_celular AS INT64) taxa_roubo_celular,
 SAFE_CAST(taxa_roubo_corporal_coletivo AS INT64) taxa_roubo_corporal_coletivo,
 SAFE_CAST(taxa_roubo_rua AS INT64) taxa_roubo_rua,
+SAFE_CAST(taxa_roubo_veiculo AS INT64) taxa_roubo_veiculo,
 SAFE_CAST(taxa_roubo_carga AS INT64) taxa_roubo_carga,
 SAFE_CAST(taxa_roubo_comercio AS INT64) taxa_roubo_comercio,
 SAFE_CAST(taxa_roubo_residencia AS INT64) taxa_roubo_residencia,
@@ -55,4 +56,4 @@ SAFE_CAST(taxa_policial_militar_morto_servico AS INT64) taxa_policial_militar_mo
 SAFE_CAST(taxa_policial_civil_morto_servico AS INT64) taxa_policial_civil_morto_servico,
 SAFE_CAST(taxa_registro_ocorrencia AS INT64) taxa_registro_ocorrencia,
 SAFE_CAST(tipo_fase AS STRING) tipo_fase
-FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_anual_municipio AS t
+FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_evolucao_anual_uf AS t

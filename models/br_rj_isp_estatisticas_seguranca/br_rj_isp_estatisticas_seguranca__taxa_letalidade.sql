@@ -1,3 +1,5 @@
+{{ config(alias='taxa_letalidade',schema='br_rj_isp_estatisticas_seguranca') }}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(regiao AS INT64) regiao,
