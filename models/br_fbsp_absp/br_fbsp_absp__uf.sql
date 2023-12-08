@@ -31,4 +31,4 @@ SAFE_CAST(quantidade_arma_fogo_apreendida AS INT64) quantidade_arma_fogo_apreend
 SAFE_CAST(quantidade_registro_pessoa_desaparecida AS INT64) quantidade_registro_pessoa_desaparecida,
 SAFE_CAST(quantidade_populacao_sistema_penitenciario AS INT64) quantidade_populacao_sistema_penitenciario,
 SAFE_CAST(despesa_empenhada_seguranca_publica AS FLOAT64) despesa_empenhada_seguranca_publica
-FROM basedosdados-staging.br_fbsp_absp_staging.uf AS t
+FROM basedosdados-staging.br_fbsp_absp_staging.uf
