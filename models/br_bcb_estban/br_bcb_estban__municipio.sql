@@ -8,7 +8,7 @@
       "data_type": "int64",
       "range": {
         "start": 1987,
-        "end": 2023,
+        "end": 2024,
         "interval": 1}
     },
     cluster_by = ["mes", "sigla_uf"],
