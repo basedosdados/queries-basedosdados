@@ -1,0 +1,9 @@
+{{ config(alias='domicilios_pelo_menos_um_moradores_terras_indigenas',schema='br_ibge_censo_2022') }}
+SELECT
+SAFE_CAST(TRIM(REGEXP_EXTRACT(terra_indigena_por_unidade_da_federacao, r'([^\(]+)')) AS STRING) terra_indigena,
+SAFE_CAST(TRIM(REGEXP_EXTRACT(terra_indigena_por_unidade_da_federacao, r'\(([^)]+)\)')) AS STRING) sigla_uf,
+SAFE_CAST(domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_indigena_domicilios_ AS INT64) domicilios_terras_indigenas_pelo_menos_um,
+SAFE_CAST(moradores_em_domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_indigena_pessoas_ AS INT64) moradores_domicilios_terras_indigenas_pelo_menos_um,
+SAFE_CAST(moradores_indigenas_em_domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_indigena_pessoas_ AS INT64) moradores_indigenas_domicilios_terras_indigenas_pelo_menos_um,
+SAFE_CAST(REPLACE(media_de_moradores_indigenas_em_domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_indigena_pessoas_, ",", ".") AS FLOAT64) media_moradores_indigenas_domicilios_terras_indigenas_pelo_menos_um,
+FROM basedosdados-staging.br_ibge_censo_2022_staging.domicilios_pelo_menos_um_moradore_terras_indigenas AS t
