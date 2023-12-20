@@ -36,20 +36,9 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_quilombolas_domicilios
+      - name: moradores_quilombolas
         description: Moradores quilombolas em domicílios particulares permanentes
             ocupados
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradres_domicilios
-        description: Média de moradores em domicílios particulares permanentes ocupados
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_quilombolas_domicilios
-        description: Média de moradores quilombolas em domicílios particulares permanentes
-            ocupados com pelo menos um morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -86,7 +75,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: domicilios_pelo_menos_um_territorios_quilombolas
+  - name: quilombolas_domicilios_pelo_menos_um_morador_territorios_quilombolas
     description: Domicílios particulares permanentes ocupados com pelo menos um morador quilombola e Moradores, total e quilombolas, em domicílios particulares permanentes ocupados com pelo menos um morador quilombola, segundo os Territórios Quilombolas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -98,19 +87,19 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: domicilios_territorios_quilombolas
+      - name: domicilios
         description: Domicílios particulares permanentes ocupados localizados em territórios
             quilombolas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios_territorios_quilombolas
+      - name: moradores_domicilios
         description: Moradores em domicílios particulares permanentes ocupados localizados
             em territórios quilombolas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_quilombolas_domicilios_territorios_quilombolas
+      - name: moradores_quilombolas
         description: Moradores quilombolas em domicílios particulares permanentes
             ocupados localizados em territórios quilombolas
         tests:
@@ -143,7 +132,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: domicilios_moradores_territorios_quilombolas
+  - name: quilombolas_domicilios_moradores_territorios_quilombolas
     description: 
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -155,37 +144,25 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: domicilios_pelo_menos_um_territorios_quilombolas
+      - name: domicilios
         description: Domicílios particulares permanentes ocupados com pelo menos um
             morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios_pelo_menos_um_territorios_quilombolas
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados com
             pelo menos um morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_quilombolas_domicilios_particulares_pelo_menos_um_territorios_quilombolas
+      - name: moradores_quilombolas
         description: Moradores quilombolas em domicílios particulares permanentes
             ocupados com pelo menos um morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: media_moradores_domicilios_pelo_menos_um_territorios_quilombolas
-        description: 'Média de moradores em domicílios particulares permanentes ocupados
-            com pelo menos um morador quilombola '
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_quilombolas_domicilios_pelo_menos_um_territorios_quilombolas
-        description: Média de moradores quilombolas em domicílios particulares permanentes
-            ocupados com pelo menos um morador quilombola
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-  - name: domicilios_pelo_menos_um_moradores_terras_indigenas
+  - name: indigenas_domicilios_pelo_menos_um_morador_terras_indigenas
     description: Domicílios particulares permanentes ocupados com pelo menos um morador indígena e Moradores, total e indígenas, em domicílios particulares permanentes ocupados com pelo menos um morador indígena, segundo as Terras Indígenas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -197,27 +174,21 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: domicilios_terras_indigenas_pelo_menos_um
+      - name: domicilios
         description: Domicílios particulares permanentes ocupados com pelo menos um
             morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios_terras_indigenas_pelo_menos_um
+      - name: moradores_domicilios
         description: Moradores em domicílios particulares permanentes ocupados com
             pelo menos um morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_indigenas_domicilios_terras_indigenas_pelo_menos_um
+      - name: moradores_indigenas
         description: Moradores indígenas em domicílios particulares permanentes ocupados
             com pelo menos um morador indígena
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_indigenas_domicilios_terras_indigenas_pelo_menos_um
-        description: Média de moradores indígenas em domicílios particulares permanentes
-            ocupados com pelo menos um morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -284,11 +255,6 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: densidade_demografica
-        description: Densidade demográfica
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
   - name: domicilios_moradores_municipio
     description: Domicílios particulares permanentes ocupados e Moradores em domicílios particulares permanentes ocupados.
     tests:
@@ -309,7 +275,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados
         tests:
           - dbt_utils.not_null_proportion:
@@ -374,7 +340,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: domicilios_recenseados
+      - name: domicilios
         description: Domicílios Recenseados
         tests:
           - dbt_utils.not_null_proportion:
@@ -405,24 +371,13 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_indigenas_domicilios
+      - name: moradores_indigenas
         description: Moradores indígenas em domicílios particulares permanentes ocupados
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_domicilios
-        description: Média de moradores em domicílios particulares permanentes ocupados
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_indigenas_domicilios
-        description: Média de moradores indígenas em domicílios particulares permanentes
-            ocupados com pelo menos um morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -486,7 +441,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: populacao_residente_terras_indigenas
+  - name: indigenas_populacao_residente_terras_indigenas
     description: População residente em terras indígenas, total e indígenas, por quesito de declaração indígena, segundo as Terras Indígenas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -508,12 +463,12 @@ models:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__uf')
                 field: sigla
-      - name: pessoas_residentes_terras_indigenas
+      - name: populacao_residente
         description: Pessoas residentes em terras indígenas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: pessoas_indigenas_residentes_terras_indigenas
+      - name: pessoas_indigenas
         description: Pessoas indígenas residentes em terras indígenas
         tests:
           - dbt_utils.not_null_proportion:
@@ -523,9 +478,8 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: domicilios_moradores_terras_indigenas
+  - name: indigenas_domicilios_moradores_terras_indigenas
     description: Domicílios particulares permanentes ocupados localizados em terras indígenas e Moradores, total e indígenas, em domicílios particulares permanentes ocupados localizados em terras indígenas, segundo as Terras Indígenas, nos Censos Demográficos.
-        here
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
@@ -545,27 +499,21 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: domicilios_terras_indigenas
+      - name: domicilios
         description: Domicílios particulares permanentes ocupados localizados em terras
             indígenas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios_terras_indigenas
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados localizados
             em terras indígenas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_indigenas_domicilios_terras_indigenas
+      - name: moradores_indigenas
         description: Moradores indígenas em domicílios particulares permanentes ocupados
             localizados em terras indígenas
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_indigenas_domicilios_terras_indigenas
-        description: Média de moradores indígenas em domicílios particulares permanentes
-            ocupados com pelo menos um morador indígena localizados em terras indígenas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -590,33 +538,21 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: domicilios_pelo_menos_um
+      - name: domicilios
         description: Domicílios particulares permanentes ocupados com pelo menos um
             morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios_pelo_menos_um
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados com
             pelo menos um morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_indigenas_domicilios_pelo_menos_um
+      - name: moradores_indigenas
         description: Moradores indígenas em domicílios particulares permanentes ocupados
             com pelo menos um morador indígena
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_domicilios_pelo_menos_um
-        description: Média de moradores em domicílios particulares permanentes ocupados
-            com pelo menos um morador indígena
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_indigenas_domicilios_pelo_menos_um
-        description: Média de moradores indígenas em domicílios particulares permanentes
-            ocupados com pelo menos um morador indígena
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
