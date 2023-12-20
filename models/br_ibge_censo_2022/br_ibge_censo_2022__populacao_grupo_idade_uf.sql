@@ -1,4 +1,4 @@
-{{ config(alias='populacao_grupos_idade_uf',schema='br_ibge_censo_2022') }}
+{{ config(alias='populacao_grupo_idade_uf',schema='br_ibge_censo_2022') }}
 SELECT
 t2.sigla as sigla_uf,
 SAFE_CAST(grupo_de_idade AS STRING) grupo_idade,

@@ -1,4 +1,4 @@
-{{ config(alias='domicilios_recenseados_especie_municipio',schema='br_ibge_censo_2022') }}
+{{ config(alias='domicilio_recenseado_especie_municipio',schema='br_ibge_censo_2022') }}
 WITH ibge as(
 SELECT
 municipio,

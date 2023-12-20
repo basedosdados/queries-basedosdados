@@ -1,4 +1,4 @@
-{{ config(alias='quilombolas_domicilios_pelo_menos_um_morador_municipio',schema='br_ibge_censo_2022') }}
+{{ config(alias='quilombolas_domicilio_pelo_menos_um_morador_quilombola_municipio',schema='br_ibge_censo_2022') }}
 WITH ibge as (
 SELECT
 municipio,

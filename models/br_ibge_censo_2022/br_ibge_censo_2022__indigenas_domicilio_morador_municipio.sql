@@ -1,4 +1,4 @@
-{{ config(alias='indigenas_domicilios_moradores_municipio',schema='br_ibge_censo_2022') }}
+{{ config(alias='indigenas_domicilio_morador_municipio',schema='br_ibge_censo_2022') }}
 WITH ibge as (
 SELECT
 municipio,

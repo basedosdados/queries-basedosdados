@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: quilombolas_domicilios_moradores_municipio
+  - name: quilombolas_domicilio_morador_municipio
     description: Domicílios particulares permanentes ocupados e Moradores, total e quilombolas, em domicílios particulares permanentes, segundo localização do domicílio.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -47,7 +47,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: populacao_residente_territorios_quilombolas
+  - name: quilombolas_populacao_residente_territorio_quilombola
     description: População residente em territórios quilombolas, total e quilombola, segundo os Territórios Quilombolas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -75,7 +75,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: quilombolas_domicilios_pelo_menos_um_morador_territorios_quilombolas
+  - name: quilombolas_domicilio_pelo_menos_um_morador_quilombola_territorio_quilombola
     description: Domicílios particulares permanentes ocupados com pelo menos um morador quilombola e Moradores, total e quilombolas, em domicílios particulares permanentes ocupados com pelo menos um morador quilombola, segundo os Territórios Quilombolas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -132,7 +132,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: quilombolas_domicilios_moradores_territorios_quilombolas
+  - name: quilombolas_domicilio_morador_territorio_quilombola
     description: 
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -162,7 +162,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: indigenas_domicilios_pelo_menos_um_morador_terras_indigenas
+  - name: indigenas_domicilio_pelo_menos_um_morador_indigena_terra_indigena
     description: Domicílios particulares permanentes ocupados com pelo menos um morador indígena e Moradores, total e indígenas, em domicílios particulares permanentes ocupados com pelo menos um morador indígena, segundo as Terras Indígenas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -255,7 +255,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: domicilios_moradores_municipio
+  - name: domicilio_morador_municipio
     description: Domicílios particulares permanentes ocupados e Moradores em domicílios particulares permanentes ocupados.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -319,7 +319,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: domicilios_recenseados_especie_municipio
+  - name: domicilio_recenseado_especie_municipio
     description: Domicílios recenseados, por espécie
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -345,7 +345,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: indigenas_domicilios_moradores_municipio
+  - name: indigenas_domicilio_morador_municipio
     description: Domicílios particulares permanentes ocupados e Moradores, total e indígenas, em domicílios particulares permanentes ocupados, por localização do domicílio, nos Censos Demográficos.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -381,7 +381,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: quilombolas_domicilios_pelo_menos_um_morador_municipio
+  - name: quilombolas_domicilio_pelo_menos_um_morador_quilombola_municipio
     description: Domicílios particulares permanentes ocupados com pelo menos um morador quilombola e Moradores, total e moradores quilombolas, em domicílios particulares permanentes ocupados com pelo menos um morador quilombola, por localização do domicílio.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -441,7 +441,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: indigenas_populacao_residente_terras_indigenas
+  - name: indigenas_populacao_residente_terra_indigena
     description: População residente em terras indígenas, total e indígenas, por quesito de declaração indígena, segundo as Terras Indígenas.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -478,7 +478,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: indigenas_domicilios_moradores_terras_indigenas
+  - name: indigenas_domicilio_morador_terra_indigena
     description: Domicílios particulares permanentes ocupados localizados em terras indígenas e Moradores, total e indígenas, em domicílios particulares permanentes ocupados localizados em terras indígenas, segundo as Terras Indígenas, nos Censos Demográficos.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -517,7 +517,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: indigenas_domicilios_pelo_menos_um_morador_municipio
+  - name: indigenas_domicilio_pelo_menos_um_morador_indigena_municipio
     description: Domicílios particulares permanentes ocupados com pelo menos um morador indígena e Moradores, total e indígenas, em domicílios particulares permanentes ocupados com pelo menos um morador indígena, por localização do domicílio, nos Censos Demográficos.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -592,7 +592,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-  - name: populacao_grupos_idade_uf
+  - name: populacao_grupo_idade_uf
     description: População, por grupos de idade
     tests:
       - dbt_utils.unique_combination_of_columns:
