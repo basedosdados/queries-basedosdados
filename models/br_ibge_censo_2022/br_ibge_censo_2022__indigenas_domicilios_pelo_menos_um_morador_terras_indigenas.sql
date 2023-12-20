@@ -1,4 +1,4 @@
-{{ config(alias='indigenas_domicilios_pelo_menos_um_moradores_terras_indigenas',schema='br_ibge_censo_2022') }}
+{{ config(alias='indigenas_domicilios_pelo_menos_um_morador_terras_indigenas',schema='br_ibge_censo_2022') }}
 SELECT
 SAFE_CAST(TRIM(REGEXP_EXTRACT(terra_indigena_por_unidade_da_federacao, r'([^\(]+)')) AS STRING) terra_indigena,
 SAFE_CAST(TRIM(REGEXP_EXTRACT(terra_indigena_por_unidade_da_federacao, r'\(([^)]+)\)')) AS STRING) sigla_uf,
