@@ -7,7 +7,6 @@ models:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
               - id_municipio
-              - sigla_uf
               - localizacao_domicilio
     columns:
       - name: id_municipio
@@ -17,21 +16,13 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
-      - name: sigla_uf
-        description: Unidade da Federação
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla                
+                field: id_municipio             
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados
         tests:
           - dbt_utils.not_null_proportion:
@@ -65,12 +56,12 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05                
-      - name: pessoas_residentes_territorios_quilombolas
+      - name: populacao_residente
         description: Pessoas residentes em territórios quilombolas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: pessoas_quilombolas_residentes_territorios_quilombolas
+      - name: pessoas_quilombolas
         description: Pessoas quilombolas residentes em territórios quilombolas
         tests:
           - dbt_utils.not_null_proportion:
@@ -93,7 +84,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados localizados
             em territórios quilombolas
         tests:
@@ -106,7 +97,7 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
   - name: br_ibge_censo_2022__quilombolas_populacao_residente_municipio
-    description: 
+    description: População residente por municipio.
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
@@ -120,20 +111,20 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
-      - name: territorios_quilombolas
+                field: id_municipio
+      - name: pessoas_quilombolas
         description: População residente, total e quilombola, Em territórios quilombolas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: fora_territorios_quilombolas
+      - name: populacao_residente
         description: População residente, total e quilombola, fora de territórios
             quilombolas
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
   - name: br_ibge_censo_2022__quilombolas_domicilio_morador_territorio_quilombola
-    description: 
+    description: Domicílios particulares permanentes ocupados e Moradores, total e quilombolas, em domicílios particulares permanentes, por território quilombola.
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
@@ -180,7 +171,7 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados com
             pelo menos um morador indígena
         tests:
@@ -209,7 +200,7 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
+                field: id_municipio
       - name: forma_declaracao_idade
         description: Forma de declaração da idade
         tests:
@@ -244,7 +235,7 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
+                field: id_municipio
       - name: populacao_residente
         description: População residente
         tests:
@@ -269,7 +260,7 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
+                field: id_municipio
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
         tests:
@@ -286,7 +277,6 @@ models:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
               - id_municipio
-              - sigla_uf
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -295,15 +285,7 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
-      - name: sigla_uf
-        description: Unidade da Federação
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla                
+                field: id_municipio
       - name: indice_envelhecimento
         description: Índice de envelhecimento
         tests:
@@ -334,7 +316,7 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
+                field: id_municipio
       - name: especie
         description: Espécie
         tests:
@@ -360,7 +342,7 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
+                field: id_municipio
       - name: localizacao_domicilio
         description: Localização Domicílio
         tests:
@@ -387,7 +369,6 @@ models:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
               - id_municipio
-              - sigla_uf
               - localizacao_domicilio
     columns:
       - name: id_municipio
@@ -397,41 +378,21 @@ models:
                 at_least: 0.05
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id
-      - name: sigla_uf
-        description: ID Município IBGE 7 dígitos
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla                
-      - name: domicilios_pelo menos_um
+                field: id_municipio              
+      - name: domicilios
         description: Domicílios particulares permanentes ocupados com pelo menos um
             morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_domicilios_pelo_menos_um
+      - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados com
             pelo menos um morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
-      - name: moradores_quilombolas_domicilios_pelo_menos_um
+      - name: moradores_quilombolas
         description: Moradores quilombolas em domicílios particulares permanentes
-            ocupados com pelo menos um morador quilombola
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_domicilios_particulares_pelo_menos_um
-        description: Média de moradores em domicílios particulares permanentes ocupados
-            com pelo menos um morador quilombola
-        tests:
-          - dbt_utils.not_null_proportion:
-                at_least: 0.05
-      - name: media_moradores_quilombolas_domicilios_particulares_pelo_menos_um
-        description: Média de moradores quilombolas em domicílios particulares permanentes
             ocupados com pelo menos um morador quilombola
         tests:
           - dbt_utils.not_null_proportion:
@@ -531,8 +492,8 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
           - relationships:
-                to: ref('basedosdados__br_bd_diretorios_brasil,municipio')
-                field: id
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
       - name: localizacao_domicilio
         description: Localização Domicílio
         tests:
@@ -563,6 +524,7 @@ models:
             combination_of_columns:
               - id_municipio
               - quesito_declaracao_indigena
+              - localizacao_domicilio
     columns:
       - name: id_municipio
         description: ID Município 7 dígitos IBGE
@@ -570,8 +532,8 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
           - relationships:
-                to: ref('basedosdados__br_bd_diretorios_brasil,municipio')
-                field: id
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
       - name: quesito_declaracao_indigena
         description: Quesito de declaração Indígena
         tests:
