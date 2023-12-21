@@ -71,13 +71,23 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
-              - territorio_quilombola
+              - id_territorio_quilombola
     columns:
+      - name: id_territorio_quilombola
+        description: ID Território Quilombola IBGE 5 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05    
       - name: territorio_quilombola
         description: Território Quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05                
       - name: domicilios
         description: Domicílios particulares permanentes ocupados localizados em territórios
             quilombolas
@@ -128,13 +138,23 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
-              - territorio_quilombola
+              - id_territorio_quilombola
     columns:
+      - name: id_territorio_quilombola
+        description: ID Território Quilombola 5 dígitos IBGE
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05    
       - name: territorio_quilombola
         description: Território Quilombola
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05                
       - name: domicilios
         description: Domicílios particulares permanentes ocupados com pelo menos um
             morador quilombola
@@ -158,8 +178,13 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
-              - terra_indigena
+              - id_terra_indigena
     columns:
+      - name: id_terra_indigena
+        description: ID Terra Indígena IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05  
       - name: terra_indigena
         description: Terra Indígena
         tests:
@@ -407,10 +432,14 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
-              - terra_indigena
-              - sigla_uf
+              - id_terra_indigena
               - quesito_declaracao_indigena
     columns:
+      - name: id_terra_indigena
+        description: ID Terra Indígena IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05        
       - name: terra_indigena
         description: Terra Indígena
         tests:
@@ -444,9 +473,13 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
-              - sigla_uf
-              - terra_indigena
+              - id_terra_indigena
     columns:
+      - name: id_terra_indigena
+        description: ID Terra Indígena IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05    
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
