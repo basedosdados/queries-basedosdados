@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: br_ibge_censo_2022__quilombolas_domicilio_morador_municipio
-    description: Domicílios particulares permanentes ocupados e Moradores, total e quilombolas, em domicílios particulares permanentes, segundo localização do domicílio. 
+    description: Domicílios particulares permanentes ocupados e Moradores, total e quilombolas, em domicílios particulares permanentes, segundo localização do domicílio.  
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:

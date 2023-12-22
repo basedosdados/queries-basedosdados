@@ -9,3 +9,5 @@ SAFE_CAST(moradores_quilombolas_em_domicilios_particulares_permanentes_ocupados_
 FROM basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_domicilio_pelo_menos_um_morador_quilombola_territorio_quilombola_territorio_quilombola AS t
 
 
+
+

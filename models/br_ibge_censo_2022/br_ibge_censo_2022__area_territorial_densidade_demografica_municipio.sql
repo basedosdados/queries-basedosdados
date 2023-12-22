@@ -13,3 +13,4 @@ from ibge
 left join `basedosdados-dev.br_ibge_censo_2022_staging.auxiliary_table` t2
 on ibge.municipio = t2.municipio
 
+

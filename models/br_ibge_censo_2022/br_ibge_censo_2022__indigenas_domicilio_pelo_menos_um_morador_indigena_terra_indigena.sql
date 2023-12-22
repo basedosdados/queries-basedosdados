@@ -10,3 +10,5 @@ SAFE_CAST(moradores_indigenas_em_domicilios_particulares_permanentes_ocupados_co
 FROM basedosdados-staging.br_ibge_censo_2022_staging.domicilios_pelo_menos_um_moradore_terras_indigenas AS t
 
 
+
+
