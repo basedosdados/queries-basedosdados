@@ -7,7 +7,7 @@
       "data_type": "int64",
       "range": {
         "start": 2005,
-        "end": 2023,
+        "end": 2024,
         "interval": 1}
      },
      pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
