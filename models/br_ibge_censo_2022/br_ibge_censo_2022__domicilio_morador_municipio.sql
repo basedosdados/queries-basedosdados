@@ -6,7 +6,7 @@ SAFE_CAST(TRIM(REGEXP_EXTRACT(municipio, r'([^\(]+)')) AS STRING) nome_municipio
 SAFE_CAST(TRIM(REGEXP_EXTRACT(municipio, r'\(([^)]+)\)')) AS STRING) sigla_uf,
 SAFE_CAST(domicilios_particulares_permanentes_ocupados_domicilios_ AS INT64) domicilios,
 SAFE_CAST(moradores_em_domicilios_particulares_permanentes_ocupados_pessoas_ AS INT64) moradores,
-FROM basedosdados-staging.br_ibge_censo_2022_staging.domicilios_moradores_municipio AS t)
+FROM basedosdados-staging.br_ibge_censo_2022_staging.domicilio_morador_municipio AS t)
 select t2.cod as id_municipio, ibge.* except(municipio, nome_municipio,sigla_uf) 
 from ibge
 left join `basedosdados-dev.br_ibge_censo_2022_staging.auxiliary_table` t2
