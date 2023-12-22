@@ -6,3 +6,5 @@ SAFE_CAST(pessoas_quilombolas_residentes_em_territorios_quilombolas_pessoas_ AS 
 SAFE_CAST(pessoas_residentes_em_territorios_quilombolas_pessoas_ AS INT64) populacao_residente,
 FROM basedosdados-staging.br_ibge_censo_2022_staging.populacao_residente_territorios_quilombolas AS t
 
+
+
