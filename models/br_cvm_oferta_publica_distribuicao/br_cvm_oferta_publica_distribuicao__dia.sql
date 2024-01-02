@@ -6,7 +6,7 @@
       "field": "data_abertura_processo",
       "data_type": "date",
       "granularity": "day"
-     },
+     })
  }}
 
 SELECT 
