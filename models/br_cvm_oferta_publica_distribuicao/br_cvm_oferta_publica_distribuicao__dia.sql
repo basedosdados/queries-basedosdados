@@ -1,12 +1,7 @@
 {{ 
   config(
     alias = 'dia',
-    schema='br_cvm_oferta_publica_distribuicao',
-    partition_by = {
-      "field": "data_abertura_processo",
-      "data_type": "date",
-      "granularity": "day"
-     })
+    schema='br_cvm_oferta_publica_distribuicao')
  }}
 
 SELECT 
