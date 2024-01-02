@@ -9,7 +9,7 @@
      },
  }}
 
-WITH tabela as(SELECT 
+SELECT 
 SAFE_CAST(numero_processo AS STRING) numero_processo,
 SAFE_CAST(numero_registro_oferta AS STRING) numero_registro_oferta,
 SAFE_CAST(tipo_oferta AS STRING) tipo_oferta,
