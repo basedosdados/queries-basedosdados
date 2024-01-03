@@ -9,7 +9,3 @@ on t.unidade_da_federacao = t2.nome
 
 
 
-
-
-
-
