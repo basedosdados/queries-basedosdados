@@ -1,0 +1,1840 @@
+version: 2
+
+models:
+  - name: br_datahackers_state_data__microdados
+    description: O mais completo mapeamento do mercado brasileiro de dados [Data Hackers + Bain]
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - p0
+    columns:
+      - name: p0
+        description: Id
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_a
+        description: Idade
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_a_1
+        description: Faixa idade
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_b
+        description: Genero
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_c
+        description: Cor/raca/etnia
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_d
+        description: Pcd
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_e
+        description: Experiencia profissional prejudicada
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_f
+        description: Aspectos prejudicados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_g
+        description: Vive no brasil
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_i
+        description: Estado onde mora
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: nome
+      - name: p1_i_1
+        description: Uf onde mora
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: p1_i_2
+        description: Regiao onde mora
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_j
+        description: Mudou de estado?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_k
+        description: Regiao de origem
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_l
+        description: Nivel de ensino
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p1_m
+        description: Área de formação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_a
+        description: Qual sua situação atual de trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_b
+        description: Setor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_c
+        description: Numero de funcionarios
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_d
+        description: Gestor?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_e
+        description: Cargo como gestor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_f
+        description: Cargo atual
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_g
+        description: Nivel
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_h
+        description: Faixa salarial
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_i
+        description: Quanto tempo de experiência na área de dados você tem?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_j
+        description: Quanto tempo de experiência na área de ti/engenharia de software
+            você teve antes de começar a trabalhar na área de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_k
+        description: Você está satisfeito na sua empresa atual?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l
+        description: Qual o principal motivo da sua insatisfação com a empresa atual?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_1
+        description: Falta de oportunidade de crescimento no emprego atual
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_2
+        description: Salário atual não corresponde ao mercado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_3
+        description: Não tenho uma boa relação com meu líder/gestor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_4
+        description: Gostaria de trabalhar em em outra área de atuação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_5
+        description: Gostaria de receber mais benefícios
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_6
+        description: O clima de trabalho/ambiente não é bom
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_l_7
+        description: Falta de maturidade analítica na empresa
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_m
+        description: Você participou de entrevistas de emprego nos últimos 6 meses?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_n
+        description: Você pretende mudar de emprego nos próximos 6 meses?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o
+        description: Quais os principais critérios que você leva em consideração no
+            momento de decidir onde trabalhar?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_1
+        description: Remuneração/salário
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_2
+        description: Benefícios
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_3
+        description: Propósito do trabalho e da empresa
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_4
+        description: Flexibilidade de trabalho remoto
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_5
+        description: Ambiente e clima de trabalho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_6
+        description: Oportunidade de aprendizado e trabalhar com referências na área
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_7
+        description: Plano de carreira e oportunidades de crescimento profissional
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_8
+        description: Maturidade da empresa em termos de tecnologia e dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_9
+        description: Qualidade dos gestores e líderes
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_o_10
+        description: Reputação que a empresa tem no mercado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_p
+        description: Atualmente qual a sua forma de trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_q
+        description: Qual a forma de trabalho ideal para você?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_r
+        description: Caso sua empresa decida pelo modelo 100% presencial qual será
+            sua atitude?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p2_s
+        description: Sua empresa passu por layoff em 2022?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_a
+        description: Qual o número aproximado de pessoas que atuam com dados na sua
+            empresa hoje?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b
+        description: Quais desses papéis/cargos fazem parte do time (ou chapter) de
+            dados da sua empresa?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_1
+        description: Analytics engineer
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_2
+        description: Engenharia de dados/data engineer
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_3
+        description: Analista de dados/data analyst
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_4
+        description: Cientista de dados/data scientist
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_5
+        description: Database administrator/dba
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_6
+        description: Analista de business intelligence/bi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_7
+        description: Arquiteto de dados/data architect
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_8
+        description: Data product manager/dpm
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_b_9
+        description: Business analyst
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c
+        description: Quais dessas responsabilidades fazem parte da sua rotina atual
+            de trabalho como gestor?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_1
+        description: Pensar na visão de longo prazo de dados da empresa e fortalecimento
+            da cultura analítica da companhia.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_2
+        description: Organização de treinamentos e iniciativas com o objetivo de aumentar
+            a maturidade analítica das áreas de negócios.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_3
+        description: Atração
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_4
+        description: Decisão sobre contratação de ferramentas e tecnologias relacionadas
+            a dados.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_5
+        description: Sou gestor da equipe responsável pela engenharia de dados e por
+            manter o data lake da empresa como fonte única dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_6
+        description: Sou gestor da equipe responsável pela entrega de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_7
+        description: Sou gestor da equipe responsável por iniciativas e projetos envolvendo
+            inteligência artificial e machine learning.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_8
+        description: Apesar de ser gestor ainda atuo na parte técnica
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_9
+        description: Gestão de projetos de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_10
+        description: Gestão de produtos de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_c_11
+        description: Gestão de pessoas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d
+        description: Quais são os 3 maiores desafios que você tem como gestor no atual
+            momento?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_1
+        description: Contratar novos talentos.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_2
+        description: Reter talentos.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_3
+        description: Convencer a empresa a aumentar os investimentos na área de dados.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_4
+        description: Gestão de equipes no ambiente remoto.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_5
+        description: Gestão de projetos envolvendo áreas multidisciplinares da empresa.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_6
+        description: Organizar as informações e garantir a qualidade e confiabilidade.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_7
+        description: Conseguir processar e armazenar um alto volume de dados.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_8
+        description: Conseguir gerar valor para as áreas de negócios através de estudos
+            e experimentos.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_9
+        description: Desenvolver e manter modelos machine learning em produção.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_10
+        description: Gerenciar a expectativa das áreas de negócio em relação as entregas
+            das equipes de dados.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_11
+        description: Garantir a manutenção dos projetos e modelos em produção
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_12
+        description: Conseguir levar inovação para a empresa através dos dados.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_13
+        description: Garantir retorno do investimento (roi) em projetos de dados.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p3_d_14
+        description: Dividir o tempo entre entregas técnicas e gestão.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_a
+        description: Mesmo que esse não seja seu cargo formal
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_a_1
+        description: Atuacao
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b
+        description: Quais das fontes de dados listadas você já analisou ou processou
+            no trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_1
+        description: Dados relacionais (estruturados em bancos sql)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_2
+        description: Dados armazenados em bancos nosql
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_3
+        description: Imagens
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_4
+        description: Textos/documentos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_5
+        description: Vídeos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_6
+        description: Áudios
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_7
+        description: Planilhas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_b_8
+        description: Dados georeferenciados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c
+        description: Entre as fontes de dados listadas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_1
+        description: Dados relacionais (estruturados em bancos sql)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_2
+        description: Dados armazenados em bancos nosql
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_3
+        description: Imagens
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_4
+        description: Textos/documentos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_5
+        description: Vídeos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_6
+        description: Áudios
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_7
+        description: Planilhas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_c_8
+        description: Dados georeferenciados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d
+        description: Quais das linguagens listadas abaixo você utiliza no trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_1
+        description: Sql
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_2
+        description: R
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_3
+        description: Python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_4
+        description: C/c++/c#
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_5
+        description: .net
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_6
+        description: Java
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_7
+        description: Julia
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_8
+        description: Sas/stata
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_9
+        description: Visual basic/vba
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_10
+        description: Scala
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_11
+        description: Matlab
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_12
+        description: Php
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_13
+        description: Javascript
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_d_14
+        description: Não utilizo nenhuma linguagem
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_e
+        description: Entre as linguagens listadas abaixo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f
+        description: Entre as linguagens listadas abaixo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_g
+        description: Quais dos bancos de dados/fontes de dados listados abaixo você
+            utiliza no trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_g_1
+        description: Mysql
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_g_2
+        description: Oracle
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_g_3
+        description: Sql server
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_4
+        description: Amazon aurora ou rds
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_5
+        description: Dynamodb
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_6
+        description: Coachdb
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_7
+        description: Cassandra
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_8
+        description: Mongodb
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_9
+        description: Mariadb
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_10
+        description: Datomic
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_11
+        description: S3
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_12
+        description: Postgresql
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_13
+        description: Elasticsearch
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_14
+        description: Db2
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_15
+        description: Microsoft access
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_16
+        description: Sqlite
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_17
+        description: Sybase
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_18
+        description: Firebase
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_19
+        description: Vertica
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_20
+        description: Redis
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_21
+        description: Neo4j
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_22
+        description: Google bigquery
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_23
+        description: Google firestore
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_24
+        description: Amazon redshift
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_25
+        description: Amazon athena
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_26
+        description: Snowflake
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_27
+        description: Databricks
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_28
+        description: Hbase
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_29
+        description: Presto
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_30
+        description: Splunk
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_31
+        description: Sap hana
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_32
+        description: Hive
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_f_33
+        description: Firebird
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_g__1
+        description: Quais das opções de cloud listadas abaixo você utiliza no trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_h
+        description: Dentre as opções listadas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_h_1
+        description: Azure (microsoft)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_h_2
+        description: Amazon web services (aws)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_h_3
+        description: Google cloud (gcp)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p4_i
+        description: Microsoft powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_1
+        description: Microsoft powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_2
+        description: Qlik view/qlik sense
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_3
+        description: Tableau
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_4
+        description: Metabase
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_5
+        description: Superset
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_6
+        description: Redash
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_7
+        description: Microstrategy
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_8
+        description: Ibm analytics/cognos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_9
+        description: Sap business objects
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_10
+        description: Oracle business intelligence
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_11
+        description: Amazon quicksight
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_12
+        description: Salesforce/einstein analytics
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_13
+        description: Mode
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_14
+        description: Alteryx
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_15
+        description: Birst
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_16
+        description: Looker
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_17
+        description: Google data studio
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_18
+        description: Sas visual analytics
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_19
+        description: Grafana
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_20
+        description: Tibco spotfire
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_21
+        description: Pentaho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_22
+        description: Fazemos todas as análises utilizando apenas excel ou planilhas
+            do google
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p4_i_23
+        description: Não utilizo nenhuma ferramenta de bi no trabalho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.01
+      - name: p5_a
+        description: Qual seu objetivo na área de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p5_b
+        description: Qual oportunidade você está buscando?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p5_c
+        description: Há quanto tempo você busca uma oportunidade na área de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p5_d
+        description: Como tem sido a busca por um emprego na área de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a
+        description: Quais das opções abaixo fazem parte da sua rotina no trabalho
+            atual como engenheiro de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_1
+        description: Desenvolvo pipelines de dados utilizando linguagens de programação
+            como python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_2
+        description: Realizo construções de etls em ferramentas como pentaho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_3
+        description: Crio consultas através da linguagem sql para exportar informações
+            e compartilhar com as áreas de negócio.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_4
+        description: Atuo na integração de diferentes fontes de dados através de plataformas
+            proprietárias como stitch data
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_5
+        description: Modelo soluções de arquitetura de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_6
+        description: Desenvolvo/cuido da manutenção de repositórios de dados baseados
+            em streaming de eventos como data lakes e data lakehouses.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_7
+        description: Atuo na modelagem dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_8
+        description: Cuido da qualidade dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_a_9
+        description: Nenhuma das opções listadas refletem meu dia a dia.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b
+        description: Quais as ferramentas/tecnologias de etl que você utiliza no trabalho
+            como data engineer?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_1
+        description: Scripts python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_2
+        description: Sql & stored procedures
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_3
+        description: Apache airflow
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_4
+        description: Luigi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_5
+        description: Aws glue
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_6
+        description: Talend
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_7
+        description: Pentaho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_8
+        description: Alteryx
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_9
+        description: Stitch
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_10
+        description: Fivetran
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_11
+        description: Google dataflow
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_12
+        description: Oracle data integrator
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_13
+        description: Ibm datastage
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_14
+        description: Sap bw etl
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_15
+        description: Sql server integration services (ssis)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_16
+        description: Sas data integration
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_17
+        description: Qlik sense
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_18
+        description: Knime
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_19
+        description: Databricks
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_b_19__1
+        description: Não utilizo ferramentas de etl
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_c
+        description: Sua organização possui um data lake?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_d
+        description: Qual tecnologia utilizada como plataforma do data lake?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_e
+        description: Sua organização possui um data warehouse?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_f
+        description: Qual tecnologia utilizada como plataforma do data warehouse?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g
+        description: Quais as ferramentas de gestão de qualidade de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_1
+        description: Great expectations
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_2
+        description: Dbt
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_3
+        description: Aws deequ
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_4
+        description: Apache griffin
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_5
+        description: Datafold
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_6
+        description: Amundsen
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_7
+        description: Monte carlo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_8
+        description: Soda
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_9
+        description: Big eye
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_10
+        description: Data band
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_11
+        description: Anomalo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_l
+        description: Metaplane
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_g_m
+        description: Acceldata
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h
+        description: Em qual das opções abaixo você gasta a maior parte do seu tempo?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_1
+        description: Desenvolvendo pipelines de dados utilizando linguagens de programação
+            como python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_2
+        description: Realizando construções de etls em ferramentas como pentaho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_3
+        description: Criando consultas através da linguagem sql para exportar informações
+            e compartilhar com as áreas de negócio.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_4
+        description: Atuando na integração de diferentes fontes de dados através de
+            plataformas proprietárias como stitch data
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_5
+        description: Modelando soluções de arquitetura de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_6
+        description: Desenvolvendo/cuidando da manutenção de repositórios de dados
+            baseados em streaming de eventos como data lakes e data lakehouses.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_7
+        description: Atuando na modelagem dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_8
+        description: Cuidando da qualidade dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p6_h_9
+        description: Nenhuma das opções listadas refletem meu dia a dia.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_1
+        description: Quais das opções abaixo fazem parte da sua rotina no trabalho
+            atual com análise de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_1
+        description: Processo e analiso dados utilizando linguagens de programação
+            como python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_2
+        description: Realizo construções de dashboards em ferramentas de bi como powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_3
+        description: Crio consultas através da linguagem sql para exportar informações
+            e compartilhar com as áreas de negócio.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_4
+        description: Utilizo apis para extrair dados e complementar minhas análises.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_5
+        description: Realizo experimentos e estudos utilizando metodologias estatísticas
+            como teste de hipótese
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_6
+        description: Desenvolvo/cuido da manutenção de etls utilizando tecnologias
+            como talend
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_7
+        description: Atuo na modelagem dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_8
+        description: Desenvolvo/cuido da manutenção de planilhas para atender as áreas
+            de negócio.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_9
+        description: Utilizo ferramentas avançadas de estatística como sas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_a_10
+        description: Nenhuma das opções listadas refletem meu dia a dia.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b
+        description: Quais as ferramentas/tecnologias de etl que você utiliza no trabalho
+            como data analyst?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_1
+        description: Scripts python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_2
+        description: Sql & stored procedures
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_3
+        description: Apache airflow
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_4
+        description: Luigi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_5
+        description: Aws glue
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_6
+        description: Talend
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_7
+        description: Pentaho
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_8
+        description: Alteryx
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_9
+        description: Stitch
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_10
+        description: Fivetran
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_11
+        description: Google dataflow
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_12
+        description: Oracle data integrator
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_13
+        description: Ibm datastage
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_14
+        description: Sap bw etl
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_15
+        description: Sql server integration services (ssis)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_16
+        description: Sas data integration
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_17
+        description: Qlik sense
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_18
+        description: Knime
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_19
+        description: Databricks
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_b_20
+        description: Não utilizo ferramentas de etl
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c
+        description: Sua empresa utiliza alguma das ferramentas listadas para dar
+            mais autonomia em análise de dados para as áreas de negócio?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c_1
+        description: Ferramentas de automl como h2o.ai
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c_2
+        description: '""point and click"" analytics como alteryx'
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c_3
+        description: Product metricts & insights como mixpanel
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c_4
+        description: Ferramentas de análise dentro de ferramentas de crm como salesforce
+            einstein anaytics ou zendesk dashboards.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c_5
+        description: Minha empresa não utiliza essas ferramentas.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_c_6
+        description: Não sei informar.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d
+        description: Em qual das opções abaixo você gasta a maior parte do seu tempo
+            de trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_1
+        description: Processando e analisando dados utilizando linguagens de programação
+            como python
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_2
+        description: Realizando construções de dashboards em ferramentas de bi como
+            powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_3
+        description: Criando consultas através da linguagem sql para exportar informações
+            e compartilhar com as áreas de negócio.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_4
+        description: Utilizando apis para extrair dados e complementar minhas análises.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_5
+        description: Realizando experimentos e estudos utilizando metodologias estatísticas
+            como teste de hipótese
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_6
+        description: Desenvolvendo/cuidando da manutenção de etls utilizando tecnologias
+            como talend
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_7
+        description: Atuando na modelagem dos dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_8
+        description: Desenvolvendo/cuidando da manutenção de planilhas do excel ou
+            google sheets para atender as áreas de negócio.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_9
+        description: Utilizando ferramentas avançadas de estatística como sas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p7_d_10
+        description: Nenhuma das opções listadas refletem meu dia a dia.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a
+        description: Quais das opções abaixo fazem parte da sua rotina no trabalho
+            atual com ciência de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_1
+        description: Estudos ad-hoc com o objetivo de confirmar hipóteses
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_2
+        description: Sou responsável pela coleta e limpeza dos dados que uso para
+            análise e modelagem.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_3
+        description: Sou responsável por entrar em contato com os times de negócio
+            para definição do problema
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_4
+        description: Desenvolvo modelos de machine learning com o objetivo de colocar
+            em produção em sistemas (produtos de dados).
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_5
+        description: Sou responsável por colocar modelos em produção
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_6
+        description: Cuido da manutenção de modelos de machine learning já em produção
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_7
+        description: Realizo construções de dashboards em ferramentas de bi como powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_8
+        description: Utilizo ferramentas avançadas de estatística como sas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_9
+        description: Crio e dou manutenção em etls
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_10
+        description: Crio e gerencio soluções de feature store e cultura de mlops.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_a_11
+        description: Sou responsável por criar e manter a infra que meus modelos e
+            soluções rodam (clusters
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b
+        description: Quais as técnicas e métodos listados abaixo você costuma utilizar
+            no trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_1
+        description: Utilizo modelos de regressão (linear
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_2
+        description: Utilizo redes neurais ou modelos baseados em árvore para criar
+            modelos de classificação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_3
+        description: Desenvolvo sistemas de recomendação (recsys)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_4
+        description: Utilizo métodos estatísticos bayesianos para analisar dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_5
+        description: Utilizo técnicas de nlp (natural language processing) para análisar
+            dados não-estruturados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_6
+        description: Utilizo métodos estatísticos clássicos (testes de hipótese
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_7
+        description: Utilizo cadeias de markov ou hmms para realizar análises de dados
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_8
+        description: Desenvolvo técnicas de clusterização (k-means
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_9
+        description: Realizo previsões através de modelos de séries temporais (time
+            series)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_10
+        description: Utilizo modelos de reinforcement learning (aprendizado por reforço)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_11
+        description: Utilizo modelos de machine learning para detecção de fraude
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_l
+        description: Utilizo métodos de visão computacional
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_b_m
+        description: Utilizo modelos de detecção de churn
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_3
+        description: Quais dessas tecnologias fazem parte do seu dia a dia como cientista
+            de dados?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_1
+        description: Ferramentas de bi (powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_2
+        description: Planilhas (excel
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_3
+        description: Ambientes de desenvolvimento local (r-studio
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_4
+        description: Ambientes de desenvolvimento na nuvem (google colab
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_5
+        description: Ferramentas de automl (datarobot
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_6
+        description: Ferramentas de etl (apache airflow
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_7
+        description: Plataformas de machine learning (tensorflow
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_8
+        description: Feature store (feast
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_9
+        description: Sistemas de controle de versão (github
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_10
+        description: Plataformas de data apps (streamlit
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_c_11
+        description: Ferramentas de estatística avançada como spss
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d
+        description: Em qual das opções abaixo você gasta a maior parte do seu tempo
+            no trabalho?
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_1
+        description: Estudos ad-hoc com o objetivo de confirmar hipóteses
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_2
+        description: Coletando e limpando os dados que uso para análise e modelagem.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_3
+        description: Entrando em contato com os times de negócio para definição do
+            problema
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_4
+        description: Desenvolvendo modelos de machine learning com o objetivo de colocar
+            em produção em sistemas (produtos de dados).
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_5
+        description: Colocando modelos em produção
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_6
+        description: Cuidando da manutenção de modelos de machine learning já em produção
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_7
+        description: Realizando construções de dashboards em ferramentas de bi como
+            powerbi
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_8
+        description: Utilizando ferramentas avançadas de estatística como sas
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_9
+        description: Criando e dando manutenção em etls
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_10
+        description: Criando e gerenciando soluções de feature store e cultura de
+            mlops.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: p8_d_11
+        description: Criando e mantendo a infra que meus modelos e soluções rodam
+            (clusters)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
