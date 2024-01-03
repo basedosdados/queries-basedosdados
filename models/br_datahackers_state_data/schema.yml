@@ -1633,7 +1633,7 @@ models:
                 at_least: 0.05
       - name: p8_a_11
         description: Sou responsável por criar e manter a infra que meus modelos e
-            soluções rodam (clusters
+            soluções rodam 
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -1644,7 +1644,7 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_b_1
-        description: Utilizo modelos de regressão (linear
+        description: Utilizo modelos de regressão
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -1671,7 +1671,7 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_b_6
-        description: Utilizo métodos estatísticos clássicos (testes de hipótese
+        description: Utilizo métodos estatísticos clássicos (testes de hipótese)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -1681,7 +1681,7 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_b_8
-        description: Desenvolvo técnicas de clusterização (k-means
+        description: Desenvolvo técnicas de clusterização (k-means)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
@@ -1718,52 +1718,52 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_1
-        description: Ferramentas de bi (powerbi
+        description: Ferramentas de bi (powerbi)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_2
-        description: Planilhas (excel
+        description: Planilhas (excel)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_3
-        description: Ambientes de desenvolvimento local (r-studio
+        description: Ambientes de desenvolvimento local (r-studio)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_4
-        description: Ambientes de desenvolvimento na nuvem (google colab
+        description: Ambientes de desenvolvimento na nuvem (google colab)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_5
-        description: Ferramentas de automl (datarobot
+        description: Ferramentas de automl (datarobot)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_6
-        description: Ferramentas de etl (apache airflow
+        description: Ferramentas de etl (apache airflow)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_7
-        description: Plataformas de machine learning (tensorflow
+        description: Plataformas de machine learning (tensorflow)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_8
-        description: Feature store (feast
+        description: Feature store (feast)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_9
-        description: Sistemas de controle de versão (github
+        description: Sistemas de controle de versão (github)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: p8_c_10
-        description: Plataformas de data apps (streamlit
+        description: Plataformas de data apps (streamlit)
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
