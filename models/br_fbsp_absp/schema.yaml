@@ -69,15 +69,15 @@ models:
       - name: despesa_empenhada_seguranca_publica
         description: Quantidade de Despesas empenhadas na Função Segurança Pública
   - name: br_fbsp_absp__violencia_escola
-      description: Tabela com indicadores que auxiliam entender o cenário de violência nas escolas
-      columns:
-        - name: ano
-          description: Ano
-        - name: sigla_uf
-          description: Sigla da Unidade da Federação
-        - name: tema
-          description: Tema da pesquisa
-        - name: item
-          description: Item referente ao tema da pesquisa
-        - name: quantidade_escola
-          description: Quantidade de escolas que aderiram a resposta
+    description: Tabela com indicadores que auxiliam entender o cenário de violência nas escolas
+    columns:
+      - name: ano
+        description: Ano
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: tema
+        description: Tema da pesquisa
+      - name: item
+        description: Item referente ao tema da pesquisa
+      - name: quantidade_escola
+        description: Quantidade de escolas que aderiram a resposta
