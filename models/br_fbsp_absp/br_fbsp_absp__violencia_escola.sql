@@ -1,4 +1,4 @@
-{
+{{
     config(
         alias='violencia_escola',
         schema='br_fbsp_absp'
