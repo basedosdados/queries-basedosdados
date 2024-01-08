@@ -52,4 +52,4 @@ CASE
   WHEN prestou_contas='N' THEN 'Não'
   WHEN prestou_contas='S' THEN 'Sim'
 END AS prestou_contas
-FROM basedosdados-dev.br_tse_eleicoes_staging.candidatos AS t
+FROM basedosdados-staging.br_tse_eleicoes_staging.candidatos AS t

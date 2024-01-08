@@ -31,4 +31,4 @@ SAFE_CAST(id_candidato_bd AS STRING) id_candidato_bd,
 SAFE_CAST(nome_candidato AS STRING) nome_candidato,
 SAFE_CAST(resultado AS STRING) resultado,
 SAFE_CAST(votos AS INT64) votos
-FROM basedosdados-dev.br_tse_eleicoes_staging.resultados_candidato AS t
+FROM basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato AS t
