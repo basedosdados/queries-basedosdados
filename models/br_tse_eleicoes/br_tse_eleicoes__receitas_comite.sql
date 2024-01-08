@@ -1,3 +1,20 @@
+{{
+    config(
+        schema='br_tse_eleicoes',
+        alias = 'receitas_comite',
+        materialized='table',
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {
+                "start": 2002,
+                "end": 2014,
+                "interval": 2
+            }
+        }
+    )
+}}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -33,4 +50,4 @@ SAFE_CAST(nome_doador_orig_rf AS STRING) nome_doador_orig_rf,
 SAFE_CAST(tipo_doador_orig AS STRING) tipo_doador_orig,
 SAFE_CAST(descricao_cnae_2_doador_orig AS STRING) descricao_cnae_2_doador_orig,
 SAFE_CAST(valor_receita AS FLOAT64) valor_receita,
-FROM basedosdados-staging.br_tse_eleicoes_staging.receitas_comite AS t
+FROM basedosdados-dev.br_tse_eleicoes_staging.receitas_comite AS t

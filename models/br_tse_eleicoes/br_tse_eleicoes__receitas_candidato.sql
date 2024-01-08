@@ -1,3 +1,20 @@
+{{
+    config(
+        schema='br_tse_eleicoes',
+        alias = 'receitas_candidato',
+        materialized='table',
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {
+                "start": 2002,
+                "end": 2022,
+                "interval": 2
+            }
+        }
+    )
+}}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(turno AS INT64) turno,
@@ -56,4 +73,4 @@ SAFE_CAST(data_prestacao_contas AS STRING) data_prestacao_contas,
 SAFE_CAST(sequencial_prestador_contas AS STRING) sequencial_prestador_contas,
 SAFE_CAST(cnpj_prestador_contas AS STRING) cnpj_prestador_contas,
 SAFE_CAST(entrega_conjunto AS STRING) entrega_conjunto
-FROM basedosdados-staging.br_tse_eleicoes_staging.receitas_candidato AS t
+FROM basedosdados-dev.br_tse_eleicoes_staging.receitas_candidato AS t
