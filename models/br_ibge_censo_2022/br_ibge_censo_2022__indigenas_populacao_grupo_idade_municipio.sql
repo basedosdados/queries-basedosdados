@@ -5,5 +5,5 @@ SAFE_CAST(cod_ AS STRING) id_municipio,
 SAFE_CAST(grupo_de_idade AS STRING) grupo_idade,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(pessoas_indigenas_pessoas_ AS INT64) populacao_residente,
-FROM basedosdados-dev.br_ibge_censo_2022_staging.indigenas_populacao_grupo_idade_municipio AS t
-
+FROM basedosdados-staging.br_ibge_censo_2022_staging.indigenas_populacao_grupo_idade_municipio AS t
+where (grupo_idade LIKE '% a %' or grupo_idade LIKE '100 anos ou mais')
