@@ -7,5 +7,4 @@ SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(cor_ou_raca AS STRING) cor_raca,
 SAFE_CAST(populacao_residente_pessoas_ AS INT64) populacao_residente,
 FROM basedosdados-staging.br_ibge_censo_2022_staging.populacao_residente_cor_raca_municipio AS t
-where (grupo_idade LIKE '% a %' or grupo_idade LIKE '100 anos ou mais')
 
