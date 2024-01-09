@@ -12,3 +12,5 @@ SAFE_CAST(pessoas_residentes_em_terras_indigenas_pessoas_ AS INT64) populacao_re
 SAFE_CAST(pessoas_indigenas_residentes_em_terras_indigenas_pessoas_ AS INT64) pessoas_indigenas,
 SAFE_CAST(quesito_de_declaracao_indigena AS STRING) quesito_declaracao_indigena,
 FROM basedosdados-staging.br_ibge_censo_2022_staging.indigenas_populacao_residente_terra_indigena AS t
+
+

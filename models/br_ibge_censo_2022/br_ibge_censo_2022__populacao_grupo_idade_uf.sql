@@ -6,7 +6,6 @@ SAFE_CAST(`população` AS INT64) populacao,
 FROM basedosdados-staging.br_ibge_censo_2022_staging.populacao_grupo_idade_uf AS t
 left join `basedosdados.br_bd_diretorios_brasil.uf` t2
 on t.unidade_da_federacao = t2.nome
-where (grupo_idade LIKE '% a %' or grupo_idade LIKE '100 anos ou mais')
 
 
 

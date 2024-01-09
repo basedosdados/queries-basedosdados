@@ -8,3 +8,5 @@ SAFE_CAST(idade_mediana_da_populacao_indigena_anos_ AS INT64) idade_mediana,
 SAFE_CAST(REPLACE(razao_de_sexo_da_populacao_indigena_razao_, ",", ".") AS FLOAT64) razao_sexo,
 FROM basedosdados-staging.br_ibge_censo_2022_staging.indigenas_indice_envelhecimento_municipio AS t
 
+
+
