@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: br_ibge_censo_2022__quilombolas_domicilio_morador_municipio
-    description: Domicílios particulares permanentes ocupados e Moradores, total e quilombolas, em domicílios particulares permanentes, segundo localização do domicílio.  
+    description: Domicílios particulares permanentes ocupados e Moradores, total e quilombolas, em domicílios particulares permanentes, segundo localização do domicílio.
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
@@ -609,6 +609,173 @@ models:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
       - name: populacao
+        description: População
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+  - name: br_ibge_censo_2022__indigenas_indice_envelhecimento_grupo_idade_municipio
+    description: Índice de envelhecimento, idade mediana e razão de sexo da população indígena, por quesito de declaração indígena
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - ano
+              - id_municipio
+              - quesito_declaracao_indigena
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id
+      - name: quesito_declaracao_indigena
+        description: Quesito de declaração indígena
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: indice_envelhecimento
+        description: Índice de envelhecimento da população indígena
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: idade_mediana
+        description: Idade mediana da população indígena
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: razao_sexo
+        description: Razão de sexo da população indígena
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+  - name: br_ibge_censo_2022__indigenas_populacao_grupo_idade_municipio
+    description: População indígena, por grupos de idade e sexo
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - ano
+              - id_municipio
+              - grupo_idade
+              - sexo
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id
+      - name: grupo_idade
+        description: Grupo de Idade
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sexo
+        description: Sexo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: populacao_residente
+        description: População Residentne
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+  - name: br_ibge_censo_2022__indice_envelhecimento_cor_raca_municipio
+    description:  Índice de envelhecimento, idade mediana e razão de sexo, por cor ou raça
+        here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - ano
+              - id_municipio
+              - cor_raca
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id
+      - name: cor_raca
+        description: Cor ou Raça
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: indice_envelhecimento
+        description: 'Índice de envelhecimento (Idosos: 60 anos ou mais de idade)'
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: idade_mediana
+        description: Idade mediana
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: razao_sexo
+        description: Razão de sexo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+  - name: br_ibge_censo_2022__populacao_residente_cor_raca_municipio
+    description: População residente, por cor ou raça, segundo o sexo e a idade
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - ano
+              - id_municipio
+              - grupo_idade
+              - sexo
+              - cor_raca
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id
+      - name: grupo_idade
+        description: Grupo de Idade
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sexo
+        description: Sexo
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: cor_raca
+        description: Cor ou Raça
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: populacao_residente
         description: População
         tests:
           - dbt_utils.not_null_proportion:
