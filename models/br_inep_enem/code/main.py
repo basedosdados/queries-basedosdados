@@ -219,6 +219,17 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
 
         return intervals
 
+    def make_temporal_cov(interval):
+        interval_sort = list(
+            map(
+                lambda year: ""
+                if year == max(YEARS) or year == min(YEARS)
+                else str(year),
+                np.sort(interval),
+            ),
+        )
+        return "(1)".join(interval_sort)
+
     def make_ranges(key, value):
         values_by_key = df.loc[
             (df["chave"] == key) & (df["valor"] == value), "valor"
@@ -230,17 +241,6 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
         ].values.astype(int)
 
         intervals = [list(set(interval)) for interval in create_intervals(years)]
-
-        def make_temporal_cov(interval):
-            interval_sort = list(
-                map(
-                    lambda year: ""
-                    if year == max(YEARS) or year == min(YEARS)
-                    else str(year),
-                    np.sort(interval),
-                ),
-            )
-            return "(1)".join(interval_sort)
 
         cobertura_temporal = [make_temporal_cov(interval) for interval in intervals]
 
@@ -254,14 +254,8 @@ def gen_unique_key_value(col_name: str, df: pd.DataFrame):
 
     dict_df = pd.DataFrame(ranges, columns=basic_cols)
 
-    unique_keys = [i for (i, v) in dict_df["chave"].value_counts().items() if v == 1]
-
-    # Drop temporal coverage if key is unique
-    def drop_temporal_cov(key, temporal_cov):
-        return None if key in unique_keys else temporal_cov
-
-    dict_df["cobertura_temporal"] = dict_df[["chave", "cobertura_temporal"]].apply(
-        lambda values: drop_temporal_cov(*values), axis=1
+    dict_df["cobertura_temporal"] = dict_df["cobertura_temporal"].apply(
+        lambda value: None if value == "(1)" else value
     )
 
     # Last edits
