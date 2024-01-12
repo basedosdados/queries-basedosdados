@@ -277,6 +277,9 @@ models:
     world_oceanos_mapeamento:
       +materialized: table
       +schema: world_oceanos_mapeamento
+    world_wwf_hydrosheds:
+      +materialized: table
+      +schema: world_wwf_hydrosheds
     test_dataset:
       +materialized: table
       +schema: test_dataset
