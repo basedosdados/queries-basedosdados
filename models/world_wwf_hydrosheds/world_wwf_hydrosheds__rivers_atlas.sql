@@ -303,5 +303,5 @@ SAFE_CAST(gdp_ud_cav AS INT64) gdp_ud_cav,
 SAFE_CAST(gdp_ud_csu AS INT64) gdp_ud_csu,
 SAFE_CAST(gdp_ud_usu AS INT64) gdp_ud_usu,
 SAFE_CAST(hdi_ix_cav AS INT64) hdi_ix_cav,
-ST_GEOGFROMTEXT(geometry) geometry
+ST_GEOGFROMTEXT(geometry, make_valid => TRUE) geometry
 FROM basedosdados-staging.world_wwf_hydrosheds_staging.rivers_atlas AS t
