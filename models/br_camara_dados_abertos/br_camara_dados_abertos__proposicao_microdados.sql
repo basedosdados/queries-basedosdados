@@ -5,22 +5,12 @@
     materialized='table',
     partition_by={
       "field": "ano",
-      "data_type": "INT64",
+      "data_type": "int64",
       "range": {
         "start": 1935,
         "end": 2024,
         "interval": 1}
-    },    
-    post_hook = ['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) > 6)',
-          'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                ON  {{this}}
-                GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                FILTER USING (True)']
-    )
-}}
+    })}}
 
 SELECT 
     SAFE_CAST(ano AS INT64) ano,
