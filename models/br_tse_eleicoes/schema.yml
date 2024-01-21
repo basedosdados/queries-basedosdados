@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: br_tse_eleicoes__candidatos
-    description: "microdados de candidatos"
+    description: "Microdados de candidatos"
     columns:
       - name: ano
         description: Ano
@@ -71,7 +71,7 @@ models:
       - name: prestou_contas
         description: Indicador de prestação de contas
   - name: br_tse_eleicoes__bens_candidato
-    description: "microdados bens candidato"
+    description: "Microdados bens candidato"
     columns:
       - name: ano
         description: Ano
@@ -92,7 +92,7 @@ models:
       - name: valor_item
         description: Valor do Item (R$)
   - name: br_tse_eleicoes__receitas_candidato
-    description: microdados receitas candidato
+    description: Microdados receitas candidato
     columns:
       - name: ano
         description: Ano
@@ -209,7 +209,7 @@ models:
       - name: entrega_conjunto
         description: Entrega em conjunto
   - name: br_tse_eleicoes__despesas_candidato
-    description: microdados despesas candidato
+    description: Microdados despesas candidato
     columns:
       - name: ano
         description: Ano
@@ -512,3 +512,65 @@ models:
         description: Resultado
       - name: votos
         description: Número de votos
+  - name: br_tse_eleicoes__resultados_candidato_secao
+    description: Resultados a nível de candidato e seção eleitoral.
+    columns:
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: zona
+        description: Zona eleitoral
+      - name: secao
+        description: Seção eleitoral
+      - name: cargo
+        description: Cargo
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: sequencial_candidato
+        description: Sequencial do candidato
+      - name: numero_candidato
+        description: Número de candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: votos
+        description: Número de votos
+  - name: br_tse_eleicoes__resultados_partido_secao
+    description: Resultados a nível de partido e seção eleitoral.
+    columns:
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: zona
+        description: Zona eleitoral
+      - name: secao
+        description: Seção eleitoral
+      - name: cargo
+        description: Cargo
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: votos_nominais
+        description: Número de votos nominais
+      - name: votos_nao_nominais
+        description: Número de votos não-nominais

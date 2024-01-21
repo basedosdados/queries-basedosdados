@@ -11,7 +11,8 @@
                 "end": 2022,
                 "interval": 2
             }
-        }
+        },
+        cluster_by=["sigla_uf"],
     )
 }}
 
