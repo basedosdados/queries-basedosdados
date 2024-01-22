@@ -157,6 +157,9 @@ models:
     br_ibge_ipca15:
       +materialized: table
       +schema: br_ibge_ipca15
+    br_ibge_pevs:
+      +materialized: table
+      +schema: pevs
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
