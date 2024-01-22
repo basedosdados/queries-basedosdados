@@ -677,6 +677,7 @@ pago_pb AS (
    ROUND(SAFE_CAST (valor_pago AS FLOAT64),2) AS valor_final,
    ROUND(SAFE_CAST (valor_pago AS FLOAT64),2) AS valor_liquido_recebido
  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+ WHERE (SAFE_CAST(exercicio_empenho AS INT64)) < 2017 
 ),
  frequencia_rj_v1 AS (
    SELECT id_empenho_bd, COUNT(id_empenho_bd) AS frequencia_id

@@ -467,6 +467,7 @@ WITH liquidacao_ce AS (
    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
    ROUND(SAFE_CAST (valor_liquidado AS FLOAT64),2) AS valor_final
  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+ WHERE (SAFE_CAST(exercicio_empenho AS INT64)) < 2017 
 ),
  frequencia_rj_v1 AS (
    SELECT id_empenho_bd, COUNT(id_empenho_bd) AS frequencia_id
@@ -608,10 +609,10 @@ WITH liquidacao_ce AS (
      SAFE_CAST (credor AS STRING) AS nome_responsavel,
      SAFE_CAST (cnpj_cpf_credor AS STRING) AS documento_responsavel,
      SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-     ROUND(SAFE_CAST (valor AS FLOAT64),2) AS valor_inicial,
+     ROUND(SAFE_CAST (REPLACE (valor, ',','.') AS FLOAT64),2) AS valor_inicial,
      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-     ROUND(SAFE_CAST (valor AS FLOAT64),2) AS valor_final
+     ROUND(SAFE_CAST (REPLACE (valor, ',','.') AS FLOAT64),2) AS valor_final
    FROM `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_df`
 )
 

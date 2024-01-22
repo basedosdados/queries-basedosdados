@@ -884,7 +884,8 @@ empenhado_mg AS (
     SAFE_CAST (SUBSTRING (programa_trabalho, 19,4)  AS STRING) AS acao,
     SAFE_CAST (SAFE_CAST (natureza_despesa AS INT64) AS STRING) AS modalidade_despesa,
     ROUND(SAFE_CAST (valor_empenhado AS FLOAT64),2) AS valor_final,
-  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio` 
+  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+  WHERE (SAFE_CAST(exercicio_empenho AS INT64)) < 2017 
 ),
   frequencia_rj_v1 AS (
     SELECT id_empenho_bd, COUNT(id_empenho_bd) AS frequencia_id
@@ -933,7 +934,7 @@ empenhado_mg AS (
         SAFE_CAST (UO AS STRING) AS id_unidade_gestora,
         SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
         SAFE_CAST (NULL AS STRING) AS id_licitacao,
-        CASE  WHEN Licitacao = 'CONVITE'                                            THEN '1'
+        CASE  WHEN Licitacao = 'CONVITE'                                          THEN '1'
             WHEN Licitacao = 'TOMADA DE PREÇOS'                                   THEN '2'
             WHEN Licitacao = 'CONCORRÊNCIA'                                       THEN '3'
             WHEN Licitacao = 'PREGÃO'                                             THEN '4'
@@ -997,9 +998,10 @@ empenhado_mg AS (
   anulacao_municipio_rj_v2 AS (
     SELECT
       SAFE_CAST (CONCAT(LEFT(EmpenhoExercicio, LENGTH(EmpenhoExercicio) - 5), ' ', TRIM(UO), ' ', TRIM(UG), ' ', '3304557', ' ', (RIGHT(Exercicio,2))) AS STRING) AS id_empenho_bd,
-      ROUND(SAFE_CAST (Valor AS FLOAT64),2) AS valor_anulacao,
+      ROUND(SUM(SAFE_CAST (Valor AS FLOAT64)),2) AS valor_anulacao,
     FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio` 
     WHERE TipoAto = 'CANCELAMENTO EMPENHO' 
+    GROUP BY 1
 ),
   empenho_municipio_rj_v2 AS (
     SELECT 
@@ -1141,13 +1143,14 @@ empenhado_mg AS (
       SAFE_CAST (codigo_programa AS STRING) AS programa,
       SAFE_CAST (codigo_acao  AS STRING) AS acao,
       SAFE_CAST (codigo_natureza  AS STRING) AS elemento_despesa,
-      ROUND(SAFE_CAST (valor_inicial AS FLOAT64),2) AS valor_inicial,
+      ROUND(SAFE_CAST (REPLACE(valor_inicial, ',', '.') AS FLOAT64),2) AS valor_inicial,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
       ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-      ROUND(SAFE_CAST (valor_final AS FLOAT64),2) AS valor_final
+      ROUND(SAFE_CAST (REPLACE (valor_final, ',', '.') AS FLOAT64),2) AS valor_final
     FROM `basedosdados-staging.world_wb_mides_staging.raw_empenho_df`
 )
+
 
 SELECT 
   *
