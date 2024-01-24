@@ -25,6 +25,7 @@
     )
 }}
 
+
 SELECT
     SAFE_CAST(ano as INT64) as ano,
     SAFE_CAST(mes as INT64) as mes,

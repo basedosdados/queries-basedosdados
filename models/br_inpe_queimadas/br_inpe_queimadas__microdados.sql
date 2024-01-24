@@ -2,6 +2,14 @@
   config(
     alias = 'microdados',
     schema = "br_inpe_queimadas",
+   partition_by = {
+      "field": "ano",
+      "data_type": "int64",
+      "range": {
+        "start": 2003,
+        "end": 2025,
+        "interval": 1}
+     },
     materialized = "table",
     labels = {"tema": "meio-ambiente"}
   )
