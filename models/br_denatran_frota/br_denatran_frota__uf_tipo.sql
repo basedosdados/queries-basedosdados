@@ -2,19 +2,12 @@
 config(
     alias='uf_tipo',
     schema='br_denatran_frota',
-    partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2003,
-        "end": 2024,
-        "interval": 1}},
-    cluster_by = ["mes", "sigla_uf"]
+    materialization='table'
 )
 }}
 
 
-with tipo_mun as (
+with uf_tipo as (
 SELECT
     ano,
     mes,
@@ -25,7 +18,16 @@ SELECT
     WHEN tipo_veiculo = 'CAMINHÃO TRATOR' THEN 'CAMINHAO TRATOR'
     WHEN tipo_veiculo = 'CHASSI PLATAFAFORMA' THEN 'CHASSI PLATAFORMA'
     WHEN tipo_veiculo = 'CHASSI PLATAF' THEN 'CHASSI PLATAFORMA'
+    WHEN tipo_veiculo = 'caminhaotrator' THEN 'caminhao trator'
+    WHEN tipo_veiculo = 'chassiplataforma' THEN 'chassi plataforma'
+    WHEN tipo_veiculo = 'moto cicleta' THEN 'motocicleta'
+    WHEN tipo_veiculo = 'moto  cicleta' THEN 'motocicleta'
     WHEN tipo_veiculo = 'MICRO-ÔNIBUS' THEN 'MICRO-ONIBUS'
+    WHEN tipo_veiculo = 'microonibus' THEN 'micro-onibus'
+    WHEN tipo_veiculo = 'sidecar' THEN 'side-car'
+    WHEN tipo_veiculo = 'semireboque' THEN 'semi-reboque'
+    WHEN tipo_veiculo = 'tratoresteira' THEN 'trator esteira'
+    WHEN tipo_veiculo = 'tratorrodas' THEN 'trator rodas'
     WHEN tipo_veiculo = 'MICROÔNIBUS' THEN 'MICRO-ONIBUS'
     WHEN tipo_veiculo = 'ÔNIBUS' THEN 'ONIBUS'
     WHEN tipo_veiculo = 'UTILITÁRIO' THEN 'UTILITARIO'
@@ -33,23 +35,14 @@ SELECT
     WHEN tipo_veiculo = 'TRATOR ESTEI' THEN 'TRATOR ESTEIRA'
     ELSE tipo_veiculo
     END as tipo_veiculo2,
-    CAST(REPLACE(quantidade, '.0', '') as INT64) quantidade
-FROM basedosdados-staging.br_denatran_frota_staging.uf_tipo
-), 
-nova_agregacao as (
-SELECT 
-ano,
-mes,
-sigla_uf,
-tipo_veiculo2 as tipo_veiculo,
-SUM(quantidade) as quantidade
-FROM tipo_mun
-GROUP BY 1,2,3,4
+    quantidade
+FROM basedosdados-dev.br_denatran_frota_staging.uf_tipo
 )
+
 SELECT
     SAFE_CAST(ano as INT64) ano,
     SAFE_CAST(mes as INT64) mes,
     SAFE_CAST(sigla_uf as STRING) sigla_uf,
-    SAFE_CAST(tipo_veiculo as STRING) tipo_veiculo,
+    SAFE_CAST(LOWER(tipo_veiculo2) as STRING) tipo_veiculo,
     SAFE_CAST(quantidade as INT64) quantidade
-FROM nova_agregacao
+FROM uf_tipo
