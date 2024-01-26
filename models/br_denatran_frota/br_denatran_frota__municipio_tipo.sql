@@ -36,7 +36,7 @@ SELECT
     ELSE tipo_veiculo
     END as tipo_veiculo2,
     quantidade
-    FROM basedosdados-dev.br_denatran_frota_staging.municipio_tipo
+    FROM basedosdados-staging.br_denatran_frota_staging.municipio_tipo
 )
 
 SELECT
