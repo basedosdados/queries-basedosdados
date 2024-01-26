@@ -132,7 +132,10 @@ models:
       +schema: br_cvm_oferta_publica_distribuicao
     br_datahackers_state_data:
       +materialized: table
-      +schema: br_datahackers_state_data          
+      +schema: br_datahackers_state_data
+    br_denatran_frota:
+      +materialized: table
+      +schema: br_denatran_frota         
     br_fbsp_absp:
       +materialized: table
       +schema: br_fbsp_absp
