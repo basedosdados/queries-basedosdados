@@ -7,6 +7,7 @@
     labels = {"tema": "economia"}
   )
  }}
+-- inclui novos municípios e estados
 SELECT 
 SAFE_CAST(ano AS STRING) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
