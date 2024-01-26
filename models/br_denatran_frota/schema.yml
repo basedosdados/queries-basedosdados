@@ -33,6 +33,12 @@ models:
                 at_least: 0.05
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
       - name: tipo_veiculo
         description: Tipo de veículo
         tests:
@@ -68,8 +74,11 @@ models:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+                at_least: 0.05
       - name: tipo_veiculo
         description: Tipo de veículo
         tests:

@@ -203,7 +203,7 @@ models:
         description: Sigla do tipo da proposição
       - name: numero
         description: Número da proposição
-        
+
   - name: br_camara_dados_abertos__deputado
     description: Lista com identificadores e informações sobre todos os parlamentares que já estiveram em exercício em algum momento na história da Câmara.
     tests:
@@ -366,3 +366,370 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
+
+  - name: br_camara_dados_abertos__proposicao_autor
+    description: Dados que relacionam identificadores básicos de proposições a identificadores básicos de autores.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id_proposicao
+              - tipo_autor
+              - ordem_assinatura
+    columns:
+      - name: id_proposicao
+        description: ID proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_proposicao
+        description: URL da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_deputado
+        description: ID do deputado autor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: tipo_autor
+        description: Tipo de Autor (i.e Deputado, Órgão do Poder Legislativo)
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: nome_autor
+        description: Nome do autor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_autor
+        description: URL do autor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_partido
+        description: Sigla do partido do autor
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_partido
+        description: URL do partido
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_uf_autor
+        description: Sigla da Unidade da Federação a qual o autor está vinculado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: ordem_assinatura
+        description: Ordem assinatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: proponente
+        description: Indica se o autor é o proponente da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+  - name: br_camara_dados_abertos__proposicao_microdados
+    description: Dados em que cada registro contém dados sobre uma proposição apresentada à Câmara dos Deputados para deliberação, como identificador universal (URI), sigla, número, ano, ementa, temas e keywords, informações sobre a tramitação mais recente, proposições a que se relacionam, etc.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+      - name: data
+        description: Data da apresentação da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: horario
+        description: Horário da apresentação da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__hora')
+                field: hora
+      - name: id
+        description: ID proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url
+        description: URL proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: numero
+        description: Número da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla
+        description: Sigla do tipo de proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: tipo
+        description: Especificação do tipo de proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: ementa
+        description: Ementa
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: ementa_detalhada
+        description: Ementa detalhada
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: palavra_chave
+        description: Palavras-chave
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_orgao_numerador
+        description: URL do órgão responsável pela numeração
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_principal
+        description: URL da proposição principal, se aplicável.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_posterior
+        description: URL da proposição posterior, se houver.
+      - name: url_teor_proposicao
+        description: URL para o texto completo.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: data_hora_ultimo_status
+        description: Data e hora do último status da proposta.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_relator_ultimo_status
+        description: URL do relator associado ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_orgao_ultimo_status
+        description: Sigla do órgão relacionado ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: regime_ultimo_status
+        description: Regime de tramitação associado ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: tramitacao_ultimo_status
+        description: Descrição da tramitação associada ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: situacao_ultimo_status
+        description: Descrição da situação associada ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: despacho_ultimo_status
+        description: Despacho relacionado ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: apreciacao_ultimo_status
+        description: Informações sobre a apreciação no último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sequencia_ultimo_status
+        description: Sequencia do último status
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_ultimo_status
+        description: URL relacionada ao último status.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+
+  - name: br_camara_dados_abertos__proposicao_tema
+    description: Cada registro corresponde a uma área temática na qual uma proposição foi classificada pelo Centro de Documentação e Informação da Câmara.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - ano
+              - url_proposicao
+              - tema
+              - relevancia
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano  
+      - name: url_proposicao
+        description: URl da Proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: tipo_proposicao
+        description: Sigla do tipo da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: numero
+        description: Número da proposição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: tema
+        description: Descrição do tema
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: relevancia
+        description: Relevancia
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+
+  - name: br_camara_dados_abertos__legislatura
+    description: Lista com os identificadores de todos os períodos de trabalho da Câmara desde sua criação em 1827. De forma simplificada, pode-se dizer que esses períodos vão da posse de um grupo de deputados até a véspera da posse do grupo de deputados seguinte. A duração desses períodos é de 4 anos desde a Constituição de 1988, mas teve variações ao longo do tempo.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id
+    columns:
+      - name: ano
+        description: Ano da eleição
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+      - name: id
+        description: ID da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url
+        description: URL da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: data_inicio
+        description: Data inicio
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: data_final
+        description: Data final
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+
+  - name: br_camara_dados_abertos__legislatura_mesa
+    description: Lista dos integrantes da Mesa Diretora da Câmara desde a legislatura 51 (1999), com os identificadores de deputados, cargos e datas de início e fim de ocupação desses cargos. No período a que se referem os dados, há duas formações da Mesa Diretora a cada legislatura – ou seja, cada composição da Mesa tem um mandato de dois anos.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id
+              - data_inicio
+              - nome_deputado
+    columns:
+      - name: id
+        description: ID da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: data_inicio
+        description: Data inicio da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: data_final
+        description: Data final da legislatura
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_orgao
+        description: ID do orgão
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_orgao
+        description: URL do orgão
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_orgao
+        description: Sigla do orgão
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: nome_orgao
+        description: Nome do orgão
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: id_deputado
+        description: ID do deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: nome_deputado
+        description: Nome do deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: cargo
+        description: Cargo do deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: url_deputado
+        description: URL do deputado
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_partido
+        description: Sigla do partido
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla

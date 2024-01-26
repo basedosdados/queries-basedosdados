@@ -130,6 +130,9 @@ models:
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
+    br_datahackers_state_data:
+      +materialized: table
+      +schema: br_datahackers_state_data          
     br_fbsp_absp:
       +materialized: table
       +schema: br_fbsp_absp
@@ -142,6 +145,9 @@ models:
     br_ibge_censo_demografico:
       +materialized: table
       +schema: br_ibge_censo_demografico     
+    br_ibge_censo_2022:
+      +materialized: table
+      +schema: br_ibge_censo_2022           
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
@@ -151,6 +157,9 @@ models:
     br_ibge_ipca15:
       +materialized: table
       +schema: br_ibge_ipca15
+    br_ibge_pevs:
+      +materialized: table
+      +schema: br_ibge_pevs
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
@@ -271,6 +280,9 @@ models:
     world_oceanos_mapeamento:
       +materialized: table
       +schema: world_oceanos_mapeamento
+    world_wwf_hydrosheds:
+      +materialized: table
+      +schema: world_wwf_hydrosheds
     test_dataset:
       +materialized: table
       +schema: test_dataset
