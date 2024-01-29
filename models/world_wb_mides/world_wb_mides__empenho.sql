@@ -11,7 +11,7 @@
         "end": 2022,
         "interval": 1}
     },
-    cluster_by = ["ano", "sigla_uf"],
+    cluster_by = ["mes", "sigla_uf"],
     labels = {'tema': 'economia'})
 }}
 SELECT
@@ -52,7 +52,12 @@ WITH empenhado_ce AS (
     SAFE_CAST (TRIM(codigo_unidade) AS STRING) AS id_unidade_gestora,
     SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
     SAFE_CAST (numero_licitacao AS STRING) AS id_licitacao,
-    SAFE_CAST (tipo_processo_licitatorio AS STRING) AS modalidade_licitacao,
+    CASE  WHEN tipo_processo_licitatorio = 'N'                                   THEN '98'
+          WHEN tipo_processo_licitatorio = 'R'                                   THEN '2'
+          WHEN tipo_processo_licitatorio = 'D'                                   THEN '8'
+          WHEN tipo_processo_licitatorio = 'I'                                   THEN '10'
+          WHEN tipo_processo_licitatorio = 'R'                                   THEN '29'
+    END AS modalidade_licitacao,
     SAFE_CAST (CONCAT(numero_empenho, ' ', TRIM(codigo_orgao), ' ', TRIM(codigo_unidade), ' ', geoibgeId, ' ', (SUBSTRING(data_emissao_empenho,6,2)), ' ', (SUBSTRING(data_emissao_empenho,3,2))) AS STRING) AS id_empenho_bd,    
     SAFE_CAST (NULL AS STRING) AS id_empenho,
     SAFE_CAST (numero_empenho AS STRING) AS numero,
@@ -815,15 +820,350 @@ empenhado_mg AS (
     FROM empenho_completo_sp e
     LEFT JOIN dummies_sp d ON d.id_empenho_bd=e.id_empenho_bd
     GROUP BY 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+),
+  empenho_municipio_sp AS (
+  SELECT
+    (SAFE_CAST(exercicio AS INT64)) AS ano,
+    (SAFE_CAST(EXTRACT(MONTH FROM DATE (data_empenho)) AS INT64)) AS mes,
+    SAFE_CAST (data_empenho AS DATE) AS data,
+    'SP' AS sigla_uf,
+    '3550308' AS  id_municipio,
+    SAFE_CAST (codigo_orgao AS STRING) AS  orgao,
+    SAFE_CAST (codigo_unidade AS STRING) AS id_unidade_gestora,
+    SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
+    SAFE_CAST (NULL AS STRING) AS id_licitacao,
+    SAFE_CAST (NULL AS STRING) AS modalidade_licitacao,
+    SAFE_CAST (CONCAT(nr_empenho, ' ', TRIM(codigo_orgao), ' ', TRIM(codigo_unidade), ' ', '3550308', ' ', (RIGHT(exercicio,2))) AS STRING) AS id_empenho_bd,    
+    SAFE_CAST (id_empenho AS STRING) AS id_empenho,
+    SAFE_CAST (nr_empenho AS STRING) AS numero,
+    SAFE_CAST (observacoes AS STRING) AS descricao,
+    SAFE_CAST (LEFT(REPLACE(tipo_empenho, 'Por Estimativa', 'Estimativo'), 1) AS STRING) AS modalidade,
+    SAFE_CAST (codigo_funcao AS STRING) AS funcao,
+    SAFE_CAST (codigo_subfuncao AS STRING) AS subfuncao,
+    SAFE_CAST (codigo_programa_governo  AS STRING) AS programa,
+    SAFE_CAST (codigo_projeto_atividade  AS STRING) AS acao,
+    SAFE_CAST (codigo_conta_despesa AS STRING) AS modalidade_despesa,
+    ROUND(SAFE_CAST (valor_empenho AS FLOAT64),2) AS valor_inicial,
+    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
+    ROUND(SAFE_CAST (cancelado AS FLOAT64),2) AS valor_anulacao,
+    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
+    ROUND(SAFE_CAST (valor_empenho AS FLOAT64) - SAFE_CAST (cancelado AS FLOAT64),2) AS valor_final,
+  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio` 
+),
+  empenhado_municipio_rj_v1 AS (
+  SELECT
+    (SAFE_CAST(exercicio_empenho AS INT64)) AS ano,
+    (SAFE_CAST(EXTRACT(MONTH FROM DATE (data_empenho)) AS INT64)) AS mes,
+    SAFE_CAST (data_empenho AS DATE) AS data,
+    'RJ' AS sigla_uf,
+    '3304557' AS  id_municipio,
+    SAFE_CAST (orgao_programa_trabalho AS STRING) AS  orgao,
+    SAFE_CAST (unidade_programa_trabalho AS STRING) AS id_unidade_gestora,
+    SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
+    SAFE_CAST (N_mero_licita__o AS STRING) AS id_licitacao,
+    CASE  WHEN modalidade_licitacao = 'Convite'                                            THEN '1'
+          WHEN modalidade_licitacao = 'Tomada De Preços'                                   THEN '2'
+          WHEN modalidade_licitacao = 'Tomada de Preços'                                   THEN '2'
+          WHEN modalidade_licitacao = 'Concorrência'                                       THEN '3'
+          WHEN modalidade_licitacao = 'Pregão'                                             THEN '4'
+          WHEN modalidade_licitacao = 'Leilão'                                             THEN '7'
+          WHEN modalidade_licitacao = 'Dispensa'                                           THEN '8'
+          WHEN modalidade_licitacao = 'Inexigibilidade'                                    THEN '10'
+          WHEN modalidade_licitacao = 'Concurso'                                           THEN '11'
+          WHEN modalidade_licitacao = 'Seleção Pública'                                    THEN '31'
+          WHEN modalidade_licitacao = 'Não Sujeito'                                        THEN '99'
+     END AS modalidade_licitacao,
+    SAFE_CAST (CONCAT(nr_empenho, ' ', TRIM(orgao_programa_trabalho), ' ', TRIM(unidade_programa_trabalho), ' ', '3304557', ' ', (RIGHT(exercicio_empenho,2))) AS STRING) AS id_empenho_bd,    
+    SAFE_CAST (NULL AS STRING) AS id_empenho,
+    SAFE_CAST (nr_empenho AS STRING) AS numero,
+    SAFE_CAST (NULL AS STRING) AS descricao,
+    SAFE_CAST (LEFT(especie, 1) AS STRING) AS modalidade,
+    SAFE_CAST (CAST (SUBSTRING (programa_trabalho, 7,2) AS INT64) AS STRING) AS funcao,
+    SAFE_CAST (CAST (SUBSTRING (programa_trabalho, 10,3) AS INT64) AS STRING) AS subfuncao,
+    SAFE_CAST (SUBSTRING (programa_trabalho, 14,4)  AS STRING) AS programa,
+    SAFE_CAST (SUBSTRING (programa_trabalho, 19,4)  AS STRING) AS acao,
+    SAFE_CAST (SAFE_CAST (natureza_despesa AS INT64) AS STRING) AS modalidade_despesa,
+    ROUND(SAFE_CAST (valor_empenhado AS FLOAT64),2) AS valor_final,
+  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+  WHERE (SAFE_CAST(exercicio_empenho AS INT64)) < 2017 
+),
+  frequencia_rj_v1 AS (
+    SELECT id_empenho_bd, COUNT(id_empenho_bd) AS frequencia_id
+    FROM empenhado_municipio_rj_v1
+    GROUP BY 1
+    ORDER BY 2 DESC
+),
+  empenho_municipio_rj_v1 AS (
+    SELECT 
+      e.ano,
+      e.mes,
+      e.data,
+      e.sigla_uf,
+      e.id_municipio,
+      e.orgao,
+      e.id_unidade_gestora,
+      e.id_licitacao_bd,
+      e.id_licitacao,
+      e.modalidade_licitacao,
+      (CASE WHEN frequencia_id > 1 THEN (SAFE_CAST (NULL AS STRING)) ELSE e.id_empenho_bd END) AS id_empenho_bd,
+      e.id_empenho,
+      e.numero,
+      e.descricao,
+      e.modalidade,
+      e.funcao,
+      e.subfuncao,
+      e.programa,
+      e.acao,
+      e.modalidade_despesa,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_inicial,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
+      e.valor_final AS valor_final
+    FROM empenhado_municipio_rj_v1 e
+    LEFT JOIN frequencia_rj_v1 f ON e.id_empenho_bd = f.id_empenho_bd 
+),
+  empenhado_municipio_rj_v2 AS (
+    SELECT
+        (SAFE_CAST(Exercicio AS INT64)) AS ano,
+        (SAFE_CAST(EXTRACT(MONTH FROM DATE (Data)) AS INT64)) AS mes,
+        SAFE_CAST (Data AS DATE) AS data,
+        'RJ' AS sigla_uf,
+        '3304557' AS  id_municipio,
+        SAFE_CAST (UG AS STRING) AS  orgao,
+        SAFE_CAST (UO AS STRING) AS id_unidade_gestora,
+        SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
+        SAFE_CAST (NULL AS STRING) AS id_licitacao,
+        CASE  WHEN Licitacao = 'CONVITE'                                          THEN '1'
+            WHEN Licitacao = 'TOMADA DE PREÇOS'                                   THEN '2'
+            WHEN Licitacao = 'CONCORRÊNCIA'                                       THEN '3'
+            WHEN Licitacao = 'PREGÃO'                                             THEN '4'
+            WHEN Licitacao = 'PREÇO REGISTRADO/PREGÃO'                            THEN '4'
+            WHEN Licitacao = 'REGISTRO DE PREÇOS EXTERNO/PREGÃO'                  THEN '4'
+            WHEN Licitacao = 'DISPENSA'                                           THEN '8'
+            WHEN Licitacao = 'INEXIGIBILIDADE'                                    THEN '10'
+            WHEN Licitacao = 'CONCURSO'                                           THEN '11'
+            WHEN Licitacao = 'SELEÇÃO PÚBLICA'                                    THEN '31'
+            WHEN Licitacao = 'NÃO SUJEITO'                                        THEN '99'
+        END AS modalidade_licitacao,
+        SAFE_CAST (CONCAT(LEFT(EmpenhoExercicio, LENGTH(EmpenhoExercicio) - 5), ' ', TRIM(UO), ' ', TRIM(UG), ' ', '3304557', ' ', (RIGHT(Exercicio,2))) AS STRING) AS id_empenho_bd,    
+        SAFE_CAST (NULL AS STRING) AS id_empenho,
+        SAFE_CAST (EmpenhoExercicio AS STRING) AS numero,
+        SAFE_CAST (Historico AS STRING) AS descricao,
+        SAFE_CAST (NULL AS STRING) AS modalidade,
+        SAFE_CAST (CAST (Funcao AS INT64) AS STRING) AS funcao,
+        SAFE_CAST (SubFuncao AS STRING) AS subfuncao,
+        SAFE_CAST (Programa AS STRING) AS programa,
+        SAFE_CAST (Acao  AS STRING) AS acao,
+        SAFE_CAST (CONCAT (
+                -- categoria econômica
+                CASE 
+                WHEN Grupo = 'PESSOAL E ENCARGOS SOCIAIS' THEN '3'
+                WHEN Grupo = 'JUROS E ENCARGOS DA DIVIDA' THEN '3'
+                WHEN Grupo = 'OUTRAS DESPESAS CORRENTES'  THEN '3'
+                WHEN Grupo = 'INVESTIMENTOS'              THEN '4'
+                WHEN Grupo = 'INVERSOES FINANCEIRAS'      THEN '4'
+                WHEN Grupo = 'AMORTIZACAO DA DIVIDA'      THEN '4'
+                END, 
+                -- natureza da despesa
+                CASE 
+                WHEN Grupo = 'PESSOAL E ENCARGOS SOCIAIS' THEN '1'
+                WHEN Grupo = 'JUROS E ENCARGOS DA DIVIDA' THEN '2'
+                WHEN Grupo = 'OUTRAS DESPESAS CORRENTES'  THEN '3'
+                WHEN Grupo = 'INVESTIMENTOS'              THEN '4'
+                WHEN Grupo = 'INVERSOES FINANCEIRAS'      THEN '5'
+                WHEN Grupo = 'AMORTIZACAO DA DIVIDA'      THEN '6'
+                END,
+                -- modalidade de aplicação
+                CASE 
+                WHEN Modalidade = 'TRANSFERENCIAS A UNIAO'                                         THEN '20'
+                WHEN Modalidade = 'TRANSFERENCIAS A ESTADOS E AO DISTRITO FEDERAL'                 THEN '30'
+                WHEN Modalidade = 'TRANSFERENCIAS A INSTITUICOES PRIVADAS SEM FINS LUCRATIVOS'     THEN '50'
+                WHEN Modalidade = 'TRANSFERENCIAS A INSTITUICOES PRIVADAS COM FINS LUCRATIVOS'     THEN '60'
+                WHEN Modalidade = 'EXECUCAO DE CONTRATO DE PARCERIA PUBLICO-PRIVADA'               THEN '67'
+                WHEN Modalidade = 'EXECUCAO DE CONTRATO DE PARCERIA PUBLICO-PRIVADA - PPP'         THEN '67'
+                WHEN Modalidade = 'EXECUCAO DE CONTRATO DE PARCERIA PUBLICO PRIVADA - PPP'         THEN '67'
+                WHEN Modalidade = 'DESP. DECORRENTES DA PART. EM FUNDOS, ORGANISMOS OU ENTIDADES ASSEMELHADAS NAC. E INTERN.'         THEN '84'
+                WHEN Modalidade = 'APLICACOES DIRETAS'                                             THEN '90'
+                WHEN Modalidade = 'APLIC. DIRETA DECOR. DE OPER. ENTRE ORG., FUNDOS E ENTID. INTEG. DO ORC. FISC. E SEG. SOC.' THEN '91'
+                WHEN Modalidade = 'APLIC DIRETAS DECOR DE OPER ENTRE ORG, FUNDOS E ENTID INTEGRANTES DOS ORC FISC E SEG SOC' THEN '91'
+                ELSE NULL
+                END,
+                -- elemento e item da despesa
+                Elemento, Subelemento) AS STRING) AS elemento_despesa,
+        ROUND(SAFE_CAST (Valor AS FLOAT64),2) AS valor_inicial,
+    FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio` 
+    WHERE TipoAto = 'EMPENHO'
+    ),
+  anulacao_municipio_rj_v2 AS (
+    SELECT
+      SAFE_CAST (CONCAT(LEFT(EmpenhoExercicio, LENGTH(EmpenhoExercicio) - 5), ' ', TRIM(UO), ' ', TRIM(UG), ' ', '3304557', ' ', (RIGHT(Exercicio,2))) AS STRING) AS id_empenho_bd,
+      ROUND(SUM(SAFE_CAST (Valor AS FLOAT64)),2) AS valor_anulacao,
+    FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio` 
+    WHERE TipoAto = 'CANCELAMENTO EMPENHO' 
+    GROUP BY 1
+),
+  empenho_municipio_rj_v2 AS (
+    SELECT 
+      e.ano,
+      e.mes,
+      e.data,
+      e.sigla_uf,
+      e.id_municipio,
+      e.orgao,
+      e.id_unidade_gestora,
+      e.id_licitacao_bd,
+      e.id_licitacao,
+      e.modalidade_licitacao,
+      e.id_empenho_bd,
+      e.id_empenho,
+      e.numero,
+      e.descricao,
+      e.modalidade,
+      e.funcao,
+      e.subfuncao,
+      e.programa,
+      e.acao,
+      e.elemento_despesa,
+      e.valor_inicial AS valor_inicial,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
+      SAFE_CAST (IFNULL(a.valor_anulacao,0) AS FLOAT64) AS valor_anulacao,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
+      ROUND (SAFE_CAST((e.valor_inicial - IFNULL (a.valor_anulacao,0)) AS FLOAT64), 2) AS valor_final
+    FROM empenhado_municipio_rj_v2 e
+    LEFT JOIN anulacao_municipio_rj_v2 a ON e.id_empenho_bd = a.id_empenho_bd 
+),
+  empenhado_rj AS (
+    SELECT
+        (SAFE_CAST(ano AS INT64)) AS ano,
+        (SAFE_CAST(EXTRACT(MONTH FROM DATE (data)) AS INT64)) AS mes,
+        SAFE_CAST (data AS DATE) AS data,
+        'RJ' AS sigla_uf,
+        SAFE_CAST (id_municipio AS STRING) AS  id_municipio,
+        SAFE_CAST (id_orgao AS STRING) AS  orgao,
+        SAFE_CAST (unidade_administrativa AS STRING) AS id_unidade_gestora,
+        SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
+        SAFE_CAST (NULL AS STRING) AS id_licitacao,
+        SAFE_CAST (NULL AS STRING) AS modalidade_licitacao,
+        SAFE_CAST (CONCAT(numero_empenho, ' ', id_orgao, ' ', id_municipio, ' ', (RIGHT(ano,2))) AS STRING) AS id_empenho_bd,    
+        SAFE_CAST (NULL AS STRING) AS id_empenho,
+        SAFE_CAST (numero_empenho AS STRING) AS numero,
+        SAFE_CAST (descricao AS STRING) AS descricao,
+        SAFE_CAST (modalidade AS STRING) AS modalidade,
+        SAFE_CAST (CAST (funcao AS INT64) AS STRING) AS funcao,
+        SAFE_CAST (subfuncao AS STRING) AS subfuncao,
+        SAFE_CAST (programa AS STRING) AS programa,
+        SAFE_CAST (atividade  AS STRING) AS acao,
+        SAFE_CAST (elemento_despesa  AS STRING) AS elemento_despesa,
+        ROUND(SAFE_CAST (valor AS FLOAT64),2) AS valor_inicial,
+    FROM `basedosdados-staging.world_wb_mides_staging.raw_empenho_rj`
+    WHERE numero_empenho IS NOT NULL
+),
+  anulacao_rj AS (
+    SELECT
+      SAFE_CAST (CONCAT(numero_empenho, ' ', id_orgao, ' ', id_municipio, ' ', (RIGHT(ano,2))) AS STRING) AS id_empenho_bd,
+      ROUND(SAFE_CAST (valor AS FLOAT64),2) AS valor_anulacao,
+    FROM `basedosdados-staging.world_wb_mides_staging.raw_anulacao_rj`
+    WHERE despesa_liquidada = 'NÃO' AND numero_empenho IS NOT NULL
+),
+  empenho_rj AS (
+    SELECT 
+      e.ano,
+      e.mes,
+      e.data,
+      e.sigla_uf,
+      e.id_municipio,
+      e.orgao,
+      e.id_unidade_gestora,
+      e.id_licitacao_bd,
+      e.id_licitacao,
+      e.modalidade_licitacao,
+      e.id_empenho_bd,
+      e.id_empenho,
+      e.numero,
+      e.descricao,
+      e.modalidade,
+      e.funcao,
+      e.subfuncao,
+      e.programa,
+      e.acao,
+      e.elemento_despesa,
+      e.valor_inicial AS valor_inicial,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
+      SAFE_CAST (IFNULL(a.valor_anulacao,0) AS FLOAT64) AS valor_anulacao,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
+      ROUND (SAFE_CAST((e.valor_inicial - IFNULL (a.valor_anulacao,0)) AS FLOAT64), 2) AS valor_final
+    FROM empenhado_rj e
+    LEFT JOIN anulacao_rj a ON e.id_empenho_bd = a.id_empenho_bd 
+),
+  empenho_df AS (
+    SELECT
+      (SAFE_CAST(exercicio AS INT64)) AS ano,
+      (SAFE_CAST(EXTRACT(MONTH FROM DATE (lancamento)) AS INT64)) AS mes,
+      SAFE_CAST (lancamento AS DATE) AS data,
+      'DF' AS sigla_uf,
+      '5300108' AS  id_municipio,
+      SAFE_CAST (codigo_ug AS STRING) AS  orgao,
+      SAFE_CAST (codigo_gestao AS STRING) AS id_unidade_gestora,
+      SAFE_CAST (NULL AS STRING) AS id_licitacao_bd,
+      SAFE_CAST (NULL AS STRING) AS id_licitacao,
+      CASE  WHEN codigo_licitacao = '1'                                   THEN '11'
+            WHEN codigo_licitacao = '2'                                   THEN '1'
+            WHEN codigo_licitacao = '3'                                   THEN '2'
+            WHEN codigo_licitacao = '4'                                   THEN '3'
+            WHEN codigo_licitacao = '5'                                   THEN '8'
+            WHEN codigo_licitacao = '6'                                   THEN '10'
+            WHEN codigo_licitacao = '7'                                   THEN '99'
+            WHEN codigo_licitacao = '8'                                   THEN '32'
+            WHEN codigo_licitacao = '9'                                   THEN '4'
+            WHEN codigo_licitacao = '10'                                  THEN '32'
+            WHEN codigo_licitacao = '11'                                  THEN '31'
+            WHEN codigo_licitacao = '12'                                  THEN ''
+            WHEN codigo_licitacao = '13'                                  THEN '5'
+            WHEN codigo_licitacao = '14'                                  THEN '6'
+            WHEN codigo_licitacao = '15'                                  THEN '5'
+            WHEN codigo_licitacao = '16'                                  THEN '5'
+            WHEN codigo_licitacao = '17'                                  THEN '6'
+            WHEN codigo_licitacao = '18'                                  THEN '3'
+            WHEN codigo_licitacao = '19'                                  THEN '32'
+            WHEN codigo_licitacao = '20'                                  THEN '31'
+            WHEN codigo_licitacao = '21'                                  THEN '31'
+            WHEN codigo_licitacao = '22'                                  THEN '32'
+            WHEN codigo_licitacao = '23'                                  THEN '12'
+            WHEN codigo_licitacao = '25'                                  THEN '98'
+            WHEN codigo_licitacao = 'INEXIGÍVEL'                          THEN '10'
+      END AS modalidade_licitacao,
+      SAFE_CAST (CONCAT(RIGHT(nota_empenho, LENGTH(nota_empenho) - 6), ' ', codigo_ug, ' ', codigo_gestao, ' ', '5300108', ' ', (RIGHT(exercicio,2))) AS STRING) AS id_empenho_bd,    
+      SAFE_CAST (NULL AS STRING) AS id_empenho,
+      SAFE_CAST (nota_empenho AS STRING) AS numero,
+      SAFE_CAST (descricao AS STRING) AS descricao,
+      SAFE_CAST (LEFT(modalidade_empenho, 1) AS STRING) AS modalidade,
+      SAFE_CAST (CAST (codigo_funcao AS INT64) AS STRING) AS funcao,
+      SAFE_CAST (codigo_subfuncao AS STRING) AS subfuncao,
+      SAFE_CAST (codigo_programa AS STRING) AS programa,
+      SAFE_CAST (codigo_acao  AS STRING) AS acao,
+      SAFE_CAST (codigo_natureza  AS STRING) AS elemento_despesa,
+      ROUND(SAFE_CAST (REPLACE(valor_inicial, ',', '.') AS FLOAT64),2) AS valor_inicial,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_reforco,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
+      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
+      ROUND(SAFE_CAST (REPLACE (valor_final, ',', '.') AS FLOAT64),2) AS valor_final
+    FROM `basedosdados-staging.world_wb_mides_staging.raw_empenho_df`
 )
+
 
 SELECT 
   *
 FROM empenho_mg
 UNION ALL (SELECT * FROM empenho_sp)
+UNION ALL (SELECT * FROM empenho_municipio_sp)
 UNION ALL (SELECT * FROM empenho_pe)
 UNION ALL (SELECT * FROM empenho_pr)
 UNION ALL (SELECT * FROM empenho_rs)
 UNION ALL (SELECT * FROM empenho_pb)
 UNION ALL (SELECT * FROM empenho_ce)
+UNION ALL (SELECT * FROM empenho_rj)
+UNION ALL (SELECT * FROM empenho_municipio_rj_v1)
+UNION ALL (SELECT * FROM empenho_municipio_rj_v2)
+UNION ALL (SELECT * FROM empenho_df)
 )
