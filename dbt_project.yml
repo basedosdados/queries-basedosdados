@@ -163,6 +163,9 @@ models:
     br_ibge_pevs:
       +materialized: table
       +schema: br_ibge_pevs
+    br_ibge_pib:
+      +materialized: table
+      +schema: br_ibge_pib      
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
