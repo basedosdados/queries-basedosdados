@@ -10,4 +10,3 @@ SAFE_CAST(va_industria AS INT64) va_industria,
 SAFE_CAST(va_servicos AS INT64) va_servicos,
 SAFE_CAST(va_adespss AS INT64) va_adespss
 FROM basedosdados-staging.br_ibge_pib_staging.municipio AS t
-
