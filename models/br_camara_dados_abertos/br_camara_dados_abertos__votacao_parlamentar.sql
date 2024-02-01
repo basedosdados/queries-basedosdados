@@ -1,6 +1,6 @@
 {{
   config(
-    alias = 'voto_parlamentar',
+    alias = 'votacao_parlamentar',
     schema='br_camara_dados_abertos',
     materialized='table',
     partition_by={
@@ -32,4 +32,4 @@ SELECT
   SAFE_CAST(sigla_partido AS STRING) sigla_partido,
   SAFE_CAST(sigla_uf AS STRING) sigla_uf,
   SAFE_CAST(id_legislatura AS STRING) id_legislatura
-FROM basedosdados-staging.br_camara_dados_abertos_staging.voto_parlamentar AS t
+FROM basedosdados-staging.br_camara_dados_abertos_staging.votacao_parlamentar AS t
