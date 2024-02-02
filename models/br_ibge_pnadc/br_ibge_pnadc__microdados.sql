@@ -13,7 +13,7 @@
     cluster_by = "sigla_uf",
     labels = {'tema': 'economia'})
 }}
-
+with microdados as(
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(trimestre AS INT64) trimestre,
@@ -439,4 +439,19 @@ SAFE_CAST(V1028199 AS FLOAT64) V1028199,
 SAFE_CAST(V1028200 AS FLOAT64) V1028200,
 SAFE_CAST(habitual AS FLOAT64) habitual,
 SAFE_CAST(efetivo AS FLOAT64) efetivo
-FROM basedosdados-staging.br_ibge_pnadc_staging.microdados AS t
+FROM basedosdados-staging.br_ibge_pnadc_staging.microdados AS t)
+-- verifica se a coluna é do tipo STRING e, caso seja, limpa as observações que começam com 0 (ie. transforma '05' em '5')
+select
+{% for column in columns %}
+    {% if column.data_type == 'STRING' and column.name.startswith('V') %}
+        (CASE
+            WHEN LENGTH(TRIM(`{{ column.name }}`)) > 1 AND LEFT(TRIM(`{{ column.name }}`), 1) = '0' THEN SUBSTR(TRIM(`{{ column.name }}`), 2)
+            ELSE TRIM(`{{ column.name }}`)
+        END) AS `{{ column.name }}`,
+        {{ log("Column is of type STRING and starts with V: " ~ column.name, info=true) }}
+    {% else %}
+        `{{ column.name }}`,
+        {{ log("Column is of type not STRING and does not start with V: " ~ column.name, info=true) }}
+    {% endif %}
+{% endfor %}
+from microdados
