@@ -13,6 +13,7 @@
     cluster_by = "sigla_uf",
     labels = {'tema': 'economia'})
 }}
+{%- set columns = adapter.get_columns_in_relation(this) -%}
 with microdados as(
 SELECT
 SAFE_CAST(ano AS INT64) ano,
