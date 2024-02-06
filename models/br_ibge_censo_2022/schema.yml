@@ -780,3 +780,68 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
+  - name: br_ibge_censo_2022__coordenada_endereco
+    description: Coordenadas geográficas das espécies de endereços do Censo 2022
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id_municipio
+              - id_uf
+              - latitude
+              - longitude
+              - nivel_geo_coordenada
+    columns:
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
+      - name: id_uf
+        description: ID da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: id
+      - name: especie_endereco
+        description: Espécie de endereço
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: nivel_geo_coordenada
+        description: Nível de geocodificação
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: latitude
+        description: Latitude da Coordenada de Localização da Espécie do Endereço
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: longitude
+        description: Longitude da Coordenada de Localização da Espécie do Endereço
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+      - name: ponto
+        description: Ponto geográfico criado a partir das colunas longitude e latitude.
+        tests:
+          - dbt_utils.not_null_proportion:
+                at_least: 0.05
+  - name: br_ibge_censo_2022__dicionario
+    description: Dicionário
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna        
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor
