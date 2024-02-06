@@ -20,5 +20,7 @@ SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(unidade AS STRING) unidade,
 SAFE_CAST(quantidade AS INT64) quantidade,
 ROUND(SAFE_CAST(valor AS FLOAT64), 4) valor,
-FROM basedosdados-staging.br_ibge_pevs_staging.producao_extracao_vegetal AS t
-
+FROM basedosdados-staging.br_ibge_pevs_staging.producao_extracao_vegetal
+WHERE 
+    produto IS NOT NULL AND -- isso faz categorias de agregação caírem
+    quantidade IS NOT NULL -- isso faz unidade vazia cair
