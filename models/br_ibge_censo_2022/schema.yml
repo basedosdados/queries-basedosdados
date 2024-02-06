@@ -832,3 +832,16 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
                 at_least: 0.05
+  - name: br_ibge_censo_2022__dicionario
+    description: Dicionário
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna        
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor

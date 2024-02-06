@@ -2,11 +2,7 @@
 config(alias='coordenada_endereco',
 schema='br_ibge_censo_2022',
 materialized='table',
-    partition_by={
-      "field": "id_uf",
-      "data_type": "int64",
-},
-cluster_by = ["id_municipio"])}}
+cluster_by = ["id_municipio", "id_uf", "especie_endereco"])}}
 
 SELECT
 SAFE_CAST(id_uf AS STRING) id_uf,
