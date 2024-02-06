@@ -283,12 +283,15 @@ models:
     world_iea_pirls:
       +materialized: table
       +schema: world_iea_pirls
-    world_wb_mides:
-      +materialized: table
-      +schema: world_wb_mides
     world_oceanos_mapeamento:
       +materialized: table
       +schema: world_oceanos_mapeamento
+    world_oecd_public_finance:
+      +materialized: table
+      +schema: world_oecd_public_finance  
+    world_wb_mides:
+      +materialized: table
+      +schema: world_wb_mides
     world_wwf_hydrosheds:
       +materialized: table
       +schema: world_wwf_hydrosheds
