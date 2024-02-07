@@ -1,6 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
+    alias='incentivos',
     materialized='incremental',
      partition_by={
       "field": "ano",
@@ -23,24 +24,24 @@
      ]   
     )
  }}
-WITH raw_cnes_regra_contratual AS (
+WITH raw_cnes_incentivos AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados-staging.br_ms_cnes_staging.regra_contratual`
+  FROM `basedosdados-staging.br_ms_cnes_staging.incentivos`
   WHERE CNES IS NOT NULL
 ),
-raw_cnes_regra_contratual_without_duplicates as(
+raw_cnes_incentivos_without_duplicates as(
   -- 2. distinct nas linhas 
   SELECT DISTINCT *
-  FROM raw_cnes_regra_contratual
+  FROM raw_cnes_incentivos
 ),
 cnes_add_muni AS (
   -- 3. Adicionar id_municipio e sigla_uf
   SELECT *
-  FROM raw_cnes_regra_contratual_without_duplicates  
+  FROM raw_cnes_incentivos_without_duplicates  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
   FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
-  ON raw_cnes_regra_contratual_without_duplicates.CODUFMUN = mun.id_municipio_6
+  ON raw_cnes_incentivos_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
 
 SELECT
@@ -54,7 +55,7 @@ CAST(SUBSTR(CMPT_INI, 5, 2) AS INT64) AS mes_competencia_inicial,
 CAST(SUBSTR(CMPT_FIM, 1, 4) AS INT64) AS ano_competencia_final,
 CAST(SUBSTR(CMPT_FIM, 5, 2) AS INT64) AS mes_competencia_final,
 SAFE_CAST(SGRUPHAB AS STRING) tipo_habilitacao,
-CASE WHEN SAFE_CAST(SGRUPHAB AS STRING) IN ("7109","7110","7112","7113","7114","7115","7116","7117","7118") THEN '1' ELSE '2' END AS tipo_regra_contratual,
+CASE WHEN SAFE_CAST(SGRUPHAB AS STRING) IN ("8105","8106","8107") THEN '2' ELSE '1' END AS tipo_incentivo,
 SAFE_CAST(PORTARIA AS STRING) portaria,
 CAST(CONCAT(SUBSTRING(DTPORTAR,-4),'-',SUBSTRING(DTPORTAR,-7,2),'-',SUBSTRING(DTPORTAR,1,2)) AS DATE) data_portaria,
 CAST(SUBSTR(MAPORTAR, 1, 4) AS INT64) AS ano_portaria,

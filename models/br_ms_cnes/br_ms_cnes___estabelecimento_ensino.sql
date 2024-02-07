@@ -1,13 +1,14 @@
 {{ 
   config(
     schema='br_ms_cnes',
+    alias='estabelecimento_ensino',
     materialized='incremental',
      partition_by={
       "field": "ano",
       "data_type": "int64",
       "range": {
         "start": 2005,
-        "end": 2024,
+        "end": 2023,
         "interval": 1}
      },
      pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
@@ -23,26 +24,25 @@
      ]   
     )
  }}
-WITH raw_cnes_estabelecimento_filantropico AS (
+WITH raw_cnes_estabelecimento_ensino AS (
   -- 1. Retirar linhas com id_estabelecimento_cnes nulo
   SELECT *
-  FROM `basedosdados-staging.br_ms_cnes_staging.estabelecimento_filantropico`
+  FROM `basedosdados-staging.br_ms_cnes_staging.estabelecimento_ensino`
   WHERE CNES IS NOT NULL
 ),
-raw_cnes_estabelecimento_filantropico_without_duplicates as(
+raw_cnes_estabelecimento_ensino_without_duplicates as(
   -- 2. distinct nas linhas 
   SELECT DISTINCT *
-  FROM raw_cnes_estabelecimento_filantropico
+  FROM raw_cnes_estabelecimento_ensino
 ),
 cnes_add_muni AS (
   -- 3. Adicionar id_municipio e sigla_uf
   SELECT *
-  FROM raw_cnes_estabelecimento_filantropico_without_duplicates  
+  FROM raw_cnes_estabelecimento_ensino_without_duplicates  
   LEFT JOIN (SELECT id_municipio, id_municipio_6,
   FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
-  ON raw_cnes_estabelecimento_filantropico_without_duplicates.CODUFMUN = mun.id_municipio_6
+  ON raw_cnes_estabelecimento_ensino_without_duplicates.CODUFMUN = mun.id_municipio_6
 )
-
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,

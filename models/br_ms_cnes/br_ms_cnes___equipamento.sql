@@ -1,6 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
+    alias='equipamento',
     materialized='incremental',
      partition_by={
       "field": "ano",
