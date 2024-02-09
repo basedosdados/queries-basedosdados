@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    alias='regra_contratual',
+    alias='servico_especializado',
     materialized='incremental',
      partition_by={
       "field": "ano",
