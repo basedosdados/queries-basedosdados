@@ -165,7 +165,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
           - id_votacao
-          - id_proposicao
+          - sigla_bancada
     columns:
       - name: ano
         description: Ano
