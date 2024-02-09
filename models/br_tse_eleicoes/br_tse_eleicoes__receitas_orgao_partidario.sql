@@ -1,3 +1,21 @@
+{{
+    config(
+        schema='br_tse_eleicoes',
+        alias = 'receitas_orgao_partidario',
+        materialized='table',
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {
+                "start": 2010,
+                "end": 2022,
+                "interval": 2
+            }
+        },
+        cluster_by=["sigla_uf"],
+    )
+}}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf_diretorio AS STRING) sigla_uf,

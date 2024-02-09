@@ -1,3 +1,21 @@
+{{
+    config(
+        schema='br_tse_eleicoes',
+        alias = 'candidatos',
+        materialized='table',
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {
+                "start": 1994,
+                "end": 2022,
+                "interval": 2
+            }
+        },
+        cluster_by=["sigla_uf"],
+    )
+}}
+
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
@@ -32,7 +50,7 @@ SAFE_CAST(nome_federacao AS STRING) nome_federacao,
 SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
 SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
 CASE
-  WHEN prestou_contas='N' THEN 'Nao'
+  WHEN prestou_contas='N' THEN 'Não'
   WHEN prestou_contas='S' THEN 'Sim'
 END AS prestou_contas
 FROM basedosdados-staging.br_tse_eleicoes_staging.candidatos AS t
