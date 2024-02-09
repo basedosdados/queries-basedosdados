@@ -15,7 +15,7 @@
         cluster_by=["sigla_uf"],
     )
 }}
-
+-- precisa ser atualizada com as colunas de federação
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
@@ -44,13 +44,13 @@ SAFE_CAST(sigla_uf_nascimento AS STRING) sigla_uf_nascimento,
 SAFE_CAST(municipio_nascimento AS STRING) municipio_nascimento,
 SAFE_CAST(email AS STRING) email,
 SAFE_CAST(raca AS STRING) raca,
-SAFE_CAST(situacao_totalizacao AS STRING) situacao_totalizacao,
-SAFE_CAST(numero_federacao AS STRING) numero_federacao,
-SAFE_CAST(nome_federacao AS STRING) nome_federacao,
-SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
-SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
-CASE
-  WHEN prestou_contas='N' THEN 'Não'
-  WHEN prestou_contas='S' THEN 'Sim'
-END AS prestou_contas
+-- SAFE_CAST(situacao_totalizacao AS STRING) situacao_totalizacao,
+-- SAFE_CAST(numero_federacao AS STRING) numero_federacao,
+-- SAFE_CAST(nome_federacao AS STRING) nome_federacao,
+-- SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
+-- SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
+-- CASE
+--   WHEN prestou_contas='N' THEN 'Nao'
+--   WHEN prestou_contas='S' THEN 'Sim'
+-- END AS prestou_contas
 FROM basedosdados-staging.br_tse_eleicoes_staging.candidatos AS t
