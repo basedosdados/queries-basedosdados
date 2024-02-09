@@ -1,7 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
-    alias='dados_complementares'
+    alias='dados_complementares',
     materialized='incremental',
      partition_by={
       "field": "ano",
