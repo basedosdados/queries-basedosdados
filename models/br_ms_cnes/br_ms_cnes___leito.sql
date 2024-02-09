@@ -1,6 +1,7 @@
 {{ 
   config(
     schema='br_ms_cnes',
+    alias='leito',
     materialized='incremental',
      partition_by={
       "field": "ano",
