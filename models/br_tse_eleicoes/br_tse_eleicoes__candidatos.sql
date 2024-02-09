@@ -15,7 +15,7 @@
         cluster_by=["sigla_uf"],
     )
 }}
--- precisa ser atualizada com federações
+-- precisa ser atualizada com as colunas de federação
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
