@@ -1,0 +1,26 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: no-commit-to-branch
+        args: [-b, main]
+      - id: trailing-whitespace
+  - repo: https://github.com/tconbeer/sqlfmt
+    rev: v0.20.0
+    hooks:
+      - id: sqlfmt
+        language_version: python
+        additional_dependencies: ['.[jinjafmt]']
+  - repo: local
+    hooks:
+      - id: yamlfix
+        name: yamlfix
+        types: [yaml]
+        language: system
+        entry: yamlfix --exclude ".kubernetes/**/*" .
