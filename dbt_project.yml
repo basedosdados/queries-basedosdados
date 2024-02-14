@@ -190,6 +190,9 @@ models:
     br_inpe_queimadas:
       +materialized: table
       +schema: br_inpe_queimadas
+    br_inpe_sisam:
+      +materialized: table
+      +schema: br_inpe_sisam
     br_jota:
       +materialized: table
       +schema: br_jota
