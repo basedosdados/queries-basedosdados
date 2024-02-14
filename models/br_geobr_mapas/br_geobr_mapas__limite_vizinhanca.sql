@@ -1,21 +1,21 @@
-{{ 
-  config(
-    alias='limite_vizinhanca',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="limite_vizinhanca",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(REPLACE(id_uf,".0","") AS STRING) id_uf,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(REPLACE(id_municipio,".0","") AS STRING) id_municipio,
-SAFE_CAST(nome_municipio AS STRING) nome_municipio,
-SAFE_CAST(REPLACE(id_distrito,".0","") AS STRING) id_distrito,
-SAFE_CAST(nome_distrito AS STRING) nome_distrito,
-SAFE_CAST(REPLACE(id_subdistrito,".0","") AS STRING) id_subdistrito,
-SAFE_CAST(nome_subdistrito AS STRING) nome_subdistrito,
-SAFE_CAST(REPLACE(id_vizinhanca,".0","") AS STRING) id_vizinhanca,
-SAFE_CAST(nome_vizinhanca AS STRING) nome_vizinhanca,
-SAFE_CAST(referencia_geometria AS STRING) referencia_geometria,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria,
-FROM basedosdados-staging.br_geobr_mapas_staging.limite_vizinhanca as t
+}}
+select
+    safe_cast(replace(id_uf, ".0", "") as string) id_uf,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(replace(id_municipio, ".0", "") as string) id_municipio,
+    safe_cast(nome_municipio as string) nome_municipio,
+    safe_cast(replace(id_distrito, ".0", "") as string) id_distrito,
+    safe_cast(nome_distrito as string) nome_distrito,
+    safe_cast(replace(id_subdistrito, ".0", "") as string) id_subdistrito,
+    safe_cast(nome_subdistrito as string) nome_subdistrito,
+    safe_cast(replace(id_vizinhanca, ".0", "") as string) id_vizinhanca,
+    safe_cast(nome_vizinhanca as string) nome_vizinhanca,
+    safe_cast(referencia_geometria as string) referencia_geometria,
+    safe.st_geogfromtext(geometria) geometria,
+from `basedosdados-staging.br_geobr_mapas_staging.limite_vizinhanca ` as t

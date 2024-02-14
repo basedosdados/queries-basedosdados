@@ -1,13 +1,13 @@
-{{ 
-  config(
-    alias='saude',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="saude",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(id_regiao_saude AS STRING) id_regiao_saude,
-SAFE_CAST(id_uf AS STRING) id_uf,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
-FROM basedosdados-staging.br_geobr_mapas_staging.saude AS t
+}}
+select
+    safe_cast(id_regiao_saude as string) id_regiao_saude,
+    safe_cast(id_uf as string) id_uf,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe.st_geogfromtext(geometria) geometria
+from `basedosdados-staging.br_geobr_mapas_staging.saude ` as t

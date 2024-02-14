@@ -1,5 +1,5 @@
+---
 version: 2
-
 models:
   - name: novo_bolsa_familia
     description: Números do Novo Bolsa Família
@@ -8,7 +8,7 @@ models:
           combination_of_columns:
             - ano_competencia
             - mes_competencia
-            - nis_favorecido    
+            - nis_favorecido
     columns:
       - name: ano_competencia
         description: Ano a que se refere a parcela
@@ -23,21 +23,20 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipios')
-              field: id_municipio               
+              field: id_municipio
       - name: sigla_uf
         description: Sigla da Unidade Federativa do beneficiário do Novo Bolsa Família
       - name: cpf_favorecido
-        description: Número do Cadastro de Pessoas Físicas (CPF) do beneficiário do Novo
-            Bolsa Família, caso possua
+        description: Número do Cadastro de Pessoas Físicas (CPF) do beneficiário do
+          Novo Bolsa Família, caso possua
       - name: nis_favorecido
         description: Número de Identificação Social (NIS) do beneficiário do Novo
-            Bolsa Família, caso possua
+          Bolsa Família, caso possua
       - name: nome_favorecido
         description: Nome do beneficiário do Novo Bolsa Família
       - name: valor_parcela
         description: Valor da parcela do benefício
-        tests:
-          - not_null        
+        tests: [not_null]
   - name: garantia_safra
     description: Números do Garantia Safra
     tests:
@@ -45,7 +44,7 @@ models:
           combination_of_columns:
             - ano_referencia
             - mes_referencia
-            - nis_favorecido  
+            - nis_favorecido
     columns:
       - name: ano_referencia
         description: Ano da folha de pagamento
@@ -55,17 +54,17 @@ models:
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil__municipios')        
+              to: ref('br_bd_diretorios_brasil__municipios')
       - name: sigla_uf
         description: Sigla da Unidade Federativa do beneficiário do Garantia Safra
       - name: nis_favorecido
-        description: Número de Identificação Social (NIS) do beneficiário do Garantia Safra, caso possua
+        description: Número de Identificação Social (NIS) do beneficiário do Garantia
+          Safra, caso possua
       - name: nome_favorecido
         description: Nome do beneficiário do Garantia Safra
       - name: valor_parcela
-        description: Valor da parcela do benefício  
-        tests:
-          - not_null                 
+        description: Valor da parcela do benefício
+        tests: [not_null]
   - name: bpc
     description: Números do Benefício de Prestação Continuada
     tests:
@@ -73,7 +72,7 @@ models:
           combination_of_columns:
             - ano_competencia
             - mes_competencia
-            - nis_favorecido    
+            - nis_favorecido
     columns:
       - name: ano_competencia
         description: Ano a que se refere a parcela
@@ -82,19 +81,19 @@ models:
       - name: ano_referencia
         description: Ano da folha de pagamento
       - name: mes_referencia
-        description: Mês da folha de pagamento   
+        description: Mês da folha de pagamento
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil__municipios')                
+              to: ref('br_bd_diretorios_brasil__municipios')
       - name: sigla_uf
         description: Sigla da Unidade Federativa do beneficiário do BPC
       - name: nis_favorecido
         description: NIS do beneficiário do BPC
       - name: cpf_favorecido
         description: Número no Cadastro de Pessoas Físicas (CPF) do beneficiário do
-            BPC, caso possua
+          BPC, caso possua
       - name: nome_favorecido
         description: Nome do beneficiário do BPC
       - name: nis_representante
@@ -104,11 +103,9 @@ models:
       - name: nome_representante
         description: Nome do Representante Legal do Beneficiário
       - name: numero_beneficio
-        description: "Número do Benefício"
+        description: Número do Benefício
       - name: concedido_judicialmente
-        description: "Indica se o benefício foi concedido judicialmente (“SIM” ou
-            “NÃO”)"
+        description: Indica se o benefício foi concedido judicialmente (“SIM” ou “NÃO”)
       - name: valor_parcela
         description: Valor da parcela do benefício
-        tests:
-          - not_null           
+        tests: [not_null]

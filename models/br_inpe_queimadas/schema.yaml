@@ -1,5 +1,5 @@
+---
 version: 2
-
 models:
   - name: br_inpe_queimadas__microdados
     description: Microdados do banco de dados do INPE sobre queimadas
@@ -24,9 +24,7 @@ models:
         description: ID BDQueimadas - Banco de Dados de Queimadas do INPE
       - name: id_foco
         description: ID Foco de incêndio
-        tests:
-          - unique
-          - not_null
+        tests: [unique, not_null]
       - name: data_hora
         description: Data e hora de registro do foco de incêndio
       - name: centroide

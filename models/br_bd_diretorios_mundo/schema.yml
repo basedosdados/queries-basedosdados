@@ -1,8 +1,9 @@
+---
 version: 2
-
-models: 
+models:
   - name: br_bd_diretorios_mundo__pais
-    description: A tabela contém dados com identificadores dos países segundo instituições internacionais, além de siglas e os nomes
+    description: A tabela contém dados com identificadores dos países segundo instituições
+      internacionais, além de siglas e os nomes
     columns:
       - name: id_pais_m49
         description: ID País - M49/PNUD

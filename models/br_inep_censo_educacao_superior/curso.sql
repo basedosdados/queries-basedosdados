@@ -1,195 +1,405 @@
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(tipo_dimensao AS STRING) tipo_dimensao,
-SAFE_CAST(tipo_organizacao_academica AS STRING) tipo_organizacao_academica,
-SAFE_CAST(tipo_organizacao_administrativa AS STRING) tipo_organizacao_administrativa,
-SAFE_CAST(rede AS STRING) rede,
-SAFE_CAST(id_ies AS STRING) id_ies,
-SAFE_CAST(nome_curso AS STRING) nome_curso,
-SAFE_CAST(id_curso AS STRING) id_curso,
-SAFE_CAST(id_curso_cine AS STRING) id_curso_cine,
-SAFE_CAST(nome_curso_cine AS STRING) nome_curso_cine,
-SAFE_CAST(id_area_geral AS STRING) id_area_geral,
-SAFE_CAST(nome_area_geral AS STRING) nome_area_geral,
-SAFE_CAST(id_area_especifica AS STRING) id_area_especifica,
-SAFE_CAST(nome_area_especifica AS STRING) nome_area_especifica,
-SAFE_CAST(id_area_detalhada AS STRING) id_area_detalhada,
-SAFE_CAST(nome_area_detalhada AS STRING) nome_area_detalhada,
-SAFE_CAST(tipo_grau_academico AS STRING) tipo_grau_academico,
-SAFE_CAST(indicador_gratuito AS BOOLEAN) indicador_gratuito,
-SAFE_CAST(tipo_modalidade_ensino AS STRING) tipo_modalidade_ensino,
-SAFE_CAST(tipo_nivel_academico AS STRING) tipo_nivel_academico,
-SAFE_CAST(quantidade_vagas AS INT64) quantidade_vagas,
-SAFE_CAST(quantidade_vagas_diurno AS INT64) quantidade_vagas_diurno,
-SAFE_CAST(quantidade_vagas_noturno AS INT64) quantidade_vagas_noturno,
-SAFE_CAST(quantidade_vagas_ead AS INT64) quantidade_vagas_ead,
-SAFE_CAST(quantidade_vagas_novas AS INT64) quantidade_vagas_novas,
-SAFE_CAST(quantidade_vagas_processos_seletivos AS INT64) quantidade_vagas_processos_seletivos,
-SAFE_CAST(quantidade_vagas_remanescentes AS INT64) quantidade_vagas_remanescentes,
-SAFE_CAST(quantidade_vagas_programas_especiais AS INT64) quantidade_vagas_programas_especiais,
-SAFE_CAST(quantidade_inscritos AS INT64) quantidade_inscritos,
-SAFE_CAST(quantidade_inscritos_diurno AS INT64) quantidade_inscritos_diurno,
-SAFE_CAST(quantidade_inscritos_noturno AS INT64) quantidade_inscritos_noturno,
-SAFE_CAST(quantidade_inscritos_ead AS INT64) quantidade_inscritos_ead,
-SAFE_CAST(quantidade_inscritos_vagas_novas AS INT64) quantidade_inscritos_vagas_novas,
-SAFE_CAST(quantidade_inscritos_processos_seletivos AS INT64) quantidade_inscritos_processos_seletivos,
-SAFE_CAST(quantidade_inscritos_remanescentes AS INT64) quantidade_inscritos_remanescentes,
-SAFE_CAST(quantidade_inscritos_programas_especiais AS INT64) quantidade_inscritos_programas_especiais,
-SAFE_CAST(quantidade_ingressantes AS INT64) quantidade_ingressantes,
-SAFE_CAST(quantidade_ingressantes_feminino AS INT64) quantidade_ingressantes_feminino,
-SAFE_CAST(quantidade_ingressantes_masculino AS INT64) quantidade_ingressantes_masculino,
-SAFE_CAST(quantidade_ingressantes_diurno AS INT64) quantidade_ingressantes_diurno,
-SAFE_CAST(quantidade_ingressantes_noturno AS INT64) quantidade_ingressantes_noturno,
-SAFE_CAST(quantidade_ingressantes_vagas_novas AS INT64) quantidade_ingressantes_vagas_novas,
-SAFE_CAST(quantidade_ingressantes_vestibular AS INT64) quantidade_ingressantes_vestibular,
-SAFE_CAST(quantidade_ingressantes_enem AS INT64) quantidade_ingressantes_enem,
-SAFE_CAST(quantidade_ingressantes_avaliacao_seriada AS INT64) quantidade_ingressantes_avaliacao_seriada,
-SAFE_CAST(quantidade_ingressantes_selecao_simplificada AS INT64) quantidade_ingressantes_selecao_simplificada,
-SAFE_CAST(quantidade_ingressantes_egressos AS INT64) quantidade_ingressantes_egressos,
-SAFE_CAST(quantidade_ingressantes_outro_tipo_selecao AS INT64) quantidade_ingressantes_outro_tipo_selecao,
-SAFE_CAST(quantidade_ingressantes_processos_seletivos AS INT64) quantidade_ingressantes_processos_seletivos,
-SAFE_CAST(quantidade_ingressantes_remanescentes AS INT64) quantidade_ingressantes_remanescentes,
-SAFE_CAST(quantidade_ingressantes_programas_especiais AS INT64) quantidade_ingressantes_programas_especiais,
-SAFE_CAST(quantidade_ingressantes_outras_formas AS INT64) quantidade_ingressantes_outras_formas,
-SAFE_CAST(quantidade_ingressantes_0_17 AS INT64) quantidade_ingressantes_0_17,
-SAFE_CAST(quantidade_ingressantes_18_24 AS INT64) quantidade_ingressantes_18_24,
-SAFE_CAST(quantidade_ingressantes_25_29 AS INT64) quantidade_ingressantes_25_29,
-SAFE_CAST(quantidade_ingressantes_30_34 AS INT64) quantidade_ingressantes_30_34,
-SAFE_CAST(quantidade_ingressantes_35_39 AS INT64) quantidade_ingressantes_35_39,
-SAFE_CAST(quantidade_ingressantes_40_49 AS INT64) quantidade_ingressantes_40_49,
-SAFE_CAST(quantidade_ingressantes_50_59 AS INT64) quantidade_ingressantes_50_59,
-SAFE_CAST(quantidade_ingressantes_60_mais AS INT64) quantidade_ingressantes_60_mais,
-SAFE_CAST(quantidade_ingressantes_branca AS INT64) quantidade_ingressantes_branca,
-SAFE_CAST(quantidade_ingressantes_preta AS INT64) quantidade_ingressantes_preta,
-SAFE_CAST(quantidade_ingressantes_parda AS INT64) quantidade_ingressantes_parda,
-SAFE_CAST(quantidade_ingressantes_amarela AS INT64) quantidade_ingressantes_amarela,
-SAFE_CAST(quantidade_ingressantes_indigena AS INT64) quantidade_ingressantes_indigena,
-SAFE_CAST(quantidade_ingressantes_cor_nao_declarada AS INT64) quantidade_ingressantes_cor_nao_declarada,
-SAFE_CAST(quantidade_matriculas AS INT64) quantidade_matriculas,
-SAFE_CAST(quantidade_matriculas_feminino AS INT64) quantidade_matriculas_feminino,
-SAFE_CAST(quantidade_matriculas_masculino AS INT64) quantidade_matriculas_masculino,
-SAFE_CAST(quantidade_matriculas_diurno AS INT64) quantidade_matriculas_diurno,
-SAFE_CAST(quantidade_matriculas_noturno AS INT64) quantidade_matriculas_noturno,
-SAFE_CAST(quantidade_matriculas_0_17 AS INT64) quantidade_matriculas_0_17,
-SAFE_CAST(quantidade_matriculas_18_24 AS INT64) quantidade_matriculas_18_24,
-SAFE_CAST(quantidade_matriculas_25_29 AS INT64) quantidade_matriculas_25_29,
-SAFE_CAST(quantidade_matriculas_30_34 AS INT64) quantidade_matriculas_30_34,
-SAFE_CAST(quantidade_matriculas_35_39 AS INT64) quantidade_matriculas_35_39,
-SAFE_CAST(quantidade_matriculas_40_49 AS INT64) quantidade_matriculas_40_49,
-SAFE_CAST(quantidade_matriculas_50_59 AS INT64) quantidade_matriculas_50_59,
-SAFE_CAST(quantidade_matriculas_60_mais AS INT64) quantidade_matriculas_60_mais,
-SAFE_CAST(quantidade_matriculas_branca AS INT64) quantidade_matriculas_branca,
-SAFE_CAST(quantidade_matriculas_preta AS INT64) quantidade_matriculas_preta,
-SAFE_CAST(quantidade_matriculas_parda AS INT64) quantidade_matriculas_parda,
-SAFE_CAST(quantidade_matriculas_amarela AS INT64) quantidade_matriculas_amarela,
-SAFE_CAST(quantidade_matriculas_indigena AS INT64) quantidade_matriculas_indigena,
-SAFE_CAST(quantidade_matriculas_cor_nao_declarada AS INT64) quantidade_matriculas_cor_nao_declarada,
-SAFE_CAST(quantidade_concluintes AS INT64) quantidade_concluintes,
-SAFE_CAST(quantidade_concluintes_feminino AS INT64) quantidade_concluintes_feminino,
-SAFE_CAST(quantidade_concluintes_masculino AS INT64) quantidade_concluintes_masculino,
-SAFE_CAST(quantidade_concluintes_diurno AS INT64) quantidade_concluintes_diurno,
-SAFE_CAST(quantidade_concluintes_noturno AS INT64) quantidade_concluintes_noturno,
-SAFE_CAST(quantidade_concluintes_0_17 AS INT64) quantidade_concluintes_0_17,
-SAFE_CAST(quantidade_concluintes_18_24 AS INT64) quantidade_concluintes_18_24,
-SAFE_CAST(quantidade_concluintes_25_29 AS INT64) quantidade_concluintes_25_29,
-SAFE_CAST(quantidade_concluintes_30_34 AS INT64) quantidade_concluintes_30_34,
-SAFE_CAST(quantidade_concluintes_35_39 AS INT64) quantidade_concluintes_35_39,
-SAFE_CAST(quantidade_concluintes_40_49 AS INT64) quantidade_concluintes_40_49,
-SAFE_CAST(quantidade_concluintes_50_59 AS INT64) quantidade_concluintes_50_59,
-SAFE_CAST(quantidade_concluintes_60_mais AS INT64) quantidade_concluintes_60_mais,
-SAFE_CAST(quantidade_concluintes_branca AS INT64) quantidade_concluintes_branca,
-SAFE_CAST(quantidade_concluintes_preta AS INT64) quantidade_concluintes_preta,
-SAFE_CAST(quantidade_concluintes_parda AS INT64) quantidade_concluintes_parda,
-SAFE_CAST(quantidade_concluintes_amarela AS INT64) quantidade_concluintes_amarela,
-SAFE_CAST(quantidade_concluintes_indigena AS INT64) quantidade_concluintes_indigena,
-SAFE_CAST(quantidade_concluintes_cor_nao_declarada AS INT64) quantidade_concluintes_cor_nao_declarada,
-SAFE_CAST(quantidade_ingressantes_brasileiro AS INT64) quantidade_ingressantes_brasileiro,
-SAFE_CAST(quantidade_ingressantes_estrangeiro AS INT64) quantidade_ingressantes_estrangeiro,
-SAFE_CAST(quantidade_matriculas_brasileiro AS INT64) quantidade_matriculas_brasileiro,
-SAFE_CAST(quantidade_matriculas_estrangeiro AS INT64) quantidade_matriculas_estrangeiro,
-SAFE_CAST(quantidade_concluintes_brasileiro AS INT64) quantidade_concluintes_brasileiro,
-SAFE_CAST(quantidade_concluintes_estrangeiro AS INT64) quantidade_concluintes_estrangeiro,
-SAFE_CAST(quantidade_alunos_deficiencia AS INT64) quantidade_alunos_deficiencia,
-SAFE_CAST(quantidade_ingressantes_deficiencia AS INT64) quantidade_ingressantes_deficiencia,
-SAFE_CAST(quantidade_matriculas_deficiencia AS INT64) quantidade_matriculas_deficiencia,
-SAFE_CAST(quantidade_concluintes_deficiencia AS INT64) quantidade_concluintes_deficiencia,
-SAFE_CAST(quantidade_ingressantes_financiamento AS INT64) quantidade_ingressantes_financiamento,
-SAFE_CAST(quantidade_ingressantes_financiamento_reembolsavel AS INT64) quantidade_ingressantes_financiamento_reembolsavel,
-SAFE_CAST(quantidade_ingressantes_financiamento_reembolsavel_fies AS INT64) quantidade_ingressantes_financiamento_reembolsavel_fies,
-SAFE_CAST(quantidade_ingressantes_financiamento_reembolsavel_instituicao AS INT64) quantidade_ingressantes_financiamento_reembolsavel_instituicao,
-SAFE_CAST(quantidade_ingressantes_financiamento_reembolsavel_outros AS INT64) quantidade_ingressantes_financiamento_reembolsavel_outros,
-SAFE_CAST(quantidade_ingressantes_financiamento_nao_reembolsavel AS INT64) quantidade_ingressantes_financiamento_nao_reembolsavel,
-SAFE_CAST(quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_integral AS INT64) quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_integral,
-SAFE_CAST(quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_parcial AS INT64) quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_parcial,
-SAFE_CAST(quantidade_ingressantes_financiamento_nao_reembolsavel_instituicao AS INT64) quantidade_ingressantes_financiamento_nao_reembolsavel_instituicao,
-SAFE_CAST(quantidade_ingressantes_financiamento_nao_reembolsavel_outros AS INT64) quantidade_ingressantes_financiamento_nao_reembolsavel_outros,
-SAFE_CAST(quantidade_matriculas_financiamento AS INT64) quantidade_matriculas_financiamento,
-SAFE_CAST(quantidade_matriculas_financiamento_reembolsavel AS INT64) quantidade_matriculas_financiamento_reembolsavel,
-SAFE_CAST(quantidade_matriculas_financiamento_reembolsavel_fies AS INT64) quantidade_matriculas_financiamento_reembolsavel_fies,
-SAFE_CAST(quantidade_matriculas_financiamento_reembolsavel_instituicao AS INT64) quantidade_matriculas_financiamento_reembolsavel_instituicao,
-SAFE_CAST(quantidade_matriculas_financiamento_reembolsavel_outros AS INT64) quantidade_matriculas_financiamento_reembolsavel_outros,
-SAFE_CAST(quantidade_matriculas_financiamento_nao_reembolsavel AS INT64) quantidade_matriculas_financiamento_nao_reembolsavel,
-SAFE_CAST(quantidade_matriculas_financiamento_nao_reembolsavel_prouni_integral AS INT64) quantidade_matriculas_financiamento_nao_reembolsavel_prouni_integral,
-SAFE_CAST(quantidade_matriculas_financiamento_nao_reembolsavel_prouni_parcial AS INT64) quantidade_matriculas_financiamento_nao_reembolsavel_prouni_parcial,
-SAFE_CAST(quantidade_matriculas_financiamento_nao_reembolsavel_instituicao AS INT64) quantidade_matriculas_financiamento_nao_reembolsavel_instituicao,
-SAFE_CAST(quantidade_matriculas_financiamento_nao_reembolsavel_outros AS INT64) quantidade_matriculas_financiamento_nao_reembolsavel_outros,
-SAFE_CAST(quantidade_concluintes_financiamento AS INT64) quantidade_concluintes_financiamento,
-SAFE_CAST(quantidade_concluintes_financiamento_reembolsavel AS INT64) quantidade_concluintes_financiamento_reembolsavel,
-SAFE_CAST(quantidade_concluintes_financiamento_reembolsavel_fies AS INT64) quantidade_concluintes_financiamento_reembolsavel_fies,
-SAFE_CAST(quantidade_concluintes_financiamento_reembolsavel_instituicao AS INT64) quantidade_concluintes_financiamento_reembolsavel_instituicao,
-SAFE_CAST(quantidade_concluintes_financiamento_reembolsavel_outros AS INT64) quantidade_concluintes_financiamento_reembolsavel_outros,
-SAFE_CAST(quantidade_concluintes_financiamento_nao_reembolsavel AS INT64) quantidade_concluintes_financiamento_nao_reembolsavel,
-SAFE_CAST(quantidade_concluintes_financiamento_nao_reembolsavel_prouni_integral AS INT64) quantidade_concluintes_financiamento_nao_reembolsavel_prouni_integral,
-SAFE_CAST(quantidade_concluintes_financiamento_nao_reembolsavel_prouni_parcial AS INT64) quantidade_concluintes_financiamento_nao_reembolsavel_prouni_parcial,
-SAFE_CAST(quantidade_concluintes_financiamento_nao_reembolsavel_instituicao AS INT64) quantidade_concluintes_financiamento_nao_reembolsavel_instituicao,
-SAFE_CAST(quantidade_concluintes_financiamento_nao_reembolsavel_outros AS INT64) quantidade_concluintes_financiamento_nao_reembolsavel_outros,
-SAFE_CAST(quantidade_ingressantes_reserva_vaga AS INT64) quantidade_ingressantes_reserva_vaga,
-SAFE_CAST(quantidade_ingressantes_reserva_vaga_rede_publica AS INT64) quantidade_ingressantes_reserva_vaga_rede_publica,
-SAFE_CAST(quantidade_ingressantes_reserva_vaga_etnico AS INT64) quantidade_ingressantes_reserva_vaga_etnico,
-SAFE_CAST(quantidade_ingressantes_reserva_vaga_deficiencia AS INT64) quantidade_ingressantes_reserva_vaga_deficiencia,
-SAFE_CAST(quantidade_ingressantes_reserva_vaga_social_renda_familiar AS INT64) quantidade_ingressantes_reserva_vaga_social_renda_familiar,
-SAFE_CAST(quantidade_ingressantes_reserva_vaga_outros AS INT64) quantidade_ingressantes_reserva_vaga_outros,
-SAFE_CAST(quantidade_matriculas_reserva_vaga AS INT64) quantidade_matriculas_reserva_vaga,
-SAFE_CAST(quantidade_matriculas_reserva_vaga_rede_publica AS INT64) quantidade_matriculas_reserva_vaga_rede_publica,
-SAFE_CAST(quantidade_matriculas_reserva_vaga_etnico AS INT64) quantidade_matriculas_reserva_vaga_etnico,
-SAFE_CAST(quantidade_matriculas_reserva_vaga_deficiencia AS INT64) quantidade_matriculas_reserva_vaga_deficiencia,
-SAFE_CAST(quantidade_matriculas_reserva_vaga_social_renda_familiar AS INT64) quantidade_matriculas_reserva_vaga_social_renda_familiar,
-SAFE_CAST(quantidade_matriculas_reserva_vaga_outros AS INT64) quantidade_matriculas_reserva_vaga_outros,
-SAFE_CAST(quantidade_concluintes_reserva_vaga AS INT64) quantidade_concluintes_reserva_vaga,
-SAFE_CAST(quantidade_concluintes_reserva_vaga_rede_publica AS INT64) quantidade_concluintes_reserva_vaga_rede_publica,
-SAFE_CAST(quantidade_concluintes_reserva_vaga_etnico AS INT64) quantidade_concluintes_reserva_vaga_etnico,
-SAFE_CAST(quantidade_concluintes_reserva_vaga_deficiencia AS INT64) quantidade_concluintes_reserva_vaga_deficiencia,
-SAFE_CAST(quantidade_concluintes_reserva_vaga_social_renda_familiar AS INT64) quantidade_concluintes_reserva_vaga_social_renda_familiar,
-SAFE_CAST(quantidade_concluintes_reserva_vaga_outros AS INT64) quantidade_concluintes_reserva_vaga_outros,
-SAFE_CAST(quantidade_alunos_situacao_trancada AS INT64) quantidade_alunos_situacao_trancada,
-SAFE_CAST(quantidade_alunos_situacao_desvinculada AS INT64) quantidade_alunos_situacao_desvinculada,
-SAFE_CAST(quantidade_alunos_situacao_transferida AS INT64) quantidade_alunos_situacao_transferida,
-SAFE_CAST(quantidade_alunos_situacao_falecidos AS INT64) quantidade_alunos_situacao_falecidos,
-SAFE_CAST(quantidade_ingressantes_em_rede_publica AS INT64) quantidade_ingressantes_em_rede_publica,
-SAFE_CAST(quantidade_ingressantes_em_rede_privada AS INT64) quantidade_ingressantes_em_rede_privada,
-SAFE_CAST(quantidade_ingressantes_em_rede_nao_informada AS INT64) quantidade_ingressantes_em_rede_nao_informada,
-SAFE_CAST(quantidade_matriculas_em_rede_publica AS INT64) quantidade_matriculas_em_rede_publica,
-SAFE_CAST(quantidade_matriculas_em_rede_privada AS INT64) quantidade_matriculas_em_rede_privada,
-SAFE_CAST(quantidade_matriculas_em_rede_nao_informada AS INT64) quantidade_matriculas_em_rede_nao_informada,
-SAFE_CAST(quantidade_concluintes_em_rede_publica AS INT64) quantidade_concluintes_em_rede_publica,
-SAFE_CAST(quantidade_concluintes_em_rede_privada AS INT64) quantidade_concluintes_em_rede_privada,
-SAFE_CAST(quantidade_concluintes_em_rede_nao_informada AS INT64) quantidade_concluintes_em_rede_nao_informada,
-SAFE_CAST(quantidade_alunos_parfor AS INT64) quantidade_alunos_parfor,
-SAFE_CAST(quantidade_ingressantes_parfor AS INT64) quantidade_ingressantes_parfor,
-SAFE_CAST(quantidade_matriculas_parfor AS INT64) quantidade_matriculas_parfor,
-SAFE_CAST(quantidade_concluintes_parfor AS INT64) quantidade_concluintes_parfor,
-SAFE_CAST(quantidade_alunos_apoio_social AS INT64) quantidade_alunos_apoio_social,
-SAFE_CAST(quantidade_ingressantes_apoio_social AS INT64) quantidade_ingressantes_apoio_social,
-SAFE_CAST(quantidade_matriculas_apoio_social AS INT64) quantidade_matriculas_apoio_social,
-SAFE_CAST(quantidade_concluintes_apoio_social AS INT64) quantidade_concluintes_apoio_social,
-SAFE_CAST(quantidade_alunos_atividade_extracurricular AS INT64) quantidade_alunos_atividade_extracurricular,
-SAFE_CAST(quantidade_ingressantes_atividade_extracurricular AS INT64) quantidade_ingressantes_atividade_extracurricular,
-SAFE_CAST(quantidade_matriculas_atividade_extracurricular AS INT64) quantidade_matriculas_atividade_extracurricular,
-SAFE_CAST(quantidade_concluintes_atividade_extracurricular AS INT64) quantidade_concluintes_atividade_extracurricular,
-SAFE_CAST(quantidade_alunos_mobilidade_academica AS INT64) quantidade_alunos_mobilidade_academica,
-SAFE_CAST(quantidade_ingressantes_mobilidade_academica AS INT64) quantidade_ingressantes_mobilidade_academica,
-SAFE_CAST(quantidade_matriculas_mobilidade_academica AS INT64) quantidade_matriculas_mobilidade_academica,
-SAFE_CAST(quantidade_concluintes_mobilidade_academica AS INT64) quantidade_concluintes_mobilidade_academica
-FROM basedosdados-staging.br_inep_censo_educacao_superior_staging.curso AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(tipo_dimensao as string) tipo_dimensao,
+    safe_cast(tipo_organizacao_academica as string) tipo_organizacao_academica,
+    safe_cast(
+        tipo_organizacao_administrativa as string
+    ) tipo_organizacao_administrativa,
+    safe_cast(rede as string) rede,
+    safe_cast(id_ies as string) id_ies,
+    safe_cast(nome_curso as string) nome_curso,
+    safe_cast(id_curso as string) id_curso,
+    safe_cast(id_curso_cine as string) id_curso_cine,
+    safe_cast(nome_curso_cine as string) nome_curso_cine,
+    safe_cast(id_area_geral as string) id_area_geral,
+    safe_cast(nome_area_geral as string) nome_area_geral,
+    safe_cast(id_area_especifica as string) id_area_especifica,
+    safe_cast(nome_area_especifica as string) nome_area_especifica,
+    safe_cast(id_area_detalhada as string) id_area_detalhada,
+    safe_cast(nome_area_detalhada as string) nome_area_detalhada,
+    safe_cast(tipo_grau_academico as string) tipo_grau_academico,
+    safe_cast(indicador_gratuito as boolean) indicador_gratuito,
+    safe_cast(tipo_modalidade_ensino as string) tipo_modalidade_ensino,
+    safe_cast(tipo_nivel_academico as string) tipo_nivel_academico,
+    safe_cast(quantidade_vagas as int64) quantidade_vagas,
+    safe_cast(quantidade_vagas_diurno as int64) quantidade_vagas_diurno,
+    safe_cast(quantidade_vagas_noturno as int64) quantidade_vagas_noturno,
+    safe_cast(quantidade_vagas_ead as int64) quantidade_vagas_ead,
+    safe_cast(quantidade_vagas_novas as int64) quantidade_vagas_novas,
+    safe_cast(
+        quantidade_vagas_processos_seletivos as int64
+    ) quantidade_vagas_processos_seletivos,
+    safe_cast(quantidade_vagas_remanescentes as int64) quantidade_vagas_remanescentes,
+    safe_cast(
+        quantidade_vagas_programas_especiais as int64
+    ) quantidade_vagas_programas_especiais,
+    safe_cast(quantidade_inscritos as int64) quantidade_inscritos,
+    safe_cast(quantidade_inscritos_diurno as int64) quantidade_inscritos_diurno,
+    safe_cast(quantidade_inscritos_noturno as int64) quantidade_inscritos_noturno,
+    safe_cast(quantidade_inscritos_ead as int64) quantidade_inscritos_ead,
+    safe_cast(
+        quantidade_inscritos_vagas_novas as int64
+    ) quantidade_inscritos_vagas_novas,
+    safe_cast(
+        quantidade_inscritos_processos_seletivos as int64
+    ) quantidade_inscritos_processos_seletivos,
+    safe_cast(
+        quantidade_inscritos_remanescentes as int64
+    ) quantidade_inscritos_remanescentes,
+    safe_cast(
+        quantidade_inscritos_programas_especiais as int64
+    ) quantidade_inscritos_programas_especiais,
+    safe_cast(quantidade_ingressantes as int64) quantidade_ingressantes,
+    safe_cast(
+        quantidade_ingressantes_feminino as int64
+    ) quantidade_ingressantes_feminino,
+    safe_cast(
+        quantidade_ingressantes_masculino as int64
+    ) quantidade_ingressantes_masculino,
+    safe_cast(quantidade_ingressantes_diurno as int64) quantidade_ingressantes_diurno,
+    safe_cast(quantidade_ingressantes_noturno as int64) quantidade_ingressantes_noturno,
+    safe_cast(
+        quantidade_ingressantes_vagas_novas as int64
+    ) quantidade_ingressantes_vagas_novas,
+    safe_cast(
+        quantidade_ingressantes_vestibular as int64
+    ) quantidade_ingressantes_vestibular,
+    safe_cast(quantidade_ingressantes_enem as int64) quantidade_ingressantes_enem,
+    safe_cast(
+        quantidade_ingressantes_avaliacao_seriada as int64
+    ) quantidade_ingressantes_avaliacao_seriada,
+    safe_cast(
+        quantidade_ingressantes_selecao_simplificada as int64
+    ) quantidade_ingressantes_selecao_simplificada,
+    safe_cast(
+        quantidade_ingressantes_egressos as int64
+    ) quantidade_ingressantes_egressos,
+    safe_cast(
+        quantidade_ingressantes_outro_tipo_selecao as int64
+    ) quantidade_ingressantes_outro_tipo_selecao,
+    safe_cast(
+        quantidade_ingressantes_processos_seletivos as int64
+    ) quantidade_ingressantes_processos_seletivos,
+    safe_cast(
+        quantidade_ingressantes_remanescentes as int64
+    ) quantidade_ingressantes_remanescentes,
+    safe_cast(
+        quantidade_ingressantes_programas_especiais as int64
+    ) quantidade_ingressantes_programas_especiais,
+    safe_cast(
+        quantidade_ingressantes_outras_formas as int64
+    ) quantidade_ingressantes_outras_formas,
+    safe_cast(quantidade_ingressantes_0_17 as int64) quantidade_ingressantes_0_17,
+    safe_cast(quantidade_ingressantes_18_24 as int64) quantidade_ingressantes_18_24,
+    safe_cast(quantidade_ingressantes_25_29 as int64) quantidade_ingressantes_25_29,
+    safe_cast(quantidade_ingressantes_30_34 as int64) quantidade_ingressantes_30_34,
+    safe_cast(quantidade_ingressantes_35_39 as int64) quantidade_ingressantes_35_39,
+    safe_cast(quantidade_ingressantes_40_49 as int64) quantidade_ingressantes_40_49,
+    safe_cast(quantidade_ingressantes_50_59 as int64) quantidade_ingressantes_50_59,
+    safe_cast(quantidade_ingressantes_60_mais as int64) quantidade_ingressantes_60_mais,
+    safe_cast(quantidade_ingressantes_branca as int64) quantidade_ingressantes_branca,
+    safe_cast(quantidade_ingressantes_preta as int64) quantidade_ingressantes_preta,
+    safe_cast(quantidade_ingressantes_parda as int64) quantidade_ingressantes_parda,
+    safe_cast(quantidade_ingressantes_amarela as int64) quantidade_ingressantes_amarela,
+    safe_cast(
+        quantidade_ingressantes_indigena as int64
+    ) quantidade_ingressantes_indigena,
+    safe_cast(
+        quantidade_ingressantes_cor_nao_declarada as int64
+    ) quantidade_ingressantes_cor_nao_declarada,
+    safe_cast(quantidade_matriculas as int64) quantidade_matriculas,
+    safe_cast(quantidade_matriculas_feminino as int64) quantidade_matriculas_feminino,
+    safe_cast(quantidade_matriculas_masculino as int64) quantidade_matriculas_masculino,
+    safe_cast(quantidade_matriculas_diurno as int64) quantidade_matriculas_diurno,
+    safe_cast(quantidade_matriculas_noturno as int64) quantidade_matriculas_noturno,
+    safe_cast(quantidade_matriculas_0_17 as int64) quantidade_matriculas_0_17,
+    safe_cast(quantidade_matriculas_18_24 as int64) quantidade_matriculas_18_24,
+    safe_cast(quantidade_matriculas_25_29 as int64) quantidade_matriculas_25_29,
+    safe_cast(quantidade_matriculas_30_34 as int64) quantidade_matriculas_30_34,
+    safe_cast(quantidade_matriculas_35_39 as int64) quantidade_matriculas_35_39,
+    safe_cast(quantidade_matriculas_40_49 as int64) quantidade_matriculas_40_49,
+    safe_cast(quantidade_matriculas_50_59 as int64) quantidade_matriculas_50_59,
+    safe_cast(quantidade_matriculas_60_mais as int64) quantidade_matriculas_60_mais,
+    safe_cast(quantidade_matriculas_branca as int64) quantidade_matriculas_branca,
+    safe_cast(quantidade_matriculas_preta as int64) quantidade_matriculas_preta,
+    safe_cast(quantidade_matriculas_parda as int64) quantidade_matriculas_parda,
+    safe_cast(quantidade_matriculas_amarela as int64) quantidade_matriculas_amarela,
+    safe_cast(quantidade_matriculas_indigena as int64) quantidade_matriculas_indigena,
+    safe_cast(
+        quantidade_matriculas_cor_nao_declarada as int64
+    ) quantidade_matriculas_cor_nao_declarada,
+    safe_cast(quantidade_concluintes as int64) quantidade_concluintes,
+    safe_cast(quantidade_concluintes_feminino as int64) quantidade_concluintes_feminino,
+    safe_cast(
+        quantidade_concluintes_masculino as int64
+    ) quantidade_concluintes_masculino,
+    safe_cast(quantidade_concluintes_diurno as int64) quantidade_concluintes_diurno,
+    safe_cast(quantidade_concluintes_noturno as int64) quantidade_concluintes_noturno,
+    safe_cast(quantidade_concluintes_0_17 as int64) quantidade_concluintes_0_17,
+    safe_cast(quantidade_concluintes_18_24 as int64) quantidade_concluintes_18_24,
+    safe_cast(quantidade_concluintes_25_29 as int64) quantidade_concluintes_25_29,
+    safe_cast(quantidade_concluintes_30_34 as int64) quantidade_concluintes_30_34,
+    safe_cast(quantidade_concluintes_35_39 as int64) quantidade_concluintes_35_39,
+    safe_cast(quantidade_concluintes_40_49 as int64) quantidade_concluintes_40_49,
+    safe_cast(quantidade_concluintes_50_59 as int64) quantidade_concluintes_50_59,
+    safe_cast(quantidade_concluintes_60_mais as int64) quantidade_concluintes_60_mais,
+    safe_cast(quantidade_concluintes_branca as int64) quantidade_concluintes_branca,
+    safe_cast(quantidade_concluintes_preta as int64) quantidade_concluintes_preta,
+    safe_cast(quantidade_concluintes_parda as int64) quantidade_concluintes_parda,
+    safe_cast(quantidade_concluintes_amarela as int64) quantidade_concluintes_amarela,
+    safe_cast(quantidade_concluintes_indigena as int64) quantidade_concluintes_indigena,
+    safe_cast(
+        quantidade_concluintes_cor_nao_declarada as int64
+    ) quantidade_concluintes_cor_nao_declarada,
+    safe_cast(
+        quantidade_ingressantes_brasileiro as int64
+    ) quantidade_ingressantes_brasileiro,
+    safe_cast(
+        quantidade_ingressantes_estrangeiro as int64
+    ) quantidade_ingressantes_estrangeiro,
+    safe_cast(
+        quantidade_matriculas_brasileiro as int64
+    ) quantidade_matriculas_brasileiro,
+    safe_cast(
+        quantidade_matriculas_estrangeiro as int64
+    ) quantidade_matriculas_estrangeiro,
+    safe_cast(
+        quantidade_concluintes_brasileiro as int64
+    ) quantidade_concluintes_brasileiro,
+    safe_cast(
+        quantidade_concluintes_estrangeiro as int64
+    ) quantidade_concluintes_estrangeiro,
+    safe_cast(quantidade_alunos_deficiencia as int64) quantidade_alunos_deficiencia,
+    safe_cast(
+        quantidade_ingressantes_deficiencia as int64
+    ) quantidade_ingressantes_deficiencia,
+    safe_cast(
+        quantidade_matriculas_deficiencia as int64
+    ) quantidade_matriculas_deficiencia,
+    safe_cast(
+        quantidade_concluintes_deficiencia as int64
+    ) quantidade_concluintes_deficiencia,
+    safe_cast(
+        quantidade_ingressantes_financiamento as int64
+    ) quantidade_ingressantes_financiamento,
+    safe_cast(
+        quantidade_ingressantes_financiamento_reembolsavel as int64
+    ) quantidade_ingressantes_financiamento_reembolsavel,
+    safe_cast(
+        quantidade_ingressantes_financiamento_reembolsavel_fies as int64
+    ) quantidade_ingressantes_financiamento_reembolsavel_fies,
+    safe_cast(
+        quantidade_ingressantes_financiamento_reembolsavel_instituicao as int64
+    ) quantidade_ingressantes_financiamento_reembolsavel_instituicao,
+    safe_cast(
+        quantidade_ingressantes_financiamento_reembolsavel_outros as int64
+    ) quantidade_ingressantes_financiamento_reembolsavel_outros,
+    safe_cast(
+        quantidade_ingressantes_financiamento_nao_reembolsavel as int64
+    ) quantidade_ingressantes_financiamento_nao_reembolsavel,
+    safe_cast(
+        quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_integral as int64
+    ) quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_integral,
+    safe_cast(
+        quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_parcial as int64
+    ) quantidade_ingressantes_financiamento_nao_reembolsavel_prouni_parcial,
+    safe_cast(
+        quantidade_ingressantes_financiamento_nao_reembolsavel_instituicao as int64
+    ) quantidade_ingressantes_financiamento_nao_reembolsavel_instituicao,
+    safe_cast(
+        quantidade_ingressantes_financiamento_nao_reembolsavel_outros as int64
+    ) quantidade_ingressantes_financiamento_nao_reembolsavel_outros,
+    safe_cast(
+        quantidade_matriculas_financiamento as int64
+    ) quantidade_matriculas_financiamento,
+    safe_cast(
+        quantidade_matriculas_financiamento_reembolsavel as int64
+    ) quantidade_matriculas_financiamento_reembolsavel,
+    safe_cast(
+        quantidade_matriculas_financiamento_reembolsavel_fies as int64
+    ) quantidade_matriculas_financiamento_reembolsavel_fies,
+    safe_cast(
+        quantidade_matriculas_financiamento_reembolsavel_instituicao as int64
+    ) quantidade_matriculas_financiamento_reembolsavel_instituicao,
+    safe_cast(
+        quantidade_matriculas_financiamento_reembolsavel_outros as int64
+    ) quantidade_matriculas_financiamento_reembolsavel_outros,
+    safe_cast(
+        quantidade_matriculas_financiamento_nao_reembolsavel as int64
+    ) quantidade_matriculas_financiamento_nao_reembolsavel,
+    safe_cast(
+        quantidade_matriculas_financiamento_nao_reembolsavel_prouni_integral as int64
+    ) quantidade_matriculas_financiamento_nao_reembolsavel_prouni_integral,
+    safe_cast(
+        quantidade_matriculas_financiamento_nao_reembolsavel_prouni_parcial as int64
+    ) quantidade_matriculas_financiamento_nao_reembolsavel_prouni_parcial,
+    safe_cast(
+        quantidade_matriculas_financiamento_nao_reembolsavel_instituicao as int64
+    ) quantidade_matriculas_financiamento_nao_reembolsavel_instituicao,
+    safe_cast(
+        quantidade_matriculas_financiamento_nao_reembolsavel_outros as int64
+    ) quantidade_matriculas_financiamento_nao_reembolsavel_outros,
+    safe_cast(
+        quantidade_concluintes_financiamento as int64
+    ) quantidade_concluintes_financiamento,
+    safe_cast(
+        quantidade_concluintes_financiamento_reembolsavel as int64
+    ) quantidade_concluintes_financiamento_reembolsavel,
+    safe_cast(
+        quantidade_concluintes_financiamento_reembolsavel_fies as int64
+    ) quantidade_concluintes_financiamento_reembolsavel_fies,
+    safe_cast(
+        quantidade_concluintes_financiamento_reembolsavel_instituicao as int64
+    ) quantidade_concluintes_financiamento_reembolsavel_instituicao,
+    safe_cast(
+        quantidade_concluintes_financiamento_reembolsavel_outros as int64
+    ) quantidade_concluintes_financiamento_reembolsavel_outros,
+    safe_cast(
+        quantidade_concluintes_financiamento_nao_reembolsavel as int64
+    ) quantidade_concluintes_financiamento_nao_reembolsavel,
+    safe_cast(
+        quantidade_concluintes_financiamento_nao_reembolsavel_prouni_integral as int64
+    ) quantidade_concluintes_financiamento_nao_reembolsavel_prouni_integral,
+    safe_cast(
+        quantidade_concluintes_financiamento_nao_reembolsavel_prouni_parcial as int64
+    ) quantidade_concluintes_financiamento_nao_reembolsavel_prouni_parcial,
+    safe_cast(
+        quantidade_concluintes_financiamento_nao_reembolsavel_instituicao as int64
+    ) quantidade_concluintes_financiamento_nao_reembolsavel_instituicao,
+    safe_cast(
+        quantidade_concluintes_financiamento_nao_reembolsavel_outros as int64
+    ) quantidade_concluintes_financiamento_nao_reembolsavel_outros,
+    safe_cast(
+        quantidade_ingressantes_reserva_vaga as int64
+    ) quantidade_ingressantes_reserva_vaga,
+    safe_cast(
+        quantidade_ingressantes_reserva_vaga_rede_publica as int64
+    ) quantidade_ingressantes_reserva_vaga_rede_publica,
+    safe_cast(
+        quantidade_ingressantes_reserva_vaga_etnico as int64
+    ) quantidade_ingressantes_reserva_vaga_etnico,
+    safe_cast(
+        quantidade_ingressantes_reserva_vaga_deficiencia as int64
+    ) quantidade_ingressantes_reserva_vaga_deficiencia,
+    safe_cast(
+        quantidade_ingressantes_reserva_vaga_social_renda_familiar as int64
+    ) quantidade_ingressantes_reserva_vaga_social_renda_familiar,
+    safe_cast(
+        quantidade_ingressantes_reserva_vaga_outros as int64
+    ) quantidade_ingressantes_reserva_vaga_outros,
+    safe_cast(
+        quantidade_matriculas_reserva_vaga as int64
+    ) quantidade_matriculas_reserva_vaga,
+    safe_cast(
+        quantidade_matriculas_reserva_vaga_rede_publica as int64
+    ) quantidade_matriculas_reserva_vaga_rede_publica,
+    safe_cast(
+        quantidade_matriculas_reserva_vaga_etnico as int64
+    ) quantidade_matriculas_reserva_vaga_etnico,
+    safe_cast(
+        quantidade_matriculas_reserva_vaga_deficiencia as int64
+    ) quantidade_matriculas_reserva_vaga_deficiencia,
+    safe_cast(
+        quantidade_matriculas_reserva_vaga_social_renda_familiar as int64
+    ) quantidade_matriculas_reserva_vaga_social_renda_familiar,
+    safe_cast(
+        quantidade_matriculas_reserva_vaga_outros as int64
+    ) quantidade_matriculas_reserva_vaga_outros,
+    safe_cast(
+        quantidade_concluintes_reserva_vaga as int64
+    ) quantidade_concluintes_reserva_vaga,
+    safe_cast(
+        quantidade_concluintes_reserva_vaga_rede_publica as int64
+    ) quantidade_concluintes_reserva_vaga_rede_publica,
+    safe_cast(
+        quantidade_concluintes_reserva_vaga_etnico as int64
+    ) quantidade_concluintes_reserva_vaga_etnico,
+    safe_cast(
+        quantidade_concluintes_reserva_vaga_deficiencia as int64
+    ) quantidade_concluintes_reserva_vaga_deficiencia,
+    safe_cast(
+        quantidade_concluintes_reserva_vaga_social_renda_familiar as int64
+    ) quantidade_concluintes_reserva_vaga_social_renda_familiar,
+    safe_cast(
+        quantidade_concluintes_reserva_vaga_outros as int64
+    ) quantidade_concluintes_reserva_vaga_outros,
+    safe_cast(
+        quantidade_alunos_situacao_trancada as int64
+    ) quantidade_alunos_situacao_trancada,
+    safe_cast(
+        quantidade_alunos_situacao_desvinculada as int64
+    ) quantidade_alunos_situacao_desvinculada,
+    safe_cast(
+        quantidade_alunos_situacao_transferida as int64
+    ) quantidade_alunos_situacao_transferida,
+    safe_cast(
+        quantidade_alunos_situacao_falecidos as int64
+    ) quantidade_alunos_situacao_falecidos,
+    safe_cast(
+        quantidade_ingressantes_em_rede_publica as int64
+    ) quantidade_ingressantes_em_rede_publica,
+    safe_cast(
+        quantidade_ingressantes_em_rede_privada as int64
+    ) quantidade_ingressantes_em_rede_privada,
+    safe_cast(
+        quantidade_ingressantes_em_rede_nao_informada as int64
+    ) quantidade_ingressantes_em_rede_nao_informada,
+    safe_cast(
+        quantidade_matriculas_em_rede_publica as int64
+    ) quantidade_matriculas_em_rede_publica,
+    safe_cast(
+        quantidade_matriculas_em_rede_privada as int64
+    ) quantidade_matriculas_em_rede_privada,
+    safe_cast(
+        quantidade_matriculas_em_rede_nao_informada as int64
+    ) quantidade_matriculas_em_rede_nao_informada,
+    safe_cast(
+        quantidade_concluintes_em_rede_publica as int64
+    ) quantidade_concluintes_em_rede_publica,
+    safe_cast(
+        quantidade_concluintes_em_rede_privada as int64
+    ) quantidade_concluintes_em_rede_privada,
+    safe_cast(
+        quantidade_concluintes_em_rede_nao_informada as int64
+    ) quantidade_concluintes_em_rede_nao_informada,
+    safe_cast(quantidade_alunos_parfor as int64) quantidade_alunos_parfor,
+    safe_cast(quantidade_ingressantes_parfor as int64) quantidade_ingressantes_parfor,
+    safe_cast(quantidade_matriculas_parfor as int64) quantidade_matriculas_parfor,
+    safe_cast(quantidade_concluintes_parfor as int64) quantidade_concluintes_parfor,
+    safe_cast(quantidade_alunos_apoio_social as int64) quantidade_alunos_apoio_social,
+    safe_cast(
+        quantidade_ingressantes_apoio_social as int64
+    ) quantidade_ingressantes_apoio_social,
+    safe_cast(
+        quantidade_matriculas_apoio_social as int64
+    ) quantidade_matriculas_apoio_social,
+    safe_cast(
+        quantidade_concluintes_apoio_social as int64
+    ) quantidade_concluintes_apoio_social,
+    safe_cast(
+        quantidade_alunos_atividade_extracurricular as int64
+    ) quantidade_alunos_atividade_extracurricular,
+    safe_cast(
+        quantidade_ingressantes_atividade_extracurricular as int64
+    ) quantidade_ingressantes_atividade_extracurricular,
+    safe_cast(
+        quantidade_matriculas_atividade_extracurricular as int64
+    ) quantidade_matriculas_atividade_extracurricular,
+    safe_cast(
+        quantidade_concluintes_atividade_extracurricular as int64
+    ) quantidade_concluintes_atividade_extracurricular,
+    safe_cast(
+        quantidade_alunos_mobilidade_academica as int64
+    ) quantidade_alunos_mobilidade_academica,
+    safe_cast(
+        quantidade_ingressantes_mobilidade_academica as int64
+    ) quantidade_ingressantes_mobilidade_academica,
+    safe_cast(
+        quantidade_matriculas_mobilidade_academica as int64
+    ) quantidade_matriculas_mobilidade_academica,
+    safe_cast(
+        quantidade_concluintes_mobilidade_academica as int64
+    ) quantidade_concluintes_mobilidade_academica
+from `basedosdados-staging.br_inep_censo_educacao_superior_staging.curso ` as t

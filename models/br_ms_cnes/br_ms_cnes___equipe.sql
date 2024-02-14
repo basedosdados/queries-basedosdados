@@ -1,73 +1,73 @@
-{{ 
-  config(
-    schema='br_ms_cnes',
-    alias='equipe',
-    materialized='incremental',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2005,
-        "end": 2024,
-        "interval": 1}
-     },
-     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-     post_hook = [ 
-      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-       ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
-     ]   
+{{
+    config(
+        schema="br_ms_cnes",
+        alias="equipe",
+        materialized="incremental",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2005, "end": 2024, "interval": 1},
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+        ],
     )
- }}
+}}
 
-WITH raw_cnes_equipe AS (
-  -- 1. Retirar linhas com id_estabelecimento_cnes nulo
-  SELECT *
-  FROM `basedosdados-staging.br_ms_cnes_staging.equipe`
-  WHERE CNES IS NOT NULL),
-cnes_add_muni AS (
-  -- 2. Adicionar id_municipio de 7 dígitos
-  SELECT *
-  FROM raw_cnes_equipe  
-  LEFT JOIN (SELECT id_municipio, id_municipio_6,
-  FROM `basedosdados.br_bd_diretorios_brasil.municipio`) as mun
-  ON raw_cnes_equipe.CODUFMUN = mun.id_municipio_6
-)
---tipo_desativacao_equipe com valor 0 que não é indicado como um valor possível do campo no dicionário do cnes. 
+with
+    raw_cnes_equipe as (
+        -- 1. Retirar linhas com id_estabelecimento_cnes nulo
+        select *
+        from `basedosdados-staging.br_ms_cnes_staging.equipe`
+        where cnes is not null
+    ),
+    cnes_add_muni as (
+        -- 2. Adicionar id_municipio de 7 dígitos
+        select *
+        from raw_cnes_equipe
+        left join
+            (
+                select id_municipio, id_municipio_6,
+                from `basedosdados.br_bd_diretorios_brasil.municipio`
+            ) as mun
+            on raw_cnes_equipe.codufmun = mun.id_municipio_6
+    )
+-- tipo_desativacao_equipe com valor 0 que não é indicado como um valor possível do
+-- campo no dicionário do cnes.
 -- pode ser NA. Em todos os anos tem valor significativo de zeros
---tipo_segmento e descricao_segmento vem juntos na tabela e nao esta presente no dicionario original
-SELECT 
-SAFE_CAST(ano AS INT64) AS ano,
-SAFE_CAST(mes AS INT64) AS mes,
-SAFE_CAST(sigla_uf AS STRING) AS sigla_uf,
-SAFE_CAST(id_municipio AS STRING) AS id_municipio,
-SAFE_CAST(CNES AS STRING) AS id_estabelecimento_cnes,
-SAFE_CAST(ID_EQUIPE AS STRING) AS id_equipe,
-SAFE_CAST(TIPO_EQP AS STRING) AS tipo_equipe,
-SAFE_CAST(NOME_EQP AS STRING) AS equipe,
-SAFE_CAST(NOMEAREA AS STRING) AS area,
-SAFE_CAST(ID_SEGM AS STRING) AS id_segmento,
-SAFE_CAST(TIPOSEGM AS STRING) AS tipo_segmento,
-SAFE_CAST(DESCSEGM AS STRING) AS descricao_segmento,
---- inserir subsrt para criar ano e mes
-SAFE_CAST(SUBSTR(DT_ATIVA, 1, 4) AS INT64) AS ano_ativacao_equipe,
-SAFE_CAST(SUBSTR(DT_ATIVA,5,6) AS INT64) AS mes_ativacao_equipe,
-SAFE_CAST(MOTDESAT AS STRING) AS motivo_desativacao_equipe,
-SAFE_CAST(TP_DESAT AS STRING) AS tipo_desativacao_equipe,
-SAFE_CAST(SUBSTR(DT_DESAT, 1, 4) AS INT64) AS ano_desativacao_equipe,
-SAFE_CAST(SUBSTR(DT_DESAT,5,6) AS INT64) AS mes_desativacao_equipe,
-SAFE_CAST(QUILOMBO AS STRING) AS indicador_atende_populacao_assistida_quilombolas,
-SAFE_CAST(ASSENTAD AS STRING) AS indicador_atende_populacao_assistida_assentados,
-SAFE_CAST(POPGERAL AS STRING) AS indicador_atende_populacao_assistida_geral,
-SAFE_CAST(ESCOLA AS STRING) AS indicador_atende_populacao_assistida_escolares,
-SAFE_CAST(INDIGENA AS STRING) AS indicador_atende_populacao_assistida_indigena,
-SAFE_CAST(PRONASCI AS STRING) AS indicador_atende_populacao_assistida_pronasci,
-FROM cnes_add_muni
-{% if is_incremental() %} 
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+-- tipo_segmento e descricao_segmento vem juntos na tabela e nao esta presente no
+-- dicionario original
+select
+    safe_cast(ano as int64) as ano,
+    safe_cast(mes as int64) as mes,
+    safe_cast(sigla_uf as string) as sigla_uf,
+    safe_cast(id_municipio as string) as id_municipio,
+    safe_cast(cnes as string) as id_estabelecimento_cnes,
+    safe_cast(id_equipe as string) as id_equipe,
+    safe_cast(tipo_eqp as string) as tipo_equipe,
+    safe_cast(nome_eqp as string) as equipe,
+    safe_cast(nomearea as string) as area,
+    safe_cast(id_segm as string) as id_segmento,
+    safe_cast(tiposegm as string) as tipo_segmento,
+    safe_cast(descsegm as string) as descricao_segmento,
+    -- - inserir subsrt para criar ano e mes
+    safe_cast(substr(dt_ativa, 1, 4) as int64) as ano_ativacao_equipe,
+    safe_cast(substr(dt_ativa, 5, 6) as int64) as mes_ativacao_equipe,
+    safe_cast(motdesat as string) as motivo_desativacao_equipe,
+    safe_cast(tp_desat as string) as tipo_desativacao_equipe,
+    safe_cast(substr(dt_desat, 1, 4) as int64) as ano_desativacao_equipe,
+    safe_cast(substr(dt_desat, 5, 6) as int64) as mes_desativacao_equipe,
+    safe_cast(quilombo as string) as indicador_atende_populacao_assistida_quilombolas,
+    safe_cast(assentad as string) as indicador_atende_populacao_assistida_assentados,
+    safe_cast(popgeral as string) as indicador_atende_populacao_assistida_geral,
+    safe_cast(escola as string) as indicador_atende_populacao_assistida_escolares,
+    safe_cast(indigena as string) as indicador_atende_populacao_assistida_indigena,
+    safe_cast(pronasci as string) as indicador_atende_populacao_assistida_pronasci,
+from cnes_add_muni
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}

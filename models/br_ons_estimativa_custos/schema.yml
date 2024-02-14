@@ -1,14 +1,17 @@
+---
 version: 2
-
 models:
   - name: br_ons_estimativa_custos__custo_marginal_operacao_semi_horario
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - data
-            - hora
-            - id_subsistema
-    description: Valores do custo, por unidade de energia produzida, para atender ao incremento de uma unidade de carga no SIN, chamado de Custo Marginal de Operação – CMO. Este CMO é estimado pelo modelo DESSEM para cada barra do sistema em base semi-horária. O CMO do subsistema é obtido pelo média dos CMOs nas barras de cada subsistema, ponderados pelas respectivas cargas, considerando que um aumento de carga no subsistema se dá de maneira uniforme nas barras que a ele pertencem.
+          combination_of_columns: [data, hora, id_subsistema]
+    description: Valores do custo, por unidade de energia produzida, para atender
+      ao incremento de uma unidade de carga no SIN, chamado de Custo Marginal de Operação
+      – CMO. Este CMO é estimado pelo modelo DESSEM para cada barra do sistema em
+      base semi-horária. O CMO do subsistema é obtido pelo média dos CMOs nas barras
+      de cada subsistema, ponderados pelas respectivas cargas, considerando que um
+      aumento de carga no subsistema se dá de maneira uniforme nas barras que a ele
+      pertencem.
     columns:
       - name: data
         description: Data de referência da medição
@@ -27,10 +30,11 @@ models:
   - name: br_ons_estimativa_custos__custo_marginal_operacao_semanal
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - data
-            - id_subsistema
-    description: Valores do custo, por unidade de energia produzida, para atender ao incremento de uma unidade de carga no SIN, chamado de Custo Marginal de Operação – CMO. Valores para cada semana operativa por subsistema, e por patamar de carga, além da média semanal, estimados pelo modelo Decomp.
+          combination_of_columns: [data, id_subsistema]
+    description: Valores do custo, por unidade de energia produzida, para atender
+      ao incremento de uma unidade de carga no SIN, chamado de Custo Marginal de Operação
+      – CMO. Valores para cada semana operativa por subsistema, e por patamar de carga,
+      além da média semanal, estimados pelo modelo Decomp.
     columns:
       - name: data
         description: Data de referência da medição
@@ -45,19 +49,21 @@ models:
       - name: custo_marginal_operacao_semanal
         description: Valor do Custo Marginal Operacional (CMO) médio semanal
       - name: custo_marginal_operacao_semanal_carga_leve
-        description: Valor do Custo Marginal Operacional (CMO) no patamar de carga leve
+        description: Valor do Custo Marginal Operacional (CMO) no patamar de carga
+          leve
       - name: custo_marginal_operacao_semanal_carga_media
-        description: Valor do Custo Marginal Operacional (CMO) no patamar de carga média
+        description: Valor do Custo Marginal Operacional (CMO) no patamar de carga
+          média
       - name: custo_marginal_operacao_semanal_carga_pesada
-        description: Valor do Custo Marginal Operacional (CMO) no patamar de carga pesada
+        description: Valor do Custo Marginal Operacional (CMO) no patamar de carga
+          pesada
   - name: br_ons_estimativa_custos__balanco_energia_subsistemas
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - data
-            - hora
-            - id_subsistema
-    description: Informações da carga e oferta de energia verificados em periodicidade horária por subsistema. A oferta é representada pelos valores de geração das usinas hidráulicas, térmicas, eólicas e fotovoltaicas.
+          combination_of_columns: [data, hora, id_subsistema]
+    description: Informações da carga e oferta de energia verificados em periodicidade
+      horária por subsistema. A oferta é representada pelos valores de geração das
+      usinas hidráulicas, térmicas, eólicas e fotovoltaicas.
     columns:
       - name: data
         description: Data de referência da medição
@@ -86,11 +92,10 @@ models:
   - name: br_ons_estimativa_custos__balanco_energia_subsistemas_dessem
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - data
-            - hora
-            - id_subsistema
-    description: Informação da programação eletro energética, resultante do modelo DESSEM, da demanda de energia e geração por fontes previstas para um dia de referência em periodicidade semi-horária no subsistema.
+          combination_of_columns: [data, hora, id_subsistema]
+    description: Informação da programação eletro energética, resultante do modelo
+      DESSEM, da demanda de energia e geração por fontes previstas para um dia de
+      referência em periodicidade semi-horária no subsistema.
     columns:
       - name: data
         description: Data de referência da medição
@@ -121,11 +126,9 @@ models:
   - name: br_ons_estimativa_custos__custo_variavel_unitario_usinas_termicas
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - data_inicio
-            - data_fim
-            - id_modelo_usina
-    description: Custo Variável Unitário (CVU) de usinas térmicas considerado no Programa Mensal da Operação, conforme utilizado na execução do modelo DECOMP
+          combination_of_columns: [data_inicio, data_fim, id_modelo_usina]
+    description: Custo Variável Unitário (CVU) de usinas térmicas considerado no Programa
+      Mensal da Operação, conforme utilizado na execução do modelo DECOMP
     columns:
       - name: data_inicio
         description: Data de início da semana operativa

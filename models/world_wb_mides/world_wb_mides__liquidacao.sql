@@ -1,634 +1,999 @@
-{{ 
-  config(
-    alias = 'liquidacao',
-    schema='world_wb_mides',
-    materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 1995,
-        "end": 2022,
-        "interval": 1}
-    },
-    cluster_by = ["mes", "sigla_uf"],
-    labels = {'tema': 'economia'})
+{{
+    config(
+        alias="liquidacao",
+        schema="world_wb_mides",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 1995, "end": 2022, "interval": 1},
+        },
+        cluster_by=["mes", "sigla_uf"],
+        labels={"tema": "economia"},
+    )
 }}
-SELECT
-  ano,
-  mes,
-  data,
-  sigla_uf,
-  id_municipio,
-  orgao,
-  id_unidade_gestora,
-  id_empenho_bd,
-  id_empenho,
-  numero_empenho,
-  id_liquidacao_bd,
-  id_liquidacao,
-  numero,
-  nome_responsavel,
-  documento_responsavel,
-  indicador_restos_pagar,
-  valor_inicial,
-  valor_anulacao,
-  valor_ajuste,
-  valor_final
-FROM (  
-WITH liquidacao_ce AS (
-      SELECT
-      (SAFE_CAST(EXTRACT(YEAR FROM DATE (data_liquidacao)) AS INT64)) AS ano,
-      (SAFE_CAST(EXTRACT(MONTH FROM DATE (data_liquidacao)) AS INT64)) AS mes,
-      SAFE_CAST (EXTRACT(DATE FROM TIMESTAMP(data_liquidacao)) AS DATE) AS data,
-      'CE' AS sigla_uf, 
-      SAFE_CAST (geoibgeId AS STRING) AS id_municipio,
-      SAFE_CAST (codigo_orgao AS STRING) AS  orgao,
-      SAFE_CAST (codigo_unidade AS STRING) AS id_unidade_gestora,
-      SAFE_CAST (CONCAT(numero_empenho, ' ', TRIM(codigo_orgao), ' ', TRIM(codigo_unidade), ' ', geoibgeId, ' ', (SUBSTRING(data_emissao_empenho,6,2)), ' ', (SUBSTRING(data_emissao_empenho,3,2))) AS STRING) AS id_empenho_bd,    
-      SAFE_CAST (NULL AS STRING) AS  id_empenho,
-      SAFE_CAST (numero_empenho AS STRING) AS numero_empenho,
-      SAFE_CAST (NULL AS STRING) AS id_liquidacao_bd,
-      SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-      SAFE_CAST (NULL AS STRING) AS numero,
-      SAFE_CAST (nome_responsavel_liquidacao AS STRING) AS nome_responsavel,
-      SAFE_CAST (cpf_responsavel_liquidacao_ AS STRING) AS documento_responsavel,
-      SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-      ROUND(SAFE_CAST (valor_liquidado AS FLOAT64),2) AS valor_inicial,
-      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-      ROUND(SAFE_CAST (valor_liquidado AS FLOAT64),2) AS valor_final,
-    FROM basedosdados-staging.world_wb_mides_staging.raw_liquidacao_ce l
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_ce m ON l.codigo_municipio = m.codigo_municipio
-),
-  liquidacao_mg AS (
-    SELECT
-      SAFE_CAST (ano AS INT64) AS ano,
-      SAFE_CAST (mes AS INT64) AS mes,
-      SAFE_CAST (data AS DATE) AS data,
-      'MG' AS sigla_uf,
-      SAFE_CAST (l.id_municipio AS STRING) AS id_municipio,
-      SAFE_CAST (l.orgao AS STRING) AS orgao,
-      SAFE_CAST (l.id_unidade_gestora AS STRING) AS id_unidade_gestora,
-      SAFE_CAST ((CASE 
-        WHEN id_empenho != '-1' THEN CONCAT(id_empenho, ' ', l.orgao, ' ', l.id_municipio, ' ', (RIGHT(ano,2)))
-        WHEN id_empenho = '-1'  THEN CONCAT(id_empenho_origem, ' ', r.orgao, ' ', r.id_municipio, ' ', (RIGHT(num_ano_emp_origem,2)))
-        END) AS STRING) AS id_empenho_bd,
-      SAFE_CAST ((CASE 
-        WHEN id_empenho = '-1' THEN REPLACE (id_empenho, '-1', id_empenho_origem) END) AS STRING) AS id_empenho,
-      SAFE_CAST (numero_empenho AS STRING) AS numero_empenho,
-      SAFE_CAST (CONCAT(id_liquidacao, ' ', l.orgao, ' ', l.id_municipio, ' ', (RIGHT(ano,2))) AS STRING) AS id_liquidacao_bd,
-      SAFE_CAST (id_liquidacao AS STRING) AS id_liquidacao,
-      SAFE_CAST (numero_liquidacao AS STRING) AS numero,
-      SAFE_CAST (nome_responsavel AS STRING) AS nome_responsavel,
-      SAFE_CAST (documento_responsavel AS STRING) AS documento_responsavel,
-      SAFE_CAST ((CASE WHEN l.id_rsp != '-1' THEN 1 ELSE 0 END) AS BOOL) AS indicador_restos_pagar,
-      ROUND(SAFE_CAST (valor_liquidacao_original AS FLOAT64),2) AS valor_inicial,
-      ROUND(SAFE_CAST (valor_anulado AS FLOAT64),2) AS valor_anulacao,
-      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-      ROUND(SAFE_CAST (valor_liquidacao_original AS FLOAT64) - IFNULL(SAFE_CAST (valor_anulado AS FLOAT64),0),2) AS valor_final
-  FROM basedosdados-staging.world_wb_mides_staging.raw_liquidacao_mg AS l
-  LEFT JOIN basedosdados-staging.world_wb_mides_staging.raw_rsp_mg AS r ON l.id_rsp=r.id_rsp
-),
-  liquidacao_pb AS (
-    SELECT
-    SAFE_CAST (dt_Ano AS INT64) AS ano,
-    (SAFE_CAST(SUBSTRING(dt_Liquidacao,-7,2) AS INT64)) AS mes,
-    SAFE_CAST (CONCAT(SUBSTRING(dt_Liquidacao,-4),'-',SUBSTRING(dt_Liquidacao,-7,2),'-',SUBSTRING(dt_Liquidacao,1,2)) AS DATE) AS data,
-    'PB' AS sigla_uf, 
-    SAFE_CAST (id_municipio AS STRING) AS id_municipio,
-    SAFE_CAST (NULL AS STRING) AS  orgao,
-    SAFE_CAST (l.cd_UGestora AS STRING) AS id_unidade_gestora,
-    SAFE_CAST (CONCAT(nu_Empenho, ' ', l.cd_ugestora, ' ', m.id_municipio, ' ', (RIGHT(dt_Ano,2))) AS STRING) AS id_empenho_bd,
-    SAFE_CAST (NULL AS STRING) AS  id_empenho,
-    SAFE_CAST (nu_Empenho AS STRING) AS numero_empenho,
-    SAFE_CAST (NULL AS STRING) AS id_liquidacao_bd,
-    SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-    SAFE_CAST (nu_Liquidacao AS STRING) AS numero,
-    SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-    SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-    SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-    ROUND(SAFE_CAST (vl_Liquidacao AS FLOAT64),2) AS valor_inicial,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SAFE_CAST (vl_Liquidacao AS FLOAT64),2) AS valor_final,
-  FROM basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pb l
-  LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_pb m ON l.cd_ugestora = SAFE_CAST(m.id_unidade_gestora AS STRING)
-),
-  liquidacao_pr AS (
-    SELECT
-    SAFE_CAST (nrAnoLiquidacao AS INT64) AS ano,
-    (SAFE_CAST(EXTRACT(MONTH FROM DATE (dtLiquidacao)) AS INT64)) AS mes,
-    SAFE_CAST (EXTRACT(DATE FROM TIMESTAMP(dtLiquidacao)) AS DATE) AS data,
-    'PR' AS sigla_uf, 
-    SAFE_CAST (id_municipio AS STRING) AS id_municipio,
-    SAFE_CAST (cdOrgao AS STRING) AS orgao,
-    SAFE_CAST (cdUnidade AS STRING) AS id_unidade_gestora,
-    SAFE_CAST (CONCAT(l.idEmpenho, ' ', m.id_municipio) AS STRING) AS id_empenho_bd,
-    SAFE_CAST (l.idEmpenho AS STRING) AS id_empenho,
-    SAFE_CAST (nrEmpenho AS STRING) AS numero_empenho,
-    SAFE_CAST (CONCAT(l.idLiquidacao,' ', m.id_municipio) AS STRING) AS id_liquidacao_bd,
-    SAFE_CAST (idLiquidacao AS STRING) AS id_liquidacao,
-    SAFE_CAST (nrLiquidacao AS STRING) AS numero,
-    SAFE_CAST (nmLiquidante AS STRING) AS nome_responsavel,
-    SAFE_CAST (nrDocLiquidante AS STRING) AS documento_responsavel,
-    SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-    ROUND(SAFE_CAST (vlLiquidacaoBruto AS FLOAT64),2) AS valor_inicial,
-    ROUND(SAFE_CAST (vlLiquidacaoEstornado AS FLOAT64),2) AS valor_anulacao,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SAFE_CAST (vlLiquidacaoLiquido AS FLOAT64),2) AS valor_final,
-  FROM basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pr l
-  LEFT JOIN basedosdados.br_bd_diretorios_brasil.municipio m ON cdIBGE = id_municipio_6
-  LEFT JOIN basedosdados-staging.world_wb_mides_staging.raw_empenho_pr e ON l.idEmpenho = e.idEmpenho
-),
-  liquidacao_pe AS (
-    SELECT
-      SAFE_CAST (l.ANOREFERENCIA AS INT64) AS ano,
-      (SAFE_CAST(EXTRACT(MONTH FROM DATE(DATA)) AS INT64)) AS mes,
-      SAFE_CAST (EXTRACT(DATE FROM TIMESTAMP(DATA)) AS DATE) AS data,
-      'PE' AS sigla_uf, 
-      SAFE_CAST (CODIGOIBGE AS STRING) AS id_municipio,
-      SAFE_CAST (NULL AS STRING) orgao,
-      SAFE_CAST (ID_UNIDADEGESTORA AS STRING) AS id_unidade_gestora,
-      SAFE_CAST (NULL AS STRING) AS id_empenho_bd,
-      SAFE_CAST (TRIM(IDEMPENHO) AS STRING) AS id_empenho,
-      SAFE_CAST (l.NUMEROEMPENHO AS STRING) AS numero_empenho,
-      SAFE_CAST (NULL AS STRING) AS id_liquidacao_bd,
-      SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-      SAFE_CAST (NULL AS STRING) AS numero,
-      SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-      SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-      SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-      ROUND(SAFE_CAST (VALOR AS FLOAT64),2) AS valor_inicial,
-      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-      ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-      ROUND(SAFE_CAST (VALOR AS FLOAT64),2) AS valor_final,
-    FROM basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pe l
-    LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_pe m ON l.ID_UNIDADE_GESTORA = SAFE_CAST(m.ID_UNIDADEGESTORA AS STRING)
-),
-  liquidado_rs AS (
-  SELECT
-    MIN(ano_recebimento) AS ano_recebimento,
-    SAFE_CAST(ano_operacao AS INT64) AS ano,
-    SAFE_CAST(EXTRACT(MONTH FROM DATE(dt_operacao)) AS INT64) AS mes,
-    SAFE_CAST(CONCAT(SUBSTRING(dt_operacao,1,4), '-', SUBSTRING(dt_operacao,6,2),  '-', SUBSTRING(dt_operacao,9,2)) AS DATE) AS data,
-    'RS' AS sigla_uf,
-    SAFE_CAST(a.id_municipio AS STRING) AS id_municipio,
-    SAFE_CAST(c.cd_orgao AS STRING) AS orgao,
-    SAFE_CAST(cd_orgao_orcamentario AS STRING) AS id_unidade_gestora,
-    SAFE_CAST(CONCAT(nr_empenho, ' ', c.cd_orgao, ' ', m.id_municipio, ' ', (RIGHT(ano_empenho,2))) AS STRING) AS id_empenho_bd,
-    SAFE_CAST(NULL AS STRING) AS id_empenho,
-    SAFE_CAST(nr_empenho AS STRING) AS numero_empenho,
-    SAFE_CAST(CONCAT(nr_liquidacao, ' ', c.cd_orgao, ' ', m.id_municipio, ' ', (RIGHT(ano_empenho,2))) AS STRING) AS id_liquidacao_bd,
-    SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-    SAFE_CAST (nr_liquidacao AS STRING) AS numero,
-    SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-    SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-    SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-    SAFE_CAST(vl_liquidacao AS FLOAT64) AS valor_inicial
-  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
-  LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
-  LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m ON m.id_municipio = a.id_municipio
-  WHERE tipo_operacao = 'L' AND (SAFE_CAST(vl_liquidacao AS FLOAT64) >= 0)
-  GROUP BY 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
-),
-  estorno_rs AS (
-    SELECT 
-      SAFE_CAST(CONCAT(nr_empenho, ' ', c.cd_orgao, ' ', m.id_municipio, ' ', (RIGHT(ano_empenho,2))) AS STRING) AS id_empenho_bd,
-      -1*SUM(SAFE_CAST(vl_liquidacao AS FLOAT64)) AS valor_anulacao
-    FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` AS c
-    LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` AS a ON c.cd_orgao = a.cd_orgao
-    LEFT JOIN `basedosdados.br_bd_diretorios_brasil.municipio` m ON m.id_municipio = a.id_municipio
-    WHERE tipo_operacao = 'L' AND (SAFE_CAST(vl_liquidacao AS FLOAT64) < 0)
-    GROUP BY 1   
-),
-  frequencia_rs AS (
-    SELECT 
-      id_empenho_bd, COUNT(id_empenho_bd) AS frequencia_id
-    FROM liquidado_rs
-    GROUP BY 1
-  ),
-    liquidacao1_rs AS (
-      SELECT 
-        ano,
-        mes,
-        data,
-        sigla_uf,
-        id_municipio,
-        orgao,
-        id_unidade_gestora,
-        l.id_empenho_bd,
-        id_empenho,
-        numero_empenho,
-        id_liquidacao_bd,
-        id_liquidacao,
-        numero,
-        nome_responsavel,
-        documento_responsavel,
-        indicador_restos_pagar,
-        SUM(valor_inicial) AS valor_inicial,
-        SUM(valor_anulacao/frequencia_id) AS valor_anulacao,
-        ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-        SUM(valor_inicial - IFNULL((valor_anulacao/frequencia_id), 0)) AS valor_final
-      FROM liquidado_rs l
-      LEFT JOIN estorno_rs e ON l.id_empenho_bd=e.id_empenho_bd
-      LEFT JOIN frequencia_rs f ON l.id_empenho_bd=f.id_empenho_bd
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
-),
-  data_rs AS (
-    SELECT 
-      id_liquidacao_bd,
-      CASE WHEN (COUNT (DISTINCT data)) > 1 THEN 1 ELSE 0 END AS ddata
-    FROM liquidacao1_rs
-    GROUP BY 1
-),
-  liquidacao_rs AS (
-    SELECT 
-        ano,
-        mes,
-        data,
-        sigla_uf,
-        id_municipio,
-        orgao,
-        id_unidade_gestora,
-        id_empenho_bd,
-        id_empenho,
-        numero_empenho,
-        CASE WHEN ddata = 1 THEN (SAFE_CAST (NULL AS STRING)) ELSE l.id_liquidacao_bd END AS id_liquidacao_bd,
-        id_liquidacao,
-        numero,
-        nome_responsavel,
-        documento_responsavel,
-        indicador_restos_pagar,
-        ROUND(valor_inicial,2),
-        ROUND(IFNULL(valor_anulacao,0),2),
-        valor_ajuste,
-        ROUND(valor_final,2)
-    FROM liquidacao1_rs l
-    LEFT JOIN data_rs d ON l.id_liquidacao_bd=d.id_liquidacao_bd
-),
-  liquidado_sp AS (
-   SELECT
-     SAFE_CAST (ano_exercicio AS INT64) AS ano,
-     SAFE_CAST (mes_referencia AS INT64) AS mes,
-     SAFE_CAST (CONCAT(SUBSTRING(dt_emissao_despesa,-4),'-',SUBSTRING(dt_emissao_despesa,-7,2),'-',SUBSTRING(dt_emissao_despesa,1,2)) AS DATE) AS data,
-     'SP' AS sigla_uf,
-     SAFE_CAST (id_municipio AS STRING) AS id_municipio,
-     SAFE_CAST (codigo_orgao AS STRING) AS orgao,
-     SAFE_CAST (NULL AS STRING) AS id_unidade_gestora,
-     SAFE_CAST (CONCAT(LEFT(nr_empenho, LENGTH(nr_empenho) - 5), ' ', codigo_orgao, ' ', id_municipio, ' ', (RIGHT(ano_exercicio,2))) AS STRING) AS id_empenho_bd,
-     SAFE_CAST (NULL AS STRING) AS id_empenho,
-     SAFE_CAST (nr_empenho AS STRING) AS numero_empenho,
-     SAFE_CAST (CONCAT(LEFT(nr_empenho, LENGTH(nr_empenho) - 5), ' ', REGEXP_REPLACE(identificador_despesa, '[^0-9]', ''), ' ', codigo_orgao, ' ', id_municipio, ' ', (RIGHT(ano_exercicio,2))) AS STRING) AS id_liquidacao_bd,
-     SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-     SAFE_CAST (NULL AS STRING) AS numero,
-     SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-     SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-     SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-     SAFE_CAST (nr_empenho AS STRING) AS numero,
-     CASE WHEN ds_modalidade_lic = 'CONVITE'                                            THEN '1'
-          WHEN ds_modalidade_lic = 'TOMADA DE PREÇOS'                                   THEN '2'
-          WHEN ds_modalidade_lic = 'CONCORRÊNCIA'                                       THEN '3'
-          WHEN ds_modalidade_lic = 'PREGÃO'                                             THEN '4'
-          WHEN ds_modalidade_lic = 'Leilão'                                             THEN '7'
-          WHEN ds_modalidade_lic = 'DISPENSA DE LICITAÇÃO'                              THEN '8'
-          WHEN ds_modalidade_lic = 'BEC-BOLSA ELETRÔNICA DE COMPRAS'                    THEN '9'
-          WHEN ds_modalidade_lic = 'INEXIGÍVEL'                                         THEN '10'
-          WHEN ds_modalidade_lic = 'CONCURSO'                                           THEN '11'
-          WHEN ds_modalidade_lic = 'RDC'                                                THEN '12'
-          WHEN ds_modalidade_lic = 'OUTROS/NÃO APLICÁVEL'                               THEN '99'
-     END AS modalidade_licitacao,
-     SAFE_CAST (LOWER(historico_despesa) AS STRING) AS descricao,
-     SAFE_CAST (NULL AS STRING) AS modalidade,
-     SAFE_CAST (funcao AS STRING) AS funcao,
-     SAFE_CAST (subfuncao AS STRING) AS subfuncao,
-     SAFE_CAST (cd_programa AS STRING) AS programa,
-     SAFE_CAST (cd_acao AS STRING) AS acao,
-     SAFE_CAST ((LEFT(ds_elemento,8)) AS STRING) AS elemento_despesa,
-     SAFE_CAST (REPLACE(vl_despesa, ',', '.') AS FLOAT64) AS valor_inicial
-   FROM basedosdados-staging.world_wb_mides_staging.raw_despesa_sp e
-   LEFT JOIN basedosdados-staging.world_wb_mides_staging.aux_municipio_sp m ON m.ds_orgao = e.ds_orgao
-   LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_funcao` ON ds_funcao_governo = UPPER(nome_funcao)
-   LEFT JOIN `basedosdados-staging.world_wb_mides_staging.aux_subfuncao` ON ds_subfuncao_governo = UPPER(nome_subfuncao)
-   WHERE tp_despesa = 'Valor Liquidado'
-),
-  frequencia AS (
-     SELECT id_empenho_bd, COUNT (id_empenho_bd) AS frequencia_id
-     FROM liquidado_sp
-     GROUP BY 1
-     ORDER BY 2 DESC
-),
-  dorgao AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT orgao)) > 1 THEN 1 ELSE 0 END AS dorgao
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  ddesc AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT IFNULL(descricao,''))) > 1 THEN 1 ELSE 0 END AS ddesc
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  dmod AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT modalidade_licitacao)) > 1 THEN 1 ELSE 0 END AS dmod
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  dfun AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT funcao)) > 1 THEN 1 ELSE 0 END AS dfun
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  dsubf AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT subfuncao)) > 1 THEN 1 ELSE 0 END AS dsubf
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  dprog AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT programa)) > 1 THEN 1 ELSE 0 END AS dprog
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  dacao AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT acao)) > 1 THEN 1 ELSE 0 END AS dacao
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  delem AS (
-    SELECT 
-      id_empenho_bd,
-      CASE WHEN (COUNT (DISTINCT elemento_despesa)) > 1 THEN 1 ELSE 0 END AS delem
-    FROM liquidado_sp
-    GROUP BY 1
-),
-  dummies AS (
-    SELECT 
-      o.id_empenho_bd,
-      dorgao,
-      dmod,
-      ddesc,
-      dfun,
-      dsubf,
-      dprog,
-      dacao,
-      delem  
-    FROM dorgao o
-    FULL OUTER JOIN dmod m ON o.id_empenho_bd = m.id_empenho_bd
-    FULL OUTER JOIN ddesc d ON o.id_empenho_bd = d.id_empenho_bd
-    FULL OUTER JOIN dfun f ON o.id_empenho_bd = f.id_empenho_bd
-    FULL OUTER JOIN dsubf s ON o.id_empenho_bd = s.id_empenho_bd
-    FULL OUTER JOIN dprog p ON o.id_empenho_bd = p.id_empenho_bd
-    FULL OUTER JOIN dacao a ON o.id_empenho_bd = a.id_empenho_bd
-    FULL OUTER JOIN delem e ON o.id_empenho_bd = e.id_empenho_bd
-),
-  liquidacao_sp AS (
-  SELECT
-    MIN(ano) AS ano,
-    MIN(mes) AS mes,
-    MIN(data) AS data,
+select
+    ano,
+    mes,
+    data,
     sigla_uf,
     id_municipio,
     orgao,
     id_unidade_gestora,
-    (CASE WHEN (dorgao = 1 OR dmod = 1 OR dfun = 1 OR dsubf = 1 OR dprog = 1 OR dacao = 1 OR delem = 1) THEN (SAFE_CAST (NULL AS STRING)) ELSE l.id_empenho_bd END) AS id_empenho_bd, 
-    id_empenho, 
+    id_empenho_bd,
+    id_empenho,
     numero_empenho,
     id_liquidacao_bd,
     id_liquidacao,
-    SAFE_CAST(NULL AS STRING) AS numero,
+    numero,
     nome_responsavel,
     documento_responsavel,
     indicador_restos_pagar,
-    ROUND(SUM(valor_inicial),2) AS valor_inicial,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SUM(valor_inicial),2) AS valor_final
-  FROM liquidado_sp l
-  LEFT JOIN dummies d ON d.id_empenho_bd=l.id_empenho_bd
-  GROUP BY 4,5,6,7,8,9,10,11,12,13,14,15,16
-),
-  liquidacao_municipio_sp AS (
-  SELECT
-    (SAFE_CAST(exercicio AS INT64)) AS ano,
-    (SAFE_CAST(EXTRACT(MONTH FROM DATE (data_empenho)) AS INT64)) AS mes,
-    SAFE_CAST (data_empenho AS DATE) AS data,
-    'SP' AS sigla_uf,
-    '3550308' AS  id_municipio,
-    SAFE_CAST (codigo_orgao AS STRING) AS  orgao,
-    SAFE_CAST (codigo_unidade AS STRING) AS id_unidade_gestora,
-    SAFE_CAST (CONCAT(nr_empenho, ' ', TRIM(codigo_orgao), ' ', TRIM(codigo_unidade), ' ', '3550308', ' ', (RIGHT(exercicio,2))) AS STRING) AS id_empenho_bd,    
-    SAFE_CAST (id_empenho AS STRING) AS id_empenho,
-    SAFE_CAST (nr_empenho AS STRING) AS numero_empenho,
-    SAFE_CAST (NULL AS STRING) AS id_liquidacao_bd,
-    SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-    SAFE_CAST (NULL AS STRING) AS numero,
-    SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-    SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-    SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-    ROUND(SAFE_CAST (liquidado AS FLOAT64),2) AS valor_inicial,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-    ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-    ROUND(SAFE_CAST (liquidado AS FLOAT64),2) AS valor_final
-  FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio` 
-),
-  liquidado_municipio_rj_v1 AS (
-  SELECT
-   SAFE_CAST(exercicio_empenho AS INT64) AS ano,
-   SAFE_CAST(NULL AS INT64) AS mes,
-   SAFE_CAST (NULL AS DATE) AS data,
-   'RJ' AS sigla_uf,
-   '3304557' AS id_municipio,
-   SAFE_CAST (orgao_programa_trabalho AS STRING) AS orgao,
-   SAFE_CAST (unidade_programa_trabalho AS STRING) AS id_unidade_gestora,
-   SAFE_CAST (CONCAT(nr_empenho, ' ', TRIM(orgao_programa_trabalho), ' ', TRIM(unidade_programa_trabalho), ' ', '3304557', ' ', (RIGHT(exercicio_empenho,2))) AS STRING) AS id_empenho_bd,   
-   SAFE_CAST (NULL AS STRING) AS id_empenho,
-   SAFE_CAST (nr_empenho AS STRING) AS numero_empenho,
-   SAFE_CAST (NULL AS STRING) AS id_liquidacao_bd,
-   SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-   SAFE_CAST (NULL AS STRING) AS numero,
-   SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-   SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-   SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-   ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_inicial,
-   ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-   ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-   ROUND(SAFE_CAST (valor_liquidado AS FLOAT64),2) AS valor_final
- FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
- WHERE (SAFE_CAST(exercicio_empenho AS INT64)) < 2017 
-),
- frequencia_rj_v1 AS (
-   SELECT id_empenho_bd, COUNT(id_empenho_bd) AS frequencia_id
-   FROM liquidado_municipio_rj_v1
-   GROUP BY 1
-   ORDER BY 2 DESC
-),
- liquidacao_municipio_rj_v1 AS (
-   SELECT
-     l.ano,
-     l.mes,
-     l.data,
-     l.sigla_uf,
-     l.id_municipio,
-     l.orgao,
-     l.id_unidade_gestora,
-     (CASE WHEN frequencia_id > 1 THEN (SAFE_CAST (NULL AS STRING)) ELSE l.id_empenho_bd END) AS id_empenho_bd,
-     l.id_empenho,
-     l.numero_empenho,
-     l.id_liquidacao_bd,
-     l.id_liquidacao,
-     l.numero,
-     l.nome_responsavel,
-     l.documento_responsavel,
-     l.indicador_restos_pagar,
-     l.valor_inicial,
-     l.valor_anulacao,
-     l.valor_ajuste,
-     l.valor_final
-   FROM liquidado_municipio_rj_v1 l
-   LEFT JOIN frequencia_rj_v1 f ON l.id_empenho_bd = f.id_empenho_bd
-),
- liquidado_municipio_rj_v2 AS (
-   SELECT
-     (SAFE_CAST(Exercicio AS INT64)) AS ano,
-     (SAFE_CAST(EXTRACT(MONTH FROM DATE (Data)) AS INT64)) AS mes,
-     SAFE_CAST (Data AS DATE) AS data,
-     'RJ' AS sigla_uf,
-     '3304557' AS  id_municipio,
-     SAFE_CAST (UG AS STRING) AS  orgao,
-     SAFE_CAST (UO AS STRING) AS id_unidade_gestora,
-     SAFE_CAST (CONCAT(LEFT(EmpenhoExercicio, LENGTH(EmpenhoExercicio) - 5), ' ', TRIM(UO), ' ', TRIM(UG), ' ', '3304557', ' ', (RIGHT(Exercicio,2))) AS STRING) AS id_empenho_bd,   
-     SAFE_CAST (NULL AS STRING) AS id_empenho,
-     SAFE_CAST (EmpenhoExercicio AS STRING) AS numero_empenho,
-     SAFE_CAST (CONCAT(Liquidacao, ' ', LEFT(EmpenhoExercicio, LENGTH(EmpenhoExercicio) - 5), ' ', TRIM(UO), ' ', TRIM(UG), ' ', '3304557', ' ', (RIGHT(Exercicio,2))) AS STRING) AS id_liquidacao_bd,
-     SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-     SAFE_CAST (Liquidacao AS STRING) AS numero,
-     SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-     SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-     SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-     ROUND(SAFE_CAST (Valor AS FLOAT64),2) AS valor_inicial
-   FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
-   WHERE TipoAto = 'LIQUIDACAO'
-   ),
- anulacao_municipio_rj_v2 AS (
-   SELECT
-     SAFE_CAST (TipoAto AS STRING) AS TipoAto,
-     SAFE_CAST (CONCAT(LEFT(EmpenhoExercicio, LENGTH(EmpenhoExercicio) - 5), ' ', TRIM(UO), ' ', TRIM(UG), ' ', '3304557', ' ', (RIGHT(Exercicio,2))) AS STRING) AS id_empenho_bd,
-     SUM(SAFE_CAST (Valor AS FLOAT64)) AS valor_anulacao,
-   FROM `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
-   WHERE TipoAto IN ('CANCELAMENTO LIQUIDACAO', 'Cancelamento de liquidação de RPN', 'CANCELAMENTO DE RPN')
-   GROUP BY 1,2
-),
- frequencia_rj_v2 AS (
-   SELECT
-     id_empenho_bd, COUNT (1) AS frequencia
-   FROM anulacao_municipio_rj_v2
-   GROUP BY 1
-),
- liquidacao_municipio_rj_v2 AS (
-   SELECT
-     l.ano,
-     l.mes,
-     l.data,
-     l.sigla_uf,
-     l.id_municipio,
-     l.orgao,
-     l.id_unidade_gestora,
-     l.id_empenho_bd,
-     l.id_empenho,
-     l.numero_empenho,
-     l.id_liquidacao_bd,
-     l.id_liquidacao,
-     l.numero,
-     l.nome_responsavel,
-     l.documento_responsavel,
-     CASE WHEN TipoAto = 'Cancelamento de liquidação de RPN' THEN true
-          WHEN TipoAto = 'CANCELAMENTO DE RPN'               THEN true
-          ELSE false
-     END AS indicador_restos_pagar,
-     ROUND (SAFE_CAST(l.valor_inicial AS FLOAT64), 2) AS valor_inicial,
-     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-     ROUND (SAFE_CAST(l.valor_inicial AS FLOAT64), 2) AS valor_final
-   FROM liquidado_municipio_rj_v2 l
-   LEFT JOIN anulacao_municipio_rj_v2 a ON l.id_empenho_bd = a.id_empenho_bd
-   LEFT JOIN frequencia_rj_v2 f ON l.id_empenho_bd = f.id_empenho_bd
-),
- liquidacao_rj AS (
-   SELECT
-     (SAFE_CAST(ano AS INT64)) AS ano,
-     (SAFE_CAST(EXTRACT(MONTH FROM DATE (data)) AS INT64)) AS mes,
-     SAFE_CAST (data AS DATE) AS data,
-     'RJ' AS sigla_uf,
-     SAFE_CAST (id_municipio AS STRING) AS  id_municipio,
-     SAFE_CAST (id_orgao AS STRING) AS  orgao,
-     SAFE_CAST (unidade_administrativa AS STRING) AS id_unidade_gestora,
-     SAFE_CAST (CONCAT(numero_empenho, ' ', id_orgao, ' ', id_municipio, ' ', (RIGHT(ano,2))) AS STRING) AS id_empenho_bd,   
-     SAFE_CAST (NULL AS STRING) AS id_empenho,
-     SAFE_CAST (numero_empenho AS STRING) AS numero_empenho,
-     SAFE_CAST (NULL AS STRING) AS id_liquidacao_bd,
-     SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-     SAFE_CAST (NULL AS STRING) AS numero,
-     SAFE_CAST (NULL AS STRING) AS nome_responsavel,
-     SAFE_CAST (NULL AS STRING) AS documento_responsavel,
-     SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-     ROUND(SAFE_CAST (valor AS FLOAT64),2) AS valor_inicial,
-     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-     ROUND(SAFE_CAST (valor AS FLOAT64),2) AS valor_final
-   FROM `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_rj`
-   WHERE numero_empenho IS NOT NULL
-),
-  liquidacao_df AS (
-    SELECT
-     (SAFE_CAST(exercicio AS INT64)) AS ano,
-     (SAFE_CAST(EXTRACT(MONTH FROM DATE (emissao)) AS INT64)) AS mes,
-     SAFE_CAST (emissao AS DATE) AS data,
-     'DF' AS sigla_uf,
-     '5300108' AS  id_municipio,
-      SAFE_CAST (codigo_ug AS STRING) AS  orgao,
-      SAFE_CAST (codigo_gestao AS STRING) AS id_unidade_gestora,
-     SAFE_CAST (CONCAT(RIGHT(nota_empenho, LENGTH(nota_empenho) - 6), ' ', codigo_ug, ' ', codigo_gestao, ' ', '5300108', ' ', (RIGHT(exercicio,2))) AS STRING) AS id_empenho_bd,   
-     SAFE_CAST (NULL AS STRING) AS id_empenho,
-     SAFE_CAST (nota_empenho AS STRING) AS numero_empenho,
-     CASE WHEN LENGTH(nota_lancamento) = 11 THEN SAFE_CAST (CONCAT(RIGHT(nota_lancamento, LENGTH(nota_lancamento) - 6), ' ', codigo_ug, ' ', codigo_gestao, ' ', '5300108', ' ', (RIGHT(exercicio,2))) AS STRING) END AS id_liquidacao_bd,
-     SAFE_CAST (NULL AS STRING) AS id_liquidacao,
-     SAFE_CAST (nota_lancamento AS STRING) AS numero,
-     SAFE_CAST (credor AS STRING) AS nome_responsavel,
-     SAFE_CAST (cnpj_cpf_credor AS STRING) AS documento_responsavel,
-     SAFE_CAST (NULL AS BOOL) AS indicador_restos_pagar,
-     ROUND(SAFE_CAST (REPLACE (valor, ',','.') AS FLOAT64),2) AS valor_inicial,
-     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_anulacao,
-     ROUND(SAFE_CAST (0 AS FLOAT64),2) AS valor_ajuste,
-     ROUND(SAFE_CAST (REPLACE (valor, ',','.') AS FLOAT64),2) AS valor_final
-   FROM `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_df`
-)
+    valor_inicial,
+    valor_anulacao,
+    valor_ajuste,
+    valor_final
+from
+    (
+        with
+            liquidacao_ce as (
+                select
+                    (
+                        safe_cast(extract(year from date(data_liquidacao)) as int64)
+                    ) as ano,
+                    (
+                        safe_cast(extract(month from date(data_liquidacao)) as int64)
+                    ) as mes,
+                    safe_cast(
+                        extract(date from timestamp(data_liquidacao)) as date
+                    ) as data,
+                    'CE' as sigla_uf,
+                    safe_cast(geoibgeid as string) as id_municipio,
+                    safe_cast(codigo_orgao as string) as orgao,
+                    safe_cast(codigo_unidade as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            numero_empenho,
+                            ' ',
+                            trim(codigo_orgao),
+                            ' ',
+                            trim(codigo_unidade),
+                            ' ',
+                            geoibgeid,
+                            ' ',
+                            (substring(data_emissao_empenho, 6, 2)),
+                            ' ',
+                            (substring(data_emissao_empenho, 3, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(numero_empenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    safe_cast(
+                        nome_responsavel_liquidacao as string
+                    ) as nome_responsavel,
+                    safe_cast(
+                        cpf_responsavel_liquidacao_ as string
+                    ) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(valor_liquidado as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(valor_liquidado as float64), 2) as valor_final,
+                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_ce l
+                left join
+                    basedosdados - staging.world_wb_mides_staging.aux_municipio_ce m
+                    on l.codigo_municipio = m.codigo_municipio
+            ),
+            liquidacao_mg as (
+                select
+                    safe_cast(ano as int64) as ano,
+                    safe_cast(mes as int64) as mes,
+                    safe_cast(data as date) as data,
+                    'MG' as sigla_uf,
+                    safe_cast(l.id_municipio as string) as id_municipio,
+                    safe_cast(l.orgao as string) as orgao,
+                    safe_cast(l.id_unidade_gestora as string) as id_unidade_gestora,
+                    safe_cast(
+                        (
+                            case
+                                when id_empenho != '-1'
+                                then
+                                    concat(
+                                        id_empenho,
+                                        ' ',
+                                        l.orgao,
+                                        ' ',
+                                        l.id_municipio,
+                                        ' ',
+                                        (right(ano, 2))
+                                    )
+                                when id_empenho = '-1'
+                                then
+                                    concat(
+                                        id_empenho_origem,
+                                        ' ',
+                                        r.orgao,
+                                        ' ',
+                                        r.id_municipio,
+                                        ' ',
+                                        (right(num_ano_emp_origem, 2))
+                                    )
+                            end
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(
+                        (
+                            case
+                                when id_empenho = '-1'
+                                then replace (id_empenho, '-1', id_empenho_origem)
+                            end
+                        ) as string
+                    ) as id_empenho,
+                    safe_cast(numero_empenho as string) as numero_empenho,
+                    safe_cast(
+                        concat(
+                            id_liquidacao,
+                            ' ',
+                            l.orgao,
+                            ' ',
+                            l.id_municipio,
+                            ' ',
+                            (right(ano, 2))
+                        ) as string
+                    ) as id_liquidacao_bd,
+                    safe_cast(id_liquidacao as string) as id_liquidacao,
+                    safe_cast(numero_liquidacao as string) as numero,
+                    safe_cast(nome_responsavel as string) as nome_responsavel,
+                    safe_cast(documento_responsavel as string) as documento_responsavel,
+                    safe_cast(
+                        (case when l.id_rsp != '-1' then 1 else 0 end) as bool
+                    ) as indicador_restos_pagar,
+                    round(
+                        safe_cast(valor_liquidacao_original as float64), 2
+                    ) as valor_inicial,
+                    round(safe_cast(valor_anulado as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(
+                        safe_cast(valor_liquidacao_original as float64)
+                        - ifnull(safe_cast(valor_anulado as float64), 0),
+                        2
+                    ) as valor_final
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_mg `
+                    as l
+                left join
+                    `basedosdados-staging.world_wb_mides_staging.raw_rsp_mg ` as r
+                    on l.id_rsp = r.id_rsp
+            ),
+            liquidacao_pb as (
+                select
+                    safe_cast(dt_ano as int64) as ano,
+                    (safe_cast(substring(dt_liquidacao, -7, 2) as int64)) as mes,
+                    safe_cast(
+                        concat(
+                            substring(dt_liquidacao, -4),
+                            '-',
+                            substring(dt_liquidacao, -7, 2),
+                            '-',
+                            substring(dt_liquidacao, 1, 2)
+                        ) as date
+                    ) as data,
+                    'PB' as sigla_uf,
+                    safe_cast(id_municipio as string) as id_municipio,
+                    safe_cast(null as string) as orgao,
+                    safe_cast(l.cd_ugestora as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            nu_empenho,
+                            ' ',
+                            l.cd_ugestora,
+                            ' ',
+                            m.id_municipio,
+                            ' ',
+                            (right(dt_ano, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(nu_empenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(nu_liquidacao as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(vl_liquidacao as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(vl_liquidacao as float64), 2) as valor_final,
+                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_pb l
+                left join
+                    basedosdados - staging.world_wb_mides_staging.aux_municipio_pb m
+                    on l.cd_ugestora = safe_cast(m.id_unidade_gestora as string)
+            ),
+            liquidacao_pr as (
+                select
+                    safe_cast(nranoliquidacao as int64) as ano,
+                    (safe_cast(extract(month from date(dtliquidacao)) as int64)) as mes,
+                    safe_cast(
+                        extract(date from timestamp(dtliquidacao)) as date
+                    ) as data,
+                    'PR' as sigla_uf,
+                    safe_cast(id_municipio as string) as id_municipio,
+                    safe_cast(cdorgao as string) as orgao,
+                    safe_cast(cdunidade as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(l.idempenho, ' ', m.id_municipio) as string
+                    ) as id_empenho_bd,
+                    safe_cast(l.idempenho as string) as id_empenho,
+                    safe_cast(nrempenho as string) as numero_empenho,
+                    safe_cast(
+                        concat(l.idliquidacao, ' ', m.id_municipio) as string
+                    ) as id_liquidacao_bd,
+                    safe_cast(idliquidacao as string) as id_liquidacao,
+                    safe_cast(nrliquidacao as string) as numero,
+                    safe_cast(nmliquidante as string) as nome_responsavel,
+                    safe_cast(nrdocliquidante as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(vlliquidacaobruto as float64), 2) as valor_inicial,
+                    round(
+                        safe_cast(vlliquidacaoestornado as float64), 2
+                    ) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(vlliquidacaoliquido as float64), 2) as valor_final,
+                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_pr l
+                left join
+                    basedosdados.br_bd_diretorios_brasil.municipio m
+                    on cdibge = id_municipio_6
+                left join
+                    basedosdados - staging.world_wb_mides_staging.raw_empenho_pr e
+                    on l.idempenho = e.idempenho
+            ),
+            liquidacao_pe as (
+                select
+                    safe_cast(l.anoreferencia as int64) as ano,
+                    (safe_cast(extract(month from date(data)) as int64)) as mes,
+                    safe_cast(extract(date from timestamp(data)) as date) as data,
+                    'PE' as sigla_uf,
+                    safe_cast(codigoibge as string) as id_municipio,
+                    safe_cast(null as string) orgao,
+                    safe_cast(id_unidadegestora as string) as id_unidade_gestora,
+                    safe_cast(null as string) as id_empenho_bd,
+                    safe_cast(trim(idempenho) as string) as id_empenho,
+                    safe_cast(l.numeroempenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(valor as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(valor as float64), 2) as valor_final,
+                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_pe l
+                left join
+                    basedosdados - staging.world_wb_mides_staging.aux_municipio_pe m
+                    on l.id_unidade_gestora = safe_cast(m.id_unidadegestora as string)
+            ),
+            liquidado_rs as (
+                select
+                    min(ano_recebimento) as ano_recebimento,
+                    safe_cast(ano_operacao as int64) as ano,
+                    safe_cast(extract(month from date(dt_operacao)) as int64) as mes,
+                    safe_cast(
+                        concat(
+                            substring(dt_operacao, 1, 4),
+                            '-',
+                            substring(dt_operacao, 6, 2),
+                            '-',
+                            substring(dt_operacao, 9, 2)
+                        ) as date
+                    ) as data,
+                    'RS' as sigla_uf,
+                    safe_cast(a.id_municipio as string) as id_municipio,
+                    safe_cast(c.cd_orgao as string) as orgao,
+                    safe_cast(cd_orgao_orcamentario as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            nr_empenho,
+                            ' ',
+                            c.cd_orgao,
+                            ' ',
+                            m.id_municipio,
+                            ' ',
+                            (right(ano_empenho, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(nr_empenho as string) as numero_empenho,
+                    safe_cast(
+                        concat(
+                            nr_liquidacao,
+                            ' ',
+                            c.cd_orgao,
+                            ' ',
+                            m.id_municipio,
+                            ' ',
+                            (right(ano_empenho, 2))
+                        ) as string
+                    ) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(nr_liquidacao as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    safe_cast(vl_liquidacao as float64) as valor_inicial
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                left join
+                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
+                    on c.cd_orgao = a.cd_orgao
+                left join
+                    `basedosdados.br_bd_diretorios_brasil.municipio` m
+                    on m.id_municipio = a.id_municipio
+                where tipo_operacao = 'L' and (safe_cast(vl_liquidacao as float64) >= 0)
+                group by 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+            ),
+            estorno_rs as (
+                select
+                    safe_cast(
+                        concat(
+                            nr_empenho,
+                            ' ',
+                            c.cd_orgao,
+                            ' ',
+                            m.id_municipio,
+                            ' ',
+                            (right(ano_empenho, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    -1 * sum(safe_cast(vl_liquidacao as float64)) as valor_anulacao
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                left join
+                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
+                    on c.cd_orgao = a.cd_orgao
+                left join
+                    `basedosdados.br_bd_diretorios_brasil.municipio` m
+                    on m.id_municipio = a.id_municipio
+                where tipo_operacao = 'L' and (safe_cast(vl_liquidacao as float64) < 0)
+                group by 1
+            ),
+            frequencia_rs as (
+                select id_empenho_bd, count(id_empenho_bd) as frequencia_id
+                from liquidado_rs
+                group by 1
+            ),
+            liquidacao1_rs as (
+                select
+                    ano,
+                    mes,
+                    data,
+                    sigla_uf,
+                    id_municipio,
+                    orgao,
+                    id_unidade_gestora,
+                    l.id_empenho_bd,
+                    id_empenho,
+                    numero_empenho,
+                    id_liquidacao_bd,
+                    id_liquidacao,
+                    numero,
+                    nome_responsavel,
+                    documento_responsavel,
+                    indicador_restos_pagar,
+                    sum(valor_inicial) as valor_inicial,
+                    sum(valor_anulacao / frequencia_id) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    sum(
+                        valor_inicial - ifnull((valor_anulacao / frequencia_id), 0)
+                    ) as valor_final
+                from liquidado_rs l
+                left join estorno_rs e on l.id_empenho_bd = e.id_empenho_bd
+                left join frequencia_rs f on l.id_empenho_bd = f.id_empenho_bd
+                group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+            ),
+            data_rs as (
+                select
+                    id_liquidacao_bd,
+                    case when (count(distinct data)) > 1 then 1 else 0 end as ddata
+                from liquidacao1_rs
+                group by 1
+            ),
+            liquidacao_rs as (
+                select
+                    ano,
+                    mes,
+                    data,
+                    sigla_uf,
+                    id_municipio,
+                    orgao,
+                    id_unidade_gestora,
+                    id_empenho_bd,
+                    id_empenho,
+                    numero_empenho,
+                    case
+                        when ddata = 1
+                        then (safe_cast(null as string))
+                        else l.id_liquidacao_bd
+                    end as id_liquidacao_bd,
+                    id_liquidacao,
+                    numero,
+                    nome_responsavel,
+                    documento_responsavel,
+                    indicador_restos_pagar,
+                    round(valor_inicial, 2),
+                    round(ifnull(valor_anulacao, 0), 2),
+                    valor_ajuste,
+                    round(valor_final, 2)
+                from liquidacao1_rs l
+                left join data_rs d on l.id_liquidacao_bd = d.id_liquidacao_bd
+            ),
+            liquidado_sp as (
+                select
+                    safe_cast(ano_exercicio as int64) as ano,
+                    safe_cast(mes_referencia as int64) as mes,
+                    safe_cast(
+                        concat(
+                            substring(dt_emissao_despesa, -4),
+                            '-',
+                            substring(dt_emissao_despesa, -7, 2),
+                            '-',
+                            substring(dt_emissao_despesa, 1, 2)
+                        ) as date
+                    ) as data,
+                    'SP' as sigla_uf,
+                    safe_cast(id_municipio as string) as id_municipio,
+                    safe_cast(codigo_orgao as string) as orgao,
+                    safe_cast(null as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            left(nr_empenho, length(nr_empenho) - 5),
+                            ' ',
+                            codigo_orgao,
+                            ' ',
+                            id_municipio,
+                            ' ',
+                            (right(ano_exercicio, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(nr_empenho as string) as numero_empenho,
+                    safe_cast(
+                        concat(
+                            left(nr_empenho, length(nr_empenho) - 5),
+                            ' ',
+                            regexp_replace(identificador_despesa, '[^0-9]', ''),
+                            ' ',
+                            codigo_orgao,
+                            ' ',
+                            id_municipio,
+                            ' ',
+                            (right(ano_exercicio, 2))
+                        ) as string
+                    ) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    safe_cast(nr_empenho as string) as numero,
+                    case
+                        when ds_modalidade_lic = 'CONVITE'
+                        then '1'
+                        when ds_modalidade_lic = 'TOMADA DE PREÇOS'
+                        then '2'
+                        when ds_modalidade_lic = 'CONCORRÊNCIA'
+                        then '3'
+                        when ds_modalidade_lic = 'PREGÃO'
+                        then '4'
+                        when ds_modalidade_lic = 'Leilão'
+                        then '7'
+                        when ds_modalidade_lic = 'DISPENSA DE LICITAÇÃO'
+                        then '8'
+                        when ds_modalidade_lic = 'BEC-BOLSA ELETRÔNICA DE COMPRAS'
+                        then '9'
+                        when ds_modalidade_lic = 'INEXIGÍVEL'
+                        then '10'
+                        when ds_modalidade_lic = 'CONCURSO'
+                        then '11'
+                        when ds_modalidade_lic = 'RDC'
+                        then '12'
+                        when ds_modalidade_lic = 'OUTROS/NÃO APLICÁVEL'
+                        then '99'
+                    end as modalidade_licitacao,
+                    safe_cast(lower(historico_despesa) as string) as descricao,
+                    safe_cast(null as string) as modalidade,
+                    safe_cast(funcao as string) as funcao,
+                    safe_cast(subfuncao as string) as subfuncao,
+                    safe_cast(cd_programa as string) as programa,
+                    safe_cast(cd_acao as string) as acao,
+                    safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
+                    safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
+                from basedosdados - staging.world_wb_mides_staging.raw_despesa_sp e
+                left join
+                    basedosdados - staging.world_wb_mides_staging.aux_municipio_sp m
+                    on m.ds_orgao = e.ds_orgao
+                left join
+                    `basedosdados-staging.world_wb_mides_staging.aux_funcao`
+                    on ds_funcao_governo = upper(nome_funcao)
+                left join
+                    `basedosdados-staging.world_wb_mides_staging.aux_subfuncao`
+                    on ds_subfuncao_governo = upper(nome_subfuncao)
+                where tp_despesa = 'Valor Liquidado'
+            ),
+            frequencia as (
+                select id_empenho_bd, count(id_empenho_bd) as frequencia_id
+                from liquidado_sp
+                group by 1
+                order by 2 desc
+            ),
+            dorgao as (
+                select
+                    id_empenho_bd,
+                    case when (count(distinct orgao)) > 1 then 1 else 0 end as dorgao
+                from liquidado_sp
+                group by 1
+            ),
+            ddesc as (
+                select
+                    id_empenho_bd,
+                    case
+                        when (count(distinct ifnull(descricao, ''))) > 1 then 1 else 0
+                    end as ddesc
+                from liquidado_sp
+                group by 1
+            ),
+            dmod as (
+                select
+                    id_empenho_bd,
+                    case
+                        when (count(distinct modalidade_licitacao)) > 1 then 1 else 0
+                    end as dmod
+                from liquidado_sp
+                group by 1
+            ),
+            dfun as (
+                select
+                    id_empenho_bd,
+                    case when (count(distinct funcao)) > 1 then 1 else 0 end as dfun
+                from liquidado_sp
+                group by 1
+            ),
+            dsubf as (
+                select
+                    id_empenho_bd,
+                    case when (count(distinct subfuncao)) > 1 then 1 else 0 end as dsubf
+                from liquidado_sp
+                group by 1
+            ),
+            dprog as (
+                select
+                    id_empenho_bd,
+                    case when (count(distinct programa)) > 1 then 1 else 0 end as dprog
+                from liquidado_sp
+                group by 1
+            ),
+            dacao as (
+                select
+                    id_empenho_bd,
+                    case when (count(distinct acao)) > 1 then 1 else 0 end as dacao
+                from liquidado_sp
+                group by 1
+            ),
+            delem as (
+                select
+                    id_empenho_bd,
+                    case
+                        when (count(distinct elemento_despesa)) > 1 then 1 else 0
+                    end as delem
+                from liquidado_sp
+                group by 1
+            ),
+            dummies as (
+                select
+                    o.id_empenho_bd,
+                    dorgao,
+                    dmod,
+                    ddesc,
+                    dfun,
+                    dsubf,
+                    dprog,
+                    dacao,
+                    delem
+                from dorgao o
+                full outer join dmod m on o.id_empenho_bd = m.id_empenho_bd
+                full outer join ddesc d on o.id_empenho_bd = d.id_empenho_bd
+                full outer join dfun f on o.id_empenho_bd = f.id_empenho_bd
+                full outer join dsubf s on o.id_empenho_bd = s.id_empenho_bd
+                full outer join dprog p on o.id_empenho_bd = p.id_empenho_bd
+                full outer join dacao a on o.id_empenho_bd = a.id_empenho_bd
+                full outer join delem e on o.id_empenho_bd = e.id_empenho_bd
+            ),
+            liquidacao_sp as (
+                select
+                    min(ano) as ano,
+                    min(mes) as mes,
+                    min(data) as data,
+                    sigla_uf,
+                    id_municipio,
+                    orgao,
+                    id_unidade_gestora,
+                    (
+                        case
+                            when
+                                (
+                                    dorgao = 1
+                                    or dmod = 1
+                                    or dfun = 1
+                                    or dsubf = 1
+                                    or dprog = 1
+                                    or dacao = 1
+                                    or delem = 1
+                                )
+                            then (safe_cast(null as string))
+                            else l.id_empenho_bd
+                        end
+                    ) as id_empenho_bd,
+                    id_empenho,
+                    numero_empenho,
+                    id_liquidacao_bd,
+                    id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    nome_responsavel,
+                    documento_responsavel,
+                    indicador_restos_pagar,
+                    round(sum(valor_inicial), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(sum(valor_inicial), 2) as valor_final
+                from liquidado_sp l
+                left join dummies d on d.id_empenho_bd = l.id_empenho_bd
+                group by 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+            ),
+            liquidacao_municipio_sp as (
+                select
+                    (safe_cast(exercicio as int64)) as ano,
+                    (safe_cast(extract(month from date(data_empenho)) as int64)) as mes,
+                    safe_cast(data_empenho as date) as data,
+                    'SP' as sigla_uf,
+                    '3550308' as id_municipio,
+                    safe_cast(codigo_orgao as string) as orgao,
+                    safe_cast(codigo_unidade as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            nr_empenho,
+                            ' ',
+                            trim(codigo_orgao),
+                            ' ',
+                            trim(codigo_unidade),
+                            ' ',
+                            '3550308',
+                            ' ',
+                            (right(exercicio, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(id_empenho as string) as id_empenho,
+                    safe_cast(nr_empenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(liquidado as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(liquidado as float64), 2) as valor_final
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
+            ),
+            liquidado_municipio_rj_v1 as (
+                select
+                    safe_cast(exercicio_empenho as int64) as ano,
+                    safe_cast(null as int64) as mes,
+                    safe_cast(null as date) as data,
+                    'RJ' as sigla_uf,
+                    '3304557' as id_municipio,
+                    safe_cast(orgao_programa_trabalho as string) as orgao,
+                    safe_cast(
+                        unidade_programa_trabalho as string
+                    ) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            nr_empenho,
+                            ' ',
+                            trim(orgao_programa_trabalho),
+                            ' ',
+                            trim(unidade_programa_trabalho),
+                            ' ',
+                            '3304557',
+                            ' ',
+                            (right(exercicio_empenho, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(nr_empenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(0 as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(valor_liquidado as float64), 2) as valor_final
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+                where (safe_cast(exercicio_empenho as int64)) < 2017
+            ),
+            frequencia_rj_v1 as (
+                select id_empenho_bd, count(id_empenho_bd) as frequencia_id
+                from liquidado_municipio_rj_v1
+                group by 1
+                order by 2 desc
+            ),
+            liquidacao_municipio_rj_v1 as (
+                select
+                    l.ano,
+                    l.mes,
+                    l.data,
+                    l.sigla_uf,
+                    l.id_municipio,
+                    l.orgao,
+                    l.id_unidade_gestora,
+                    (
+                        case
+                            when frequencia_id > 1
+                            then (safe_cast(null as string))
+                            else l.id_empenho_bd
+                        end
+                    ) as id_empenho_bd,
+                    l.id_empenho,
+                    l.numero_empenho,
+                    l.id_liquidacao_bd,
+                    l.id_liquidacao,
+                    l.numero,
+                    l.nome_responsavel,
+                    l.documento_responsavel,
+                    l.indicador_restos_pagar,
+                    l.valor_inicial,
+                    l.valor_anulacao,
+                    l.valor_ajuste,
+                    l.valor_final
+                from liquidado_municipio_rj_v1 l
+                left join frequencia_rj_v1 f on l.id_empenho_bd = f.id_empenho_bd
+            ),
+            liquidado_municipio_rj_v2 as (
+                select
+                    (safe_cast(exercicio as int64)) as ano,
+                    (safe_cast(extract(month from date(data)) as int64)) as mes,
+                    safe_cast(data as date) as data,
+                    'RJ' as sigla_uf,
+                    '3304557' as id_municipio,
+                    safe_cast(ug as string) as orgao,
+                    safe_cast(uo as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            left(empenhoexercicio, length(empenhoexercicio) - 5),
+                            ' ',
+                            trim(uo),
+                            ' ',
+                            trim(ug),
+                            ' ',
+                            '3304557',
+                            ' ',
+                            (right(exercicio, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(empenhoexercicio as string) as numero_empenho,
+                    safe_cast(
+                        concat(
+                            liquidacao,
+                            ' ',
+                            left(empenhoexercicio, length(empenhoexercicio) - 5),
+                            ' ',
+                            trim(uo),
+                            ' ',
+                            trim(ug),
+                            ' ',
+                            '3304557',
+                            ' ',
+                            (right(exercicio, 2))
+                        ) as string
+                    ) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(liquidacao as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(valor as float64), 2) as valor_inicial
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                where tipoato = 'LIQUIDACAO'
+            ),
+            anulacao_municipio_rj_v2 as (
+                select
+                    safe_cast(tipoato as string) as tipoato,
+                    safe_cast(
+                        concat(
+                            left(empenhoexercicio, length(empenhoexercicio) - 5),
+                            ' ',
+                            trim(uo),
+                            ' ',
+                            trim(ug),
+                            ' ',
+                            '3304557',
+                            ' ',
+                            (right(exercicio, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    sum(safe_cast(valor as float64)) as valor_anulacao,
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                where
+                    tipoato in (
+                        'CANCELAMENTO LIQUIDACAO',
+                        'Cancelamento de liquidação de RPN',
+                        'CANCELAMENTO DE RPN'
+                    )
+                group by 1, 2
+            ),
+            frequencia_rj_v2 as (
+                select id_empenho_bd, count(1) as frequencia
+                from anulacao_municipio_rj_v2
+                group by 1
+            ),
+            liquidacao_municipio_rj_v2 as (
+                select
+                    l.ano,
+                    l.mes,
+                    l.data,
+                    l.sigla_uf,
+                    l.id_municipio,
+                    l.orgao,
+                    l.id_unidade_gestora,
+                    l.id_empenho_bd,
+                    l.id_empenho,
+                    l.numero_empenho,
+                    l.id_liquidacao_bd,
+                    l.id_liquidacao,
+                    l.numero,
+                    l.nome_responsavel,
+                    l.documento_responsavel,
+                    case
+                        when tipoato = 'Cancelamento de liquidação de RPN'
+                        then true
+                        when tipoato = 'CANCELAMENTO DE RPN'
+                        then true
+                        else false
+                    end as indicador_restos_pagar,
+                    round(safe_cast(l.valor_inicial as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(l.valor_inicial as float64), 2) as valor_final
+                from liquidado_municipio_rj_v2 l
+                left join
+                    anulacao_municipio_rj_v2 a on l.id_empenho_bd = a.id_empenho_bd
+                left join frequencia_rj_v2 f on l.id_empenho_bd = f.id_empenho_bd
+            ),
+            liquidacao_rj as (
+                select
+                    (safe_cast(ano as int64)) as ano,
+                    (safe_cast(extract(month from date(data)) as int64)) as mes,
+                    safe_cast(data as date) as data,
+                    'RJ' as sigla_uf,
+                    safe_cast(id_municipio as string) as id_municipio,
+                    safe_cast(id_orgao as string) as orgao,
+                    safe_cast(unidade_administrativa as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            numero_empenho,
+                            ' ',
+                            id_orgao,
+                            ' ',
+                            id_municipio,
+                            ' ',
+                            (right(ano, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(numero_empenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero,
+                    safe_cast(null as string) as nome_responsavel,
+                    safe_cast(null as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(safe_cast(valor as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(valor as float64), 2) as valor_final
+                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_rj`
+                where numero_empenho is not null
+            ),
+            liquidacao_df as (
+                select
+                    (safe_cast(exercicio as int64)) as ano,
+                    (safe_cast(extract(month from date(emissao)) as int64)) as mes,
+                    safe_cast(emissao as date) as data,
+                    'DF' as sigla_uf,
+                    '5300108' as id_municipio,
+                    safe_cast(codigo_ug as string) as orgao,
+                    safe_cast(codigo_gestao as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            right(nota_empenho, length(nota_empenho) - 6),
+                            ' ',
+                            codigo_ug,
+                            ' ',
+                            codigo_gestao,
+                            ' ',
+                            '5300108',
+                            ' ',
+                            (right(exercicio, 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(nota_empenho as string) as numero_empenho,
+                    case
+                        when length(nota_lancamento) = 11
+                        then
+                            safe_cast(
+                                concat(
+                                    right(nota_lancamento, length(nota_lancamento) - 6),
+                                    ' ',
+                                    codigo_ug,
+                                    ' ',
+                                    codigo_gestao,
+                                    ' ',
+                                    '5300108',
+                                    ' ',
+                                    (right(exercicio, 2))
+                                ) as string
+                            )
+                    end as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(nota_lancamento as string) as numero,
+                    safe_cast(credor as string) as nome_responsavel,
+                    safe_cast(cnpj_cpf_credor as string) as documento_responsavel,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    round(
+                        safe_cast(replace (valor, ',', '.') as float64), 2
+                    ) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(
+                        safe_cast(replace (valor, ',', '.') as float64), 2
+                    ) as valor_final
+                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_df`
+            )
 
-
-SELECT 
-  *
-FROM liquidacao_mg
-UNION ALL (SELECT * FROM liquidacao_sp)
-UNION ALL (SELECT * FROM liquidacao_municipio_sp)
-UNION ALL (SELECT * FROM liquidacao_pe)
-UNION ALL (SELECT * FROM liquidacao_pr)
-UNION ALL (SELECT * FROM liquidacao_rs)
-UNION ALL (SELECT * FROM liquidacao_pb)
-UNION ALL (SELECT * FROM liquidacao_ce)
-UNION ALL (SELECT * FROM liquidacao_municipio_rj_v1)
-UNION ALL (SELECT * FROM liquidacao_municipio_rj_v2)
-UNION ALL (SELECT * FROM liquidacao_rj)
-UNION ALL (SELECT * FROM liquidacao_df)
-)
+        select *
+        from liquidacao_mg
+        union all
+        (select * from liquidacao_sp)
+        union all
+        (select * from liquidacao_municipio_sp)
+        union all
+        (select * from liquidacao_pe)
+        union all
+        (select * from liquidacao_pr)
+        union all
+        (select * from liquidacao_rs)
+        union all
+        (select * from liquidacao_pb)
+        union all
+        (select * from liquidacao_ce)
+        union all
+        (select * from liquidacao_municipio_rj_v1)
+        union all
+        (select * from liquidacao_municipio_rj_v2)
+        union all
+        (select * from liquidacao_rj)
+        union all
+        (select * from liquidacao_df)
+    )

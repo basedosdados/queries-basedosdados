@@ -1,8 +1,9 @@
+---
 version: 2
-
 models:
   - name: br_ms_sim__microdados
-    description: Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde.
+    description: Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério
+      da Saúde.
     columns:
       - name: ano
         description: Ano
@@ -149,13 +150,15 @@ models:
       - name: semanas_gestacao
         description: Semanas de Gestação
       - name: diferenca_data
-        description: Diferença Entre a Data de Óbito e Data do Recebimento Original da DO
+        description: Diferença Entre a Data de Óbito e Data do Recebimento Original
+          da DO
       - name: data_conclusao_investigacao
         description: Data de Conclusão da Investigação
       - name: data_conclusao_caso
         description: Data de Conclusão do Caso
       - name: numero_dias_obito_investigacao
-        description: Número de Dias Entre a Data do Óbito e a Data Declarada para a Conclusão da Investigação
+        description: Número de Dias Entre a Data do Óbito e a Data Declarada para
+          a Conclusão da Investigação
       - name: id_municipio_naturalidade
         description: ID Município Naturalidade - IBGE 7 Dígitos
       - name: descricao_estabelecimento
@@ -175,11 +178,13 @@ models:
       - name: atestado
         description: CIDs Informados no Atestado
       - name: numero_dias_obito_ficha
-        description: Número de Dias Entre a Data do Óbito e a Data do Cadastro da Ficha Síntese de Investigação no Módulo
+        description: Número de Dias Entre a Data do Óbito e a Data do Cadastro da
+          Ficha Síntese de Investigação no Módulo
       - name: fontes
         description: Fontes
       - name: tipo_resgate_informacao
-        description: A Investigação Permitiu o Resgate de Alguma Causa de Óbito Não Informado, ou a Correção de Alguma Antes Informada?
+        description: A Investigação Permitiu o Resgate de Alguma Causa de Óbito Não
+          Informado, ou a Correção de Alguma Antes Informada?
       - name: tipo_nivel_investigador
         description: Tipo de Nível Investigador
       - name: numero_dias_informacao

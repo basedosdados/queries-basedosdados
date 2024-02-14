@@ -1,5 +1,6 @@
+---
 version: 2
-models :
+models:
   - name: br_inep_enem__microdados
     description: Microdados de notas.
     columns:
@@ -6731,8 +6732,8 @@ models :
       - name: Q013
         description: "Você tem em sua casa?\nGeladeira"
       - name: Q014
-        description: "Você tem em sua casa?\nFreezer (aparelho independente ou parte
-          da geladeira duplex)"
+        description: "Você tem em sua casa?\nFreezer (aparelho independente ou parte\
+          \ da geladeira duplex)"
       - name: Q015
         description: "Você tem em sua casa?\nTelefone fixo"
       - name: Q016
@@ -6750,26 +6751,26 @@ models :
       - name: Q022
         description: Você exerce ou já exerceu atividade remunerada?
       - name: Q023
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Testar meus conhecimentos"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Testar meus conhecimentos"
       - name: Q024
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Aumentar a possibilidade de conseguir um emprego"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Aumentar a possibilidade de conseguir um emprego"
       - name: Q025
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Progredir no meu emprego atual"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Progredir no meu emprego atual"
       - name: Q026
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Ingressar na Educação Superior Pública"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Ingressar na Educação Superior Pública"
       - name: Q027
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Ingressar na Educação Superior Privada"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Ingressar na Educação Superior Privada"
       - name: Q028
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Conseguir uma bolsa de estudos (ProUni, outras)"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Conseguir uma bolsa de estudos (ProUni, outras)"
       - name: Q029
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Participar do Programa de Financiamento Estudantil - FIES"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Participar do Programa de Financiamento Estudantil - FIES"
       - name: Q030
         description: Quantos anos você levou para concluir o Ensino Fundamental?
       - name: Q031
@@ -6783,56 +6784,56 @@ models :
       - name: Q035
         description: Em que tipo de escola você cursou o Ensino Médio?
       - name: Q036
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades? \nPró-Uni (Programa Universidade
-          para Todos)"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades? \nPró-Uni (Programa\
+          \ Universidade para Todos)"
       - name: Q037
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos da
-          própria Instituição de Ensino Superior"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos\
+          \ da própria Instituição de Ensino Superior"
       - name: Q038
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos da
-          empresa onde trabalho"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos\
+          \ da empresa onde trabalho"
       - name: Q039
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades?\nAuxílio do Programa
-          de Financiamento Estudantil - FIES"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades?\nAuxílio do Programa\
+          \ de Financiamento Estudantil - FIES"
       - name: Q040
         description: Com que idade você começou a exercer uma atividade remunerada?
       - name: Q041
         description: Quantas horas semanais você trabalha ou trabalhou aproximadamente?
       - name: Q042
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nAjudar meus pais nas despesas com a residência"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nAjudar meus pais nas despesas com a residência"
       - name: Q043
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nSustentar minha família (esposo/a, filhos/as etc.)"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nSustentar minha família (esposo/a, filhos/as etc.)"
       - name: Q044
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nSer independente/ganhar meu próprio dinheiro"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nSer independente/ganhar meu próprio dinheiro"
       - name: Q045
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nAdquirir experiência"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nAdquirir experiência"
       - name: Q046
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nCustear/pagar meus estudos"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nCustear/pagar meus estudos"
       - name: Q047
         description: "Indique os cursos que você frequenta ou frequentou:\nCurso profissionalizante"
       - name: Q048
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório
-          para vestibular"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório\
+          \ para vestibular"
       - name: Q049
         description: "Indique os cursos que você frequenta ou frequentou:\nCurso superior"
       - name: Q050
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de
-          língua estrangeira"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de\
+          \ língua estrangeira"
       - name: Q051
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de
-          computação ou informática"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de\
+          \ computação ou informática"
       - name: Q052
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório
-          para concursos públicos"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório\
+          \ para concursos públicos"
       - name: Q053
         description: "Indique os cursos que você frequenta ou frequentou:\nOutro curso"
       - name: Q054
@@ -6841,70 +6842,70 @@ models :
         description: Como é ou era o principal curso de EJA que você frequenta ou
           frequentou?
       - name: Q056
-        description: "Indique o que levou você a deixar de cursar a EJA \n (Se você
-          não deixou de cursar a EJA, vá para a questão...):\nTrabalhava, não tinha
-          tempo de estudar"
+        description: "Indique o que levou você a deixar de cursar a EJA \n (Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nTrabalhava, não tinha\
+          \ tempo de estudar"
       - name: Q057
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nEstudava no curso da
-          empresa e foi interrompido"
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nEstudava no curso\
+          \ da empresa e foi interrompido"
       - name: Q058
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nOcorreram problemas
-          de saúde ou acidentes comigo ou familiares"
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nOcorreram problemas\
+          \ de saúde ou acidentes comigo ou familiares"
       - name: Q059
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nMudei de bairro, cidade
-          ou município"
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nMudei de bairro, cidade\
+          \ ou município"
       - name: Q060
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nPor motivos pessoais,
-          casamento, filhos etc."
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nPor motivos pessoais,\
+          \ casamento, filhos etc."
       - name: Q061
-        description: "Indique o que levou você a deixar de cursar a EJA  \n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nFaltava-me interesse,
-          desisti"
+        description: "Indique o que levou você a deixar de cursar a EJA  \n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nFaltava-me interesse,\
+          \ desisti"
       - name: Q062
-        description: "Indique o que levou você a deixar de cursar a EJA\n (Se você
-          não deixou de cursar a EJA, vá para a questão...):\nSenti-me discriminado(a)"
+        description: "Indique o que levou você a deixar de cursar a EJA\n (Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nSenti-me discriminado(a)"
       - name: Q063
-        description: "Indique o que levou você a deixar de cursar a EJA \n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nTemi/Sofri violência"
+        description: "Indique o que levou você a deixar de cursar a EJA \n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nTemi/Sofri violência"
       - name: Q064
         description: Você já frequentou o ensino regular?
       - name: Q065
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de vaga em escola pública"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de vaga em escola pública"
       - name: Q066
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Ausência de escola perto de casa"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Ausência de escola perto de casa"
       - name: Q067
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Dificuldades após reprovação"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Dificuldades após reprovação"
       - name: Q068
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de interesse em estudar"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de interesse em estudar"
       - name: Q069
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de condições adequadas na escola"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de condições adequadas na escola"
       - name: Q070
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Trabalho, falta de tempo para estudar"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Trabalho, falta de tempo para estudar"
       - name: Q071
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Motivos pessoais, casamento/filhos etc."
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Motivos pessoais, casamento/filhos etc."
       - name: Q072
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de apoio familiar."
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de apoio familiar."
       - name: Q073
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Problemas de saúde ou acidente comigo ou familiares"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Problemas de saúde ou acidente comigo ou familiares"
       - name: Q074
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Discriminação/Preconceitos (sexo, raça, idade, classe etc.)"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Discriminação/Preconceitos (sexo, raça, idade, classe etc.)"
       - name: Q075
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Medo de sofrer violência"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Medo de sofrer violência"
       - name: Q076
         description: Quantos anos você tinha quando deixou de frequentar o ensino
           regular?
@@ -6941,8 +6942,8 @@ models :
       - name: Q013
         description: "Você tem em sua casa?\nGeladeira"
       - name: Q014
-        description: "Você tem em sua casa?\nFreezer (aparelho independente ou parte
-          da geladeira duplex)"
+        description: "Você tem em sua casa?\nFreezer (aparelho independente ou parte\
+          \ da geladeira duplex)"
       - name: Q015
         description: "Você tem em sua casa?\nTelefone fixo"
       - name: Q016
@@ -6960,26 +6961,26 @@ models :
       - name: Q022
         description: Você exerce ou já exerceu atividade remunerada?
       - name: Q023
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Testar meus conhecimentos"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Testar meus conhecimentos"
       - name: Q024
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Aumentar a possibilidade de conseguir um emprego"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Aumentar a possibilidade de conseguir um emprego"
       - name: Q025
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Progredir no meu emprego atual"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Progredir no meu emprego atual"
       - name: Q026
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Ingressar na Educação Superior Pública"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Ingressar na Educação Superior Pública"
       - name: Q027
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Ingressar na Educação Superior Privada"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Ingressar na Educação Superior Privada"
       - name: Q028
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Conseguir uma bolsa de estudos (ProUni, outras)"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Conseguir uma bolsa de estudos (ProUni, outras)"
       - name: Q029
-        description: "Indique os motivos que levaram você a participar do ENEM:\n
-          Participar do Programa de Financiamento Estudantil - FIES"
+        description: "Indique os motivos que levaram você a participar do ENEM:\n\
+          \ Participar do Programa de Financiamento Estudantil - FIES"
       - name: Q030
         description: Quantos anos você levou para concluir o Ensino Fundamental?
       - name: Q031
@@ -6993,56 +6994,56 @@ models :
       - name: Q035
         description: Em que tipo de escola você cursou o Ensino Médio?
       - name: Q036
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades? \nPró-Uni (Programa Universidade
-          para Todos)"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades? \nPró-Uni (Programa\
+          \ Universidade para Todos)"
       - name: Q037
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos da
-          própria Instituição de Ensino Superior"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos\
+          \ da própria Instituição de Ensino Superior"
       - name: Q038
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos da
-          empresa onde trabalho"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades? \nBolsa de estudos\
+          \ da empresa onde trabalho"
       - name: Q039
-        description: "Caso você ingresse no Ensino Superior privado pretende recorrer
-          aos auxílios abaixo para custeio das mensalidades?\nAuxílio do Programa
-          de Financiamento Estudantil - FIES"
+        description: "Caso você ingresse no Ensino Superior privado pretende recorrer\
+          \ aos auxílios abaixo para custeio das mensalidades?\nAuxílio do Programa\
+          \ de Financiamento Estudantil - FIES"
       - name: Q040
         description: Com que idade você começou a exercer uma atividade remunerada?
       - name: Q041
         description: Quantas horas semanais você trabalha ou trabalhou aproximadamente?
       - name: Q042
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nAjudar meus pais nas despesas com a residência"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nAjudar meus pais nas despesas com a residência"
       - name: Q043
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nSustentar minha família (esposo/a, filhos/as etc.)"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nSustentar minha família (esposo/a, filhos/as etc.)"
       - name: Q044
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nSer independente/ganhar meu próprio dinheiro"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nSer independente/ganhar meu próprio dinheiro"
       - name: Q045
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nAdquirir experiência"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nAdquirir experiência"
       - name: Q046
-        description: "Indique a importância de cada um dos motivos abaixo na sua decisão
-          de trabalhar: \nCustear/pagar meus estudos"
+        description: "Indique a importância de cada um dos motivos abaixo na sua decisão\
+          \ de trabalhar: \nCustear/pagar meus estudos"
       - name: Q047
         description: "Indique os cursos que você frequenta ou frequentou:\nCurso profissionalizante"
       - name: Q048
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório
-          para vestibular"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório\
+          \ para vestibular"
       - name: Q049
         description: "Indique os cursos que você frequenta ou frequentou:\nCurso superior"
       - name: Q050
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de
-          língua estrangeira"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de\
+          \ língua estrangeira"
       - name: Q051
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de
-          computação ou informática"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso de\
+          \ computação ou informática"
       - name: Q052
-        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório
-          para concursos públicos"
+        description: "Indique os cursos que você frequenta ou frequentou:\nCurso preparatório\
+          \ para concursos públicos"
       - name: Q053
         description: "Indique os cursos que você frequenta ou frequentou:\nOutro curso"
       - name: Q054
@@ -7051,70 +7052,70 @@ models :
         description: Como é ou era o principal curso de EJA que você frequenta ou
           frequentou?
       - name: Q056
-        description: "Indique o que levou você a deixar de cursar a EJA \n (Se você
-          não deixou de cursar a EJA, vá para a questão...):\nTrabalhava, não tinha
-          tempo de estudar"
+        description: "Indique o que levou você a deixar de cursar a EJA \n (Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nTrabalhava, não tinha\
+          \ tempo de estudar"
       - name: Q057
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nEstudava no curso da
-          empresa e foi interrompido"
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nEstudava no curso\
+          \ da empresa e foi interrompido"
       - name: Q058
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nOcorreram problemas
-          de saúde ou acidentes comigo ou familiares"
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nOcorreram problemas\
+          \ de saúde ou acidentes comigo ou familiares"
       - name: Q059
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nMudei de bairro, cidade
-          ou município"
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nMudei de bairro, cidade\
+          \ ou município"
       - name: Q060
-        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nPor motivos pessoais,
-          casamento, filhos etc."
+        description: "Indique o que levou você a deixar de cursar a EJA\n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nPor motivos pessoais,\
+          \ casamento, filhos etc."
       - name: Q061
-        description: "Indique o que levou você a deixar de cursar a EJA  \n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nFaltava-me interesse,
-          desisti"
+        description: "Indique o que levou você a deixar de cursar a EJA  \n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nFaltava-me interesse,\
+          \ desisti"
       - name: Q062
-        description: "Indique o que levou você a deixar de cursar a EJA\n (Se você
-          não deixou de cursar a EJA, vá para a questão...):\nSenti-me discriminado(a)"
+        description: "Indique o que levou você a deixar de cursar a EJA\n (Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nSenti-me discriminado(a)"
       - name: Q063
-        description: "Indique o que levou você a deixar de cursar a EJA \n(Se você
-          não deixou de cursar a EJA, vá para a questão...):\nTemi/Sofri violência"
+        description: "Indique o que levou você a deixar de cursar a EJA \n(Se você\
+          \ não deixou de cursar a EJA, vá para a questão...):\nTemi/Sofri violência"
       - name: Q064
         description: Você já frequentou o ensino regular?
       - name: Q065
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de vaga em escola pública"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de vaga em escola pública"
       - name: Q066
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Ausência de escola perto de casa"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Ausência de escola perto de casa"
       - name: Q067
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Dificuldades após reprovação"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Dificuldades após reprovação"
       - name: Q068
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de interesse em estudar"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de interesse em estudar"
       - name: Q069
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de condições adequadas na escola"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de condições adequadas na escola"
       - name: Q070
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Trabalho, falta de tempo para estudar"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Trabalho, falta de tempo para estudar"
       - name: Q071
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Motivos pessoais, casamento/filhos etc."
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Motivos pessoais, casamento/filhos etc."
       - name: Q072
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Falta de apoio familiar."
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Falta de apoio familiar."
       - name: Q073
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Problemas de saúde ou acidente comigo ou familiares"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Problemas de saúde ou acidente comigo ou familiares"
       - name: Q074
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Discriminação/Preconceitos (sexo, raça, idade, classe etc.)"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Discriminação/Preconceitos (sexo, raça, idade, classe etc.)"
       - name: Q075
-        description: "Indique o que levou você a deixar de cursar o ensino regular:\n
-          Medo de sofrer violência"
+        description: "Indique o que levou você a deixar de cursar o ensino regular:\n\
+          \ Medo de sofrer violência"
       - name: Q076
         description: Quantos anos você tinha quando deixou de frequentar o ensino
           regular?

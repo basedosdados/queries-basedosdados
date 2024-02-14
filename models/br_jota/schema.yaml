@@ -1,8 +1,8 @@
+---
 version: 2
-
 models:
   - name: eleicao_perfil_candidato_2022
-    description: "Descreve o perfil dos candidatos da eleição de 2022"
+    description: Descreve o perfil dos candidatos da eleição de 2022
     columns:
       - name: sequencial
       - name: ano_sequencial_candidato
@@ -15,7 +15,7 @@ models:
       - name: idade
       - name: faixa_etaria
   - name: eleicao_prestacao_contas_candidato_2022
-    description: "Informações de prestação de contas no nível de candidato"
+    description: Informações de prestação de contas no nível de candidato
     columns:
       - name: sequencial
       - name: ano_sequencial_candidato
@@ -33,7 +33,8 @@ models:
       - name: receita_partido
       - name: valor_total
   - name: eleicao_prestacao_contas_candidato_origem_2022
-    description: "Informações de prestação de contas no nível de candidato e da origem da despesa ou receita "
+    description: 'Informações de prestação de contas no nível de candidato e da origem
+      da despesa ou receita '
     columns:
       - name: sequencial_candidato
       - name: ano_sequencial_candidato

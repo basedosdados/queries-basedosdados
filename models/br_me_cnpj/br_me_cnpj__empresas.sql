@@ -1,36 +1,34 @@
 {{
-  config(
-    schema='br_me_cnpj',
-    materialized='incremental',
-    alias = 'empresas',
-    unique_key='data',
-    partition_by={
-      "field": "data",
-      "data_type": "date",
-    },
-    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-    post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) > 6)',
-              'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                    ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) <= 6)']
-  )
+    config(
+        schema="br_me_cnpj",
+        materialized="incremental",
+        alias="empresas",
+        unique_key="data",
+        partition_by={
+            "field": "data",
+            "data_type": "date",
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) <= 6)',
+        ],
+    )
 }}
-WITH cnpj_empresas AS (SELECT 
-    SAFE_CAST(data AS DATE) data,
-    SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
-    SAFE_CAST(razao_social AS STRING) razao_social,
-    SAFE_CAST(natureza_juridica AS STRING) natureza_juridica,
-    SAFE_CAST(qualificacao_responsavel AS STRING) qualificacao_responsavel,
-    SAFE_CAST(capital_social AS FLOAT64) capital_social,
-    SAFE_CAST(REGEXP_REPLACE(porte, '^0', '') AS STRING) porte,
-    SAFE_CAST(ente_federativo AS STRING) ente_federativo
-FROM basedosdados-staging.br_me_cnpj_staging.empresas AS t
-WHERE porte != "porte")
-SELECT * FROM cnpj_empresas
-{% if is_incremental() %} 
-WHERE data > (SELECT MAX(data) FROM {{ this }} )
-{% endif %}
+with
+    cnpj_empresas as (
+        select
+            safe_cast(data as date) data,
+            safe_cast(lpad(cnpj_basico, 8, '0') as string) cnpj_basico,
+            safe_cast(razao_social as string) razao_social,
+            safe_cast(natureza_juridica as string) natureza_juridica,
+            safe_cast(qualificacao_responsavel as string) qualificacao_responsavel,
+            safe_cast(capital_social as float64) capital_social,
+            safe_cast(regexp_replace(porte, '^0', '') as string) porte,
+            safe_cast(ente_federativo as string) ente_federativo
+        from `basedosdados-staging.br_me_cnpj_staging.empresas ` as t
+        where porte != "porte"
+    )
+select *
+from cnpj_empresas
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}

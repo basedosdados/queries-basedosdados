@@ -1,23 +1,23 @@
-{{ 
-  config(
-    alias='unidade_conservacao',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="unidade_conservacao",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(id_unidade_conservacao AS STRING) id_unidade_conservacao,
-INITCAP(unidade_conservacao) unidade_conservacao,
-SAFE_CAST(id_unidade_conservacao_wcmc AS STRING) id_unidade_conservacao_wcmc,
-SAFE_CAST(id_cnuc AS STRING) id_cnuc,
-SAFE_CAST(id_geografico AS STRING) id_geografico,
-SAFE_CAST(organizacao_orgao AS STRING) organizacao_orgao,
-SAFE_CAST(categoria AS STRING) categoria,
-SAFE_CAST(sigla_grupo AS STRING) sigla_grupo,
-SAFE_CAST(qualidade AS STRING) qualidade,
-INITCAP(esfera) esfera,
-SAFE_CAST(ano_criacao AS INT64) ano_criacao,
-SAFE_CAST(legislacao AS STRING) legislacao,
-SAFE_CAST(data_ultima AS DATE) data_ultima,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria,
-FROM basedosdados-staging.br_geobr_mapas_staging.unidade_conservacao as t
+}}
+select
+    safe_cast(id_unidade_conservacao as string) id_unidade_conservacao,
+    initcap(unidade_conservacao) unidade_conservacao,
+    safe_cast(id_unidade_conservacao_wcmc as string) id_unidade_conservacao_wcmc,
+    safe_cast(id_cnuc as string) id_cnuc,
+    safe_cast(id_geografico as string) id_geografico,
+    safe_cast(organizacao_orgao as string) organizacao_orgao,
+    safe_cast(categoria as string) categoria,
+    safe_cast(sigla_grupo as string) sigla_grupo,
+    safe_cast(qualidade as string) qualidade,
+    initcap(esfera) esfera,
+    safe_cast(ano_criacao as int64) ano_criacao,
+    safe_cast(legislacao as string) legislacao,
+    safe_cast(data_ultima as date) data_ultima,
+    safe.st_geogfromtext(geometria) geometria,
+from `basedosdados-staging.br_geobr_mapas_staging.unidade_conservacao ` as t

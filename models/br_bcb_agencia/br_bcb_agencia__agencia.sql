@@ -1,166 +1,230 @@
-{{ 
-  config(
-    alias='agencia',
-    schema='br_bcb_agencia',
-    materialized='incremental',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2007,
-        "end": 2024,
-        "interval": 1}
-     },
-     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-     post_hook = [ 
-      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-       ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
-     ]   
+{{
+    config(
+        alias="agencia",
+        schema="br_bcb_agencia",
+        materialized="incremental",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2007, "end": 2024, "interval": 1},
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+        ],
     )
- }}
+}}
 
 
-WITH wrang_data as (
-SELECT
-  CASE
-    WHEN sigla_uf = 'SP' AND nome =  'mogimirim' THEN '3530805'
-    WHEN sigla_uf = 'SP' AND nome =  'mogiguacu' THEN '3530706'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia ceilandia' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia brazlandia' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia sobradinho' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia samambaia' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia gama' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia taguatinga' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia guara' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia paranoa' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia nucleo bandeirante' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia cruzeiro' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia sudoesteoctogonal' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia aguas claras' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia planaltina' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia recanto das emas' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia santa maria' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia riacho fundo' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia sao sebastiao' THEN '5300108'
-    WHEN sigla_uf = 'DF' AND nome = 'brasilia candangolandia' THEN '5300108'
-    WHEN sigla_uf = 'RJ' AND nome = 'trajano de morais' THEN '3305901'
-    WHEN sigla_uf = 'RS' AND nome = 'entre ijuis' THEN '4306932'
-    WHEN sigla_uf = 'MG' AND nome = 'brasopolis' THEN '3108909'
-    WHEN sigla_uf = 'PR' AND nome = 'santa cruz do monte castelo' THEN '4123303'
-    WHEN sigla_uf = 'PA' AND nome = 'eldorado dos carajas' THEN '1502954'
-    WHEN sigla_uf = 'PE' AND nome = 'belem de sao francisco' THEN '2601607'
-    WHEN sigla_uf = 'SC' AND nome = 'sao lourenco doeste' THEN '4216909'
-    WHEN sigla_uf = 'MG' AND nome = 'sao tome das letras' THEN '3165206'
-    WHEN sigla_uf = 'MG' AND nome = 'dona euzebia' THEN '3122900'
-    WHEN sigla_uf = 'SC' AND nome = 'picarras' THEN '4212809'
-    WHEN sigla_uf = 'SP' AND nome = 'florinea' THEN '3516101'
-    WHEN sigla_uf = 'MA' AND nome = 'pindare mirim' THEN '2108504'
-    WHEN sigla_uf = 'SC' AND nome = 'presidente castelo branco' THEN '4120408'
-    WHEN sigla_uf = 'RO' AND nome = 'alta floresta do oeste' THEN '1100015'
-    WHEN sigla_uf = 'PB' AND nome = 'campo de santana' THEN '2516409'
-    WHEN sigla_uf = 'RN' AND nome = 'augusto severo' THEN '2401305'
-    WHEN sigla_uf = 'SC' AND nome = 'luis alves' THEN '4210001'
-    WHEN sigla_uf = 'SP' AND nome = 'luisiania' THEN '3527702'
-    WHEN sigla_uf = 'RO' AND nome = 'alvorada do oeste' THEN '1100346'
-    WHEN sigla_uf = 'RO' AND nome = 'santa luzia do oeste' THEN '1100296'
-    WHEN sigla_uf = 'PE' AND nome = 'itamaraca' THEN '2607604'
-    WHEN sigla_uf = 'RS' AND nome = 'chiapeta' THEN '4305405'
-    WHEN sigla_uf = 'MG' AND nome = 'itabirinha de mantena' THEN '3131802'
-    WHEN sigla_uf = 'MS' AND nome = 'bataipora' THEN '3528502'
-    WHEN sigla_uf = 'SP' AND nome = 'brodosqui' THEN '3507803'
-    WHEN sigla_uf = 'TO' AND nome = 'paraiso do norte de goias' THEN '1716109'
-    WHEN sigla_uf = 'PE' AND nome = 'cabo' THEN '2602902'
-    WHEN sigla_uf = 'TO' AND nome = 'miracema do norte' THEN '1713205'
-    WHEN sigla_uf = 'RJ' AND nome = 'pati do alferes' THEN '3303856'
-    WHEN sigla_uf = 'TO' AND nome = 'colinas de goias' THEN '1705508'
-    WHEN sigla_uf = 'RN' AND nome = 'assu' THEN '2400208'
-    WHEN sigla_uf = 'BA' AND nome = 'camaca' THEN '2905602'
-    WHEN sigla_uf = 'SE' AND nome = 'caninde do sao francisco' THEN '2801207'
-    WHEN sigla_uf = 'MT' AND nome = 'quatro marcos' THEN '5107107'
-    WHEN sigla_uf = 'SP' AND nome = 'ipaucu' THEN '3520905'
-    WHEN sigla_uf = 'MT' AND nome = 'rio claro' THEN '3543907'
-    WHEN sigla_uf = 'SP' AND nome = 'sud menucci' THEN '3552304'
-    WHEN sigla_uf = 'RS' AND nome = 'eldorado' THEN '4306767'
-    WHEN sigla_uf = 'RS' AND nome = 'portolandia' THEN '5218102'
-    WHEN sigla_uf = 'MG' AND nome = 'gouvea' THEN '3127602'
-    WHEN sigla_uf = 'MG' AND nome = 'sao joao da manteninha' THEN '3162575'
-    WHEN sigla_uf = 'MT' AND nome = 'vila bela da sstrindade' THEN '5105507'
-    WHEN sigla_uf = 'SP' AND nome = 'salmorao' THEN '3545100'
-    WHEN sigla_uf = 'MG' AND nome = 'gouveia' THEN '3127602'
-    WHEN sigla_uf = 'MT' AND nome = 'poxoreu' THEN '5107008'
-    WHEN sigla_uf = 'GO' AND nome = 'portolandia' THEN '5218102'
-    WHEN sigla_uf = 'TO' AND nome = 'alianca do norte' THEN '1700350'
-    WHEN sigla_uf = 'MA' AND nome = 'sao luiz gonzaga maranhao' THEN '2111409'
-    WHEN sigla_uf = 'MG' AND nome = 'cachoeira do pajeu' THEN '3102704'
-    WHEN sigla_uf = 'TO' AND nome = 'divinopolis de goias' THEN '1707108'
-    WHEN sigla_uf = 'GO' AND nome = 'cocalzinho' THEN '5205513'
-    WHEN sigla_uf = 'RO' AND nome = 'sao francisco do guarope' THEN '1101492'
-    WHEN sigla_uf = 'PE' AND nome = 'lagoa do itaenga' THEN '2608503'
-    WHEN sigla_uf = 'RJ' AND nome = 'parati' THEN '3303807'
-    WHEN sigla_uf = 'SC' AND nome = 'sao miguel doeste' THEN '4217204'
-    WHEN sigla_uf = 'PR' AND nome = 'rosario' THEN '4122651'
-    WHEN sigla_uf = 'AM' AND nome = 'careiro castanho' THEN '1301100'
-    WHEN sigla_uf = 'SP' AND nome = 'embu' THEN '3515004'
-    WHEN sigla_uf = 'RO' AND nome = 'nova brasilandia' THEN '1100148'
-    WHEN sigla_uf = 'GO' AND nome = 'costelandia' THEN '5205059'
-    ELSE id_municipio
-  END as id_municipio_fixed,
-  CASE
-    WHEN LENGTH(cnpj) != 14 
-    THEN NULL
-    ELSE cnpj
-  END AS cnpj1,  
-    LPAD(cep, 8, '0') as cep1,
-    NULLIF(sigla_uf, 'nan') as sigla_uf1,
-    NULLIF(nome_agencia, 'nan') as nome_agencia1,
-    NULLIF(instituicao, 'nan') as instituicao1,
-    NULLIF(segmento, 'nan') as segmento1,
-    NULLIF(id_compe_bcb_agencia, 'nan') as id_compe_bcb_agencia1,
-    NULLIF(id_compe_bcb_instituicao, 'nan') as id_compe_bcb_instituicao1,
-    NULLIF(endereco, 'nan') as endereco1,
-    NULLIF(complemento, 'nan') as complemento1,
-    NULLIF(bairro, 'nan') as bairro1,
-    NULLIF(ddd, 'nan') as ddd1,
-    NULLIF(fone, 'nan') as fone1,
-    NULLIF(id_instalacao, 'nan') as id_instalacao1,
-    data_inicio,
-    ano,
-    mes
-  FROM basedosdados-staging.br_bcb_agencia_staging.agencia AS t
-)
+with
+    wrang_data as (
+        select
+            case
+                when sigla_uf = 'SP' and nome = 'mogimirim'
+                then '3530805'
+                when sigla_uf = 'SP' and nome = 'mogiguacu'
+                then '3530706'
+                when sigla_uf = 'DF' and nome = 'brasilia ceilandia'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia brazlandia'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia sobradinho'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia samambaia'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia gama'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia taguatinga'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia guara'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia paranoa'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia nucleo bandeirante'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia cruzeiro'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia sudoesteoctogonal'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia aguas claras'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia planaltina'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia recanto das emas'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia santa maria'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia riacho fundo'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia sao sebastiao'
+                then '5300108'
+                when sigla_uf = 'DF' and nome = 'brasilia candangolandia'
+                then '5300108'
+                when sigla_uf = 'RJ' and nome = 'trajano de morais'
+                then '3305901'
+                when sigla_uf = 'RS' and nome = 'entre ijuis'
+                then '4306932'
+                when sigla_uf = 'MG' and nome = 'brasopolis'
+                then '3108909'
+                when sigla_uf = 'PR' and nome = 'santa cruz do monte castelo'
+                then '4123303'
+                when sigla_uf = 'PA' and nome = 'eldorado dos carajas'
+                then '1502954'
+                when sigla_uf = 'PE' and nome = 'belem de sao francisco'
+                then '2601607'
+                when sigla_uf = 'SC' and nome = 'sao lourenco doeste'
+                then '4216909'
+                when sigla_uf = 'MG' and nome = 'sao tome das letras'
+                then '3165206'
+                when sigla_uf = 'MG' and nome = 'dona euzebia'
+                then '3122900'
+                when sigla_uf = 'SC' and nome = 'picarras'
+                then '4212809'
+                when sigla_uf = 'SP' and nome = 'florinea'
+                then '3516101'
+                when sigla_uf = 'MA' and nome = 'pindare mirim'
+                then '2108504'
+                when sigla_uf = 'SC' and nome = 'presidente castelo branco'
+                then '4120408'
+                when sigla_uf = 'RO' and nome = 'alta floresta do oeste'
+                then '1100015'
+                when sigla_uf = 'PB' and nome = 'campo de santana'
+                then '2516409'
+                when sigla_uf = 'RN' and nome = 'augusto severo'
+                then '2401305'
+                when sigla_uf = 'SC' and nome = 'luis alves'
+                then '4210001'
+                when sigla_uf = 'SP' and nome = 'luisiania'
+                then '3527702'
+                when sigla_uf = 'RO' and nome = 'alvorada do oeste'
+                then '1100346'
+                when sigla_uf = 'RO' and nome = 'santa luzia do oeste'
+                then '1100296'
+                when sigla_uf = 'PE' and nome = 'itamaraca'
+                then '2607604'
+                when sigla_uf = 'RS' and nome = 'chiapeta'
+                then '4305405'
+                when sigla_uf = 'MG' and nome = 'itabirinha de mantena'
+                then '3131802'
+                when sigla_uf = 'MS' and nome = 'bataipora'
+                then '3528502'
+                when sigla_uf = 'SP' and nome = 'brodosqui'
+                then '3507803'
+                when sigla_uf = 'TO' and nome = 'paraiso do norte de goias'
+                then '1716109'
+                when sigla_uf = 'PE' and nome = 'cabo'
+                then '2602902'
+                when sigla_uf = 'TO' and nome = 'miracema do norte'
+                then '1713205'
+                when sigla_uf = 'RJ' and nome = 'pati do alferes'
+                then '3303856'
+                when sigla_uf = 'TO' and nome = 'colinas de goias'
+                then '1705508'
+                when sigla_uf = 'RN' and nome = 'assu'
+                then '2400208'
+                when sigla_uf = 'BA' and nome = 'camaca'
+                then '2905602'
+                when sigla_uf = 'SE' and nome = 'caninde do sao francisco'
+                then '2801207'
+                when sigla_uf = 'MT' and nome = 'quatro marcos'
+                then '5107107'
+                when sigla_uf = 'SP' and nome = 'ipaucu'
+                then '3520905'
+                when sigla_uf = 'MT' and nome = 'rio claro'
+                then '3543907'
+                when sigla_uf = 'SP' and nome = 'sud menucci'
+                then '3552304'
+                when sigla_uf = 'RS' and nome = 'eldorado'
+                then '4306767'
+                when sigla_uf = 'RS' and nome = 'portolandia'
+                then '5218102'
+                when sigla_uf = 'MG' and nome = 'gouvea'
+                then '3127602'
+                when sigla_uf = 'MG' and nome = 'sao joao da manteninha'
+                then '3162575'
+                when sigla_uf = 'MT' and nome = 'vila bela da sstrindade'
+                then '5105507'
+                when sigla_uf = 'SP' and nome = 'salmorao'
+                then '3545100'
+                when sigla_uf = 'MG' and nome = 'gouveia'
+                then '3127602'
+                when sigla_uf = 'MT' and nome = 'poxoreu'
+                then '5107008'
+                when sigla_uf = 'GO' and nome = 'portolandia'
+                then '5218102'
+                when sigla_uf = 'TO' and nome = 'alianca do norte'
+                then '1700350'
+                when sigla_uf = 'MA' and nome = 'sao luiz gonzaga maranhao'
+                then '2111409'
+                when sigla_uf = 'MG' and nome = 'cachoeira do pajeu'
+                then '3102704'
+                when sigla_uf = 'TO' and nome = 'divinopolis de goias'
+                then '1707108'
+                when sigla_uf = 'GO' and nome = 'cocalzinho'
+                then '5205513'
+                when sigla_uf = 'RO' and nome = 'sao francisco do guarope'
+                then '1101492'
+                when sigla_uf = 'PE' and nome = 'lagoa do itaenga'
+                then '2608503'
+                when sigla_uf = 'RJ' and nome = 'parati'
+                then '3303807'
+                when sigla_uf = 'SC' and nome = 'sao miguel doeste'
+                then '4217204'
+                when sigla_uf = 'PR' and nome = 'rosario'
+                then '4122651'
+                when sigla_uf = 'AM' and nome = 'careiro castanho'
+                then '1301100'
+                when sigla_uf = 'SP' and nome = 'embu'
+                then '3515004'
+                when sigla_uf = 'RO' and nome = 'nova brasilandia'
+                then '1100148'
+                when sigla_uf = 'GO' and nome = 'costelandia'
+                then '5205059'
+                else id_municipio
+            end as id_municipio_fixed,
+            case when length(cnpj) != 14 then null else cnpj end as cnpj1,
+            lpad(cep, 8, '0') as cep1,
+            nullif(sigla_uf, 'nan') as sigla_uf1,
+            nullif(nome_agencia, 'nan') as nome_agencia1,
+            nullif(instituicao, 'nan') as instituicao1,
+            nullif(segmento, 'nan') as segmento1,
+            nullif(id_compe_bcb_agencia, 'nan') as id_compe_bcb_agencia1,
+            nullif(id_compe_bcb_instituicao, 'nan') as id_compe_bcb_instituicao1,
+            nullif(endereco, 'nan') as endereco1,
+            nullif(complemento, 'nan') as complemento1,
+            nullif(bairro, 'nan') as bairro1,
+            nullif(ddd, 'nan') as ddd1,
+            nullif(fone, 'nan') as fone1,
+            nullif(id_instalacao, 'nan') as id_instalacao1,
+            data_inicio,
+            ano,
+            mes
+        from `basedosdados-staging.br_bcb_agencia_staging.agencia ` as t
+    )
 
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(sigla_uf1 AS STRING) sigla_uf,
-SAFE_CAST(NULLIF(id_municipio_fixed, 'nan') AS STRING) id_municipio,
-SAFE_CAST(data_inicio AS DATE) data_inicio,
-SAFE_CAST(cnpj1 AS STRING) cnpj,
-SAFE_CAST(nome_agencia1 AS STRING) nome_agencia,
-SAFE_CAST(instituicao1 AS STRING) instituicao,
-SAFE_CAST(segmento1 AS STRING) segmento,
-SAFE_CAST(id_compe_bcb_agencia1 AS STRING) id_compe_bcb_agencia,
-SAFE_CAST(id_compe_bcb_instituicao1 AS STRING) id_compe_bcb_instituicao,
-CASE
-  WHEN REGEXP_CONTAINS(cep1, r'^0{8}$') 
-  THEN NULL
-  else cep1
-  end as cep,
-SAFE_CAST(endereco1 AS STRING) endereco,
-SAFE_CAST(complemento1 AS STRING) complemento,
-SAFE_CAST(bairro1 AS STRING) bairro,
-SAFE_CAST(ddd1 AS STRING) ddd,
-SAFE_CAST(fone1 AS STRING) fone,
-SAFE_CAST(id_instalacao1 AS STRING) id_instalacao
-FROM wrang_data
-{% if is_incremental() %} 
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(sigla_uf1 as string) sigla_uf,
+    safe_cast(nullif(id_municipio_fixed, 'nan') as string) id_municipio,
+    safe_cast(data_inicio as date) data_inicio,
+    safe_cast(cnpj1 as string) cnpj,
+    safe_cast(nome_agencia1 as string) nome_agencia,
+    safe_cast(instituicao1 as string) instituicao,
+    safe_cast(segmento1 as string) segmento,
+    safe_cast(id_compe_bcb_agencia1 as string) id_compe_bcb_agencia,
+    safe_cast(id_compe_bcb_instituicao1 as string) id_compe_bcb_instituicao,
+    case when regexp_contains(cep1, r'^0{8}$') then null else cep1 end as cep,
+    safe_cast(endereco1 as string) endereco,
+    safe_cast(complemento1 as string) complemento,
+    safe_cast(bairro1 as string) bairro,
+    safe_cast(ddd1 as string) ddd,
+    safe_cast(fone1 as string) fone,
+    safe_cast(id_instalacao1 as string) id_instalacao
+from wrang_data
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}
-
-

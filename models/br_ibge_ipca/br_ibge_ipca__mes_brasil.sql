@@ -1,30 +1,28 @@
-{{ 
+{{
     config(
-        alias='mes_brasil', 
-        schema='br_ibge_ipca',
-        materialized='incremental',
-    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-    post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-              'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                    ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)']
-  )
+        alias="mes_brasil",
+        schema="br_ibge_ipca",
+        materialized="incremental",
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+        ],
+    )
 }}
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(indice AS FLOAT64) indice,
-SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal,
-SAFE_CAST(variacao_trimestral AS FLOAT64) variacao_trimestral,
-SAFE_CAST(variacao_semestral AS FLOAT64) variacao_semestral,
-SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
-SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
-FROM basedosdados-staging.br_ibge_ipca_staging.mes_brasil AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(indice as float64) indice,
+    safe_cast(variacao_mensal as float64) variacao_mensal,
+    safe_cast(variacao_trimestral as float64) variacao_trimestral,
+    safe_cast(variacao_semestral as float64) variacao_semestral,
+    safe_cast(variacao_anual as float64) variacao_anual,
+    safe_cast(variacao_doze_meses as float64) variacao_doze_meses
+from `basedosdados-staging.br_ibge_ipca_staging.mes_brasil ` as t
 
 {% if is_incremental() %}
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}

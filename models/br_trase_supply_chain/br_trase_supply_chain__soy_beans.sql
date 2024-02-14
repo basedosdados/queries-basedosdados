@@ -1,176 +1,383 @@
-{{ config(
-    alias='soy_beans', 
-    schema='br_trase_supply_chain',
-    partition_by={
-      "field": "year",
-      "data_type": "int64",
-      "range": {
-        "start": 2004,
-        "end": 2021,
-        "interval": 1}
-     }) 
+{{
+    config(
+        alias="soy_beans",
+        schema="br_trase_supply_chain",
+        partition_by={
+            "field": "year",
+            "data_type": "int64",
+            "range": {"start": 2004, "end": 2021, "interval": 1},
+        },
+    )
 }}
 
 
-
 -- padronizar iso3
-with inserir_id_iso3 as (
---padronizar colunas que precisam ser tratadas
-SELECT 
-  *,
-  LOWER(TRANSLATE(`COUNTRY OF FIRST IMPORT`, 'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ', 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'))  AS name_country_first_import,
-  LOWER(TRANSLATE(`LOGISTICS HUB`, 'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ', 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC')) name_logistics_hub,
-  SAFE_CAST(SUBSTR(TRASE_GEOCODE, 4,11) AS STRING) municipality_id
-  FROM `basedosdados-staging.br_trase_supply_chain_staging.soy_beans`
-  
-),
-iso3 as (
-  SELECT *
-  FROM inserir_id_iso3
-LEFT JOIN (SELECT LOWER(TRANSLATE(nome_ingles, 'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ', 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC')) as nome_ingles, sigla_pais_iso3 as iso3_country_id FROM `basedosdados.br_bd_diretorios_mundo.pais`) as diretorio_pais
-  ON inserir_id_iso3.name_country_first_import = diretorio_pais.nome_ingles
-),
-iso3_2 as(
+with
+    inserir_id_iso3 as (
+        -- padronizar colunas que precisam ser tratadas
+        select
+            *,
+            lower(
+                translate(
+                    `COUNTRY OF FIRST IMPORT`,
+                    'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ',
+                    'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'
+                )
+            ) as name_country_first_import,
+            lower(
+                translate(
+                    `LOGISTICS HUB`,
+                    'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ',
+                    'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'
+                )
+            ) name_logistics_hub,
+            safe_cast(substr(trase_geocode, 4, 11) as string) municipality_id
+        from `basedosdados-staging.br_trase_supply_chain_staging.soy_beans`
 
-SELECT *,
-  CASE 
-  -- tem valores unknown country e unknown country european union
-  -- netherlands antilles -> dissolvida em 2010 para curacao e saint martin https://2009-2017.state.gov/r/pa/ei/bgn/22528.htm
-  -- pacific islands (usa) -> não tem no diretório de países
-    WHEN name_country_first_import = 'china (mainland)'AND iso3_country_id IS NULL  THEN 'CHN'
-    WHEN name_country_first_import = 'netherlands' AND iso3_country_id IS NULL THEN 'NLD'
-    WHEN name_country_first_import = 'united kingdom'AND iso3_country_id IS NULL THEN 'GBR'
-    WHEN name_country_first_import = 'vietnam' AND iso3_country_id IS NULL THEN 'VNM'
-    WHEN name_country_first_import = 'united states'AND iso3_country_id IS NULL THEN 'USA'
-    WHEN name_country_first_import = 'south korea' AND iso3_country_id IS NULL THEN 'KOR'
-    WHEN name_country_first_import = 'taiwan' AND iso3_country_id IS NULL THEN 'TWN'
-    WHEN name_country_first_import = 'iran' AND iso3_country_id IS NULL THEN 'IRN'
-    WHEN name_country_first_import = 'venezuela' AND iso3_country_id IS NULL THEN 'VEN'
-    WHEN name_country_first_import = 'russian federation' AND iso3_country_id IS NULL THEN 'RUS'
-    WHEN name_country_first_import = 'united arab emirates'AND iso3_country_id IS NULL THEN 'ARE'
-    WHEN name_country_first_import = 'bolivia' AND iso3_country_id IS NULL THEN 'BOL'
-    WHEN name_country_first_import = 'dominican republic' AND iso3_country_id IS NULL THEN 'DOM'
-    WHEN name_country_first_import = 'philippines' AND iso3_country_id IS NULL THEN 'PHL'
-    WHEN name_country_first_import = 'china (hong kong)' AND iso3_country_id IS NULL THEN 'HKG'
-    WHEN name_country_first_import = 'north korea' AND iso3_country_id IS NULL THEN 'PRK'
-    WHEN name_country_first_import = 'cayman islands' AND iso3_country_id IS NULL THEN 'CYM'
-    WHEN name_country_first_import = 'turks and caicos islands' AND iso3_country_id IS NULL THEN 'TCA'
-    WHEN name_country_first_import = 'cape verde' AND iso3_country_id IS NULL THEN 'CPV'
-    WHEN name_country_first_import = 'bahamas' AND iso3_country_id IS NULL THEN 'BHS'
-    WHEN name_country_first_import = 'gambia' AND iso3_country_id IS NULL THEN 'GMB'
-    WHEN name_country_first_import = 'congo' AND iso3_country_id IS NULL THEN 'COG'
-    WHEN name_country_first_import = 'sudan' AND iso3_country_id IS NULL THEN 'SDN'
-    WHEN name_country_first_import = 'tanzania' AND iso3_country_id IS NULL THEN 'TZA'
-    WHEN name_country_first_import = 'virgin islands (uk)' AND iso3_country_id IS NULL THEN 'VGB'
-    WHEN name_country_first_import = 'netherlands antilles'AND iso3_country_id IS NULL  THEN 'NLD'
-    WHEN name_country_first_import = 'pacific islands (usa)' AND iso3_country_id IS NULL THEN 'HKG'
-    WHEN name_country_first_import = 'syria'AND iso3_country_id IS NULL  THEN 'SYR'
-    WHEN name_country_first_import = 'congo democratic republic of the'AND iso3_country_id IS NULL  THEN 'COD'
-    WHEN name_country_first_import = 'st. vincent and the grenadines' AND iso3_country_id IS NULL THEN 'VCT'
-    WHEN name_country_first_import = 'united states virgin islands'AND iso3_country_id IS NULL  THEN 'VIR'
-    WHEN name_country_first_import = 'dominica island'AND iso3_country_id IS NULL  THEN 'DMA'
-    WHEN name_country_first_import = 'macedonia' AND iso3_country_id IS NULL THEN 'MKD'
-    WHEN name_country_first_import = 'marshall islands' AND iso3_country_id IS NULL THEN 'MHL'
-    WHEN name_country_first_import = 'st. kitts and nevis' AND iso3_country_id IS NULL THEN 'KNA'
-    ELSE iso3_country_id
-    END AS iso3_country_id_,
-  CASE
-    WHEN name_logistics_hub = 'lagoa do itaenga' THEN 'lagoa de itaenga'
-    WHEN name_logistics_hub = 'porto naciona' THEN 'porto nacional'
-    WHEN name_logistics_hub = 'belo horizont' THEN 'belo horizonte'
-    WHEN name_logistics_hub = 'patos de mina' THEN 'patos de minas'
-    WHEN name_logistics_hub = 'sao valerio da natividade' THEN 'sao valerio'
-    WHEN name_logistics_hub = 'coronel vivid' THEN 'coronel vivida'
-    WHEN name_logistics_hub = 'eldorado do s' THEN 'eldorado do sul'
-    WHEN name_logistics_hub = 'faxinal dos g' THEN 'faxinal dos guedes'
-    ELSE name_logistics_hub
-    END AS name_logistics_hub1,
-  CASE
-    WHEN `COUNTRY OF PRODUCTION` = 'BRAZIL' THEN 'BRA'
-    ELSE `COUNTRY OF PRODUCTION`
-    END AS country_production_iso3_id,
-  -- alguns valores da variável TRASE GEOCODE
-  -- não são ids_municipios, o código seguinte corrige isso
-  CASE 
-    WHEN REGEXP_CONTAINS(municipality_id, r'\D') THEN NULL
-    ELSE municipality_id
-    END AS municipality_id_production,
-  CASE 
-    WHEN STATE = 'ACRE' THEN 'AC'
-    WHEN STATE = 'ALAGOAS' THEN 'AL'
-    WHEN STATE = 'AMAPA' THEN 'AP'
-    WHEN STATE = 'AMAZONAS' THEN 'AM'
-    WHEN STATE = 'BAHIA' THEN 'BA'
-    WHEN STATE = 'CEARA' THEN 'CE'
-    WHEN STATE = 'DISTRITO FEDERAL' THEN 'DF'
-    WHEN STATE = 'ESPIRITO SANTO' THEN 'ES'
-    WHEN STATE = 'GOIAS' THEN 'GO'
-    WHEN STATE = 'MARANHAO' THEN 'MA'
-    WHEN STATE = 'MATO GROSSO' THEN 'MT'
-    WHEN STATE = 'MATO GROSSO DO SUL' THEN 'MS'
-    WHEN STATE = 'MINAS GERAIS' THEN 'MG'
-    WHEN STATE = 'PARA' THEN 'PA'
-    WHEN STATE = 'PARAIBA' THEN 'PB'
-    WHEN STATE = 'PARANA' THEN 'PR'
-    WHEN STATE = 'PERNAMBUCO' THEN 'PE'
-    WHEN STATE = 'PIAUI' THEN 'PI'
-    WHEN STATE = 'RIO DE JANEIRO' THEN 'RJ'
-    WHEN STATE = 'RIO GRANDE DO NORTE' THEN 'RN'
-    WHEN STATE = 'RIO GRANDE DO SUL' THEN 'RS'
-    WHEN STATE = 'RONDONIA' THEN 'RO'
-    WHEN STATE = 'RORAIMA' THEN 'RR'
-    WHEN STATE = 'SANTA CATARINA' THEN 'SC'
-    WHEN STATE = 'SAO PAULO' THEN 'SP'
-    WHEN STATE = 'SERGIPE' THEN 'SE'
-    WHEN STATE = 'TOCANTINS' THEN 'TO'
-    ELSE ' '
-    END AS state_production,
-FROM iso3),
---adicionar id_municipio do logistics hub
-add_logistics as (
-SELECT *
-from iso3_2
-LEFT JOIN (
-  SELECT 
-    LOWER(TRANSLATE(nome, 'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ', 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC')) as nome, 
-    id_municipio as municipality_id_logistics_hub 
-  FROM `basedosdados.br_bd_diretorios_brasil.municipio`
+    ),
+    iso3 as (
+        select *
+        from inserir_id_iso3
+        left join
+            (
+                select
+                    lower(
+                        translate(
+                            nome_ingles,
+                            'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ',
+                            'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'
+                        )
+                    ) as nome_ingles,
+                    sigla_pais_iso3 as iso3_country_id
+                from `basedosdados.br_bd_diretorios_mundo.pais`
+            ) as diretorio_pais
+            on inserir_id_iso3.name_country_first_import = diretorio_pais.nome_ingles
+    ),
+    iso3_2 as (
 
-  ) as diretorio
-ON iso3_2.name_logistics_hub1 = diretorio.nome
-AND diretorio.nome  NOT IN (
-  'santana', 'nova olimpia', 'agua boa', 'canarana', 'santa maria', 'sao simao', 'cafelandia', 'presidente kennedy', 'redencao', 'alto alegre',
-  'boa vista', 'palmas', 'candeias', 'santa luzia', 'lagoa santa', 'bom jesus', 'guaira', 'jardinopolis', 'sertaozinho',
-  'pinhao', 'planalto', 'rio negro', 'santa helena', 'terra roxa', 'turvo', 'marau', 'triunfo', 'soledade', 'sao gabriel', 'buritis',
-  'capanema', 'bonito', 'alvorada', 'colinas', 'riachao', 'santa filomena', 'bocaina', 'morrinhos', 'cascavel', 'jardim', 'campo grande','palmeira',
-  'pedra preta', 'floresta', 'sao joao', 'itambe', 'campo alegre', 'toledo', 'eldorado', 'tapejara', 'bandeirantes', 'nova aurora', 'irati', 'general carneiro')
-)
+        select
+            *,
+            case
+                -- tem valores unknown country e unknown country european union
+                -- netherlands antilles -> dissolvida em 2010 para curacao e saint
+                -- martin https://2009-2017.state.gov/r/pa/ei/bgn/22528.htm
+                -- pacific islands (usa) -> não tem no diretório de países
+                when
+                    name_country_first_import = 'china (mainland)'
+                    and iso3_country_id is null
+                then 'CHN'
+                when
+                    name_country_first_import = 'netherlands'
+                    and iso3_country_id is null
+                then 'NLD'
+                when
+                    name_country_first_import = 'united kingdom'
+                    and iso3_country_id is null
+                then 'GBR'
+                when name_country_first_import = 'vietnam' and iso3_country_id is null
+                then 'VNM'
+                when
+                    name_country_first_import = 'united states'
+                    and iso3_country_id is null
+                then 'USA'
+                when
+                    name_country_first_import = 'south korea'
+                    and iso3_country_id is null
+                then 'KOR'
+                when name_country_first_import = 'taiwan' and iso3_country_id is null
+                then 'TWN'
+                when name_country_first_import = 'iran' and iso3_country_id is null
+                then 'IRN'
+                when name_country_first_import = 'venezuela' and iso3_country_id is null
+                then 'VEN'
+                when
+                    name_country_first_import = 'russian federation'
+                    and iso3_country_id is null
+                then 'RUS'
+                when
+                    name_country_first_import = 'united arab emirates'
+                    and iso3_country_id is null
+                then 'ARE'
+                when name_country_first_import = 'bolivia' and iso3_country_id is null
+                then 'BOL'
+                when
+                    name_country_first_import = 'dominican republic'
+                    and iso3_country_id is null
+                then 'DOM'
+                when
+                    name_country_first_import = 'philippines'
+                    and iso3_country_id is null
+                then 'PHL'
+                when
+                    name_country_first_import = 'china (hong kong)'
+                    and iso3_country_id is null
+                then 'HKG'
+                when
+                    name_country_first_import = 'north korea'
+                    and iso3_country_id is null
+                then 'PRK'
+                when
+                    name_country_first_import = 'cayman islands'
+                    and iso3_country_id is null
+                then 'CYM'
+                when
+                    name_country_first_import = 'turks and caicos islands'
+                    and iso3_country_id is null
+                then 'TCA'
+                when
+                    name_country_first_import = 'cape verde' and iso3_country_id is null
+                then 'CPV'
+                when name_country_first_import = 'bahamas' and iso3_country_id is null
+                then 'BHS'
+                when name_country_first_import = 'gambia' and iso3_country_id is null
+                then 'GMB'
+                when name_country_first_import = 'congo' and iso3_country_id is null
+                then 'COG'
+                when name_country_first_import = 'sudan' and iso3_country_id is null
+                then 'SDN'
+                when name_country_first_import = 'tanzania' and iso3_country_id is null
+                then 'TZA'
+                when
+                    name_country_first_import = 'virgin islands (uk)'
+                    and iso3_country_id is null
+                then 'VGB'
+                when
+                    name_country_first_import = 'netherlands antilles'
+                    and iso3_country_id is null
+                then 'NLD'
+                when
+                    name_country_first_import = 'pacific islands (usa)'
+                    and iso3_country_id is null
+                then 'HKG'
+                when name_country_first_import = 'syria' and iso3_country_id is null
+                then 'SYR'
+                when
+                    name_country_first_import = 'congo democratic republic of the'
+                    and iso3_country_id is null
+                then 'COD'
+                when
+                    name_country_first_import = 'st. vincent and the grenadines'
+                    and iso3_country_id is null
+                then 'VCT'
+                when
+                    name_country_first_import = 'united states virgin islands'
+                    and iso3_country_id is null
+                then 'VIR'
+                when
+                    name_country_first_import = 'dominica island'
+                    and iso3_country_id is null
+                then 'DMA'
+                when name_country_first_import = 'macedonia' and iso3_country_id is null
+                then 'MKD'
+                when
+                    name_country_first_import = 'marshall islands'
+                    and iso3_country_id is null
+                then 'MHL'
+                when
+                    name_country_first_import = 'st. kitts and nevis'
+                    and iso3_country_id is null
+                then 'KNA'
+                else iso3_country_id
+            end as iso3_country_id_,
+            case
+                when name_logistics_hub = 'lagoa do itaenga'
+                then 'lagoa de itaenga'
+                when name_logistics_hub = 'porto naciona'
+                then 'porto nacional'
+                when name_logistics_hub = 'belo horizont'
+                then 'belo horizonte'
+                when name_logistics_hub = 'patos de mina'
+                then 'patos de minas'
+                when name_logistics_hub = 'sao valerio da natividade'
+                then 'sao valerio'
+                when name_logistics_hub = 'coronel vivid'
+                then 'coronel vivida'
+                when name_logistics_hub = 'eldorado do s'
+                then 'eldorado do sul'
+                when name_logistics_hub = 'faxinal dos g'
+                then 'faxinal dos guedes'
+                else name_logistics_hub
+            end as name_logistics_hub1,
+            case
+                when `COUNTRY OF PRODUCTION` = 'BRAZIL'
+                then 'BRA'
+                else `COUNTRY OF PRODUCTION`
+            end as country_production_iso3_id,
+            -- alguns valores da variável TRASE GEOCODE
+            -- não são ids_municipios, o código seguinte corrige isso
+            case
+                when regexp_contains(municipality_id, r'\D')
+                then null
+                else municipality_id
+            end as municipality_id_production,
+            case
+                when state = 'ACRE'
+                then 'AC'
+                when state = 'ALAGOAS'
+                then 'AL'
+                when state = 'AMAPA'
+                then 'AP'
+                when state = 'AMAZONAS'
+                then 'AM'
+                when state = 'BAHIA'
+                then 'BA'
+                when state = 'CEARA'
+                then 'CE'
+                when state = 'DISTRITO FEDERAL'
+                then 'DF'
+                when state = 'ESPIRITO SANTO'
+                then 'ES'
+                when state = 'GOIAS'
+                then 'GO'
+                when state = 'MARANHAO'
+                then 'MA'
+                when state = 'MATO GROSSO'
+                then 'MT'
+                when state = 'MATO GROSSO DO SUL'
+                then 'MS'
+                when state = 'MINAS GERAIS'
+                then 'MG'
+                when state = 'PARA'
+                then 'PA'
+                when state = 'PARAIBA'
+                then 'PB'
+                when state = 'PARANA'
+                then 'PR'
+                when state = 'PERNAMBUCO'
+                then 'PE'
+                when state = 'PIAUI'
+                then 'PI'
+                when state = 'RIO DE JANEIRO'
+                then 'RJ'
+                when state = 'RIO GRANDE DO NORTE'
+                then 'RN'
+                when state = 'RIO GRANDE DO SUL'
+                then 'RS'
+                when state = 'RONDONIA'
+                then 'RO'
+                when state = 'RORAIMA'
+                then 'RR'
+                when state = 'SANTA CATARINA'
+                then 'SC'
+                when state = 'SAO PAULO'
+                then 'SP'
+                when state = 'SERGIPE'
+                then 'SE'
+                when state = 'TOCANTINS'
+                then 'TO'
+                else ' '
+            end as state_production,
+        from iso3
+    ),
+    -- adicionar id_municipio do logistics hub
+    add_logistics as (
+        select *
+        from iso3_2
+        left join
+            (
+                select
+                    lower(
+                        translate(
+                            nome,
+                            'áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ',
+                            'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'
+                        )
+                    ) as nome,
+                    id_municipio as municipality_id_logistics_hub
+                from `basedosdados.br_bd_diretorios_brasil.municipio`
 
-SELECT
-SAFE_CAST(YEAR AS INT64) year,
-SAFE_CAST(BIOME AS STRING) biome,
-SAFE_CAST(country_production_iso3_id AS STRING) country_production_iso3_id,
-SAFE_CAST(state_production AS STRING) state_production,
-SAFE_CAST(LOWER(`MUNICIPALITY OF PRODUCTION`) AS STRING) municipality_name_production,
-SAFE_CAST(REPLACE(municipality_id, 'XXXXXXX', '') AS STRING) municipality_id_production,
-SAFE_CAST(name_logistics_hub AS STRING) municipality_name_logistics_hub,
-SAFE_CAST(municipality_id_logistics_hub AS STRING) municipality_id_logistics_hub,
-SAFE_CAST(REPLACE(`PORT OF EXPORT`, 'UNKNOWN', '') AS STRING) export_port,
-SAFE_CAST(REPLACE(EXPORTER, 'UNKNOWN', '') AS STRING) exporter_name,
-SAFE_CAST(REPLACE(`EXPORTER GROUP`, 'UNKNOWN', '') AS STRING) exporter_group,
-SAFE_CAST(REPLACE(IMPORTER, 'UNKNOWN', '') AS STRING) importer_name,
-SAFE_CAST(REPLACE(`IMPORTER GROUP`, 'UNKNOWN', '') AS STRING) importer_group,
-SAFE_CAST(iso3_country_id_ AS STRING) country_first_import_iso3_id,
-SAFE_CAST(`COUNTRY OF FIRST IMPORT` AS STRING) country_first_import_name,
-SAFE_CAST(`ECONOMIC BLOC` AS STRING) economic_bloc_first_import_name,
-SAFE_CAST(FOB_USD AS FLOAT64) fob_usd,
-SAFE_CAST(SOY_EQUIVALENT_TONNES AS FLOAT64) soy_total_export,
-SAFE_CAST(LAND_USE_HA AS FLOAT64) land_use,
-SAFE_CAST(`Soy deforestation exposure` AS STRING) soy_deforestation_exposure,
-SAFE_CAST(ZERO_DEFORESTATION_BRAZIL_SOY AS STRING) zero_deforestation_commitments,
-SAFE_CAST(CO2_GROSS_EMISSIONS_SOY_DEFORESTATION_5_YEAR_TOTAL_EXPOSURE AS FLOAT64) co2_gross_emissions_deforestation_5,
-SAFE_CAST(CO2_NET_EMISSIONS_SOY_DEFORESTATION_5_YEAR_TOTAL_EXPOSURE AS FLOAT64) co2_net_emissions_deforestation_5,
-SAFE_CAST(`Soy deforestation risk` AS FLOAT64) soy_risk,
-SAFE_CAST(TYPE AS STRING) type,
-FROM add_logistics
+            ) as diretorio
+            on iso3_2.name_logistics_hub1 = diretorio.nome
+            and diretorio.nome not in (
+                'santana',
+                'nova olimpia',
+                'agua boa',
+                'canarana',
+                'santa maria',
+                'sao simao',
+                'cafelandia',
+                'presidente kennedy',
+                'redencao',
+                'alto alegre',
+                'boa vista',
+                'palmas',
+                'candeias',
+                'santa luzia',
+                'lagoa santa',
+                'bom jesus',
+                'guaira',
+                'jardinopolis',
+                'sertaozinho',
+                'pinhao',
+                'planalto',
+                'rio negro',
+                'santa helena',
+                'terra roxa',
+                'turvo',
+                'marau',
+                'triunfo',
+                'soledade',
+                'sao gabriel',
+                'buritis',
+                'capanema',
+                'bonito',
+                'alvorada',
+                'colinas',
+                'riachao',
+                'santa filomena',
+                'bocaina',
+                'morrinhos',
+                'cascavel',
+                'jardim',
+                'campo grande',
+                'palmeira',
+                'pedra preta',
+                'floresta',
+                'sao joao',
+                'itambe',
+                'campo alegre',
+                'toledo',
+                'eldorado',
+                'tapejara',
+                'bandeirantes',
+                'nova aurora',
+                'irati',
+                'general carneiro'
+            )
+    )
 
+select
+    safe_cast(year as int64) year,
+    safe_cast(biome as string) biome,
+    safe_cast(country_production_iso3_id as string) country_production_iso3_id,
+    safe_cast(state_production as string) state_production,
+    safe_cast(
+        lower(`MUNICIPALITY OF PRODUCTION`) as string
+    ) municipality_name_production,
+    safe_cast(
+        replace(municipality_id, 'XXXXXXX', '') as string
+    ) municipality_id_production,
+    safe_cast(name_logistics_hub as string) municipality_name_logistics_hub,
+    safe_cast(municipality_id_logistics_hub as string) municipality_id_logistics_hub,
+    safe_cast(replace(`PORT OF EXPORT`, 'UNKNOWN', '') as string) export_port,
+    safe_cast(replace(exporter, 'UNKNOWN', '') as string) exporter_name,
+    safe_cast(replace(`EXPORTER GROUP`, 'UNKNOWN', '') as string) exporter_group,
+    safe_cast(replace(importer, 'UNKNOWN', '') as string) importer_name,
+    safe_cast(replace(`IMPORTER GROUP`, 'UNKNOWN', '') as string) importer_group,
+    safe_cast(iso3_country_id_ as string) country_first_import_iso3_id,
+    safe_cast(`COUNTRY OF FIRST IMPORT` as string) country_first_import_name,
+    safe_cast(`ECONOMIC BLOC` as string) economic_bloc_first_import_name,
+    safe_cast(fob_usd as float64) fob_usd,
+    safe_cast(soy_equivalent_tonnes as float64) soy_total_export,
+    safe_cast(land_use_ha as float64) land_use,
+    safe_cast(`Soy deforestation exposure` as string) soy_deforestation_exposure,
+    safe_cast(zero_deforestation_brazil_soy as string) zero_deforestation_commitments,
+    safe_cast(
+        co2_gross_emissions_soy_deforestation_5_year_total_exposure as float64
+    ) co2_gross_emissions_deforestation_5,
+    safe_cast(
+        co2_net_emissions_soy_deforestation_5_year_total_exposure as float64
+    ) co2_net_emissions_deforestation_5,
+    safe_cast(`Soy deforestation risk` as float64) soy_risk,
+    safe_cast(type as string) type,
+from add_logistics

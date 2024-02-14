@@ -1,14 +1,14 @@
-SELECT
-  SAFE_CAST(table_id AS STRING) table_id,
-  SAFE_CAST(name AS STRING) name,
-  SAFE_CAST(bigquery_type AS STRING) bigquery_type,
-  SAFE_CAST(description AS STRING) description,
-  SAFE_CAST(temporal_coverage AS STRING) temporal_coverage,
-  SAFE_CAST(covered_by_dictionary AS STRING) covered_by_dictionary,
-  SAFE_CAST(directory_column AS STRING) directory_column,
-  SAFE_CAST(measurement_unit AS STRING) measurement_unit,
-  SAFE_CAST(has_sensitive_data AS STRING) has_sensitive_data,
-  SAFE_CAST(observations AS STRING) observations,
-  SAFE_CAST(is_in_staging AS STRING) is_in_staging,
-  SAFE_CAST(is_partition AS STRING) is_partition
-FROM `basedosdados-dev.br_bd_metadados_staging.columns` AS t
+select
+    safe_cast(table_id as string) table_id,
+    safe_cast(name as string) name,
+    safe_cast(bigquery_type as string) bigquery_type,
+    safe_cast(description as string) description,
+    safe_cast(temporal_coverage as string) temporal_coverage,
+    safe_cast(covered_by_dictionary as string) covered_by_dictionary,
+    safe_cast(directory_column as string) directory_column,
+    safe_cast(measurement_unit as string) measurement_unit,
+    safe_cast(has_sensitive_data as string) has_sensitive_data,
+    safe_cast(observations as string) observations,
+    safe_cast(is_in_staging as string) is_in_staging,
+    safe_cast(is_partition as string) is_partition
+from `basedosdados-dev.br_bd_metadados_staging.columns` as t

@@ -1,13 +1,13 @@
-{{ 
-  config(
-    alias='escola',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="escola",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
+}}
 
-SELECT 
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_escola AS STRING) id_escola,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
-FROM basedosdados-staging.br_geobr_mapas_staging.escola AS t
+select
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_escola as string) id_escola,
+    safe.st_geogfromtext(geometria) geometria
+from `basedosdados-staging.br_geobr_mapas_staging.escola ` as t

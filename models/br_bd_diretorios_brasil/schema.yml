@@ -1,8 +1,12 @@
+---
 version: 2
-
-models: 
+models:
   - name: br_bd_diretorios_brasil__empresa
-    description: A tabela apresenta informações do Cadastro Nacional da Pessoa Jurídica (CNPJ), que é um banco de dados administrado pela Secretaria Especial da Receita Federal do Brasil (RFB). Esse cadastro armazena detalhes cadastrais de pessoas jurídicas e outras entidades relevantes para as administrações tributárias do governo federal, dos estados, do Distrito Federal e dos municípios.
+    description: A tabela apresenta informações do Cadastro Nacional da Pessoa Jurídica
+      (CNPJ), que é um banco de dados administrado pela Secretaria Especial da Receita
+      Federal do Brasil (RFB). Esse cadastro armazena detalhes cadastrais de pessoas
+      jurídicas e outras entidades relevantes para as administrações tributárias do
+      governo federal, dos estados, do Distrito Federal e dos municípios.
     columns:
       - name: cnpj
         description: CNPJ
@@ -19,7 +23,7 @@ models:
       - name: natureza_juridica
         description: Natureza Jurídica
       - name: ente_federativo
-        description: Ente Federativo Responsável 
+        description: Ente Federativo Responsável
       - name: cnae_fiscal_principal
         description: CNAE Fiscal Principal
       - name: cnae_fiscal_secundaria
@@ -29,7 +33,7 @@ models:
       - name: porte
         description: Tipo do porte da empresa
       - name: matriz_filial
-        description: Identificador entre Matriz e Filial 
+        description: Identificador entre Matriz e Filial
       - name: situacao_cadastral
         description: Situação Cadastral
       - name: situacao_especial
@@ -69,11 +73,11 @@ models:
       - name: email
         description: Email
   - name: cep
-    description: "Na tabela, é possível encontrar a numeração dos CEPs, juntamente com
-    informações sobre suas localidades, tais como logradouros, bairros e cidades,
-    além de complementos e identificação geográfica compostos pela latitude e longitude.
-    Os dados foram obtidos através de uma base aberta no Kaggle e validados em relação
-    aos seus pontos de geolocalização."
+    description: Na tabela, é possível encontrar a numeração dos CEPs, juntamente
+      com informações sobre suas localidades, tais como logradouros, bairros e cidades,
+      além de complementos e identificação geográfica compostos pela latitude e longitude.
+      Os dados foram obtidos através de uma base aberta no Kaggle e validados em relação
+      aos seus pontos de geolocalização.
     columns:
       - name: cep
         description: Número do CEP
@@ -96,46 +100,48 @@ models:
       - name: centroide
         description: Centróide do CEP
   - name: br_bd_diretorios_brasil__municipio
-    description: 'Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.'
+    description: 'Diretório ligando diversos códigos institucionais de municípios
+      brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde,
+      etc.'
     columns:
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos 
+        description: ID Município - IBGE 7 Dígitos
       - name: id_municipio_6
         description: ID Município - IBGE 6 Dígitos
       - name: id_municipio_tse
         description: ID Município - Tribunal Superior Eleitoral (TSE)
       - name: id_municipio_rf
-        description: ID Município - Receita Federal (RF) 
+        description: ID Município - Receita Federal (RF)
       - name: id_municipio_bcb
         description: ID Município - Banco Central do Brasil (BCB)
       - name: nome
-        description: Nome do Município    
+        description: Nome do Município
       - name: capital_uf
         description: Município é a Capital da Unidade da Federação
       - name: id_comarca
-        description: ID Sede Comarca  
+        description: ID Sede Comarca
       - name: id_regiao_saude
         description: ID Região de Saúde
       - name: nome_regiao_saude
         description: Nome da Região de Saúde
       - name: id_regiao_imediata
-        description: ID Região Imediata - IBGE  
+        description: ID Região Imediata - IBGE
       - name: nome_regiao_imediata
         description: Nome da Região Imediata
       - name: id_regiao_intermediaria
         description: ID Região Intermediária - IBGE
       - name: nome_regiao_intermediaria
-        description: Nome da Região Intermediária 
+        description: Nome da Região Intermediária
       - name: id_microrregiao
         description: ID Microrregião - IBGE
       - name: nome_microrregiao
-        description: Nome da Microrregião  
+        description: Nome da Microrregião
       - name: id_mesorregiao
         description: ID Mesorregião - IBGE
       - name: nome_mesorregiao
         description: Nome da Mesorregião
       - name: id_regiao_metropolitana
-        description: ID Região Metropolitana - IBGE 
+        description: ID Região Metropolitana - IBGE
       - name: nome_regiao_metropolitana
         description: Nome da Região Metropolitana
       - name: ddd
@@ -153,10 +159,12 @@ models:
       - name: centroide
         description: Centróide do município
   - name: regiao_metropolitana
-    description: 'A tabela contém os códigos identificadores e nomes de Região Metropolitana (RM), Aglomeração Urbana (AU), Região Integrada de Desenvolvimento (RIDE) entre outros recortes reunidas pelo IBGE'
+    description: A tabela contém os códigos identificadores e nomes de Região Metropolitana
+      (RM), Aglomeração Urbana (AU), Região Integrada de Desenvolvimento (RIDE) entre
+      outros recortes reunidas pelo IBGE
     columns:
       - name: id_regiao_metropolitana
-        description: ID Região Metropolitana - IBGE 
+        description: ID Região Metropolitana - IBGE
       - name: nome
         description: Nome da Região Metropolitana
       - name: id_recorte_metropolitano
@@ -166,23 +174,21 @@ models:
       - name: id_subcategoria_metropolitana
         description: ID Subcategoria Metropolitana - IBGE
       - name: nome_subcategoria_metropolitana
-        description: Nome Subcategoria Metropolitana    
+        description: Nome Subcategoria Metropolitana
       - name: tipo
         description: Tipo da Região
       - name: id_municipio
         description: Lista com ID Município - IBGE 7 Dígitos
       - name: sigla_uf
-        description: Sigla da Unidade da Federação 
+        description: Sigla da Unidade da Federação
       - name: nome_regiao
         description: Nome da Grande Região
-
   - name: br_bd_diretorios_brasil__cnae_1
     description: Diretório da Classificação Nacional de Atividades Econômicas 1.0.
     columns:
       - name: cnae_1
         description: Classificação Nacional de Atividades Econômicas (CNAE) 1.0
-        tests:
-          - not_null        
+        tests: [not_null]
       - name: descricao
         description: Descrição da CNAE 1.0
       - name: grupo
@@ -197,14 +203,12 @@ models:
         description: Seção
       - name: descricao_secao
         description: Descrição da Seção
-
   - name: br_bd_diretorios_brasil__cnae_2
     description: Diretório da Classificação Nacional de Atividades Econômicas 2.0.
     columns:
       - name: cnae_2
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
-        tests:
-          - not_null
+        tests: [not_null]
       - name: descricao
         description: Descrição da CNAE 2.0
       - name: grupo
@@ -218,17 +222,17 @@ models:
       - name: secao
         description: Seção
       - name: descricao_secao
-        description: Descrição da Seção 
-
+        description: Descrição da Seção
   - name: br_bd_diretorios_brasil__cnae_2_3_subclasses
-    description: Diretório da Classificação Nacional de Atividades Econômicas - Subclasses 2.3.
+    description: Diretório da Classificação Nacional de Atividades Econômicas - Subclasses
+      2.3.
     columns:
       - name: cnae_2_3_subclasses
-        description: Classificação Nacional de Atividades Econômicas (CNAE) - Subclasses 2.3
-        tests:
-          - not_null
+        description: Classificação Nacional de Atividades Econômicas (CNAE) - Subclasses
+          2.3
+        tests: [not_null]
       - name: descricao
-        description: Descrição da CNAE - Subclasses 2.3   
+        description: Descrição da CNAE - Subclasses 2.3
       - name: cnae_2
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
       - name: descricao_cnae_2
@@ -244,4 +248,4 @@ models:
       - name: secao
         description: Seção
       - name: descricao_secao
-        description: Descrição da Seção   
+        description: Descrição da Seção

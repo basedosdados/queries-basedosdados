@@ -1,27 +1,27 @@
-{{ config(
-    alias='producao_silvicultura',
-    schema='br_ibge_pevs',
-    materialized='table',
-    partition_by={
-    "field": "ano",
-    "data_type": "int64",
-    "range": {
-        "start": 1986,
-        "end": 2022,
-        "interval": 1}
-    },
-    cluster_by = ["id_municipio"])}}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(categoria_produto AS STRING) categoria_produto,
-SAFE_CAST(tipo_produto AS STRING) tipo_produto,
-SAFE_CAST(subtipo_produto AS STRING) subtipo_produto,
-SAFE_CAST(produto AS STRING) produto,
-SAFE_CAST(unidade AS STRING) unidade,
-SAFE_CAST(quantidade AS INT64) quantidade,
-ROUND(SAFE_CAST(valor AS FLOAT64), 4) valor,
-FROM basedosdados-staging.br_ibge_pevs_staging.producao_silvicultura
-WHERE 
-    produto IS NOT NULL AND -- isso faz categorias de agregação caírem
-    quantidade IS NOT NULL -- isso faz unidade vazia cair
+{{
+    config(
+        alias="producao_silvicultura",
+        schema="br_ibge_pevs",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 1986, "end": 2022, "interval": 1},
+        },
+        cluster_by=["id_municipio"],
+    )
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(categoria_produto as string) categoria_produto,
+    safe_cast(tipo_produto as string) tipo_produto,
+    safe_cast(subtipo_produto as string) subtipo_produto,
+    safe_cast(produto as string) produto,
+    safe_cast(unidade as string) unidade,
+    safe_cast(quantidade as int64) quantidade,
+    round(safe_cast(valor as float64), 4) valor,
+from basedosdados - staging.br_ibge_pevs_staging.producao_silvicultura
+where
+    produto is not null  -- isso faz categorias de agregação caírem
+    and quantidade is not null  -- isso faz unidade vazia cair

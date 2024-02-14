@@ -1,5 +1,6 @@
+---
 version: 2
-models :
+models:
   - name: curso
     description: Dados a nível de curso.
     columns:
