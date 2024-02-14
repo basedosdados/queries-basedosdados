@@ -23,7 +23,7 @@ SELECT
   SAFE_CAST (id_ies AS STRING) AS id_ies,
   SAFE_CAST (sigla_ies AS STRING) AS sigla_ies,
   SAFE_CAST (sigla_uf_campus AS STRING) AS sigla_uf_campus,
-  SAFE_CAST (id_municipio AS STRING) AS id_municipio_campus,
+  SAFE_CAST (d1.id_municipio AS STRING) AS id_municipio_campus,
   SAFE_CAST (id_campus AS STRING) AS id_campus,
   SAFE_CAST (campus AS STRING) AS campus,
   SAFE_CAST (id_curso AS STRING) AS id_curso,
@@ -37,7 +37,7 @@ SELECT
   CASE
     WHEN periodicidade = 'Trimestral'       THEN '3'
     WHEN periodicidade = 'Quadrimestral'    THEN '4'
-    WHEN periodicidade = 'Quadrimestral'    THEN '6'
+    WHEN periodicidade = 'Semestral'        THEN '6'
     WHEN periodicidade = 'Anual'            THEN '12'
   END AS periodicidade,
   SAFE_CAST (tipo_cota AS STRING) AS tipo_cota,
@@ -64,7 +64,7 @@ SELECT
        ELSE data_nascimento
   END AS data_nascimento,
   SAFE_CAST (sigla_uf_candidato AS STRING) AS sigla_uf_candidato,
-  SAFE_CAST (id_municipio AS STRING) AS id_municipio_candidato,
+  SAFE_CAST (d2.id_municipio AS STRING) AS id_municipio_candidato,
   SAFE_CAST (opcao AS STRING) AS opcao,
   SAFE_CAST (nota_l AS FLOAT64) AS nota_l,
   SAFE_CAST (nota_ch AS FLOAT64) AS nota_ch,
@@ -99,5 +99,5 @@ SELECT
     WHEN status_matricula = 'SUBSTITUÍDA OUTRA IES'                     THEN '9'
   END AS status_matricula
 FROM `basedosdados-dev.br_mec_sisu_staging.microdados` s
-LEFT JOIN `basedosdados-dev.br_bd_diretorios_brasil.municipio` d ON LOWER(s.nome_municipio_campus) = LOWER(d.nome) 
-                                                                 AND LOWER(s.nome_municipio_candidato) = LOWER(d.nome)
+LEFT JOIN `basedosdados-dev.br_bd_diretorios_brasil.municipio` d1 ON LOWER(s.nome_municipio_campus) = LOWER(d1.nome) 
+LEFT JOIN `basedosdados-dev.br_bd_diretorios_brasil.municipio` d2 ON LOWER(s.nome_municipio_candidato) = LOWER(d2.nome)
