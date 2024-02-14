@@ -1,22 +1,27 @@
-{{ config(alias='prefect_flows',schema='br_bd_metadados') }}
-SELECT
-SAFE_CAST(flow_group_id AS STRING) flow_group_id,
-SAFE_CAST(name AS STRING) name,
-DATETIME(LEFT(flow_group_flows_aggregate_aggregate_min_created,19)) created,
-SAFE_CAST(version AS INT64) latest_version,
-DATETIME(LEFT(created,19)) last_update,
-SAFE_CAST(schedule_type AS STRING) schedule_type,
-SAFE_CAST(schedule_cron AS STRING) schedule_cron,
-DATETIME(TRIM(JSON_EXTRACT(schedule_start_date,'$.dt'),'"')) schedule_start_date,
-SAFE_CAST(schedule_filters AS STRING) schedule_filters,
-SAFE_CAST(schedule_adjustments AS STRING) schedule_adjustments,
-SAFE_CAST(schedule_labels AS STRING) schedule_labels,
-SAFE_CAST(schedule_parameter_defaults AS STRING) schedule_all_parameters,
-SAFE_CAST(schedule_parameters_dataset_id AS STRING) schedule_parameters_dataset_id,
-SAFE_CAST(schedule_parameters_table_id AS STRING) schedule_parameters_table_id,
-SAFE_CAST(schedule_parameters_dbt_alias AS BOOL) schedule_parameters_dbt_alias,
-SAFE_CAST(schedule_parameters_materialization_mode AS STRING) schedule_parameters_materialization_mode,
-SAFE_CAST(schedule_parameters_materialize_after_dump AS BOOL) schedule_parameters_materialize_after_dump,
-SAFE_CAST(schedule_parameters_update_metadata AS BOOL) schedule_parameters_update_metadata,
-FROM basedosdados-staging.br_bd_metadados_staging.prefect_flows AS t
-
+{{ config(alias="prefect_flows", schema="br_bd_metadados") }}
+select
+    safe_cast(flow_group_id as string) flow_group_id,
+    safe_cast(name as string) name,
+    datetime(left(flow_group_flows_aggregate_aggregate_min_created, 19)) created,
+    safe_cast(version as int64) latest_version,
+    datetime(left(created, 19)) last_update,
+    safe_cast(schedule_type as string) schedule_type,
+    safe_cast(schedule_cron as string) schedule_cron,
+    datetime(trim(json_extract(schedule_start_date, '$.dt'), '"')) schedule_start_date,
+    safe_cast(schedule_filters as string) schedule_filters,
+    safe_cast(schedule_adjustments as string) schedule_adjustments,
+    safe_cast(schedule_labels as string) schedule_labels,
+    safe_cast(schedule_parameter_defaults as string) schedule_all_parameters,
+    safe_cast(schedule_parameters_dataset_id as string) schedule_parameters_dataset_id,
+    safe_cast(schedule_parameters_table_id as string) schedule_parameters_table_id,
+    safe_cast(schedule_parameters_dbt_alias as bool) schedule_parameters_dbt_alias,
+    safe_cast(
+        schedule_parameters_materialization_mode as string
+    ) schedule_parameters_materialization_mode,
+    safe_cast(
+        schedule_parameters_materialize_after_dump as bool
+    ) schedule_parameters_materialize_after_dump,
+    safe_cast(
+        schedule_parameters_update_metadata as bool
+    ) schedule_parameters_update_metadata,
+from `basedosdados-staging.br_bd_metadados_staging.prefect_flows ` as t

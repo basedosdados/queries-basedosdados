@@ -1,121 +1,117 @@
+---
 version: 2
-
 models:
   - name: br_ibge_pib__municipio
     description: Produto Interno Bruto (PIB) municipal a preços correntes
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - ano
-              - id_municipio
+          combination_of_columns: [ano, id_municipio]
     columns:
       - name: ano
         description: Ano
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 Dígitos
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: pib
         description: Produto Interno Bruto a preços correntes
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: impostos_liquidos
         description: Impostos, líquidos de subsídios, sobre produtos a preços correntes
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: va
         description: Valor adicionado bruto a preços correntes total
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: va_agropecuaria
         description: Valor adicionado bruto a preços correntes da agropecuária
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: va_industria
         description: Valor adicionado bruto a preços correntes da indústria
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: va_servicos
         description: Valor adicionado bruto a preços correntes dos serviços, exclusive
-            administração, defesa, educação e saúde públicas e seguridade social
+          administração, defesa, educação e saúde públicas e seguridade social
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: va_adespss
         description: Valor adicionado bruto a preços correntes da administração, defesa,
-            educação e saúde públicas e seguridade social
+          educação e saúde públicas e seguridade social
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
   - name: br_ibge_pib__gini
-    description: Índice de Gini do produto interno bruto a preços correntes e do valor adicionado bruto a preços correntes por atividade econômica - Referência 2010
+    description: Índice de Gini do produto interno bruto a preços correntes e do valor
+      adicionado bruto a preços correntes por atividade econômica - Referência 2010
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - id_uf
-              - ano
+          combination_of_columns: [id_uf, ano]
     columns:
       - name: id_uf
         description: ID UF - IBGE 2 Dígitos
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: id_uf
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: id_uf
       - name: ano
         description: Ano
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano
       - name: gini_pib
         description: Índice de Gini da distribuição do produto interno bruto a preços
-            correntes
+          correntes
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: gini_va_agro
         description: Índice de Gini da distribuição do valor adicionado bruto a preços
-            correntes da agropecuária
+          correntes da agropecuária
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: gini_va_industria
         description: Índice de Gini da distribuição do valor adicionado bruto a preços
-            correntes da indústria
+          correntes da indústria
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: gini_va_servicos
         description: Índice de Gini da distribuição do valor adicionado bruto a preços
-            correntes dos serviços, exclusive administração, defesa, educação e saúde
-            públicas e seguridade social
+          correntes dos serviços, exclusive administração, defesa, educação e saúde
+          públicas e seguridade social
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
+              at_least: 0.05
       - name: gini_va_adespss
         description: Índice de Gini da distribuição do valor adicionado bruto a preços
-            correntes da administração, defesa, educação e saúde públicas e seguridade
-            social
+          correntes da administração, defesa, educação e saúde públicas e seguridade
+          social
         tests:
           - dbt_utils.not_null_proportion:
-                at_least: 0.05
-
+              at_least: 0.05

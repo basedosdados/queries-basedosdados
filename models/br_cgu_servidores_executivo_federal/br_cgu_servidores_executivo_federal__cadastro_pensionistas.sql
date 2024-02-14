@@ -1,28 +1,18 @@
 {{
     config(
-        schema = 'br_cgu_servidores_executivo_federal',
-        alias = 'cadastro_pensionistas',
-        materialized='table',
+        schema="br_cgu_servidores_executivo_federal",
+        alias="cadastro_pensionistas",
+        materialized="table",
         partition_by={
-            'field': 'ano',
-            'data_type': 'int64',
-            'range': {
-                "start": 2020,
-                "end": 2023,
-                "interval": 1
-            }
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2020, "end": 2023, "interval": 1},
         },
-        cluster_by=['ano', 'mes'],
-        post_hook = [
-          'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter
-                      ON {{this}}
-                      GRANT TO ("allUsers")
-                      FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 7)',
-          'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                      ON  {{this}}
-                      GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 7)'
-        ]
+        cluster_by=["ano", "mes"],
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 7)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 7)',
+        ],
     )
 }}
 
@@ -70,26 +60,35 @@ select
     ) jornada_trabalho_instituidor_pensao,
     (
         case
-            when data_ingresso_cargo_funcao_instituidor_pensao = "Não informada" then null
+            when data_ingresso_cargo_funcao_instituidor_pensao = "Não informada"
+            then null
             else parse_date('%d/%m/%Y', data_ingresso_cargo_funcao_instituidor_pensao)
         end
     ) as data_ingresso_cargo_funcao_instituidor_pensao,
     (
         case
-            when data_nomeacao_cargo_funcao_instituidor_pensao = "Não informada" then null
+            when data_nomeacao_cargo_funcao_instituidor_pensao = "Não informada"
+            then null
             else parse_date('%d/%m/%Y', data_nomeacao_cargo_funcao_instituidor_pensao)
         end
     ) as data_nomeacao_cargo_funcao_instituidor_pensao,
     (
         case
-            when data_ingresso_orgao_instituidor_pensao = "Não informada" then null
+            when data_ingresso_orgao_instituidor_pensao = "Não informada"
+            then null
             else parse_date('%d/%m/%Y', data_ingresso_orgao_instituidor_pensao)
         end
     ) as data_ingresso_orgao_instituidor_pensao,
     (
         case
-            when data_diploma_ingresso_servico_publico_instituidor_pensao = "Não informada" then null
-            else parse_date('%d/%m/%Y', data_diploma_ingresso_servico_publico_instituidor_pensao)
+            when
+                data_diploma_ingresso_servico_publico_instituidor_pensao
+                = "Não informada"
+            then null
+            else
+                parse_date(
+                    '%d/%m/%Y', data_diploma_ingresso_servico_publico_instituidor_pensao
+                )
         end
     ) as data_diploma_ingresso_servico_publico_instituidor_pensao,
     safe_cast(

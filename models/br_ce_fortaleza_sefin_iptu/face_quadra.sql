@@ -1,15 +1,15 @@
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_face_quadra AS STRING) id_face_quadra,
-REPLACE(logradouro, "nan", "") logradouro,
-SAFE_CAST(metrica AS STRING) metrica,
-SAFE_CAST(pavimentacao AS STRING) pavimentacao,
-SAFE_CAST(indicador_agua AS BOOL) indicador_agua,
-SAFE_CAST(indicador_esgoto AS BOOL) indicador_esgoto,
-SAFE_CAST(indicador_galeria_pluvial AS BOOL) indicador_galeria_pluvial,
-SAFE_CAST(indicador_sarjeta AS BOOL) indicador_sarjeta,
-SAFE_CAST(indicador_iluminacao_publica AS BOOL) indicador_iluminacao_publica,
-SAFE_CAST(indicador_arborizacao AS BOOL) indicador_arborizacao,
-SAFE.ST_GEOGFROMTEXT(geometria) centroide,
-SAFE_CAST(valor AS float64) valor
-FROM basedosdados-staging.br_ce_fortaleza_sefin_iptu_staging.face_quadra AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(id_face_quadra as string) id_face_quadra,
+    replace(logradouro, "nan", "") logradouro,
+    safe_cast(metrica as string) metrica,
+    safe_cast(pavimentacao as string) pavimentacao,
+    safe_cast(indicador_agua as bool) indicador_agua,
+    safe_cast(indicador_esgoto as bool) indicador_esgoto,
+    safe_cast(indicador_galeria_pluvial as bool) indicador_galeria_pluvial,
+    safe_cast(indicador_sarjeta as bool) indicador_sarjeta,
+    safe_cast(indicador_iluminacao_publica as bool) indicador_iluminacao_publica,
+    safe_cast(indicador_arborizacao as bool) indicador_arborizacao,
+    safe.st_geogfromtext(geometria) centroide,
+    safe_cast(valor as float64) valor
+from `basedosdados-staging.br_ce_fortaleza_sefin_iptu_staging.face_quadra ` as t

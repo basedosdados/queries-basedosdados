@@ -1,27 +1,30 @@
-{{ config(
-    alias='beef_slaughterhouses', 
-    schema='br_trase_supply_chain') 
-}}
+{{ config(alias="beef_slaughterhouses", schema="br_trase_supply_chain") }}
 
 
-SELECT
-SAFE_CAST(the_geom AS STRING) geom_id,
-SAFE_CAST(cartodb_id AS STRING) cartodb_id,
-SAFE_CAST(the_geom_webmercator AS STRING) geom_webmercator_id,
-SAFE_CAST(geocode AS STRING) municipality_id,
-SAFE_CAST(state AS STRING) state,
-SAFE_CAST(address AS STRING) address,
-SAFE_CAST(id AS STRING) slaugtherhouse_id,
-SAFE_CAST(company AS STRING) company,
-SAFE_CAST(other_names AS STRING) other_company_names,
-SAFE_CAST(multifunctions AS STRING) multifunctions,
-SAFE_CAST(resolution AS STRING) resolution_id,
-SAFE_CAST(subclass AS STRING) subclass,
-SAFE_CAST(inspection_level AS STRING) inspection_level,
-SAFE_CAST(REPLACE(inspection_number, 'NA', '') AS STRING) inspection_number,
-SAFE_CAST(REPLACE(tac, 'NA', '') AS STRING) tac,
-SAFE_CAST(REGEXP_REPLACE(status, r'(?i)^NA$', '') AS STRING) status,
-SAFE_CAST(FORMAT_DATE('%Y-%m-%d', SAFE.PARSE_DATE('%d/%m/%Y', date_sif_registered)) AS STRING) date_sif_registered,
-SAFE_CAST(REPLACE(sif_category,'NA','') AS STRING) sif_category,
-SAFE_CAST(ST_GEOGPOINT(SAFE_CAST(long AS FLOAT64),SAFE_CAST(lat AS FLOAT64)) as GEOGRAPHY) point
-FROM basedosdados-staging.br_trase_supply_chain_staging.beef_slaughterhouses AS t
+select
+    safe_cast(the_geom as string) geom_id,
+    safe_cast(cartodb_id as string) cartodb_id,
+    safe_cast(the_geom_webmercator as string) geom_webmercator_id,
+    safe_cast(geocode as string) municipality_id,
+    safe_cast(state as string) state,
+    safe_cast(address as string) address,
+    safe_cast(id as string) slaugtherhouse_id,
+    safe_cast(company as string) company,
+    safe_cast(other_names as string) other_company_names,
+    safe_cast(multifunctions as string) multifunctions,
+    safe_cast(resolution as string) resolution_id,
+    safe_cast(subclass as string) subclass,
+    safe_cast(inspection_level as string) inspection_level,
+    safe_cast(replace(inspection_number, 'NA', '') as string) inspection_number,
+    safe_cast(replace(tac, 'NA', '') as string) tac,
+    safe_cast(regexp_replace(status, r'(?i)^NA$', '') as string) status,
+    safe_cast(
+        format_date(
+            '%Y-%m-%d', safe.parse_date('%d/%m/%Y', date_sif_registered)
+        ) as string
+    ) date_sif_registered,
+    safe_cast(replace(sif_category, 'NA', '') as string) sif_category,
+    safe_cast(
+        st_geogpoint(safe_cast(long as float64), safe_cast(lat as float64)) as geography
+    ) point
+from `basedosdados-staging.br_trase_supply_chain_staging.beef_slaughterhouses ` as t

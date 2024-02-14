@@ -1,11 +1,11 @@
-SELECT
-SAFE_CAST(id AS STRING) id,
-SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(descricao AS STRING) descricao,
-SAFE_CAST(email AS STRING) email,
-SAFE_CAST(twitter AS STRING) twitter,
-SAFE_CAST(github AS STRING) github,
-SAFE_CAST(website AS STRING) website,
-SAFE_CAST(linkedin AS STRING) linkedin,
-SAFE_CAST(url_foto AS STRING) url_foto
-FROM basedosdados-staging.br_bd_indicadores_staging.pessoas AS t
+select
+    safe_cast(id as string) id,
+    safe_cast(nome as string) nome,
+    safe_cast(descricao as string) descricao,
+    safe_cast(email as string) email,
+    safe_cast(twitter as string) twitter,
+    safe_cast(github as string) github,
+    safe_cast(website as string) website,
+    safe_cast(linkedin as string) linkedin,
+    safe_cast(url_foto as string) url_foto
+from `basedosdados-staging.br_bd_indicadores_staging.pessoas ` as t

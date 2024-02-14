@@ -1,51 +1,48 @@
 {{
-  config(
-    alias = 'licitacao',
-    schema = "world_wb_mides",
-    materialized = "table",
-    partition_by = {
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2009,
-        "end": 2021,
-        "interval": 1}
-    },
-    cluster_by = ["mes", "sigla_uf"],
-    labels = {"tema": "economia"}
-  )
- }}
-SELECT
-    SAFE_CAST(ano AS INT64) ano,
-    SAFE_CAST(mes AS INT64) mes,
-    SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-    SAFE_CAST(id_municipio AS STRING) id_municipio,
-    SAFE_CAST(orgao AS STRING) orgao,
-    SAFE_CAST(id_unidade_gestora AS STRING) id_unidade_gestora,
-    SAFE_CAST(id_licitacao_bd AS STRING) id_licitacao_bd,
-    SAFE_CAST(id_licitacao AS STRING) id_licitacao,
-    SAFE_CAST(id_dispensa AS STRING) id_dispensa,
-    SAFE_CAST(ano_processo AS INT64) ano_processo,
-    SAFE_CAST(data_abertura AS DATE) data_abertura,
-    SAFE_CAST(data_edital AS DATE) data_edital,
-    SAFE_CAST(data_homologacao AS DATE) data_homologacao,
-    SAFE_CAST(data_publicacao_dispensa AS DATE) data_publicacao_dispensa,
-    SAFE_CAST(descricao_objeto AS STRING) descricao_objeto,
-    SAFE_CAST(natureza_objeto AS STRING) natureza_objeto,
-    SAFE_CAST(modalidade AS STRING) modalidade,
-    SAFE_CAST(natureza_processo AS STRING) natureza_processo,
-    SAFE_CAST(tipo AS STRING) tipo,
-    SAFE_CAST(forma_pagamento AS STRING) forma_pagamento,
-    SAFE_CAST(valor_orcamento AS FLOAT64) valor_orcamento,
-    SAFE_CAST(valor AS FLOAT64) valor,
-    SAFE_CAST(valor_corrigido AS FLOAT64) valor_corrigido,
-    SAFE_CAST(situacao AS STRING) situacao,
-    SAFE_CAST(estagio AS STRING) estagio,
-    SAFE_CAST(preferencia_micro_pequena AS STRING) preferencia_micro_pequena,
-    SAFE_CAST(exclusiva_micro_pequena AS STRING) exclusiva_micro_pequena,
-    SAFE_CAST(contratacao AS STRING) contratacao,
-    SAFE_CAST(quantidade_convidados AS INT64) quantidade_convidados,
-    SAFE_CAST(tipo_cadastro AS STRING) tipo_cadastro,
-    SAFE_CAST(carona AS STRING) carona,
-    SAFE_CAST(covid_19 AS STRING) covid_19
-FROM `basedosdados-staging.world_wb_mides_staging.licitacao` AS t
+    config(
+        alias="licitacao",
+        schema="world_wb_mides",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2009, "end": 2021, "interval": 1},
+        },
+        cluster_by=["mes", "sigla_uf"],
+        labels={"tema": "economia"},
+    )
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(orgao as string) orgao,
+    safe_cast(id_unidade_gestora as string) id_unidade_gestora,
+    safe_cast(id_licitacao_bd as string) id_licitacao_bd,
+    safe_cast(id_licitacao as string) id_licitacao,
+    safe_cast(id_dispensa as string) id_dispensa,
+    safe_cast(ano_processo as int64) ano_processo,
+    safe_cast(data_abertura as date) data_abertura,
+    safe_cast(data_edital as date) data_edital,
+    safe_cast(data_homologacao as date) data_homologacao,
+    safe_cast(data_publicacao_dispensa as date) data_publicacao_dispensa,
+    safe_cast(descricao_objeto as string) descricao_objeto,
+    safe_cast(natureza_objeto as string) natureza_objeto,
+    safe_cast(modalidade as string) modalidade,
+    safe_cast(natureza_processo as string) natureza_processo,
+    safe_cast(tipo as string) tipo,
+    safe_cast(forma_pagamento as string) forma_pagamento,
+    safe_cast(valor_orcamento as float64) valor_orcamento,
+    safe_cast(valor as float64) valor,
+    safe_cast(valor_corrigido as float64) valor_corrigido,
+    safe_cast(situacao as string) situacao,
+    safe_cast(estagio as string) estagio,
+    safe_cast(preferencia_micro_pequena as string) preferencia_micro_pequena,
+    safe_cast(exclusiva_micro_pequena as string) exclusiva_micro_pequena,
+    safe_cast(contratacao as string) contratacao,
+    safe_cast(quantidade_convidados as int64) quantidade_convidados,
+    safe_cast(tipo_cadastro as string) tipo_cadastro,
+    safe_cast(carona as string) carona,
+    safe_cast(covid_19 as string) covid_19
+from `basedosdados-staging.world_wb_mides_staging.licitacao` as t

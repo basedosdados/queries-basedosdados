@@ -1,223 +1,370 @@
-{{ 
-  config(
-    schema='br_ms_sinan',
-    materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2008,
-        "end": 2025,
-        "interval": 1}
-    },
-    labels =  {'tema': 'saude'}
+{{
+    config(
+        schema="br_ms_sinan",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2008, "end": 2025, "interval": 1},
+        },
+        labels={"tema": "saude"},
     )
- }}
+}}
 
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(data_notificacao AS DATE) data_notificacao,
-SAFE_CAST(id_municipio_notificacao AS STRING) id_municipio_notificacao,
-SAFE_CAST(id_municipio_6_notificacao AS STRING) id_municipio_6_notificacao,
-SAFE_CAST(sistema AS STRING) sistema,
-SAFE_CAST(id_estabelecimento_cnes AS STRING) id_estabelecimento_cnes,
-SAFE_CAST(semana_notificacao AS INT64) semana_notificacao,
-SAFE_CAST(data_primeiros_sintomas AS DATE) data_primeiros_sintomas,
-SAFE_CAST(semana_sintomas AS INT64) semana_sintomas,
-SAFE_CAST(SAFE_CAST(paciente_estrangeiro AS NUMERIC) AS STRING) paciente_estrangeiro,
-SAFE_CAST(pais_residencia AS STRING) pais_residencia,
-SAFE_CAST(sigla_uf_residencia AS STRING) sigla_uf_residencia,
-SAFE_CAST(id_municipio_residencia AS STRING) id_municipio_residencia,
-SAFE_CAST(id_municipio_6_residencia AS STRING) id_municipio_6_residencia,
-SAFE_CAST(SAFE_CAST(zona_residencia AS NUMERIC) AS STRING) zona_residencia,
-SAFE_CAST(SAFE_CAST(caso_natural_residencia AS NUMERIC) AS STRING) caso_natural_residencia,
-SAFE_CAST(data_nascimento AS STRING) data_nascimento,
-SAFE_CAST(SAFE_CAST(sexo AS NUMERIC) AS STRING)  sexo,
-SAFE_CAST(SAFE_CAST(raca_cor AS NUMERIC) AS STRING) raca_cor,
-SAFE_CAST(etnia AS STRING) etnia,
-SAFE_CAST(SAFE_CAST(gestante AS NUMERIC) AS STRING) gestante,
-SAFE_CAST(SAFE_CAST(puerpera AS NUMERIC) AS STRING) puerpera,
-SAFE_CAST(SAFE_CAST(escolaridade AS NUMERIC) AS STRING) escolaridade,
-SAFE_CAST(SAFE_CAST(ocupacao AS NUMERIC) AS STRING) ocupacao,
-SAFE_CAST(SAFE_CAST(doenca_relacionada_trabalho AS NUMERIC) AS STRING) doenca_relacionada_trabalho,
-SAFE_CAST(SAFE_CAST(tabagista AS NUMERIC) AS STRING) tabagista,
-SAFE_CAST(SAFE_CAST(sindrome_gripal AS NUMERIC) AS STRING) sindrome_gripal,
-SAFE_CAST(SAFE_CAST(infeccao_hospitalar AS NUMERIC) AS STRING) infeccao_hospitalar,
-SAFE_CAST(SAFE_CAST(contato_aves_suinos AS NUMERIC) AS STRING) contato_aves_suinos,
-SAFE_CAST(SAFE_CAST(contato_outro_animal AS NUMERIC) AS STRING) contato_outro_animal,
-SAFE_CAST(SAFE_CAST(apresenta_febre AS NUMERIC) AS STRING) apresenta_febre,
-SAFE_CAST(SAFE_CAST(apresenta_tosse AS NUMERIC) AS STRING) apresenta_tosse,
-SAFE_CAST(SAFE_CAST(apresenta_calafrio AS NUMERIC) AS STRING) apresenta_calafrio,
-SAFE_CAST(SAFE_CAST(apresenta_dor_garganta AS NUMERIC) AS STRING) apresenta_dor_garganta,
-SAFE_CAST(SAFE_CAST(apresenta_dispneia AS NUMERIC) AS STRING) apresenta_dispneia,
-SAFE_CAST(SAFE_CAST(apresenta_artralgia AS NUMERIC) AS STRING) apresenta_artralgia,
-SAFE_CAST(SAFE_CAST(apresenta_mialgia AS NUMERIC) AS STRING) apresenta_mialgia,
-SAFE_CAST(SAFE_CAST(apresenta_conjuntivite AS NUMERIC) AS STRING) apresenta_conjuntivite,
-SAFE_CAST(SAFE_CAST(apresenta_coriza AS NUMERIC) AS STRING) apresenta_coriza,
-SAFE_CAST(SAFE_CAST(apresenta_desconforto_respiratorio AS NUMERIC) AS STRING) apresenta_desconforto_respiratorio,
-SAFE_CAST(SAFE_CAST(apresenta_saturacao_anormal AS NUMERIC) AS STRING) apresenta_saturacao_anormal,
-SAFE_CAST(SAFE_CAST(apresenta_diarreia AS NUMERIC) AS STRING) apresenta_diarreia,
-SAFE_CAST(SAFE_CAST(apresenta_vomito AS NUMERIC) AS STRING) apresenta_vomito,
-SAFE_CAST(SAFE_CAST(apresenta_dor_abdominal AS NUMERIC) AS STRING) apresenta_dor_abdominal,
-SAFE_CAST(SAFE_CAST(apresenta_fadiga AS NUMERIC) AS STRING) apresenta_fadiga,
-SAFE_CAST(SAFE_CAST(apresenta_perda_olfato AS NUMERIC) AS STRING) apresenta_perda_olfato,
-SAFE_CAST(SAFE_CAST(apresenta_perda_paladar AS NUMERIC) AS STRING) apresenta_perda_paladar,
-SAFE_CAST(SAFE_CAST(apresenta_outros_sintomas AS NUMERIC) AS STRING) apresenta_outros_sintomas,
-SAFE_CAST(qual_outro_sintoma AS STRING) qual_outro_sintoma,
-SAFE_CAST(SAFE_CAST(apresenta_fator_risco AS NUMERIC) AS STRING) apresenta_fator_risco,
-SAFE_CAST(SAFE_CAST(possui_cardiopatia AS NUMERIC) AS STRING) possui_cardiopatia,
-SAFE_CAST(SAFE_CAST(possui_pneumopatia AS NUMERIC) AS STRING) possui_pneumopatia,
-SAFE_CAST(SAFE_CAST(possui_hemoglobinopatia AS NUMERIC) AS STRING) possui_hemoglobinopatia,
-SAFE_CAST(SAFE_CAST(possui_doenca_metabolica AS NUMERIC) AS STRING) possui_doenca_metabolica,
-SAFE_CAST(SAFE_CAST(possui_sindrome_down AS NUMERIC) AS STRING) possui_sindrome_down,
-SAFE_CAST(SAFE_CAST(possui_hepatite AS NUMERIC) AS STRING) possui_hepatite,
-SAFE_CAST(SAFE_CAST(possui_doenca_neurologica AS NUMERIC) AS STRING) possui_doenca_neurologica,
-SAFE_CAST(SAFE_CAST(possui_imunodeficiencia AS NUMERIC) AS STRING) possui_imunodeficiencia,
-SAFE_CAST(SAFE_CAST(possui_doenca_renal AS NUMERIC) AS STRING) possui_doenca_renal,
-SAFE_CAST(SAFE_CAST(possui_obesidade AS NUMERIC) AS STRING) possui_obesidade,
-SAFE_CAST(imc_obeso AS STRING) imc_obeso,
-SAFE_CAST(SAFE_CAST(possui_hematologia AS NUMERIC) AS STRING) possui_hematologia,
-SAFE_CAST(SAFE_CAST(possui_asma AS NUMERIC) AS STRING) possui_asma,
-SAFE_CAST(SAFE_CAST(possui_diabetes AS NUMERIC) AS STRING) possui_diabetes,
-SAFE_CAST(SAFE_CAST(possui_outra_morbidade AS NUMERIC) AS STRING) possui_outra_morbidade,
-SAFE_CAST(qual_outra_morbidade AS STRING) qual_outra_morbidade,
-SAFE_CAST(SAFE_CAST(vacina_gripe AS NUMERIC) AS STRING) vacina_gripe,
-SAFE_CAST(data_ultima_dose AS DATE) data_ultima_dose,
-SAFE_CAST(SAFE_CAST(vacina_gripe_mae AS NUMERIC) AS STRING) vacina_gripe_mae,
-SAFE_CAST(data_vacina_mae AS DATE) data_vacina_mae,
-SAFE_CAST(SAFE_CAST(mae_amamenta AS NUMERIC) AS STRING) mae_amamenta,
-SAFE_CAST(data_vacina_crianca_dose_unica AS DATE) data_vacina_crianca_dose_unica,
-SAFE_CAST(data_vacina_crianca_1dose AS DATE) data_vacina_crianca_1dose,
-SAFE_CAST(data_vacina_crianca_2dose AS DATE) data_vacina_crianca_2dose,
-SAFE_CAST(SAFE_CAST(vacina_covid AS NUMERIC) AS STRING) vacina_covid,
-SAFE_CAST(data_vacina_covid_dose_1 AS DATE) data_vacina_covid_dose1,
-SAFE_CAST(data_vacina_covid_dose_2 AS DATE) data_vacina_covid_dose2,
-SAFE_CAST(laboratorio_vacina_covid AS STRING) laboratorio_vacina_covid,
-SAFE_CAST(lote_dose1_vacina_covid AS STRING) lote_dose1_vacina_covid,
-SAFE_CAST(lote_dose2_vacina_covid AS STRING) lote_dose2_vacina_covid,
-SAFE_CAST(SAFE_CAST(fonte_dados_vacina_covid AS NUMERIC) AS STRING) fonte_dados_vacina_covid,
-SAFE_CAST(SAFE_CAST(antiviral_gripe AS NUMERIC) AS STRING) antiviral_gripe,
-SAFE_CAST(SAFE_CAST(tipo_antiviral AS NUMERIC) AS STRING) tipo_antiviral,
-SAFE_CAST(outro_tipo_antiviral AS STRING) outro_tipo_antiviral,
-SAFE_CAST(data_tratamento_antiviral AS DATE) data_tratamento_antiviral,
-SAFE_CAST(SAFE_CAST(internacao AS NUMERIC) AS STRING) internacao,
-SAFE_CAST(data_internacao AS DATE) data_internacao,
-SAFE_CAST(sigla_uf_internacao AS STRING) sigla_uf_internacao,
-SAFE_CAST(SAFE_CAST(id_regional_saude_internacao AS NUMERIC) AS STRING) id_regional_saude_internacao,
-SAFE_CAST(SAFE_CAST(id_municipio_internacao AS NUMERIC) AS STRING) id_municipio_internacao,
-SAFE_CAST(SAFE_CAST(id_municipio_6_internacao AS NUMERIC) AS STRING) id_municipio_6_internacao,
-SAFE_CAST(SAFE_CAST(internacao_uti AS NUMERIC) AS STRING) internacao_uti,
-SAFE_CAST(data_entrada_uti AS DATE) data_entrada_uti,
-SAFE_CAST(data_saida_uti AS DATE) data_saida_uti,
-SAFE_CAST(SAFE_CAST(suporte_ventilatorio AS NUMERIC) AS STRING) suporte_ventilatorio,
-SAFE_CAST(SAFE_CAST(resultado_raiox_torax AS NUMERIC) AS STRING) resultado_raiox_torax,
-SAFE_CAST(SAFE_CAST(outro_resultado_raiox AS NUMERIC) AS STRING) outro_resultado_raiox,
-SAFE_CAST(data_raiox AS DATE) data_raiox,
-SAFE_CAST(SAFE_CAST(resultado_tomografia AS NUMERIC) AS STRING) resultado_tomografia,
-SAFE_CAST(outro_resultado_tomografia AS STRING) outro_resultado_tomografia,
-SAFE_CAST(data_tomografia AS DATE) data_tomografia,
-SAFE_CAST(SAFE_CAST(coleta_amostra AS NUMERIC) AS STRING) coleta_amostra,
-SAFE_CAST(data_coleta AS DATE) data_coleta,
-SAFE_CAST(SAFE_CAST(tipo_amostra AS NUMERIC) AS STRING) tipo_amostra,
-SAFE_CAST(outro_tipo_amostra AS STRING) outro_tipo_amostra,
-SAFE_CAST(SAFE_CAST(resultado_amostra AS NUMERIC) AS STRING) resultado_amostra,
-SAFE_CAST(data_coleta_hemaglutinacao AS DATE) data_coleta_hemaglutinacao,
-SAFE_CAST(SAFE_CAST(resultado_hemaglutinacao AS NUMERIC) AS STRING) resultado_hemaglutinacao,
-SAFE_CAST(SAFE_CAST(tipo_resultado_hemaglutinacao AS NUMERIC) AS STRING) tipo_resultado_hemaglutinacao,
-SAFE_CAST(SAFE_CAST(hemaglutinacao_tipo_hemaglutinina AS NUMERIC) AS STRING) hemaglutinacao_tipo_hemaglutinina,
-SAFE_CAST(SAFE_CAST(hemaglutinacao_tipo_neuraminidase AS NUMERIC) AS STRING) hemaglutinacao_tipo_neuraminidase,
-SAFE_CAST(SAFE_CAST(tipo_pcr AS NUMERIC) AS STRING) tipo_pcr,
-SAFE_CAST(data_coleta_pcr AS DATE) data_coleta_pcr,
-SAFE_CAST(SAFE_CAST(tipo_amostra_pcr AS NUMERIC) AS STRING) tipo_amostra_pcr,
-SAFE_CAST(qual_outro_tipo_amostra_pcr AS STRING) qual_outro_tipo_amostra_pcr,
-SAFE_CAST(data_resultado_pcr AS STRING) data_resultado_pcr,
-SAFE_CAST(SAFE_CAST(resultado_pcr AS NUMERIC) AS STRING) resultado_pcr,
-SAFE_CAST(SAFE_CAST(diagnostico_pcr AS NUMERIC) AS STRING) diagnostico_pcr,
-SAFE_CAST(SAFE_CAST(id_laboratorio_pcr AS NUMERIC) AS STRING) id_laboratorio_pcr,
-SAFE_CAST(SAFE_CAST(tipo_resultado_pcr AS NUMERIC) AS STRING) tipo_resultado_pcr,
-SAFE_CAST(SAFE_CAST(pcr_tipo_hemaglutinina AS NUMERIC) AS STRING) pcr_tipo_hemaglutinina,
-SAFE_CAST(SAFE_CAST(pcr_tipo_neuraminidase AS NUMERIC) AS STRING) pcr_tipo_neuraminidase,
-SAFE_CAST(SAFE_CAST(pcr_positivo_influenza AS NUMERIC) AS STRING) pcr_positivo_influenza,
-SAFE_CAST(SAFE_CAST(tipo_influenza_pcr AS NUMERIC) AS STRING) tipo_influenza_pcr,
-SAFE_CAST(SAFE_CAST(subtipo_influenza_a AS NUMERIC) AS STRING) subtipo_influenza_a,
-SAFE_CAST(outro_subtitpo_influenza AS STRING) outro_subtitpo_influenza,
-SAFE_CAST(SAFE_CAST(linhagem_influeza_b as NUMERIC) AS STRING) linhagem_influeza_b,
-SAFE_CAST(outra_linhagem_influenza_b AS STRING) outra_linhagem_influenza_b,
-SAFE_CAST(SAFE_CAST(pcr_positivo_outro_virus AS NUMERIC) AS STRING) pcr_positivo_outro_virus,
-SAFE_CAST(SAFE_CAST(pcr_sarscov2 AS NUMERIC) AS INT64) pcr_sarscov2,
-SAFE_CAST(SAFE_CAST(pcr_virus_sincicial_respiratorio AS NUMERIC) AS INT64) pcr_virus_sincicial_respiratorio,
-SAFE_CAST(SAFE_CAST(pcr_parainfluenza_1 AS NUMERIC) AS STRING) pcr_parainfluenza_1,
-SAFE_CAST(SAFE_CAST(pcr_parainfluenza_2 AS NUMERIC) AS STRING) pcr_parainfluenza_2,
-SAFE_CAST(SAFE_CAST(pcr_parainfluenza_3 AS NUMERIC) AS STRING) pcr_parainfluenza_3,
-SAFE_CAST(SAFE_CAST(pcr_parainfluenza_4 AS NUMERIC) AS STRING) pcr_parainfluenza_4,
-SAFE_CAST(SAFE_CAST(pcr_adenovirus AS NUMERIC) AS INT64) pcr_adenovirus,
-SAFE_CAST(SAFE_CAST(pcr_metapneumovirus AS NUMERIC) AS INT64) pcr_metapneumovirus,
-SAFE_CAST(SAFE_CAST(pcr_bocavirus AS NUMERIC) AS INT64) pcr_bocavirus,
-SAFE_CAST(SAFE_CAST(pcr_rinovirus AS NUMERIC) AS INT64) pcr_rinovirus,
-SAFE_CAST(SAFE_CAST(pcr_outro_virus AS NUMERIC) AS STRING) pcr_outro_virus,
-SAFE_CAST(qual_outro_virus AS STRING) qual_outro_virus,
-SAFE_CAST(SAFE_CAST(diagnostico_imunofluorescencia AS NUMERIC) AS STRING) diagnostico_imunofluorescencia,
-SAFE_CAST(SAFE_CAST(resultado_imunofluorescencia AS NUMERIC) AS STRING) resultado_imunofluorescencia,
-SAFE_CAST(data_resultado_imunofluorescencia AS DATE) data_resultado_imunofluorescencia,
-SAFE_CAST(SAFE_CAST(id_laboratorio_imunofluorescencia AS NUMERIC) AS STRING) id_laboratorio_imunofluorescencia,
-SAFE_CAST(SAFE_CAST(diagnostico_influenza_a AS NUMERIC) AS STRING) diagnostico_influenza_a,
-SAFE_CAST(SAFE_CAST(diagnostico_subtipo_influenza_a AS NUMERIC) AS STRING) diagnostico_subtipo_influenza_a,
-SAFE_CAST(SAFE_CAST(diagnostico_influenza_b AS NUMERIC) AS STRING) diagnostico_influenza_b,
-SAFE_CAST(SAFE_CAST(diagnostico_virus_sincicial_respiratorio AS NUMERIC) AS STRING) diagnostico_virus_sincicial_respiratorio,
-SAFE_CAST(SAFE_CAST(diagnostico_parainfluenza_1 AS NUMERIC) AS STRING) diagnostico_parainfluenza_1,
-SAFE_CAST(SAFE_CAST(diagnostico_parainfluenza_2 AS NUMERIC) AS STRING) diagnostico_parainfluenza_2,
-SAFE_CAST(SAFE_CAST(diagnostico_parainfluenza_3 AS NUMERIC) AS STRING) diagnostico_parainfluenza_3,
-SAFE_CAST(SAFE_CAST(diagnostico_adenovirus AS NUMERIC) AS STRING) diagnostico_adenovirus,
-SAFE_CAST(SAFE_CAST(diagnostico_outro_virus AS NUMERIC) AS STRING) diagnostico_outro_virus,
-SAFE_CAST(SAFE_CAST(diagnostico_outra_metodologia AS NUMERIC) AS STRING) diagnostico_outra_metodologia,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_positivo_influenza AS NUMERIC) AS STRING) imunofluorescencia_positivo_influenza,
-SAFE_CAST(SAFE_CAST(tipo_influenza_imunofluorescencia AS NUMERIC) AS STRING) tipo_influenza_imunofluorescencia,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_positivo_outro_virus AS NUMERIC) AS STRING) imunofluorescencia_positivo_outro_virus,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_virus_sincicial_respiratorio AS NUMERIC) AS STRING) imunofluorescencia_virus_sincicial_respiratorio,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_parainfluenza_1 AS NUMERIC) AS STRING) imunofluorescencia_parainfluenza_1,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_parainfluenza_2 AS NUMERIC) AS STRING) imunofluorescencia_parainfluenza_2,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_parainfluenza_3 AS NUMERIC) AS STRING) imunofluorescencia_parainfluenza_3,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_adenovirus AS NUMERIC) AS STRING) imunofluorescencia_adenovirus,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_outro_virus AS NUMERIC) AS STRING) imunofluorescencia_outro_virus,
-SAFE_CAST(SAFE_CAST(imunofluorescencia_qual_outro_virus AS NUMERIC) AS STRING) imunofluorescencia_qual_outro_virus,
-SAFE_CAST(SAFE_CAST(tipo_teste_antigenico AS NUMERIC) AS STRING) tipo_teste_antigenico,
-SAFE_CAST(data_resultado_teste AS DATE) data_resultado_teste,
-SAFE_CAST(SAFE_CAST(resultado_teste_antigenico AS NUMERIC) AS STRING) resultado_teste_antigenico,
-SAFE_CAST(SAFE_CAST(teste_positivo_influenza AS NUMERIC) AS STRING) teste_positivo_influenza,
-SAFE_CAST(SAFE_CAST(tipo_influenza_teste AS NUMERIC) AS STRING) tipo_influenza_teste,
-SAFE_CAST(SAFE_CAST(teste_positivo_outro_virus AS NUMERIC) AS STRING) teste_positivo_outro_virus,
-SAFE_CAST(SAFE_CAST(teste_sarscov2 AS NUMERIC) AS STRING) teste_sarscov2,
-SAFE_CAST(SAFE_CAST(teste_virus_sincicial_respiratorio AS NUMERIC) AS INT64) teste_virus_sincicial_respiratorio,
-SAFE_CAST(SAFE_CAST(teste_parainfluenza_1 AS NUMERIC) AS STRING) teste_parainfluenza_1,
-SAFE_CAST(SAFE_CAST(teste_parainfluenza_2 AS NUMERIC) AS STRING) teste_parainfluenza_2,
-SAFE_CAST(SAFE_CAST(teste_parainfluenza_3 AS NUMERIC) AS STRING) teste_parainfluenza_3,
-SAFE_CAST(SAFE_CAST(teste_adenovirus AS NUMERIC) AS INT64) teste_adenovirus,
-SAFE_CAST(SAFE_CAST(teste_outro_virus AS NUMERIC) AS INT64) teste_outro_virus,
-SAFE_CAST(teste_outro_virus_nome AS STRING) teste_outro_virus_nome,
-SAFE_CAST(SAFE_CAST(tipo_amostra_sorologica AS NUMERIC) AS STRING) tipo_amostra_sorologica,
-SAFE_CAST(qual_outra_amostra AS STRING) qual_outra_amostra,
-SAFE_CAST(data_coleta_amostra AS DATE) data_coleta_amostra,
-SAFE_CAST(SAFE_CAST(tipo_sorologia AS NUMERIC) AS STRING) tipo_sorologia,
-SAFE_CAST(qual_outra_sorologia AS STRING) qual_outra_sorologia,
-SAFE_CAST(data_resultado_sorologia AS DATE) data_resultado_sorologia,
-SAFE_CAST(SAFE_CAST(resultado_sorologia_igg AS NUMERIC) AS STRING) resultado_sorologia_igg,
-SAFE_CAST(SAFE_CAST(resultado_sorologia_igm AS NUMERIC) AS STRING) resultado_sorologia_igm,
-SAFE_CAST(SAFE_CAST(resultado_sorologia_iga AS NUMERIC) AS STRING) resultado_sorologia_iga,
-SAFE_CAST(SAFE_CAST(historico_viagem AS NUMERIC) AS STRING) historico_viagem,
-SAFE_CAST(pais_viagem AS STRING) pais_viagem,
-SAFE_CAST(local_viagem AS STRING) local_viagem,
-SAFE_CAST(data_viagem AS DATE) data_viagem_paciente,
-SAFE_CAST(data_retorno AS DATE) data_retorno_paciente,
-SAFE_CAST(SAFE_CAST(status_monitoramento AS NUMERIC) AS STRING) status_monitoramento,
-SAFE_CAST(SAFE_CAST(classificacao_final AS NUMERIC) AS STRING) classificacao_final,
-SAFE_CAST(outro_agente_etiologico AS STRING) outro_agente_etiologico,
-SAFE_CAST(SAFE_CAST(criterio_encerramento AS NUMERIC) AS STRING) criterio_encerramento,
-SAFE_CAST(SAFE_CAST(evolucao_caso AS NUMERIC) AS STRING) evolucao_caso,
-SAFE_CAST(data_alta_obito AS DATE) data_alta_obito,
-SAFE_CAST(data_encerramento AS DATE) data_encerramento,
-SAFE_CAST(data_digitacao AS DATE) data_digitacao,
-SAFE_CAST(SAFE_CAST(tipo_ficha AS NUMERIC) AS STRING) tipo_ficha,
-SAFE_CAST(requisicao_sistema_gal AS STRING) requisicao_sistema_gal,
-SAFE_CAST(SAFE_CAST(controle_srag_sinan AS NUMERIC) AS STRING) controle_srag_sinan
-FROM basedosdados-staging.br_ms_sinan_staging.microdados_influenza_srag AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(data_notificacao as date) data_notificacao,
+    safe_cast(id_municipio_notificacao as string) id_municipio_notificacao,
+    safe_cast(id_municipio_6_notificacao as string) id_municipio_6_notificacao,
+    safe_cast(sistema as string) sistema,
+    safe_cast(id_estabelecimento_cnes as string) id_estabelecimento_cnes,
+    safe_cast(semana_notificacao as int64) semana_notificacao,
+    safe_cast(data_primeiros_sintomas as date) data_primeiros_sintomas,
+    safe_cast(semana_sintomas as int64) semana_sintomas,
+    safe_cast(
+        safe_cast(paciente_estrangeiro as numeric) as string
+    ) paciente_estrangeiro,
+    safe_cast(pais_residencia as string) pais_residencia,
+    safe_cast(sigla_uf_residencia as string) sigla_uf_residencia,
+    safe_cast(id_municipio_residencia as string) id_municipio_residencia,
+    safe_cast(id_municipio_6_residencia as string) id_municipio_6_residencia,
+    safe_cast(safe_cast(zona_residencia as numeric) as string) zona_residencia,
+    safe_cast(
+        safe_cast(caso_natural_residencia as numeric) as string
+    ) caso_natural_residencia,
+    safe_cast(data_nascimento as string) data_nascimento,
+    safe_cast(safe_cast(sexo as numeric) as string) sexo,
+    safe_cast(safe_cast(raca_cor as numeric) as string) raca_cor,
+    safe_cast(etnia as string) etnia,
+    safe_cast(safe_cast(gestante as numeric) as string) gestante,
+    safe_cast(safe_cast(puerpera as numeric) as string) puerpera,
+    safe_cast(safe_cast(escolaridade as numeric) as string) escolaridade,
+    safe_cast(safe_cast(ocupacao as numeric) as string) ocupacao,
+    safe_cast(
+        safe_cast(doenca_relacionada_trabalho as numeric) as string
+    ) doenca_relacionada_trabalho,
+    safe_cast(safe_cast(tabagista as numeric) as string) tabagista,
+    safe_cast(safe_cast(sindrome_gripal as numeric) as string) sindrome_gripal,
+    safe_cast(safe_cast(infeccao_hospitalar as numeric) as string) infeccao_hospitalar,
+    safe_cast(safe_cast(contato_aves_suinos as numeric) as string) contato_aves_suinos,
+    safe_cast(
+        safe_cast(contato_outro_animal as numeric) as string
+    ) contato_outro_animal,
+    safe_cast(safe_cast(apresenta_febre as numeric) as string) apresenta_febre,
+    safe_cast(safe_cast(apresenta_tosse as numeric) as string) apresenta_tosse,
+    safe_cast(safe_cast(apresenta_calafrio as numeric) as string) apresenta_calafrio,
+    safe_cast(
+        safe_cast(apresenta_dor_garganta as numeric) as string
+    ) apresenta_dor_garganta,
+    safe_cast(safe_cast(apresenta_dispneia as numeric) as string) apresenta_dispneia,
+    safe_cast(safe_cast(apresenta_artralgia as numeric) as string) apresenta_artralgia,
+    safe_cast(safe_cast(apresenta_mialgia as numeric) as string) apresenta_mialgia,
+    safe_cast(
+        safe_cast(apresenta_conjuntivite as numeric) as string
+    ) apresenta_conjuntivite,
+    safe_cast(safe_cast(apresenta_coriza as numeric) as string) apresenta_coriza,
+    safe_cast(
+        safe_cast(apresenta_desconforto_respiratorio as numeric) as string
+    ) apresenta_desconforto_respiratorio,
+    safe_cast(
+        safe_cast(apresenta_saturacao_anormal as numeric) as string
+    ) apresenta_saturacao_anormal,
+    safe_cast(safe_cast(apresenta_diarreia as numeric) as string) apresenta_diarreia,
+    safe_cast(safe_cast(apresenta_vomito as numeric) as string) apresenta_vomito,
+    safe_cast(
+        safe_cast(apresenta_dor_abdominal as numeric) as string
+    ) apresenta_dor_abdominal,
+    safe_cast(safe_cast(apresenta_fadiga as numeric) as string) apresenta_fadiga,
+    safe_cast(
+        safe_cast(apresenta_perda_olfato as numeric) as string
+    ) apresenta_perda_olfato,
+    safe_cast(
+        safe_cast(apresenta_perda_paladar as numeric) as string
+    ) apresenta_perda_paladar,
+    safe_cast(
+        safe_cast(apresenta_outros_sintomas as numeric) as string
+    ) apresenta_outros_sintomas,
+    safe_cast(qual_outro_sintoma as string) qual_outro_sintoma,
+    safe_cast(
+        safe_cast(apresenta_fator_risco as numeric) as string
+    ) apresenta_fator_risco,
+    safe_cast(safe_cast(possui_cardiopatia as numeric) as string) possui_cardiopatia,
+    safe_cast(safe_cast(possui_pneumopatia as numeric) as string) possui_pneumopatia,
+    safe_cast(
+        safe_cast(possui_hemoglobinopatia as numeric) as string
+    ) possui_hemoglobinopatia,
+    safe_cast(
+        safe_cast(possui_doenca_metabolica as numeric) as string
+    ) possui_doenca_metabolica,
+    safe_cast(
+        safe_cast(possui_sindrome_down as numeric) as string
+    ) possui_sindrome_down,
+    safe_cast(safe_cast(possui_hepatite as numeric) as string) possui_hepatite,
+    safe_cast(
+        safe_cast(possui_doenca_neurologica as numeric) as string
+    ) possui_doenca_neurologica,
+    safe_cast(
+        safe_cast(possui_imunodeficiencia as numeric) as string
+    ) possui_imunodeficiencia,
+    safe_cast(safe_cast(possui_doenca_renal as numeric) as string) possui_doenca_renal,
+    safe_cast(safe_cast(possui_obesidade as numeric) as string) possui_obesidade,
+    safe_cast(imc_obeso as string) imc_obeso,
+    safe_cast(safe_cast(possui_hematologia as numeric) as string) possui_hematologia,
+    safe_cast(safe_cast(possui_asma as numeric) as string) possui_asma,
+    safe_cast(safe_cast(possui_diabetes as numeric) as string) possui_diabetes,
+    safe_cast(
+        safe_cast(possui_outra_morbidade as numeric) as string
+    ) possui_outra_morbidade,
+    safe_cast(qual_outra_morbidade as string) qual_outra_morbidade,
+    safe_cast(safe_cast(vacina_gripe as numeric) as string) vacina_gripe,
+    safe_cast(data_ultima_dose as date) data_ultima_dose,
+    safe_cast(safe_cast(vacina_gripe_mae as numeric) as string) vacina_gripe_mae,
+    safe_cast(data_vacina_mae as date) data_vacina_mae,
+    safe_cast(safe_cast(mae_amamenta as numeric) as string) mae_amamenta,
+    safe_cast(data_vacina_crianca_dose_unica as date) data_vacina_crianca_dose_unica,
+    safe_cast(data_vacina_crianca_1dose as date) data_vacina_crianca_1dose,
+    safe_cast(data_vacina_crianca_2dose as date) data_vacina_crianca_2dose,
+    safe_cast(safe_cast(vacina_covid as numeric) as string) vacina_covid,
+    safe_cast(data_vacina_covid_dose_1 as date) data_vacina_covid_dose1,
+    safe_cast(data_vacina_covid_dose_2 as date) data_vacina_covid_dose2,
+    safe_cast(laboratorio_vacina_covid as string) laboratorio_vacina_covid,
+    safe_cast(lote_dose1_vacina_covid as string) lote_dose1_vacina_covid,
+    safe_cast(lote_dose2_vacina_covid as string) lote_dose2_vacina_covid,
+    safe_cast(
+        safe_cast(fonte_dados_vacina_covid as numeric) as string
+    ) fonte_dados_vacina_covid,
+    safe_cast(safe_cast(antiviral_gripe as numeric) as string) antiviral_gripe,
+    safe_cast(safe_cast(tipo_antiviral as numeric) as string) tipo_antiviral,
+    safe_cast(outro_tipo_antiviral as string) outro_tipo_antiviral,
+    safe_cast(data_tratamento_antiviral as date) data_tratamento_antiviral,
+    safe_cast(safe_cast(internacao as numeric) as string) internacao,
+    safe_cast(data_internacao as date) data_internacao,
+    safe_cast(sigla_uf_internacao as string) sigla_uf_internacao,
+    safe_cast(
+        safe_cast(id_regional_saude_internacao as numeric) as string
+    ) id_regional_saude_internacao,
+    safe_cast(
+        safe_cast(id_municipio_internacao as numeric) as string
+    ) id_municipio_internacao,
+    safe_cast(
+        safe_cast(id_municipio_6_internacao as numeric) as string
+    ) id_municipio_6_internacao,
+    safe_cast(safe_cast(internacao_uti as numeric) as string) internacao_uti,
+    safe_cast(data_entrada_uti as date) data_entrada_uti,
+    safe_cast(data_saida_uti as date) data_saida_uti,
+    safe_cast(
+        safe_cast(suporte_ventilatorio as numeric) as string
+    ) suporte_ventilatorio,
+    safe_cast(
+        safe_cast(resultado_raiox_torax as numeric) as string
+    ) resultado_raiox_torax,
+    safe_cast(
+        safe_cast(outro_resultado_raiox as numeric) as string
+    ) outro_resultado_raiox,
+    safe_cast(data_raiox as date) data_raiox,
+    safe_cast(
+        safe_cast(resultado_tomografia as numeric) as string
+    ) resultado_tomografia,
+    safe_cast(outro_resultado_tomografia as string) outro_resultado_tomografia,
+    safe_cast(data_tomografia as date) data_tomografia,
+    safe_cast(safe_cast(coleta_amostra as numeric) as string) coleta_amostra,
+    safe_cast(data_coleta as date) data_coleta,
+    safe_cast(safe_cast(tipo_amostra as numeric) as string) tipo_amostra,
+    safe_cast(outro_tipo_amostra as string) outro_tipo_amostra,
+    safe_cast(safe_cast(resultado_amostra as numeric) as string) resultado_amostra,
+    safe_cast(data_coleta_hemaglutinacao as date) data_coleta_hemaglutinacao,
+    safe_cast(
+        safe_cast(resultado_hemaglutinacao as numeric) as string
+    ) resultado_hemaglutinacao,
+    safe_cast(
+        safe_cast(tipo_resultado_hemaglutinacao as numeric) as string
+    ) tipo_resultado_hemaglutinacao,
+    safe_cast(
+        safe_cast(hemaglutinacao_tipo_hemaglutinina as numeric) as string
+    ) hemaglutinacao_tipo_hemaglutinina,
+    safe_cast(
+        safe_cast(hemaglutinacao_tipo_neuraminidase as numeric) as string
+    ) hemaglutinacao_tipo_neuraminidase,
+    safe_cast(safe_cast(tipo_pcr as numeric) as string) tipo_pcr,
+    safe_cast(data_coleta_pcr as date) data_coleta_pcr,
+    safe_cast(safe_cast(tipo_amostra_pcr as numeric) as string) tipo_amostra_pcr,
+    safe_cast(qual_outro_tipo_amostra_pcr as string) qual_outro_tipo_amostra_pcr,
+    safe_cast(data_resultado_pcr as string) data_resultado_pcr,
+    safe_cast(safe_cast(resultado_pcr as numeric) as string) resultado_pcr,
+    safe_cast(safe_cast(diagnostico_pcr as numeric) as string) diagnostico_pcr,
+    safe_cast(safe_cast(id_laboratorio_pcr as numeric) as string) id_laboratorio_pcr,
+    safe_cast(safe_cast(tipo_resultado_pcr as numeric) as string) tipo_resultado_pcr,
+    safe_cast(
+        safe_cast(pcr_tipo_hemaglutinina as numeric) as string
+    ) pcr_tipo_hemaglutinina,
+    safe_cast(
+        safe_cast(pcr_tipo_neuraminidase as numeric) as string
+    ) pcr_tipo_neuraminidase,
+    safe_cast(
+        safe_cast(pcr_positivo_influenza as numeric) as string
+    ) pcr_positivo_influenza,
+    safe_cast(safe_cast(tipo_influenza_pcr as numeric) as string) tipo_influenza_pcr,
+    safe_cast(safe_cast(subtipo_influenza_a as numeric) as string) subtipo_influenza_a,
+    safe_cast(outro_subtitpo_influenza as string) outro_subtitpo_influenza,
+    safe_cast(safe_cast(linhagem_influeza_b as numeric) as string) linhagem_influeza_b,
+    safe_cast(outra_linhagem_influenza_b as string) outra_linhagem_influenza_b,
+    safe_cast(
+        safe_cast(pcr_positivo_outro_virus as numeric) as string
+    ) pcr_positivo_outro_virus,
+    safe_cast(safe_cast(pcr_sarscov2 as numeric) as int64) pcr_sarscov2,
+    safe_cast(
+        safe_cast(pcr_virus_sincicial_respiratorio as numeric) as int64
+    ) pcr_virus_sincicial_respiratorio,
+    safe_cast(safe_cast(pcr_parainfluenza_1 as numeric) as string) pcr_parainfluenza_1,
+    safe_cast(safe_cast(pcr_parainfluenza_2 as numeric) as string) pcr_parainfluenza_2,
+    safe_cast(safe_cast(pcr_parainfluenza_3 as numeric) as string) pcr_parainfluenza_3,
+    safe_cast(safe_cast(pcr_parainfluenza_4 as numeric) as string) pcr_parainfluenza_4,
+    safe_cast(safe_cast(pcr_adenovirus as numeric) as int64) pcr_adenovirus,
+    safe_cast(safe_cast(pcr_metapneumovirus as numeric) as int64) pcr_metapneumovirus,
+    safe_cast(safe_cast(pcr_bocavirus as numeric) as int64) pcr_bocavirus,
+    safe_cast(safe_cast(pcr_rinovirus as numeric) as int64) pcr_rinovirus,
+    safe_cast(safe_cast(pcr_outro_virus as numeric) as string) pcr_outro_virus,
+    safe_cast(qual_outro_virus as string) qual_outro_virus,
+    safe_cast(
+        safe_cast(diagnostico_imunofluorescencia as numeric) as string
+    ) diagnostico_imunofluorescencia,
+    safe_cast(
+        safe_cast(resultado_imunofluorescencia as numeric) as string
+    ) resultado_imunofluorescencia,
+    safe_cast(
+        data_resultado_imunofluorescencia as date
+    ) data_resultado_imunofluorescencia,
+    safe_cast(
+        safe_cast(id_laboratorio_imunofluorescencia as numeric) as string
+    ) id_laboratorio_imunofluorescencia,
+    safe_cast(
+        safe_cast(diagnostico_influenza_a as numeric) as string
+    ) diagnostico_influenza_a,
+    safe_cast(
+        safe_cast(diagnostico_subtipo_influenza_a as numeric) as string
+    ) diagnostico_subtipo_influenza_a,
+    safe_cast(
+        safe_cast(diagnostico_influenza_b as numeric) as string
+    ) diagnostico_influenza_b,
+    safe_cast(
+        safe_cast(diagnostico_virus_sincicial_respiratorio as numeric) as string
+    ) diagnostico_virus_sincicial_respiratorio,
+    safe_cast(
+        safe_cast(diagnostico_parainfluenza_1 as numeric) as string
+    ) diagnostico_parainfluenza_1,
+    safe_cast(
+        safe_cast(diagnostico_parainfluenza_2 as numeric) as string
+    ) diagnostico_parainfluenza_2,
+    safe_cast(
+        safe_cast(diagnostico_parainfluenza_3 as numeric) as string
+    ) diagnostico_parainfluenza_3,
+    safe_cast(
+        safe_cast(diagnostico_adenovirus as numeric) as string
+    ) diagnostico_adenovirus,
+    safe_cast(
+        safe_cast(diagnostico_outro_virus as numeric) as string
+    ) diagnostico_outro_virus,
+    safe_cast(
+        safe_cast(diagnostico_outra_metodologia as numeric) as string
+    ) diagnostico_outra_metodologia,
+    safe_cast(
+        safe_cast(imunofluorescencia_positivo_influenza as numeric) as string
+    ) imunofluorescencia_positivo_influenza,
+    safe_cast(
+        safe_cast(tipo_influenza_imunofluorescencia as numeric) as string
+    ) tipo_influenza_imunofluorescencia,
+    safe_cast(
+        safe_cast(imunofluorescencia_positivo_outro_virus as numeric) as string
+    ) imunofluorescencia_positivo_outro_virus,
+    safe_cast(
+        safe_cast(imunofluorescencia_virus_sincicial_respiratorio as numeric) as string
+    ) imunofluorescencia_virus_sincicial_respiratorio,
+    safe_cast(
+        safe_cast(imunofluorescencia_parainfluenza_1 as numeric) as string
+    ) imunofluorescencia_parainfluenza_1,
+    safe_cast(
+        safe_cast(imunofluorescencia_parainfluenza_2 as numeric) as string
+    ) imunofluorescencia_parainfluenza_2,
+    safe_cast(
+        safe_cast(imunofluorescencia_parainfluenza_3 as numeric) as string
+    ) imunofluorescencia_parainfluenza_3,
+    safe_cast(
+        safe_cast(imunofluorescencia_adenovirus as numeric) as string
+    ) imunofluorescencia_adenovirus,
+    safe_cast(
+        safe_cast(imunofluorescencia_outro_virus as numeric) as string
+    ) imunofluorescencia_outro_virus,
+    safe_cast(
+        safe_cast(imunofluorescencia_qual_outro_virus as numeric) as string
+    ) imunofluorescencia_qual_outro_virus,
+    safe_cast(
+        safe_cast(tipo_teste_antigenico as numeric) as string
+    ) tipo_teste_antigenico,
+    safe_cast(data_resultado_teste as date) data_resultado_teste,
+    safe_cast(
+        safe_cast(resultado_teste_antigenico as numeric) as string
+    ) resultado_teste_antigenico,
+    safe_cast(
+        safe_cast(teste_positivo_influenza as numeric) as string
+    ) teste_positivo_influenza,
+    safe_cast(
+        safe_cast(tipo_influenza_teste as numeric) as string
+    ) tipo_influenza_teste,
+    safe_cast(
+        safe_cast(teste_positivo_outro_virus as numeric) as string
+    ) teste_positivo_outro_virus,
+    safe_cast(safe_cast(teste_sarscov2 as numeric) as string) teste_sarscov2,
+    safe_cast(
+        safe_cast(teste_virus_sincicial_respiratorio as numeric) as int64
+    ) teste_virus_sincicial_respiratorio,
+    safe_cast(
+        safe_cast(teste_parainfluenza_1 as numeric) as string
+    ) teste_parainfluenza_1,
+    safe_cast(
+        safe_cast(teste_parainfluenza_2 as numeric) as string
+    ) teste_parainfluenza_2,
+    safe_cast(
+        safe_cast(teste_parainfluenza_3 as numeric) as string
+    ) teste_parainfluenza_3,
+    safe_cast(safe_cast(teste_adenovirus as numeric) as int64) teste_adenovirus,
+    safe_cast(safe_cast(teste_outro_virus as numeric) as int64) teste_outro_virus,
+    safe_cast(teste_outro_virus_nome as string) teste_outro_virus_nome,
+    safe_cast(
+        safe_cast(tipo_amostra_sorologica as numeric) as string
+    ) tipo_amostra_sorologica,
+    safe_cast(qual_outra_amostra as string) qual_outra_amostra,
+    safe_cast(data_coleta_amostra as date) data_coleta_amostra,
+    safe_cast(safe_cast(tipo_sorologia as numeric) as string) tipo_sorologia,
+    safe_cast(qual_outra_sorologia as string) qual_outra_sorologia,
+    safe_cast(data_resultado_sorologia as date) data_resultado_sorologia,
+    safe_cast(
+        safe_cast(resultado_sorologia_igg as numeric) as string
+    ) resultado_sorologia_igg,
+    safe_cast(
+        safe_cast(resultado_sorologia_igm as numeric) as string
+    ) resultado_sorologia_igm,
+    safe_cast(
+        safe_cast(resultado_sorologia_iga as numeric) as string
+    ) resultado_sorologia_iga,
+    safe_cast(safe_cast(historico_viagem as numeric) as string) historico_viagem,
+    safe_cast(pais_viagem as string) pais_viagem,
+    safe_cast(local_viagem as string) local_viagem,
+    safe_cast(data_viagem as date) data_viagem_paciente,
+    safe_cast(data_retorno as date) data_retorno_paciente,
+    safe_cast(
+        safe_cast(status_monitoramento as numeric) as string
+    ) status_monitoramento,
+    safe_cast(safe_cast(classificacao_final as numeric) as string) classificacao_final,
+    safe_cast(outro_agente_etiologico as string) outro_agente_etiologico,
+    safe_cast(
+        safe_cast(criterio_encerramento as numeric) as string
+    ) criterio_encerramento,
+    safe_cast(safe_cast(evolucao_caso as numeric) as string) evolucao_caso,
+    safe_cast(data_alta_obito as date) data_alta_obito,
+    safe_cast(data_encerramento as date) data_encerramento,
+    safe_cast(data_digitacao as date) data_digitacao,
+    safe_cast(safe_cast(tipo_ficha as numeric) as string) tipo_ficha,
+    safe_cast(requisicao_sistema_gal as string) requisicao_sistema_gal,
+    safe_cast(safe_cast(controle_srag_sinan as numeric) as string) controle_srag_sinan
+from `basedosdados-staging.br_ms_sinan_staging.microdados_influenza_srag ` as t

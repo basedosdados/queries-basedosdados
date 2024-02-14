@@ -1,24 +1,26 @@
-{{ 
-  config(
-    alias='terra_indigena',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="terra_indigena",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(id_geografico AS STRING) id_geografico,
-SAFE_CAST(id_terra_indigena AS STRING) id_terra_indigena,
-SAFE_CAST(terra_indigena AS STRING) terra_indigena,
-SAFE_CAST(etnia AS STRING) etnia,
-SAFE_CAST(nome_municipio AS STRING) nome_municipio,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(area AS FLOAT64) area,
-SAFE_CAST(fase AS STRING) fase,
-SAFE_CAST(modalidade AS STRING) modalidade,
-SAFE_CAST(reestudo AS STRING) reestudo,
-SAFE_CAST(indicador_faixa_fronteira AS BOOL) indicador_faixa_fronteira,
-SAFE_CAST(REPLACE(id_unidade_administrativa,".0","") AS STRING) id_unidade_administrativa,
-SAFE_CAST(sigla_unidade_administrativa AS STRING) sigla_unidade_administrativa,
-INITCAP(unidade_administrativa) unidade_administrativa,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria,
-FROM basedosdados-staging.br_geobr_mapas_staging.terra_indigena as t
+}}
+select
+    safe_cast(id_geografico as string) id_geografico,
+    safe_cast(id_terra_indigena as string) id_terra_indigena,
+    safe_cast(terra_indigena as string) terra_indigena,
+    safe_cast(etnia as string) etnia,
+    safe_cast(nome_municipio as string) nome_municipio,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(area as float64) area,
+    safe_cast(fase as string) fase,
+    safe_cast(modalidade as string) modalidade,
+    safe_cast(reestudo as string) reestudo,
+    safe_cast(indicador_faixa_fronteira as bool) indicador_faixa_fronteira,
+    safe_cast(
+        replace(id_unidade_administrativa, ".0", "") as string
+    ) id_unidade_administrativa,
+    safe_cast(sigla_unidade_administrativa as string) sigla_unidade_administrativa,
+    initcap(unidade_administrativa) unidade_administrativa,
+    safe.st_geogfromtext(geometria) geometria,
+from `basedosdados-staging.br_geobr_mapas_staging.terra_indigena ` as t

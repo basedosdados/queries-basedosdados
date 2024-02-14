@@ -1,13 +1,13 @@
+---
 version: 2
-
 models:
   - name: br_firjan_ifgf__ranking
-    description: O Índice Firjan de Gestão Fiscal fornece sob 4 aspectos da administração pública uma nota entre 0 e 1. Tal nota é usada para o ranking estadual e nacional dos municípios avaliados
+    description: O Índice Firjan de Gestão Fiscal fornece sob 4 aspectos da administração
+      pública uma nota entre 0 e 1. Tal nota é usada para o ranking estadual e nacional
+      dos municípios avaliados
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - id_municipio    
+          combination_of_columns: [ano, id_municipio]
     columns:
       - name: ano
         description: Ano

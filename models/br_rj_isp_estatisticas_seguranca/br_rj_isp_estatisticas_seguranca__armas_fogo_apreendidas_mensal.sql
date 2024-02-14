@@ -1,11 +1,19 @@
-{{ config(alias='armas_fogo_apreendidas_mensal',schema='br_rj_isp_estatisticas_seguranca') }}
+{{
+    config(
+        alias="armas_fogo_apreendidas_mensal",
+        schema="br_rj_isp_estatisticas_seguranca",
+    )
+}}
 
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_cisp AS STRING) id_cisp,
-SAFE_CAST(id_aisp AS STRING) id_aisp,
-SAFE_CAST(id_risp AS STRING) id_risp,
-SAFE_CAST(quantidade_arma_fogo_apreendida AS INT64) quantidade_arma_fogo_apreendida
-FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.armas_fogo_apreendidas_mensal AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_cisp as string) id_cisp,
+    safe_cast(id_aisp as string) id_aisp,
+    safe_cast(id_risp as string) id_risp,
+    safe_cast(quantidade_arma_fogo_apreendida as int64) quantidade_arma_fogo_apreendida
+from
+    basedosdados
+    - staging.br_rj_isp_estatisticas_seguranca_staging.armas_fogo_apreendidas_mensal
+    as t

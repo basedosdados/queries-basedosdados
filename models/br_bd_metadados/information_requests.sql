@@ -1,18 +1,18 @@
-SELECT
-  SAFE_CAST(dataset_id AS STRING) dataset_id,
-  SAFE_CAST(id AS STRING) id,
-  SAFE_CAST(name AS STRING) name,
-  SAFE_CAST(date_created AS DATE) date_created,
-  SAFE_CAST(date_last_modified AS DATE) date_last_modified,
-  SAFE_CAST(url AS STRING) url,
-  SAFE_CAST(origin AS STRING) origin,
-  SAFE_CAST(number AS STRING) number,
-  SAFE_CAST(opening_date AS DATE) opening_date,
-  SAFE_CAST(requested_by AS STRING) requested_by,
-  SAFE_CAST(status AS STRING) status,
-  SAFE_CAST(data_url AS STRING) data_url,
-  SAFE_CAST(spatial_coverage AS STRING) spatial_coverage,
-  SAFE_CAST(temporal_coverage AS STRING) temporal_coverage,
-  SAFE_CAST(update_frequency AS STRING) update_frequency,
-  SAFE_CAST(observation_level AS STRING) observation_level
-FROM `basedosdados-dev.br_bd_metadados_staging.information_requests` AS t
+select
+    safe_cast(dataset_id as string) dataset_id,
+    safe_cast(id as string) id,
+    safe_cast(name as string) name,
+    safe_cast(date_created as date) date_created,
+    safe_cast(date_last_modified as date) date_last_modified,
+    safe_cast(url as string) url,
+    safe_cast(origin as string) origin,
+    safe_cast(number as string) number,
+    safe_cast(opening_date as date) opening_date,
+    safe_cast(requested_by as string) requested_by,
+    safe_cast(status as string) status,
+    safe_cast(data_url as string) data_url,
+    safe_cast(spatial_coverage as string) spatial_coverage,
+    safe_cast(temporal_coverage as string) temporal_coverage,
+    safe_cast(update_frequency as string) update_frequency,
+    safe_cast(observation_level as string) observation_level
+from `basedosdados-dev.br_bd_metadados_staging.information_requests` as t

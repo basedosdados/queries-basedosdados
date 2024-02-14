@@ -1,136 +1,295 @@
-{{ 
-  config(
-    schema='br_cvm_fi',
-    materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2015,
-        "end": 2023,
-        "interval": 1}
-    },
-    cluster_by =  ["mes", "data_competencia"])
- }}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-REGEXP_REPLACE(cnpj, r'[^0-9]', '') AS cnpj,
-SUBSTR(REGEXP_REPLACE(cnpj, r'[^0-9]', ''), 1, 8) AS cnpj_basico,
-SAFE_CAST(denominacao_social AS STRING) denominacao_social,
-SAFE_CAST(data_competencia AS DATE) data_competencia,
-SAFE_CAST(condominio AS STRING) condominio,
-SAFE_CAST(indicador_negociacao_mercado AS INT64) indicador_negociacao_mercado,
-SAFE_CAST(nome_mercado AS STRING) nome_mercado,
-SAFE_CAST(tipo_prazo AS STRING) tipo_prazo,
-SAFE_CAST(prazo AS STRING) prazo,
-SAFE_CAST(publico_alvo AS STRING) publico_alvo,
-SAFE_CAST(indicador_registro_anbima AS INT64) indicador_registro_anbima,
-SAFE_CAST(classificacao_anbima AS STRING) classificacao_anbima,
-SAFE_CAST(forma_distribuicao AS STRING) forma_distribuicao,
-SAFE_CAST(politica_investimento AS STRING) politica_investimento,
-SAFE_CAST(porcentagem_aplicacao_maximo_fundo_ligado AS FLOAT64) porcentagem_aplicacao_maximo_fundo_ligado,
-SAFE_CAST(indicador_resultados_carteira_incorporado_patrimonio_liquido AS INT64) indicador_resultados_carteira_incorporado_patrimonio_liquido,
-SAFE_CAST(indicador_fundo_cotas AS INT64) indicador_fundo_cotas,
-SAFE_CAST(indicador_fundo_espelho AS INT64) indicador_fundo_espelho,
-SAFE_CAST(aplicacao_minima AS FLOAT64) aplicacao_minima,
-SAFE_CAST(indicador_atualizacao_diaria_cota AS INT64) indicador_atualizacao_diaria_cota,
-SAFE_CAST(prazo_atualizacao_valor_cota AS STRING) prazo_atualizacao_valor_cota,
-SAFE_CAST(cota_emissao AS STRING) cota_emissao,
-SAFE_CAST(patrimonio_liquido_cota AS STRING) patrimonio_liquido_cota,
-SAFE_CAST(quantidade_dias_conversao_cota AS INT64) quantidade_dias_conversao_cota,
-SAFE_CAST(quantidade_dias_pagamento_cota AS INT64) quantidade_dias_pagamento_cota,
-SAFE_CAST(quantidade_dias_carencia_resgate_cotas AS INT64) quantidade_dias_carencia_resgate_cotas,
-SAFE_CAST(quantidade_dias_pagamento_resgates AS INT64) quantidade_dias_pagamento_resgates,
-SAFE_CAST(tipo_prazo_pagamento_resgates AS STRING) tipo_prazo_pagamento_resgates,
-SAFE_CAST(indicador_cobranca_taxa_saida_resgates AS INT64) indicador_cobranca_taxa_saida_resgates,
-SAFE_CAST(taxa_administracao AS FLOAT64) taxa_administracao,
-SAFE_CAST(taxa_maxima_custodia AS FLOAT64) taxa_maxima_custodia,
-SAFE_CAST(indicador_taxa_performance AS INT64) indicador_taxa_performance,
-SAFE_CAST(taxa_performance AS FLOAT64) taxa_performance,
-SAFE_CAST(parametro_taxa_performance AS STRING) parametro_taxa_performance,
-SAFE_CAST(porcentagem_indice_referencia_taxa_performance AS FLOAT64) porcentagem_indice_referencia_taxa_performance,
-SAFE_CAST(valor_cumpom AS FLOAT64) valor_cumpom,
-SAFE_CAST(metodo_calculo_taxa_performance AS STRING) metodo_calculo_taxa_performance,
-SAFE_CAST(informacoes_adicionais_taxa_performance AS STRING) informacoes_adicionais_taxa_performance,
-SAFE_CAST(indicador_taxa_ingresso AS INT64) indicador_taxa_ingresso,
-SAFE_CAST(taxa_ingresso_real AS FLOAT64) taxa_ingresso_real,
-SAFE_CAST(porcentagem_taxa_ingresso AS FLOAT64) porcentagem_taxa_ingresso,
-SAFE_CAST(indicador_cobranca_taxa_saida AS INT64) indicador_cobranca_taxa_saida,
-SAFE_CAST(taxa_saida_real AS FLOAT64) taxa_saida_real,
-SAFE_CAST(porcentagem_taxa_saida AS FLOAT64) porcentagem_taxa_saida,
-SAFE_CAST(indicador_operacoes_derivativos AS INT64) indicador_operacoes_derivativos,
-SAFE_CAST(finalidade_operacoes_derivativos AS STRING) finalidade_operacoes_derivativos,
-SAFE_CAST(indicador_operacoes_valor_superior_patrimonio_liquido AS INT64) indicador_operacoes_valor_superior_patrimonio_liquido,
-SAFE_CAST(fator_limite_total_operacoes_patrimonio_liquido AS FLOAT64) fator_limite_total_operacoes_patrimonio_liquido,
-SAFE_CAST(indicador_contraparte_ligado AS INT64) indicador_contraparte_ligado,
-SAFE_CAST(indicador_investimentos_exterior AS INT64) indicador_investimentos_exterior,
-SAFE_CAST(aplicacao_maxima_ativo_exterior AS FLOAT64) aplicacao_maxima_ativo_exterior,
-SAFE_CAST(indicador_ativo_credito_privado AS INT64) indicador_ativo_credito_privado,
-SAFE_CAST(aplicacao_maxima_ativo_credito_privado AS FLOAT64) aplicacao_maxima_ativo_credito_privado,
-SAFE_CAST(porcentagem_exposicao_minima_emissor_instituicao_financeira AS FLOAT64) porcentagem_exposicao_minima_emissor_instituicao_financeira,
-SAFE_CAST(porcentagem_exposicao_maxima_emissor_instituicao_financeira AS FLOAT64) porcentagem_exposicao_maxima_emissor_instituicao_financeira,
-SAFE_CAST(porcentagem_exposicao_minima_emissor_companhias_abertas AS FLOAT64) porcentagem_exposicao_minima_emissor_companhias_abertas,
-SAFE_CAST(porcentagem_exposicao_maxima_emissor_companhias_abertas AS FLOAT64) porcentagem_exposicao_maxima_emissor_companhias_abertas,
-SAFE_CAST(porcentagem_exposicao_minima_emissor_fundos_investimento AS FLOAT64) porcentagem_exposicao_minima_emissor_fundos_investimento,
-SAFE_CAST(porcentagem_exposicao_maxima_emissor_fundos_investimento AS FLOAT64) porcentagem_exposicao_maxima_emissor_fundos_investimento,
-SAFE_CAST(porcentagem_exposicao_minima_emissor_uniao_federal AS FLOAT64) porcentagem_exposicao_minima_emissor_uniao_federal,
-SAFE_CAST(porcentagem_exposicao_maxima_emissor_uniao_federal AS FLOAT64) porcentagem_exposicao_maxima_emissor_uniao_federal,
-SAFE_CAST(porcentagem_exposicao_minima_emissor_adm_gestor_pessoas_ligadas AS FLOAT64) porcentagem_exposicao_minima_emissor_adm_gestor_pessoas_ligadas,
-SAFE_CAST(porcentagem_exposicao_maxima_emissor_adm_gestor_pessoas_ligadas AS FLOAT64) porcentagem_exposicao_maxima_emissor_adm_gestor_pessoas_ligadas,
-SAFE_CAST(porcentagem_exposicao_minima_emissor_outros AS FLOAT64) porcentagem_exposicao_minima_emissor_outros,
-SAFE_CAST(porcentagem_exposicao_maxima_emissor_outros AS FLOAT64) porcentagem_exposicao_maxima_emissor_outros,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fi AS FLOAT64) porcentagem_exposicao_minima_cotas_fi,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fi AS FLOAT64) porcentagem_exposicao_maxima_cotas_fi,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fic AS FLOAT64) porcentagem_exposicao_minima_cotas_fic,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fic AS FLOAT64) porcentagem_exposicao_maxima_cotas_fic,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fi_qualificados AS FLOAT64) porcentagem_exposicao_minima_cotas_fi_qualificados,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fi_qualificados AS FLOAT64) porcentagem_exposicao_maxima_cotas_fi_qualificados,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fic_qualificados AS FLOAT64) porcentagem_exposicao_minima_cotas_fic_qualificados,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fic_qualificados AS FLOAT64) porcentagem_exposicao_maxima_cotas_fic_qualificados,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fi_profissionais AS FLOAT64) porcentagem_exposicao_minima_cotas_fi_profissionais,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fi_profissionais AS FLOAT64) porcentagem_exposicao_maxima_cotas_fi_profissionais,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fic_profissionais AS FLOAT64) porcentagem_exposicao_minima_cotas_fic_profissionais,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fic_profissionais AS FLOAT64) porcentagem_exposicao_maxima_cotas_fic_profissionais,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fii AS FLOAT64) porcentagem_exposicao_minima_cotas_fii,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fii AS FLOAT64) porcentagem_exposicao_maxima_cotas_fii,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fidc AS FLOAT64) porcentagem_exposicao_minima_cotas_fidc,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fidc AS FLOAT64) porcentagem_exposicao_maxima_cotas_fidc,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_ficfidc AS FLOAT64) porcentagem_exposicao_minima_cotas_ficfidc,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_ficfidc AS FLOAT64) porcentagem_exposicao_maxima_cotas_ficfidc,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fidic_np AS FLOAT64) porcentagem_exposicao_minima_cotas_fidic_np,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fidic_np AS FLOAT64) porcentagem_exposicao_maxima_cotas_fidic_np,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_ficfidic_np AS FLOAT64) porcentagem_exposicao_minima_cotas_ficfidic_np,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_ficfidc_np AS FLOAT64) porcentagem_exposicao_maxima_cotas_ficfidc_np,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_etf AS FLOAT64) porcentagem_exposicao_minima_cotas_etf,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_etf AS FLOAT64) porcentagem_exposicao_maxima_cotas_etf,
-SAFE_CAST(porcentagem_exposicao_minima_cota_cri AS FLOAT64) porcentagem_exposicao_minima_cota_cri,
-SAFE_CAST(porcentagem_exposicao_maxima_cota_cri AS FLOAT64) porcentagem_exposicao_maxima_cota_cri,
-SAFE_CAST(porcentagem_exposicao_minima_titulos_publicos_operacoes_comprimessadas AS FLOAT64) porcentagem_exposicao_minima_titulos_publicos_operacoes_comprimessadas,
-SAFE_CAST(porcentagem_exposicao_maxima_titulos_publicos_operacoes_comprimessadas AS FLOAT64) porcentagem_exposicao_maxima_titulos_publicos_operacoes_comprimessadas,
-SAFE_CAST(porcentagem_exposicao_minima_ouro AS FLOAT64) porcentagem_exposicao_minima_ouro,
-SAFE_CAST(porcentagem_exposicao_maxima_ouro AS FLOAT64) porcentagem_exposicao_maxima_ouro,
-SAFE_CAST(porcentagem_exposicao_minima_titulos_instituicao_financeira_bacen AS FLOAT64) porcentagem_exposicao_minima_titulos_instituicao_financeira_bacen,
-SAFE_CAST(porcentagem_exposicao_maxima_titulos_instituicao_financeira_bacen AS FLOAT64) porcentagem_exposicao_maxima_titulos_instituicao_financeira_bacen,
-SAFE_CAST(porcentagem_exposicao_minima_valores_mobiliarios AS FLOAT64) porcentagem_exposicao_minima_valores_mobiliarios,
-SAFE_CAST(porcentagem_exposicao_maxima_valores_mobiliarios AS FLOAT64) porcentagem_exposicao_maxima_valores_mobiliarios,
-SAFE_CAST(porcentagem_exposicao_minima_acoes AS FLOAT64) porcentagem_exposicao_minima_acoes,
-SAFE_CAST(porcentagem_exposicao_maxima_acoes AS FLOAT64) porcentagem_exposicao_maxima_acoes,
-SAFE_CAST(porcentagem_exposicao_minima_debenture AS FLOAT64) porcentagem_exposicao_minima_debenture,
-SAFE_CAST(porcentagem_exposicao_maxima_debenture AS FLOAT64) porcentagem_exposicao_maxima_debenture,
-SAFE_CAST(porcentagem_exposicao_minima_notas_promissorias AS FLOAT64) porcentagem_exposicao_minima_notas_promissorias,
-SAFE_CAST(porcentagem_exposicao_maxima_notas_promissorias AS FLOAT64) porcentagem_exposicao_maxima_notas_promissorias,
-SAFE_CAST(porcentagem_exposicao_minima_operacoes_compromissadas_titulos_credito_privado AS FLOAT64) porcentagem_exposicao_minima_operacoes_compromissadas_titulos_credito_privado,
-SAFE_CAST(porcentagem_exposicao_maxima_operacoes_compromissadas_titulos_credito_privado AS FLOAT64) porcentagem_exposicao_maxima_operacoes_compromissadas_titulos_credito_privado,
-SAFE_CAST(porcentagem_exposicao_minima_derivativos AS FLOAT64) porcentagem_exposicao_minima_derivativos,
-SAFE_CAST(porcentagem_exposicao_maxima_derivativos AS FLOAT64) porcentagem_exposicao_maxima_derivativos,
-SAFE_CAST(porcentagem_exposicao_minima_outros AS FLOAT64) porcentagem_exposicao_minima_outros,
-SAFE_CAST(porcentagem_exposicao_maxima_outros AS FLOAT64) porcentagem_exposicao_maxima_outros,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fmiee AS FLOAT64) porcentagem_exposicao_minima_cotas_fmiee,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fmiee AS FLOAT64) porcentagem_exposicao_maxima_cotas_fmiee,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_fip AS FLOAT64) porcentagem_exposicao_minima_cotas_fip,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_fip AS FLOAT64) porcentagem_exposicao_maxima_cotas_fip,
-SAFE_CAST(porcentagem_exposicao_minima_cotas_ficfip AS FLOAT64) porcentagem_exposicao_minima_cotas_ficfip,
-SAFE_CAST(porcentagem_exposicao_maxima_cotas_ficfip AS FLOAT64) porcentagem_exposicao_maxima_cotas_ficfip,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_extratos_informacoes AS t
-
+{{
+    config(
+        schema="br_cvm_fi",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2015, "end": 2023, "interval": 1},
+        },
+        cluster_by=["mes", "data_competencia"],
+    )
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    regexp_replace(cnpj, r'[^0-9]', '') as cnpj,
+    substr(regexp_replace(cnpj, r'[^0-9]', ''), 1, 8) as cnpj_basico,
+    safe_cast(denominacao_social as string) denominacao_social,
+    safe_cast(data_competencia as date) data_competencia,
+    safe_cast(condominio as string) condominio,
+    safe_cast(indicador_negociacao_mercado as int64) indicador_negociacao_mercado,
+    safe_cast(nome_mercado as string) nome_mercado,
+    safe_cast(tipo_prazo as string) tipo_prazo,
+    safe_cast(prazo as string) prazo,
+    safe_cast(publico_alvo as string) publico_alvo,
+    safe_cast(indicador_registro_anbima as int64) indicador_registro_anbima,
+    safe_cast(classificacao_anbima as string) classificacao_anbima,
+    safe_cast(forma_distribuicao as string) forma_distribuicao,
+    safe_cast(politica_investimento as string) politica_investimento,
+    safe_cast(
+        porcentagem_aplicacao_maximo_fundo_ligado as float64
+    ) porcentagem_aplicacao_maximo_fundo_ligado,
+    safe_cast(
+        indicador_resultados_carteira_incorporado_patrimonio_liquido as int64
+    ) indicador_resultados_carteira_incorporado_patrimonio_liquido,
+    safe_cast(indicador_fundo_cotas as int64) indicador_fundo_cotas,
+    safe_cast(indicador_fundo_espelho as int64) indicador_fundo_espelho,
+    safe_cast(aplicacao_minima as float64) aplicacao_minima,
+    safe_cast(
+        indicador_atualizacao_diaria_cota as int64
+    ) indicador_atualizacao_diaria_cota,
+    safe_cast(prazo_atualizacao_valor_cota as string) prazo_atualizacao_valor_cota,
+    safe_cast(cota_emissao as string) cota_emissao,
+    safe_cast(patrimonio_liquido_cota as string) patrimonio_liquido_cota,
+    safe_cast(quantidade_dias_conversao_cota as int64) quantidade_dias_conversao_cota,
+    safe_cast(quantidade_dias_pagamento_cota as int64) quantidade_dias_pagamento_cota,
+    safe_cast(
+        quantidade_dias_carencia_resgate_cotas as int64
+    ) quantidade_dias_carencia_resgate_cotas,
+    safe_cast(
+        quantidade_dias_pagamento_resgates as int64
+    ) quantidade_dias_pagamento_resgates,
+    safe_cast(tipo_prazo_pagamento_resgates as string) tipo_prazo_pagamento_resgates,
+    safe_cast(
+        indicador_cobranca_taxa_saida_resgates as int64
+    ) indicador_cobranca_taxa_saida_resgates,
+    safe_cast(taxa_administracao as float64) taxa_administracao,
+    safe_cast(taxa_maxima_custodia as float64) taxa_maxima_custodia,
+    safe_cast(indicador_taxa_performance as int64) indicador_taxa_performance,
+    safe_cast(taxa_performance as float64) taxa_performance,
+    safe_cast(parametro_taxa_performance as string) parametro_taxa_performance,
+    safe_cast(
+        porcentagem_indice_referencia_taxa_performance as float64
+    ) porcentagem_indice_referencia_taxa_performance,
+    safe_cast(valor_cumpom as float64) valor_cumpom,
+    safe_cast(
+        metodo_calculo_taxa_performance as string
+    ) metodo_calculo_taxa_performance,
+    safe_cast(
+        informacoes_adicionais_taxa_performance as string
+    ) informacoes_adicionais_taxa_performance,
+    safe_cast(indicador_taxa_ingresso as int64) indicador_taxa_ingresso,
+    safe_cast(taxa_ingresso_real as float64) taxa_ingresso_real,
+    safe_cast(porcentagem_taxa_ingresso as float64) porcentagem_taxa_ingresso,
+    safe_cast(indicador_cobranca_taxa_saida as int64) indicador_cobranca_taxa_saida,
+    safe_cast(taxa_saida_real as float64) taxa_saida_real,
+    safe_cast(porcentagem_taxa_saida as float64) porcentagem_taxa_saida,
+    safe_cast(indicador_operacoes_derivativos as int64) indicador_operacoes_derivativos,
+    safe_cast(
+        finalidade_operacoes_derivativos as string
+    ) finalidade_operacoes_derivativos,
+    safe_cast(
+        indicador_operacoes_valor_superior_patrimonio_liquido as int64
+    ) indicador_operacoes_valor_superior_patrimonio_liquido,
+    safe_cast(
+        fator_limite_total_operacoes_patrimonio_liquido as float64
+    ) fator_limite_total_operacoes_patrimonio_liquido,
+    safe_cast(indicador_contraparte_ligado as int64) indicador_contraparte_ligado,
+    safe_cast(
+        indicador_investimentos_exterior as int64
+    ) indicador_investimentos_exterior,
+    safe_cast(
+        aplicacao_maxima_ativo_exterior as float64
+    ) aplicacao_maxima_ativo_exterior,
+    safe_cast(indicador_ativo_credito_privado as int64) indicador_ativo_credito_privado,
+    safe_cast(
+        aplicacao_maxima_ativo_credito_privado as float64
+    ) aplicacao_maxima_ativo_credito_privado,
+    safe_cast(
+        porcentagem_exposicao_minima_emissor_instituicao_financeira as float64
+    ) porcentagem_exposicao_minima_emissor_instituicao_financeira,
+    safe_cast(
+        porcentagem_exposicao_maxima_emissor_instituicao_financeira as float64
+    ) porcentagem_exposicao_maxima_emissor_instituicao_financeira,
+    safe_cast(
+        porcentagem_exposicao_minima_emissor_companhias_abertas as float64
+    ) porcentagem_exposicao_minima_emissor_companhias_abertas,
+    safe_cast(
+        porcentagem_exposicao_maxima_emissor_companhias_abertas as float64
+    ) porcentagem_exposicao_maxima_emissor_companhias_abertas,
+    safe_cast(
+        porcentagem_exposicao_minima_emissor_fundos_investimento as float64
+    ) porcentagem_exposicao_minima_emissor_fundos_investimento,
+    safe_cast(
+        porcentagem_exposicao_maxima_emissor_fundos_investimento as float64
+    ) porcentagem_exposicao_maxima_emissor_fundos_investimento,
+    safe_cast(
+        porcentagem_exposicao_minima_emissor_uniao_federal as float64
+    ) porcentagem_exposicao_minima_emissor_uniao_federal,
+    safe_cast(
+        porcentagem_exposicao_maxima_emissor_uniao_federal as float64
+    ) porcentagem_exposicao_maxima_emissor_uniao_federal,
+    safe_cast(
+        porcentagem_exposicao_minima_emissor_adm_gestor_pessoas_ligadas as float64
+    ) porcentagem_exposicao_minima_emissor_adm_gestor_pessoas_ligadas,
+    safe_cast(
+        porcentagem_exposicao_maxima_emissor_adm_gestor_pessoas_ligadas as float64
+    ) porcentagem_exposicao_maxima_emissor_adm_gestor_pessoas_ligadas,
+    safe_cast(
+        porcentagem_exposicao_minima_emissor_outros as float64
+    ) porcentagem_exposicao_minima_emissor_outros,
+    safe_cast(
+        porcentagem_exposicao_maxima_emissor_outros as float64
+    ) porcentagem_exposicao_maxima_emissor_outros,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fi as float64
+    ) porcentagem_exposicao_minima_cotas_fi,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fi as float64
+    ) porcentagem_exposicao_maxima_cotas_fi,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fic as float64
+    ) porcentagem_exposicao_minima_cotas_fic,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fic as float64
+    ) porcentagem_exposicao_maxima_cotas_fic,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fi_qualificados as float64
+    ) porcentagem_exposicao_minima_cotas_fi_qualificados,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fi_qualificados as float64
+    ) porcentagem_exposicao_maxima_cotas_fi_qualificados,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fic_qualificados as float64
+    ) porcentagem_exposicao_minima_cotas_fic_qualificados,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fic_qualificados as float64
+    ) porcentagem_exposicao_maxima_cotas_fic_qualificados,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fi_profissionais as float64
+    ) porcentagem_exposicao_minima_cotas_fi_profissionais,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fi_profissionais as float64
+    ) porcentagem_exposicao_maxima_cotas_fi_profissionais,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fic_profissionais as float64
+    ) porcentagem_exposicao_minima_cotas_fic_profissionais,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fic_profissionais as float64
+    ) porcentagem_exposicao_maxima_cotas_fic_profissionais,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fii as float64
+    ) porcentagem_exposicao_minima_cotas_fii,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fii as float64
+    ) porcentagem_exposicao_maxima_cotas_fii,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fidc as float64
+    ) porcentagem_exposicao_minima_cotas_fidc,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fidc as float64
+    ) porcentagem_exposicao_maxima_cotas_fidc,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_ficfidc as float64
+    ) porcentagem_exposicao_minima_cotas_ficfidc,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_ficfidc as float64
+    ) porcentagem_exposicao_maxima_cotas_ficfidc,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fidic_np as float64
+    ) porcentagem_exposicao_minima_cotas_fidic_np,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fidic_np as float64
+    ) porcentagem_exposicao_maxima_cotas_fidic_np,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_ficfidic_np as float64
+    ) porcentagem_exposicao_minima_cotas_ficfidic_np,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_ficfidc_np as float64
+    ) porcentagem_exposicao_maxima_cotas_ficfidc_np,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_etf as float64
+    ) porcentagem_exposicao_minima_cotas_etf,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_etf as float64
+    ) porcentagem_exposicao_maxima_cotas_etf,
+    safe_cast(
+        porcentagem_exposicao_minima_cota_cri as float64
+    ) porcentagem_exposicao_minima_cota_cri,
+    safe_cast(
+        porcentagem_exposicao_maxima_cota_cri as float64
+    ) porcentagem_exposicao_maxima_cota_cri,
+    safe_cast(
+        porcentagem_exposicao_minima_titulos_publicos_operacoes_comprimessadas
+        as float64
+    ) porcentagem_exposicao_minima_titulos_publicos_operacoes_comprimessadas,
+    safe_cast(
+        porcentagem_exposicao_maxima_titulos_publicos_operacoes_comprimessadas
+        as float64
+    ) porcentagem_exposicao_maxima_titulos_publicos_operacoes_comprimessadas,
+    safe_cast(
+        porcentagem_exposicao_minima_ouro as float64
+    ) porcentagem_exposicao_minima_ouro,
+    safe_cast(
+        porcentagem_exposicao_maxima_ouro as float64
+    ) porcentagem_exposicao_maxima_ouro,
+    safe_cast(
+        porcentagem_exposicao_minima_titulos_instituicao_financeira_bacen as float64
+    ) porcentagem_exposicao_minima_titulos_instituicao_financeira_bacen,
+    safe_cast(
+        porcentagem_exposicao_maxima_titulos_instituicao_financeira_bacen as float64
+    ) porcentagem_exposicao_maxima_titulos_instituicao_financeira_bacen,
+    safe_cast(
+        porcentagem_exposicao_minima_valores_mobiliarios as float64
+    ) porcentagem_exposicao_minima_valores_mobiliarios,
+    safe_cast(
+        porcentagem_exposicao_maxima_valores_mobiliarios as float64
+    ) porcentagem_exposicao_maxima_valores_mobiliarios,
+    safe_cast(
+        porcentagem_exposicao_minima_acoes as float64
+    ) porcentagem_exposicao_minima_acoes,
+    safe_cast(
+        porcentagem_exposicao_maxima_acoes as float64
+    ) porcentagem_exposicao_maxima_acoes,
+    safe_cast(
+        porcentagem_exposicao_minima_debenture as float64
+    ) porcentagem_exposicao_minima_debenture,
+    safe_cast(
+        porcentagem_exposicao_maxima_debenture as float64
+    ) porcentagem_exposicao_maxima_debenture,
+    safe_cast(
+        porcentagem_exposicao_minima_notas_promissorias as float64
+    ) porcentagem_exposicao_minima_notas_promissorias,
+    safe_cast(
+        porcentagem_exposicao_maxima_notas_promissorias as float64
+    ) porcentagem_exposicao_maxima_notas_promissorias,
+    safe_cast(
+        porcentagem_exposicao_minima_operacoes_compromissadas_titulos_credito_privado
+        as float64
+    ) porcentagem_exposicao_minima_operacoes_compromissadas_titulos_credito_privado,
+    safe_cast(
+        porcentagem_exposicao_maxima_operacoes_compromissadas_titulos_credito_privado
+        as float64
+    ) porcentagem_exposicao_maxima_operacoes_compromissadas_titulos_credito_privado,
+    safe_cast(
+        porcentagem_exposicao_minima_derivativos as float64
+    ) porcentagem_exposicao_minima_derivativos,
+    safe_cast(
+        porcentagem_exposicao_maxima_derivativos as float64
+    ) porcentagem_exposicao_maxima_derivativos,
+    safe_cast(
+        porcentagem_exposicao_minima_outros as float64
+    ) porcentagem_exposicao_minima_outros,
+    safe_cast(
+        porcentagem_exposicao_maxima_outros as float64
+    ) porcentagem_exposicao_maxima_outros,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fmiee as float64
+    ) porcentagem_exposicao_minima_cotas_fmiee,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fmiee as float64
+    ) porcentagem_exposicao_maxima_cotas_fmiee,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_fip as float64
+    ) porcentagem_exposicao_minima_cotas_fip,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_fip as float64
+    ) porcentagem_exposicao_maxima_cotas_fip,
+    safe_cast(
+        porcentagem_exposicao_minima_cotas_ficfip as float64
+    ) porcentagem_exposicao_minima_cotas_ficfip,
+    safe_cast(
+        porcentagem_exposicao_maxima_cotas_ficfip as float64
+    ) porcentagem_exposicao_maxima_cotas_ficfip,
+from `basedosdados-staging.br_cvm_fi_staging.documentos_extratos_informacoes ` as t

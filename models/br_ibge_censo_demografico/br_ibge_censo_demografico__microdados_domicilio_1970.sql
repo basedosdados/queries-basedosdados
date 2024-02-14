@@ -1,40 +1,42 @@
-{{ 
-  config(
-    alias='microdados_domicilio_1970',
-    schema='br_ibge_censo_demografico',
-    materialized='table',
-    partition_by={
-      "field": "sigla_uf",
-      "data_type": "string",
-    },
+{{
+    config(
+        alias="microdados_domicilio_1970",
+        schema="br_ibge_censo_demografico",
+        materialized="table",
+        partition_by={
+            "field": "sigla_uf",
+            "data_type": "string",
+        },
     )
- }}
+}}
 
-SELECT 
-    SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-    SAFE_CAST(id_municipio AS STRING) id_municipio,
-    SAFE_CAST(id_domicilio AS STRING) id_domicilio,
-    SAFE_CAST(numero_familia AS INT64) numero_familia,
-    SAFE_CAST(v001 AS STRING) v001,
-    SAFE_CAST(v002 AS STRING) v002,
-    SAFE_CAST(v003 AS STRING) v003,
-    SAFE_CAST(v004 AS STRING) v004,
-    SAFE_CAST(v005 AS INT64) v005,
-    SAFE_CAST(v006 AS STRING) v006,
-    SAFE_CAST(v007 AS STRING) v007,
-    SAFE_CAST(v008 AS STRING) v008,
-    SAFE_CAST(v009 AS STRING) v009,
-    SAFE_CAST(v010 AS STRING) v010,
-    SAFE_CAST(v011 AS STRING) v011,
-    SAFE_CAST(v012 AS STRING) v012,
-    SAFE_CAST(v013 AS STRING) v013,
-    SAFE_CAST(v014 AS STRING) v014,
-    SAFE_CAST(v015 AS STRING) v015,
-    SAFE_CAST(v016 AS STRING) v016,
-    SAFE_CAST(v017 AS STRING) v017,
-    SAFE_CAST(v018 AS STRING) v018,
-    SAFE_CAST(v019 AS STRING) v019,
-    SAFE_CAST(v020 AS INT64) v020,
-    SAFE_CAST(v021 AS INT64) v021,
-    SAFE_CAST(v054 AS INT64) v054
-FROM basedosdados-staging.br_ibge_censo_demografico_staging.microdados_domicilio_1970 AS t
+select
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_domicilio as string) id_domicilio,
+    safe_cast(numero_familia as int64) numero_familia,
+    safe_cast(v001 as string) v001,
+    safe_cast(v002 as string) v002,
+    safe_cast(v003 as string) v003,
+    safe_cast(v004 as string) v004,
+    safe_cast(v005 as int64) v005,
+    safe_cast(v006 as string) v006,
+    safe_cast(v007 as string) v007,
+    safe_cast(v008 as string) v008,
+    safe_cast(v009 as string) v009,
+    safe_cast(v010 as string) v010,
+    safe_cast(v011 as string) v011,
+    safe_cast(v012 as string) v012,
+    safe_cast(v013 as string) v013,
+    safe_cast(v014 as string) v014,
+    safe_cast(v015 as string) v015,
+    safe_cast(v016 as string) v016,
+    safe_cast(v017 as string) v017,
+    safe_cast(v018 as string) v018,
+    safe_cast(v019 as string) v019,
+    safe_cast(v020 as int64) v020,
+    safe_cast(v021 as int64) v021,
+    safe_cast(v054 as int64) v054
+from
+    basedosdados
+    - staging.br_ibge_censo_demografico_staging.microdados_domicilio_1970 as t

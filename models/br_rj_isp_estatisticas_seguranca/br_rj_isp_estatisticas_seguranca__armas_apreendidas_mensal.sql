@@ -1,22 +1,29 @@
-{{ config(alias='armas_apreendidas_mensal',schema='br_rj_isp_estatisticas_seguranca') }}
+{{
+    config(
+        alias="armas_apreendidas_mensal", schema="br_rj_isp_estatisticas_seguranca"
+    )
+}}
 
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_cisp AS STRING) id_cisp,
-SAFE_CAST(id_aisp AS STRING) id_aisp,
-SAFE_CAST(id_risp AS STRING) id_risp,
-SAFE_CAST(quantidade_arma_fabricacao_caseira AS INT64) quantidade_arma_fabricacao_caseira,
-SAFE_CAST(quantidade_carabina AS INT64) quantidade_carabina,
-SAFE_CAST(quantidade_espingarda AS INT64) quantidade_espingarda,
-SAFE_CAST(quantidade_fuzil AS INT64) quantidade_fuzil,
-SAFE_CAST(quantidade_garrucha AS INT64) quantidade_garrucha,
-SAFE_CAST(quantidade_garruchao AS INT64) quantidade_garruchao,
-SAFE_CAST(quantidade_metralhadora AS INT64) quantidade_metralhadora,
-SAFE_CAST(quantidade_outros AS INT64) quantidade_outros,
-SAFE_CAST(quantidade_pistola AS INT64) quantidade_pistola,
-SAFE_CAST(quantidade_revolver AS INT64) quantidade_revolver,
-SAFE_CAST(quantidade_submetralhadora AS INT64) quantidade_submetralhadora,
-SAFE_CAST(total AS INT64) total
-FROM basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.armas_apreendidas_mensal AS t
-
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(id_cisp as string) id_cisp,
+    safe_cast(id_aisp as string) id_aisp,
+    safe_cast(id_risp as string) id_risp,
+    safe_cast(
+        quantidade_arma_fabricacao_caseira as int64
+    ) quantidade_arma_fabricacao_caseira,
+    safe_cast(quantidade_carabina as int64) quantidade_carabina,
+    safe_cast(quantidade_espingarda as int64) quantidade_espingarda,
+    safe_cast(quantidade_fuzil as int64) quantidade_fuzil,
+    safe_cast(quantidade_garrucha as int64) quantidade_garrucha,
+    safe_cast(quantidade_garruchao as int64) quantidade_garruchao,
+    safe_cast(quantidade_metralhadora as int64) quantidade_metralhadora,
+    safe_cast(quantidade_outros as int64) quantidade_outros,
+    safe_cast(quantidade_pistola as int64) quantidade_pistola,
+    safe_cast(quantidade_revolver as int64) quantidade_revolver,
+    safe_cast(quantidade_submetralhadora as int64) quantidade_submetralhadora,
+    safe_cast(total as int64) total
+from
+    basedosdados
+    - staging.br_rj_isp_estatisticas_seguranca_staging.armas_apreendidas_mensal as t

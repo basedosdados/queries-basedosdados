@@ -1,8 +1,9 @@
+---
 version: 2
-
 models:
   - name: br_cnpq_bolsas__microdados
-    description: "Dados acerca dos pagamentos efetuados pelo CNPq para projetos de pesquisa"
+    description: Dados acerca dos pagamentos efetuados pelo CNPq para projetos de
+      pesquisa
     columns:
       - name: ano
         description: Ano

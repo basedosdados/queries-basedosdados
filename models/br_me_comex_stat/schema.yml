@@ -1,8 +1,9 @@
+---
 version: 2
-
 models:
   - name: br_me_comex_stat__municipio_exportacao
-    description: Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4)
+    description: Base de dados detalhada por município da empresa exportadora e Posição
+      do Sistema Harmonizado (SH4)
     columns:
       - name: ano
         description: Ano
@@ -15,13 +16,14 @@ models:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos	
+        description: ID Município - IBGE 7 Dígitos
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
   - name: br_me_comex_stat__municipio_importacao
-    description: Base de dados detalhada por município da empresa importadora e Posição do Sistema Harmonizado (SH4)
+    description: Base de dados detalhada por município da empresa importadora e Posição
+      do Sistema Harmonizado (SH4)
     columns:
       - name: ano
         description: Ano
@@ -34,26 +36,27 @@ models:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos	
+        description: ID Município - IBGE 7 Dígitos
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
         description: Valor Livre a Bordo
   - name: br_me_comex_stat__ncm_importacao
-    description: Base de dados dos produtos importados pelo Brasil segundo a Nomenclatura Comum do Mercosul
+    description: Base de dados dos produtos importados pelo Brasil segundo a Nomenclatura
+      Comum do Mercosul
     columns:
       - name: ano
         description: Ano
       - name: mes
         description: Mês
       - name: id_ncm
-        description: 	ID Produto - Nomenclatura Comum do Mercosul
+        description: ID Produto - Nomenclatura Comum do Mercosul
       - name: id_unidade
         description: ID Unidade
       - name: id_pais
-        description: ID País	
+        description: ID País
       - name: sigla_uf_ncm
-        description: 	Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
+        description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
       - name: id_via
         description: ID Via de Transporte
       - name: id_urf
@@ -69,20 +72,21 @@ models:
       - name: valor_seguro
         description: Valor do Seguro
   - name: br_me_comex_stat__ncm_exportacao
-    description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+    description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares
+      com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
     columns:
       - name: ano
         description: Ano
       - name: mes
         description: Mês
       - name: id_ncm
-        description: 	ID Produto - Nomenclatura Comum do Mercosul
+        description: ID Produto - Nomenclatura Comum do Mercosul
       - name: id_unidade
         description: ID Unidade
       - name: id_pais
-        description: ID País	
+        description: ID País
       - name: sigla_uf_ncm
-        description: 	Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
+        description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
       - name: id_via
         description: ID Via de Transporte
       - name: id_urf

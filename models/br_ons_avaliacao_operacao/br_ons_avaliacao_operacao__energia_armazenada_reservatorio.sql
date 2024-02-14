@@ -1,43 +1,72 @@
-{{ config(
-    alias='energia_armazenada_reservatorio', 
-    schema='br_ons_avaliacao_operacao',
-    partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2000,
-        "end": 2024,
-        "interval": 1}
-     },
-    cluster_by=['ano', 'mes']) 
+{{
+    config(
+        alias="energia_armazenada_reservatorio",
+        schema="br_ons_avaliacao_operacao",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2000, "end": 2024, "interval": 1},
+        },
+        cluster_by=["ano", "mes"],
+    )
 }}
 
-SELECT
-SAFE_CAST(data AS DATE) data,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(reservatorio AS STRING) reservatorio,
-SAFE_CAST(tipo_reservatorio AS STRING) tipo_reservatorio,
-SAFE_CAST(REPLACE(id_reservatorio_planejamento, '.0', '') AS STRING) id_reservatorio_planejamento,
-SAFE_CAST(reservatorio_equivalente_energia AS STRING) reservatorio_equivalente_energia,
-SAFE_CAST(id_subsistema AS STRING) id_subsistema,
-SAFE_CAST(subsistema AS STRING) subsistema,
-SAFE_CAST(id_subsistema_jusante AS STRING) id_subsistema_jusante,
-SAFE_CAST(subsistema_jusante AS STRING) subsistema_jusante,
-SAFE_CAST(bacia AS STRING) bacia,
-SAFE_CAST(energia_armazenada_subsistema AS FLOAT64) energia_armazenada_subsistema,
-SAFE_CAST(energia_armazenada_jusante_subsistema AS FLOAT64) energia_armazenada_jusante_subsistema,
-SAFE_CAST(energia_maxima_armazenada_subsistema AS FLOAT64) energia_maxima_armazenada_subsistema,
-SAFE_CAST(energia_maxima_armazenada_jusante_subsistema AS FLOAT64) energia_maxima_armazenada_jusante_subsistema,
-SAFE_CAST(energia_armazenada_total AS FLOAT64) energia_armazenada_total,
-SAFE_CAST(energia_maxima_armazenada_total AS FLOAT64) energia_maxima_armazenada_total,
-SAFE_CAST(proporcao_energia_armazenada AS FLOAT64) proporcao_energia_armazenada,
-SAFE_CAST(proporcao_contribuicao_energia_armazenada_bacia AS FLOAT64) proporcao_contribuicao_energia_armazenada_bacia,
-SAFE_CAST(proporcao_contribuicao_energia_maxima_armazenada_bacia AS FLOAT64) proporcao_contribuicao_energia_maxima_armazenada_bacia,
-SAFE_CAST(proporcao_contribuicao_energia_armazenada_subsistema AS FLOAT64) proporcao_contribuicao_energia_armazenada_subsistema,
-SAFE_CAST(proporcao_contribuicao_energia_maxima_armazenada_subsistema AS FLOAT64) proporcao_contribuicao_energia_maxima_armazenada_subsistema,
-SAFE_CAST(proporcao_contribuicao_energia_armazenada_subsistema_jusante AS FLOAT64) proporcao_contribuicao_energia_armazenada_subsistema_jusante,
-SAFE_CAST(proporcao_contribuicao_energia_maxima_armazenada_subsistema_jusante AS FLOAT64) proporcao_contribuicao_energia_maxima_armazenada_subsistema_jusante,
-SAFE_CAST(proporcao_contribuicao_energia_armazenada_sin AS FLOAT64) proporcao_contribuicao_energia_armazenada_sin,
-SAFE_CAST(proporcao_contribuicao_energia_armazenada_maxima_sin AS FLOAT64) proporcao_contribuicao_energia_armazenada_maxima_sin
-FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.energia_armazenada_reservatorio AS t
+select
+    safe_cast(data as date) data,
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(reservatorio as string) reservatorio,
+    safe_cast(tipo_reservatorio as string) tipo_reservatorio,
+    safe_cast(
+        replace(id_reservatorio_planejamento, '.0', '') as string
+    ) id_reservatorio_planejamento,
+    safe_cast(
+        reservatorio_equivalente_energia as string
+    ) reservatorio_equivalente_energia,
+    safe_cast(id_subsistema as string) id_subsistema,
+    safe_cast(subsistema as string) subsistema,
+    safe_cast(id_subsistema_jusante as string) id_subsistema_jusante,
+    safe_cast(subsistema_jusante as string) subsistema_jusante,
+    safe_cast(bacia as string) bacia,
+    safe_cast(energia_armazenada_subsistema as float64) energia_armazenada_subsistema,
+    safe_cast(
+        energia_armazenada_jusante_subsistema as float64
+    ) energia_armazenada_jusante_subsistema,
+    safe_cast(
+        energia_maxima_armazenada_subsistema as float64
+    ) energia_maxima_armazenada_subsistema,
+    safe_cast(
+        energia_maxima_armazenada_jusante_subsistema as float64
+    ) energia_maxima_armazenada_jusante_subsistema,
+    safe_cast(energia_armazenada_total as float64) energia_armazenada_total,
+    safe_cast(
+        energia_maxima_armazenada_total as float64
+    ) energia_maxima_armazenada_total,
+    safe_cast(proporcao_energia_armazenada as float64) proporcao_energia_armazenada,
+    safe_cast(
+        proporcao_contribuicao_energia_armazenada_bacia as float64
+    ) proporcao_contribuicao_energia_armazenada_bacia,
+    safe_cast(
+        proporcao_contribuicao_energia_maxima_armazenada_bacia as float64
+    ) proporcao_contribuicao_energia_maxima_armazenada_bacia,
+    safe_cast(
+        proporcao_contribuicao_energia_armazenada_subsistema as float64
+    ) proporcao_contribuicao_energia_armazenada_subsistema,
+    safe_cast(
+        proporcao_contribuicao_energia_maxima_armazenada_subsistema as float64
+    ) proporcao_contribuicao_energia_maxima_armazenada_subsistema,
+    safe_cast(
+        proporcao_contribuicao_energia_armazenada_subsistema_jusante as float64
+    ) proporcao_contribuicao_energia_armazenada_subsistema_jusante,
+    safe_cast(
+        proporcao_contribuicao_energia_maxima_armazenada_subsistema_jusante as float64
+    ) proporcao_contribuicao_energia_maxima_armazenada_subsistema_jusante,
+    safe_cast(
+        proporcao_contribuicao_energia_armazenada_sin as float64
+    ) proporcao_contribuicao_energia_armazenada_sin,
+    safe_cast(
+        proporcao_contribuicao_energia_armazenada_maxima_sin as float64
+    ) proporcao_contribuicao_energia_armazenada_maxima_sin
+from
+    basedosdados
+    - staging.br_ons_avaliacao_operacao_staging.energia_armazenada_reservatorio as t

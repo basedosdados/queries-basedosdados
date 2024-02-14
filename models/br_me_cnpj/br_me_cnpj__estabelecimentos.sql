@@ -1,63 +1,66 @@
 {{
-  config(
-    schema='br_me_cnpj',
-    materialized='incremental',
-    alias = 'estabelecimentos',
-    partition_by={
-      "field": "data",
-      "data_type": "date",
-    },
-    cluster_by='sigla_uf' ,
-    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-    post_hook=['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) > 6)',
-              'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                    ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) <= 6)']
-  )
+    config(
+        schema="br_me_cnpj",
+        materialized="incremental",
+        alias="estabelecimentos",
+        partition_by={
+            "field": "data",
+            "data_type": "date",
+        },
+        cluster_by="sigla_uf",
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) <= 6)',
+        ],
+    )
 }}
-WITH cnpj_estabelecimentos AS 
-(SELECT 
-  SAFE_CAST(data AS DATE) data,
-  SAFE_CAST(lpad(cnpj,14,"0") AS STRING) cnpj,
-  SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
-  SAFE_CAST(lpad(cnpj_ordem, 4, '0') AS STRING) cnpj_ordem,
-  SAFE_CAST(lpad(cnpj_dv, 2, '0') AS STRING) cnpj_dv,
-  SAFE_CAST(identificador_matriz_filial AS STRING) identificador_matriz_filial,
-  SAFE_CAST(nome_fantasia AS STRING) nome_fantasia,
-  SAFE_CAST(CAST(situacao_cadastral AS INT64) AS STRING) situacao_cadastral,
-  SAFE_CAST(data_situacao_cadastral AS DATE) data_situacao_cadastral,
-  SAFE_CAST(motivo_situacao_cadastral AS STRING) motivo_situacao_cadastral,
-  SAFE_CAST(nome_cidade_exterior AS STRING) nome_cidade_exterior,
-  SAFE_CAST(CAST(id_pais AS INT64) AS STRING) id_pais,
-  SAFE_CAST(data_inicio_atividade AS DATE) data_inicio_atividade,
-  SAFE_CAST(cnae_fiscal_principal AS STRING) cnae_fiscal_principal,
-  SAFE_CAST(cnae_fiscal_secundaria AS STRING) cnae_fiscal_secundaria,
-  SAFE_CAST(a.sigla_uf AS STRING) sigla_uf,
-  SAFE_CAST(b.id_municipio AS STRING) id_municipio,
-  SAFE_CAST(SAFE_CAST(a.id_municipio_rf AS NUMERIC)AS STRING) id_municipio_rf,
-  SAFE_CAST(tipo_logradouro AS STRING) tipo_logradouro,
-  SAFE_CAST(logradouro AS STRING) logradouro,
-  SAFE_CAST(numero AS STRING) numero,
-  SAFE_CAST(complemento AS STRING) complemento,
-  SAFE_CAST(bairro AS STRING) bairro,
-  SAFE_CAST(REPLACE (cep,".0","") AS STRING) cep,
-  SAFE_CAST(ddd_1 AS STRING) ddd_1,
-  SAFE_CAST(telefone_1 AS STRING) telefone_1,
-  SAFE_CAST(ddd_2 AS STRING) ddd_2,
-  SAFE_CAST(telefone_2 AS STRING) telefone_2,
-  SAFE_CAST(ddd_fax AS STRING) ddd_fax,
-  SAFE_CAST(fax AS STRING) fax,
-  SAFE_CAST(LOWER(email) AS STRING) email,
-  SAFE_CAST(situacao_especial AS STRING) situacao_especial,
-  SAFE_CAST(data_situacao_especial AS DATE) data_situacao_especial
-FROM basedosdados-staging.br_me_cnpj_staging.estabelecimentos a
-LEFT JOIN basedosdados.br_bd_diretorios_brasil.municipio b
-    ON SAFE_CAST(SAFE_CAST(a.id_municipio_rf AS NUMERIC)AS STRING)  = b.id_municipio_rf)
-SELECT * FROM cnpj_estabelecimentos
-{% if is_incremental() %} 
-WHERE data > (SELECT MAX(data) FROM {{ this }} )
-{% endif %}
+with
+    cnpj_estabelecimentos as (
+        select
+            safe_cast(data as date) data,
+            safe_cast(lpad(cnpj, 14, "0") as string) cnpj,
+            safe_cast(lpad(cnpj_basico, 8, '0') as string) cnpj_basico,
+            safe_cast(lpad(cnpj_ordem, 4, '0') as string) cnpj_ordem,
+            safe_cast(lpad(cnpj_dv, 2, '0') as string) cnpj_dv,
+            safe_cast(
+                identificador_matriz_filial as string
+            ) identificador_matriz_filial,
+            safe_cast(nome_fantasia as string) nome_fantasia,
+            safe_cast(cast(situacao_cadastral as int64) as string) situacao_cadastral,
+            safe_cast(data_situacao_cadastral as date) data_situacao_cadastral,
+            safe_cast(motivo_situacao_cadastral as string) motivo_situacao_cadastral,
+            safe_cast(nome_cidade_exterior as string) nome_cidade_exterior,
+            safe_cast(cast(id_pais as int64) as string) id_pais,
+            safe_cast(data_inicio_atividade as date) data_inicio_atividade,
+            safe_cast(cnae_fiscal_principal as string) cnae_fiscal_principal,
+            safe_cast(cnae_fiscal_secundaria as string) cnae_fiscal_secundaria,
+            safe_cast(a.sigla_uf as string) sigla_uf,
+            safe_cast(b.id_municipio as string) id_municipio,
+            safe_cast(
+                safe_cast(a.id_municipio_rf as numeric) as string
+            ) id_municipio_rf,
+            safe_cast(tipo_logradouro as string) tipo_logradouro,
+            safe_cast(logradouro as string) logradouro,
+            safe_cast(numero as string) numero,
+            safe_cast(complemento as string) complemento,
+            safe_cast(bairro as string) bairro,
+            safe_cast(replace (cep, ".0", "") as string) cep,
+            safe_cast(ddd_1 as string) ddd_1,
+            safe_cast(telefone_1 as string) telefone_1,
+            safe_cast(ddd_2 as string) ddd_2,
+            safe_cast(telefone_2 as string) telefone_2,
+            safe_cast(ddd_fax as string) ddd_fax,
+            safe_cast(fax as string) fax,
+            safe_cast(lower(email) as string) email,
+            safe_cast(situacao_especial as string) situacao_especial,
+            safe_cast(data_situacao_especial as date) data_situacao_especial
+        from basedosdados - staging.br_me_cnpj_staging.estabelecimentos a
+        left join
+            basedosdados.br_bd_diretorios_brasil.municipio b
+            on safe_cast(safe_cast(a.id_municipio_rf as numeric) as string)
+            = b.id_municipio_rf
+    )
+select *
+from cnpj_estabelecimentos
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}

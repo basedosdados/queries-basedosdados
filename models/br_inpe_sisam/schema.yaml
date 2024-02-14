@@ -1,13 +1,11 @@
+---
 version: 2
-
 models:
   - name: br_inpe_sisam__microdados
     description: Dados do Sistema de Informações Ambientais integrado à saúde
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - id_municipio
-            - data_hora
+          combination_of_columns: [id_municipio, data_hora]
     columns:
       - name: ano
         description: Ano

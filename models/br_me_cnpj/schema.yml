@@ -1,13 +1,12 @@
+---
 version: 2
-
 models:
   - name: br_me_cnpj__empresas
     description: Empresas
     columns:
       - name: data
         description: Data
-        tests:
-          - is_row_count_increasing
+        tests: [is_row_count_increasing]
       - name: cnpj_basico
         description: CNPJ Básico
       - name: razao_social
@@ -22,14 +21,12 @@ models:
         description: Porte
       - name: ente_federativo
         description: Ente Federativo
-
   - name: br_me_cnpj__socios
     description: Sócios
     columns:
       - name: data
         description: Data
-        tests:
-          - is_row_count_increasing
+        tests: [is_row_count_increasing]
       - name: cnpj_basico
         description: CNPJ básico
       - name: tipo
@@ -52,7 +49,6 @@ models:
         description: Qualificação do Representante Legal
       - name: faixa_etaria
         description: Faixa Etária
-
   - name: br_me_cnpj__simples
     description: Simples Nacional
     columns:
@@ -70,14 +66,12 @@ models:
         description: Data de Opção pelo MEI
       - name: data_exclusao_mei
         description: Data de Exclusão do MEI
-
   - name: br_me_cnpj__estabelecimentos
     description: Estabelecimentos
     columns:
       - name: data
         description: Data
-        tests:
-          - is_row_count_increasing
+        tests: [is_row_count_increasing]
       - name: cnpj
         description: CNPJ
       - name: cnpj_basico
@@ -142,14 +136,13 @@ models:
         description: Situação Especial
       - name: data_situacao_especial
         description: Data da Situação Especial
-
   - name: br_me_cnpj__dicionario
     description: Dicionário
     columns:
       - name: id_tabela
         description: ID Tabela
       - name: nome_coluna
-        description: Nome da coluna        
+        description: Nome da coluna
       - name: chave
         description: Chave
       - name: cobertura_temporal

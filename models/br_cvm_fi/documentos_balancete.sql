@@ -1,27 +1,23 @@
-{{ 
-  config(
-    schema='br_cvm_fi',
-    materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2005,
-        "end": 2023,
-        "interval": 1}
-    },
-    cluster_by = ["mes", "data_competencia"],
-    labels = {'project_id': 'basedosdados', 'tema': 'economia'})
- }}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-REGEXP_REPLACE(cnpj, r'[^0-9]', '') AS cnpj,
-SUBSTR(REGEXP_REPLACE(cnpj, r'[^0-9]', ''), 1, 8) AS cnpj_basico,
-SAFE_CAST(data_competencia AS DATE) data_competencia,
-SAFE_CAST(plano_contabil_balancete AS STRING) plano_contabil_balancete,
-SAFE_CAST(codigo_conta AS STRING) codigo_conta,
-SAFE_CAST(saldo_conta AS FLOAT64) saldo_conta,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_balancete AS t
-
-
+{{
+    config(
+        schema="br_cvm_fi",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2005, "end": 2023, "interval": 1},
+        },
+        cluster_by=["mes", "data_competencia"],
+        labels={"project_id": "basedosdados", "tema": "economia"},
+    )
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    regexp_replace(cnpj, r'[^0-9]', '') as cnpj,
+    substr(regexp_replace(cnpj, r'[^0-9]', ''), 1, 8) as cnpj_basico,
+    safe_cast(data_competencia as date) data_competencia,
+    safe_cast(plano_contabil_balancete as string) plano_contabil_balancete,
+    safe_cast(codigo_conta as string) codigo_conta,
+    safe_cast(saldo_conta as float64) saldo_conta,
+from `basedosdados-staging.br_cvm_fi_staging.documentos_balancete ` as t

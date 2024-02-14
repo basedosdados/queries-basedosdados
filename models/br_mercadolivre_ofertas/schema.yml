@@ -1,8 +1,10 @@
+---
 version: 2
-
 models:
   - name: item
-    description: A tabela apresenta informações específicas sobre os produtos disponíveis no Mercado Livre. Valores missing podem se dar por instabilidade do site no momento da coleta.
+    description: A tabela apresenta informações específicas sobre os produtos disponíveis
+      no Mercado Livre. Valores missing podem se dar por instabilidade do site no
+      momento da coleta.
     columns:
       - name: data_consulta
         description: Data consulta da oferta
@@ -31,12 +33,13 @@ models:
       - name: preco_original
         description: Preço original de referência
       - name: desconto
-        description: Desconto percentual em relação ao preço original de referência 
+        description: Desconto percentual em relação ao preço original de referência
       - name: preco_final
         description: Preço de oferta
-
   - name: vendedor
-    description: A tabela contém informações sobre os vendedores associados às ofertas presentes na tabela de itens. Valores missing podem se dar por instabilidade do site no momento da coleta.
+    description: A tabela contém informações sobre os vendedores associados às ofertas
+      presentes na tabela de itens. Valores missing podem se dar por instabilidade
+      do site no momento da coleta.
     columns:
       - name: data_consulta
         description: Data consulta

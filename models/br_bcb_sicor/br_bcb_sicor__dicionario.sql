@@ -1,14 +1,14 @@
 {{
-  config(
-    alias = 'dicionario',
-    schema='br_bcb_sicor',
-    materialized='table',
-  )
+    config(
+        alias="dicionario",
+        schema="br_bcb_sicor",
+        materialized="table",
+    )
 }}
-SELECT 
-SAFE_CAST(id_tabela AS STRING) id_tabela,
-SAFE_CAST(nome_coluna AS STRING) nome_coluna,
-SAFE_CAST(chave AS STRING) chave,
-SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
-SAFE_CAST(valor AS STRING) valor
-FROM basedosdados-staging.br_bcb_sicor_staging.dicionario AS t
+select
+    safe_cast(id_tabela as string) id_tabela,
+    safe_cast(nome_coluna as string) nome_coluna,
+    safe_cast(chave as string) chave,
+    safe_cast(cobertura_temporal as string) cobertura_temporal,
+    safe_cast(valor as string) valor
+from `basedosdados-staging.br_bcb_sicor_staging.dicionario ` as t

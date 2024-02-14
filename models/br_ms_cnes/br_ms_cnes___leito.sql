@@ -1,52 +1,44 @@
-{{ 
-  config(
-    schema='br_ms_cnes',
-    alias='leito',
-    materialized='incremental',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2007,
-        "end": 2024,
-        "interval": 1}
-     },
-     pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-     post_hook = [ 
-      'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-      'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-       ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)'      
-     ]  
+{{
+    config(
+        schema="br_ms_cnes",
+        alias="leito",
+        materialized="incremental",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2007, "end": 2024, "interval": 1},
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+        ],
     )
- }}
+}}
 
 
-WITH raw_cnes_leito AS (
-  -- 1. Retirar linhas com id_estabelecimento_cnes nulo
-  SELECT *
-  FROM `basedosdados-staging.br_ms_cnes_staging.leito`
-  WHERE CNES IS NOT NULL),
-cnes_leito_without_duplicates AS (
-    SELECT DISTINCT *
-    FROM raw_cnes_leito
-)
+with
+    raw_cnes_leito as (
+        -- 1. Retirar linhas com id_estabelecimento_cnes nulo
+        select *
+        from `basedosdados-staging.br_ms_cnes_staging.leito`
+        where cnes is not null
+    ),
+    cnes_leito_without_duplicates as (select distinct * from raw_cnes_leito)
 
-SELECT 
-SAFE_CAST(ano AS INT64) AS ano,
-SAFE_CAST(mes AS INT64) AS mes,
-SAFE_CAST(sigla_uf AS STRING) AS sigla_uf,
-SAFE_CAST(CNES AS STRING) AS id_estabelecimento_cnes,
-SAFE_CAST(CODLEITO AS STRING) AS tipo_especialidade_leito,
-SAFE_CAST(TP_LEITO AS STRING) AS tipo_leito,
-SAFE_CAST(QT_EXIST AS STRING) AS quantidade_total,
-SAFE_CAST(QT_CONTR AS STRING) AS quantidade_contratado,
-SAFE_CAST(QT_SUS AS STRING) AS quantidade_sus
-FROM cnes_leito_without_duplicates
-{% if is_incremental() %} 
-WHERE DATE(CAST(ano AS INT64),CAST(mes AS INT64),1) > (SELECT MAX(DATE(CAST(ano AS INT64),CAST(mes AS INT64),1)) FROM {{ this }} )
+select
+    safe_cast(ano as int64) as ano,
+    safe_cast(mes as int64) as mes,
+    safe_cast(sigla_uf as string) as sigla_uf,
+    safe_cast(cnes as string) as id_estabelecimento_cnes,
+    safe_cast(codleito as string) as tipo_especialidade_leito,
+    safe_cast(tp_leito as string) as tipo_leito,
+    safe_cast(qt_exist as string) as quantidade_total,
+    safe_cast(qt_contr as string) as quantidade_contratado,
+    safe_cast(qt_sus as string) as quantidade_sus
+from cnes_leito_without_duplicates
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}

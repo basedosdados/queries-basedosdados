@@ -1,14 +1,14 @@
-{{ 
-  config(
-    alias='estabelecimentos_saude',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="estabelecimentos_saude",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_cnes AS STRING) id_cnes,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
-FROM basedosdados-staging.br_geobr_mapas_staging.estabelecimentos_saude AS t
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_cnes as string) id_cnes,
+    safe.st_geogfromtext(geometria) geometria
+from `basedosdados-staging.br_geobr_mapas_staging.estabelecimentos_saude ` as t

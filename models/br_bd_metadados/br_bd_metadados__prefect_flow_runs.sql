@@ -1,20 +1,19 @@
-{{ config(alias='prefect_flow_runs',schema='br_bd_metadados') }}
-SELECT
-SAFE_CAST(id AS STRING) id,
-SAFE_CAST(flow_flow_group_id AS STRING) flow_group_id,
-SAFE_CAST(name AS STRING) name,
-SAFE_CAST(labels AS STRING) labels,
-SAFE_CAST(flow_project_name AS STRING) flow_project_name,
-SAFE_CAST(flow_name AS STRING) flow_name,
-SAFE_CAST(flow_archived AS BOOL) flow_archived,
-SAFE_CAST(dataset_id AS STRING) dataset_id,
-SAFE_CAST(table_id AS STRING) table_id,
-DATETIME(LEFT(start_time,19)) start_time,
-DATETIME(LEFT(end_time,19)) end_time,
-SAFE_CAST(state AS STRING) state,
-SAFE_CAST(state_message AS STRING) state_message,
-SAFE_CAST(task_runs AS STRING) task_runs,
-SAFE_CAST(skipped_upload_to_gcs AS BOOL) skipped_upload_to_gcs,
-SAFE_CAST(logs AS STRING) error_logs,
-FROM basedosdados-staging.br_bd_metadados_staging.prefect_flow_runs AS t
-
+{{ config(alias="prefect_flow_runs", schema="br_bd_metadados") }}
+select
+    safe_cast(id as string) id,
+    safe_cast(flow_flow_group_id as string) flow_group_id,
+    safe_cast(name as string) name,
+    safe_cast(labels as string) labels,
+    safe_cast(flow_project_name as string) flow_project_name,
+    safe_cast(flow_name as string) flow_name,
+    safe_cast(flow_archived as bool) flow_archived,
+    safe_cast(dataset_id as string) dataset_id,
+    safe_cast(table_id as string) table_id,
+    datetime(left(start_time, 19)) start_time,
+    datetime(left(end_time, 19)) end_time,
+    safe_cast(state as string) state,
+    safe_cast(state_message as string) state_message,
+    safe_cast(task_runs as string) task_runs,
+    safe_cast(skipped_upload_to_gcs as bool) skipped_upload_to_gcs,
+    safe_cast(logs as string) error_logs,
+from `basedosdados-staging.br_bd_metadados_staging.prefect_flow_runs ` as t

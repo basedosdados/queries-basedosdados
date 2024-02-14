@@ -1,5 +1,5 @@
+---
 version: 2
-
 models:
   - name: br_cvm_administradores_carteira__pessoa_fisica
     description: Dados Cadastrais de Administradores de Carteira da CVM (Pessoa Física)

@@ -1,12 +1,12 @@
-{{ 
-  config(
-    alias='regiao',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="regiao",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(id_regiao AS STRING) id_regiao,
-SAFE_CAST(nome_regiao AS STRING) nome_regiao,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
-FROM basedosdados-staging.br_geobr_mapas_staging.regiao AS t
+}}
+select
+    safe_cast(id_regiao as string) id_regiao,
+    safe_cast(nome_regiao as string) nome_regiao,
+    safe.st_geogfromtext(geometria) geometria
+from `basedosdados-staging.br_geobr_mapas_staging.regiao ` as t

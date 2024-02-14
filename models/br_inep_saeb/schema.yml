@@ -1,5 +1,6 @@
+---
 version: 2
-models :
+models:
   - name: br_inep_saeb__aluno_ef_2ano
     description: Microdados do SAEB com respostas dos alunos para as avaliações e
       questionário socioeconômico matriculados no 2º ano do Ensino Fundamental
@@ -1326,8 +1327,8 @@ models :
       - name: turno
         description: Turno
   - name: br_inep_saeb__municipio
-    description: "Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro
-    de cada nível de aprendizado segundo o Inep a nível municipal"
+    description: Tabela resumo dos dados do SAEB com a média e percentual de alunos
+      dentro de cada nível de aprendizado segundo o Inep a nível municipal
     columns:
       - name: ano
         description: Ano
@@ -1348,7 +1349,7 @@ models :
       - name: nivel_0
         description: Percentual de alunos que se enquadram no nível zero de aprendizagem
       - name: nivel_1
-        description: Percentual de alunos que se enquadram no nível um de aprendizagem  
+        description: Percentual de alunos que se enquadram no nível um de aprendizagem
       - name: nivel_2
         description: Percentual de alunos que se enquadram no nível dois de aprendizagem
       - name: nivel_3
@@ -1364,7 +1365,6 @@ models :
       - name: nivel_8
         description: Percentual de alunos que se enquadram no nível oito de aprendizagem
       - name: nivel_9
-        description: Percentual de alunos que se enquadram no nível nove de aprendizagem 
+        description: Percentual de alunos que se enquadram no nível nove de aprendizagem
       - name: nivel_10
         description: Percentual de alunos que se enquadram no nível dez de aprendizagem
-

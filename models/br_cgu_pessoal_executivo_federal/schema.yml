@@ -1,8 +1,8 @@
+---
 version: 2
-
 models:
   - name: tercerizados
-    description: "dbt model for tercerizados table"
+    description: dbt model for tercerizados table
     columns:
       - name: ano
         description: Ano

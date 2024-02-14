@@ -1,45 +1,43 @@
-{{ config(
-    materialized='table',
-    partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 1995,
-        "end": 2023,
-        "interval": 1
-      }
-    }
-)}}
+{{
+    config(
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 1995, "end": 2023, "interval": 1},
+        },
+    )
+}}
 
 
-SELECT 
+select
 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(data_cadastramento AS DATE) data_cadastramento,
-SAFE_CAST(numero_notificacao AS STRING) numero_notificacao,
-SAFE_CAST(numero_contribuinte AS STRING) numero_contribuinte,
-SAFE_CAST(ano_inicio_vida_contribuinte AS INT64) ano_inicio_vida_contribuinte,
-SAFE_CAST(mes_inicio_vida_contribuinte AS INT64) mes_inicio_vida_contribuinte,
-SAFE_CAST(logradouro AS STRING) logradouro,
-SAFE_CAST(numero_imovel AS INT64) numero_imovel,
-SAFE_CAST(numero_condominio AS STRING) numero_condominio,
-SAFE_CAST(complemento AS STRING) complemento,
-SAFE_CAST(bairro AS STRING) bairro,
-SAFE_CAST(cep AS STRING) cep,
-SAFE_CAST(ano_construcao_corrigida AS INT64) ano_construcao_corrigida,
-SAFE_CAST(fator_obsolescencia AS FLOAT64) fator_obsolescencia,
-INITCAP(referencia_imovel) AS referencia_imovel,
-INITCAP(finalidade_imovel) AS finalidade_imovel,
-INITCAP(tipo_construcao) AS tipo_construcao,
-INITCAP(tipo_terreno) AS tipo_terreno,
-SAFE_CAST(fracao_ideal AS FLOAT64) fracao_ideal,
-SAFE_CAST(area_terreno AS INT64) area_terreno,
-SAFE_CAST(area_construida AS INT64) area_construida,
-SAFE_CAST(area_ocupada AS INT64) area_ocupada,
-SAFE_CAST(quantidade_pavimento AS INT64) quantidade_pavimento,
-SAFE_CAST(quantidade_esquina_imovel AS STRING) quantidade_esquina_imovel,
-SAFE_CAST(testada_imovel AS FLOAT64) testada_imovel,
-SAFE_CAST(valor_terreno AS INT64) valor_terreno,
-SAFE_CAST(valor_construcao AS INT64) valor_construcao,
+    safe_cast(ano as int64) ano,
+    safe_cast(data_cadastramento as date) data_cadastramento,
+    safe_cast(numero_notificacao as string) numero_notificacao,
+    safe_cast(numero_contribuinte as string) numero_contribuinte,
+    safe_cast(ano_inicio_vida_contribuinte as int64) ano_inicio_vida_contribuinte,
+    safe_cast(mes_inicio_vida_contribuinte as int64) mes_inicio_vida_contribuinte,
+    safe_cast(logradouro as string) logradouro,
+    safe_cast(numero_imovel as int64) numero_imovel,
+    safe_cast(numero_condominio as string) numero_condominio,
+    safe_cast(complemento as string) complemento,
+    safe_cast(bairro as string) bairro,
+    safe_cast(cep as string) cep,
+    safe_cast(ano_construcao_corrigida as int64) ano_construcao_corrigida,
+    safe_cast(fator_obsolescencia as float64) fator_obsolescencia,
+    initcap(referencia_imovel) as referencia_imovel,
+    initcap(finalidade_imovel) as finalidade_imovel,
+    initcap(tipo_construcao) as tipo_construcao,
+    initcap(tipo_terreno) as tipo_terreno,
+    safe_cast(fracao_ideal as float64) fracao_ideal,
+    safe_cast(area_terreno as int64) area_terreno,
+    safe_cast(area_construida as int64) area_construida,
+    safe_cast(area_ocupada as int64) area_ocupada,
+    safe_cast(quantidade_pavimento as int64) quantidade_pavimento,
+    safe_cast(quantidade_esquina_imovel as string) quantidade_esquina_imovel,
+    safe_cast(testada_imovel as float64) testada_imovel,
+    safe_cast(valor_terreno as int64) valor_terreno,
+    safe_cast(valor_construcao as int64) valor_construcao,
 
-FROM basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu AS t
+from `basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu ` as t

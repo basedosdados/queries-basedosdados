@@ -1,5 +1,6 @@
+---
 version: 2
-models :
+models:
   - name: world_wb_mides__empenho
     description: Dados a nível de empenho.
     columns:
@@ -292,12 +293,12 @@ models :
         description: Valor da anulação ou estorno, caso haja deduções
       - name: valor_ajuste
         description: Valor de correção entre o valor final e valor inicial, caso haja
-            diferença
+          diferença
       - name: valor_final
         description: Resultado do valor original descontado das deduções
       - name: valor_liquido_recebido
         description: Resultado do valor original descontado das deduções retidas na
-            fonte
+          fonte
   - name: world_wb_mides__liquidacao
     description: Dados a nível de liquidação
     columns:
