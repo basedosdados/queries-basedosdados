@@ -1,0 +1,23 @@
+---
+name: CI dbt
+on:
+  pull_request:
+    paths: ['**.sql', '**.yaml']
+jobs:
+  lint:
+    name: Lint dbt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          cache: pip
+          python-version: '3.10'
+      - name: Install requirements
+        run: pip install -r requirements-dev.txt
+      - name: Lint sql
+        run: sqlfmt --diff .
+      - name: Lint yaml
+        run: yamlfix --exclude ".kubernetes/**/*" .
