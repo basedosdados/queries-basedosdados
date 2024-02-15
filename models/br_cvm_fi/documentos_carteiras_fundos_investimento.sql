@@ -122,6 +122,4 @@ select
         replace(quantidade_ativos_exterior, '.0', '') as int64
     ) quantidade_ativos_exterior,
     safe_cast(valor_ativo_exterior as float64) valor_ativo_exterior,
-from
-    basedosdados
-    - staging.br_cvm_fi_staging.documentos_carteiras_fundos_investimento as t
+from `basedosdados-staging.br_cvm_fi_staging.documentos_carteiras_fundos_investimento` t

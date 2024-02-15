@@ -52,6 +52,5 @@ select
 # FLOAT64) media_moradores_domicilios_pelo_menos_um_territorios_quilombolas,
 # SAFE_CAST(media_moradores_quilombolas_domicilios_pelo_menos_um_territorios_quilombolas AS FLOAT64) media_moradores_quilombolas_domicilios_pelo_menos_um_territorios_quilombolas,
 from
-    basedosdados
-    - staging.br_ibge_censo_2022_staging.quilombolas_domicilio_morador_territorio_quilombola
+    `basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_domicilio_morador_territorio_quilombola`
     as t

@@ -11,5 +11,4 @@ select
     safe_cast(sexo as string) sexo,
     safe_cast(pessoas_indigenas_pessoas_ as int64) populacao_residente,
 from
-    basedosdados
-    - staging.br_ibge_censo_2022_staging.indigenas_populacao_grupo_idade_municipio as t
+    `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_populacao_grupo_idade_municipio` t

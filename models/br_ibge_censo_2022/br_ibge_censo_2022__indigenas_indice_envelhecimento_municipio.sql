@@ -20,5 +20,4 @@ select
         replace(razao_de_sexo_da_populacao_indigena_razao_, ",", ".") as float64
     ) razao_sexo,
 from
-    basedosdados
-    - staging.br_ibge_censo_2022_staging.indigenas_indice_envelhecimento_municipio as t
+    `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_indice_envelhecimento_municipio` t

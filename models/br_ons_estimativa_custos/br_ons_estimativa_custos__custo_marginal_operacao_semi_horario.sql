@@ -14,5 +14,4 @@ select
     safe_cast(subsistema as string) subsistema,
     safe_cast(custo_marginal_operacao as float64) custo_marginal_operacao
 from
-    basedosdados
-    - staging.br_ons_estimativa_custos_staging.custo_marginal_operacao_semi_horario as t
+    `basedosdados-staging.br_ons_estimativa_custos_staging.custo_marginal_operacao_semi_horario` t

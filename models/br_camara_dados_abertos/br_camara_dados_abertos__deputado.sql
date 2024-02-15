@@ -58,7 +58,7 @@ with
             safe_cast(id_final_legislatura as string) id_final_legislatura,
             safe_cast(url_site as string) url_site,
             safe_cast(url_rede_social as string) url_rede_social,
-        from basedosdados - staging.br_camara_dados_abertos_staging.deputado
+        from `basedosdados-staging.br_camara_dados_abertos_staging.deputado`
     ),
     uniao_valores as (
         select a.*, b.nome as name_id_municipio, b.id_municipio, b.sigla_uf

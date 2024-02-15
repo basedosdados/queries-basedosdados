@@ -49,6 +49,5 @@ select
         as int64
     ) moradores_quilombolas,
 from
-    basedosdados
-    - staging.br_ibge_censo_2022_staging.quilombolas_domicilio_pelo_menos_um_morador_quilombola_territorio_quilombola
+    `basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_domicilio_pelo_menos_um_morador_quilombola_territorio_quilombola`
     as t

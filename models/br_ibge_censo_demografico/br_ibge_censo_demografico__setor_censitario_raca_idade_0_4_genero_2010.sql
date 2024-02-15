@@ -23,6 +23,5 @@ select
     safe_cast(v009 as int64) v009,
     safe_cast(v010 as int64) v010
 from
-    basedosdados
-    - staging.br_ibge_censo_demografico_staging.setor_censitario_raca_idade_0_4_genero_2010
+    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_raca_idade_0_4_genero_2010`
     as t

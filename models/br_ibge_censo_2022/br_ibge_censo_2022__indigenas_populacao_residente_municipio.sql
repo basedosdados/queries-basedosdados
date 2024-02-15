@@ -20,8 +20,7 @@ with
             safe_cast(pessoas_indigenas_pessoas_ as int64) pessoas_indigenas,
             safe_cast(populacao_residente_pessoas_ as int64) populacao_residente,
         from
-            basedosdados
-            - staging.br_ibge_censo_2022_staging.indigenas_populacao_residente_municipio
+            `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_populacao_residente_municipio`
             as t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)

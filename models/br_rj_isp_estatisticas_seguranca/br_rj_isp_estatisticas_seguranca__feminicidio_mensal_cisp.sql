@@ -14,5 +14,4 @@ select
     ) quantidade_tentativa_feminicidio,
     safe_cast(tipo_fase as string) tipo_fase
 from
-    basedosdados
-    - staging.br_rj_isp_estatisticas_seguranca_staging.feminicidio_mensal_cisp as t
+    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.feminicidio_mensal_cisp` t

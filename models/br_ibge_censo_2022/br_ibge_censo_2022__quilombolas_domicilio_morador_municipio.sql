@@ -28,8 +28,7 @@ with
             # SAFE_CAST(REPLACE(media_de_moradores_quilombolas_em_domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_quilombola_pessoas_, ",", ".") AS FLOAT64) media_moradores_quilombolas_domicilios,
             safe_cast(localizacao_do_domicilio as string) localizacao_domicilio,
         from
-            basedosdados
-            - staging.br_ibge_censo_2022_staging.quilombolas_domicilio_morador_municipio
+            `basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_domicilio_morador_municipio`
             as t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)

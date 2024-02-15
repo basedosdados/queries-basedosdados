@@ -147,6 +147,5 @@ select
     safe_cast(v133 as int64) v133,
     safe_cast(v134 as int64) v134
 from
-    basedosdados
-    - staging.br_ibge_censo_demografico_staging.setor_censitario_idade_mulheres_2010
+    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_idade_mulheres_2010`
     as t

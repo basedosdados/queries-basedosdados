@@ -37,5 +37,4 @@ select
     safe_cast(v603 as int64) v603,
     safe_cast(v598 as string) v598
 from
-    basedosdados
-    - staging.br_ibge_censo_demografico_staging.microdados_domicilio_1980 as t
+    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_domicilio_1980` t

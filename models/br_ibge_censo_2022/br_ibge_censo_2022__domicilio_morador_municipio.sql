@@ -17,8 +17,7 @@ with
                 as int64
             ) moradores,
         from
-            basedosdados
-            - staging.br_ibge_censo_2022_staging.domicilio_morador_municipio as t
+            `basedosdados-staging.br_ibge_censo_2022_staging.domicilio_morador_municipio` t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)
 from ibge

@@ -65,9 +65,9 @@ from
                         ) as string
                     ) as documento_credor,
                     safe_cast(safe_cast(codigo_fonte_ as int64) as string) as fonte,
-                from basedosdados - staging.world_wb_mides_staging.raw_empenho_ce e
+                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_ce` e
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_ce m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
                     on e.codigo_municipio = m.codigo_municipio
             ),
             pago_ce as (
@@ -136,9 +136,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_nota_pagamento as float64), 2) as valor_final,
                     round(safe_cast(0 as float64), 2) as valor_liquido_recebido,
-                from basedosdados - staging.world_wb_mides_staging.raw_pagamento_ce p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_ce` p
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_ce m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
                     on p.codigo_municipio = m.codigo_municipio
             ),
             frequencia_ce as (
@@ -365,15 +365,15 @@ from
                         - safe_cast(vl_retencao as float64),
                         2
                     ) as valor_liquido_recebido,
-                from basedosdados - staging.world_wb_mides_staging.raw_pagamento_pb p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_pb` p
                 left join
-                    basedosdados - staging.world_wb_mides_staging.raw_empenho_pb e
+                    `basedosdados-staging.world_wb_mides_staging.raw_empenho_pb` e
                     on p.nu_empenho = e.nu_empenho
                     and p.cd_ugestora = e.cd_ugestora
                     and p.de_uorcamentaria = e.de_uorcamentaria
                     and p.dt_ano = e.dt_ano
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_pb m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
                     on safe_cast(e.cd_ugestora as string)
                     = safe_cast(m.id_unidade_gestora as string)
             ),
@@ -456,9 +456,9 @@ from
                         2
                     ) as valor_final,
                     round(safe_cast(0 as float64), 2) as valor_liquido_recebido,
-                from basedosdados - staging.world_wb_mides_staging.raw_pagamento_pe p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_pe` p
                 inner join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_pe m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pe` m
                     on safe_cast(p.id_unidade_gestora as string)
                     = safe_cast(m.id_unidadegestora as string)
             ),
@@ -497,9 +497,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(p.cdibge as float64), 2) as valor_final,
                     round(safe_cast(0 as float64), 2) as valor_liquido_recebido,
-                from basedosdados - staging.world_wb_mides_staging.raw_pagamento_pr p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_pr` p
                 left join
-                    basedosdados - staging.world_wb_mides_staging.raw_empenho_pr e
+                    `basedosdados-staging.world_wb_mides_staging.raw_empenho_pr` e
                     on p.idempenho = e.idempenho
                 left join
                     basedosdados.br_bd_diretorios_brasil.municipio m
@@ -878,9 +878,9 @@ from
                     safe_cast(cd_acao as string) as acao,
                     safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
                     safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
-                from basedosdados - staging.world_wb_mides_staging.raw_despesa_sp e
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` e
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_sp m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = e.ds_orgao
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_funcao`

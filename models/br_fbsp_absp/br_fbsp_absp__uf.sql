@@ -61,4 +61,4 @@ select
     safe_cast(
         despesa_empenhada_seguranca_publica as float64
     ) despesa_empenhada_seguranca_publica
-from basedosdados - staging.br_fbsp_absp_staging.uf
+from `basedosdados-staging.br_fbsp_absp_staging.uf`

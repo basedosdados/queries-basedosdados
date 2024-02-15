@@ -28,8 +28,7 @@ with
         # SAFE_CAST(REPLACE(media_de_moradores_em_domicilios_particulares_permanentes_ocupados_pessoas_, ",", ".") AS FLOAT64) media_moradores_domicilios,
         # SAFE_CAST(REPLACE(media_de_moradores_indigenas_em_domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_indigena_pessoas_, ",", ".") AS FLOAT64) media_moradores_indigenas_domicilios,
         from
-            basedosdados
-            - staging.br_ibge_censo_2022_staging.indigenas_domicilio_morador_municipio
+            `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_domicilio_morador_municipio`
             as t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)
