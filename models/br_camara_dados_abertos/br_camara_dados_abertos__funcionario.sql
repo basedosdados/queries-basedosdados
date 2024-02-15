@@ -1,15 +1,14 @@
-{{ config(alias='funcionario',schema='br_camara_dados_abertos') }}
-SELECT
-DISTINCT
-SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(funcao AS STRING) funcao,
-SAFE_CAST(dataInicioHistorico AS DATE) data_inicio_historico,
-SAFE_CAST(dataNomeacao AS DATE) data_nomeacao,
-SAFE_CAST(dataPubNomeacao AS DATE) data_publicacao_nomeacao,
-SAFE_CAST(grupo AS STRING) grupo,
-SAFE_CAST(ponto AS STRING) ponto,
-SAFE_CAST(atoNomeacao AS STRING) ato_nomeacao,
-SAFE_CAST(lotacao AS STRING) lotacao,
-SAFE_CAST(uriLotacao AS STRING) url_lotacao,
-FROM basedosdados-staging.br_camara_dados_abertos_staging.funcionario AS t
+{{ config(alias="funcionario", schema="br_camara_dados_abertos") }}
+select distinct
+    safe_cast(nome as string) nome,
+    safe_cast(cargo as string) cargo,
+    safe_cast(funcao as string) funcao,
+    safe_cast(datainiciohistorico as date) data_inicio_historico,
+    safe_cast(datanomeacao as date) data_nomeacao,
+    safe_cast(datapubnomeacao as date) data_publicacao_nomeacao,
+    safe_cast(grupo as string) grupo,
+    safe_cast(ponto as string) ponto,
+    safe_cast(atonomeacao as string) ato_nomeacao,
+    safe_cast(lotacao as string) lotacao,
+    safe_cast(urilotacao as string) url_lotacao,
+from `basedosdados-staging.br_camara_dados_abertos_staging.funcionario` as t

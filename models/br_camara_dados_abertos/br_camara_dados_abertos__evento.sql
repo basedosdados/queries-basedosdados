@@ -1,15 +1,31 @@
-{{ config(alias='evento',schema='br_camara_dados_abertos') }}
-SELECT
-SAFE_CAST(id AS STRING) id,
-SAFE_CAST(uri AS STRING) url,
-SAFE_CAST(urlDocumentoPauta AS STRING) url_documento_pauta,
-SAFE_CAST(SPLIT(FORMAT_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S', TIMESTAMP(dataHoraInicio)), 'T')[OFFSET(0)] AS DATE) data_inicio,
-SAFE_CAST(SPLIT(FORMAT_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S', TIMESTAMP(dataHoraInicio)), 'T')[OFFSET(1)] AS TIME) horario_inicio,
-SAFE_CAST(SPLIT(FORMAT_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S', TIMESTAMP(dataHoraFim)), 'T')[OFFSET(0)] AS DATE) data_final,
-SAFE_CAST(SPLIT(FORMAT_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S', TIMESTAMP(dataHoraFim)), 'T')[OFFSET(1)] AS TIME) horario_final,
-SAFE_CAST(situacao AS STRING) situacao,
-SAFE_CAST(descricao AS STRING) descricao,
-SAFE_CAST(descricaoTipo AS STRING) tipo,
-SAFE_CAST(localExterno AS STRING) local_externo,
-SAFE_CAST(localCamara_nome AS STRING) nome_local,
-FROM basedosdados-staging.br_camara_dados_abertos_staging.evento AS t
+{{ config(alias="evento", schema="br_camara_dados_abertos") }}
+select
+    safe_cast(id as string) id,
+    safe_cast(uri as string) url,
+    safe_cast(urldocumentopauta as string) url_documento_pauta,
+    safe_cast(
+        split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datahorainicio)), 'T')[
+            offset(0)
+        ] as date
+    ) data_inicio,
+    safe_cast(
+        split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datahorainicio)), 'T')[
+            offset(1)
+        ] as time
+    ) horario_inicio,
+    safe_cast(
+        split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datahorafim)), 'T')[
+            offset(0)
+        ] as date
+    ) data_final,
+    safe_cast(
+        split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datahorafim)), 'T')[
+            offset(1)
+        ] as time
+    ) horario_final,
+    safe_cast(situacao as string) situacao,
+    safe_cast(descricao as string) descricao,
+    safe_cast(descricaotipo as string) tipo,
+    safe_cast(localexterno as string) local_externo,
+    safe_cast(localcamara_nome as string) nome_local,
+from `basedosdados-staging.br_camara_dados_abertos_staging.evento` as t
