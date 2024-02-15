@@ -18,5 +18,4 @@ select
         st_geogpoint(safe_cast(long as float64), safe_cast(lat as float64)) as geography
     ) point,
 from
-    basedosdados
-    - staging.br_trase_supply_chain_staging.soy_beans_crushing_facilities as t
+    `basedosdados-staging.br_trase_supply_chain_staging.soy_beans_crushing_facilities` t

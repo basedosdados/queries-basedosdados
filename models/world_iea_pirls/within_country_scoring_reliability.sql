@@ -1056,6 +1056,4 @@ select
     safe_cast(version as string) version,
     safe_cast(scope as string) scope,
     safe_cast(pirls_type as string) pirls_type,
-from
-    basedosdados
-    - staging.world_iea_pirls_staging.within_country_scoring_reliability as t
+from `basedosdados-staging.world_iea_pirls_staging.within_country_scoring_reliability` t

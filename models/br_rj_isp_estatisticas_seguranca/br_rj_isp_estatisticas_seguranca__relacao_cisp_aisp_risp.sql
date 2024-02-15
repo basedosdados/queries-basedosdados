@@ -8,5 +8,4 @@ select
     safe_cast(unidade_territorial as string) unidade_territorial,
     safe_cast(regiao as string) regiao
 from
-    basedosdados
-    - staging.br_rj_isp_estatisticas_seguranca_staging.relacao_cisp_aisp_risp as t
+    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.relacao_cisp_aisp_risp` t

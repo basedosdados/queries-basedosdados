@@ -21,8 +21,7 @@ with
         # SAFE_CAST(REPLACE(densidade_demografica_habitante_por_quilometro_quadrado_,
         # ",", ".") AS FLOAT64) densidade_demografica,
         from
-            basedosdados
-            - staging.br_ibge_censo_2022_staging.area_territorial_densidade_demografica_municipio
+            `basedosdados-staging.br_ibge_censo_2022_staging.area_territorial_densidade_demografica_municipio`
             as t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)

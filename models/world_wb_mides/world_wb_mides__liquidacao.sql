@@ -82,9 +82,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_liquidado as float64), 2) as valor_final,
-                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_ce l
+                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_ce` l
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_ce m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
                     on l.codigo_municipio = m.codigo_municipio
             ),
             liquidacao_mg as (
@@ -208,9 +208,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(vl_liquidacao as float64), 2) as valor_final,
-                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_pb l
+                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pb` l
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_pb m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
                     on l.cd_ugestora = safe_cast(m.id_unidade_gestora as string)
             ),
             liquidacao_pr as (
@@ -243,12 +243,12 @@ from
                     ) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(vlliquidacaoliquido as float64), 2) as valor_final,
-                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_pr l
+                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pr` l
                 left join
                     basedosdados.br_bd_diretorios_brasil.municipio m
                     on cdibge = id_municipio_6
                 left join
-                    basedosdados - staging.world_wb_mides_staging.raw_empenho_pr e
+                    `basedosdados-staging.world_wb_mides_staging.raw_empenho_pr` e
                     on l.idempenho = e.idempenho
             ),
             liquidacao_pe as (
@@ -273,9 +273,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor as float64), 2) as valor_final,
-                from basedosdados - staging.world_wb_mides_staging.raw_liquidacao_pe l
+                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pe` l
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_pe m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pe` m
                     on l.id_unidade_gestora = safe_cast(m.id_unidadegestora as string)
             ),
             liquidado_rs as (
@@ -511,9 +511,9 @@ from
                     safe_cast(cd_acao as string) as acao,
                     safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
                     safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
-                from basedosdados - staging.world_wb_mides_staging.raw_despesa_sp e
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` e
                 left join
-                    basedosdados - staging.world_wb_mides_staging.aux_municipio_sp m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = e.ds_orgao
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_funcao`

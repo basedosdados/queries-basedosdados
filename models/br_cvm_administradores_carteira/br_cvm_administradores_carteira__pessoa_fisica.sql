@@ -26,8 +26,7 @@ with
             safe_cast(data_inicio_situacao as date) data_inicio_situacao,
             safe_cast(categoria_registro as string) categoria_registro
         from
-            basedosdados
-            - staging.br_cvm_administradores_carteira_staging.pessoa_fisica as t
+            `basedosdados-staging.br_cvm_administradores_carteira_staging.pessoa_fisica` t
     )
 select *
 from tabela

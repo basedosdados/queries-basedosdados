@@ -47,5 +47,4 @@ select
     ) moradores_indigenas,
 # SAFE_CAST(REPLACE(media_de_moradores_indigenas_em_domicilios_particulares_permanentes_ocupados_com_pelo_menos_um_morador_indigena_localizados_em_terras_indigenas_pessoas_, ",", ".") AS FLOAT64) media_moradores_indigenas_domicilios_terras_indigenas,
 from
-    basedosdados
-    - staging.br_ibge_censo_2022_staging.indigenas_domicilio_morador_terra_indigena as t
+    `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_domicilio_morador_terra_indigena` t

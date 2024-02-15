@@ -17,6 +17,4 @@ select
     safe_cast(descricao as string) descricao,
     safe_cast(id_proposicao as string) sigla_bancada,
     safe_cast(orientacao as string) orientacao,
-from
-    basedosdados
-    - staging.br_camara_dados_abertos_staging.votacao_orientacao_bancada as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_orientacao_bancada` t

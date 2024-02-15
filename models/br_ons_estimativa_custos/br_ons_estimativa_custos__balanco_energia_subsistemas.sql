@@ -16,5 +16,4 @@ select
     safe_cast(carga_verificada as float64) carga_verificada,
     safe_cast(intercambio_verificado as float64) intercambio_verificado
 from
-    basedosdados
-    - staging.br_ons_estimativa_custos_staging.balanco_energia_subsistemas as t
+    `basedosdados-staging.br_ons_estimativa_custos_staging.balanco_energia_subsistemas` t

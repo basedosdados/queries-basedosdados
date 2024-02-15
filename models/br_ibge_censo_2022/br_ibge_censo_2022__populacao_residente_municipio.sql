@@ -14,8 +14,7 @@ with
             safe_cast(idade as string) idade,
             safe_cast(populacao_residente_pessoas_ as int64) populacao_residente,
         from
-            basedosdados
-            - staging.br_ibge_censo_2022_staging.populacao_residente_municipio as t
+            `basedosdados-staging.br_ibge_censo_2022_staging.populacao_residente_municipio` t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)
 from ibge

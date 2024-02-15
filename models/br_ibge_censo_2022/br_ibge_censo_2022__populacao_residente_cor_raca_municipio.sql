@@ -11,5 +11,4 @@ select
     safe_cast(cor_ou_raca as string) cor_raca,
     safe_cast(populacao_residente_pessoas_ as int64) populacao_residente,
 from
-    basedosdados
-    - staging.br_ibge_censo_2022_staging.populacao_residente_cor_raca_municipio as t
+    `basedosdados-staging.br_ibge_censo_2022_staging.populacao_residente_cor_raca_municipio` t

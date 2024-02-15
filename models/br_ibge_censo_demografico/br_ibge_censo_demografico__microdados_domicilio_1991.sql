@@ -54,5 +54,4 @@ select
     safe_cast(v0226 as string) v0226,
     safe_cast(v0227 as string) v0227
 from
-    basedosdados
-    - staging.br_ibge_censo_demografico_staging.microdados_domicilio_1991 as t
+    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_domicilio_1991` t

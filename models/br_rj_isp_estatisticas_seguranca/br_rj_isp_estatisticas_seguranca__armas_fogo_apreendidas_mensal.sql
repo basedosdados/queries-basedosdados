@@ -14,6 +14,5 @@ select
     safe_cast(id_risp as string) id_risp,
     safe_cast(quantidade_arma_fogo_apreendida as int64) quantidade_arma_fogo_apreendida
 from
-    basedosdados
-    - staging.br_rj_isp_estatisticas_seguranca_staging.armas_fogo_apreendidas_mensal
+    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.armas_fogo_apreendidas_mensal`
     as t

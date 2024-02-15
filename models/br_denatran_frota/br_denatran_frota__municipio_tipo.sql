@@ -49,7 +49,7 @@ with
                 else tipo_veiculo
             end as tipo_veiculo2,
             quantidade
-        from basedosdados - staging.br_denatran_frota_staging.municipio_tipo
+        from `basedosdados-staging.br_denatran_frota_staging.municipio_tipo`
     )
 
 select
