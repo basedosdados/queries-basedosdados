@@ -219,4 +219,4 @@ select
     safe_cast(q73_4 as string) q73_4,
     safe_cast(q73_5 as string) q73_5,
     safe_cast(q73_6 as string) q73_6
-from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2002 ` as t
+from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2002` as t

@@ -277,4 +277,4 @@ select
     safe_cast(indicator_fiscal_rule_balance as int64) indicator_fiscal_rule_balance,
     safe_cast(indicator_fiscal_rule_debt as int64) indicator_fiscal_rule_debt,
     safe_cast(indicator_fiscal_council as int64) indicator_fiscal_council
-from `basedosdados-staging.world_oecd_public_finance_staging.country ` as t
+from `basedosdados-staging.world_oecd_public_finance_staging.country` as t

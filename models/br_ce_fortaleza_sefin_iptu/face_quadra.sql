@@ -12,4 +12,4 @@ select
     safe_cast(indicador_arborizacao as bool) indicador_arborizacao,
     safe.st_geogfromtext(geometria) centroide,
     safe_cast(valor as float64) valor
-from `basedosdados-staging.br_ce_fortaleza_sefin_iptu_staging.face_quadra ` as t
+from `basedosdados-staging.br_ce_fortaleza_sefin_iptu_staging.face_quadra` as t

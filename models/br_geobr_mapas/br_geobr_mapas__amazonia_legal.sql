@@ -6,4 +6,4 @@
     )
 }}
 select safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.amazonia_legal ` as t
+from `basedosdados-staging.br_geobr_mapas_staging.amazonia_legal` as t

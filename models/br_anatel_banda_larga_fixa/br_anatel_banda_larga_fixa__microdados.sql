@@ -30,4 +30,4 @@ select
     safe_cast(velocidade as string) velocidade,
     safe_cast(produto as string) produto,
     safe_cast(acessos as int64) acessos
-from `basedosdados-staging.br_anatel_banda_larga_fixa_staging.microdados ` as t
+from `basedosdados-staging.br_anatel_banda_larga_fixa_staging.microdados` as t

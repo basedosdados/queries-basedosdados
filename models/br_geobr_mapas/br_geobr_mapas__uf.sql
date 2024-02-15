@@ -9,4 +9,4 @@ select
     safe_cast(id_uf as string) id_uf,
     safe_cast(sigla_uf as string) sigla_uf,
     safe.st_geogfromtext(geometria) geometria
-from `basedosdados-staging.br_geobr_mapas_staging.uf ` as t
+from `basedosdados-staging.br_geobr_mapas_staging.uf` as t

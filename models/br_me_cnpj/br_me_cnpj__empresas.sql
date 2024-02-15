@@ -26,7 +26,7 @@ with
             safe_cast(capital_social as float64) capital_social,
             safe_cast(regexp_replace(porte, '^0', '') as string) porte,
             safe_cast(ente_federativo as string) ente_federativo
-        from `basedosdados-staging.br_me_cnpj_staging.empresas ` as t
+        from `basedosdados-staging.br_me_cnpj_staging.empresas` as t
         where porte != "porte"
     )
 select *

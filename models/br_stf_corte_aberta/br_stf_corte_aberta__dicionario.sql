@@ -6,4 +6,4 @@ select
     initcap(chave) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     initcap(valor) valor
-from `basedosdados-staging.br_stf_corte_aberta_staging.dicionario ` as t
+from `basedosdados-staging.br_stf_corte_aberta_staging.dicionario` as t

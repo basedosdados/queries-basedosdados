@@ -296,4 +296,4 @@ select
     safe_cast(
         porcentagem_patrimonio_liquido_convertido_caixa as float64
     ) porcentagem_patrimonio_liquido_convertido_caixa,
-from `basedosdados-staging.br_cvm_fi_staging.documentos_perfil_mensal ` as t
+from `basedosdados-staging.br_cvm_fi_staging.documentos_perfil_mensal` as t

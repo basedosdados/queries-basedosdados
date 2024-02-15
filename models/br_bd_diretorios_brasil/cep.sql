@@ -22,4 +22,4 @@ select
     st_geogpoint(
         safe_cast(longitude as float64), safe_cast(latitude as float64)
     ) centroide
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.cep ` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.cep` as t

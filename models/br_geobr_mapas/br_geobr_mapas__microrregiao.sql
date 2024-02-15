@@ -11,4 +11,4 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_microrregiao as string) id_microrregiao,
     safe.st_geogfromtext(geometria) geometria
-from `basedosdados-staging.br_geobr_mapas_staging.microrregiao ` as t
+from `basedosdados-staging.br_geobr_mapas_staging.microrregiao` as t

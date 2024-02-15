@@ -27,4 +27,4 @@ select
     safe_cast(
         st_geogpoint(safe_cast(long as float64), safe_cast(lat as float64)) as geography
     ) point
-from `basedosdados-staging.br_trase_supply_chain_staging.beef_slaughterhouses ` as t
+from `basedosdados-staging.br_trase_supply_chain_staging.beef_slaughterhouses` as t

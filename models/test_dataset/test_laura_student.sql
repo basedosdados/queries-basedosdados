@@ -23,4 +23,4 @@ select
     safe_cast(score_reading as float64) score_reading,
     safe_cast(score_science as float64) score_science,
     safe_cast(student_weight as float64) student_weight
-from `basedosdados-staging.test_dataset_staging.test_laura_student ` as t
+from `basedosdados-staging.test_dataset_staging.test_laura_student` as t

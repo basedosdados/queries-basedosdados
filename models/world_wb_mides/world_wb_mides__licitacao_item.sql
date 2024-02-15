@@ -37,4 +37,4 @@ select
     safe_cast(valor_vencedor as float64) valor_vencedor,
     safe_cast(nome_vencedor as string) nome_vencedor,
     safe_cast(documento as string) documento
-from `basedosdados-staging.world_wb_mides_staging.licitacao_item ` as t
+from `basedosdados-staging.world_wb_mides_staging.licitacao_item` as t

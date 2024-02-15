@@ -33,4 +33,4 @@ select
     safe_cast(nome_regiao as string) nome_regiao,
     safe_cast(amazonia_legal as int64) amazonia_legal,
     safe.st_geogfromtext(centroide) centroide
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.municipio ` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.municipio` as t

@@ -127,4 +127,4 @@ select
     safe_cast(q125 as string) q125,
     safe_cast(q126 as string) q126,
     safe_cast(q127 as string) q127
-from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2000 ` as t
+from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2000` as t

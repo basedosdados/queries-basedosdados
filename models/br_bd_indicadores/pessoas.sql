@@ -8,4 +8,4 @@ select
     safe_cast(website as string) website,
     safe_cast(linkedin as string) linkedin,
     safe_cast(url_foto as string) url_foto
-from `basedosdados-staging.br_bd_indicadores_staging.pessoas ` as t
+from `basedosdados-staging.br_bd_indicadores_staging.pessoas` as t

@@ -7,4 +7,4 @@ select
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor
 
-from `basedosdados-staging.br_rf_cafir_staging.dicionario ` as t
+from `basedosdados-staging.br_rf_cafir_staging.dicionario` as t

@@ -17,4 +17,4 @@ select
     safe_cast(consorcio as string) consorcio,
     safe_cast(cedula_mae as string) cedula_mae,
     safe_cast(id_tipo_cultura as string) id_tipo_cultura
-from `basedosdados-dev.test_dataset_staging.test_table_laura ` as t
+from `basedosdados-dev.test_dataset_staging.test_table_laura` as t

@@ -18,4 +18,4 @@ select
     safe_cast(numero as string) numero,
     safe_cast(codtema as string) tema,
     safe_cast(relevancia as int64) relevancia,
-from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_tema ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_tema` as t

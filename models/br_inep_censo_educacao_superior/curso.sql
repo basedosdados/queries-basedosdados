@@ -402,4 +402,4 @@ select
     safe_cast(
         quantidade_concluintes_mobilidade_academica as int64
     ) quantidade_concluintes_mobilidade_academica
-from `basedosdados-staging.br_inep_censo_educacao_superior_staging.curso ` as t
+from `basedosdados-staging.br_inep_censo_educacao_superior_staging.curso` as t

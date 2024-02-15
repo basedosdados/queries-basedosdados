@@ -32,7 +32,7 @@ with
             safe_cast(tipo_sessao_pregao as string) tipo_sessao_pregao,
             safe_cast(quantidade_negociada as int64) quantidade_negociada,
             safe_cast(preco_negocio as float64) preco_negocio
-        from `basedosdados-staging.br_b3_cotacoes_staging.cotacoes ` as t
+        from `basedosdados-staging.br_b3_cotacoes_staging.cotacoes` as t
     )
 select *
 from b3

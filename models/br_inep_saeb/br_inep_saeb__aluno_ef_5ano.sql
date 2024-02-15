@@ -323,4 +323,4 @@ select
     safe_cast(pandemia_apoio_colegas as string) pandemia_apoio_colegas,
     safe_cast(pretensao_futura as string) pretensao_futura,
     safe_cast(opiniao_teste as string) opiniao_teste
-from `basedosdados-staging.br_inep_saeb_staging.aluno_ef_5ano ` as t
+from `basedosdados-staging.br_inep_saeb_staging.aluno_ef_5ano` as t

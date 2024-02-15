@@ -6,4 +6,4 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(entidade as string) entidade,
     safe_cast(titulo as string) titulo,
-from `basedosdados-staging.br_camara_dados_abertos_staging.deputado_ocupacao ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.deputado_ocupacao` as t

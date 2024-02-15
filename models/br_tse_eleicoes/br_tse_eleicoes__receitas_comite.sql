@@ -47,4 +47,4 @@ select
     safe_cast(tipo_doador_orig as string) tipo_doador_orig,
     safe_cast(descricao_cnae_2_doador_orig as string) descricao_cnae_2_doador_orig,
     safe_cast(valor_receita as float64) valor_receita,
-from `basedosdados-staging.br_tse_eleicoes_staging.receitas_comite ` as t
+from `basedosdados-staging.br_tse_eleicoes_staging.receitas_comite` as t

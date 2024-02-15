@@ -13,4 +13,4 @@ select
     ) horario,
     safe_cast(id_profissao as string) id_profissao,
     safe_cast(titulo as string) titulo,
-from `basedosdados-staging.br_camara_dados_abertos_staging.deputado_profissao ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.deputado_profissao` as t

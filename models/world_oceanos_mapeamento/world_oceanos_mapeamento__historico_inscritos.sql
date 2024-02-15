@@ -45,4 +45,4 @@ select
     safe_cast(indicador_semifinalista_2 as string) indicador_semifinalista,
     safe_cast(indicador_finalista_2 as string) indicador_finalista,
     safe_cast(indicador_vencedor_2 as string) indicador_vencedor,
-from `basedosdados-staging.world_oceanos_mapeamento_staging.historico_inscritos ` as t
+from `basedosdados-staging.world_oceanos_mapeamento_staging.historico_inscritos` as t

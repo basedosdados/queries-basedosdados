@@ -36,7 +36,7 @@ with
             safe_cast(unidade_medida as string) unidade_medida,
             safe_cast(preco_compra as float64) preco_compra,
             safe_cast(preco_venda as float64) preco_venda
-        from `basedosdados-staging.br_anp_precos_combustiveis_staging.microdados ` as t
+        from `basedosdados-staging.br_anp_precos_combustiveis_staging.microdados` as t
     )
 select *
 from anp

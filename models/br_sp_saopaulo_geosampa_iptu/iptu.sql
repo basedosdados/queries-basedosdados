@@ -40,4 +40,4 @@ select
     safe_cast(valor_terreno as int64) valor_terreno,
     safe_cast(valor_construcao as int64) valor_construcao,
 
-from `basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu ` as t
+from `basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu` as t

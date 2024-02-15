@@ -26,7 +26,7 @@ select
     safe_cast(cnpj_agencia as string) cnpj_agencia,
     safe_cast(id_verbete as string) id_verbete,
     safe_cast(valor as float64) valor
-from `basedosdados-staging.br_bcb_estban_staging.agencia ` as t
+from `basedosdados-staging.br_bcb_estban_staging.agencia` as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

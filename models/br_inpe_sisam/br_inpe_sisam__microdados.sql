@@ -26,4 +26,4 @@ select
     safe_cast(umidade_relativa as float64) umidade_relativa,
     safe_cast(vento_direcao as int64) vento_direcao,
     safe_cast(vento_velocidade as float64) vento_velocidade,
-from `basedosdados-staging.br_inpe_sisam_staging.microdados ` as t
+from `basedosdados-staging.br_inpe_sisam_staging.microdados` as t

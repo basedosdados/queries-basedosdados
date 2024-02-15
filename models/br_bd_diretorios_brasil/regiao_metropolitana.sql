@@ -17,4 +17,4 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(nome_regiao as string) nome_regiao,
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.regiao_metropolitana ` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.regiao_metropolitana` as t

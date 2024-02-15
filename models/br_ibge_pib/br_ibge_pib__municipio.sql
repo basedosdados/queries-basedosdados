@@ -9,4 +9,4 @@ select
     safe_cast(va_industria as int64) va_industria,
     safe_cast(va_servicos as int64) va_servicos,
     safe_cast(va_adespss as int64) va_adespss
-from `basedosdados-staging.br_ibge_pib_staging.municipio ` as t
+from `basedosdados-staging.br_ibge_pib_staging.municipio` as t

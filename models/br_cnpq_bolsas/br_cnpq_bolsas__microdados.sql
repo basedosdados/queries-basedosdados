@@ -32,4 +32,4 @@ select
     safe_cast(programa_ppa as string) programa_ppa,
     safe_cast(acao_ppa as string) acao_ppa,
     safe_cast(valor as float64) valor
-from `basedosdados-staging.br_cnpq_bolsas_staging.microdados ` as t
+from `basedosdados-staging.br_cnpq_bolsas_staging.microdados` as t

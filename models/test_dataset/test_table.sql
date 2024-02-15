@@ -16,4 +16,4 @@ select
     safe_cast(mes as int64) mes,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(dado as string) dado
-from `basedosdados-staging.test_dataset_staging.test_table ` as t
+from `basedosdados-staging.test_dataset_staging.test_table` as t

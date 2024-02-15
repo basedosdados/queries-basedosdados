@@ -200,7 +200,7 @@ with
             data_inicio,
             ano,
             mes
-        from `basedosdados-staging.br_bcb_agencia_staging.agencia ` as t
+        from `basedosdados-staging.br_bcb_agencia_staging.agencia` as t
     )
 
 select

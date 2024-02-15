@@ -15,4 +15,4 @@ select
     safe_cast(latitude as float64) latitude,
     safe_cast(longitude as float64) longitude,
     st_geogpoint(safe_cast(longitude as float64), safe_cast(latitude as float64)) ponto
-from `basedosdados-staging.br_ibge_censo_2022_staging.coordenada_endereco ` as t
+from `basedosdados-staging.br_ibge_censo_2022_staging.coordenada_endereco` as t
