@@ -449,7 +449,7 @@ with
             safe_cast(v1028200 as float64) v1028200,
             safe_cast(habitual as float64) habitual,
             safe_cast(efetivo as float64) efetivo
-        from `basedosdados-staging.br_ibge_pnadc_staging.microdados ` as t
+        from `basedosdados-staging.br_ibge_pnadc_staging.microdados` as t
     )
 -- verifica se a coluna é do tipo STRING e, caso seja, limpa as observações que
 -- começam com 0 (ie. transforma '05' em '5')

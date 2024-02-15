@@ -305,4 +305,4 @@ select
     safe_cast(v1032198 as float64) v1032198,
     safe_cast(v1032199 as float64) v1032199,
     safe_cast(v1032200 as float64) v1032200
-from `basedosdados-staging.br_ibge_pnadc_staging.rendimentos_outras_fontes ` as t
+from `basedosdados-staging.br_ibge_pnadc_staging.rendimentos_outras_fontes` as t

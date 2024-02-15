@@ -34,4 +34,4 @@ select
     safe_cast(data_hora_ultima_proposicao as datetime) data_hora_ultima_proposicao,
     safe_cast(descricao_ultima_proposicao as string) descricao_ultima_proposicao,
     safe_cast(id_ultima_proposicao as string) id_ultima_proposicao,
-from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_microdados ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_microdados` as t

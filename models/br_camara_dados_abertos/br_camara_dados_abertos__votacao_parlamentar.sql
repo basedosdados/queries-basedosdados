@@ -33,4 +33,4 @@ select
     safe_cast(sigla_partido as string) sigla_partido,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_legislatura as string) id_legislatura
-from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_parlamentar ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_parlamentar` as t

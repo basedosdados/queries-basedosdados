@@ -354,4 +354,4 @@ select
     safe_cast(opiniao_frase_1 as string) opiniao_frase_1,
     safe_cast(opiniao_frase_2 as string) opiniao_frase_2,
     safe_cast(opiniao_frase_3 as string) opiniao_frase_3
-from `basedosdados-staging.br_inep_saeb_staging.aluno_ef_9ano ` as t
+from `basedosdados-staging.br_inep_saeb_staging.aluno_ef_9ano` as t

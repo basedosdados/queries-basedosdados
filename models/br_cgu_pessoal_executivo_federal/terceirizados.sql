@@ -25,4 +25,4 @@ select
     safe_cast(nome_orgao_trabalho as string) nome_orgao_trabalho,
     safe_cast(codigo_siafi_trabalho as string) codigo_siafi_trabalho,
     safe_cast(codigo_siape_trabalho as string) codigo_siape_trabalho
-from `basedosdados-staging.br_cgu_pessoal_executivo_federal_staging.terceirizados ` as t
+from `basedosdados-staging.br_cgu_pessoal_executivo_federal_staging.terceirizados` as t

@@ -12,4 +12,4 @@ select
     safe_cast(uripartidoautor as string) url_partido,
     safe_cast(ordemassinatura as string) ordem_assinatura,
     safe_cast(proponente as string) proponente,
-from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_autor ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_autor` as t

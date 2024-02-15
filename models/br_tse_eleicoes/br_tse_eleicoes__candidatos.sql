@@ -49,4 +49,4 @@ select
 -- WHEN prestou_contas='N' THEN 'Nao'
 -- WHEN prestou_contas='S' THEN 'Sim'
 -- END AS prestou_contas
-from `basedosdados-staging.br_tse_eleicoes_staging.candidatos ` as t
+from `basedosdados-staging.br_tse_eleicoes_staging.candidatos` as t

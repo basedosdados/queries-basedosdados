@@ -61,4 +61,4 @@ select
     safe_cast(sigla_partido_fornecedor as string) sigla_partido_fornecedor,
     safe_cast(nome_partido_fornecedor as string) nome_partido_fornecedor,
     safe_cast(cargo_fornecedor as string) cargo_fornecedor
-from `basedosdados-staging.br_tse_eleicoes_staging.despesas_candidato ` as t
+from `basedosdados-staging.br_tse_eleicoes_staging.despesas_candidato` as t

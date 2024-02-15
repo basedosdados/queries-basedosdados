@@ -6,4 +6,4 @@ select
     safe_cast(users_28_days as int64) users_28_days,
     safe_cast(users_30_days as int64) users_30_days,
     safe_cast(new_users as int64) new_users
-from `basedosdados-staging.br_bd_indicadores_staging.website_user ` as t
+from `basedosdados-staging.br_bd_indicadores_staging.website_user` as t

@@ -18,4 +18,4 @@ select
     safe_cast(nome_vizinhanca as string) nome_vizinhanca,
     safe_cast(referencia_geometria as string) referencia_geometria,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.limite_vizinhanca ` as t
+from `basedosdados-staging.br_geobr_mapas_staging.limite_vizinhanca` as t

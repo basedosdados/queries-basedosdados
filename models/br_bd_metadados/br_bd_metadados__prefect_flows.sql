@@ -24,4 +24,4 @@ select
     safe_cast(
         schedule_parameters_update_metadata as bool
     ) schedule_parameters_update_metadata,
-from `basedosdados-staging.br_bd_metadados_staging.prefect_flows ` as t
+from `basedosdados-staging.br_bd_metadados_staging.prefect_flows` as t

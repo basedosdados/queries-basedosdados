@@ -10,4 +10,4 @@ select distinct
     safe_cast(datafim as date) data_final,
     safe_cast(siglapartido as string) sigla_partido,
     safe_cast(urideputado as string) url_deputado
-from `basedosdados-staging.br_camara_dados_abertos_staging.orgao_deputado ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.orgao_deputado` as t

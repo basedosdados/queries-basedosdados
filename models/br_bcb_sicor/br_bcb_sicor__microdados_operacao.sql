@@ -76,4 +76,4 @@ select
         valor_percentual_risco_fundo_constitucional as float64
     ) valor_percentual_risco_fundo_constitucional,
     safe_cast(valor_percentual_risco_stn as float64) valor_percentual_risco_stn
-from `basedosdados-staging.br_bcb_sicor_staging.microdados_operacao ` as t
+from `basedosdados-staging.br_bcb_sicor_staging.microdados_operacao` as t

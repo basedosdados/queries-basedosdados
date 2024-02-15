@@ -8,4 +8,4 @@ select
     safe_cast(frequencia as string) frequencia,
     safe_cast(equipe as string) equipe,
     safe_cast(safe_cast(valor as numeric) as float64) valor
-from `basedosdados-staging.br_bd_indicadores_staging.contabilidade ` as t
+from `basedosdados-staging.br_bd_indicadores_staging.contabilidade` as t

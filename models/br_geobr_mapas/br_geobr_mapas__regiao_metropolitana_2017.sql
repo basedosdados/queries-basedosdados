@@ -16,4 +16,4 @@ select
     safe_cast(legislacao as string) legislacao,
     safe_cast(data_legislacao as date) data_legislacao,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-dev.br_geobr_mapas_staging.regiao_metropolitana_2017 ` as t
+from `basedosdados-dev.br_geobr_mapas_staging.regiao_metropolitana_2017` as t

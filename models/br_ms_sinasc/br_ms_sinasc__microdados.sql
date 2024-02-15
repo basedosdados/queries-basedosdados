@@ -101,4 +101,4 @@ select
     safe_cast(status_dn as string) status_dn,
     safe_cast(status_dn_nova as string) status_dn_nova,
     safe_cast(paridade as string) paridade
-from `basedosdados-staging.br_ms_sinasc_staging.microdados ` as t
+from `basedosdados-staging.br_ms_sinasc_staging.microdados` as t

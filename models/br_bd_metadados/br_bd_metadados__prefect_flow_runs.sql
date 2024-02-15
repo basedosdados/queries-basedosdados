@@ -16,4 +16,4 @@ select
     safe_cast(task_runs as string) task_runs,
     safe_cast(skipped_upload_to_gcs as bool) skipped_upload_to_gcs,
     safe_cast(logs as string) error_logs,
-from `basedosdados-staging.br_bd_metadados_staging.prefect_flow_runs ` as t
+from `basedosdados-staging.br_bd_metadados_staging.prefect_flow_runs` as t

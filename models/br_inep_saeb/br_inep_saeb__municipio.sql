@@ -27,4 +27,4 @@ select
     round(safe_cast(nivel_8 as float64), 2) nivel_8,
     round(safe_cast(nivel_9 as float64), 2) nivel_9,
     round(safe_cast(nivel_10 as float64), 2) nivel_10
-from `basedosdados-staging.br_inep_saeb_staging.municipio ` as t
+from `basedosdados-staging.br_inep_saeb_staging.municipio` as t

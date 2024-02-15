@@ -15,4 +15,4 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(densidade as float64) densidade
-from `basedosdados-staging.br_anatel_banda_larga_fixa_staging.densidade_municipio ` as t
+from `basedosdados-staging.br_anatel_banda_larga_fixa_staging.densidade_municipio` as t

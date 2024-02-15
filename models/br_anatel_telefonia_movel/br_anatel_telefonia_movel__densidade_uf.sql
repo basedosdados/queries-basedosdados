@@ -14,4 +14,4 @@ select
     safe_cast(mes as int64) mes,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(densidade as float64) densidade
-from `basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_uf ` as t
+from `basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_uf` as t

@@ -5,4 +5,4 @@ select
     safe_cast(equipe as string) equipe,
     safe_cast(nivel as string) nivel,
     safe_cast(cargo as string) cargo
-from `basedosdados-staging.br_bd_indicadores_staging.equipes ` as t
+from `basedosdados-staging.br_bd_indicadores_staging.equipes` as t

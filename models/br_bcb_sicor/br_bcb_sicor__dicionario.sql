@@ -11,4 +11,4 @@ select
     safe_cast(chave as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor
-from `basedosdados-staging.br_bcb_sicor_staging.dicionario ` as t
+from `basedosdados-staging.br_bcb_sicor_staging.dicionario` as t

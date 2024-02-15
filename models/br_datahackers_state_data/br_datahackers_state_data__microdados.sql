@@ -353,4 +353,4 @@ select
     safe_cast(p8_d_9 as int64) p8_d_9,
     safe_cast(p8_d_10 as int64) p8_d_10,
     safe_cast(p8_d_11 as int64) p8_d_11,
-from `basedosdados-dev.br_datahackers_state_data_staging.microdados ` as t
+from `basedosdados-dev.br_datahackers_state_data_staging.microdados` as t

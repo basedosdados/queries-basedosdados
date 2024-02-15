@@ -12,4 +12,4 @@ select
     safe_cast(tipo_cpf_cnpj as string) tipo_cpf_cnpj,
     safe_cast(tipo_pessoa as string) tipo_pessoa,
     safe_cast(valor_parcela as float64) valor_parcela
-from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_cooperado ` as t
+from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_cooperado` as t

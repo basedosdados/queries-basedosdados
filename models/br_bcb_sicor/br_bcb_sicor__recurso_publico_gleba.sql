@@ -11,4 +11,4 @@ select
     safe_cast(indice_indice_ponto as int64) indice_ponto,
     st_geogpoint(safe_cast(longitude as float64), safe_cast(latitude as float64)) ponto,
     safe_cast(altitude as float64) altitude
-from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_gleba ` as t
+from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_gleba` as t

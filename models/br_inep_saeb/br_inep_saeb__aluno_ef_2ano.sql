@@ -52,4 +52,4 @@ select
     safe_cast(erro_padrao as float64) erro_padrao,
     safe_cast(proficiencia_saeb as float64) proficiencia_saeb,
     safe_cast(erro_padrao_saeb as float64) erro_padrao_saeb
-from `basedosdados-staging.br_inep_saeb_staging.aluno_ef_2ano ` as t
+from `basedosdados-staging.br_inep_saeb_staging.aluno_ef_2ano` as t

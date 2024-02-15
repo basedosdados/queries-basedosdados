@@ -12,4 +12,4 @@ select
     safe_cast(id_empenho as string) id_empenho,
     safe_cast(id_licitacao as string) id_licitacao,
     safe_cast(id_municipio as string) id_municipio
-from `basedosdados-staging.world_wb_mides_staging.relacionamentos ` as t
+from `basedosdados-staging.world_wb_mides_staging.relacionamentos` as t

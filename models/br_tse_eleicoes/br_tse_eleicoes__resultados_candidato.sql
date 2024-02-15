@@ -28,4 +28,4 @@ select
     safe_cast(nome_candidato as string) nome_candidato,
     safe_cast(resultado as string) resultado,
     safe_cast(votos as int64) votos
-from `basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato ` as t
+from `basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato` as t

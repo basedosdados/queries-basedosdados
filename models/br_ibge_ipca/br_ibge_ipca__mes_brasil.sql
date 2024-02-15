@@ -19,7 +19,7 @@ select
     safe_cast(variacao_semestral as float64) variacao_semestral,
     safe_cast(variacao_anual as float64) variacao_anual,
     safe_cast(variacao_doze_meses as float64) variacao_doze_meses
-from `basedosdados-staging.br_ibge_ipca_staging.mes_brasil ` as t
+from `basedosdados-staging.br_ibge_ipca_staging.mes_brasil` as t
 
 {% if is_incremental() %}
     where

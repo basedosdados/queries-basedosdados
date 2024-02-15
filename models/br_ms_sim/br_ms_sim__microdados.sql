@@ -104,4 +104,4 @@ select
     safe_cast(numero_dias_informacao as int64) numero_dias_informacao,
     safe_cast(fontes_informacao as string) fontes_informacao,
     safe_cast(alt_causa as string) alt_causa
-from `basedosdados-staging.br_ms_sim_staging.microdados ` as t
+from `basedosdados-staging.br_ms_sim_staging.microdados` as t

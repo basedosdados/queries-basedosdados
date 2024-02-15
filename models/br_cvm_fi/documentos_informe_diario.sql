@@ -23,4 +23,4 @@ select
     safe_cast(captacao_dia as float64) captacao_dia,
     safe_cast(regate_dia as float64) resgate_dia,
     safe_cast(quantidade_cotistas as int64) quantidade_cotistas,
-from `basedosdados-staging.br_cvm_fi_staging.documentos_informe_diario ` as t
+from `basedosdados-staging.br_cvm_fi_staging.documentos_informe_diario` as t

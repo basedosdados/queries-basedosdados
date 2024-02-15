@@ -18,4 +18,4 @@ select
     safe_cast(nome_oficial_ingles as string) nome_oficial_ingles,
     safe_cast(nacionalidade as string) nacionalidade,
     safe_cast(sigla_continente as string) sigla_continente
-from `basedosdados-staging.br_bd_diretorios_mundo_staging.pais ` as t
+from `basedosdados-staging.br_bd_diretorios_mundo_staging.pais` as t

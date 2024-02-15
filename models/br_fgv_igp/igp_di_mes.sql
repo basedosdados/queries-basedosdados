@@ -6,4 +6,4 @@ select
     safe_cast(variacao_12_meses as float64) variacao_12_meses,
     safe_cast(variacao_acumulada_ano as float64) variacao_acumulada_ano,
     safe_cast(indice_fechamento_mensal as float64) indice_fechamento_mensal
-from `basedosdados-staging.br_fgv_igp_staging.igp_di_mes ` as t
+from `basedosdados-staging.br_fgv_igp_staging.igp_di_mes` as t

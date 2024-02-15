@@ -292,4 +292,4 @@ select
     safe_cast(v1028198 as float64) v1028198,
     safe_cast(v1028199 as float64) v1028199,
     safe_cast(v1028200 as float64) v1028200,
-from `basedosdados-staging.br_ibge_pnadc_staging.educacao ` as t
+from `basedosdados-staging.br_ibge_pnadc_staging.educacao` as t

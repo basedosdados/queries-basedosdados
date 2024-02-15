@@ -45,4 +45,4 @@ select
     safe_cast(ultimostatus_apreciacao as string) apreciacao_ultimo_status,
     safe_cast(ultimostatus_sequencia as string) sequencia_ultimo_status,
     safe_cast(ultimostatus_url as string) url_ultimo_status,
-from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_microdados ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_microdados` as t

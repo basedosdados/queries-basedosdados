@@ -27,4 +27,4 @@ select
     safe_cast(sigla_tipo as string) sigla_tipo,
     safe_cast(replace(numero, ".0", "") as string) numero,
     safe_cast(titulo as string) titulo
-from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_objeto ` as t
+from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_objeto` as t

@@ -7,4 +7,4 @@ select
     safe_cast(tipo as string) tipo,
     safe_cast(frequencia as string) frequencia,
     safe_cast(valor as float64) valor
-from `basedosdados-staging.br_bd_indicadores_staging.receitas_planejadas ` as t
+from `basedosdados-staging.br_bd_indicadores_staging.receitas_planejadas` as t

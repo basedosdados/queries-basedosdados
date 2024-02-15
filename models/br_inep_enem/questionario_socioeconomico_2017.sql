@@ -27,4 +27,4 @@ select
     safe_cast(q025 as string) q025,
     safe_cast(q026 as string) q026,
     safe_cast(q027 as string) q027
-from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2017 ` as t
+from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2017` as t

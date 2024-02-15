@@ -20,4 +20,4 @@ select
     safe_cast(id_referencia_bacen as string) id_referencia_bacen,
     safe_cast(numero_ordem as string) numero_ordem,
     safe_cast(valor_liberado as float64) valor_liberado
-from `basedosdados-staging.br_bcb_sicor_staging.microdados_liberacao ` as t
+from `basedosdados-staging.br_bcb_sicor_staging.microdados_liberacao` as t

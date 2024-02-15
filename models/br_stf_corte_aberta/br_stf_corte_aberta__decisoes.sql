@@ -34,4 +34,4 @@ select
     safe_cast(data_autuacao as date) data_autuacao,
     safe_cast(data_decisao as date) data_decisao,
     safe_cast(data_baixa_processo as date) data_baixa_processo
-from `basedosdados-staging.br_stf_corte_aberta_staging.decisoes ` as t
+from `basedosdados-staging.br_stf_corte_aberta_staging.decisoes` as t
