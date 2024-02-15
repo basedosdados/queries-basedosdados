@@ -1,8 +1,0 @@
-gql==3.4.1
-requests==2.30.0
-requests_toolbelt==1.0.0
-basedosdados[upload]==2.0.0b13
-ruamel.yaml==0.17.26
-pre-commit==3.6.1
-shandy-sqlfmt==0.20.0
-yamlfix==1.16.0
