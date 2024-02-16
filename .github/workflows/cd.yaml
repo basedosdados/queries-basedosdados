@@ -1,5 +1,5 @@
 ---
-name: Deployment
+name: CD
 on:
   pull_request:
     types: [closed]
@@ -15,13 +15,14 @@ env:
   IMAGE_NAME: ghcr.io/basedosdados/queries-basedosdados
 jobs:
   build-container:
-    if: (github.event.pull_request.merged == true && github.event.pull_request.base.ref
-      == 'main')
+    if: |
+      github.event.pull_request.merged == true
+      && github.event.pull_request.base.ref == 'main'
     name: Deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v0.2.1
         with:
@@ -62,37 +63,39 @@ jobs:
         uses: tj-actions/changed-files@v35
         with:
           separator: ','
-      - name: Setup Python 3.9
-        uses: actions/setup-python@v2
+      - name: Set up poetry
+        run: pipx install poetry
+      - name: Set up python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+          cache: poetry
+          python-version: '3.9'
+      - name: Install requirements
+        run: poetry install --only=dev
       - name: Run script for approving table
         run: |
-          python .github/workflows/scripts/table_approve.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --source-bucket-name ${{ secrets.SOURCE_BUCKET_NAME }} --destination-bucket-name ${{ secrets.DESTINATION_BUCKET_NAME }} --backup-bucket-name ${{ secrets.BACKUP_BUCKET_NAME }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }} --materialization-mode ${{ secrets.MATERIALIZATION_MODE }} --materialization-label ${{ secrets.MATERIALIZATION_LABEL }}
+          poetry run python .github/workflows/scripts/table_approve.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --source-bucket-name ${{ secrets.SOURCE_BUCKET_NAME }} --destination-bucket-name ${{ secrets.DESTINATION_BUCKET_NAME }} --backup-bucket-name ${{ secrets.BACKUP_BUCKET_NAME }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }} --materialization-mode ${{ secrets.MATERIALIZATION_MODE }} --materialization-label ${{ secrets.MATERIALIZATION_LABEL }}
   change-metadata-status:
     needs: table-approve
     name: Change metadata status to "production"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get all changed files using a comma separator
         id: changed-files
         uses: tj-actions/changed-files@v35
         with:
           separator: ','
-      - name: Setup Python 3.9
-        uses: actions/setup-python@v2
+      - name: Set up poetry
+        run: pipx install poetry
+      - name: Set up python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+          cache: poetry
+          python-version: '3.9'
+      - name: Install requirements
+        run: poetry install --only=dev
       - name: Run script for changing metadata status
         run: |-
           python .github/workflows/scripts/change_metadata_status.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --status published --email ${{ secrets.BACKEND_EMAIL }} --password ${{ secrets.BACKEND_PASSWORD }}

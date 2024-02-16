@@ -1,18 +1,30 @@
-FROM python:3.8-slim
+# Builder Image
 
-# Setup virtual environment
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+FROM python:3.9-bookworm AS builder
 
-# Copy and install dependencies
-WORKDIR /tmp
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
+RUN pip install --no-cache-dir poetry==1.7.0
 
-# Copy dbt project and profiles
-WORKDIR /dbt
+ENV POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_CACHE_DIR=/tmp/pypoetry
+
+WORKDIR /app
+COPY pyproject.toml poetry.lock dbt_project.yml packages.yml ./
+RUN poetry install --no-root && poetry run dbt deps && rm -rf $POETRY_CACHE_DIR
+
+# Runner Image
+
+FROM python:3.9-slim-bookworm AS runner
+
+ENV VIRTUAL_ENV=/app/.venv \
+    DBT_PACKAGES=/app/dbt_packages \
+    PATH="/app/.venv/bin:$PATH"
+
+WORKDIR /app
+
+COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+COPY --from=builder ${DBT_PACKAGES} ${DBT_PACKAGES}
+
 COPY . .
 
-# Run dbt deps and dbt rpc
-CMD ["/dbt/start-server.sh"]
+CMD ["dbt-rpc", "serve", "--profiles-dir", ".", "--host", "0.0.0.0", "--port", "8580"]
