@@ -6,7 +6,7 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 1994, "end": 2022, "interval": 1},
+            "range": {"start": 1994, "end": 2024, "interval": 1},
         },
         cluster_by=["mes", "sigla_uf"],
         labels={"tema": "economia"},
@@ -107,7 +107,7 @@ from
                         safe_cast(codigo_elemento_despesa as int64) as string
                     ) as modalidade_despesa,
                     round(safe_cast(valor_empenhado as float64), 2) as valor_inicial,
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_ce` e
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_ce` e
             ),
             anulacao_ce as (
                 select
@@ -129,7 +129,7 @@ from
                     round(
                         sum(safe_cast(valor_anulacao as float64)), 2
                     ) as valor_anulacao
-                from `basedosdados-staging.world_wb_mides_staging.raw_anulacao_ce`
+                from `basedosdados-dev.world_wb_mides_staging.raw_anulacao_ce`
                 group by 1
             ),
             frequencia_ce as (
@@ -240,7 +240,7 @@ from
                         ),
                         2
                     ) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_mg`
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_mg`
             ),
             dlic as (
                 select
@@ -419,15 +419,15 @@ from
                         cd_elemento
                     ) as elemento_despesa,
                     safe_cast(vl_empenho as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_pb` e
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_pb` e
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pb` m
                     on e.cd_ugestora = safe_cast(m.id_unidade_gestora as string)
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_funcao` f
+                    `basedosdados-dev.world_wb_mides_staging.aux_funcao` f
                     on e.de_funcao = f.nome_funcao
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_subfuncao` sf
+                    `basedosdados-dev.world_wb_mides_staging.aux_subfuncao` sf
                     on e.de_subfuncao = sf.nome_subfuncao
             ),
             anulacao_pb as (
@@ -444,9 +444,9 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     sum(safe_cast(vl_estorno as float64)) as valor_anulacao
-                from `basedosdados-staging.world_wb_mides_staging.raw_estorno_pb` a
+                from `basedosdados-dev.world_wb_mides_staging.raw_estorno_pb` a
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pb` m
                     on a.cd_ugestora = safe_cast(m.id_unidade_gestora as string)
                 group by 1
             ),
@@ -848,12 +848,12 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valorempenhado as float64), 2) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_pe` e
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_pe` e
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pe` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pe` m
                     on e.nomeunidadegestora = m.nomeunidadegestora
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_funcao` fun
+                    `basedosdados-dev.world_wb_mides_staging.aux_funcao` fun
                     on upper(
                         trim(
                             replace(
@@ -867,7 +867,7 @@ from
                     )
                     = upper(nome_funcao)
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_subfuncao` sub
+                    `basedosdados-dev.world_wb_mides_staging.aux_subfuncao` sub
                     on upper(trim(e.subfuncao)) = upper(nome_subfuncao)
             ),
             empenho_pr as (
@@ -910,7 +910,7 @@ from
                         - ifnull(safe_cast(vlestornoempenho as float64), 0),
                         2
                     ) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_pr` e
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_pr` e
                 left join
                     basedosdados.br_bd_diretorios_brasil.municipio m
                     on e.cdibge = m.id_municipio_6
@@ -959,9 +959,9 @@ from
                         replace(cd_elemento, '.', '') as string
                     ) as elemento_despesa,
                     safe_cast(vl_empenho as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` as c
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
+                    `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
                 left join
                     `basedosdados.br_bd_diretorios_brasil.municipio` m
@@ -1009,9 +1009,9 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     -1 * sum(safe_cast(vl_empenho as float64)) as valor_anulacao
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` as c
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
+                    `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
                 left join
                     `basedosdados.br_bd_diretorios_brasil.municipio` m
@@ -1252,15 +1252,15 @@ from
                     safe_cast(safe_cast(cd_acao as int64) as string) as acao,
                     safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
                     safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` e
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp` e
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = e.ds_orgao
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_funcao`
+                    `basedosdados-dev.world_wb_mides_staging.aux_funcao`
                     on ds_funcao_governo = upper(nome_funcao)
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_subfuncao`
+                    `basedosdados-dev.world_wb_mides_staging.aux_subfuncao`
                     on ds_subfuncao_governo = upper(nome_subfuncao)
                 where tp_despesa = 'Empenhado'
             ),
@@ -1286,9 +1286,9 @@ from
                     sum(
                         safe_cast(replace(vl_despesa, ',', '.') as float64)
                     ) as valor_anulacao
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` a
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp` a
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = a.ds_orgao
                 where tp_despesa = 'Anulação'
                 group by 1
@@ -1309,9 +1309,9 @@ from
                     sum(
                         safe_cast(replace(vl_despesa, ',', '.') as float64)
                     ) as valor_reforco
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` r
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp` r
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = r.ds_orgao
                 where tp_despesa = 'Reforço'
                 group by 1
@@ -1537,7 +1537,7 @@ from
                         2
                     ) as valor_final,
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
+                    `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp_municipio`
             ),
             empenhado_municipio_rj_v1 as (
                 select
@@ -1608,7 +1608,7 @@ from
                     ) as modalidade_despesa,
                     round(safe_cast(valor_empenhado as float64), 2) as valor_final,
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+                    `basedosdados-dev.world_wb_mides_staging.raw_despesa_rj_municipio`
                 where (safe_cast(exercicio_empenho as int64)) < 2017
             ),
             frequencia_rj_v1 as (
@@ -1791,8 +1791,7 @@ from
                         ) as string
                     ) as elemento_despesa,
                     round(safe_cast(valor as float64), 2) as valor_inicial,
-                from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
                 where tipoato = 'EMPENHO'
             ),
             anulacao_municipio_rj_v2 as (
@@ -1811,8 +1810,7 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     round(sum(safe_cast(valor as float64)), 2) as valor_anulacao,
-                from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
                 where tipoato = 'CANCELAMENTO EMPENHO'
                 group by 1
             ),
@@ -1885,7 +1883,7 @@ from
                     safe_cast(atividade as string) as acao,
                     safe_cast(elemento_despesa as string) as elemento_despesa,
                     round(safe_cast(valor as float64), 2) as valor_inicial,
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_rj`
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_rj`
                 where numero_empenho is not null
             ),
             anulacao_rj as (
@@ -1902,7 +1900,7 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     round(safe_cast(valor as float64), 2) as valor_anulacao,
-                from `basedosdados-staging.world_wb_mides_staging.raw_anulacao_rj`
+                from `basedosdados-dev.world_wb_mides_staging.raw_anulacao_rj`
                 where despesa_liquidada = 'NÃO' and numero_empenho is not null
             ),
             empenho_rj as (
@@ -2025,16 +2023,93 @@ from
                     safe_cast(codigo_programa as string) as programa,
                     safe_cast(codigo_acao as string) as acao,
                     safe_cast(codigo_natureza as string) as elemento_despesa,
-                    round(
-                        safe_cast(replace(valor_inicial, ',', '.') as float64), 2
-                    ) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_inicial,
                     round(safe_cast(0 as float64), 2) as valor_reforco,
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
-                    round(
-                        safe_cast(replace (valor_final, ',', '.') as float64), 2
-                    ) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_df`
+                    round(safe_cast(replace (valor_final, ',', '.') as float64), 2) as valor_final
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_df`
+            ),
+            empenhado_sc AS (
+                select
+                    safe_cast (ano_emp as int64) as ano,
+                    safe_cast (substring(trim(data_empenho),-7,2) as int64) as mes,
+                    safe_cast (concat(substring(trim(data_empenho),-4),'-',substring(trim(data_empenho),-7,2),'-',substring(trim(data_empenho),1,2))as date) as data,
+                    'SC' as sigla_uf,
+                    safe_cast (id_municipio as string) as id_municipio,
+                    safe_cast (codigo_orgao as string) as orgao,
+                    safe_cast (null as string) as id_unidade_gestora,
+                    safe_cast (null as string) as id_licitacao_bd,
+                    safe_cast (case
+                                   when (split(nr_licitacao_contrato_convenio, ' / ')[offset(0)]) != "Sem Licitação" and 
+                                        (split(nr_licitacao_contrato_convenio, ' / ')[offset(0)]) != "Sem licitação" and
+                                        (split(nr_licitacao_contrato_convenio, ' / ')[offset(0)]) != "Sem Licitacao" and
+                                        (split(nr_licitacao_contrato_convenio, ' / ')[offset(0)]) != "SEM LICITACAO" 
+                                   then (split(nr_licitacao_contrato_convenio, ' / ')[offset(0)]) else '' 
+                              end as string) as id_licitacao,
+                    safe_cast (null as string) as modalidade_licitacao,
+                    safe_cast (concat(num_empenho, 
+                                      ' ', 
+                                      codigo_orgao,
+                                      ' ', 
+                                      id_municipio, 
+                                      ' ', 
+                                      (right(cast (ano_emp as string),2))) 
+                              as string) as id_empenho_bd,
+                    safe_cast (null as string) as id_empenho,
+                    safe_cast (num_empenho as string) as numero,
+                    safe_cast (LOWER (descricao_historico_empenho) as string) as descricao,
+                    safe_cast (null as string) as modalidade,
+                    safe_cast (cast(left(funcao, 2) as int64) as string) as funcao,
+                    safe_cast (cast(left(subfuncao, 3) as int64) as string) as subfuncao,
+                    safe_cast (null as string) as programa,
+                    safe_cast (null as string) as acao,
+                    safe_cast (elemento_despesa as string) as elemento_despesa,
+                    round(safe_cast (valor_empenho as float64),2) as valor_inicial,
+                    round(safe_cast (0 as float64),2) as valor_reforco,
+                    round(safe_cast (0 as float64),2) as valor_anulacao,
+                    round(safe_cast (0 as float64),2) as valor_ajuste,
+                    round(safe_cast (valor_empenho as float64),2) as valor_final
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_sc`
+            ),
+            frequencia_sc as (
+                    select id_empenho_bd, count(id_empenho_bd) as frequencia_id
+                    from empenhado_sc
+                    group by 1
+                    order by 2 desc
+            ), 
+            empenho_sc as (
+                select
+                    e.ano,
+                    e.mes,
+                    e.data,
+                    e.sigla_uf,
+                    e.id_municipio,
+                    e.orgao,
+                    e.id_unidade_gestora,
+                    e.id_licitacao_bd,
+                    e.id_licitacao,
+                    e.modalidade_licitacao,
+                    (case 
+                          when frequencia_id > 1 
+                          then (safe_cast (null as string)) else e.id_empenho_bd 
+                    end) as id_empenho_bd,
+                    e.id_empenho,
+                    e.numero,
+                    e.descricao,
+                    e.modalidade,
+                    e.funcao,
+                    e.subfuncao,
+                    e.programa,
+                    e.acao,
+                    e.elemento_despesa,
+                    round(safe_cast (0 as float64),2) as valor_inicial,
+                    round(safe_cast (0 as float64),2) as valor_reforco,
+                    round(safe_cast (0 as float64),2) as valor_anulacao,
+                    round(safe_cast (0 as float64),2) as valor_ajuste,
+                    e.valor_final AS valor_final
+                  from empenhado_sc e
+                  left join frequencia_sc f on e.id_empenho_bd = f.id_empenho_bd
             )
 
         select *
@@ -2061,4 +2136,6 @@ from
         (select * from empenho_municipio_rj_v2)
         union all
         (select * from empenho_df)
+        union all
+        (select * from empenho_sc)
     )

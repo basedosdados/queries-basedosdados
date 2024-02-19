@@ -6,7 +6,7 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 1995, "end": 2022, "interval": 1},
+            "range": {"start": 1995, "end": 2024, "interval": 1},
         },
         cluster_by=["mes", "sigla_uf"],
         labels={"tema": "economia"},
@@ -82,9 +82,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_liquidado as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_ce` l
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_ce` l
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_ce` m
                     on l.codigo_municipio = m.codigo_municipio
             ),
             liquidacao_mg as (
@@ -161,11 +161,9 @@ from
                         - ifnull(safe_cast(valor_anulado as float64), 0),
                         2
                     ) as valor_final
-                from
-                    `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_mg `
-                    as l
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_mg` as l
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.raw_rsp_mg ` as r
+                    `basedosdados-dev.world_wb_mides_staging.raw_rsp_mg` as r
                     on l.id_rsp = r.id_rsp
             ),
             liquidacao_pb as (
@@ -208,9 +206,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(vl_liquidacao as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pb` l
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_pb` l
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pb` m
                     on l.cd_ugestora = safe_cast(m.id_unidade_gestora as string)
             ),
             liquidacao_pr as (
@@ -243,12 +241,12 @@ from
                     ) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(vlliquidacaoliquido as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pr` l
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_pr` l
                 left join
                     basedosdados.br_bd_diretorios_brasil.municipio m
                     on cdibge = id_municipio_6
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.raw_empenho_pr` e
+                    `basedosdados-dev.world_wb_mides_staging.raw_empenho_pr` e
                     on l.idempenho = e.idempenho
             ),
             liquidacao_pe as (
@@ -273,9 +271,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pe` l
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_pe` l
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pe` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pe` m
                     on l.id_unidade_gestora = safe_cast(m.id_unidadegestora as string)
             ),
             liquidado_rs as (
@@ -326,9 +324,9 @@ from
                     safe_cast(null as string) as documento_responsavel,
                     safe_cast(null as bool) as indicador_restos_pagar,
                     safe_cast(vl_liquidacao as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` as c
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
+                    `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
                 left join
                     `basedosdados.br_bd_diretorios_brasil.municipio` m
@@ -350,9 +348,9 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     -1 * sum(safe_cast(vl_liquidacao as float64)) as valor_anulacao
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` as c
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
+                    `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
                 left join
                     `basedosdados.br_bd_diretorios_brasil.municipio` m
@@ -511,15 +509,15 @@ from
                     safe_cast(cd_acao as string) as acao,
                     safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
                     safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` e
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp` e
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
+                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = e.ds_orgao
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_funcao`
+                    `basedosdados-dev.world_wb_mides_staging.aux_funcao`
                     on ds_funcao_governo = upper(nome_funcao)
                 left join
-                    `basedosdados-staging.world_wb_mides_staging.aux_subfuncao`
+                    `basedosdados-dev.world_wb_mides_staging.aux_subfuncao`
                     on ds_subfuncao_governo = upper(nome_subfuncao)
                 where tp_despesa = 'Valor Liquidado'
             ),
@@ -686,8 +684,7 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(liquidado as float64), 2) as valor_final
-                from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp_municipio`
             ),
             liquidado_municipio_rj_v1 as (
                 select
@@ -725,9 +722,8 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_liquidado as float64), 2) as valor_final
-                from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
-                where (safe_cast(exercicio_empenho as int64)) < 2017
+                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rj_municipio`
+                where (safe_cast (exercicio_empenho as int64)) < 2017
             ),
             frequencia_rj_v1 as (
                 select id_empenho_bd, count(id_empenho_bd) as frequencia_id
@@ -812,7 +808,7 @@ from
                     safe_cast(null as bool) as indicador_restos_pagar,
                     round(safe_cast(valor as float64), 2) as valor_inicial
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                    `basedosdados-dev.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
                 where tipoato = 'LIQUIDACAO'
             ),
             anulacao_municipio_rj_v2 as (
@@ -833,7 +829,7 @@ from
                     ) as id_empenho_bd,
                     sum(safe_cast(valor as float64)) as valor_anulacao,
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                    `basedosdados-dev.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
                 where
                     tipoato in (
                         'CANCELAMENTO LIQUIDACAO',
@@ -912,7 +908,7 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor as float64), 2) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_rj`
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_rj`
                 where numero_empenho is not null
             ),
             liquidacao_df as (
@@ -961,16 +957,80 @@ from
                     safe_cast(credor as string) as nome_responsavel,
                     safe_cast(cnpj_cpf_credor as string) as documento_responsavel,
                     safe_cast(null as bool) as indicador_restos_pagar,
-                    round(
-                        safe_cast(replace (valor, ',', '.') as float64), 2
-                    ) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_inicial,
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(
-                        safe_cast(replace (valor, ',', '.') as float64), 2
-                    ) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_df`
-            )
+                        safe_cast(replace(valor, ',', '.') as float64), 2
+                    ) as valor_inicial,
+                from `basedosdados-dev.world_wb_mides_staging.raw_liquidacao_df`
+            ),
+            liquidado_sc as (
+                select
+                    safe_cast (ano_emp as int64) as ano,
+                    safe_cast (substring(trim(data_empenho),-7,2) as int64) as mes,
+                    safe_cast (null as date) as data,
+                    'SC' as sigla_uf,
+                    safe_cast (id_municipio as string) as id_municipio,
+                    safe_cast (codigo_orgao as string) as orgao,
+                    safe_cast (null as string) as id_unidade_gestora,
+                    safe_cast (concat(
+                                    num_empenho, 
+                                    ' ', 
+                                    codigo_orgao, 
+                                    ' ', 
+                                    id_municipio, 
+                                    ' ', 
+                                    (right(cast(ano_emp as string),2))) as string
+                              ) as id_empenho_bd,
+                    safe_cast (null as string) as id_empenho,
+                    safe_cast (num_empenho as string) as numero_empenho,
+                    safe_cast (null as string) as id_liquidacao_bd,
+                    safe_cast (null as string) as id_liquidacao,
+                    safe_cast (null as string) as numero,
+                    safe_cast (null as string) as nome_responsavel,
+                    safe_cast (null as string) as documento_responsavel,
+                    safe_cast (null as bool) as indicador_restos_pagar,
+                    round(safe_cast (0 as float64),2) as valor_inicial,
+                    round(safe_cast (0 as float64),2) as valor_reforco,
+                    round(safe_cast (0 as float64),2) as valor_anulacao,
+                    round(safe_cast (0 as float64),2) as valor_ajuste,
+                    round(safe_cast (valor_liquidacao as float64),2) as valor_final
+                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_sc`
+                ),
+                frequencia_sc as (
+                    select id_empenho_bd, count(id_empenho_bd) as frequencia_id
+                    from liquidado_sc
+                    group by 1
+                    order by 2 desc
+                ),
+                liquidacao_sc as (
+                    select
+                        l.ano,
+                        l.mes,
+                        l.data,
+                        l.sigla_uf,
+                        l.id_municipio,
+                        l.orgao,
+                        l.id_unidade_gestora,
+                        (case when frequencia_id > 1 then (safe_cast (null as string)) else l.id_empenho_bd end) as id_empenho_bd,
+                        l.id_empenho,
+                        l.numero_empenho,
+                        l.id_liquidacao_bd,
+                        l.id_liquidacao,
+                        l.numero,
+                        l.nome_responsavel,
+                        l.documento_responsavel,
+                        l.indicador_restos_pagar,
+                        l.valor_inicial,
+                        l.valor_anulacao,
+                        l.valor_ajuste,
+                        l.valor_final
+                    from liquidado_sc l
+                    left join frequencia_sc f on l.id_empenho_bd = f.id_empenho_bd
+                )
+
+
 
         select *
         from liquidacao_mg
@@ -996,4 +1056,6 @@ from
         (select * from liquidacao_rj)
         union all
         (select * from liquidacao_df)
+        union all
+        (select * from liquidacao_sc)
     )
