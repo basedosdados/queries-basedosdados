@@ -7,30 +7,30 @@ env:
   DBT_SA: ${{ secrets.DBT_SA }}
 jobs:
   docs:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref
-      == 'main'
+    if: |
+      github.event.pull_request.merged == true
+      && github.event.pull_request.base.ref == 'main'
     name: Deploy docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/checkout@v4
+      - name: Set up poetry
+        run: pipx install poetry
+      - name: Set up python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9.x
-      - name: Upgrade pip
-        run: |
-          pip install -U pip
-      - name: Install dependencies
-        run: |
-          pip3 install -r requirements-docs.txt -r requirements.txt
+          cache: poetry
+          python-version: '3.9'
+      - name: Install requirements
+        run: poetry install --with=dev
       - name: Setup credentials
         run: |
           echo $DBT_SA | base64 --decode > dbt-sa.json
-          python3 .github/workflows/scripts/modify_profiles.py
+          poetry run python .github/workflows/scripts/modify_profiles.py
       - name: Generate docs
         run: |
-          dbt docs generate --profiles-dir .
+          poetry run dbt docs generate --profiles-dir .
       - name: Delete credentials
         run: |
           rm dbt-sa.json

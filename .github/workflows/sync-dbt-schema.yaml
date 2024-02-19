@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
       - name: Get all changed files using a comma separator
@@ -20,17 +20,18 @@ jobs:
         uses: tj-actions/changed-files@v35
         with:
           separator: ','
-      - name: Setup Python 3.9
-        uses: actions/setup-python@v2
+      - name: Set up poetry
+        run: pipx install poetry
+      - name: Set up python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+          cache: poetry
+          python-version: '3.9'
+      - name: Install requirements
+        run: poetry install --only=dev
       - name: Run script for syncing DBT schema
         run: |
-          python .github/workflows/scripts/sync_dbt_schema.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }}
+          poetry run python .github/workflows/scripts/sync_dbt_schema.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }}
       - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
