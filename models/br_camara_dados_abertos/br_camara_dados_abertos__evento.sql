@@ -1,3 +1,4 @@
+# register flow
 {{ config(alias="evento", schema="br_camara_dados_abertos") }}
 select
     safe_cast(id as string) id,
