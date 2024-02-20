@@ -1,7 +1,6 @@
 {{ config(alias="evento", schema="br_camara_dados_abertos") }}
 select
     safe_cast(id as string) id,
-    safe_cast(uri as string) url,
     safe_cast(urldocumentopauta as string) url_documento_pauta,
     safe_cast(
         split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datahorainicio)), 'T')[

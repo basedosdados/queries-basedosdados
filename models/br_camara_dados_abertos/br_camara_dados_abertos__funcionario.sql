@@ -10,5 +10,4 @@ select distinct
     safe_cast(ponto as string) ponto,
     safe_cast(atonomeacao as string) ato_nomeacao,
     safe_cast(lotacao as string) lotacao,
-    safe_cast(urilotacao as string) url_lotacao,
 from `basedosdados-staging.br_camara_dados_abertos_staging.funcionario` as t
