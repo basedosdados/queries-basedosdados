@@ -22,6 +22,10 @@ target-path: target  # directory which will store compiled SQL files
 clean-targets:  # directories to be removed by `dbt clean`
   - target
   - dbt_modules
+# Disable metadata models updates:
+vars:
+  disable_dbt_artifacts_autoupload: true
+
 # Grant acess
 # bq data control: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language
 # dbt grant statements use https://discourse.getdbt.com/t/the-exact-grant-statements-we-use-in-a-dbt-project/430
@@ -298,3 +302,5 @@ models:
     test_dataset:
       +materialized: table
       +schema: test_dataset
+  elementary:
+    +schema: elementary
