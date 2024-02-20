@@ -28,9 +28,7 @@ with
             safe_cast(tipo_modalidade_operacao as string) tipo_modalidade_operacao,
             safe_cast(tipo_combustivel as string) tipo_combustivel,
             safe_cast(geracao as float64) geracao
-        from
-            `basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_usina` 
-            as t
+        from `basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_usina` as t
     )
 select distinct *
 from ons
