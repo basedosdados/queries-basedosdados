@@ -302,5 +302,5 @@ models:
     test_dataset:
       +materialized: table
       +schema: test_dataset
-    elementary:
-      +schema: elementary
+  elementary:
+    +schema: elementary
