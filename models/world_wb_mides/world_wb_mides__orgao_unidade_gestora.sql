@@ -16,6 +16,6 @@ select
     safe_cast(id_unidade_gestora as string) id_unidade_gestora,
     safe_cast(nome_unidade_gestora as string) nome_unidade_gestora,
     safe_cast(esfera as string) esfera
-from `basedosdados-dev.world_wb_mides_staging.orgao_unidade_gestora` as t
+from `basedosdados-staging.world_wb_mides_staging.orgao_unidade_gestora` as t
 
 -- contém 10 UFs: CE, DF, MG, PB, PE, PR, RJ, RS, SC, SP 

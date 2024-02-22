@@ -65,9 +65,9 @@ from
                         ) as string
                     ) as documento_credor,
                     safe_cast(safe_cast(codigo_fonte_ as int64) as string) as fonte,
-                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_ce` e
+                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_ce` e
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_ce` m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
                     on e.codigo_municipio = m.codigo_municipio
             ),
             pago_ce as (
@@ -136,9 +136,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_nota_pagamento as float64), 2) as valor_final,
                     round(safe_cast(0 as float64), 2) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_ce` p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_ce` p
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_ce` m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
                     on p.codigo_municipio = m.codigo_municipio
             ),
             frequencia_ce as (
@@ -296,9 +296,9 @@ from
                         - ifnull(safe_cast(vlr_ret_fonte as float64), 0),
                         2
                     ) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_mg` as p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_mg` as p
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.raw_rsp_mg` as r
+                    `basedosdados-staging.world_wb_mides_staging.raw_rsp_mg` as r
                     on p.id_rsp = r.id_rsp
             ),
             pago_pb as (
@@ -364,15 +364,15 @@ from
                         - safe_cast(vl_retencao as float64),
                         2
                     ) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_pb` p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_pb` p
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.raw_empenho_pb` e
+                    `basedosdados-staging.world_wb_mides_staging.raw_empenho_pb` e
                     on p.nu_empenho = e.nu_empenho
                     and p.cd_ugestora = e.cd_ugestora
                     and p.de_uorcamentaria = e.de_uorcamentaria
                     and p.dt_ano = e.dt_ano
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pb` m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
                     on safe_cast(e.cd_ugestora as string)
                     = safe_cast(m.id_unidade_gestora as string)
             ),
@@ -455,9 +455,9 @@ from
                         2
                     ) as valor_final,
                     round(safe_cast(0 as float64), 2) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_pe` p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_pe` p
                 inner join
-                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_pe` m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_pe` m
                     on safe_cast(p.id_unidade_gestora as string)
                     = safe_cast(m.id_unidadegestora as string)
             ),
@@ -496,9 +496,9 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(p.cdibge as float64), 2) as valor_final,
                     round(safe_cast(0 as float64), 2) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_pr` p
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_pr` p
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.raw_empenho_pr` e
+                    `basedosdados-staging.world_wb_mides_staging.raw_empenho_pr` e
                     on p.idempenho = e.idempenho
                 left join
                     basedosdados.br_bd_diretorios_brasil.municipio m
@@ -572,9 +572,9 @@ from
                     safe_cast(null as bool) as indicador_restos_pagar,
                     safe_cast(null as string) as fonte,
                     safe_cast(vl_pagamento as float64) as valor_inicial
-                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` as c
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` as a
+                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
                 left join
                     `basedosdados.br_bd_diretorios_brasil.municipio` m
@@ -617,9 +617,9 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     -1 * sum(safe_cast(vl_pagamento as float64)) as valor_anulacao
-                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rs` as c
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_orgao_rs` as a
+                    `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
                 left join
                     `basedosdados.br_bd_diretorios_brasil.municipio` m
@@ -877,15 +877,15 @@ from
                     safe_cast(cd_acao as string) as acao,
                     safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
                     safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
-                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp` e
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` e
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_municipio_sp` m
+                    `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = e.ds_orgao
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_funcao`
+                    `basedosdados-staging.world_wb_mides_staging.aux_funcao`
                     on ds_funcao_governo = upper(nome_funcao)
                 left join
-                    `basedosdados-dev.world_wb_mides_staging.aux_subfuncao`
+                    `basedosdados-staging.world_wb_mides_staging.aux_subfuncao`
                     on ds_subfuncao_governo = upper(nome_subfuncao)
                 where tp_despesa = 'Valor Pago'
             ),
@@ -1123,7 +1123,7 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(pago as float64), 2) as valor_final,
                     round(safe_cast(pago as float64), 2) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_sp_municipio`
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
             ),
             pago_municipio_rj_v1 as (
                 select
@@ -1166,7 +1166,7 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_pago as float64), 2) as valor_final,
                     round(safe_cast(valor_pago as float64), 2) as valor_liquido_recebido
-                from `basedosdados-dev.world_wb_mides_staging.raw_despesa_rj_municipio`
+                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
             ),
             frequencia_rj_v1 as (
                 select id_empenho_bd, count(id_empenho_bd) as frequencia_id
@@ -1274,7 +1274,7 @@ from
                     safe_cast(fonterecursos as string) as fonte,
                     round(safe_cast(valor as float64), 2) as valor_inicial,
                 from
-                    `basedosdados-dev.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
                 where tipoato = 'PAGAMENTO'
             ),
             anulacao_municipio_rj_v2 as (
@@ -1295,7 +1295,7 @@ from
                     ) as id_empenho_bd,
                     sum(safe_cast(valor as float64)) as valor_anulacao,
                 from
-                    `basedosdados-dev.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
                 where
                     tipoato in (
                         'CANCEL.PAGAMENTO RET.DOTAÇÃO',
@@ -1390,7 +1390,7 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor as float64), 2) as valor_final,
                     round(safe_cast(valor as float64), 2) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_rj`
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_rj`
                 where numero_empenho is not null
             ),
             pagamento_df as (
@@ -1489,7 +1489,7 @@ from
                         - safe_cast(replace(valor_cancelado, ',', '.') as float64),
                         2
                     ) as valor_liquido_recebido,
-                from `basedosdados-dev.world_wb_mides_staging.raw_pagamento_df`
+                from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_df`
             ),
             pago_sc AS (
                 select
@@ -1518,7 +1518,7 @@ from
                     round(safe_cast (0 as float64),2) as valor_ajuste,
                     round(safe_cast (valor_pagamento as float64),2) as valor_final,
                     round(safe_cast (valor_pagamento as float64),2) as valor_liquido_recebido
-                from `basedosdados-dev.world_wb_mides_staging.raw_empenho_sc`
+                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_sc`
             ),
             frequencia_sc as (
                 select id_empenho_bd, count(id_empenho_bd) as frequencia_id
