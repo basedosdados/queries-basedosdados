@@ -1123,7 +1123,8 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(pago as float64), 2) as valor_final,
                     round(safe_cast(pago as float64), 2) as valor_liquido_recebido,
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
             ),
             pago_municipio_rj_v1 as (
                 select
@@ -1166,7 +1167,8 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_pago as float64), 2) as valor_final,
                     round(safe_cast(valor_pago as float64), 2) as valor_liquido_recebido
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+                from
+                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
             ),
             frequencia_rj_v1 as (
                 select id_empenho_bd, count(id_empenho_bd) as frequencia_id
@@ -1491,33 +1493,45 @@ from
                     ) as valor_liquido_recebido,
                 from `basedosdados-staging.world_wb_mides_staging.raw_pagamento_df`
             ),
-            pago_sc AS (
+            pago_sc as (
                 select
-                    safe_cast (ano_emp as int64) as ano,
-                    safe_cast (substring(trim(data_empenho),-7,2) as int64) as mes,
-                    safe_cast (null as date) as data,
+                    safe_cast(ano_emp as int64) as ano,
+                    safe_cast(substring(trim(data_empenho), -7, 2) as int64) as mes,
+                    safe_cast(null as date) as data,
                     'SC' as sigla_uf,
-                    safe_cast (id_municipio as string) as id_municipio,
-                    safe_cast (codigo_orgao as string) as orgao,
-                    safe_cast (null as string) as id_unidade_gestora,
-                    safe_cast (concat(num_empenho, ' ', codigo_orgao, ' ', id_municipio, ' ', (right(cast(ano_emp as string),2))) as string) as id_empenho_bd,
-                    safe_cast (null as string) as id_empenho,
-                    safe_cast (num_empenho as string) as numero_empenho,
-                    safe_cast (null as string) as id_liquidacao_bd,
-                    safe_cast (null as string) as id_liquidacao,
-                    safe_cast (null as string) as numero_liquidacao,
-                    safe_cast (null as string) as id_pagamento_bd,
-                    safe_cast (null as string) as id_pagamento,
-                    safe_cast (null as string) as numero,
-                    safe_cast (nome_credor as string) as nome_credor,
-                    safe_cast (cpf_cnpj as string) as documento_credor,
-                    safe_cast (null as bool) as indicador_restos_pagar,
-                    safe_cast (right(especificacao_fonte_recurso,2) as string) as fonte,
-                    round(safe_cast (0 as float64),2) as valor_inicial,
-                    round(safe_cast (0 as float64),2) as valor_anulacao,
-                    round(safe_cast (0 as float64),2) as valor_ajuste,
-                    round(safe_cast (valor_pagamento as float64),2) as valor_final,
-                    round(safe_cast (valor_pagamento as float64),2) as valor_liquido_recebido
+                    safe_cast(id_municipio as string) as id_municipio,
+                    safe_cast(codigo_orgao as string) as orgao,
+                    safe_cast(null as string) as id_unidade_gestora,
+                    safe_cast(
+                        concat(
+                            num_empenho,
+                            ' ',
+                            codigo_orgao,
+                            ' ',
+                            id_municipio,
+                            ' ',
+                            (right(cast(ano_emp as string), 2))
+                        ) as string
+                    ) as id_empenho_bd,
+                    safe_cast(null as string) as id_empenho,
+                    safe_cast(num_empenho as string) as numero_empenho,
+                    safe_cast(null as string) as id_liquidacao_bd,
+                    safe_cast(null as string) as id_liquidacao,
+                    safe_cast(null as string) as numero_liquidacao,
+                    safe_cast(null as string) as id_pagamento_bd,
+                    safe_cast(null as string) as id_pagamento,
+                    safe_cast(null as string) as numero,
+                    safe_cast(nome_credor as string) as nome_credor,
+                    safe_cast(cpf_cnpj as string) as documento_credor,
+                    safe_cast(null as bool) as indicador_restos_pagar,
+                    safe_cast(right(especificacao_fonte_recurso, 2) as string) as fonte,
+                    round(safe_cast(0 as float64), 2) as valor_inicial,
+                    round(safe_cast(0 as float64), 2) as valor_anulacao,
+                    round(safe_cast(0 as float64), 2) as valor_ajuste,
+                    round(safe_cast(valor_pagamento as float64), 2) as valor_final,
+                    round(
+                        safe_cast(valor_pagamento as float64), 2
+                    ) as valor_liquido_recebido
                 from `basedosdados-staging.world_wb_mides_staging.raw_empenho_sc`
             ),
             frequencia_sc as (
@@ -1535,7 +1549,13 @@ from
                     p.id_municipio,
                     p.orgao,
                     p.id_unidade_gestora,
-                    (case when frequencia_id > 1 then (safe_cast (null as string)) else p.id_empenho_bd end) as id_empenho_bd,
+                    (
+                        case
+                            when frequencia_id > 1
+                            then (safe_cast(null as string))
+                            else p.id_empenho_bd
+                        end
+                    ) as id_empenho_bd,
                     p.id_empenho,
                     p.numero_empenho,
                     p.id_liquidacao_bd,
