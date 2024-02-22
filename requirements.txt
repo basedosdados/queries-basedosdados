@@ -1,4 +1,0 @@
-dbt-core==1.5.6
-dbt-bigquery==1.5.6
-dbt-rpc==0.4.2
-markupsafe==2.0.1
