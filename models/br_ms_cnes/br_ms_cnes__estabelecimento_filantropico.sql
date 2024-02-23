@@ -1,7 +1,7 @@
 {{
     config(
         schema="br_ms_cnes",
-        alias="habilitacao",
+        alias="estabelecimento_filantropico",
         materialized="incremental",
         partition_by={
             "field": "ano",
@@ -10,32 +10,33 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
         ],
     )
 }}
 with
-    raw_cnes_habilitacaol as (
+    raw_cnes_estabelecimento_filantropico as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.habilitacao`
+        from `basedosdados-dev.br_ms_cnes_staging.estabelecimento_filantropico`
         where cnes is not null
     ),
-    raw_cnes_habilitacao_without_duplicates as (
+    raw_cnes_estabelecimento_filantropico_without_duplicates as (
         -- 2. distinct nas linhas
-        select distinct * from raw_cnes_habilitacaol
+        select distinct * from raw_cnes_estabelecimento_filantropico
     ),
     cnes_add_muni as (
         -- 3. Adicionar id_municipio e sigla_uf
         select *
-        from raw_cnes_habilitacao_without_duplicates
+        from raw_cnes_estabelecimento_filantropico_without_duplicates
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados.br_bd_diretorios_brasil.municipio`
+                from `basedosdados-dev.br_bd_diretorios_brasil.municipio`
             ) as mun
-            on raw_cnes_habilitacao_without_duplicates.codufmun = mun.id_municipio_6
+            on raw_cnes_estabelecimento_filantropico_without_duplicates.codufmun
+            = mun.id_municipio_6
     )
 
 select
@@ -44,32 +45,13 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(cnes as string) id_estabelecimento_cnes,
-    safe_cast(nuleitos as int64) quantidade_leitos,
     cast(substr(cmpt_ini, 1, 4) as int64) as ano_competencia_inicial,
     cast(substr(cmpt_ini, 5, 2) as int64) as mes_competencia_inicial,
     cast(substr(cmpt_fim, 1, 4) as int64) as ano_competencia_final,
     cast(substr(cmpt_fim, 5, 2) as int64) as mes_competencia_final,
     safe_cast(sgruphab as string) tipo_habilitacao,
-    case
-        when
-            safe_cast(sgruphab as string) in (
-                "0901",
-                "0902",
-                "0903",
-                "0904",
-                "0905",
-                "0906",
-                "0907",
-                "1901",
-                "1902",
-                "2901",
-                "3304"
-            )
-        then '2'
-        else '1'
-    end as nivel_habilitacao,
     safe_cast(portaria as string) portaria,
-    safe_cast(
+    cast(
         concat(
             substring(dtportar, -4),
             '-',
@@ -80,9 +62,9 @@ select
     ) data_portaria,
     cast(substr(maportar, 1, 4) as int64) as ano_portaria,
     cast(substr(maportar, 5, 2) as int64) as mes_portaria,
-from cnes_add_muni as t
 {% if is_incremental() %}
     where
+
         date(cast(ano as int64), cast(mes as int64), 1)
         > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}
