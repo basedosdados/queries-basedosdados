@@ -1,19 +1,18 @@
-{{ config(alias='densidade_municipio', schema='br_anatel_telefonia_movel',
-          post_hook = [
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                        ON {{this}}
-                        GRANT TO ("allUsers")
-                        FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                        ON  {{this}}
-                        GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                        FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)']) }}
+{{
+    config(
+        alias="densidade_municipio",
+        schema="br_anatel_telefonia_movel",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+        ],
+    )
+}}
 
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-REPLACE(CAST(id_municipio AS STRING), '.0', '') id_municipio,
-SAFE_CAST(densidade AS FLOAT64) densidade
-FROM basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_municipio AS t
-
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(sigla_uf as string) sigla_uf,
+    replace(cast(id_municipio as string), '.0', '') id_municipio,
+    safe_cast(densidade as float64) densidade
+from `basedosdados-staging.br_anatel_telefonia_movel_staging.densidade_municipio` as t

@@ -5,9 +5,7 @@ title: "[dados] <dataset_id>"
 labels: ''
 assignees: ''
 
----
-
-**Metadados da base**
+-**Metadados da base**
 
 1. Descrição: <descrição da base e suas tabelas>
 
@@ -24,7 +22,7 @@ assignees: ''
     * Cobertura espacial: `<area.slug>`
     * Cobertura temporal: `de YYYY-MM-DD a YYYY-MM-DD`
     * Frequência de atualização: `<year> / <semester> / <quarter> / <month> / <day> / <hour> / <minute> / <second>`
-    * Nível de Observação (o que representa cada linha da tabela): 
+    * Nível de Observação (o que representa cada linha da tabela):
         * `<tabela> - <entidade> - <coluna>`
 
 5. Raspagem

@@ -7,12 +7,11 @@ metadata:
   name: dbt-rpc-dev
 spec:
   ports:
-    - name: "8580"
+    - name: '8580'
       port: 8580
       targetPort: 8580
   selector:
     app: dbt-rpc-dev
-
 ---
 apiVersion: v1
 kind: Service
@@ -22,7 +21,7 @@ metadata:
   name: dbt-rpc-prod
 spec:
   ports:
-    - name: "8580"
+    - name: '8580'
       port: 8580
       targetPort: 8580
   selector:

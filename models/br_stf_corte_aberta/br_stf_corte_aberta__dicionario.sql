@@ -1,9 +1,9 @@
-{{ config(alias='dicionario', schema='br_stf_corte_aberta') }}
+{{ config(alias="dicionario", schema="br_stf_corte_aberta") }}
 
-SELECT 
-SAFE_CAST(id_tabela AS STRING) id_tabela,
-SAFE_CAST(nome_coluna AS STRING) nome_coluna,
-INITCAP(chave) chave,
-SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
-INITCAP(valor) valor
-FROM basedosdados-staging.br_stf_corte_aberta_staging.dicionario AS t
+select
+    safe_cast(id_tabela as string) id_tabela,
+    safe_cast(nome_coluna as string) nome_coluna,
+    initcap(chave) chave,
+    safe_cast(cobertura_temporal as string) cobertura_temporal,
+    initcap(valor) valor
+from `basedosdados-staging.br_stf_corte_aberta_staging.dicionario` as t

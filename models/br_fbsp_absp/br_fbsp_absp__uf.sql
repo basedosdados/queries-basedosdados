@@ -1,34 +1,64 @@
-{{
-    config(alias='uf', schema='br_fbsp_absp')
-}}
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(quantidade_cvli AS INT64) quantidade_cvli,
-SAFE_CAST(quantidade_feminicidio AS INT64) quantidade_feminicidio,
-SAFE_CAST(quantidade_ocorrencia_homicidio_doloso AS INT64) quantidade_ocorrencia_homicidio_doloso,
-SAFE_CAST(quantidade_vitima_homicidio_doloso AS INT64) quantidade_vitima_homicidio_doloso,
-SAFE_CAST(quantidade_latrocinio AS INT64) quantidade_latrocinio,
-SAFE_CAST(quantidade_lesao_corporal_seguida_de_morte AS INT64) quantidade_lesao_corporal_seguida_de_morte,
-SAFE_CAST(quantidade_morte_a_esclarecer AS INT64) quantidade_morte_a_esclarecer,
-SAFE_CAST(quantidade_morte_intervencao_policial_civil_servico AS INT64) quantidade_morte_intervencao_policial_civil_servico,
-SAFE_CAST(quantidade_morte_intervencao_policial_civil_fora_servico AS INT64) quantidade_morte_intervencao_policial_civil_fora_servico,
-SAFE_CAST(quantidade_morte_intervencao_policial_militar_servico AS INT64) quantidade_morte_intervencao_policial_militar_servico,
-SAFE_CAST(quantidade_morte_intervencao_policial_militar_fora_servico AS INT64) quantidade_morte_intervencao_policial_militar_fora_servico,
-SAFE_CAST(quantidade_morte_violenta_intencional AS INT64) quantidade_morte_violenta_intencional,
-SAFE_CAST(quantidade_policial_civil_morto_confronto_servico AS INT64) quantidade_policial_civil_morto_confronto_servico,
-SAFE_CAST(quantidade_policial_civil_morto_confronto_fora_servico AS INT64) quantidade_policial_civil_morto_confronto_fora_servico,
-SAFE_CAST(quantidade_policial_militar_morto_confronto_servico AS INT64) quantidade_policial_militar_morto_confronto_servico,
-SAFE_CAST(quantidade_policial_militar_morto_confronto_fora_servico AS INT64) quantidade_policial_militar_morto_confronto_fora_servico,
-SAFE_CAST(quantidade_suicidio AS INT64) quantidade_suicidio,
-SAFE_CAST(quantidade_estupro AS INT64) quantidade_estupro,
-SAFE_CAST(quantidade_tentativa_estupro AS INT64) quantidade_tentativa_estupro,
-SAFE_CAST(quantidade_furto_veiculo AS INT64) quantidade_furto_veiculo,
-SAFE_CAST(quantidade_roubo_instituicao_financeira AS INT64) quantidade_roubo_instituicao_financeira,
-SAFE_CAST(quantidade_roubo_carga AS INT64) quantidade_roubo_carga,
-SAFE_CAST(quantidade_roubo_de_veiculo AS INT64) quantidade_roubo_de_veiculo,
-SAFE_CAST(quantidade_arma_fogo_apreendida AS INT64) quantidade_arma_fogo_apreendida,
-SAFE_CAST(quantidade_registro_pessoa_desaparecida AS INT64) quantidade_registro_pessoa_desaparecida,
-SAFE_CAST(quantidade_populacao_sistema_penitenciario AS INT64) quantidade_populacao_sistema_penitenciario,
-SAFE_CAST(despesa_empenhada_seguranca_publica AS FLOAT64) despesa_empenhada_seguranca_publica
-FROM basedosdados-staging.br_fbsp_absp_staging.uf
+{{ config(alias="uf", schema="br_fbsp_absp") }}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(quantidade_cvli as int64) quantidade_cvli,
+    safe_cast(quantidade_feminicidio as int64) quantidade_feminicidio,
+    safe_cast(
+        quantidade_ocorrencia_homicidio_doloso as int64
+    ) quantidade_ocorrencia_homicidio_doloso,
+    safe_cast(
+        quantidade_vitima_homicidio_doloso as int64
+    ) quantidade_vitima_homicidio_doloso,
+    safe_cast(quantidade_latrocinio as int64) quantidade_latrocinio,
+    safe_cast(
+        quantidade_lesao_corporal_seguida_de_morte as int64
+    ) quantidade_lesao_corporal_seguida_de_morte,
+    safe_cast(quantidade_morte_a_esclarecer as int64) quantidade_morte_a_esclarecer,
+    safe_cast(
+        quantidade_morte_intervencao_policial_civil_servico as int64
+    ) quantidade_morte_intervencao_policial_civil_servico,
+    safe_cast(
+        quantidade_morte_intervencao_policial_civil_fora_servico as int64
+    ) quantidade_morte_intervencao_policial_civil_fora_servico,
+    safe_cast(
+        quantidade_morte_intervencao_policial_militar_servico as int64
+    ) quantidade_morte_intervencao_policial_militar_servico,
+    safe_cast(
+        quantidade_morte_intervencao_policial_militar_fora_servico as int64
+    ) quantidade_morte_intervencao_policial_militar_fora_servico,
+    safe_cast(
+        quantidade_morte_violenta_intencional as int64
+    ) quantidade_morte_violenta_intencional,
+    safe_cast(
+        quantidade_policial_civil_morto_confronto_servico as int64
+    ) quantidade_policial_civil_morto_confronto_servico,
+    safe_cast(
+        quantidade_policial_civil_morto_confronto_fora_servico as int64
+    ) quantidade_policial_civil_morto_confronto_fora_servico,
+    safe_cast(
+        quantidade_policial_militar_morto_confronto_servico as int64
+    ) quantidade_policial_militar_morto_confronto_servico,
+    safe_cast(
+        quantidade_policial_militar_morto_confronto_fora_servico as int64
+    ) quantidade_policial_militar_morto_confronto_fora_servico,
+    safe_cast(quantidade_suicidio as int64) quantidade_suicidio,
+    safe_cast(quantidade_estupro as int64) quantidade_estupro,
+    safe_cast(quantidade_tentativa_estupro as int64) quantidade_tentativa_estupro,
+    safe_cast(quantidade_furto_veiculo as int64) quantidade_furto_veiculo,
+    safe_cast(
+        quantidade_roubo_instituicao_financeira as int64
+    ) quantidade_roubo_instituicao_financeira,
+    safe_cast(quantidade_roubo_carga as int64) quantidade_roubo_carga,
+    safe_cast(quantidade_roubo_de_veiculo as int64) quantidade_roubo_de_veiculo,
+    safe_cast(quantidade_arma_fogo_apreendida as int64) quantidade_arma_fogo_apreendida,
+    safe_cast(
+        quantidade_registro_pessoa_desaparecida as int64
+    ) quantidade_registro_pessoa_desaparecida,
+    safe_cast(
+        quantidade_populacao_sistema_penitenciario as int64
+    ) quantidade_populacao_sistema_penitenciario,
+    safe_cast(
+        despesa_empenhada_seguranca_publica as float64
+    ) despesa_empenhada_seguranca_publica
+from `basedosdados-staging.br_fbsp_absp_staging.uf`

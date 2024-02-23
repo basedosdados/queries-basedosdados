@@ -1,6 +1,6 @@
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(indice AS FLOAT64) indice,
-SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal
-FROM basedosdados-staging.br_sp_saopaulo_dieese_icv_staging.mes as t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(indice as float64) indice,
+    safe_cast(variacao_mensal as float64) variacao_mensal
+from `basedosdados-staging.br_sp_saopaulo_dieese_icv_staging.mes` as t

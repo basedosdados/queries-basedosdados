@@ -1,17 +1,17 @@
-{{ config(
-    alias='soy_beans_refining_facilities', 
-    schema='br_trase_supply_chain') 
-}}
+{{ config(alias="soy_beans_refining_facilities", schema="br_trase_supply_chain") }}
 
 
-SELECT
-SAFE_CAST(year AS INT64) year,
-SAFE_CAST(the_geom AS STRING) geom_id,
-SAFE_CAST(cartodb_id AS STRING) cartodb_id,
-SAFE_CAST(the_geom_webmercator AS STRING) geom_webmercator_id,
-SAFE_CAST(geocode AS STRING) municipality_id,
-SAFE_CAST(state AS STRING) state,
-SAFE_CAST(company AS STRING) company,
-SAFE_CAST(REPLACE(capacity, 'NA', '') AS INT64) capacity,
-SAFE_CAST(ST_GEOGPOINT(SAFE_CAST(long AS FLOAT64),SAFE_CAST(lat AS FLOAT64)) as GEOGRAPHY) point
-FROM basedosdados-staging.br_trase_supply_chain_staging.soy_beans_refining_facilities AS t
+select
+    safe_cast(year as int64) year,
+    safe_cast(the_geom as string) geom_id,
+    safe_cast(cartodb_id as string) cartodb_id,
+    safe_cast(the_geom_webmercator as string) geom_webmercator_id,
+    safe_cast(geocode as string) municipality_id,
+    safe_cast(state as string) state,
+    safe_cast(company as string) company,
+    safe_cast(replace(capacity, 'NA', '') as int64) capacity,
+    safe_cast(
+        st_geogpoint(safe_cast(long as float64), safe_cast(lat as float64)) as geography
+    ) point
+from
+    `basedosdados-staging.br_trase_supply_chain_staging.soy_beans_refining_facilities` t

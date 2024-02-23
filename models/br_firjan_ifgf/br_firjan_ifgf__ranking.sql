@@ -1,16 +1,9 @@
-{{ 
-    config(
-        alias='ranking', 
-        schema='br_firjan_ifgf',
-    labels = {'tema': 'economia'}
-    )
- }}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(indice_firjan_gestao_fiscal AS FLOAT64) indice_firjan_gestao_fiscal,
-SAFE_CAST(ranking_estadual AS INT64) ranking_estadual,
-SAFE_CAST(ranking_nacional AS INT64) ranking_nacional,
-FROM basedosdados-staging.br_firjan_ifgf_staging.ranking AS t
-
+{{ config(alias="ranking", schema="br_firjan_ifgf", labels={"tema": "economia"}) }}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(indice_firjan_gestao_fiscal as float64) indice_firjan_gestao_fiscal,
+    safe_cast(ranking_estadual as int64) ranking_estadual,
+    safe_cast(ranking_nacional as int64) ranking_nacional,
+from `basedosdados-staging.br_firjan_ifgf_staging.ranking` as t

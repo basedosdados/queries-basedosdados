@@ -23,7 +23,7 @@ def sidra_to_dataframe(url: str) -> pd.DataFrame:
         if response.status_code >= 400 and response.status_code <= 599:
             logging.info(f"Tabela grande demais: {url}")
             raise Exception(f"Erro de requisição: status code {response.status_code}")
-    except requests.exceptions.RequestException as e: 
+    except requests.exceptions.RequestException as e:
         raise SystemExit(e)
     return pd.json_normalize(response.json())
 
@@ -52,7 +52,7 @@ if __name__ == "__main__":
                 munis = ""
                 munis += "".join(f"{value}" if i == 0 else f",{value}" for i, value in enumerate(output_list[n]))
                 url_nova = re.split(r"all(?=/v/)", v)
-                df = sidra_to_dataframe(url=f"{url_nova[0]}{munis}{url_nova[1]}")       
+                df = sidra_to_dataframe(url=f"{url_nova[0]}{munis}{url_nova[1]}")
                 df = rename_dataframe(df)
                 df_final = pd.concat([df_final, df])
-            dataframe_to_parquet(df_final, mkdir = True, table_id=k )    
+            dataframe_to_parquet(df_final, mkdir = True, table_id=k )

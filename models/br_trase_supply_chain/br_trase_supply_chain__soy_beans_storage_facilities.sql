@@ -1,24 +1,24 @@
-{{ config(
-    alias='soy_beans_storage_facilities', 
-    schema='br_trase_supply_chain') 
-}}
+{{ config(alias="soy_beans_storage_facilities", schema="br_trase_supply_chain") }}
 
 
-SELECT
-SAFE_CAST(the_geom AS STRING) geom_id,
-SAFE_CAST(cartodb_id AS STRING) cartodb_id,
-SAFE_CAST(the_geom_webmercator AS STRING) geom_webmercator_id,
-SAFE_CAST(geocode AS STRING) municipality_id,
-SAFE_CAST(uf AS STRING) state,
-CASE
-    WHEN LENGTH(cnpj) = 18 THEN REGEXP_REPLACE(cnpj, r'[^0-9]', '')
-    ELSE CONCAT('***', SUBSTR(cnpj, 4, LENGTH(cnpj) - 6), '***')
-  END AS cnpj_cpf ,
-SAFE_CAST(company AS STRING) company,
-SAFE_CAST(capacity AS INT64) capacity,
-SAFE_CAST(ST_GEOGPOINT(SAFE_CAST(long AS FLOAT64),SAFE_CAST(lat AS FLOAT64)) as GEOGRAPHY) point,
-SAFE_CAST(SAFE.PARSE_DATE("%Y-%m-%d", date) AS DATE) date,
-SAFE_CAST(subclass AS STRING) subclass,
-SAFE_CAST(dt AS STRING) dt
+select
+    safe_cast(the_geom as string) geom_id,
+    safe_cast(cartodb_id as string) cartodb_id,
+    safe_cast(the_geom_webmercator as string) geom_webmercator_id,
+    safe_cast(geocode as string) municipality_id,
+    safe_cast(uf as string) state,
+    case
+        when length(cnpj) = 18
+        then regexp_replace(cnpj, r'[^0-9]', '')
+        else concat('***', substr(cnpj, 4, length(cnpj) - 6), '***')
+    end as cnpj_cpf,
+    safe_cast(company as string) company,
+    safe_cast(capacity as int64) capacity,
+    safe_cast(
+        st_geogpoint(safe_cast(long as float64), safe_cast(lat as float64)) as geography
+    ) point,
+    safe_cast(safe.parse_date("%Y-%m-%d", date) as date) date,
+    safe_cast(subclass as string) subclass,
+    safe_cast(dt as string) dt
 
-FROM basedosdados-staging.br_trase_supply_chain_staging.soy_beans_storage_facilities AS t
+from `basedosdados-staging.br_trase_supply_chain_staging.soy_beans_storage_facilities` t

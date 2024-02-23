@@ -1,18 +1,18 @@
 {{
-  config(
-    schema='br_me_cnpj',
-    alias = 'simples',
-    materialized='table',
-  )
+    config(
+        schema="br_me_cnpj",
+        alias="simples",
+        materialized="table",
+    )
 }}
 
-SELECT 
-  SAFE_CAST(lpad(cnpj_basico, 8, '0') AS STRING) cnpj_basico,
-  SAFE_CAST(opcao_simples AS INT64) opcao_simples,
-  SAFE_CAST(data_opcao_simples AS DATE) data_opcao_simples,
-  SAFE_CAST(data_exclusao_simples AS DATE) data_exclusao_simples,
-  SAFE_CAST(opcao_mei AS INT64) opcao_mei,
-  SAFE_CAST(data_opcao_mei AS DATE) data_opcao_mei,
-  SAFE_CAST(data_exclusao_mei AS DATE) data_exclusao_mei
-FROM basedosdados-staging.br_me_cnpj_staging.simples AS t
-WHERE opcao_mei != "opcao_mei"
+select
+    safe_cast(lpad(cnpj_basico, 8, '0') as string) cnpj_basico,
+    safe_cast(opcao_simples as int64) opcao_simples,
+    safe_cast(data_opcao_simples as date) data_opcao_simples,
+    safe_cast(data_exclusao_simples as date) data_exclusao_simples,
+    safe_cast(opcao_mei as int64) opcao_mei,
+    safe_cast(data_opcao_mei as date) data_opcao_mei,
+    safe_cast(data_exclusao_mei as date) data_exclusao_mei
+from `basedosdados-staging.br_me_cnpj_staging.simples` as t
+where opcao_mei != "opcao_mei"

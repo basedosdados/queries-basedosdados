@@ -11,7 +11,7 @@ dbt_packages/
 # Python
 **/test.py
 __pycache__/
-pyproject.toml
+.python-version
 #
 models/*/tmp/
 models/*/input/

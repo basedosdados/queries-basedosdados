@@ -1,15 +1,15 @@
 {{
-  config(
-    alias = 'relacionamentos',
-    schema = "world_wb_mides",
-    materialized = "table",
-    labels = {"tema": "economia"}
-  )
- }}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_empenho AS STRING) id_empenho,
-SAFE_CAST(id_licitacao AS STRING) id_licitacao,
-SAFE_CAST(id_municipio AS STRING) id_municipio
-FROM basedosdados-staging.world_wb_mides_staging.relacionamentos AS t
+    config(
+        alias="relacionamentos",
+        schema="world_wb_mides",
+        materialized="table",
+        labels={"tema": "economia"},
+    )
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_empenho as string) id_empenho,
+    safe_cast(id_licitacao as string) id_licitacao,
+    safe_cast(id_municipio as string) id_municipio
+from `basedosdados-staging.world_wb_mides_staging.relacionamentos` as t

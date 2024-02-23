@@ -1,166 +1,280 @@
-{{ config(alias='country',schema='world_oecd_public_finance') }}
-SELECT 
-SAFE_CAST(year AS INT64) year,
-SAFE_CAST(country AS STRING) country,
-SAFE_CAST(revenue_personal_income_tax AS FLOAT64) revenue_personal_income_tax,
-SAFE_CAST(revenue_social_security_contribution AS FLOAT64) revenue_social_security_contribution,
-SAFE_CAST(revenue_corporate_tax AS FLOAT64) revenue_corporate_tax,
-SAFE_CAST(revenue_environmental_tax AS FLOAT64) revenue_environmental_tax,
-SAFE_CAST(revenue_other_consumption_tax AS FLOAT64) revenue_other_consumption_tax,
-SAFE_CAST(revenue_immovable_property_tax AS FLOAT64) revenue_immovable_property_tax,
-SAFE_CAST(revenue_other_property_tax AS FLOAT64) revenue_other_property_tax,
-SAFE_CAST(revenue_sales_goods_services_tax AS FLOAT64) revenue_sales_goods_services_tax,
-SAFE_CAST(revenue_other_non_property_tax AS FLOAT64) revenue_other_non_property_tax,
-SAFE_CAST(revenue_property_income AS FLOAT64) revenue_property_income,
-SAFE_CAST(revenue_property_income_except_interest AS FLOAT64) revenue_property_income_except_interest,
-SAFE_CAST(expenditure_education AS FLOAT64) expenditure_education,
-SAFE_CAST(expenditure_health AS FLOAT64) expenditure_health,
-SAFE_CAST(expenditure_wage_intermediate_consumption AS FLOAT64) expenditure_wage_intermediate_consumption,
-SAFE_CAST(expenditure_pension AS FLOAT64) expenditure_pension,
-SAFE_CAST(expenditure_sickness_disability AS FLOAT64) expenditure_sickness_disability,
-SAFE_CAST(expenditure_unemployment_benefit AS FLOAT64) expenditure_unemployment_benefit,
-SAFE_CAST(expenditure_family_children AS FLOAT64) expenditure_family_children,
-SAFE_CAST(expenditure_subsidies AS FLOAT64) expenditure_subsidies,
-SAFE_CAST(expenditure_public_investment AS FLOAT64) expenditure_public_investment,
-SAFE_CAST(expenditure_other_primary_expenditure AS FLOAT64) expenditure_other_primary_expenditure,
-SAFE_CAST(expenditure_property_income AS FLOAT64) expenditure_property_income,
-SAFE_CAST(expenditure_property_income_except_interest AS FLOAT64) expenditure_property_income_except_interest,
-SAFE_CAST(revenue_personal_income_tax_adjusted AS FLOAT64) revenue_personal_income_tax_adjusted,
-SAFE_CAST(revenue_social_security_contribution_adjusted AS FLOAT64) revenue_social_security_contribution_adjusted,
-SAFE_CAST(revenue_corporate_tax_adjusted AS FLOAT64) revenue_corporate_tax_adjusted,
-SAFE_CAST(revenue_environmental_tax_adjusted AS FLOAT64) revenue_environmental_tax_adjusted,
-SAFE_CAST(revenue_other_consumption_tax_adjusted AS FLOAT64) revenue_other_consumption_tax_adjusted,
-SAFE_CAST(revenue_immovable_property_tax_adjusted AS FLOAT64) revenue_immovable_property_tax_adjusted,
-SAFE_CAST(revenue_other_property_tax_adjusted AS FLOAT64) revenue_other_property_tax_adjusted,
-SAFE_CAST(revenue_sales_goods_services_tax_adjusted AS FLOAT64) revenue_sales_goods_services_tax_adjusted,
-SAFE_CAST(revenue_other_non_property_tax_adjusted AS FLOAT64) revenue_other_non_property_tax_adjusted,
-SAFE_CAST(revenue_property_income_adjusted AS FLOAT64) revenue_property_income_adjusted,
-SAFE_CAST(revenue_property_income_except_interest_adjusted AS FLOAT64) revenue_property_income_except_interest_adjusted,
-SAFE_CAST(expenditure_education_adjusted AS FLOAT64) expenditure_education_adjusted,
-SAFE_CAST(expenditure_health_adjusted AS FLOAT64) expenditure_health_adjusted,
-SAFE_CAST(expenditure_wage_intermediate_consumption_adjusted AS FLOAT64) expenditure_wage_intermediate_consumption_adjusted,
-SAFE_CAST(expenditure_pension_adjusted AS FLOAT64) expenditure_pension_adjusted,
-SAFE_CAST(expenditure_sickness_disability_adjusted AS FLOAT64) expenditure_sickness_disability_adjusted,
-SAFE_CAST(expenditure_unemployment_benefit_adjusted AS FLOAT64) expenditure_unemployment_benefit_adjusted,
-SAFE_CAST(expenditure_family_children_adjusted AS FLOAT64) expenditure_family_children_adjusted,
-SAFE_CAST(expenditure_subsidies_adjusted AS FLOAT64) expenditure_subsidies_adjusted,
-SAFE_CAST(expenditure_public_investment_adjusted AS FLOAT64) expenditure_public_investment_adjusted,
-SAFE_CAST(expenditure_other_primary_expenditure_adjusted AS FLOAT64) expenditure_other_primary_expenditure_adjusted,
-SAFE_CAST(expenditure_property_income_adjusted AS FLOAT64) expenditure_property_income_adjusted,
-SAFE_CAST(expenditure_property_income_except_interest_adjusted AS FLOAT64) expenditure_property_income_except_interest_adjusted,
-SAFE_CAST(current_receipt AS FLOAT64) current_receipt,
-SAFE_CAST(current_receipt_except_interest AS FLOAT64) current_receipt_except_interest,
-SAFE_CAST(current_receipt_adjusted AS FLOAT64) current_receipt_adjusted,
-SAFE_CAST(total_receipt AS FLOAT64) total_receipt,
-SAFE_CAST(current_expenditure AS FLOAT64) current_expenditure,
-SAFE_CAST(current_expenditure_except_interest AS FLOAT64) current_expenditure_except_interest,
-SAFE_CAST(current_expenditure_adjusted AS FLOAT64) current_expenditure_adjusted,
-SAFE_CAST(current_expenditure_except_interest_adjusted AS FLOAT64) current_expenditure_except_interest_adjusted,
-SAFE_CAST(total_expenditure AS FLOAT64) total_expenditure,
-SAFE_CAST(net_lending AS FLOAT64) net_lending,
-SAFE_CAST(primary_balance AS FLOAT64) primary_balance,
-SAFE_CAST(net_lending_adjusted AS FLOAT64) net_lending_adjusted,
-SAFE_CAST(primary_balance_adjusted AS FLOAT64) primary_balance_adjusted,
-SAFE_CAST(underlying_net_lending AS FLOAT64) underlying_net_lending,
-SAFE_CAST(underlying_primary_balance AS FLOAT64) underlying_primary_balance,
-SAFE_CAST(net_financial_liabilities AS FLOAT64) net_financial_liabilities,
-SAFE_CAST(financial_assets AS FLOAT64) financial_assets,
-SAFE_CAST(gross_interest_paid AS FLOAT64) gross_interest_paid,
-SAFE_CAST(gross_interest_received AS FLOAT64) gross_interest_received,
-SAFE_CAST(net_interest_paid AS FLOAT64) net_interest_paid,
-SAFE_CAST(gross_domestic_product_current_prices AS FLOAT64) gross_domestic_product_current_prices,
-SAFE_CAST(gross_domestic_product_volume AS FLOAT64) gross_domestic_product_volume,
-SAFE_CAST(gross_domestic_product_potential_current_prices AS FLOAT64) gross_domestic_product_potential_current_prices,
-SAFE_CAST(gross_domestic_product_potential_volume AS FLOAT64) gross_domestic_product_potential_volume,
-SAFE_CAST(output_gap AS FLOAT64) output_gap,
-SAFE_CAST(short_term_interest_rate AS FLOAT64) short_term_interest_rate,
-SAFE_CAST(long_term_interest_rate AS FLOAT64) long_term_interest_rate,
-SAFE_CAST(consumer_price_index AS FLOAT64) consumer_price_index,
-SAFE_CAST(exchange_rate AS FLOAT64) exchange_rate,
-SAFE_CAST(nominal_effective_exchange_rate AS FLOAT64) nominal_effective_exchange_rate,
-SAFE_CAST(real_effective_exchange_rate AS FLOAT64) real_effective_exchange_rate,
-SAFE_CAST(total_employment AS FLOAT64) total_employment,
-SAFE_CAST(government_employment AS FLOAT64) government_employment,
-SAFE_CAST(labor_force AS FLOAT64) labor_force,
-SAFE_CAST(unemployment_rate AS FLOAT64) unemployment_rate,
-SAFE_CAST(export AS FLOAT64) export,
-SAFE_CAST(import AS FLOAT64) import,
-SAFE_CAST(deflator_export AS FLOAT64) deflator_export,
-SAFE_CAST(deflator_import AS FLOAT64) deflator_import,
-SAFE_CAST(deflator_gross_domestic_product AS FLOAT64) deflator_gross_domestic_product,
-SAFE_CAST(government_fixed_capital_formation AS FLOAT64) government_fixed_capital_formation,
-SAFE_CAST(capital_transfers AS FLOAT64) capital_transfers,
-SAFE_CAST(government_consumption_fixed_capital AS FLOAT64) government_consumption_fixed_capital,
-SAFE_CAST(capital_tax_transfers_receipts AS FLOAT64) capital_tax_transfers_receipts,
-SAFE_CAST(term_trade AS FLOAT64) term_trade,
-SAFE_CAST(trade_openness_ratio AS FLOAT64) trade_openness_ratio,
-SAFE_CAST(primary_total_expenditure_adjustred AS FLOAT64) primary_total_expenditure_adjustred,
-SAFE_CAST(total_expenditure_adjusted AS FLOAT64) total_expenditure_adjusted,
-SAFE_CAST(total_receipt_adjusted AS FLOAT64) total_receipt_adjusted,
-SAFE_CAST(primary_total_receipt_adjusted AS FLOAT64) primary_total_receipt_adjusted,
-SAFE_CAST(expenditure_labor_policy_active AS FLOAT64) expenditure_labor_policy_active,
-SAFE_CAST(expenditure_labor_policy_passive AS FLOAT64) expenditure_labor_policy_passive,
-SAFE_CAST(size_municipalities AS FLOAT64) size_municipalities,
-SAFE_CAST(share_women_parliament AS FLOAT64) share_women_parliament,
-SAFE_CAST(share_women_minister AS FLOAT64) share_women_minister,
-SAFE_CAST(government_confidence AS FLOAT64) government_confidence,
-SAFE_CAST(rule_of_law_limited_power AS FLOAT64) rule_of_law_limited_power,
-SAFE_CAST(rule_of_law_rights AS FLOAT64) rule_of_law_rights,
-SAFE_CAST(expenditure_health_pc AS FLOAT64) expenditure_health_pc,
-SAFE_CAST(judicial_confidence AS FLOAT64) judicial_confidence,
-SAFE_CAST(rule_of_law_justice_enforcement AS FLOAT64) rule_of_law_justice_enforcement,
-SAFE_CAST(rule_of_law_justice_government_influence AS FLOAT64) rule_of_law_justice_government_influence,
-SAFE_CAST(index_ourdata AS FLOAT64) index_ourdata,
-SAFE_CAST(internet_interaction_authoriries AS FLOAT64) internet_interaction_authoriries,
-SAFE_CAST(average_income_tax_rate AS FLOAT64) average_income_tax_rate,
-SAFE_CAST(average_employee_social_security_rate AS FLOAT64) average_employee_social_security_rate,
-SAFE_CAST(average_employer_social_security_rate AS FLOAT64) average_employer_social_security_rate,
-SAFE_CAST(average_income_social_security_rate AS FLOAT64) average_income_social_security_rate,
-SAFE_CAST(net_personal_average_tax_rate AS FLOAT64) net_personal_average_tax_rate,
-SAFE_CAST(average_tax_wedge AS FLOAT64) average_tax_wedge,
-SAFE_CAST(marginal_tax_wedge AS FLOAT64) marginal_tax_wedge,
-SAFE_CAST(total_red_expenditure_intramural AS FLOAT64) total_red_expenditure_intramural,
-SAFE_CAST(total_red_expenditure_government AS FLOAT64) total_red_expenditure_government,
-SAFE_CAST(budget_aproppriation_red AS FLOAT64) budget_aproppriation_red,
-SAFE_CAST(basic_red_expenditure_intramural AS FLOAT64) basic_red_expenditure_intramural,
-SAFE_CAST(basic_red_expenditure_government AS FLOAT64) basic_red_expenditure_government,
-SAFE_CAST(female_labor_participation_rate AS FLOAT64) female_labor_participation_rate,
-SAFE_CAST(male_labor_participation_rate AS FLOAT64) male_labor_participation_rate,
-SAFE_CAST(fertility_rate AS FLOAT64) fertility_rate,
-SAFE_CAST(life_expectancy AS FLOAT64) life_expectancy,
-SAFE_CAST(gini_disposable_income AS FLOAT64) gini_disposable_income,
-SAFE_CAST(gini_market_income AS FLOAT64) gini_market_income,
-SAFE_CAST(gini_government_income AS FLOAT64) gini_government_income,
-SAFE_CAST(poverty_rate AS FLOAT64) poverty_rate,
-SAFE_CAST(pmr_market_regulation_indicator AS FLOAT64) pmr_market_regulation_indicator,
-SAFE_CAST(pmr_state_control AS FLOAT64) pmr_state_control,
-SAFE_CAST(pmr_barriers_entrepeneurship AS FLOAT64) pmr_barriers_entrepeneurship,
-SAFE_CAST(pmr_barriers_trade_investment AS FLOAT64) pmr_barriers_trade_investment,
-SAFE_CAST(employment_contract_protect_ex_collective_dismissal AS FLOAT64) employment_contract_protect_ex_collective_dismissal,
-SAFE_CAST(employment_contract_protect_in_collective_dismissal AS FLOAT64) employment_contract_protect_in_collective_dismissal,
-SAFE_CAST(cabinet_right AS FLOAT64) cabinet_right,
-SAFE_CAST(cabinet_center AS FLOAT64) cabinet_center,
-SAFE_CAST(cabinet_left AS FLOAT64) cabinet_left,
-SAFE_CAST(cabinet_composition AS FLOAT64) cabinet_composition,
-SAFE_CAST(cabinet_ideological_composition AS FLOAT64) cabinet_ideological_composition,
-SAFE_CAST(cabinet_ideological_gap AS FLOAT64) cabinet_ideological_gap,
-SAFE_CAST(government_change AS FLOAT64) government_change,
-SAFE_CAST(election_turnout AS FLOAT64) election_turnout,
-SAFE_CAST(`budget_perspective_medium term` AS FLOAT64) budget_perspective_medium_term,
-SAFE_CAST(performance_budget AS FLOAT64) performance_budget,
-SAFE_CAST(government_capital_stock AS FLOAT64) government_capital_stock,
-SAFE_CAST(public_private_partnership_capital_stock AS FLOAT64) public_private_partnership_capital_stock,
-SAFE_CAST(corporate_income_tax_rate AS FLOAT64) corporate_income_tax_rate,
-SAFE_CAST(vat_rate AS FLOAT64) vat_rate,
-SAFE_CAST(voice_accountability AS FLOAT64) voice_accountability,
-SAFE_CAST(regulatory_quality AS FLOAT64) regulatory_quality,
-SAFE_CAST(rule_of_law AS FLOAT64) rule_of_law,
-SAFE_CAST(political_stability AS FLOAT64) political_stability,
-SAFE_CAST(government_effectiveness AS FLOAT64) government_effectiveness,
-SAFE_CAST(corruption_control AS FLOAT64) corruption_control,
-SAFE_CAST(indicator_fiscal_rule_expenditure AS INT64) indicator_fiscal_rule_expenditure,
-SAFE_CAST(indicator_fiscal_rule_revenue AS INT64) indicator_fiscal_rule_revenue,
-SAFE_CAST(indicator_fiscal_rule_balance AS INT64) indicator_fiscal_rule_balance,
-SAFE_CAST(indicator_fiscal_rule_debt AS INT64) indicator_fiscal_rule_debt,
-SAFE_CAST(indicator_fiscal_council AS INT64) indicator_fiscal_council
-FROM basedosdados-staging.world_oecd_public_finance_staging.country AS t
+{{ config(alias="country", schema="world_oecd_public_finance") }}
+select
+    safe_cast(year as int64) year,
+    safe_cast(country as string) country,
+    safe_cast(revenue_personal_income_tax as float64) revenue_personal_income_tax,
+    safe_cast(
+        revenue_social_security_contribution as float64
+    ) revenue_social_security_contribution,
+    safe_cast(revenue_corporate_tax as float64) revenue_corporate_tax,
+    safe_cast(revenue_environmental_tax as float64) revenue_environmental_tax,
+    safe_cast(revenue_other_consumption_tax as float64) revenue_other_consumption_tax,
+    safe_cast(revenue_immovable_property_tax as float64) revenue_immovable_property_tax,
+    safe_cast(revenue_other_property_tax as float64) revenue_other_property_tax,
+    safe_cast(
+        revenue_sales_goods_services_tax as float64
+    ) revenue_sales_goods_services_tax,
+    safe_cast(revenue_other_non_property_tax as float64) revenue_other_non_property_tax,
+    safe_cast(revenue_property_income as float64) revenue_property_income,
+    safe_cast(
+        revenue_property_income_except_interest as float64
+    ) revenue_property_income_except_interest,
+    safe_cast(expenditure_education as float64) expenditure_education,
+    safe_cast(expenditure_health as float64) expenditure_health,
+    safe_cast(
+        expenditure_wage_intermediate_consumption as float64
+    ) expenditure_wage_intermediate_consumption,
+    safe_cast(expenditure_pension as float64) expenditure_pension,
+    safe_cast(
+        expenditure_sickness_disability as float64
+    ) expenditure_sickness_disability,
+    safe_cast(
+        expenditure_unemployment_benefit as float64
+    ) expenditure_unemployment_benefit,
+    safe_cast(expenditure_family_children as float64) expenditure_family_children,
+    safe_cast(expenditure_subsidies as float64) expenditure_subsidies,
+    safe_cast(expenditure_public_investment as float64) expenditure_public_investment,
+    safe_cast(
+        expenditure_other_primary_expenditure as float64
+    ) expenditure_other_primary_expenditure,
+    safe_cast(expenditure_property_income as float64) expenditure_property_income,
+    safe_cast(
+        expenditure_property_income_except_interest as float64
+    ) expenditure_property_income_except_interest,
+    safe_cast(
+        revenue_personal_income_tax_adjusted as float64
+    ) revenue_personal_income_tax_adjusted,
+    safe_cast(
+        revenue_social_security_contribution_adjusted as float64
+    ) revenue_social_security_contribution_adjusted,
+    safe_cast(revenue_corporate_tax_adjusted as float64) revenue_corporate_tax_adjusted,
+    safe_cast(
+        revenue_environmental_tax_adjusted as float64
+    ) revenue_environmental_tax_adjusted,
+    safe_cast(
+        revenue_other_consumption_tax_adjusted as float64
+    ) revenue_other_consumption_tax_adjusted,
+    safe_cast(
+        revenue_immovable_property_tax_adjusted as float64
+    ) revenue_immovable_property_tax_adjusted,
+    safe_cast(
+        revenue_other_property_tax_adjusted as float64
+    ) revenue_other_property_tax_adjusted,
+    safe_cast(
+        revenue_sales_goods_services_tax_adjusted as float64
+    ) revenue_sales_goods_services_tax_adjusted,
+    safe_cast(
+        revenue_other_non_property_tax_adjusted as float64
+    ) revenue_other_non_property_tax_adjusted,
+    safe_cast(
+        revenue_property_income_adjusted as float64
+    ) revenue_property_income_adjusted,
+    safe_cast(
+        revenue_property_income_except_interest_adjusted as float64
+    ) revenue_property_income_except_interest_adjusted,
+    safe_cast(expenditure_education_adjusted as float64) expenditure_education_adjusted,
+    safe_cast(expenditure_health_adjusted as float64) expenditure_health_adjusted,
+    safe_cast(
+        expenditure_wage_intermediate_consumption_adjusted as float64
+    ) expenditure_wage_intermediate_consumption_adjusted,
+    safe_cast(expenditure_pension_adjusted as float64) expenditure_pension_adjusted,
+    safe_cast(
+        expenditure_sickness_disability_adjusted as float64
+    ) expenditure_sickness_disability_adjusted,
+    safe_cast(
+        expenditure_unemployment_benefit_adjusted as float64
+    ) expenditure_unemployment_benefit_adjusted,
+    safe_cast(
+        expenditure_family_children_adjusted as float64
+    ) expenditure_family_children_adjusted,
+    safe_cast(expenditure_subsidies_adjusted as float64) expenditure_subsidies_adjusted,
+    safe_cast(
+        expenditure_public_investment_adjusted as float64
+    ) expenditure_public_investment_adjusted,
+    safe_cast(
+        expenditure_other_primary_expenditure_adjusted as float64
+    ) expenditure_other_primary_expenditure_adjusted,
+    safe_cast(
+        expenditure_property_income_adjusted as float64
+    ) expenditure_property_income_adjusted,
+    safe_cast(
+        expenditure_property_income_except_interest_adjusted as float64
+    ) expenditure_property_income_except_interest_adjusted,
+    safe_cast(current_receipt as float64) current_receipt,
+    safe_cast(
+        current_receipt_except_interest as float64
+    ) current_receipt_except_interest,
+    safe_cast(current_receipt_adjusted as float64) current_receipt_adjusted,
+    safe_cast(total_receipt as float64) total_receipt,
+    safe_cast(current_expenditure as float64) current_expenditure,
+    safe_cast(
+        current_expenditure_except_interest as float64
+    ) current_expenditure_except_interest,
+    safe_cast(current_expenditure_adjusted as float64) current_expenditure_adjusted,
+    safe_cast(
+        current_expenditure_except_interest_adjusted as float64
+    ) current_expenditure_except_interest_adjusted,
+    safe_cast(total_expenditure as float64) total_expenditure,
+    safe_cast(net_lending as float64) net_lending,
+    safe_cast(primary_balance as float64) primary_balance,
+    safe_cast(net_lending_adjusted as float64) net_lending_adjusted,
+    safe_cast(primary_balance_adjusted as float64) primary_balance_adjusted,
+    safe_cast(underlying_net_lending as float64) underlying_net_lending,
+    safe_cast(underlying_primary_balance as float64) underlying_primary_balance,
+    safe_cast(net_financial_liabilities as float64) net_financial_liabilities,
+    safe_cast(financial_assets as float64) financial_assets,
+    safe_cast(gross_interest_paid as float64) gross_interest_paid,
+    safe_cast(gross_interest_received as float64) gross_interest_received,
+    safe_cast(net_interest_paid as float64) net_interest_paid,
+    safe_cast(
+        gross_domestic_product_current_prices as float64
+    ) gross_domestic_product_current_prices,
+    safe_cast(gross_domestic_product_volume as float64) gross_domestic_product_volume,
+    safe_cast(
+        gross_domestic_product_potential_current_prices as float64
+    ) gross_domestic_product_potential_current_prices,
+    safe_cast(
+        gross_domestic_product_potential_volume as float64
+    ) gross_domestic_product_potential_volume,
+    safe_cast(output_gap as float64) output_gap,
+    safe_cast(short_term_interest_rate as float64) short_term_interest_rate,
+    safe_cast(long_term_interest_rate as float64) long_term_interest_rate,
+    safe_cast(consumer_price_index as float64) consumer_price_index,
+    safe_cast(exchange_rate as float64) exchange_rate,
+    safe_cast(
+        nominal_effective_exchange_rate as float64
+    ) nominal_effective_exchange_rate,
+    safe_cast(real_effective_exchange_rate as float64) real_effective_exchange_rate,
+    safe_cast(total_employment as float64) total_employment,
+    safe_cast(government_employment as float64) government_employment,
+    safe_cast(labor_force as float64) labor_force,
+    safe_cast(unemployment_rate as float64) unemployment_rate,
+    safe_cast(export as float64) export,
+    safe_cast(import as float64) import,
+    safe_cast(deflator_export as float64) deflator_export,
+    safe_cast(deflator_import as float64) deflator_import,
+    safe_cast(
+        deflator_gross_domestic_product as float64
+    ) deflator_gross_domestic_product,
+    safe_cast(
+        government_fixed_capital_formation as float64
+    ) government_fixed_capital_formation,
+    safe_cast(capital_transfers as float64) capital_transfers,
+    safe_cast(
+        government_consumption_fixed_capital as float64
+    ) government_consumption_fixed_capital,
+    safe_cast(capital_tax_transfers_receipts as float64) capital_tax_transfers_receipts,
+    safe_cast(term_trade as float64) term_trade,
+    safe_cast(trade_openness_ratio as float64) trade_openness_ratio,
+    safe_cast(
+        primary_total_expenditure_adjustred as float64
+    ) primary_total_expenditure_adjustred,
+    safe_cast(total_expenditure_adjusted as float64) total_expenditure_adjusted,
+    safe_cast(total_receipt_adjusted as float64) total_receipt_adjusted,
+    safe_cast(primary_total_receipt_adjusted as float64) primary_total_receipt_adjusted,
+    safe_cast(
+        expenditure_labor_policy_active as float64
+    ) expenditure_labor_policy_active,
+    safe_cast(
+        expenditure_labor_policy_passive as float64
+    ) expenditure_labor_policy_passive,
+    safe_cast(size_municipalities as float64) size_municipalities,
+    safe_cast(share_women_parliament as float64) share_women_parliament,
+    safe_cast(share_women_minister as float64) share_women_minister,
+    safe_cast(government_confidence as float64) government_confidence,
+    safe_cast(rule_of_law_limited_power as float64) rule_of_law_limited_power,
+    safe_cast(rule_of_law_rights as float64) rule_of_law_rights,
+    safe_cast(expenditure_health_pc as float64) expenditure_health_pc,
+    safe_cast(judicial_confidence as float64) judicial_confidence,
+    safe_cast(
+        rule_of_law_justice_enforcement as float64
+    ) rule_of_law_justice_enforcement,
+    safe_cast(
+        rule_of_law_justice_government_influence as float64
+    ) rule_of_law_justice_government_influence,
+    safe_cast(index_ourdata as float64) index_ourdata,
+    safe_cast(
+        internet_interaction_authoriries as float64
+    ) internet_interaction_authoriries,
+    safe_cast(average_income_tax_rate as float64) average_income_tax_rate,
+    safe_cast(
+        average_employee_social_security_rate as float64
+    ) average_employee_social_security_rate,
+    safe_cast(
+        average_employer_social_security_rate as float64
+    ) average_employer_social_security_rate,
+    safe_cast(
+        average_income_social_security_rate as float64
+    ) average_income_social_security_rate,
+    safe_cast(net_personal_average_tax_rate as float64) net_personal_average_tax_rate,
+    safe_cast(average_tax_wedge as float64) average_tax_wedge,
+    safe_cast(marginal_tax_wedge as float64) marginal_tax_wedge,
+    safe_cast(
+        total_red_expenditure_intramural as float64
+    ) total_red_expenditure_intramural,
+    safe_cast(
+        total_red_expenditure_government as float64
+    ) total_red_expenditure_government,
+    safe_cast(budget_aproppriation_red as float64) budget_aproppriation_red,
+    safe_cast(
+        basic_red_expenditure_intramural as float64
+    ) basic_red_expenditure_intramural,
+    safe_cast(
+        basic_red_expenditure_government as float64
+    ) basic_red_expenditure_government,
+    safe_cast(
+        female_labor_participation_rate as float64
+    ) female_labor_participation_rate,
+    safe_cast(male_labor_participation_rate as float64) male_labor_participation_rate,
+    safe_cast(fertility_rate as float64) fertility_rate,
+    safe_cast(life_expectancy as float64) life_expectancy,
+    safe_cast(gini_disposable_income as float64) gini_disposable_income,
+    safe_cast(gini_market_income as float64) gini_market_income,
+    safe_cast(gini_government_income as float64) gini_government_income,
+    safe_cast(poverty_rate as float64) poverty_rate,
+    safe_cast(
+        pmr_market_regulation_indicator as float64
+    ) pmr_market_regulation_indicator,
+    safe_cast(pmr_state_control as float64) pmr_state_control,
+    safe_cast(pmr_barriers_entrepeneurship as float64) pmr_barriers_entrepeneurship,
+    safe_cast(pmr_barriers_trade_investment as float64) pmr_barriers_trade_investment,
+    safe_cast(
+        employment_contract_protect_ex_collective_dismissal as float64
+    ) employment_contract_protect_ex_collective_dismissal,
+    safe_cast(
+        employment_contract_protect_in_collective_dismissal as float64
+    ) employment_contract_protect_in_collective_dismissal,
+    safe_cast(cabinet_right as float64) cabinet_right,
+    safe_cast(cabinet_center as float64) cabinet_center,
+    safe_cast(cabinet_left as float64) cabinet_left,
+    safe_cast(cabinet_composition as float64) cabinet_composition,
+    safe_cast(
+        cabinet_ideological_composition as float64
+    ) cabinet_ideological_composition,
+    safe_cast(cabinet_ideological_gap as float64) cabinet_ideological_gap,
+    safe_cast(government_change as float64) government_change,
+    safe_cast(election_turnout as float64) election_turnout,
+    safe_cast(
+        `budget_perspective_medium term` as float64
+    ) budget_perspective_medium_term,
+    safe_cast(performance_budget as float64) performance_budget,
+    safe_cast(government_capital_stock as float64) government_capital_stock,
+    safe_cast(
+        public_private_partnership_capital_stock as float64
+    ) public_private_partnership_capital_stock,
+    safe_cast(corporate_income_tax_rate as float64) corporate_income_tax_rate,
+    safe_cast(vat_rate as float64) vat_rate,
+    safe_cast(voice_accountability as float64) voice_accountability,
+    safe_cast(regulatory_quality as float64) regulatory_quality,
+    safe_cast(rule_of_law as float64) rule_of_law,
+    safe_cast(political_stability as float64) political_stability,
+    safe_cast(government_effectiveness as float64) government_effectiveness,
+    safe_cast(corruption_control as float64) corruption_control,
+    safe_cast(
+        indicator_fiscal_rule_expenditure as int64
+    ) indicator_fiscal_rule_expenditure,
+    safe_cast(indicator_fiscal_rule_revenue as int64) indicator_fiscal_rule_revenue,
+    safe_cast(indicator_fiscal_rule_balance as int64) indicator_fiscal_rule_balance,
+    safe_cast(indicator_fiscal_rule_debt as int64) indicator_fiscal_rule_debt,
+    safe_cast(indicator_fiscal_council as int64) indicator_fiscal_council
+from `basedosdados-staging.world_oecd_public_finance_staging.country` as t

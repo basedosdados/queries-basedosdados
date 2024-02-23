@@ -1,14 +1,11 @@
+---
 version: 2
-
 models:
   - name: br_inpe_prodes__municipio_bioma
     description: Apresenta o desmatamento dos municipios a partir do ano 2000
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - id_municipio
-            - bioma
+          combination_of_columns: [ano, id_municipio, bioma]
     columns:
       - name: ano
         description: Ano

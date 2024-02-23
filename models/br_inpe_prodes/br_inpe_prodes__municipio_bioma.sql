@@ -1,16 +1,11 @@
-{{
-    config(
-        alias='municipio_bioma',
-        schema='br_inpe_prodes'
-    )
-}}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(bioma AS STRING) bioma,
-SAFE_CAST(area AS INT64) area_total,
-SAFE_CAST(desmatamento AS FLOAT64) desmatado,
-SAFE_CAST(floresta AS FLOAT64) vegetacao_natural,
-SAFE_CAST(nao_floresta AS FLOAT64) nao_vegetacao_natural,
-SAFE_CAST(hidrografia AS FLOAT64) hidrografia
-FROM basedosdados-staging.br_inpe_prodes_staging.municipio_bioma AS t
+{{ config(alias="municipio_bioma", schema="br_inpe_prodes") }}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(bioma as string) bioma,
+    safe_cast(area as int64) area_total,
+    safe_cast(desmatamento as float64) desmatado,
+    safe_cast(floresta as float64) vegetacao_natural,
+    safe_cast(nao_floresta as float64) nao_vegetacao_natural,
+    safe_cast(hidrografia as float64) hidrografia
+from `basedosdados-staging.br_inpe_prodes_staging.municipio_bioma` as t

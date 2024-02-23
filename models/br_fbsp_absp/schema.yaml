@@ -1,8 +1,11 @@
+---
 version: 2
-
 models:
   - name: br_fbsp_absp__uf
-    description: A base contempla as informações do Anuário de Segurança Pública a partir de 2007 com as estatísticas criminais compatibilizadas entre anos, com informações acerca dos homicídios, tráfico, furto e roubo, além da força policial, entre outros ao nível das unidades da federação.
+    description: A base contempla as informações do Anuário de Segurança Pública a
+      partir de 2007 com as estatísticas criminais compatibilizadas entre anos, com
+      informações acerca dos homicídios, tráfico, furto e roubo, além da força policial,
+      entre outros ao nível das unidades da federação.
     columns:
       - name: ano
         description: Ano
@@ -24,28 +27,28 @@ models:
         description: Quantidade de Mortes a esclarecer
       - name: quantidade_morte_intervencao_policial_civil_servico
         description: Quantidade de Mortes decorrentes de intervenções de Policiais
-            Civis em servico
+          Civis em servico
       - name: quantidade_morte_intervencao_policial_civil_fora_servico
         description: Quantidade de Mortes decorrentes de intervenções de Policiais
-            Civis fora de servico
+          Civis fora de servico
       - name: quantidade_morte_intervencao_policial_militar_servico
         description: Quantidade de Mortes decorrentes de intervenções de Policiais
-            Militares em servico
+          Militares em servico
       - name: quantidade_morte_intervencao_policial_militar_fora_servico
         description: Quantidade de Mortes decorrentes de intervenções de Policiais
-            Militares fora de servico
+          Militares fora de servico
       - name: quantidade_morte_violenta_intencional
         description: Quantidade de Mortes Violentas Intencionais
       - name: quantidade_policial_civil_morto_confronto_servico
         description: Quantidade de Policiais Civis mortos em confronto em servico
       - name: quantidade_policial_civil_morto_confronto_fora_servico
         description: Quantidade de Policiais Civis mortos em confronto ou por lesão
-            não natural fora de servico
+          não natural fora de servico
       - name: quantidade_policial_militar_morto_confronto_servico
         description: Quantidade de Policiais Militares mortos em confronto em servico
       - name: quantidade_policial_militar_morto_confronto_fora_servico
         description: Quantidade de Policiais Militares mortos em confronto ou por
-            lesão não natural fora de servico
+          lesão não natural fora de servico
       - name: quantidade_suicidio
         description: Quantidade de Suicídio
       - name: quantidade_estupro
@@ -69,7 +72,8 @@ models:
       - name: despesa_empenhada_seguranca_publica
         description: Quantidade de Despesas empenhadas na Função Segurança Pública
   - name: br_fbsp_absp__violencia_escola
-    description: Tabela com indicadores que auxiliam entender o cenário de violência nas escolas
+    description: Tabela com indicadores que auxiliam entender o cenário de violência
+      nas escolas
     columns:
       - name: ano
         description: Ano

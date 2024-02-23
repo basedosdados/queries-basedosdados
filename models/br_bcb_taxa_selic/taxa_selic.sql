@@ -1,11 +1,8 @@
-{{ 
-  config(
-    schema='br_bcb_taxa_selic',
-    materialized='table',
-    labels = {'tema': 'economia'})
- }}
+{{
+    config(
+        schema="br_bcb_taxa_selic", materialized="table", labels={"tema": "economia"}
+    )
+}}
 
-SELECT 
-SAFE_CAST(data AS DATE) data,
-SAFE_CAST(valor AS FLOAT64) valor,
-FROM basedosdados-staging.br_bcb_taxa_selic_staging.taxa_selic AS t
+select safe_cast(data as date) data, safe_cast(valor as float64) valor,
+from `basedosdados-staging.br_bcb_taxa_selic_staging.taxa_selic` as t

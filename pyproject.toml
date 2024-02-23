@@ -1,0 +1,29 @@
+[tool.poetry]
+authors = ["Gabriel Gazola Milan <gabriel.gazola@poli.ufrj.br>"]
+description = ""
+license = "GPL-3.0"
+name = "queries-basedosdados"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+python = "~3.9"
+dbt-core = "1.5.6"
+dbt-bigquery = "1.5.6"
+dbt-rpc = "0.4.2"
+pyyaml = "6.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.0"
+yamlfix = "^1.16.0"
+shandy-sqlfmt = "^0.20.0"
+pyyaml = "^6.0"
+gspread = "^5.3.0"
+pandas = "^2.0.0"
+requests = "^2.27.1"
+openpyxl = "^3.0.9"
+ruamel-yaml = "^0.17.21"
+markdown = "^3.3.6"
+basedosdados = {version = "2.0.0b13", extras = ["upload"]}

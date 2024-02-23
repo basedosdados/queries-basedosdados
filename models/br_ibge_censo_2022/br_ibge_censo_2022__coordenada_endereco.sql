@@ -1,18 +1,18 @@
 {{
-config(alias='coordenada_endereco',
-schema='br_ibge_censo_2022',
-materialized='table',
-cluster_by = ["id_municipio", "id_uf", "especie_endereco"])}}
+    config(
+        alias="coordenada_endereco",
+        schema="br_ibge_censo_2022",
+        materialized="table",
+        cluster_by=["id_municipio", "id_uf", "especie_endereco"],
+    )
+}}
 
-SELECT
-SAFE_CAST(id_uf AS STRING) id_uf,
-SAFE_CAST(COD_MUN AS STRING) id_municipio,
-SAFE_CAST(COD_ESPECIE AS STRING) especie_endereco,
-SAFE_CAST(NV_GEO_COORD AS STRING) nivel_geo_coordenada,
-SAFE_CAST(LATITUDE AS FLOAT64) latitude,
-SAFE_CAST(LONGITUDE AS FLOAT64) longitude,
-ST_GEOGPOINT(SAFE_CAST(LONGITUDE AS FLOAT64),SAFE_CAST(LATITUDE AS FLOAT64)) ponto
-FROM basedosdados-staging.br_ibge_censo_2022_staging.coordenada_endereco AS t
-
-
-
+select
+    safe_cast(id_uf as string) id_uf,
+    safe_cast(cod_mun as string) id_municipio,
+    safe_cast(cod_especie as string) especie_endereco,
+    safe_cast(nv_geo_coord as string) nivel_geo_coordenada,
+    safe_cast(latitude as float64) latitude,
+    safe_cast(longitude as float64) longitude,
+    st_geogpoint(safe_cast(longitude as float64), safe_cast(latitude as float64)) ponto
+from `basedosdados-staging.br_ibge_censo_2022_staging.coordenada_endereco` as t

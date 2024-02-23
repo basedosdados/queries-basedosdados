@@ -1,18 +1,22 @@
-SELECT
-    sequencial, 
-    CONCAT(ano,sequencial) as ano_sequencial_candidato,
-    nome_urna, 
-    sigla_partido, 
-    INITCAP(cargo) as cargo, 
+select
+    sequencial,
+    concat(ano, sequencial) as ano_sequencial_candidato,
+    nome_urna,
+    sigla_partido,
+    initcap(cargo) as cargo,
     sigla_uf,
-    INITCAP(genero) as genero, 
-    INITCAP(raca) as raca, 
+    initcap(genero) as genero,
+    initcap(raca) as raca,
     idade,
-    CASE 
-    WHEN SAFE_CAST(idade as INT64) < 29 THEN "18-29"
-    WHEN SAFE_CAST(idade as INT64) < 50 THEN "30-49"
-    WHEN SAFE_CAST(idade as INT64) < 70 THEN "50-69"
-    WHEN SAFE_CAST(idade as INT64) >=70 THEN "70-100"
-    END AS faixa_etaria
-FROM `basedosdados.br_tse_eleicoes.candidatos` 
-WHERE ano = 2022
+    case
+        when safe_cast(idade as int64) < 29
+        then "18-29"
+        when safe_cast(idade as int64) < 50
+        then "30-49"
+        when safe_cast(idade as int64) < 70
+        then "50-69"
+        when safe_cast(idade as int64) >= 70
+        then "70-100"
+    end as faixa_etaria
+from `basedosdados.br_tse_eleicoes.candidatos`
+where ano = 2022

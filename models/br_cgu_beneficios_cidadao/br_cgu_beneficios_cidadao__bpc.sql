@@ -1,47 +1,45 @@
 {{
-  config(
-    alias='bpc',    
-    schema='br_cgu_beneficios_cidadao',
-    materialized='table',
-     partition_by={
-      "field": "ano_competencia",
-      "data_type": "int64",
-      "range": {
-        "start": 2019,
-        "end": 2024,
-        "interval": 1}
-    },
-    cluster_by = ["mes_competencia", "sigla_uf"],
-    pre_hook = "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-    post_hook = [
-        'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano_competencia AS INT64),CAST(mes_competencia AS INT64),1), MONTH) > 6)',
-        'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                    ON  {{this}}
-                    GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano_competencia AS INT64),CAST(mes_competencia AS INT64),1), MONTH) <= 6)']      )
+    config(
+        alias="bpc",
+        schema="br_cgu_beneficios_cidadao",
+        materialized="table",
+        partition_by={
+            "field": "ano_competencia",
+            "data_type": "int64",
+            "range": {"start": 2019, "end": 2024, "interval": 1},
+        },
+        cluster_by=["mes_competencia", "sigla_uf"],
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano_competencia AS INT64),CAST(mes_competencia AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano_competencia AS INT64),CAST(mes_competencia AS INT64),1), MONTH) <= 6)',
+        ],
+    )
 }}
-with bpc as (
-SELECT 
-SAFE_CAST(SUBSTR(mes_competencia, 1, 4) AS INT64) ano_competencia,
-SAFE_CAST(SUBSTR(mes_competencia, 5, 2) AS INT64) mes_competencia,
-SAFE_CAST(SUBSTR(mes_referencia, 1, 4) AS INT64) ano_referencia,
-SAFE_CAST(SUBSTR(mes_referencia, 5, 2) AS INT64) mes_referencia,
-SAFE_CAST(PARSE_DATE('%Y%m',mes_referencia) AS DATE) data,
-t2.id_municipio,
-SAFE_CAST(t1.sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(nis AS STRING) nis_favorecido,
-SAFE_CAST(cpf AS STRING) cpf_favorecido,
-SAFE_CAST(t1.nome AS STRING) nome_favorecido,
-SAFE_CAST(nis_representante AS STRING) nis_representante,
-SAFE_CAST(cpf_representante AS STRING) cpf_representante,
-SAFE_CAST(t1.nome_representante AS STRING) nome_representante,
-SAFE_CAST(numero AS STRING) numero_beneficio,
-SAFE_CAST(concedido_judicialmente AS STRING) concedido_judicialmente,
-SAFE_CAST(valor AS FLOAT64) valor_parcela,
-FROM `basedosdados-staging.br_cgu_beneficios_cidadao_staging.bpc` t1
-left join `basedosdados.br_bd_diretorios_brasil.municipio` t2
-on SAFE_CAST(t1.id_municipio_siafi AS INT64) = SAFE_CAST(t2.id_municipio_rf AS INT64))
-select * except(data) from bpc
+with
+    bpc as (
+        select
+            safe_cast(substr(mes_competencia, 1, 4) as int64) ano_competencia,
+            safe_cast(substr(mes_competencia, 5, 2) as int64) mes_competencia,
+            safe_cast(substr(mes_referencia, 1, 4) as int64) ano_referencia,
+            safe_cast(substr(mes_referencia, 5, 2) as int64) mes_referencia,
+            safe_cast(parse_date('%Y%m', mes_referencia) as date) data,
+            t2.id_municipio,
+            safe_cast(t1.sigla_uf as string) sigla_uf,
+            safe_cast(nis as string) nis_favorecido,
+            safe_cast(cpf as string) cpf_favorecido,
+            safe_cast(t1.nome as string) nome_favorecido,
+            safe_cast(nis_representante as string) nis_representante,
+            safe_cast(cpf_representante as string) cpf_representante,
+            safe_cast(t1.nome_representante as string) nome_representante,
+            safe_cast(numero as string) numero_beneficio,
+            safe_cast(concedido_judicialmente as string) concedido_judicialmente,
+            safe_cast(valor as float64) valor_parcela,
+        from `basedosdados-staging.br_cgu_beneficios_cidadao_staging.bpc` t1
+        left join
+            `basedosdados.br_bd_diretorios_brasil.municipio` t2
+            on safe_cast(t1.id_municipio_siafi as int64)
+            = safe_cast(t2.id_municipio_rf as int64)
+    )
+select * except (data)
+from bpc

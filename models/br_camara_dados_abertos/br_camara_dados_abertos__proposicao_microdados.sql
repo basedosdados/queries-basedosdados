@@ -1,41 +1,48 @@
 {{
-  config(
-    alias = 'proposicao_microdados',
-    schema='br_camara_dados_abertos',
-    materialized='table',
-    partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 1935,
-        "end": 2024,
-        "interval": 1}
-    })}}
+    config(
+        alias="proposicao_microdados",
+        schema="br_camara_dados_abertos",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 1935, "end": 2024, "interval": 1},
+        },
+    )
+}}
 
-SELECT 
-    SAFE_CAST(ano AS INT64) ano,
-    SAFE_CAST(SPLIT(FORMAT_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S', TIMESTAMP(dataApresentacao)), 'T')[OFFSET(0)] AS DATE) data,
-    SAFE_CAST(SPLIT(FORMAT_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S', TIMESTAMP(dataApresentacao)), 'T')[OFFSET(1)] AS TIME) horario,
-    SAFE_CAST(id AS STRING) id,
-    SAFE_CAST(uri AS STRING) url,
-    SAFE_CAST(numero AS STRING) numero,
-    SAFE_CAST(siglaTipo AS STRING) sigla,
-    SAFE_CAST(descricaoTipo AS STRING) tipo,
-    SAFE_CAST(ementa AS STRING) ementa,
-    SAFE_CAST(ementaDetalhada AS STRING) ementa_detalhada,
-    SAFE_CAST(keywords AS STRING) palavra_chave,
-    SAFE_CAST(uriOrgaoNumerador AS STRING) url_orgao_numerador,
-    SAFE_CAST(uriPropPrincipal AS STRING) url_principal,
-    SAFE_CAST(uriPropPosterior AS STRING) url_posterior,
-    SAFE_CAST(urlInteiroTeor AS STRING) url_teor_proposicao,
-    SAFE_CAST(ultimoStatus_dataHora AS STRING) data_hora_ultimo_status,
-    SAFE_CAST(ultimoStatus_uriRelator AS STRING) url_relator_ultimo_status,
-    SAFE_CAST(ultimoStatus_siglaOrgao AS STRING) sigla_orgao_ultimo_status,
-    SAFE_CAST(ultimoStatus_regime AS STRING) regime_ultimo_status,
-    SAFE_CAST(ultimoStatus_descricaoTramitacao AS STRING) tramitacao_ultimo_status,
-    SAFE_CAST(ultimoStatus_descricaoSituacao AS STRING) situacao_ultimo_status,
-    SAFE_CAST(ultimoStatus_despacho AS STRING) despacho_ultimo_status,
-    SAFE_CAST(ultimoStatus_apreciacao AS STRING) apreciacao_ultimo_status,
-    SAFE_CAST(ultimoStatus_sequencia AS STRING) sequencia_ultimo_status,
-    SAFE_CAST(ultimoStatus_url AS STRING) url_ultimo_status,
-FROM basedosdados-staging.br_camara_dados_abertos_staging.proposicao_microdados AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(
+        split(
+            format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(dataapresentacao)), 'T'
+        )[offset(0)] as date
+    ) data,
+    safe_cast(
+        split(
+            format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(dataapresentacao)), 'T'
+        )[offset(1)] as time
+    ) horario,
+    safe_cast(id as string) id,
+    safe_cast(uri as string) url,
+    safe_cast(numero as string) numero,
+    safe_cast(siglatipo as string) sigla,
+    safe_cast(descricaotipo as string) tipo,
+    safe_cast(ementa as string) ementa,
+    safe_cast(ementadetalhada as string) ementa_detalhada,
+    safe_cast(keywords as string) palavra_chave,
+    safe_cast(uriorgaonumerador as string) url_orgao_numerador,
+    safe_cast(uripropprincipal as string) url_principal,
+    safe_cast(uripropposterior as string) url_posterior,
+    safe_cast(urlinteiroteor as string) url_teor_proposicao,
+    safe_cast(ultimostatus_datahora as string) data_hora_ultimo_status,
+    safe_cast(ultimostatus_urirelator as string) url_relator_ultimo_status,
+    safe_cast(ultimostatus_siglaorgao as string) sigla_orgao_ultimo_status,
+    safe_cast(ultimostatus_regime as string) regime_ultimo_status,
+    safe_cast(ultimostatus_descricaotramitacao as string) tramitacao_ultimo_status,
+    safe_cast(ultimostatus_descricaosituacao as string) situacao_ultimo_status,
+    safe_cast(ultimostatus_despacho as string) despacho_ultimo_status,
+    safe_cast(ultimostatus_apreciacao as string) apreciacao_ultimo_status,
+    safe_cast(ultimostatus_sequencia as string) sequencia_ultimo_status,
+    safe_cast(ultimostatus_url as string) url_ultimo_status,
+from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_microdados` as t

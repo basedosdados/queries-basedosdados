@@ -1,33 +1,29 @@
-
-{{ 
+{{
     config(
-        alias='microdados', 
-        schema='br_inpe_sisam',
-    partition_by = {
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2000,
-        "end": 2025,
-        "interval": 1}
-     },
-    cluster_by = ["ano", "sigla_uf"],
-    labels = {'tema': 'meio-ambiente'}
+        alias="microdados",
+        schema="br_inpe_sisam",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2000, "end": 2025, "interval": 1},
+        },
+        cluster_by=["ano", "sigla_uf"],
+        labels={"tema": "meio-ambiente"},
     )
- }}
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(data_hora AS DATETIME) data_hora,
-SAFE_CAST(co_ppb AS FLOAT64) co_ppb,
-SAFE_CAST(no2_ppb AS FLOAT64) no2_ppb,
-SAFE_CAST(o3_ppb AS FLOAT64) o3_ppb,
-SAFE_CAST(pm25_ugm3 AS FLOAT64) pm25_ugm3,
-SAFE_CAST(so2_ugm3 AS FLOAT64) so2_ugm3,
-SAFE_CAST(precipitacao_dia AS FLOAT64) precipitacao_dia,
-SAFE_CAST(temperatura AS FLOAT64) temperatura,
-SAFE_CAST(umidade_relativa AS FLOAT64) umidade_relativa,
-SAFE_CAST(vento_direcao AS INT64) vento_direcao,
-SAFE_CAST(vento_velocidade AS FLOAT64) vento_velocidade,
-FROM basedosdados-staging.br_inpe_sisam_staging.microdados AS t
+}}
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(data_hora as datetime) data_hora,
+    safe_cast(co_ppb as float64) co_ppb,
+    safe_cast(no2_ppb as float64) no2_ppb,
+    safe_cast(o3_ppb as float64) o3_ppb,
+    safe_cast(pm25_ugm3 as float64) pm25_ugm3,
+    safe_cast(so2_ugm3 as float64) so2_ugm3,
+    safe_cast(precipitacao_dia as float64) precipitacao_dia,
+    safe_cast(temperatura as float64) temperatura,
+    safe_cast(umidade_relativa as float64) umidade_relativa,
+    safe_cast(vento_direcao as int64) vento_direcao,
+    safe_cast(vento_velocidade as float64) vento_velocidade,
+from `basedosdados-staging.br_inpe_sisam_staging.microdados` as t

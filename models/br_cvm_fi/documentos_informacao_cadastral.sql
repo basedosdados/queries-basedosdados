@@ -1,54 +1,64 @@
-{{ 
-  config(
-    schema='br_cvm_fi',
-    materialized='table',
-    cluster_by = "id_fundo")
- }}
-SELECT
-SAFE_CAST(id_fundo AS STRING) id_fundo,
-REGEXP_REPLACE(cnpj, r'[^0-9]', '') AS cnpj,
-SUBSTR(REGEXP_REPLACE(cnpj, r'[^0-9]', ''), 1, 8) AS cnpj_basico,
-SAFE_CAST(denominacao_social AS STRING) denominacao_social,
-SAFE_CAST(data_registro AS DATE) data_registro,
-SAFE_CAST(data_constituicao AS DATE) data_constituicao,
-SAFE_CAST(codigo_cvm AS STRING) codigo_cvm,
-SAFE_CAST(data_cancelamento AS DATE) data_cancelamento,
-SAFE_CAST(situacao AS STRING) situacao,
-SAFE_CAST(data_inicio_situacao AS DATE) data_inicio_situacao,
-SAFE_CAST(data_inicio_atividade AS DATE) data_inicio_atividade,
-SAFE_CAST(data_inicio_exercicio AS DATE) data_inicio_exercicio,
-SAFE_CAST(data_fim_exercicio AS DATE) data_fim_exercicio,
-SAFE_CAST(classe AS STRING) classe,
-SAFE_CAST(data_inicio_classe AS DATE) data_inicio_classe,
-SAFE_CAST(tipo_rentabilidade AS STRING) tipo_rentabilidade,
-SAFE_CAST(tipo_condominio AS STRING) tipo_condominio,
-SAFE_CAST(indicador_fundo_cotas AS INT64) indicador_fundo_cotas,
-SAFE_CAST(indicador_fundo_exclusivo AS INT64) indicador_fundo_exclusivo,
-SAFE_CAST(indicador_tributacao_longo_prazo AS INT64) indicador_tributacao_longo_prazo,
-SAFE_CAST(publico_alvo AS INT64) publico_alvo,
-SAFE_CAST(indicador_entidade_investimento AS INT64) indicador_entidade_investimento,
-SAFE_CAST(taxa_perfomarnce AS FLOAT64) taxa_perfomarnce,
-SAFE_CAST(informacoes_adicionais_taxa_performance AS STRING) informacoes_adicionais_taxa_performance,
-SAFE_CAST(taxa_administracao AS FLOAT64) taxa_administracao,
-SAFE_CAST(informacoes_adicionais_taxa_administracao AS STRING) informacoes_adicionais_taxa_administracao,
-SAFE_CAST(valor_patrimonio_liquido AS FLOAT64) valor_patrimonio_liquido,
-SAFE_CAST(data_patrimonio_liquido AS DATE) data_patrimonio_liquido,
-SAFE_CAST(nome_diretor AS STRING) nome_diretor,
-REGEXP_REPLACE(cnpj_administrador, r'[^0-9]', '') AS cnpj_administrador,
-SUBSTR(REGEXP_REPLACE(cnpj_administrador, r'[^0-9]', ''), 1, 8) AS cnpj_basico_administrador,
-SAFE_CAST(nome_administrador AS STRING) nome_administrador,
-SAFE_CAST(indicador_pessoa_fisica_ou_juridica AS STRING) indicador_pessoa_fisica_ou_juridica,
-SAFE_CAST(cpf_cnpj_gestor AS STRING) cpf_cnpj_gestor,
-SAFE_CAST(nome_gestor AS STRING) nome_gestor,
-REGEXP_REPLACE(cnpj_auditor, r'[^0-9]', '') AS cnpj_auditor,
-SUBSTR(REGEXP_REPLACE(cnpj_auditor, r'[^0-9]', ''), 1, 8) AS cnpj_basico_auditor,
-SAFE_CAST(nome_auditor AS STRING) nome_auditor,
-REGEXP_REPLACE(cnpj_custodiante, r'[^0-9]', '') AS cnpj_custodiante,
-SUBSTR(REGEXP_REPLACE(cnpj_custodiante, r'[^0-9]', ''), 1, 8) AS cnpj_basico_custodiante,
-SAFE_CAST(nome_custodiante AS STRING) nome_custodiante,
-REGEXP_REPLACE(cnpj_controlador, r'[^0-9]', '') AS cnpj_controlador,
-SUBSTR(REGEXP_REPLACE(cnpj_controlador, r'[^0-9]', ''), 1, 8) AS cnpj_basico_controlador,
-SAFE_CAST(nome_controlador AS STRING) nome_controlador,
-SAFE_CAST(indicador_aplicacao_total_recursos_exterior AS INT64) indicador_aplicacao_total_recursos_exterior,
-FROM basedosdados-staging.br_cvm_fi_staging.documentos_informacao_cadastral AS t
-
+{{ config(schema="br_cvm_fi", materialized="table", cluster_by="id_fundo") }}
+select
+    safe_cast(id_fundo as string) id_fundo,
+    regexp_replace(cnpj, r'[^0-9]', '') as cnpj,
+    substr(regexp_replace(cnpj, r'[^0-9]', ''), 1, 8) as cnpj_basico,
+    safe_cast(denominacao_social as string) denominacao_social,
+    safe_cast(data_registro as date) data_registro,
+    safe_cast(data_constituicao as date) data_constituicao,
+    safe_cast(codigo_cvm as string) codigo_cvm,
+    safe_cast(data_cancelamento as date) data_cancelamento,
+    safe_cast(situacao as string) situacao,
+    safe_cast(data_inicio_situacao as date) data_inicio_situacao,
+    safe_cast(data_inicio_atividade as date) data_inicio_atividade,
+    safe_cast(data_inicio_exercicio as date) data_inicio_exercicio,
+    safe_cast(data_fim_exercicio as date) data_fim_exercicio,
+    safe_cast(classe as string) classe,
+    safe_cast(data_inicio_classe as date) data_inicio_classe,
+    safe_cast(tipo_rentabilidade as string) tipo_rentabilidade,
+    safe_cast(tipo_condominio as string) tipo_condominio,
+    safe_cast(indicador_fundo_cotas as int64) indicador_fundo_cotas,
+    safe_cast(indicador_fundo_exclusivo as int64) indicador_fundo_exclusivo,
+    safe_cast(
+        indicador_tributacao_longo_prazo as int64
+    ) indicador_tributacao_longo_prazo,
+    safe_cast(publico_alvo as int64) publico_alvo,
+    safe_cast(indicador_entidade_investimento as int64) indicador_entidade_investimento,
+    safe_cast(taxa_perfomarnce as float64) taxa_perfomarnce,
+    safe_cast(
+        informacoes_adicionais_taxa_performance as string
+    ) informacoes_adicionais_taxa_performance,
+    safe_cast(taxa_administracao as float64) taxa_administracao,
+    safe_cast(
+        informacoes_adicionais_taxa_administracao as string
+    ) informacoes_adicionais_taxa_administracao,
+    safe_cast(valor_patrimonio_liquido as float64) valor_patrimonio_liquido,
+    safe_cast(data_patrimonio_liquido as date) data_patrimonio_liquido,
+    safe_cast(nome_diretor as string) nome_diretor,
+    regexp_replace(cnpj_administrador, r'[^0-9]', '') as cnpj_administrador,
+    substr(
+        regexp_replace(cnpj_administrador, r'[^0-9]', ''), 1, 8
+    ) as cnpj_basico_administrador,
+    safe_cast(nome_administrador as string) nome_administrador,
+    safe_cast(
+        indicador_pessoa_fisica_ou_juridica as string
+    ) indicador_pessoa_fisica_ou_juridica,
+    safe_cast(cpf_cnpj_gestor as string) cpf_cnpj_gestor,
+    safe_cast(nome_gestor as string) nome_gestor,
+    regexp_replace(cnpj_auditor, r'[^0-9]', '') as cnpj_auditor,
+    substr(regexp_replace(cnpj_auditor, r'[^0-9]', ''), 1, 8) as cnpj_basico_auditor,
+    safe_cast(nome_auditor as string) nome_auditor,
+    regexp_replace(cnpj_custodiante, r'[^0-9]', '') as cnpj_custodiante,
+    substr(
+        regexp_replace(cnpj_custodiante, r'[^0-9]', ''), 1, 8
+    ) as cnpj_basico_custodiante,
+    safe_cast(nome_custodiante as string) nome_custodiante,
+    regexp_replace(cnpj_controlador, r'[^0-9]', '') as cnpj_controlador,
+    substr(
+        regexp_replace(cnpj_controlador, r'[^0-9]', ''), 1, 8
+    ) as cnpj_basico_controlador,
+    safe_cast(nome_controlador as string) nome_controlador,
+    safe_cast(
+        indicador_aplicacao_total_recursos_exterior as int64
+    ) indicador_aplicacao_total_recursos_exterior,
+from `basedosdados-staging.br_cvm_fi_staging.documentos_informacao_cadastral` as t
