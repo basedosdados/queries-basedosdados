@@ -1,103 +1,144 @@
-{{ 
-  config(
-    schema='br_mec_sisu',
-    alias = 'microdados',
-    materialized='table',
-     partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2017,
-        "end": 2024,
-        "interval": 1}
-    },
-    cluster_by = ["ano", "sigla_uf_candidato"],
-    labels = {'tema': 'educacao'})
+{{
+    config(
+        schema="br_mec_sisu",
+        alias="microdados",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2017, "end": 2024, "interval": 1},
+        },
+        cluster_by=["ano", "sigla_uf_candidato"],
+        labels={"tema": "educacao"},
+    )
 }}
 
-SELECT
-  SAFE_CAST (ano AS INT64) AS ano,
-  SAFE_CAST (edicao AS STRING) AS edicao,
-  SAFE_CAST (etapa AS STRING) AS etapa,
-  SAFE_CAST (sigla_uf_ies AS STRING) AS sigla_uf_ies,
-  SAFE_CAST (id_ies AS STRING) AS id_ies,
-  SAFE_CAST (sigla_ies AS STRING) AS sigla_ies,
-  SAFE_CAST (sigla_uf_campus AS STRING) AS sigla_uf_campus,
-  SAFE_CAST (d1.id_municipio AS STRING) AS id_municipio_campus,
-  SAFE_CAST (id_campus AS STRING) AS id_campus,
-  SAFE_CAST (campus AS STRING) AS campus,
-  SAFE_CAST (id_curso AS STRING) AS id_curso,
-  CASE
-    WHEN turno = 'Integral'    THEN '1'
-    WHEN turno = 'Matutino'    THEN '2'
-    WHEN turno = 'Vespertino'  THEN '3'
-    WHEN turno = 'Noturno'     THEN '4'
-    WHEN turno = 'EaD'         THEN '5'
-  END AS turno,
-  CASE
-    WHEN periodicidade = 'Trimestral'       THEN '3'
-    WHEN periodicidade = 'Quadrimestral'    THEN '4'
-    WHEN periodicidade = 'Semestral'        THEN '6'
-    WHEN periodicidade = 'Anual'            THEN '12'
-  END AS periodicidade,
-  SAFE_CAST (tipo_cota AS STRING) AS tipo_cota,
-  SAFE_CAST (ds_modalidade_concorrencia AS STRING) AS modalidade_concorrencia,
-  SAFE_CAST (quantidade_vagas_concorrencia AS INT64) AS quantidade_vagas_concorrencia,
-  SAFE_CAST (percentual_bonus AS FLOAT64) AS percentual_bonus,
-  SAFE_CAST (peso_l AS FLOAT64) AS peso_l,
-  SAFE_CAST (peso_ch AS FLOAT64) AS peso_ch,
-  SAFE_CAST (peso_cn AS FLOAT64) AS peso_cn,
-  SAFE_CAST (peso_m AS FLOAT64) AS peso_m,
-  SAFE_CAST (peso_r AS FLOAT64) AS peso_r,
-  SAFE_CAST (nota_minima_l AS FLOAT64) AS nota_minima_l,
-  SAFE_CAST (nota_minima_ch AS FLOAT64) AS nota_minima_ch,
-  SAFE_CAST (nota_minima_cn AS FLOAT64) AS nota_minima_cn,
-  SAFE_CAST (nota_minima_m AS FLOAT64) AS nota_minima_m,
-  SAFE_CAST (nota_minima_r AS FLOAT64) AS nota_minima_r,
-  SAFE_CAST (media_minima AS FLOAT64) AS media_minima,
-  SAFE_CAST (cpf AS STRING) AS cpf,
-  SAFE_CAST (inscricao_enem AS STRING) AS inscricao_enem,
-  SAFE_CAST (candidato AS STRING) AS candidato,
-  SAFE_CAST (sexo AS STRING) AS sexo,
-  CASE WHEN ((LENGTH(data_nascimento) = 8 ) AND (CAST(SUBSTR(data_nascimento,1,2) AS INT64) > 30)) THEN CONCAT('19', data_nascimento)
-       WHEN ((LENGTH(data_nascimento) = 8 ) AND (CAST(SUBSTR(data_nascimento,1,2) AS INT64) < 30)) THEN CONCAT('20', data_nascimento)
-       ELSE data_nascimento
-  END AS data_nascimento,
-  SAFE_CAST (sigla_uf_candidato AS STRING) AS sigla_uf_candidato,
-  SAFE_CAST (d2.id_municipio AS STRING) AS id_municipio_candidato,
-  SAFE_CAST (opcao AS STRING) AS opcao,
-  SAFE_CAST (nota_l AS FLOAT64) AS nota_l,
-  SAFE_CAST (nota_ch AS FLOAT64) AS nota_ch,
-  SAFE_CAST (nota_cn AS FLOAT64) AS nota_cn,
-  SAFE_CAST (nota_m AS FLOAT64) AS nota_m,
-  SAFE_CAST (nota_r AS FLOAT64) AS nota_r,
-  SAFE_CAST (nota_l_peso AS FLOAT64) AS nota_l_peso,
-  SAFE_CAST (nota_ch_peso AS FLOAT64) AS nota_ch_peso,
-  SAFE_CAST (nota_cn_peso AS FLOAT64) AS nota_cn_peso,
-  SAFE_CAST (nota_m_peso AS FLOAT64) AS nota_m_peso,
-  SAFE_CAST (nota_r_peso AS FLOAT64) AS nota_r_peso,  
-  SAFE_CAST (nota_candidato AS FLOAT64) AS nota_candidato, 
-  SAFE_CAST (nota_corte AS FLOAT64) AS nota_corte, 
-  SAFE_CAST (classificacao AS INT64) AS classificacao, 
-  SAFE_CAST ((CASE 
-                WHEN status_aprovado = 'N' THEN False
-                WHEN status_aprovado = 'S' THEN True 
-              END) AS BOOL) AS status_aprovado, 
-  CASE 
-    WHEN status_matricula = 'CANCELADA'                                 THEN '1'
-    WHEN status_matricula = 'DOCUMENTACAO REJEITADA'                    THEN '2'
-    WHEN status_matricula = 'DOCUMENTAÇÃO REJEITADA'                    THEN '2'
-    WHEN status_matricula = 'EFETIVADA'                                 THEN '3'
-    WHEN status_matricula = 'NÃO COMPARECEU'                            THEN '4'
-    WHEN status_matricula = 'NÃO CONVOCADO'                             THEN '5'
-    WHEN status_matricula = 'PENDENTE'                                  THEN '6'
-    WHEN status_matricula = 'SUBSTITUIDA - FORA DO PRAZO'               THEN '7'
-    WHEN status_matricula = 'SUBSTITUIDA - MATRICULA FORA DO PRAZO'     THEN '7'
-    WHEN status_matricula = 'SUBSTITUIDA - MESMA IES'                   THEN '8'
-    WHEN status_matricula = 'SUBSTITUIDA - OUTRA IES'                   THEN '9'
-    WHEN status_matricula = 'SUBSTITUÍDA MESMA IES'                     THEN '8'
-    WHEN status_matricula = 'SUBSTITUÍDA OUTRA IES'                     THEN '9'
-  END AS status_matricula
-FROM `basedosdados-dev.br_mec_sisu_staging.microdados` s
-LEFT JOIN `basedosdados-dev.br_bd_diretorios_brasil.municipio` d1 ON LOWER(s.nome_municipio_campus) = LOWER(d1.nome) 
-LEFT JOIN `basedosdados-dev.br_bd_diretorios_brasil.municipio` d2 ON LOWER(s.nome_municipio_candidato) = LOWER(d2.nome)
+select
+    safe_cast(ano as int64) as ano,
+    safe_cast(edicao as string) as edicao,
+    safe_cast(etapa as string) as etapa,
+    safe_cast(sigla_uf_ies as string) as sigla_uf_ies,
+    safe_cast(id_ies as string) as id_ies,
+    safe_cast(sigla_ies as string) as sigla_ies,
+    safe_cast(sigla_uf_campus as string) as sigla_uf_campus,
+    safe_cast(d1.id_municipio as string) as id_municipio_campus,
+    safe_cast(id_campus as string) as id_campus,
+    safe_cast(campus as string) as campus,
+    safe_cast(id_curso as string) as id_curso,
+    case
+        when turno = 'Integral'
+        then '1'
+        when turno = 'Matutino'
+        then '2'
+        when turno = 'Vespertino'
+        then '3'
+        when turno = 'Noturno'
+        then '4'
+        when turno = 'EaD'
+        then '5'
+    end as turno,
+    case
+        when periodicidade = 'Trimestral'
+        then '3'
+        when periodicidade = 'Quadrimestral'
+        then '4'
+        when periodicidade = 'Semestral'
+        then '6'
+        when periodicidade = 'Anual'
+        then '12'
+    end as periodicidade,
+    safe_cast(tipo_cota as string) as tipo_cota,
+    safe_cast(ds_modalidade_concorrencia as string) as modalidade_concorrencia,
+    safe_cast(quantidade_vagas_concorrencia as int64) as quantidade_vagas_concorrencia,
+    safe_cast(percentual_bonus as float64) as percentual_bonus,
+    safe_cast(peso_l as float64) as peso_l,
+    safe_cast(peso_ch as float64) as peso_ch,
+    safe_cast(peso_cn as float64) as peso_cn,
+    safe_cast(peso_m as float64) as peso_m,
+    safe_cast(peso_r as float64) as peso_r,
+    safe_cast(nota_minima_l as float64) as nota_minima_l,
+    safe_cast(nota_minima_ch as float64) as nota_minima_ch,
+    safe_cast(nota_minima_cn as float64) as nota_minima_cn,
+    safe_cast(nota_minima_m as float64) as nota_minima_m,
+    safe_cast(nota_minima_r as float64) as nota_minima_r,
+    safe_cast(media_minima as float64) as media_minima,
+    safe_cast(cpf as string) as cpf,
+    safe_cast(inscricao_enem as string) as inscricao_enem,
+    safe_cast(candidato as string) as candidato,
+    safe_cast(sexo as string) as sexo,
+    case
+        when
+            (
+                (length(data_nascimento) = 8)
+                and (cast(substr(data_nascimento, 1, 2) as int64) > 30)
+            )
+        then concat('19', data_nascimento)
+        when
+            (
+                (length(data_nascimento) = 8)
+                and (cast(substr(data_nascimento, 1, 2) as int64) < 30)
+            )
+        then concat('20', data_nascimento)
+        else data_nascimento
+    end as data_nascimento,
+    safe_cast(sigla_uf_candidato as string) as sigla_uf_candidato,
+    safe_cast(d2.id_municipio as string) as id_municipio_candidato,
+    safe_cast(opcao as string) as opcao,
+    safe_cast(nota_l as float64) as nota_l,
+    safe_cast(nota_ch as float64) as nota_ch,
+    safe_cast(nota_cn as float64) as nota_cn,
+    safe_cast(nota_m as float64) as nota_m,
+    safe_cast(nota_r as float64) as nota_r,
+    safe_cast(nota_l_peso as float64) as nota_l_peso,
+    safe_cast(nota_ch_peso as float64) as nota_ch_peso,
+    safe_cast(nota_cn_peso as float64) as nota_cn_peso,
+    safe_cast(nota_m_peso as float64) as nota_m_peso,
+    safe_cast(nota_r_peso as float64) as nota_r_peso,
+    safe_cast(nota_candidato as float64) as nota_candidato,
+    safe_cast(nota_corte as float64) as nota_corte,
+    safe_cast(classificacao as int64) as classificacao,
+    safe_cast(
+        (
+            case
+                when status_aprovado = 'N'
+                then false
+                when status_aprovado = 'S'
+                then true
+            end
+        ) as bool
+    ) as status_aprovado,
+    case
+        when status_matricula = 'CANCELADA'
+        then '1'
+        when status_matricula = 'DOCUMENTACAO REJEITADA'
+        then '2'
+        when status_matricula = 'DOCUMENTAÇÃO REJEITADA'
+        then '2'
+        when status_matricula = 'EFETIVADA'
+        then '3'
+        when status_matricula = 'NÃO COMPARECEU'
+        then '4'
+        when status_matricula = 'NÃO CONVOCADO'
+        then '5'
+        when status_matricula = 'PENDENTE'
+        then '6'
+        when status_matricula = 'SUBSTITUIDA - FORA DO PRAZO'
+        then '7'
+        when status_matricula = 'SUBSTITUIDA - MATRICULA FORA DO PRAZO'
+        then '7'
+        when status_matricula = 'SUBSTITUIDA - MESMA IES'
+        then '8'
+        when status_matricula = 'SUBSTITUIDA - OUTRA IES'
+        then '9'
+        when status_matricula = 'SUBSTITUÍDA MESMA IES'
+        then '8'
+        when status_matricula = 'SUBSTITUÍDA OUTRA IES'
+        then '9'
+    end as status_matricula
+from `basedosdados-dev.br_mec_sisu_staging.microdados` s
+left join
+    `basedosdados-dev.br_bd_diretorios_brasil.municipio` d1
+    on lower(s.nome_municipio_campus) = lower(d1.nome)
+left join
+    `basedosdados-dev.br_bd_diretorios_brasil.municipio` d2
+    on lower(s.nome_municipio_candidato) = lower(d2.nome)
