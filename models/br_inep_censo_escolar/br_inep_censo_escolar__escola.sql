@@ -583,7 +583,9 @@ with
             null as quantidade_matricula_fundamental_3_ano,
             null as quantidade_matricula_fundamental_4_ano,
             null as quantidade_matricula_fundamental_5_ano,
-            null as quantidade_matricula_fundamental_anos_finais,
+            safe_cast(
+                quantidade_matricula_fundamental_anos_finais as int64
+            ) quantidade_matricula_fundamental_anos_finais,
             null as quantidade_matricula_fundamental_6_ano,
             null as quantidade_matricula_fundamental_7_ano,
             null as quantidade_matricula_fundamental_8_ano,
