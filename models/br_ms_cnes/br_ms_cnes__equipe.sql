@@ -10,8 +10,8 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
         ],
     )
 }}
@@ -59,14 +59,15 @@ select
     safe_cast(tp_desat as string) as tipo_desativacao_equipe,
     safe_cast(substr(dt_desat, 1, 4) as int64) as ano_desativacao_equipe,
     safe_cast(substr(dt_desat, 5, 6) as int64) as mes_desativacao_equipe,
-    safe_cast(quilombo as string) as indicador_atende_populacao_assistida_quilombolas,
-    safe_cast(assentad as string) as indicador_atende_populacao_assistida_assentados,
-    safe_cast(popgeral as string) as indicador_atende_populacao_assistida_geral,
-    safe_cast(escola as string) as indicador_atende_populacao_assistida_escolares,
-    safe_cast(indigena as string) as indicador_atende_populacao_assistida_indigena,
-    safe_cast(pronasci as string) as indicador_atende_populacao_assistida_pronasci,
+    safe_cast(quilombo as int64) as indicador_atende_populacao_assistida_quilombolas,
+    safe_cast(assentad as int64) as indicador_atende_populacao_assistida_assentados,
+    safe_cast(popgeral as int64) as indicador_atende_populacao_assistida_geral,
+    safe_cast(escola as int64) as indicador_atende_populacao_assistida_escolares,
+    safe_cast(indigena as int64) as indicador_atende_populacao_assistida_indigena,
+    safe_cast(pronasci as int64) as indicador_atende_populacao_assistida_pronasci,
 from cnes_add_muni
 {% if is_incremental() %}
+
     where
         date(cast(ano as int64), cast(mes as int64), 1)
         > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
