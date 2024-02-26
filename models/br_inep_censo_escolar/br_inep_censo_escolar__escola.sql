@@ -10,7 +10,7 @@
         cluster_by="sigla_uf",
     )
 }}
--- comentário
+
 with
     censo as (
         select
