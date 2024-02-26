@@ -33,7 +33,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados-dev.br_bd_diretorios_brasil.municipio`
+                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
             ) as mun
             on raw_cnes_estabelecimento_without_duplicates.codufmun = mun.id_municipio_6
     )
@@ -239,7 +239,7 @@ select
     safe_cast(ap03cv04 as int64) indicador_atendimento_sadt_plano_seguro_terceiro,
     safe_cast(ap03cv05 as int64) indicador_atendimento_sadt_plano_saude_publico,
     safe_cast(ap03cv06 as int64) indicador_atendimento_sadt_plano_saude_privado,
-    safe_cast(ap04cv01 as string) indicador_atendimento_urgencia_sus,
+    safe_cast(ap04cv01 as int64) indicador_atendimento_urgencia_sus,
     safe_cast(ap04cv02 as int64) indicador_atendimento_urgencia_privado,
     safe_cast(ap04cv03 as int64) indicador_atendimento_urgencia_plano_seguro_proprio,
     safe_cast(ap04cv04 as int64) indicador_atendimento_urgencia_plano_seguro_terceiro,

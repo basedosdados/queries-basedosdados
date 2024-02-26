@@ -19,7 +19,7 @@ with
     raw_cnes_gestao_metas as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-dev.br_ms_cnes_staging.gestao_metas`
+        from `basedosdados-staging.br_ms_cnes_staging.gestao_metas`
         where cnes is not null
     ),
     raw_cnes_gestao_metas_without_duplicates as (
@@ -33,7 +33,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados-dev.br_bd_diretorios_brasil.municipio`
+                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
             ) as mun
             on raw_cnes_gestao_metas_without_duplicates.codufmun = mun.id_municipio_6
     )

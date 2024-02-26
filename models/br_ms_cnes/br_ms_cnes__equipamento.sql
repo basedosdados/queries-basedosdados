@@ -21,7 +21,7 @@ with
     raw_cnes_equipamento as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-dev.br_ms_cnes_staging.equipamento`
+        from `basedosdados-staging.br_ms_cnes_staging.equipamento`
         where cnes is not null
     ),
     unique_raw_cnes_equipamento as (
@@ -35,7 +35,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados-dev.br_bd_diretorios_brasil.municipio`
+                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
             ) as mun
             on unique_raw_cnes_equipamento.codufmun = mun.id_municipio_6
     )
