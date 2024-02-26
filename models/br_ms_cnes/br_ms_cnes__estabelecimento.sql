@@ -263,6 +263,7 @@ select
     safe_cast(ap07cv04 as int64) indicador_atendimento_regulacao_plano_seguro_terceiro,
     safe_cast(ap07cv05 as int64) indicador_atendimento_regulacao_plano_saude_publico,
     safe_cast(ap07cv06 as int64) indicador_atendimento_regulacao_plano_saude_privado
+from cnes_add_muni
 {% if is_incremental() %}
     where
 
