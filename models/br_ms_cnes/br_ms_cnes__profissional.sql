@@ -32,7 +32,7 @@ with
                     cast(ano as string) as ano1,
                     cast(mes as string) as mes1,
                     id_estabelecimento_cnes as iddd
-                from `basedosdados-staging.br_ms_cnes.estabelecimento`
+                from `basedosdados.br_ms_cnes.estabelecimento`
             ) as st
             on pf.cnes = st.iddd
             and pf.ano = st.ano1
