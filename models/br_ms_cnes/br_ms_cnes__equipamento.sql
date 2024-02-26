@@ -35,7 +35,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
+                from `basedosdados.br_bd_diretorios_brasil.municipio`
             ) as mun
             on unique_raw_cnes_equipamento.codufmun = mun.id_municipio_6
     )

@@ -30,7 +30,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
+                from `basedosdados.br_bd_diretorios_brasil.municipio`
             ) as mun
             on raw_cnes_equipe.codufmun = mun.id_municipio_6
     )
