@@ -2,7 +2,7 @@
 name: CI dbt
 on:
   pull_request:
-    paths: ['**.sql', '**.yaml']
+    paths: ['**.sql', '**.yaml', '**.yml']
 jobs:
   lint:
     name: Lint dbt
