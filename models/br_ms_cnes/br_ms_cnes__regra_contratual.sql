@@ -1,7 +1,7 @@
 {{
     config(
         schema="br_ms_cnes",
-        alias="gestao_metas",
+        alias="regra_contratual",
         materialized="incremental",
         partition_by={
             "field": "ano",
@@ -10,32 +10,33 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
         ],
     )
 }}
 with
-    raw_cnes_gestao_metas as (
+    raw_cnes_regra_contratual as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.gestao_metas`
+        from `basedosdados-staging.br_ms_cnes_staging.regra_contratual`
         where cnes is not null
     ),
-    raw_cnes_gestao_metas_without_duplicates as (
+    raw_cnes_regra_contratual_without_duplicates as (
         -- 2. distinct nas linhas
-        select distinct * from raw_cnes_gestao_metas
+        select distinct * from raw_cnes_regra_contratual
     ),
     cnes_add_muni as (
         -- 3. Adicionar id_municipio e sigla_uf
         select *
-        from raw_cnes_gestao_metas_without_duplicates
+        from raw_cnes_regra_contratual_without_duplicates
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados.br_bd_diretorios_brasil.municipio`
+                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
             ) as mun
-            on raw_cnes_gestao_metas_without_duplicates.codufmun = mun.id_municipio_6
+            on raw_cnes_regra_contratual_without_duplicates.codufmun
+            = mun.id_municipio_6
     )
 
 select
@@ -50,10 +51,12 @@ select
     cast(substr(cmpt_fim, 5, 2) as int64) as mes_competencia_final,
     safe_cast(sgruphab as string) tipo_habilitacao,
     case
-        when safe_cast(sgruphab as string) in ("7003", "7004", "7005", "7006")
+        when
+            safe_cast(sgruphab as string)
+            in ("7109", "7110", "7112", "7113", "7114", "7115", "7116", "7117", "7118")
         then '1'
         else '2'
-    end as tipo_gestao_metas,
+    end as tipo_regra_contratual,
     safe_cast(portaria as string) portaria,
     cast(
         concat(
@@ -69,6 +72,7 @@ select
 from cnes_add_muni as t
 {% if is_incremental() %}
     where
+
         date(cast(ano as int64), cast(mes as int64), 1)
         > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}

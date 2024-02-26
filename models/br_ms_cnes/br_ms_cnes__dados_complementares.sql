@@ -10,8 +10,8 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
         ],
     )
 }}
@@ -33,7 +33,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados.br_bd_diretorios_brasil.municipio`
+                from `basedosdados-staging.br_bd_diretorios_brasil.municipio`
             ) as mun
             on raw_cnes_dados_complementares_without_duplicates.codufmun
             = mun.id_municipio_6
@@ -137,6 +137,7 @@ select
     safe_cast(dialise as int64) indicador_existencia_requisito_dialise,
     safe_cast(quimradi as int64) indicador_existencia_requisito_quimio_radio
 from cnes_add_muni as t
+
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)
