@@ -19,7 +19,7 @@ with
     raw_cnes_habilitacaol as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-dev.br_ms_cnes_staging.habilitacao`
+        from `basedosdados-staging.br_ms_cnes_staging.habilitacao`
         where cnes is not null
     ),
     raw_cnes_habilitacao_without_duplicates as (
