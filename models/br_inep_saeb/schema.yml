@@ -1280,7 +1280,7 @@ models:
   - name: br_inep_saeb__proficiencia
     description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma
       série histórica e compatibilizada à partir de 1995 com informações sobre o aluno,
-      a escola e o resultado do exame
+      a escola e o resultado do exame.
     columns:
       - name: amostra
         description: Amostra
