@@ -1,5 +1,4 @@
 {{ config(alias="dicionario", schema="br_inep_saeb", materialized="table") }}
-
 select
     safe_cast(id_tabela as string) id_tabela,
     safe_cast(coluna as string) coluna,
@@ -7,3 +6,4 @@ select
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor
 from `basedosdados-staging.br_inep_saeb_staging.dicionario` as t
+where id_tabela is not null
