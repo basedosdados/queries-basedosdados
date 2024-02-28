@@ -7,7 +7,7 @@ models:
       da escola, caracterizando desde a infraestrutura física disponível, a equipe
       pedagógica, a infraestrutura pedagógica, marcas do período letivo como seu começo
       e fim, além de várias informações agregadas sobre os estudantes da escola. É
-      a única tabela do Censo Escolar liberada pelo INEP a partir de 2021
+      a única tabela do Censo Escolar liberada pelo INEP a partir de 2021.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_escola]
