@@ -836,3 +836,301 @@ models:
         description: Cobertura temporal
       - name: valor
         description: Valor
+  - name: br_ibge_censo_2022__domicilio_quantidade_esgotamento_sanitario_municipio
+    description: Insert `domicilio_quantidade_esgotamento_sanitario_municipio` table
+      description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_esgotamento_sanitario
+            - tipo_quantidade_banheiro
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_esgotamento_sanitario
+        description: Tipo de esgotamento sanitário
+      - name: tipo_quantidade_banheiro
+        description: Existência de banheiro ou sanitário e número de banheiros de
+          uso exclusivo do domicílio
+      - name: domicilios
+        description: "Domicílios particulares permanentes ocupados\t"
+  - name: br_ibge_censo_2022__domicilio_esgotamento_sanitario_municipio
+    description: Insert `domicilio_esgotamento_sanitario_municipio` table description
+      here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_esgotamento_sanitario
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_esgotamento_sanitario
+        description: Tipo de esgotamento sanitário
+      - name: domicilios
+        description: "Domicílios particulares permanentes ocupados\t"
+  - name: br_ibge_censo_2022__domicilio_canalizacao_abastecimento_agua_municipio
+    description: Insert `domicilio_canalizacao_abastecimento_agua_municipio` table
+      description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_abastecimento_agua
+            - tipo_canalizacao_agua
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_abastecimento_agua
+        description: Principal forma de abastecimento de água
+      - name: tipo_canalizacao_agua
+        description: Existência de canalização de água
+      - name: domicilios
+        description: "Domicílios particulares permanentes ocupados\t"
+  - name: br_ibge_censo_2022__domicilio_ligacao_abastecimento_agua_municipio
+    description: Insert `domicilio_ligacao_abastecimento_agua_municipio` table description
+      here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio, tipo_ligacao_rede_geral]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_ligacao_rede_geral
+        description: Existência de ligação à rede geral de distribuição de água e
+          principal forma de abastecimento de água
+      - name: domicilios
+        description: "Domicílios particulares permanentes ocupados\t"
+  - name: br_ibge_censo_2022__domicilio_tipo_municipio
+    description: Insert `domicilio_tipo_municipio` table description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio, tipo_domicilio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_domicilio
+        description: Tipo de domicílio
+      - name: domicilios
+        description: "Domicílios particulares permanentes ocupados\t"
+  - name: br_ibge_censo_2022__morador_cor_raca_esgotamento_sanitario_municipio
+    description: Insert `morador_cor_raca_esgotamento_sanitario_municipio` table description
+      here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_esgotamento_sanitario
+            - grupo_idade
+            - cor_raca
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_esgotamento_sanitario
+        description: Tipo de esgotamento sanitário
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: cor_raca
+        description: Cor ou Raça
+      - name: moradores
+        description: 'Moradores em domicílios particulares permanentes ocupados        '
+  - name: br_ibge_censo_2022__morador_cor_raca_tipo_domicilio_municipio
+    description: Insert `morador_cor_raca_tipo_domicilio_municipio` table description
+      here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_domicilio
+            - grupo_idade
+            - cor_raca
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_domicilio
+        description: Tipo de domicílio
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: cor_raca
+        description: Cor ou Raça
+      - name: moradores
+        description: 'Moradores em domicílios particulares permanentes ocupados        '
+  - name: br_ibge_censo_2022__domicilio_destino_lixo_municipio
+    description: Insert `domicilio_destino_lixo_municipio` table description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio, tipo_destino_lixo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_destino_lixo
+        description: Destino do lixo
+      - name: domicilios
+        description: "Domicílios particulares permanentes ocupados\t"
+  - name: br_ibge_censo_2022__morador_cor_raca_ligacao_abastecimento_agua_municipio
+    description: Insert `morador_cor_raca_ligacao_abastecimento_agua_municipio` table
+      description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_ligacao_rede_geral
+            - grupo_idade
+            - cor_raca
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_ligacao_rede_geral
+        description: Existência de ligação à rede geral de distribuição de água e
+          principal forma de abastecimento de água
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: cor_raca
+        description: Cor ou Raça
+      - name: moradores
+        description: 'Moradores em domicílios particulares permanentes ocupados        '
+  - name: br_ibge_censo_2022__morador_cor_raca_destino_lixo_municipio
+    description: Insert `morador_cor_raca_destino_lixo_municipio` table description
+      here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - tipo_destino_lixo
+            - grupo_idade
+            - cor_raca
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id')
+      - name: tipo_destino_lixo
+        description: Destino do lixo
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: cor_raca
+        description: Cor ou Raça
+      - name: moradores
+        description: Moradores em domicílios particulares permanentes ocupados
