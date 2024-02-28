@@ -17,10 +17,10 @@ repos:
       - id: sqlfmt
         language_version: python
         additional_dependencies: ['.[jinjafmt]']
-  # - repo: local
-  #   hooks:
-  #     - id: yamlfix
-  #       name: yamlfix
-  #       types: [yaml]
-  #       language: system
-  #       entry: yamlfix --exclude ".kubernetes/**/*" .
+  - repo: local
+    hooks:
+      - id: yamlfix
+        name: yamlfix
+        types: [yaml]
+        language: system
+        entry: yamlfix --exclude ".kubernetes/**/*" .
