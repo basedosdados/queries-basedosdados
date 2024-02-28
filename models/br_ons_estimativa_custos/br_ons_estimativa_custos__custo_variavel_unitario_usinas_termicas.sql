@@ -13,7 +13,7 @@
             },
         },
         cluster_by=["ano", "mes"],
-    ),
+    )
 }}
 with
     ons as (

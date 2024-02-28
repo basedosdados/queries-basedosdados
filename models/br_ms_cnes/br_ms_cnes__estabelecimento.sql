@@ -43,8 +43,8 @@ select
     safe_cast(ano as int64) as ano,
     safe_cast(mes as int64) as mes,
     safe_cast(sigla_uf as string) sigla_uf,
-    cast(substr(dt_atual, 1, 4) as int64) as ano_atualizacao,
-    cast(substr(dt_atual, 5, 2) as int64) as mes_atualizacao,
+    cast(substr(cast(dt_atual as string), 1, 4) as int64) as ano_atualizacao,
+    cast(substr(cast(dt_atual as string), 5, 2) as int64) as mes_atualizacao,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(codufmun as string) id_municipio_6,
     safe_cast({{ clean_cols("REGSAUDE") }} as string) id_regiao_saude,
@@ -79,22 +79,28 @@ select
     safe_cast(c_corren as string) conta_corrente,
     safe_cast(contratm as string) id_contrato_municipio_sus,
     safe_cast(
-        parse_date('%Y%m%d', dt_publm) as date
+        parse_date('%Y%m%d', cast(dt_publm as string)) as date
     ) data_publicacao_contrato_municipal,
-    safe_cast(parse_date('%Y%m%d', dt_puble) as date) data_publicacao_contrato_estadual,
+    safe_cast(
+        parse_date('%Y%m%d', cast(dt_puble as string)) as date
+    ) data_publicacao_contrato_estadual,
     safe_cast(contrate as string) id_contrato_estado_sus,
     safe_cast(alvara as string) numero_alvara,
-    safe_cast(parse_date('%Y%m%d', dt_exped) as date) data_expedicao_alvara,
+    safe_cast(
+        parse_date('%Y%m%d', cast(dt_exped as string)) as date
+    ) data_expedicao_alvara,
     safe_cast({{ clean_cols("ORGEXPED") }} as string) tipo_orgao_expedidor,
     safe_cast(
         {{ clean_cols("AV_ACRED") }} as string
     ) tipo_avaliacao_acreditacao_hospitalar,
     safe_cast(clasaval as string) tipo_classificacao_acreditacao_hospitalar,
-    cast(substr(dt_acred, 1, 4) as int64) as ano_acreditacao,
-    cast(substr(dt_acred, 5, 2) as int64) as mes_acreditacao,
-    safe_cast({{ clean_cols("AV_PNASS") }} as int64) tipo_avaliacao_pnass,
-    cast(substr(dt_pnass, 1, 4) as int64) as ano_avaliacao_pnass,
-    cast(substr(dt_pnass, 5, 2) as int64) as mes_avaliacao_pnass,
+    cast(substr(cast(dt_acred as string), 1, 4) as int64) as ano_acreditacao,
+    cast(substr(cast(dt_acred as string), 5, 2) as int64) as mes_acreditacao,
+    safe_cast(
+        cast({{ clean_cols("AV_PNASS") }} as string) as int64
+    ) tipo_avaliacao_pnass,
+    cast(substr(cast(dt_pnass as string), 1, 4) as int64) as ano_avaliacao_pnass,
+    cast(substr(cast(dt_pnass as string), 5, 2) as int64) as mes_avaliacao_pnass,
     safe_cast(nivate_a as int64) indicador_atencao_ambulatorial,
     safe_cast(gesprg1e as int64) indicador_gestao_basica_ambulatorial_estadual,
     safe_cast(gesprg1m as int64) indicador_gestao_basica_ambulatorial_municipal,
@@ -263,9 +269,9 @@ select
     safe_cast(ap07cv04 as int64) indicador_atendimento_regulacao_plano_seguro_terceiro,
     safe_cast(ap07cv05 as int64) indicador_atendimento_regulacao_plano_saude_publico,
     safe_cast(ap07cv06 as int64) indicador_atendimento_regulacao_plano_saude_privado
+from cnes_add_muni
 {% if is_incremental() %}
     where
-
         date(cast(ano as int64), cast(mes as int64), 1)
         > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}
