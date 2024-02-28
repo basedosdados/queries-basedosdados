@@ -12,7 +12,7 @@
 }}
 
 with
-    censo_antigo as (
+    censo as (
         select
             safe_cast(ano as int64) ano,
             safe_cast(sigla_uf as string) sigla_uf,
@@ -1711,7 +1711,7 @@ with
     )
 
 select *
-from censo_antigo
+from censo
 union all
 select *
 from censo_2023
