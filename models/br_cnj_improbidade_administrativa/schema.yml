@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: condenacao
+  - name: br_cnj_improbidade_administrativa__condenacao
     description: Informações sobre processos já julgados, como nome da pessoa/empresa, data da pena, duração da pena, valor da multa.
     columns:
       - name: nome
