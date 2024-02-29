@@ -1265,22 +1265,22 @@ models:
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
   - name: br_inep_saeb__dicionario
-    description: Dicionário para as tabelas do SAEB
+    description: Dicionário de dados do SAEB
     columns:
+      - name: id_tabela
+        description: ID da tabela
+      - name: coluna
+        description: Nome da coluna
       - name: chave
         description: Chave
       - name: cobertura_temporal
-        description: Cobertura Temporal
-      - name: coluna
-        description: Coluna
-      - name: id_tabela
-        description: ID da tabela
+        description: Cobertura temporal
       - name: valor
         description: Valor
   - name: br_inep_saeb__proficiencia
     description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma
       série histórica e compatibilizada à partir de 1995 com informações sobre o aluno,
-      a escola e o resultado do exame
+      a escola e o resultado do exame.
     columns:
       - name: amostra
         description: Amostra
