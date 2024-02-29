@@ -2,22 +2,20 @@
 version: 2
 models:
   - name: br_cnj_improbidade_administrativa__condenacao
-    description: Informações sobre processos já julgados, como nome da pessoa/empresa, data da pena, duração da pena, valor da multa.
+    description: Informações sobre processos já julgados, como nome da pessoa/empresa,
+      data da pena, duração da pena, valor da multa.
     columns:
       - name: nome
         description: Nome da pessoa, CPF ou CNPJ
       - name: numero_processo
         description: Número do processo
-        tests:
-          - not_null
+        tests: [not_null]
       - name: id_condenacao
         description: ID da condenaçao
-        tests:
-          - not_null
+        tests: [not_null]
       - name: id_processo
         description: ID do processo
-        tests:
-          - not_null
+        tests: [not_null]
       - name: tipo_pessoa
         description: Tipo da pessoa, física ou jurídica
       - name: id_pessoa
