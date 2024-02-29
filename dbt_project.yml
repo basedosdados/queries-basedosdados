@@ -117,6 +117,9 @@ models:
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
+    br_cnj_improbidade_administrativa:
+      +materialized: table
+      +schema: br_cnj_improbidade_administrativa
     br_cnpq_bolsas:
       +materialized: table
       +schema: br_cnpq_bolsas
