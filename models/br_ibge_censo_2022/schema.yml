@@ -866,7 +866,7 @@ models:
         description: Existência de banheiro ou sanitário e número de banheiros de
           uso exclusivo do domicílio
       - name: domicilios
-        description: "Domicílios particulares permanentes ocupados\t"
+        description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_esgotamento_sanitario_municipio
     description: Domicílios particulares permanentes ocupados, por tipo de esgotamento sanitário
     tests:
@@ -893,7 +893,7 @@ models:
       - name: tipo_esgotamento_sanitario
         description: Tipo de esgotamento sanitário
       - name: domicilios
-        description: "Domicílios particulares permanentes ocupados\t"
+        description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_canalizacao_abastecimento_agua_municipio
     description: Domicílios particulares permanentes ocupados, por existência de canalização de água e principal forma de abastecimento de água
     tests:
@@ -919,7 +919,7 @@ models:
       - name: tipo_canalizacao_agua
         description: Existência de canalização de água
       - name: domicilios
-        description: "Domicílios particulares permanentes ocupados\t"
+        description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_ligacao_abastecimento_agua_municipio
     description: Domicílios particulares permanentes ocupados, por existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água.
     tests:
@@ -944,7 +944,7 @@ models:
         description: Existência de ligação à rede geral de distribuição de água e
           principal forma de abastecimento de água
       - name: domicilios
-        description: "Domicílios particulares permanentes ocupados\t"
+        description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_tipo_municipio
     description: Domicílios particulares permanentes ocupados, por tipo de domicílio
     tests:
@@ -968,7 +968,7 @@ models:
       - name: tipo_domicilio
         description: Tipo de domicílio
       - name: domicilios
-        description: "Domicílios particulares permanentes ocupados\t"
+        description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__morador_cor_raca_esgotamento_sanitario_municipio
     description: Moradores em domicílios particulares permanentes ocupados, por tipo de esgotamento sanitário, segundo grupos de idade e cor ou raça.
     tests:
@@ -1058,7 +1058,7 @@ models:
       - name: tipo_destino_lixo
         description: Destino do lixo
       - name: domicilios
-        description: "Domicílios particulares permanentes ocupados\t"
+        description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__morador_cor_raca_ligacao_abastecimento_agua_municipio
     description:  Moradores em domicílios particulares permanentes ocupados, por existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água, segundo grupos de idade e cor ou raça.
     tests:
@@ -1092,7 +1092,7 @@ models:
       - name: cor_raca
         description: Cor ou Raça
       - name: moradores
-        description: 'Moradores em domicílios particulares permanentes ocupados        '
+        description: Moradores em domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__morador_cor_raca_destino_lixo_municipio
     description: Moradores em domicílios particulares permanentes ocupados, por destino do lixo, segundo grupos de idade e cor ou raça.
     tests:
