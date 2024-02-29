@@ -837,8 +837,7 @@ models:
       - name: valor
         description: Valor
   - name: br_ibge_censo_2022__domicilio_quantidade_esgotamento_sanitario_municipio
-    description: Insert `domicilio_quantidade_esgotamento_sanitario_municipio` table
-      description here
+    description: Domicílios particulares permanentes ocupados, por existência de banheiro ou sanitário e número de banheiros de uso exclusivo do domicílio e por tipo de esgotamento sanitário.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -854,13 +853,13 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_esgotamento_sanitario
         description: Tipo de esgotamento sanitário
       - name: tipo_quantidade_banheiro
@@ -869,8 +868,7 @@ models:
       - name: domicilios
         description: "Domicílios particulares permanentes ocupados\t"
   - name: br_ibge_censo_2022__domicilio_esgotamento_sanitario_municipio
-    description: Insert `domicilio_esgotamento_sanitario_municipio` table description
-      here
+    description: Domicílios particulares permanentes ocupados, por tipo de esgotamento sanitário
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -885,20 +883,19 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_esgotamento_sanitario
         description: Tipo de esgotamento sanitário
       - name: domicilios
         description: "Domicílios particulares permanentes ocupados\t"
   - name: br_ibge_censo_2022__domicilio_canalizacao_abastecimento_agua_municipio
-    description: Insert `domicilio_canalizacao_abastecimento_agua_municipio` table
-      description here
+    description: Domicílios particulares permanentes ocupados, por existência de canalização de água e principal forma de abastecimento de água
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -916,7 +913,7 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_abastecimento_agua
         description: Principal forma de abastecimento de água
       - name: tipo_canalizacao_agua
@@ -924,8 +921,7 @@ models:
       - name: domicilios
         description: "Domicílios particulares permanentes ocupados\t"
   - name: br_ibge_censo_2022__domicilio_ligacao_abastecimento_agua_municipio
-    description: Insert `domicilio_ligacao_abastecimento_agua_municipio` table description
-      here
+    description: Domicílios particulares permanentes ocupados, por existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio, tipo_ligacao_rede_geral]
@@ -937,20 +933,20 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_ligacao_rede_geral
         description: Existência de ligação à rede geral de distribuição de água e
           principal forma de abastecimento de água
       - name: domicilios
         description: "Domicílios particulares permanentes ocupados\t"
   - name: br_ibge_censo_2022__domicilio_tipo_municipio
-    description: Insert `domicilio_tipo_municipio` table description here
+    description: Domicílios particulares permanentes ocupados, por tipo de domicílio
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio, tipo_domicilio]
@@ -962,20 +958,19 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_domicilio
         description: Tipo de domicílio
       - name: domicilios
         description: "Domicílios particulares permanentes ocupados\t"
   - name: br_ibge_censo_2022__morador_cor_raca_esgotamento_sanitario_municipio
-    description: Insert `morador_cor_raca_esgotamento_sanitario_municipio` table description
-      here
+    description: Moradores em domicílios particulares permanentes ocupados, por tipo de esgotamento sanitário, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -992,13 +987,13 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_esgotamento_sanitario
         description: Tipo de esgotamento sanitário
       - name: grupo_idade
@@ -1008,8 +1003,7 @@ models:
       - name: moradores
         description: 'Moradores em domicílios particulares permanentes ocupados        '
   - name: br_ibge_censo_2022__morador_cor_raca_tipo_domicilio_municipio
-    description: Insert `morador_cor_raca_tipo_domicilio_municipio` table description
-      here
+    description: Moradores em domicílios particulares permanentes ocupados, por tipo do domicílio, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1026,13 +1020,13 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_domicilio
         description: Tipo de domicílio
       - name: grupo_idade
@@ -1042,7 +1036,7 @@ models:
       - name: moradores
         description: 'Moradores em domicílios particulares permanentes ocupados        '
   - name: br_ibge_censo_2022__domicilio_destino_lixo_municipio
-    description: Insert `domicilio_destino_lixo_municipio` table description here
+    description: Domicílios particulares permanentes ocupados, por destino do lixo
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio, tipo_destino_lixo]
@@ -1054,20 +1048,19 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_destino_lixo
         description: Destino do lixo
       - name: domicilios
         description: "Domicílios particulares permanentes ocupados\t"
   - name: br_ibge_censo_2022__morador_cor_raca_ligacao_abastecimento_agua_municipio
-    description: Insert `morador_cor_raca_ligacao_abastecimento_agua_municipio` table
-      description here
+    description:  Moradores em domicílios particulares permanentes ocupados, por existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1084,13 +1077,13 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_ligacao_rede_geral
         description: Existência de ligação à rede geral de distribuição de água e
           principal forma de abastecimento de água
@@ -1101,8 +1094,7 @@ models:
       - name: moradores
         description: 'Moradores em domicílios particulares permanentes ocupados        '
   - name: br_ibge_censo_2022__morador_cor_raca_destino_lixo_municipio
-    description: Insert `morador_cor_raca_destino_lixo_municipio` table description
-      here
+    description: Moradores em domicílios particulares permanentes ocupados, por destino do lixo, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1119,13 +1111,13 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ref('ano.ano')
+              field: ano
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
-              field: ref('id')
+              field: id_municipio
       - name: tipo_destino_lixo
         description: Destino do lixo
       - name: grupo_idade
