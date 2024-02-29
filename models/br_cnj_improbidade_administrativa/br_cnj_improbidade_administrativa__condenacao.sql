@@ -10,7 +10,6 @@
     )
 }}
 
-
 select
     safe_cast(nome as string) nome,
     safe_cast(num_processo as string) numero_processo,
