@@ -845,6 +845,11 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
+      - name: url_orgao
+        description: URL do orgão
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_orgao
         description: Tipo do orgão
         tests:
@@ -904,22 +909,17 @@ models:
             - sigla_partido
     columns:
       - name: id_orgao
-        description: ID do orgão
+        description: ID do órgão
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
       - name: nome
-        description: Nome do orgão
+        description: Nome do órgão
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
       - name: sigla
-        description: Sigla do orgão
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
-      - name: url
-        description: URL do orgão
+        description: Sigla do órgão
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
@@ -959,11 +959,6 @@ models:
               field: data.data
       - name: sigla_partido
         description: Sigla do partido
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
-      - name: url_deputado
-        description: URL do deputado
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
