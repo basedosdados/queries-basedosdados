@@ -14,6 +14,8 @@ models:
             - id_municipio
             - cnpj_basico
             - id_verbete
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: ano
         description: Ano
@@ -57,6 +59,8 @@ models:
             - id_municipio
             - cnpj_agencia
             - id_verbete
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: ano
         description: Ano

@@ -7,6 +7,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [p0]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: p0
         description: Id

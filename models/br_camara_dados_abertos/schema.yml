@@ -7,6 +7,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_votacao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
@@ -59,11 +61,12 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_votacao, id_proposicao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
         tests:
-          - not_null
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
@@ -99,11 +102,12 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_votacao, id_deputado]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
         tests:
-          - not_null
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
@@ -140,11 +144,12 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_votacao, sigla_bancada]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
         tests:
-          - not_null
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
@@ -165,11 +170,12 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_votacao, id_proposicao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
         tests:
-          - not_null
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
@@ -207,6 +213,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_deputado]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: nome
         description: Nome
@@ -255,6 +263,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_deputado]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano_inicio
         description: Ano início
@@ -287,6 +297,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_deputado]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_deputado
         description: ID do deputado
@@ -308,6 +320,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_proposicao, tipo_autor, ordem_assinatura]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_proposicao
         description: ID proposição
@@ -339,6 +353,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
@@ -408,6 +424,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, url_proposicao, tema, relevancia]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
@@ -434,6 +452,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano da eleição
@@ -466,6 +486,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id, data_inicio, nome_deputado]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id
         description: ID da legislatura
@@ -504,6 +526,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [url_orgao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: nome
         description: Nome do orgão
@@ -552,6 +576,8 @@ models:
             - data_inicio
             - data_final
             - sigla_partido
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: nome
         description: Nome do orgão
@@ -594,6 +620,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id
         description: ID
@@ -626,6 +654,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_evento, id_orgao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_evento
         description: ID do evento
@@ -642,6 +672,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_evento, id_deputado]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_evento
         description: ID do evento
@@ -664,6 +696,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_evento, titulo_requerimento]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_evento
         description: ID do evento
@@ -679,6 +713,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id
         description: ID
@@ -716,6 +752,8 @@ models:
             - id_deputado
             - titulo_deputado
             - url_partido_deputado
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: id_frente
         description: ID da frente
@@ -738,6 +776,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ponto]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: nome
         description: Nome

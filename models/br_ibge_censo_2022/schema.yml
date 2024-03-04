@@ -8,6 +8,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio, localizacao_domicilio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -30,6 +32,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [territorio_quilombola, sigla_uf]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: territorio_quilombola
         description: Território Quilombola
@@ -46,6 +50,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_territorio_quilombola]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_territorio_quilombola
         description: ID Território Quilombola IBGE 5 dígitos
@@ -67,6 +73,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio, territorios_quilombolas]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -85,6 +93,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_territorio_quilombola]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_territorio_quilombola
         description: ID Território Quilombola 5 dígitos IBGE
@@ -108,6 +118,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_terra_indigena]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_terra_indigena
         description: ID Terra Indígena IBGE 7 dígitos
@@ -131,6 +143,8 @@ models:
             - forma_declaracao_idade
             - sexo
             - idade
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -151,6 +165,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município 7 dígitos IBGE
@@ -168,6 +184,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -184,6 +202,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -202,6 +222,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio, especie]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 Dígitos
@@ -220,6 +242,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio, localizacao_domicilio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -243,6 +267,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio, localizacao_domicilio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -267,6 +293,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_terra_indigena, quesito_declaracao_indigena]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_terra_indigena
         description: ID Terra Indígena IBGE 7 dígitos
@@ -292,6 +320,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_terra_indigena]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_terra_indigena
         description: ID Terra Indígena IBGE 7 dígitos
@@ -320,6 +350,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_municipio, localizacao_domicilio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
@@ -347,6 +379,8 @@ models:
             - id_municipio
             - quesito_declaracao_indigena
             - localizacao_domicilio
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: id_municipio
         description: ID Município 7 dígitos IBGE
@@ -367,6 +401,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [sigla_uf, grupo_idade]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
@@ -387,6 +423,8 @@ models:
             - ano
             - id_municipio
             - quesito_declaracao_indigena
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: ano
         description: Ano
@@ -409,6 +447,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio, grupo_idade, sexo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
@@ -430,6 +470,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio, cor_raca]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05          
     columns:
       - name: ano
         description: Ano
@@ -457,6 +499,8 @@ models:
             - grupo_idade
             - sexo
             - cor_raca
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: ano
         description: Ano
@@ -484,6 +528,8 @@ models:
             - latitude
             - longitude
             - nivel_geo_coordenada
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05            
     columns:
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos

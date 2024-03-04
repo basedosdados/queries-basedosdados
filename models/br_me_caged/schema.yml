@@ -4,6 +4,9 @@ models:
   - name: microdados_movimentacao
     description: Contém dados de movimentações declaradas dentro do prazo com competência
       de declaração.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05    
     columns:
       - name: ano
         description: Ano
@@ -65,6 +68,9 @@ models:
   - name: microdados_movimentacao_fora_prazo
     description: Contém dados de movimentações declaradas fora do prazo com competência
       de declaração.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05    
     columns:
       - name: ano
         description: Ano
@@ -125,6 +131,9 @@ models:
         description: Indicador fora do prazo
   - name: microdados_movimentacao_excluida
     description: Contém dados de movimentações excluídas com competência de declaração.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05    
     columns:
       - name: ano
         description: Ano
