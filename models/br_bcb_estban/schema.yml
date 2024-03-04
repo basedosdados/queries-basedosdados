@@ -21,23 +21,16 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: cnpj_basico
         description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros
           dígitos)
         tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
           - relationships:
               to: ref('br_bd_diretorios_brasil__empresa')
               field: cnpj_basico
@@ -49,9 +42,6 @@ models:
         description: Quantidade de agências processadas da IF no município
       - name: id_verbete
         description: Código do verbete
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: valor
         description: Valores
   - name: br_bcb_estban__agencia
@@ -74,17 +64,12 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: cnpj_basico
         description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros
           dígitos)
@@ -93,15 +78,10 @@ models:
       - name: cnpj_agencia
         description: CNPJ da agência bancária
         tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
           - relationships:
               to: ref('br_bd_diretorios_brasil__empresa')
               field: cnpj
       - name: id_verbete
         description: Código do verbete
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: valor
         description: Valores

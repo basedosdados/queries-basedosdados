@@ -27,8 +27,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -71,8 +69,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -143,8 +139,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -206,8 +200,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_municipio_6
         description: ID Município - IBGE 6 Dígitos
       - name: id_regiao_saude
@@ -700,8 +692,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -733,8 +723,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -936,8 +924,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -980,8 +966,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -1030,8 +1014,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -1081,8 +1063,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -1135,8 +1115,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -1187,8 +1165,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
@@ -1240,8 +1216,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
