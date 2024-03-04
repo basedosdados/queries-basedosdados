@@ -111,12 +111,15 @@ models:
     br_cgu_beneficios_cidadao:
       +materialized: table
       +schema: br_cgu_beneficios_cidadao
-    br_cgu_servidores_executivo_federal:
+    br_cgu_dados_abertos:
       +materialized: table
-      +schema: br_cgu_servidores_executivo_federal
+      +schema: br_cgu_dados_abertos
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
+    br_cgu_servidores_executivo_federal:
+      +materialized: table
+      +schema: br_cgu_servidores_executivo_federal
     br_cnj_improbidade_administrativa:
       +materialized: table
       +schema: br_cnj_improbidade_administrativa
