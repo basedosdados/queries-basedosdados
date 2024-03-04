@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: cargos_funcoes
+  - name: br_mp_pep__cargos_funcoes
     description: "Informações sobre o quantitativo de cargos e funções com características\
       \ de direção e assessoramento no Poder Executivo Federal Civil e Funções e Gratificações\
       \ com características técnicas. Essa tabela contém todas as dimensões e apenas\
