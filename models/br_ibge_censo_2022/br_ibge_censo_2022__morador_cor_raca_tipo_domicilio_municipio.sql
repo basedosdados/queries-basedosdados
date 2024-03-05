@@ -14,5 +14,5 @@ select
         moradores_em_domicilios_particulares_permanentes_ocupados_pessoas_ as int64
     ) moradores,
 from
-    `basedosdados-staging.br_ibge_censo_2022_staging.morador_cor_racao_tipo_domicilio_municipio`
+    `basedosdados-staging.br_ibge_censo_2022_staging.morador_cor_raca_tipo_domicilio_municipio`
     as t
