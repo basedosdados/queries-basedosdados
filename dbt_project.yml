@@ -1,53 +1,55 @@
+---
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: "basedosdados"
-version: "1.0.0"
+name: basedosdados
+version: 1.0.0
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: "default"
-
+profile: default
+# Options to disable elementary models
+vars:
+  disable_run_results: false
+  disable_tests_results: false
+  disable_dbt_artifacts_autoupload: false
+  disable_dbt_invocation_autoupload: false
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-model-paths: ["models"]
-analysis-paths: ["analysis"]
-test-paths: ["tests"]
-seed-paths: ["data"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-
-target-path: "target" # directory which will store compiled SQL files
-clean-targets: # directories to be removed by `dbt clean`
-  - "target"
-  - "dbt_modules"
-
+model-paths: [models]
+analysis-paths: [analysis]
+test-paths: [tests]
+seed-paths: [data]
+macro-paths: [macros]
+snapshot-paths: [snapshots]
+target-path: target  # directory which will store compiled SQL files
+clean-targets:  # directories to be removed by `dbt clean`
+  - target
+  - dbt_modules
 # Grant acess
 # bq data control: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language
 # dbt grant statements use https://discourse.getdbt.com/t/the-exact-grant-statements-we-use-in-a-dbt-project/430
-
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
-  
 # In this example config, we tell dbt to build all models in the example/ directory
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  +post-hook: 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"'
+  +post-hook: GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "specialGroup:allUsers"
   +persist_docs:
     relation: true
     columns: true
   basedosdados:
     # Config indicated by + and applies to all files under models/example/
     example:
-      +materialized: table # Materialization type (table, table or incremental)
-      +schema: example # Overrides the default schema (defaults to what is set on profiles.yml)
+      +materialized: table  # Materialization type (table, table or incremental)
+      +schema: example  # Overrides the default schema (defaults to what is set on profiles.yml)
     br_anatel_banda_larga_fixa:
       +materialized: table
       +schema: br_anatel_banda_larga_fixa
     br_anatel_telefonia_movel:
-      +materialized: table # Materialization type (table, view or incremental)
+      +materialized: table  # Materialization type (table, view or incremental)
       +schema: br_anatel_telefonia_movel
     br_anp_precos_combustiveis:
       +materialized: table
@@ -55,15 +57,15 @@ models:
     br_ans_beneficiario:
       +materialized: incremental
       +schema: br_ans_beneficiario
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'      
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_b3_cotacoes:
       +materialized: table
-      +schema: br_b3_cotacoes 
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +schema: br_b3_cotacoes
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_bcb_agencia:
       +materialized: table
       +schema: br_bcb_agencia
@@ -72,19 +74,19 @@ models:
       +schema: br_bcb_estban
     br_bcb_sicor:
       +materialized: table
-      +schema: br_bcb_sicor  
+      +schema: br_bcb_sicor
     br_bcb_taxa_cambio:
       +materialized: table
-      +schema: br_bcb_taxa_cambio 
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +schema: br_bcb_taxa_cambio
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_bcb_taxa_selic:
       +materialized: table
-      +schema: br_bcb_taxa_selic 
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +schema: br_bcb_taxa_selic
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_bd_diretorios_brasil:
       +materialized: table
       +schema: br_bd_diretorios_brasil
@@ -103,15 +105,21 @@ models:
     br_ce_fortaleza_sefin_iptu:
       +materialized: table
       +schema: br_ce_fortaleza_sefin_iptu
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
+    br_cgu_beneficios_cidadao:
+      +materialized: table
+      +schema: br_cgu_beneficios_cidadao
     br_cgu_servidores_executivo_federal:
       +materialized: table
       +schema: br_cgu_servidores_executivo_federal
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
+    br_cnj_improbidade_administrativa:
+      +materialized: table
+      +schema: br_cnj_improbidade_administrativa
     br_cnpq_bolsas:
       +materialized: table
       +schema: br_cnpq_bolsas
@@ -121,12 +129,18 @@ models:
     br_cvm_fi:
       +materialized: table
       +schema: br_cvm_fi
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_cvm_oferta_publica_distribuicao:
       +materialized: table
       +schema: br_cvm_oferta_publica_distribuicao
+    br_datahackers_state_data:
+      +materialized: table
+      +schema: br_datahackers_state_data
+    br_denatran_frota:
+      +materialized: table
+      +schema: br_denatran_frota
     br_fbsp_absp:
       +materialized: table
       +schema: br_fbsp_absp
@@ -138,7 +152,10 @@ models:
       +schema: br_geobr_mapas
     br_ibge_censo_demografico:
       +materialized: table
-      +schema: br_ibge_censo_demografico     
+      +schema: br_ibge_censo_demografico
+    br_ibge_censo_2022:
+      +materialized: table
+      +schema: br_ibge_censo_2022
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
@@ -148,15 +165,27 @@ models:
     br_ibge_ipca15:
       +materialized: table
       +schema: br_ibge_ipca15
+    br_ibge_pevs:
+      +materialized: table
+      +schema: br_ibge_pevs
+    br_ibge_pib:
+      +materialized: table
+      +schema: br_ibge_pib
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
     br_inep_censo_educacao_superior:
       +materialized: table
       +schema: br_inep_censo_educacao_superior
+    br_inep_censo_escolar:
+      +materialized: table
+      +schema: br_inep_censo_escolar
     br_inep_enem:
       +materialized: table
       +schema: br_inep_enem
+    br_inep_indicadores_educacionais:
+      +materialized: table
+      +schema: br_inep_indicadores_educacionais
     br_inep_saeb:
       +materialized: table
       +schema: br_inep_saeb
@@ -166,6 +195,12 @@ models:
     br_inpe_prodes:
       +materialized: table
       +schema: br_inpe_prodes
+    br_inpe_queimadas:
+      +materialized: table
+      +schema: br_inpe_queimadas
+    br_inpe_sisam:
+      +materialized: table
+      +schema: br_inpe_sisam
     br_jota:
       +materialized: table
       +schema: br_jota
@@ -181,15 +216,15 @@ models:
     br_mercadolivre_ofertas:
       +materialized: table
       +schema: br_mercadolivre_ofertas
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_mg_belohorizonte_smfa_iptu:
       +materialized: table
       +schema: br_mg_belohorizonte_smfa_iptu
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_mp_pep:
       +materialized: table
       +schema: br_mp_pep
@@ -201,37 +236,37 @@ models:
       +schema: br_ms_sim
     br_ms_sinan:
       +materialized: table
-      +schema: br_ms_sinan 
+      +schema: br_ms_sinan
     br_ms_sinasc:
       +materialized: table
-      +schema: br_ms_sinasc    
+      +schema: br_ms_sinasc
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_ons_estimativa_custos:
       +materialized: table
       +schema: br_ons_estimativa_custos
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_poder360_pesquisas:
       +materialized: table
       +schema: br_poder360_pesquisas
     br_rj_isp_estatisticas_seguranca:
       +materialized: table
-      +schema: br_rj_isp_estatisticas_seguranca       
+      +schema: br_rj_isp_estatisticas_seguranca
     br_sp_saopaulo_dieese_icv:
       +materialized: table
       +schema: br_sp_saopaulo_dieese_icv
     br_sp_saopaulo_geosampa_iptu:
       +materialized: table
       +schema: br_sp_saopaulo_geosampa_iptu
-      +post-hook: 
-        - 'REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"'
-        - 'GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"'
+      +post-hook:
+        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
+        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_stf_corte_aberta:
       +materialized: table
       +schema: br_stf_corte_aberta
@@ -241,6 +276,9 @@ models:
     br_tse_eleicoes_2022:
       +materialized: table
       +schema: br_tse_eleicoes_2022
+    br_trase_supply_chain:
+      +materialized: table
+      +schema: br_trase_supply_chain
     br_rf_cafir:
       +materialized: table
       +schema: br_rf_cafir
@@ -259,12 +297,20 @@ models:
     world_iea_pirls:
       +materialized: table
       +schema: world_iea_pirls
-    world_wb_mides:
-      +materialized: table
-      +schema: world_wb_mides
     world_oceanos_mapeamento:
       +materialized: table
       +schema: world_oceanos_mapeamento
+    world_oecd_public_finance:
+      +materialized: table
+      +schema: world_oecd_public_finance
+    world_wb_mides:
+      +materialized: table
+      +schema: world_wb_mides
+    world_wwf_hydrosheds:
+      +materialized: table
+      +schema: world_wwf_hydrosheds
     test_dataset:
       +materialized: table
       +schema: test_dataset
+  elementary:
+    +schema: elementary

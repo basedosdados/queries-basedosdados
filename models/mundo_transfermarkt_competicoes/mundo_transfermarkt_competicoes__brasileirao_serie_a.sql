@@ -1,61 +1,64 @@
-{{ 
-  config(
-    alias='brasileirao_serie_a',
-    schema='mundo_transfermarkt_competicoes',
-    materialized='table',
-     partition_by={
-      "field": "ano_campeonato",
-      "data_type": "int64",
-      "range": {
-        "start": 2003,
-        "end": 2023,
-        "interval": 1}
-    },
-    labels =  {'tema': 'esporte'},
-    post_hook = ['CREATE OR REPLACE ROW ACCESS POLICY allusers_filter 
-                    ON {{this}}
-                    GRANT TO ("allUsers")
-                    FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) > 6)',
-          'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter 
-                ON  {{this}}
-                GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")
-                FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) <= 6)' ]
+{{
+    config(
+        alias="brasileirao_serie_a",
+        schema="mundo_transfermarkt_competicoes",
+        materialized="table",
+        partition_by={
+            "field": "ano_campeonato",
+            "data_type": "int64",
+            "range": {"start": 2003, "end": 2023, "interval": 1},
+        },
+        labels={"tema": "esporte"},
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"), DATE(data), week) <= 6)',
+        ],
     )
- }}
-SELECT 
-SAFE_CAST(REPLACE (ano_campeonato,".0","") AS INT64) ano_campeonato,
-SAFE_CAST(data AS DATE) data,
-SAFE_CAST(REPLACE (rodada,".0","") AS INT64) rodada,
-SAFE_CAST(estadio AS STRING) estadio,
-SAFE_CAST(arbitro AS STRING) arbitro,
-SAFE_CAST(REPLACE (publico,".0","") AS INT64) publico,
-SAFE_CAST(REPLACE (publico_max,".0","") AS INT64) publico_max,
-SAFE_CAST(time_man AS STRING) time_mandante,
-SAFE_CAST(time_vis AS STRING) time_visitante,
-SAFE_CAST(tecnico_man AS STRING) tecnico_mandante,
-SAFE_CAST(tecnico_vis AS STRING) tecnico_visitante,
-SAFE_CAST(REPLACE (colocacao_man,".0","") AS INT64) colocacao_mandante,
-SAFE_CAST(REPLACE (colocacao_vis,".0","") AS INT64) colocacao_visitante,
-SAFE_CAST(REPLACE (valor_equipe_titular_man,".0","") AS INT64) valor_equipe_titular_mandante,
-SAFE_CAST(REPLACE (valor_equipe_titular_vis,".0","") AS INT64) valor_equipe_titular_visitante,
-SAFE_CAST(idade_media_titular_man AS FLOAT64) idade_media_titular_mandante,
-SAFE_CAST(idade_media_titular_vis AS FLOAT64) idade_media_titular_visitante,
-SAFE_CAST(REPLACE (gols_man,".0","") AS INT64) gols_mandante,
-SAFE_CAST(REPLACE (gols_vis,".0","") AS INT64) gols_visitante,
-SAFE_CAST(REPLACE (gols_1_tempo_man,".0","") AS INT64) gols_1_tempo_mandante,
-SAFE_CAST(REPLACE (gols_1_tempo_vis,".0","") AS INT64) gols_1_tempo_visitante,
-SAFE_CAST(REPLACE (escanteios_man,".0","") AS INT64) escanteios_mandante,
-SAFE_CAST(REPLACE (escanteios_vis,".0","") AS INT64) escanteios_visitante,
-SAFE_CAST(REPLACE (faltas_man,".0","") AS INT64) faltas_mandante,
-SAFE_CAST(REPLACE (faltas_vis,".0","") AS INT64) faltas_visitante,
-SAFE_CAST(REPLACE (chutes_bola_parada_man,".0","") AS INT64) chutes_bola_parada_mandante,
-SAFE_CAST(REPLACE (chutes_bola_parada_vis,".0","") AS INT64) chutes_bola_parada_visitante,
-SAFE_CAST(REPLACE (defesas_man,".0","") AS INT64) defesas_mandante,
-SAFE_CAST(REPLACE (defesas_vis,".0","") AS INT64) defesas_visitante,
-SAFE_CAST(REPLACE (impedimentos_man,".0","") AS INT64) impedimentos_mandante,
-SAFE_CAST(REPLACE (impedimentos_vis,".0","") AS INT64) impedimentos_visitante,
-SAFE_CAST(REPLACE (chutes_man,".0","") AS INT64) chutes_mandante,
-SAFE_CAST(REPLACE (chutes_vis,".0","") AS INT64) chutes_visitante,
-SAFE_CAST(REPLACE (chutes_fora_man,".0","") AS INT64) chutes_fora_mandante,
-SAFE_CAST(REPLACE (chutes_fora_vis,".0","") AS INT64) chutes_fora_visitante
-FROM basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a AS t
+}}
+select
+    safe_cast(replace (ano_campeonato, ".0", "") as int64) ano_campeonato,
+    safe_cast(data as date) data,
+    safe_cast(replace (rodada, ".0", "") as int64) rodada,
+    safe_cast(estadio as string) estadio,
+    safe_cast(arbitro as string) arbitro,
+    safe_cast(replace (publico, ".0", "") as int64) publico,
+    safe_cast(replace (publico_max, ".0", "") as int64) publico_max,
+    safe_cast(time_man as string) time_mandante,
+    safe_cast(time_vis as string) time_visitante,
+    safe_cast(tecnico_man as string) tecnico_mandante,
+    safe_cast(tecnico_vis as string) tecnico_visitante,
+    safe_cast(replace (colocacao_man, ".0", "") as int64) colocacao_mandante,
+    safe_cast(replace (colocacao_vis, ".0", "") as int64) colocacao_visitante,
+    safe_cast(
+        replace (valor_equipe_titular_man, ".0", "") as int64
+    ) valor_equipe_titular_mandante,
+    safe_cast(
+        replace (valor_equipe_titular_vis, ".0", "") as int64
+    ) valor_equipe_titular_visitante,
+    safe_cast(idade_media_titular_man as float64) idade_media_titular_mandante,
+    safe_cast(idade_media_titular_vis as float64) idade_media_titular_visitante,
+    safe_cast(replace (gols_man, ".0", "") as int64) gols_mandante,
+    safe_cast(replace (gols_vis, ".0", "") as int64) gols_visitante,
+    safe_cast(replace (gols_1_tempo_man, ".0", "") as int64) gols_1_tempo_mandante,
+    safe_cast(replace (gols_1_tempo_vis, ".0", "") as int64) gols_1_tempo_visitante,
+    safe_cast(replace (escanteios_man, ".0", "") as int64) escanteios_mandante,
+    safe_cast(replace (escanteios_vis, ".0", "") as int64) escanteios_visitante,
+    safe_cast(replace (faltas_man, ".0", "") as int64) faltas_mandante,
+    safe_cast(replace (faltas_vis, ".0", "") as int64) faltas_visitante,
+    safe_cast(
+        replace (chutes_bola_parada_man, ".0", "") as int64
+    ) chutes_bola_parada_mandante,
+    safe_cast(
+        replace (chutes_bola_parada_vis, ".0", "") as int64
+    ) chutes_bola_parada_visitante,
+    safe_cast(replace (defesas_man, ".0", "") as int64) defesas_mandante,
+    safe_cast(replace (defesas_vis, ".0", "") as int64) defesas_visitante,
+    safe_cast(replace (impedimentos_man, ".0", "") as int64) impedimentos_mandante,
+    safe_cast(replace (impedimentos_vis, ".0", "") as int64) impedimentos_visitante,
+    safe_cast(replace (chutes_man, ".0", "") as int64) chutes_mandante,
+    safe_cast(replace (chutes_vis, ".0", "") as int64) chutes_visitante,
+    safe_cast(replace (chutes_fora_man, ".0", "") as int64) chutes_fora_mandante,
+    safe_cast(replace (chutes_fora_vis, ".0", "") as int64) chutes_fora_visitante
+from
+    `basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a` t
+where data is not null

@@ -1,8 +1,19 @@
+---
 version: 2
-
 models:
   - name: br_bcb_estban__municipio
-    description: "dbt model for municipio month table"
+    description: A tabela de Estatísticas Bancárias (ESTBAN) por agência se refere
+      a posição mensal dos saldos das principais rubricas de balancetes dos bancos
+      comerciais e dos bancos múltiplos com carteira comercial, agregadas por município,
+      com atualização mensal.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_municipio
+            - cnpj_basico
+            - id_verbete
     columns:
       - name: ano
         description: Ano
@@ -10,22 +21,52 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cnpj_basico
-        description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros dígitos)
+        description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros
+          dígitos)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__empresa')
+              field: cnpj_basico
       - name: instituicao
         description: Nome da Instituição Financeira (IF)
-      - name: agencias_esperadas	
-        description: Quantidade de agências esperadas da IF no município  
+      - name: agencias_esperadas
+        description: Quantidade de agências esperadas da IF no município
       - name: agencias_processadas
         description: Quantidade de agências processadas da IF no município
       - name: id_verbete
         description: Código do verbete
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: valor
         description: Valores
   - name: br_bcb_estban__agencia
-    description: "dbt model for agencia month table"
+    description: A tabela de Estatísticas Bancárias (ESTBAN) por agência se refere
+      a posição mensal dos saldos das principais rubricas de balancetes dos bancos
+      comerciais e dos bancos múltiplos com carteira comercial, agregadas por agência
+      bancária com atualização mensal.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_municipio
+            - cnpj_agencia
+            - id_verbete
     columns:
       - name: ano
         description: Ano
@@ -33,15 +74,34 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cnpj_basico
-        description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros dígitos)
+        description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros
+          dígitos)
       - name: instituicao
         description: Nome da Instituição Financeira (IF)
       - name: cnpj_agencia
         description: CNPJ da agência bancária
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__empresa')
+              field: cnpj
       - name: id_verbete
         description: Código do verbete
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: valor
         description: Valores

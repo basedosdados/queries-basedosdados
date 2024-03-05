@@ -1,18 +1,19 @@
-{{ 
-  config(
-    alias='cnae_2_3_subclasses',    
-    schema='br_bd_diretorios_brasil',
-    materialized='table',)
+{{
+    config(
+        alias="cnae_2_3_subclasses",
+        schema="br_bd_diretorios_brasil",
+        materialized="table",
+    )
 }}
-SELECT 
-  SAFE_CAST(cnae_2_3 AS STRING) AS cnae_2_3_subclasses,
-  SAFE_CAST(descricao AS STRING) AS descricao,
-  SAFE_CAST(cnae_2 AS STRING) AS cnae_2,
-  SAFE_CAST(descricao_cane_2 AS STRING) AS descricao_cnae_2,
-  SAFE_CAST(grupo AS STRING) AS grupo,
-  SAFE_CAST(descricao_grupo AS STRING) AS descricao_grupo,
-  SAFE_CAST(divisao AS STRING) AS divisao,
-  SAFE_CAST(descricao_divisao AS STRING) AS descricao_divisao,
-  SAFE_CAST(secao AS STRING) AS secao,
-  SAFE_CAST(descricao_secao AS STRING) AS descricao_secao
-FROM basedosdados-staging.br_bd_diretorios_brasil_staging.cnae_2_3_subclasses AS t
+select
+    safe_cast(cnae_2_3 as string) as cnae_2_3_subclasses,
+    safe_cast(descricao as string) as descricao,
+    safe_cast(cnae_2 as string) as cnae_2,
+    safe_cast(descricao_cane_2 as string) as descricao_cnae_2,
+    safe_cast(grupo as string) as grupo,
+    safe_cast(descricao_grupo as string) as descricao_grupo,
+    safe_cast(divisao as string) as divisao,
+    safe_cast(descricao_divisao as string) as descricao_divisao,
+    safe_cast(secao as string) as secao,
+    safe_cast(descricao_secao as string) as descricao_secao
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.cnae_2_3_subclasses` as t

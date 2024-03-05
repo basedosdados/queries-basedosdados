@@ -1,21 +1,21 @@
-{{ 
-  config(
-    alias='pais',    
-    schema='br_bd_diretorios_mundo',
-    materialized='table',
-)
+{{
+    config(
+        alias="pais",
+        schema="br_bd_diretorios_mundo",
+        materialized="table",
+    )
 }}
 
-SELECT 
-SAFE_CAST(id_pais_m49 AS STRING) id_pais_m49,
-SAFE_CAST(REPLACE(id_pais_fao,".0","") AS STRING) id_pais_fao,
-SAFE_CAST(REPLACE(id_pais_gaul,".0","") AS STRING) id_pais_gaul,
-SAFE_CAST(sigla_pais_iso3 AS STRING) sigla_pais_iso3,
-SAFE_CAST(sigla_pais_iso2 AS STRING) sigla_pais_iso2,
-SAFE_CAST(sigla_pais_pnud AS STRING) sigla_pais_pnud,
-SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(nome_ingles AS STRING) nome_ingles,
-SAFE_CAST(nome_oficial_ingles AS STRING) nome_oficial_ingles,
-SAFE_CAST(nacionalidade AS STRING) nacionalidade,
-SAFE_CAST(sigla_continente AS STRING) sigla_continente
-FROM basedosdados-staging.br_bd_diretorios_mundo_staging.pais AS t
+select
+    safe_cast(id_pais_m49 as string) id_pais_m49,
+    safe_cast(replace(id_pais_fao, ".0", "") as string) id_pais_fao,
+    safe_cast(replace(id_pais_gaul, ".0", "") as string) id_pais_gaul,
+    safe_cast(sigla_pais_iso3 as string) sigla_pais_iso3,
+    safe_cast(sigla_pais_iso2 as string) sigla_pais_iso2,
+    safe_cast(sigla_pais_pnud as string) sigla_pais_pnud,
+    safe_cast(nome as string) nome,
+    safe_cast(nome_ingles as string) nome_ingles,
+    safe_cast(nome_oficial_ingles as string) nome_oficial_ingles,
+    safe_cast(nacionalidade as string) nacionalidade,
+    safe_cast(sigla_continente as string) sigla_continente
+from `basedosdados-staging.br_bd_diretorios_mundo_staging.pais` as t

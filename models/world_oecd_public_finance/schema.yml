@@ -1,0 +1,871 @@
+---
+version: 2
+models:
+  - name: world_oecd_public_finance__country
+    description: This table is a cross-country panel dataset with historical data
+      on government revenues and expenditures, macroeconomics, politics, institutional
+      quality, fiscal policy rules, among others. The data come from many sources
+      and are made compatible following methods developed by OECD researchers. It
+      is a rich source for academic research on fiscal policy.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [year, country]
+    columns:
+      - name: year
+        description: Year
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: country
+        description: Country
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: average_employee_social_security_rate
+        description: Average rate of employees' social security contributions, Single
+          person at 100% of average earnings, no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: average_employer_social_security_rate
+        description: Average rate of employer's social security contributions, Single
+          person at 100% of average earnings, no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: average_income_social_security_rate
+        description: Average rate of income tax and employees' social security contributions,
+          Single person at 100% of average earnings, no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: average_income_tax_rate
+        description: Average income tax rate, Single person at 100% of average earnings,
+          no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: average_tax_wedge
+        description: Average tax wedge, Single person at 100% of average earnings,
+          no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: basic_red_expenditure_government
+        description: Basic research R&D expenditure, government, excluding higher
+          education
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: basic_red_expenditure_intramural
+        description: Basic research R&D expenditure, total intra-mural
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: budget_aproppriation_red
+        description: Government budget appropriations on R&D
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: budget_perspective_medium term
+        description: Use of medium term perspective in budget process
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: cabinet_center
+        description: Government composition - cabinet posts of center parties in percentage
+          of total cabinet posts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: cabinet_composition
+        description: Cabinet composition
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: cabinet_ideological_composition
+        description: New ideological composition of cabinet
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: cabinet_ideological_gap
+        description: ‘Ideological gap’ between new and old cabinets
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: cabinet_left
+        description: Government composition - cabinet posts of left wing parties in
+          percentage of total cabinet posts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: cabinet_right
+        description: Government composition - cabinet posts of right wing parties
+          in percentage of total cabinet posts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: capital_tax_transfers_receipts
+        description: Capital tax and transfers receipts, value
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: capital_transfers
+        description: Capital Transfers paid and other capital payments, value
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: consumer_price_index
+        description: Consumer price index
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: corporate_income_tax_rate
+        description: Corporate income tax, statutory rate
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: corruption_control
+        description: Control of corruption
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_expenditure
+        description: General government current expenditures
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_expenditure_adjusted
+        description: Cyclically-adjusted general government current expenditures
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_expenditure_except_interest
+        description: General government current expenditures, excluding gross interest
+          payments
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_expenditure_except_interest_adjusted
+        description: Cyclically-adjusted general government current expenditures,
+          excluding gross interest payments
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_receipt
+        description: General government current receipts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_receipt_adjusted
+        description: Cyclically-adjusted general government current receipts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: current_receipt_except_interest
+        description: General government current receipts excluding gross interest
+          receipts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: deflator_export
+        description: Deflator, exports of goods and services
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: deflator_gross_domestic_product
+        description: Deflator, Gross Domestic Product
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: deflator_import
+        description: Deflator, imports of goods and services
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: election_turnout
+        description: Voter turnout in election
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: employment_contract_protect_ex_collective_dismissal
+        description: Employment protection of regular contracts, excluding regulation
+          of collective dismissals
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: employment_contract_protect_in_collective_dismissal
+        description: Employment protection of regular contracts, including regulation
+          of collective dismissals
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: exchange_rate
+        description: Exchange rate, USD per national currency
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_education
+        description: General government expenditure on Education
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_education_adjusted
+        description: Cyclically-adjusted General government expenditure on Education
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_family_children
+        description: General government expenditure on Family & Children Benefits
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_family_children_adjusted
+        description: Cyclically-adjusted General government expenditure on Family
+          & Children Benefits
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_health
+        description: General government expenditure on Health
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_health_adjusted
+        description: Cyclically-adjusted General government expenditure on Health
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_health_pc
+        description: Public health expenditure per capita
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_labor_policy_active
+        description: Public expenditure in active labour market policy measures
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_labor_policy_passive
+        description: Public expenditure in passive labour market policy measures
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_other_primary_expenditure
+        description: General government expenditure on Other primary expenditure
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_other_primary_expenditure_adjusted
+        description: Cyclically-adjusted General government expenditure on Other primary
+          expenditure
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_pension
+        description: General government expenditure on Pensions
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_pension_adjusted
+        description: Cyclically-adjusted General government expenditure on Pensions
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_property_income
+        description: General government expenditure on Property Income
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_property_income_adjusted
+        description: Cyclically-adjusted General government expenditure on Property
+          Income
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_property_income_except_interest
+        description: General government expenditure on Property income paid (except
+          interest payments)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_property_income_except_interest_adjusted
+        description: Cyclically-adjusted General government expenditure on Property
+          income paid (except interest payments)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_public_investment
+        description: General government expenditure on Public Investment
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_public_investment_adjusted
+        description: Cyclically-adjusted General government expenditure on Public
+          Investment
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_sickness_disability
+        description: General government expenditure on Sickness & Disability Benefits
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_sickness_disability_adjusted
+        description: Cyclically-adjusted General government expenditure on Sickness
+          & Disability Benefits
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_subsidies
+        description: General government expenditure on Subsidies
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_subsidies_adjusted
+        description: Cyclically-adjusted General government expenditure on Subsidies
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_unemployment_benefit
+        description: General government expenditure on Unemployment Benefits
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_unemployment_benefit_adjusted
+        description: Cyclically-adjusted General government expenditure on Unemployment
+          Benefits
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_wage_intermediate_consumption
+        description: General government expenditure on Wages & Interm. Consumption
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: expenditure_wage_intermediate_consumption_adjusted
+        description: Cyclically-adjusted General government expenditure on Wages &
+          Interm. Consumption
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: export
+        description: Exports of goods and services, value
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: female_labor_participation_rate
+        description: Female labour participation
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: fertility_rate
+        description: Fertility rate
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: financial_assets
+        description: General government financial assets, percent of GDP
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gini_disposable_income
+        description: Disposable income gini
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gini_government_income
+        description: Gross income gini
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gini_market_income
+        description: Market income gini
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_capital_stock
+        description: General government capital stock in billions of constant 2011
+          international dollars
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_change
+        description: Number of changes in government per year
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_confidence
+        description: Confidence in national government
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_consumption_fixed_capital
+        description: Government consumption of fixed capital, value
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_effectiveness
+        description: Government effectiveness
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_employment
+        description: Government Employment
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: government_fixed_capital_formation
+        description: Government fixed capital formation, value, appropriation account
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gross_domestic_product_current_prices
+        description: Gross Domestic Product, current prices
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gross_domestic_product_potential_current_prices
+        description: Gross Domestic Product, potential, current prices
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gross_domestic_product_potential_volume
+        description: Gross Domestic Product, potential, volume
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gross_domestic_product_volume
+        description: Gross Domestic Product, volume
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gross_interest_paid
+        description: General government gross interest paid
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: gross_interest_received
+        description: General government gross interest received
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: import
+        description: Imports of goods and services, value
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: index_ourdata
+        description: OURdata Index- Open, Useful, Reusable Government Data
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: indicator_fiscal_council
+        description: Fiscal council
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: indicator_fiscal_rule_balance
+        description: Fiscal rule - Budget balance rule
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: indicator_fiscal_rule_debt
+        description: Fiscal rule - Debt rule
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: indicator_fiscal_rule_expenditure
+        description: Fiscal rule - Expenditure rule
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: indicator_fiscal_rule_revenue
+        description: Fiscal rule - Revenue rule
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: internet_interaction_authoriries
+        description: Individuals using the internet to interact with public authorities
+          by type of activity, sending filled forms (last 12 months)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: judicial_confidence
+        description: Citizens confidence with the judicial system
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: labor_force
+        description: Labour force
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: life_expectancy
+        description: Life expectancy at birth
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: long_term_interest_rate
+        description: Long-term interest rate on government bonds
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: male_labor_participation_rate
+        description: Male labour participation
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: marginal_tax_wedge
+        description: Marginal tax wedge, Principal earner, Single person at 100% of
+          average earnings, no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: net_financial_liabilities
+        description: General government net financial liabilities
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: net_interest_paid
+        description: General government net interest paid
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: net_lending
+        description: General government net lending
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: net_lending_adjusted
+        description: Cyclically-adjusted general government net lending
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: net_personal_average_tax_rate
+        description: Net personal average tax rate, Single person at 100% of average
+          earnings, no child
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: nominal_effective_exchange_rate
+        description: Nominal effective exchange rate, chain-linked, overall weights
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: output_gap
+        description: Output gap
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: performance_budget
+        description: perfomance budget
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: pmr_barriers_entrepeneurship
+        description: OECD Product Market Regulation Indicators - Barriers to entrepreneurship
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: pmr_barriers_trade_investment
+        description: OECD Product Market Regulation Indicators - Barriers to trade
+          and investment
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: pmr_market_regulation_indicator
+        description: OECD Product Market Regulation Indicators - Overall product market
+          regulation indicator
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: pmr_state_control
+        description: OECD Product Market Regulation Indicators - State control
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: political_stability
+        description: Political stability
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: poverty_rate
+        description: Poverty rate after taxes and transfers, poverty line 50%
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: primary_balance
+        description: General government primary balance
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: primary_balance_adjusted
+        description: Cyclically-adjusted general government primary balance
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: primary_total_expenditure_adjustred
+        description: Cyclically-adjusted primary total expenditure
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: primary_total_receipt_adjusted
+        description: Cyclically-adjusted primary total receipts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: public_private_partnership_capital_stock
+        description: Public-private partnership (PPP) capital stock in billions of
+          constant 2011 international dollars
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: real_effective_exchange_rate
+        description: Real effective exchange rate, constant trade weights
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: regulatory_quality
+        description: Regulatory quality
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_corporate_tax
+        description: General government revenue from Corporate Income Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_corporate_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Corporate
+          Income Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_environmental_tax
+        description: General government revenue from Environmental Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_environmental_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Environmental
+          Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_immovable_property_tax
+        description: General government revenue from Taxes on Immovable Property
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_immovable_property_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Taxes on
+          Immovable Property
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_other_consumption_tax
+        description: General government revenue from Other Consumption Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_other_consumption_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Other Consumption
+          Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_other_non_property_tax
+        description: General government revenue from Other Nonproperty Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_other_non_property_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Other Nonproperty
+          Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_other_property_tax
+        description: General government revenue from Other Property Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_other_property_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Other Property
+          Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_personal_income_tax
+        description: General government revenue from Personal Income Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_personal_income_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Personal
+          Income Taxes
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_property_income
+        description: General government revenue from Property Income
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_property_income_adjusted
+        description: Cyclically-adjusted General government revenue from Property
+          Income
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_property_income_except_interest
+        description: General government revenue from Property income received (except
+          interest receipts)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_property_income_except_interest_adjusted
+        description: Cyclically-adjusted General government revenue from Property
+          income received (except interest receipts)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_sales_goods_services_tax
+        description: General government revenue from Sales of Goods & Services
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_sales_goods_services_tax_adjusted
+        description: Cyclically-adjusted General government revenue from Sales of
+          Goods & Services
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_social_security_contribution
+        description: General government revenue from Social Security Contributions
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: revenue_social_security_contribution_adjusted
+        description: Cyclically-adjusted General government revenue from Social Security
+          Contributions
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: rule_of_law
+        description: Rule of law
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: rule_of_law_justice_enforcement
+        description: Rule of law, Civil justice, Civil justice is effectively enforced
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: rule_of_law_justice_government_influence
+        description: Rule of law, Civil justice, Civil justice is free of improper
+          government influence
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: rule_of_law_limited_power
+        description: Rule of law, Limited government powers
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: rule_of_law_rights
+        description: Rule of law, Fundamental rights
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: share_women_minister
+        description: Share of women ministers
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: share_women_parliament
+        description: Share of women parliamentarians
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: short_term_interest_rate
+        description: Short-term interest rate
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: size_municipalities
+        description: Size of municipalities
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: term_trade
+        description: Terms of trade
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_employment
+        description: Total employment
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_expenditure
+        description: General government total expenditures
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_expenditure_adjusted
+        description: Cyclically-adjusted total expenditure
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_receipt
+        description: General government total receipts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_receipt_adjusted
+        description: Cyclically-adjusted total receipts
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_red_expenditure_government
+        description: Total R&D expenditure, government, excluding higher education
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: total_red_expenditure_intramural
+        description: Total R&D expenditure, total intra-mural
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: trade_openness_ratio
+        description: Trade openness ratio
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: underlying_net_lending
+        description: Underlying general government net lending
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: underlying_primary_balance
+        description: Underlying general government primary balance
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: unemployment_rate
+        description: Unemployment rate
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: vat_rate
+        description: VAT statutory rate
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: voice_accountability
+        description: Voice accountability
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05

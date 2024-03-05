@@ -1,36 +1,38 @@
-WITH despesa AS (
-    SELECT 
-      sequencial_candidato,
-      CONCAT(ano,sequencial_candidato) as ano_sequencial_candidato,
-      'Despesa' AS receita_despesa,
-      INITCAP(origem_despesa) AS origem,
-      SUM(valor_despesa) AS valor
-    FROM `basedosdados.br_tse_eleicoes.despesas_candidato`
-    WHERE ano = 2022
-    GROUP BY 1,2,3,4
-  ),
+with
+    despesa as (
+        select
+            sequencial_candidato,
+            concat(ano, sequencial_candidato) as ano_sequencial_candidato,
+            'Despesa' as receita_despesa,
+            initcap(origem_despesa) as origem,
+            sum(valor_despesa) as valor
+        from `basedosdados.br_tse_eleicoes.despesas_candidato`
+        where ano = 2022
+        group by 1, 2, 3, 4
+    ),
 
-  receita AS (
-    SELECT   
-      sequencial_candidato,
-      CONCAT(ano,sequencial_candidato) as ano_sequencial_candidato,
-      'Receita' AS receita_despesa,
-      INITCAP(origem_receita) AS origem, 
-      SUM(valor_receita) AS valor 
-    FROM `basedosdados.br_tse_eleicoes.receitas_candidato` 
-    WHERE ano = 2022 
-    GROUP BY 1,2,3,4
-  ),
+    receita as (
+        select
+            sequencial_candidato,
+            concat(ano, sequencial_candidato) as ano_sequencial_candidato,
+            'Receita' as receita_despesa,
+            initcap(origem_receita) as origem,
+            sum(valor_receita) as valor
+        from `basedosdados.br_tse_eleicoes.receitas_candidato`
+        where ano = 2022
+        group by 1, 2, 3, 4
+    ),
 
-  receita_despesa AS (
-    SELECT *
-    FROM despesa
-    UNION ALL 
-    SELECT *
-    FROM receita)
+    receita_despesa as (
+        select *
+        from despesa
+        union all
+        select *
+        from receita
+    )
 
-SELECT t1.*,
-t2.categoria
-FROM receita_despesa as t1
-LEFT JOIN `basedosdados-perguntas.br_jota.eleicao_auxiliar_categoria_origem` as t2
-ON t1.origem = t2.origem
+select t1.*, t2.categoria
+from receita_despesa as t1
+left join
+    `basedosdados-perguntas.br_jota.eleicao_auxiliar_categoria_origem` as t2
+    on t1.origem = t2.origem

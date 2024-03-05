@@ -1,16 +1,16 @@
 {{
-  config(
-    alias = 'recurso_publico_mutuario',
-    schema='br_bcb_sicor',
-    materialized='table',
-  )
+    config(
+        alias="recurso_publico_mutuario",
+        schema="br_bcb_sicor",
+        materialized="table",
+    )
 }}
 
 
-SELECT
-SAFE_CAST(id_referencia_bacen AS STRING) id_referencia_bacen,
-SAFE_CAST(indicador_sexo AS INT64) indicador_sexo,
-SAFE_CAST(tipo_cpf_cnpj AS STRING) tipo_cpf_cnpj,
-SAFE_CAST(tipo_beneficiario AS STRING) tipo_beneficiario,
-SAFE_CAST(id_dap AS STRING) id_dap
-FROM basedosdados-staging.br_bcb_sicor_staging.recurso_publico_mutuario AS t
+select
+    safe_cast(id_referencia_bacen as string) id_referencia_bacen,
+    safe_cast(indicador_sexo as int64) indicador_sexo,
+    safe_cast(tipo_cpf_cnpj as string) tipo_cpf_cnpj,
+    safe_cast(tipo_beneficiario as string) tipo_beneficiario,
+    safe_cast(id_dap as string) id_dap
+from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_mutuario` as t

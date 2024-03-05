@@ -1,20 +1,26 @@
-WITH soma_receitas_candidato AS (
-SELECT
-    sequencial_candidato,
-    SUM(CASE WHEN origem = 'Recursos De Partido Politico' THEN valor END) as receita_partido,
-    SUM(valor) AS valor_total
-FROM `basedosdados-perguntas.br_jota.eleicao_prestacao_contas_candidato_origem_2022`
-WHERE sequencial_candidato IS NOT NULL
-AND receita_despesa = 'Receita'
-GROUP BY 1
-)
+with
+    soma_receitas_candidato as (
+        select
+            sequencial_candidato,
+            sum(
+                case when origem = 'Recursos De Partido Politico' then valor end
+            ) as receita_partido,
+            sum(valor) as valor_total
+        from
+            `basedosdados-perguntas.br_jota.eleicao_prestacao_contas_candidato_origem_2022`
+        where sequencial_candidato is not null and receita_despesa = 'Receita'
+        group by 1
+    )
 
-SELECT
-candidato_info.*,
-RANK() OVER (PARTITION BY cargo ORDER BY valor_total DESC ) AS rank_cargo,
-RANK() OVER (PARTITION BY sigla_partido ORDER BY valor_total DESC ) AS rank_partido,
-RANK() OVER (PARTITION BY sigla_partido,cargo ORDER BY valor_total DESC ) AS rank_cargo_partido,
-valores.* EXCEPT (sequencial_candidato)
-FROM `basedosdados-perguntas.br_jota.eleicao_perfil_candidato_2022` AS candidato_info
-LEFT JOIN soma_receitas_candidato AS valores
-ON candidato_info.sequencial = valores.sequencial_candidato
+select
+    candidato_info.*,
+    rank() over (partition by cargo order by valor_total desc) as rank_cargo,
+    rank() over (partition by sigla_partido order by valor_total desc) as rank_partido,
+    rank() over (
+        partition by sigla_partido, cargo order by valor_total desc
+    ) as rank_cargo_partido,
+    valores.* except (sequencial_candidato)
+from `basedosdados-perguntas.br_jota.eleicao_perfil_candidato_2022` as candidato_info
+left join
+    soma_receitas_candidato as valores
+    on candidato_info.sequencial = valores.sequencial_candidato

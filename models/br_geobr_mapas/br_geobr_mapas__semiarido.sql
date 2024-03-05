@@ -1,12 +1,12 @@
-{{ 
-  config(
-    alias='semiarido',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="semiarido",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
-FROM basedosdados-staging.br_geobr_mapas_staging.semiarido AS t
+}}
+select
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe.st_geogfromtext(geometria) geometria
+from `basedosdados-staging.br_geobr_mapas_staging.semiarido` as t

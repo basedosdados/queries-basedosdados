@@ -1,164 +1,403 @@
+---
 version: 2
-
 models:
   - name: microdados_movimentacao
-    description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração.
+    description: Contém dados de movimentações declaradas dentro do prazo com competência
+      de declaração.
     columns:
       - name: ano
         description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: mes
         description: Mês
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipios')
+              field: id_municipio
       - name: cnae_2_secao
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cnae_2_subclasse
         description: Subclasse do Código Nacional de Atividades Econômicas 2.0
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cbo_2002
         description: Classificação Brasileira de Ocupações (CBO) - 2002
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: saldo_movimentacao
         description: Saldo de movimentação (1 para admissão e -1 para desligamento)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: categoria
         description: Categoria de trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: grau_instrucao
         description: Grau de instrução ou escolaridade
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: idade
         description: Idade do trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: horas_contratuais
         description: Horas contratuais
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: raca_cor
         description: Raça ou Cor do Trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: sexo
         description: Sexo (1-Homem, 3-Mulher e 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: salario_mensal
         description: Salário mensal em moeda corrente
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_empregador
         description: Tipo de empregador (0-CNPJ RAIZ, 2-CPF e 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_estabelecimento
-        description: Tipo de estabelecimento (1-CNPJ, 3-CAEPF(Cadastro de Atividade Econômica de Pessoa Física), 4-CNO(Cadastro Nacional de Obra), 5-CEI(CAGED), 9-Não Identificado)
+        description: Tipo de estabelecimento (1-CNPJ, 3-CAEPF(Cadastro de Atividade
+          Econômica de Pessoa Física), 4-CNO(Cadastro Nacional de Obra), 5-CEI(CAGED),
+          9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_movimentacao
         description: Tipo de movimentação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_deficiencia
         description: Tipo de deficiência/Beneficiário habilitado
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_trabalho_intermitente
         description: Indicador de trabalhador intermitente (0-Não, 1-Sim, 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_trabalho_parcial
-        description: Indicador de movimentação referente a contrato parcial (0-Não, 1-Sim, 9-Não Identificado)
+        description: Indicador de movimentação referente a contrato parcial (0-Não,
+          1-Sim, 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tamanho_estabelecimento_janeiro
         description: Faixa de tamanho do estabelecimento no início do ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_aprendiz
         description: Indicador de trabalhador aprendiz (0-Não, 1-Sim, 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: origem_informacao
         description: Origem da Informação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_fora_prazo
         description: Indicador fora do prazo
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
   - name: microdados_movimentacao_fora_prazo
-    description: Contém dados de movimentações declaradas fora do prazo com competência de declaração.
+    description: Contém dados de movimentações declaradas fora do prazo com competência
+      de declaração.
     columns:
       - name: ano
         description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: mes
         description: Mês
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: cnae_2_secao
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cnae_2_subclasse
         description: Subclasse do Código Nacional de Atividades Econômicas 2.0
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cbo_2002
         description: Classificação Brasileira de Ocupações (CBO) - 2002
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: saldo_movimentacao
         description: Saldo de movimentação (1 para admissão e -1 para desligamento)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: categoria
         description: Categoria de trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: grau_instrucao
         description: Grau de instrução ou escolaridade
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: idade
         description: Idade do trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: horas_contratuais
         description: Horas contratuais
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: raca_cor
         description: Raça ou Cor do Trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: sexo
         description: Sexo (1-Homem, 3-Mulher e 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: salario_mensal
         description: Salário mensal em moeda corrente
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_empregador
         description: Tipo de empregador (0-CNPJ RAIZ, 2-CPF e 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_estabelecimento
-        description: Tipo de estabelecimento (1-CNPJ, 3-CAEPF(Cadastro de Atividade Econômica de Pessoa Física), 4-CNO(Cadastro Nacional de Obra), 5-CEI(CAGED), 9-Não Identificado)
+        description: Tipo de estabelecimento (1-CNPJ, 3-CAEPF(Cadastro de Atividade
+          Econômica de Pessoa Física), 4-CNO(Cadastro Nacional de Obra), 5-CEI(CAGED),
+          9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_movimentacao
         description: Tipo de movimentação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_deficiencia
         description: Tipo de deficiência/Beneficiário habilitado
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_trabalho_intermitente
         description: Indicador de trabalhador intermitente (0-Não, 1-Sim, 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_trabalho_parcial
-        description: Indicador de movimentação referente a contrato parcial (0-Não, 1-Sim, 9-Não Identificado)
+        description: Indicador de movimentação referente a contrato parcial (0-Não,
+          1-Sim, 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tamanho_estabelecimento_janeiro
         description: Faixa de tamanho do estabelecimento no início do ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_aprendiz
         description: Indicador de trabalhador aprendiz (0-Não, 1-Sim, 9-Não Identificado)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: origem_informacao
         description: Origem da Informação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_fora_prazo
         description: Indicador fora do prazo
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
   - name: microdados_movimentacao_excluida
     description: Contém dados de movimentações excluídas com competência de declaração.
     columns:
       - name: ano
         description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: mes
         description: Mês
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: cnae_2_secao
         description: Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção)
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cnae_2_subclasse
         description: Subclasse do Código Nacional de Atividades Econômicas 2.0
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: cbo_2002
         description: Classificação Brasileira de Ocupações (CBO) - 2002
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: saldo_movimentacao
         description: Saldo de movimentação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: categoria
         description: Categoria de trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: grau_instrucao
         description: Grau de instrução ou escolaridade
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: idade
         description: Idade do trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: horas_contratuais
         description: Horas contratuais
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: raca_cor
         description: Raça ou Cor do Trabalhador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: sexo
         description: Sexo
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: salario_mensal
         description: Salário mensal em moeda corrente
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_empregador
         description: Tipo de empregador
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_estabelecimento
         description: Tipo de estabelecimento
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_movimentacao
         description: Tipo de movimentação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tipo_deficiencia
         description: Tipo de deficiência/Beneficiário habilitado
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_trabalho_intermitente
         description: Indicador de trabalhador intermitente
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_trabalho_parcial
         description: Indicador de movimentação referente a contrato parcial
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: tamanho_estabelecimento_janeiro
         description: Faixa de tamanho do estabelecimento no início do ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_aprendiz
         description: Indicador de trabalhador aprendiz
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: origem_informacao
         description: Origem da Informação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_exclusao
-        description: Indicador Exclusão       
+        description: Indicador Exclusão
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: indicador_fora_prazo
         description: Indicador fora do prazo
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05

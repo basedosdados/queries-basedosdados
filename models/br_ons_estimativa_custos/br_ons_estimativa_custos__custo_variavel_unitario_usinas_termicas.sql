@@ -1,36 +1,42 @@
-{{ config(
-    alias='custo_variavel_unitario_usinas_termicas', 
-    schema='br_ons_estimativa_custos',
-    materialized = 'incremental',
-    partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2019,
-        "end": 2024,
-        "interval": 1}},
-    cluster_by=['ano', 'mes'])
-       
+{{
+    config(
+        alias="custo_variavel_unitario_usinas_termicas",
+        schema="br_ons_estimativa_custos",
+        materialized="incremental",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {
+                "start": 2019,
+                "end": 2024,
+                "interval": 1,
+            },
+        },
+        cluster_by=["ano", "mes"],
+    )
 }}
-WITH ons as (
-SELECT
-SAFE_CAST(data_inicio AS DATE) data_inicio,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(data_fim AS DATE) data_fim,
-SAFE_CAST(ano AS INT64) ano_pmo,
-SAFE_CAST(mes AS INT64) mes_pmo,
-SAFE_CAST(numero_revisao AS INT64) numero_revisao,
-SAFE_CAST(semana_operativa AS STRING) semana_operativa,
-SAFE_CAST(id_modelo_usina AS STRING) id_modelo_usina,
-SAFE_CAST(id_subsistema AS STRING) id_subsistema,
-SAFE_CAST(subsistema AS STRING) subsistema,
-SAFE_CAST(usina AS STRING) usina,
-SAFE_CAST(custo_variavel_unitario AS FLOAT64) custo_variavel_unitario
-FROM basedosdados-staging.br_ons_estimativa_custos_staging.custo_variavel_unitario_usinas_termicas AS t
-)
-SELECT *
-FROM ons
-{% if is_incremental() %} 
-WHERE data_inicio > (SELECT max(data_inicio) FROM {{ this }} )
+with
+    ons as (
+        select
+            safe_cast(data_inicio as date) data_inicio,
+            safe_cast(ano as int64) ano,
+            safe_cast(mes as int64) mes,
+            safe_cast(data_fim as date) data_fim,
+            safe_cast(ano as int64) ano_pmo,
+            safe_cast(mes as int64) mes_pmo,
+            safe_cast(numero_revisao as int64) numero_revisao,
+            safe_cast(semana_operativa as string) semana_operativa,
+            safe_cast(id_modelo_usina as string) id_modelo_usina,
+            safe_cast(id_subsistema as string) id_subsistema,
+            safe_cast(subsistema as string) subsistema,
+            safe_cast(usina as string) usina,
+            safe_cast(custo_variavel_unitario as float64) custo_variavel_unitario
+        from
+            `basedosdados-staging.br_ons_estimativa_custos_staging.custo_variavel_unitario_usinas_termicas`
+            as t
+    )
+select *
+from ons
+{% if is_incremental() %}
+    where data_inicio > (select max(data_inicio) from {{ this }})
 {% endif %}

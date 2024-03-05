@@ -1,8 +1,8 @@
+---
 version: 2
-
 models:
   - name: microdados
-    description: "Microdados de pesquisas eleitorais"
+    description: Microdados de pesquisas eleitorais
     columns:
       - name: id_pesquisa
         description: ID da pesquisa

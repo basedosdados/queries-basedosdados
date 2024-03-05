@@ -1,11 +1,13 @@
+---
 version: 2
-
 models:
   - name: informacao_consolidada
-    description: O conjunto contém Informações consolidadas de beneficiários por competência. Este será alterado para inclusão de dados acima de 5 anos e melhorias na qualidade dos dados.  
+    description: O conjunto contém Informações consolidadas de beneficiários por competência.
+      Este será alterado para inclusão de dados acima de 5 anos e melhorias na qualidade
+      dos dados.
     columns:
       - name: ano
-        description: Competência dos dados (AAAA) 
+        description: Competência dos dados (AAAA)
       - name: mes
         description: Competência dos dados (MM)
       - name: sigla_uf
@@ -18,7 +20,7 @@ models:
         description: Faixa etária do beneficiário
       - name: faixa_etaria_reajuste
         description: Faixa etária do beneficiária utilizada para o reajuste do plano
-            definida pela Lei 9.656
+          definida pela Lei 9.656
       - name: codigo_operadora
         description: Código de registro da operadora de plano de saúde na ANS
       - name: razao_social
@@ -27,10 +29,10 @@ models:
         description: CNPJ da Operadora
       - name: modalidade_operadora
         description: Classificação das operadoras de planos privados de assistência
-            à saúde de acordo com seu estatuto jurídico
+          à saúde de acordo com seu estatuto jurídico
       - name: codigo_plano
         description: Código do plano registrado ou cadastrado na ANS no qual o beneficiário
-            possui vínculo
+          possui vínculo
       - name: tipo_vigencia_plano
         description: Início da vigência do plano para comercialização
       - name: contratacao_beneficiario
@@ -53,7 +55,7 @@ models:
         description: Data de Carga dos dados.
   - name: br_ans_beneficiario__dicionario
     description: Dicionario
-    columns: 
+    columns:
       - name: id_tabela
         description: ID da Tabela
       - name: nome_coluna

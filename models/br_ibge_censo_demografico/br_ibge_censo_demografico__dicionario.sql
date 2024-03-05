@@ -1,14 +1,14 @@
 {{
-  config(
-    alias = 'dicionario',
-    schema='br_ibge_censo_demografico',
-    materialized='table',
-  )
+    config(
+        alias="dicionario",
+        schema="br_ibge_censo_demografico",
+        materialized="table",
+    )
 }}
-SELECT 
-SAFE_CAST(id_tabela AS STRING) id_tabela,
-SAFE_CAST(nome_coluna AS STRING) nome_coluna,
-SAFE_CAST(REPLACE(chave,".0","") AS STRING) chave,
-SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
-SAFE_CAST(valor AS STRING) valor
-FROM basedosdados-staging.br_ibge_censo_demografico_staging.dicionario AS t
+select
+    safe_cast(id_tabela as string) id_tabela,
+    safe_cast(nome_coluna as string) nome_coluna,
+    safe_cast(replace(chave, ".0", "") as string) chave,
+    safe_cast(cobertura_temporal as string) cobertura_temporal,
+    safe_cast(valor as string) valor
+from `basedosdados-staging.br_ibge_censo_demografico_staging.dicionario` as t

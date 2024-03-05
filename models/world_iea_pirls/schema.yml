@@ -1,5 +1,5 @@
+---
 version: 2
-
 models:
   - name: school_context
     description: School context
@@ -22,275 +22,274 @@ models:
         description: Locale Id Of The School Questionnaire
       - name: acbg03a
         description: Approximately What Percentage Of Students In Your School Have
-            The Following Backgrounds? Come From Economically Disadvantaged Homes
+          The Following Backgrounds? Come From Economically Disadvantaged Homes
       - name: acbg03b
         description: Approximately What Percentage Of Students In Your School Have
-            The Following Backgrounds? Come From Economically Affluent Homes
+          The Following Backgrounds? Come From Economically Affluent Homes
       - name: acbg04
         description: Approximately What Percentage Of Students In Your School Have
-            <Language Of Test> As Their Native Language?
+          <Language Of Test> As Their Native Language?
       - name: acbg05a
         description: How Many People Live In The City, Town, Or Area Where Your School
-            Is Located?
+          Is Located?
       - name: acbg05b
         description: Which Best Describes The Immediate Area In Which Your School
-            Is Located?
+          Is Located?
       - name: acbg06a
         description: 'For The <Fourth Grade> Students In Your School: How Many Days
-            Per Year Is Your School Open For Instruction?'
+          Per Year Is Your School Open For Instruction?'
       - name: acbg06b
         description: 'For The <Fourth Grade> Students In Your School: What Is The
-            Total Instructional Time, Excluding Breaks, In A Typical Day? (Minutes)'
+          Total Instructional Time, Excluding Breaks, In A Typical Day? (Minutes)'
       - name: acbg06c
         description: 'For The <Fourth Grade> Students In Your School: In One Calendar
-            Week, How Many Days Is The School Open For Instruction?'
+          Week, How Many Days Is The School Open For Instruction?'
       - name: acbg07a
         description: Does Your School Have A School Library?
       - name: acbg07b
         description: Approximately How Many Books (Print) With Different Titles Does
-            Your School Library Have (Exclude Magazines And Periodicals)?
+          Your School Library Have (Exclude Magazines And Periodicals)?
       - name: acbg07c
         description: Can Students Borrow Print Or Digital Materials From The Library
-            To Take Home?
+          To Take Home?
       - name: acbg08
         description: Does The School Provide Access To Digital Learning Resources
-            (E.G., Books, Videos)?
+          (E.G., Books, Videos)?
       - name: acbg09
         description: How Many Computers (Including Tablets) Does Your School Have
-            For Use By <Fourth Grade> Students?
+          For Use By <Fourth Grade> Students?
       - name: acbg10aa
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Instructional Materials (E.G., Textbooks)'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Instructional Materials (E.G., Textbooks)'
       - name: acbg10ab
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Supplies (E.G., Papers, Pencils, Materials)'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Supplies (E.G., Papers, Pencils, Materials)'
       - name: acbg10ac
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            School Buildings And Grounds'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          School Buildings And Grounds'
       - name: acbg10ad
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Heating/Cooling And Lighting Systems'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Heating/Cooling And Lighting Systems'
       - name: acbg10ae
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Instructional Space (E.G., Classrooms)'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Instructional Space (E.G., Classrooms)'
       - name: acbg10af
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Technologically Competent Staff'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Technologically Competent Staff'
       - name: acbg10ag
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Technology And Media Resources To Support Teaching'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Technology And Media Resources To Support Teaching'
       - name: acbg10ah
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Technology And Media Resources To Support Student Learning And Expression'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Technology And Media Resources To Support Student Learning And Expression'
       - name: acbg10ai
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Resources For Students With Disabilities'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Resources For Students With Disabilities'
       - name: acbg10aj
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? General School Resources:
-            Internet Connection'
+          By A Shortage Or Inadequacy Of The Following? General School Resources:
+          Internet Connection'
       - name: acbg10ba
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
-            Teachers With A Specialization In Reading'
+          By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
+          Teachers With A Specialization In Reading'
       - name: acbg10bb
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
-            Computer Software/Applications For Reading Instruction'
+          By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
+          Computer Software/Applications For Reading Instruction'
       - name: acbg10bc
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
-            Library Resources (Books, Ebooks, Magazines, Etc.)'
+          By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
+          Library Resources (Books, Ebooks, Magazines, Etc.)'
       - name: acbg10bd
         description: 'How Much Is Your School’S Capacity To Provide Instruction Affected
-            By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
-            Instructional Materials For Reading'
+          By A Shortage Or Inadequacy Of The Following? Resources For Reading Instruction:
+          Instructional Materials For Reading'
       - name: acbg11a
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Understanding Of The School’S Curricular Goals
+          School? Teachers’ Understanding Of The School’S Curricular Goals
       - name: acbg11b
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Degree Of Success In Implementing The School’S Curriculum
+          School? Teachers’ Degree Of Success In Implementing The School’S Curriculum
       - name: acbg11c
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Expectations For Student Achievement
+          School? Teachers’ Expectations For Student Achievement
       - name: acbg11d
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Ability To Inspire Students
+          School? Teachers’ Ability To Inspire Students
       - name: acbg11e
         description: How Would You Characterize Each Of The Following Within Your
-            School? Collaboration Between School Leadership And Teachers To Plan Instruction
+          School? Collaboration Between School Leadership And Teachers To Plan Instruction
       - name: acbg11f
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Involvement In School Activities
+          School? Parental Involvement In School Activities
       - name: acbg11g
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Commitment To Ensure That Students Are Ready To Learn
+          School? Parental Commitment To Ensure That Students Are Ready To Learn
       - name: acbg11h
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Expectations For Student Achievement
+          School? Parental Expectations For Student Achievement
       - name: acbg11i
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Support For Student Achievement
+          School? Parental Support For Student Achievement
       - name: acbg11j
         description: How Would You Characterize Each Of The Following Within Your
-            School? Students’ Desire To Do Well In School
+          School? Students’ Desire To Do Well In School
       - name: acbg11k
         description: How Would You Characterize Each Of The Following Within Your
-            School? Students’ Ability To Reach School’S Academic Goals
+          School? Students’ Ability To Reach School’S Academic Goals
       - name: acbg11l
         description: How Would You Characterize Each Of The Following Within Your
-            School? Students’ Respect For Classmates Who Excel Academically
+          School? Students’ Respect For Classmates Who Excel Academically
       - name: acbg12a
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Arriving Late At School
+          Grade> Students In Your School? Arriving Late At School
       - name: acbg12b
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Absenteeism (I.E., Unjustified Absences)
+          Grade> Students In Your School? Absenteeism (I.E., Unjustified Absences)
       - name: acbg12c
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Classroom Disturbance
+          Grade> Students In Your School? Classroom Disturbance
       - name: acbg12d
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Cheating
+          Grade> Students In Your School? Cheating
       - name: acbg12e
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Profanity
+          Grade> Students In Your School? Profanity
       - name: acbg12f
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Vandalism
+          Grade> Students In Your School? Vandalism
       - name: acbg12g
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Theft
+          Grade> Students In Your School? Theft
       - name: acbg12h
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Intimidation Or Verbal Abuse Among Students
-            (Including Texting, Emailing, Etc.)
+          Grade> Students In Your School? Intimidation Or Verbal Abuse Among Students
+          (Including Texting, Emailing, Etc.)
       - name: acbg12i
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Physical Fights Among Students
+          Grade> Students In Your School? Physical Fights Among Students
       - name: acbg12j
         description: To What Degree Is Each Of The Following A Problem Among <Fourth
-            Grade> Students In Your School? Intimidation Or Verbal Abuse Of Teachers
-            Or Staff (Including Texting, Emailing, Etc.)
+          Grade> Students In Your School? Intimidation Or Verbal Abuse Of Teachers
+          Or Staff (Including Texting, Emailing, Etc.)
       - name: acbg13
         description: About How Many Of The Students In Your School Have Basic Literacy
-            Skills (E.G., Can Write Letters Of The Alphabet, Write Sentences) When
-            They Begin The <First Grade> Or Primary/Elementary School?
+          Skills (E.G., Can Write Letters Of The Alphabet, Write Sentences) When They
+          Begin The <First Grade> Or Primary/Elementary School?
       - name: acbg14a
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Knowing
-            Letters Of The Alphabet
+          First Receive A Major Emphasis In Instruction In Your School? Knowing Letters
+          Of The Alphabet
       - name: acbg14b
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Knowing
-            Letter-Sound Relationships
+          First Receive A Major Emphasis In Instruction In Your School? Knowing Letter-Sound
+          Relationships
       - name: acbg14c
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Reading
-            Words
+          First Receive A Major Emphasis In Instruction In Your School? Reading Words
       - name: acbg14d
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Reading
-            Isolated Sentences
+          First Receive A Major Emphasis In Instruction In Your School? Reading Isolated
+          Sentences
       - name: acbg14e
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Reading
-            Connected Text
+          First Receive A Major Emphasis In Instruction In Your School? Reading Connected
+          Text
       - name: acbg14f
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Locating
-            Information Within The Text
+          First Receive A Major Emphasis In Instruction In Your School? Locating Information
+          Within The Text
       - name: acbg14g
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Identifying
-            The Main Idea Of A Text
+          First Receive A Major Emphasis In Instruction In Your School? Identifying
+          The Main Idea Of A Text
       - name: acbg14h
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Explaining
-            Or Supporting Understanding Of A Text
+          First Receive A Major Emphasis In Instruction In Your School? Explaining
+          Or Supporting Understanding Of A Text
       - name: acbg14i
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Comparing
-            A Text With Personal Experience
+          First Receive A Major Emphasis In Instruction In Your School? Comparing
+          A Text With Personal Experience
       - name: acbg14j
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Comparing
-            Different Texts
+          First Receive A Major Emphasis In Instruction In Your School? Comparing
+          Different Texts
       - name: acbg14k
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Making Predictions
-            About What Will Happen Next In A Text
+          First Receive A Major Emphasis In Instruction In Your School? Making Predictions
+          About What Will Happen Next In A Text
       - name: acbg14l
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Making Generalizations
-            And Drawing Inferences Based On A Text
+          First Receive A Major Emphasis In Instruction In Your School? Making Generalizations
+          And Drawing Inferences Based On A Text
       - name: acbg14m
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Evaluating
-            And Critiquing The Style Or Structure Of A Text
+          First Receive A Major Emphasis In Instruction In Your School? Evaluating
+          And Critiquing The Style Or Structure Of A Text
       - name: acbg14n
         description: At Which Grade Do The Following Reading Skills And Strategies
-            First Receive A Major Emphasis In Instruction In Your School? Determining
-            The Author’S Perspective Or Intention
+          First Receive A Major Emphasis In Instruction In Your School? Determining
+          The Author’S Perspective Or Intention
       - name: acbg15
         description: By The End Of This School Year, How Many Years Will You Have
-            Been A Principal Altogether?
+          Been A Principal Altogether?
       - name: acbg16
         description: By The End Of This School Year, How Many Years Will You Have
-            Been A Principal At This School?
+          Been A Principal At This School?
       - name: acbg17
         description: What Is The Highest Level Of Formal Education You Have Completed?
       - name: acbg18a
         description: Do You Hold Any Of The Following Professional Qualifications
-            In Educational Leadership? <Certificate Or License>
+          In Educational Leadership? <Certificate Or License>
       - name: acbg18b
         description: Do You Hold Any Of The Following Professional Qualifications
-            In Educational Leadership? <Master'S Or Equivalent Level—Isced Level 7>
+          In Educational Leadership? <Master'S Or Equivalent Level—Isced Level 7>
       - name: acbg18c
         description: Do You Hold Any Of The Following Professional Qualifications
-            In Educational Leadership? <Doctor Or Equivalent Level—Isced Level 8>
+          In Educational Leadership? <Doctor Or Equivalent Level—Isced Level 8>
       - name: acbg19
         description: Please Estimate The Number Of Weeks During The Current Academic
-            Year Where Normal Primary School Operations Have Been Affected By The
-            Covid-19 Pandemic.
+          Year Where Normal Primary School Operations Have Been Affected By The Covid-19
+          Pandemic.
       - name: acbg20
         description: Does Your School Provide Remote Instruction Or Distance Learning
-            Resources For Primary Grades When Normal School Operations Are Affected
-            By The Covid-19 Pandemic?
+          Resources For Primary Grades When Normal School Operations Are Affected
+          By The Covid-19 Pandemic?
       - name: acbg21a
         description: When Normal Primary School Operations Are Affected By The Covid-
-            19 Pandemic, Does Your School Support Remote Learning Through The Following?
-            Delivery Of Printed Learning Materials To Students
+          19 Pandemic, Does Your School Support Remote Learning Through The Following?
+          Delivery Of Printed Learning Materials To Students
       - name: acbg21b
         description: When Normal Primary School Operations Are Affected By The Covid-
-            19 Pandemic, Does Your School Support Remote Learning Through The Following?
-            Internet-Based Resources For Students
+          19 Pandemic, Does Your School Support Remote Learning Through The Following?
+          Internet-Based Resources For Students
       - name: acbg21c
         description: When Normal Primary School Operations Are Affected By The Covid-
-            19 Pandemic, Does Your School Support Remote Learning Through The Following?
-            Access To Digital Devices For Students
+          19 Pandemic, Does Your School Support Remote Learning Through The Following?
+          Access To Digital Devices For Students
       - name: acbg21d
         description: When Normal Primary School Operations Are Affected By The Covid-
-            19 Pandemic, Does Your School Support Remote Learning Through The Following?
-            Recommendations For Teachers About How To Provide Online Instruction
+          19 Pandemic, Does Your School Support Remote Learning Through The Following?
+          Recommendations For Teachers About How To Provide Online Instruction
       - name: acbg21e
         description: When Normal Primary School Operations Are Affected By The Covid-
-            19 Pandemic, Does Your School Support Remote Learning Through The Following?
-            Technical Support For Teachers
+          19 Pandemic, Does Your School Support Remote Learning Through The Following?
+          Technical Support For Teachers
       - name: acbg21f
         description: When Normal Primary School Operations Are Affected By The Covid-
-            19 Pandemic, Does Your School Support Remote Learning Through The Following?
-            Access To Digital Devices For Teachers
+          19 Pandemic, Does Your School Support Remote Learning Through The Following?
+          Access To Digital Devices For Teachers
       - name: school_level_weight
         description: School Level Weight
       - name: sum_student_weights
@@ -2097,253 +2096,250 @@ models:
         description: How Often Do You Speak <Language Of Test> At Home?
       - name: asbg04
         description: About How Many Books Are There In Your Home? (Do Not Count Magazines,
-            Newspapers, Or Your School Books.)
+          Newspapers, Or Your School Books.)
       - name: asbg05a
         description: Do You Have Any Of These Things At Your Home? A Shared Computer
-            Or Tablet That You Can Use
+          Or Tablet That You Can Use
       - name: asbg05b
         description: Do You Have Any Of These Things At Your Home? Study Desk/Table
-            For Your Use
+          For Your Use
       - name: asbg05c
         description: Do You Have Any Of These Things At Your Home? Your Own Room
       - name: asbg05d
         description: Do You Have Any Of These Things At Your Home? Access To The Internet
       - name: asbg05e
         description: Do You Have Any Of These Things At Your Home? A Shared Smartphone
-            That You Can Use
+          That You Can Use
       - name: asbg05f
         description: Do You Have Any Of These Things At Your Home? Your Own Computer
-            Or Tablet
+          Or Tablet
       - name: asbg05g
         description: Do You Have Any Of These Things At Your Home? Your Own Smartphone
       - name: asbg05h
         description: Do You Have Any Of These Things At Your Home? <Country-Specific
-            Indicator Of Wealth>
+          Indicator Of Wealth>
       - name: asbg05i
         description: Do You Have Any Of These Things At Your Home? <Country-Specific
-            Indicator Of Wealth>
+          Indicator Of Wealth>
       - name: asbg05j
         description: Do You Have Any Of These Things At Your Home? <Country-Specific
-            Indicator Of Wealth>
+          Indicator Of Wealth>
       - name: asbg05k
         description: Do You Have Any Of These Things At Your Home? <Country-Specific
-            Indicator Of Wealth>
+          Indicator Of Wealth>
       - name: asbg06
         description: About How Often Are You Absent From School?
       - name: asbg07a
         description: How Often Do You Feel This Way When You Arrive At School? I Feel
-            Tired
+          Tired
       - name: asbg07b
         description: How Often Do You Feel This Way When You Arrive At School? I Feel
-            Hungry
+          Hungry
       - name: asbg08a
         description: How Much Time Do You Spend Using A Computer, Tablet, Or Smartphone
-            To Do These Activities For Your Schoolwork On A Normal School Day? Finding
-            And Reading Information
+          To Do These Activities For Your Schoolwork On A Normal School Day? Finding
+          And Reading Information
       - name: asbg08b
         description: How Much Time Do You Spend Using A Computer, Tablet, Or Smartphone
-            To Do These Activities For Your Schoolwork On A Normal School Day? Preparing
-            Reports And Presentations
+          To Do These Activities For Your Schoolwork On A Normal School Day? Preparing
+          Reports And Presentations
       - name: asbg09a
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Am Good At Using A Computer Or Tablet
+          Tablets, Or Smartphones? I Am Good At Using A Computer Or Tablet
       - name: asbg09b
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Am Good At Typing
+          Tablets, Or Smartphones? I Am Good At Typing
       - name: asbg09c
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? It Is Easy For Me To Find Information On The
-            Internet
+          Tablets, Or Smartphones? It Is Easy For Me To Find Information On The Internet
       - name: asbg09d
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Know How To Create Written Stories Or Reports
+          Tablets, Or Smartphones? I Know How To Create Written Stories Or Reports
       - name: asbg09e
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Know How To Create Presentations
+          Tablets, Or Smartphones? I Know How To Create Presentations
       - name: asbg09f
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Can Recognize A Website That Is Useful To Me
+          Tablets, Or Smartphones? I Can Recognize A Website That Is Useful To Me
       - name: asbg09g
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Can Tell If A Website Is Trustworthy
+          Tablets, Or Smartphones? I Can Tell If A Website Is Trustworthy
       - name: asbg09h
         description: How Much Do You Agree With These Statements About Using Computers,
-            Tablets, Or Smartphones? I Know How To Make And Share A Video
+          Tablets, Or Smartphones? I Know How To Make And Share A Video
       - name: asbg10a
         description: What Do You Think About Your School? Tell How Much You Agree
-            With These Statements. I Like Being In School
+          With These Statements. I Like Being In School
       - name: asbg10b
         description: What Do You Think About Your School? Tell How Much You Agree
-            With These Statements. I Feel Safe When I Am At School
+          With These Statements. I Feel Safe When I Am At School
       - name: asbg10c
         description: What Do You Think About Your School? Tell How Much You Agree
-            With These Statements. I Feel Like I Belong At This School
+          With These Statements. I Feel Like I Belong At This School
       - name: asbg10d
         description: What Do You Think About Your School? Tell How Much You Agree
-            With These Statements. Teachers At My School Are Fair To Me
+          With These Statements. Teachers At My School Are Fair To Me
       - name: asbg10e
         description: What Do You Think About Your School? Tell How Much You Agree
-            With These Statements. I Am Proud To Go To This School
+          With These Statements. I Am Proud To Go To This School
       - name: asbg10f
         description: What Do You Think About Your School? Tell How Much You Agree
-            With These Statements. I Have Friends At This School
+          With These Statements. I Have Friends At This School
       - name: asbg11a
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Made Fun Of Me Or Called Me Names
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Made Fun Of Me Or Called Me Names
       - name: asbg11b
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Left Me Out Of Their Games Or Activities
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Left Me Out Of Their Games Or Activities
       - name: asbg11c
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Spread Lies About Me
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Spread Lies About Me
       - name: asbg11d
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Stole Something From Me
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Stole Something From Me
       - name: asbg11e
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Damaged Something Of Mine On Purpose
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Damaged Something Of Mine On Purpose
       - name: asbg11f
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Hit Or Hurt Me (E.G., Shoving, Kicking, Hitting)
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Hit Or Hurt Me (E.G., Shoving, Kicking, Hitting)
       - name: asbg11g
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Made Me Do Things I Didn'T Want To Do
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Made Me Do Things I Didn'T Want To Do
       - name: asbg11h
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Sent Me Nasty Or Hurtful Messages Online
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Sent Me Nasty Or Hurtful Messages Online
       - name: asbg11i
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Shared Nasty Or Hurtful Information About Me Online
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Shared Nasty Or Hurtful Information About Me Online
       - name: asbg11j
         description: During This Year, How Often Have Other Students From Your School
-            Done Any Of The Following Things To You, Including Through Texting Or
-            The Internet? Threatened Me
+          Done Any Of The Following Things To You, Including Through Texting Or The
+          Internet? Threatened Me
       - name: asbr01a
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? I Like What I Read About
-            In School
+          With These Statements About Your Reading Lessons? I Like What I Read About
+          In School
       - name: asbr01b
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? My Teacher Gives Me
-            Interesting Things To Read
+          With These Statements About Your Reading Lessons? My Teacher Gives Me Interesting
+          Things To Read
       - name: asbr01c
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? I Know What My Teacher
-            Expects Me To Do
+          With These Statements About Your Reading Lessons? I Know What My Teacher
+          Expects Me To Do
       - name: asbr01d
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? My Teacher Is Easy To
-            Understand
+          With These Statements About Your Reading Lessons? My Teacher Is Easy To
+          Understand
       - name: asbr01e
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? I Am Interested In What
-            My Teacher Says
+          With These Statements About Your Reading Lessons? I Am Interested In What
+          My Teacher Says
       - name: asbr01f
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? My Teacher Encourages
-            Me To Say What I Think About What I Have Read
+          With These Statements About Your Reading Lessons? My Teacher Encourages
+          Me To Say What I Think About What I Have Read
       - name: asbr01g
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? My Teacher Lets Me Show
-            What I Have Learned
+          With These Statements About Your Reading Lessons? My Teacher Lets Me Show
+          What I Have Learned
       - name: asbr01h
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? My Teacher Does A Variety
-            Of Things To Help Us Learn
+          With These Statements About Your Reading Lessons? My Teacher Does A Variety
+          Of Things To Help Us Learn
       - name: asbr01i
         description: Think About The Reading You Do For School. How Much Do You Agree
-            With These Statements About Your Reading Lessons? My Teacher Tells Me
-            How To Do Better When I Make A Mistake
+          With These Statements About Your Reading Lessons? My Teacher Tells Me How
+          To Do Better When I Make A Mistake
       - name: asbr02a
         description: How Often Do These Things Happen During Your Reading Lessons?
-            Students Don'T Listen To What The Teacher Says
+          Students Don'T Listen To What The Teacher Says
       - name: asbr02b
         description: How Often Do These Things Happen During Your Reading Lessons?
-            There Is Too Much Noise For Students To Work Well
+          There Is Too Much Noise For Students To Work Well
       - name: asbr02c
         description: How Often Do These Things Happen During Your Reading Lessons?
-            My Teacher Has To Wait A Long Time For Students To Be Quiet
+          My Teacher Has To Wait A Long Time For Students To Be Quiet
       - name: asbr02d
         description: How Often Do These Things Happen During Your Reading Lessons?
-            Students Interrupt The Teacher
+          Students Interrupt The Teacher
       - name: asbr02e
         description: How Often Do These Things Happen During Your Reading Lessons?
-            My Teacher Has To Keep Telling Us To Follow The Classroom Rules
+          My Teacher Has To Keep Telling Us To Follow The Classroom Rules
       - name: asbr03a
         description: In School, How Often Do These Things Happen? I Read Silently
-            On My Own
+          On My Own
       - name: asbr03b
         description: In School, How Often Do These Things Happen? I Read Things That
-            I Choose Myself
+          I Choose Myself
       - name: asbr03c
         description: In School, How Often Do These Things Happen? My Teacher Asks
-            Us In Class To Talk About What We Have Read
+          Us In Class To Talk About What We Have Read
       - name: asbr04
         description: How Often Do You Borrow Books (Including Ebooks) From Your <School
-            Or Local Library>?
+          Or Local Library>?
       - name: asbr05
         description: How Much Time Do You Spend Reading Outside Of School On A Normal
-            School Day?
+          School Day?
       - name: asbr06a
         description: How Often Do You Do These Things Outside Of School? I Read For
-            Fun
+          Fun
       - name: asbr06b
         description: How Often Do You Do These Things Outside Of School? I Read To
-            Find Out About Things I Want To Learn
+          Find Out About Things I Want To Learn
       - name: asbr07a
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Like Talking About What I Read With Other
-            People
+          Each Of These Statements. I Like Talking About What I Read With Other People
       - name: asbr07b
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Would Be Happy If Someone Gave Me A Book As
-            A Present
+          Each Of These Statements. I Would Be Happy If Someone Gave Me A Book As
+          A Present
       - name: asbr07c
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Think Reading Is Boring
+          Each Of These Statements. I Think Reading Is Boring
       - name: asbr07d
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Would Like To Have More Time For Reading
+          Each Of These Statements. I Would Like To Have More Time For Reading
       - name: asbr07e
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Enjoy Reading
+          Each Of These Statements. I Enjoy Reading
       - name: asbr07f
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Learn A Lot From Reading
+          Each Of These Statements. I Learn A Lot From Reading
       - name: asbr07g
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Like To Read Things That Make Me Think
+          Each Of These Statements. I Like To Read Things That Make Me Think
       - name: asbr07h
         description: What Do You Think About Reading? Tell How Much You Agree With
-            Each Of These Statements. I Like It When A Book Helps Me Imagine Other
-            Worlds
+          Each Of These Statements. I Like It When A Book Helps Me Imagine Other Worlds
       - name: asbr08a
         description: How Well Do You Read? Tell How Much You Agree With Each Of These
-            Statements. I Usually Do Well In Reading
+          Statements. I Usually Do Well In Reading
       - name: asbr08b
         description: How Well Do You Read? Tell How Much You Agree With Each Of These
-            Statements. Reading Is Easy For Me
+          Statements. Reading Is Easy For Me
       - name: asbr08c
         description: How Well Do You Read? Tell How Much You Agree With Each Of These
-            Statements. I Have Trouble Reading Stories With Difficult Words
+          Statements. I Have Trouble Reading Stories With Difficult Words
       - name: asbr08d
         description: How Well Do You Read? Tell How Much You Agree With Each Of These
-            Statements. Reading Is Harder For Me Than For Many Of My Classmates
+          Statements. Reading Is Harder For Me Than For Many Of My Classmates
       - name: asbr08e
         description: How Well Do You Read? Tell How Much You Agree With Each Of These
-            Statements. Reading Is Harder For Me Than Any Other Subject
+          Statements. Reading Is Harder For Me Than Any Other Subject
       - name: asbr08f
         description: How Well Do You Read? Tell How Much You Agree With Each Of These
-            Statements. I Am Just Not Good At Reading
+          Statements. I Am Just Not Good At Reading
       - name: asdage
         description: Students Age
       - name: houwgt
@@ -2497,279 +2493,278 @@ models:
         description: Locale Id Of The Student Home Questionnaire
       - name: asbh01a
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Read Books
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Read Books
       - name: asbh01b
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Tell Stories
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Tell Stories
       - name: asbh01c
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Sing Songs
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Sing Songs
       - name: asbh01d
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Play With Alphabet Toys (E.G., Blocks With Letters Of The
-            Alphabet)
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Play With Alphabet Toys (E.G., Blocks With Letters Of The Alphabet)
       - name: asbh01e
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Talk About Things You Had Done
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Talk About Things You Had Done
       - name: asbh01f
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Talk About What You Had Read
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Talk About What You Had Read
       - name: asbh01g
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Play Word Games
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Play Word Games
       - name: asbh01h
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Write Letters Or Words
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Write Letters Or Words
       - name: asbh01i
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Read Aloud Signs And Labels
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Read Aloud Signs And Labels
       - name: asbh01j
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Say Counting Rhymes Or Sing Counting Songs
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Say Counting Rhymes Or Sing Counting Songs
       - name: asbh01k
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Play With Number Toys (E.G., Blocks With Numbers)
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Play With Number Toys (E.G., Blocks With Numbers)
       - name: asbh01l
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Count Different Things
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Count Different Things
       - name: asbh01m
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Play Games Involving Shapes (E.G., Shape Sorting Toys, Puzzles)
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Play Games Involving Shapes (E.G., Shape Sorting Toys, Puzzles)
       - name: asbh01n
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Play With Building Blocks Or Construction Toys
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Play With Building Blocks Or Construction Toys
       - name: asbh01o
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Play Board Or Card Games
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Play Board Or Card Games
       - name: asbh01p
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Write Numbers
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Write Numbers
       - name: asbh01q
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Draw Shapes
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Draw Shapes
       - name: asbh01r
         description: Before Your Child Began Primary/Elementary School, How Often
-            Did You Or Someone Else In Your Home Do The Following Activities With
-            Him Or Her? Measure Or Weigh Things (E.G., When Cooking)
+          Did You Or Someone Else In Your Home Do The Following Activities With Him
+          Or Her? Measure Or Weigh Things (E.G., When Cooking)
       - name: asbh02a
         description: Was Your Child Born In <Country>?
       - name: asbh02b
         description: If No, How Old Was Your Child When He/She Came To <Country>?
       - name: asbh03a
         description: What Language Did Your Child Speak Before He/She Began School?
-            <Language Of Test>
+          <Language Of Test>
       - name: asbh03b
         description: What Language Did Your Child Speak Before He/She Began School?
-            <Country-Specific>
+          <Country-Specific>
       - name: asbh03c
         description: What Language Did Your Child Speak Before He/She Began School?
-            <Country-Specific>
+          <Country-Specific>
       - name: asbh03d
         description: What Language Did Your Child Speak Before He/She Began School?
-            <Country-Specific>
+          <Country-Specific>
       - name: asbh03e
         description: What Language Did Your Child Speak Before He/She Began School?
-            <Country-Specific>
+          <Country-Specific>
       - name: asbh03f
         description: What Language Did Your Child Speak Before He/She Began School?
-            Other
+          Other
       - name: asbh04
         description: How Often Does Your Child Speak <Language Of Test> At Home?
       - name: asbh05aa
         description: Did Your Child Attend The Following Before <First Grade>? Early
-            Childhood Educational Program Or Center For Children Under Age 3
+          Childhood Educational Program Or Center For Children Under Age 3
       - name: asbh05ab
         description: Did Your Child Attend The Following Before <First Grade>? Pre-Primary
-            Educational Program For Children Age 3 Or Older, Including <Kindergarten>
+          Educational Program For Children Age 3 Or Older, Including <Kindergarten>
       - name: asbh05b
         description: Approximately, How Long Was Your Child In These Programs Altogether?
       - name: asbh06
         description: How Old Was Your Child When He/She Began The <First Grade> Of
-            Primary/Elementary School?
+          Primary/Elementary School?
       - name: asbh07a
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Recognize Most Of The
-            Letters Of The Alphabet
+          The <First Grade> Of Primary/Elementary School? Recognize Most Of The Letters
+          Of The Alphabet
       - name: asbh07b
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Read Some Words
+          The <First Grade> Of Primary/Elementary School? Read Some Words
       - name: asbh07c
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Read Sentences
+          The <First Grade> Of Primary/Elementary School? Read Sentences
       - name: asbh07d
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Read A Story
+          The <First Grade> Of Primary/Elementary School? Read A Story
       - name: asbh07e
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Write Letters Of The Alphabet
+          The <First Grade> Of Primary/Elementary School? Write Letters Of The Alphabet
       - name: asbh07f
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Write His/Her Name
+          The <First Grade> Of Primary/Elementary School? Write His/Her Name
       - name: asbh07g
         description: How Well Could Your Child Do The Following When He/She Began
-            The <First Grade> Of Primary/Elementary School? Write Words Other Than
-            His/Her Name
+          The <First Grade> Of Primary/Elementary School? Write Words Other Than His/Her
+          Name
       - name: asbh08a
         description: What Do You Think Of Your Child’S School? My Child’S School Does
-            A Good Job Including Me In My Child’S Education
+          A Good Job Including Me In My Child’S Education
       - name: asbh08b
         description: What Do You Think Of Your Child’S School? My Child’S School Provides
-            A Safe Environment
+          A Safe Environment
       - name: asbh08c
         description: What Do You Think Of Your Child’S School? My Child’S School Cares
-            About My Child’S Progress In School
+          About My Child’S Progress In School
       - name: asbh08d
         description: What Do You Think Of Your Child’S School? My Child’S School Does
-            A Good Job Informing Me Of His/Her Progress
+          A Good Job Informing Me Of His/Her Progress
       - name: asbh08e
         description: What Do You Think Of Your Child’S School? My Child’S School Promotes
-            High Academic Standards
+          High Academic Standards
       - name: asbh08f
         description: What Do You Think Of Your Child’S School? My Child’S School Does
-            A Good Job In Helping Him/Her Become Better In Reading
+          A Good Job In Helping Him/Her Become Better In Reading
       - name: asbh09
         description: In A Typical Week, How Much Time Do You Usually Spend Reading
-            For Yourself At Home, Including Books, Magazines, Newspapers, And Materials
-            For Work (In Print Or Digital Media)?
+          For Yourself At Home, Including Books, Magazines, Newspapers, And Materials
+          For Work (In Print Or Digital Media)?
       - name: asbh10
         description: When You Are At Home, How Often Do You Read For Your Own Enjoyment?
       - name: asbh11a
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. I Read Only If I Have To
+          About Reading. I Read Only If I Have To
       - name: asbh11b
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. I Like Talking About What I Read With Other People
+          About Reading. I Like Talking About What I Read With Other People
       - name: asbh11c
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. I Like To Spend My Spare Time Reading
+          About Reading. I Like To Spend My Spare Time Reading
       - name: asbh11d
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. I Read Only If I Need Information
+          About Reading. I Read Only If I Need Information
       - name: asbh11e
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. Reading Is An Important Activity In My Home
+          About Reading. Reading Is An Important Activity In My Home
       - name: asbh11f
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. I Would Like To Have More Time For Reading
+          About Reading. I Would Like To Have More Time For Reading
       - name: asbh11g
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. I Enjoy Reading
+          About Reading. I Enjoy Reading
       - name: asbh11h
         description: Please Indicate How Much You Agree With The Following Statements
-            About Reading. Reading Is One Of My Favorite Hobbies
+          About Reading. Reading Is One Of My Favorite Hobbies
       - name: asbh12
         description: About How Many Books Are There In Your Home? (Do Not Count Ebooks,
-            Magazines, Newspapers, Or Children’S Books.)
+          Magazines, Newspapers, Or Children’S Books.)
       - name: asbh13
         description: About How Many Children’S Books Are There In Your Home? (Do Not
-            Count Children’S Ebooks, Magazines, Or School Books.)
+          Count Children’S Ebooks, Magazines, Or School Books.)
       - name: asbh14a
         description: Do You Have Any Of These Things In Your Home? Access To The Internet
       - name: asbh14b
         description: Do You Have Any Of These Things In Your Home? A Computer, Tablet,
-            Or E-Reader
+          Or E-Reader
       - name: asbh14c
         description: Do You Have Any Of These Things In Your Home? A Smartphone
       - name: asbh15a
         description: What Is The Highest Level Of Education Completed By The Child/S
-            <Parents/Guardians>? <Parent/Guardian A>
+          <Parents/Guardians>? <Parent/Guardian A>
       - name: asbh15b
         description: What Is The Highest Level Of Education Completed By The Child/S
-            <Parents/Guardians>? <Parent/Guardian B>
+          <Parents/Guardians>? <Parent/Guardian B>
       - name: asbh16
         description: How Far In His/Her Education Do You Expect Your Child To Go?
       - name: asbh17a
         description: What Kind Of Work Do The Child'S <Parents/Guardians> Do For Their
-            Main Jobs? <Parent/Guardian A>
+          Main Jobs? <Parent/Guardian A>
       - name: asbh17b
         description: What Kind Of Work Do The Child'S <Parents/Guardians> Do For Their
-            Main Jobs? <Parent/Guardian B>
+          Main Jobs? <Parent/Guardian B>
       - name: asbh18aa
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Language Of Test>
+          Following Languages? <Parent/Guardian A> <Language Of Test>
       - name: asbh18ab
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Language Of Test>
+          Following Languages? <Parent/Guardian B> <Language Of Test>
       - name: asbh18ba
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Country-Specific>
+          Following Languages? <Parent/Guardian A> <Country-Specific>
       - name: asbh18bb
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Country-Specific>
+          Following Languages? <Parent/Guardian B> <Country-Specific>
       - name: asbh18ca
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Country-Specific>
+          Following Languages? <Parent/Guardian A> <Country-Specific>
       - name: asbh18cb
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Country-Specific>
+          Following Languages? <Parent/Guardian B> <Country-Specific>
       - name: asbh18da
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Country-Specific>
+          Following Languages? <Parent/Guardian A> <Country-Specific>
       - name: asbh18db
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Country-Specific>
+          Following Languages? <Parent/Guardian B> <Country-Specific>
       - name: asbh18ea
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Country-Specific>
+          Following Languages? <Parent/Guardian A> <Country-Specific>
       - name: asbh18eb
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Country-Specific>
+          Following Languages? <Parent/Guardian B> <Country-Specific>
       - name: asbh18fa
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Other>
+          Following Languages? <Parent/Guardian A> <Other>
       - name: asbh18fb
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Other>
+          Following Languages? <Parent/Guardian B> <Other>
       - name: asbh18ga
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian A> <Not Applicable>
+          Following Languages? <Parent/Guardian A> <Not Applicable>
       - name: asbh18gb
         description: Do The Child'S <Parents/Guardians> Talk With The Child In The
-            Following Languages? <Parent/Guardian B> <Not Applicable>
+          Following Languages? <Parent/Guardian B> <Not Applicable>
       - name: asbh19
         description: Did Your Child Stay At Home Any Time Because Of The Covid-19
-            Pandemic?
+          Pandemic?
       - name: asbh20a
         description: When Your Child Was Not In School, How Did Your Child'S School
-            Engage With Your Child'S Home-Based Learning? Reading Assignments
+          Engage With Your Child'S Home-Based Learning? Reading Assignments
       - name: asbh20b
         description: When Your Child Was Not In School, How Did Your Child'S School
-            Engage With Your Child'S Home-Based Learning? Online Activities
+          Engage With Your Child'S Home-Based Learning? Online Activities
       - name: asbh20c
         description: When Your Child Was Not In School, How Did Your Child'S School
-            Engage With Your Child'S Home-Based Learning? Printed Learning Materials
+          Engage With Your Child'S Home-Based Learning? Printed Learning Materials
       - name: asbh21a
         description: Did You Provide Additional Educational Resources For Your Child
-            During The Pandemic? Books
+          During The Pandemic? Books
       - name: asbh21b
         description: Did You Provide Additional Educational Resources For Your Child
-            During The Pandemic? Digital Devices
+          During The Pandemic? Digital Devices
       - name: asbh21c
         description: Did You Provide Additional Educational Resources For Your Child
-            During The Pandemic? Digitally-Based Learning Activities
+          During The Pandemic? Digitally-Based Learning Activities
       - name: asbh21d
         description: Did You Provide Additional Educational Resources For Your Child
-            During The Pandemic? Online Instruction Or Tutoring
+          During The Pandemic? Online Instruction Or Tutoring
       - name: asbh22
         description: Do You Think Your Child'S Learning Progress Has Been Adversely
-            Affected?
+          Affected?
       - name: asbghrl
         description: Home Resources For Learning/Scl
       - name: asdghrl
@@ -4982,19 +4977,19 @@ models:
         description: 'Plausible Value: Overall Reading Pv5'
       - name: asribm01
         description: Int. Reading Scale Benchmark Reached. Performed Below The Low
-            International Benchmark
+          International Benchmark
       - name: asribm02
         description: Int. Reading Scale Benchmark Reached. Performed At Or Above The
-            Low International Benchmark, But Below The Intermediate Benchmark
+          Low International Benchmark, But Below The Intermediate Benchmark
       - name: asribm03
         description: Int. Reading Scale Benchmark Reached. Performed At Or Above The
-            Intermediate International Benchmark, But Below The High Benchmark
+          Intermediate International Benchmark, But Below The High Benchmark
       - name: asribm04
         description: Int. Reading Scale Benchmark Reached. Performed At Or Above The
-            High International Benchmark, But Below The Advanced Benchmark
+          High International Benchmark, But Below The Advanced Benchmark
       - name: asribm05
         description: Int. Reading Scale Benchmark Reached. Performed At Or Above The
-            Advanced International Benchmark
+          Advanced International Benchmark
       - name: asrlit01
         description: 'Plausible Value: Literary Purpose Pv1'
       - name: asrlit02
@@ -5068,7 +5063,7 @@ models:
         description: Locale Id Of The Teacher Questionnaire
       - name: atbg01
         description: By The End Of This School Year, How Many Years Will You Have
-            Been Teaching Altogether?
+          Been Teaching Altogether?
       - name: atbg02
         description: Which Of These Describes You?
       - name: atbg03
@@ -5077,541 +5072,540 @@ models:
         description: What Is The Highest Level Of Formal Education You Have Completed?
       - name: atbg05aa
         description: During Your <Post-Secondary> Education, What Was Your Major Or
-            Main Area(S) Of Study? Education—Primary/Elementary
+          Main Area(S) Of Study? Education—Primary/Elementary
       - name: atbg05ab
         description: During Your <Post-Secondary> Education, What Was Your Major Or
-            Main Area(S) Of Study? Education—Secondary
+          Main Area(S) Of Study? Education—Secondary
       - name: atbg05ac
         description: During Your <Post-Secondary> Education, What Was Your Major Or
-            Main Area(S) Of Study? <Language Of Test>
+          Main Area(S) Of Study? <Language Of Test>
       - name: atbg05ad
         description: During Your <Post-Secondary> Education, What Was Your Major Or
-            Main Area(S) Of Study? Other
+          Main Area(S) Of Study? Other
       - name: atbg05ba
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? <Language Of Test>
+          Did You Study The Following Areas? <Language Of Test>
       - name: atbg05bb
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Literature
+          Did You Study The Following Areas? Literature
       - name: atbg05bc
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Pedagogy/Teaching Reading
+          Did You Study The Following Areas? Pedagogy/Teaching Reading
       - name: atbg05bd
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Educational Psychology
+          Did You Study The Following Areas? Educational Psychology
       - name: atbg05be
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Learning Support
+          Did You Study The Following Areas? Learning Support
       - name: atbg05bf
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Reading Theory
+          Did You Study The Following Areas? Reading Theory
       - name: atbg05bg
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Special Education
+          Did You Study The Following Areas? Special Education
       - name: atbg05bh
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Second Language Learning
+          Did You Study The Following Areas? Second Language Learning
       - name: atbg05bi
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Assessment Methods In Reading
+          Did You Study The Following Areas? Assessment Methods In Reading
       - name: atbg05bj
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Early Childhood Education
+          Did You Study The Following Areas? Early Childhood Education
       - name: atbg05bk
         description: As Part Of Your Formal Education And/Or Training, To What Extent
-            Did You Study The Following Areas? Digital Literacies
+          Did You Study The Following Areas? Digital Literacies
       - name: atbg06
         description: How Often Do You Read For Enjoyment?
       - name: atbg07aa
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Teaching
-            Reading Comprehension Skills Or Strategies
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Teaching
+          Reading Comprehension Skills Or Strategies
       - name: atbg07ba
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Teaching Reading Comprehension Skills Or Strategies
+          Teaching Reading Comprehension Skills Or Strategies
       - name: atbg07ab
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Integrating
-            Literacies Across The Curriculum
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Integrating
+          Literacies Across The Curriculum
       - name: atbg07bb
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Integrating Literacies Across The Curriculum
+          Integrating Literacies Across The Curriculum
       - name: atbg07ac
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Addressing
-            Students' Language Needs In Teaching Reading
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Addressing
+          Students' Language Needs In Teaching Reading
       - name: atbg07bc
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Addressing Students' Language Needs In Teaching Reading
+          Addressing Students' Language Needs In Teaching Reading
       - name: atbg07ad
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Integrating
-            Technology Into Reading Instruction
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Integrating
+          Technology Into Reading Instruction
       - name: atbg07bd
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Integrating Technology Into Reading Instruction
+          Integrating Technology Into Reading Instruction
       - name: atbg07ae
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Instruction
-            Related To Digital Literacies
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Instruction
+          Related To Digital Literacies
       - name: atbg07be
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Instruction Related To Digital Literacies
+          Instruction Related To Digital Literacies
       - name: atbg07af
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Addressing
-            Differentiation Of Instruction For Students' Needs And Interests
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Addressing
+          Differentiation Of Instruction For Students' Needs And Interests
       - name: atbg07bf
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Addressing Differentiation Of Instruction For Students' Needs And Interests
+          Addressing Differentiation Of Instruction For Students' Needs And Interests
       - name: atbg07ag
         description: In The Past Two Years, Have You Participated In Formal Professional
-            Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Assessing
-            Students' Reading
+          Development In Reading (E.G., Workshops, Seminars, Lesson Studies)? Assessing
+          Students' Reading
       - name: atbg07bg
         description: How Would You Prioritize Your Need For Future Professional Development?
-            Assessing Students' Reading
+          Assessing Students' Reading
       - name: atbg08a
         description: How Helpful Is Each Type Of Professional Development? Workshops
       - name: atbg08b
         description: How Helpful Is Each Type Of Professional Development? Seminars
       - name: atbg08c
         description: How Helpful Is Each Type Of Professional Development? Access
-            To A Mentor (E.G., Literacy Coach)
+          To A Mentor (E.G., Literacy Coach)
       - name: atbg08d
         description: How Helpful Is Each Type Of Professional Development? Teacher
-            Professional Learning Communities
+          Professional Learning Communities
       - name: atbg08e
         description: How Helpful Is Each Type Of Professional Development? Online
-            Professional Development
+          Professional Development
       - name: atbg09a
         description: To What Extent Are Each Of These A Disincentive To Participate
-            In Professional Development? Financial Costs
+          In Professional Development? Financial Costs
       - name: atbg09b
         description: To What Extent Are Each Of These A Disincentive To Participate
-            In Professional Development? Time Conflicts
+          In Professional Development? Time Conflicts
       - name: atbg09c
         description: To What Extent Are Each Of These A Disincentive To Participate
-            In Professional Development? Content Is Not Relevant
+          In Professional Development? Content Is Not Relevant
       - name: atbg09d
         description: To What Extent Are Each Of These A Disincentive To Participate
-            In Professional Development? Lack Of Support From School Administrators
+          In Professional Development? Lack Of Support From School Administrators
       - name: atbg10a
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Understanding Of The School’S Curricular Goals
+          School? Teachers’ Understanding Of The School’S Curricular Goals
       - name: atbg10b
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Degree Of Success In Implementing The School’S Curriculum
+          School? Teachers’ Degree Of Success In Implementing The School’S Curriculum
       - name: atbg10c
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Expectations For Student Achievement
+          School? Teachers’ Expectations For Student Achievement
       - name: atbg10d
         description: How Would You Characterize Each Of The Following Within Your
-            School? Teachers’ Ability To Inspire Students
+          School? Teachers’ Ability To Inspire Students
       - name: atbg10e
         description: How Would You Characterize Each Of The Following Within Your
-            School? Collaboration Between School Leadership And Teachers To Plan Instruction
+          School? Collaboration Between School Leadership And Teachers To Plan Instruction
       - name: atbg10f
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Involvement In School Activities
+          School? Parental Involvement In School Activities
       - name: atbg10g
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Commitment To Ensure That Students Are Ready To Learn
+          School? Parental Commitment To Ensure That Students Are Ready To Learn
       - name: atbg10h
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Expectations For Student Achievement
+          School? Parental Expectations For Student Achievement
       - name: atbg10i
         description: How Would You Characterize Each Of The Following Within Your
-            School? Parental Support For Student Achievement
+          School? Parental Support For Student Achievement
       - name: atbg10j
         description: How Would You Characterize Each Of The Following Within Your
-            School? Students’ Desire To Do Well In School
+          School? Students’ Desire To Do Well In School
       - name: atbg10k
         description: How Would You Characterize Each Of The Following Within Your
-            School? Students’ Ability To Reach School’S Academic Goals
+          School? Students’ Ability To Reach School’S Academic Goals
       - name: atbg10l
         description: How Would You Characterize Each Of The Following Within Your
-            School? Students’ Respect For Classmates Who Excel Academically
+          School? Students’ Respect For Classmates Who Excel Academically
       - name: atbg11a
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. This School
-            Is Located In A Safe Neighborhood
+          You Agree Or Disagree With Each Of The Following Statements. This School
+          Is Located In A Safe Neighborhood
       - name: atbg11b
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. I Feel Safe
-            At This School
+          You Agree Or Disagree With Each Of The Following Statements. I Feel Safe
+          At This School
       - name: atbg11c
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. This School'S
-            Security Policies And Practices Are Sufficient
+          You Agree Or Disagree With Each Of The Following Statements. This School'S
+          Security Policies And Practices Are Sufficient
       - name: atbg11d
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. The Students
-            Behave In An Orderly Manner
+          You Agree Or Disagree With Each Of The Following Statements. The Students
+          Behave In An Orderly Manner
       - name: atbg11e
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. The Students
-            Are Respectful Of The Teachers
+          You Agree Or Disagree With Each Of The Following Statements. The Students
+          Are Respectful Of The Teachers
       - name: atbg11f
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. The Students
-            Respect School Property
+          You Agree Or Disagree With Each Of The Following Statements. The Students
+          Respect School Property
       - name: atbg11g
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. This School
-            Has Clear Rules About Student Conduct
+          You Agree Or Disagree With Each Of The Following Statements. This School
+          Has Clear Rules About Student Conduct
       - name: atbg11h
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. This School'S
-            Rules Are Enforced In A Fair And Consistent Manner
+          You Agree Or Disagree With Each Of The Following Statements. This School'S
+          Rules Are Enforced In A Fair And Consistent Manner
       - name: atbg11i
         description: Thinking About Your Current School, Indicate The Extent To Which
-            You Agree Or Disagree With Each Of The Following Statements. The Students
-            Are Respectful Of Each Other
+          You Agree Or Disagree With Each Of The Following Statements. The Students
+          Are Respectful Of Each Other
       - name: atbg12a
         description: How Often Do You Feel The Following Way About Being A Teacher?
-            I Am Content With My Profession As A Teacher
+          I Am Content With My Profession As A Teacher
       - name: atbg12b
         description: How Often Do You Feel The Following Way About Being A Teacher?
-            I Find My Work Full Of Meaning And Purpose
+          I Find My Work Full Of Meaning And Purpose
       - name: atbg12c
         description: How Often Do You Feel The Following Way About Being A Teacher?
-            I Am Enthusiastic About My Job
+          I Am Enthusiastic About My Job
       - name: atbg12d
         description: How Often Do You Feel The Following Way About Being A Teacher?
-            My Work Inspires Me
+          My Work Inspires Me
       - name: atbg12e
         description: How Often Do You Feel The Following Way About Being A Teacher?
-            I Am Proud Of The Work I Do
+          I Am Proud Of The Work I Do
       - name: atbg12f
         description: How Often Do You Feel The Following Way About Being A Teacher?
-            I Feel Appreciated As A Teacher
+          I Feel Appreciated As A Teacher
       - name: atbr01a
         description: How Many Students Are In This Class?
       - name: atbr01b
-        description: 'How Many Of The Students In #R1A Are In <Fourth Grade>?'
+        description: 'How Many Of The Students In # R1A Are In <Fourth Grade>?'
       - name: atbr02a
         description: How Many <Fourth Grade> Students Experience Difficulties Understanding
-            Spoken <Language Of Test>?
+          Spoken <Language Of Test>?
       - name: atbr02b
         description: How Many <Fourth Grade> Students Experience Difficulties In Reading?
       - name: atbr03a
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Students Lacking Prerequisite Knowledge Or Skills
+          This Class? Students Lacking Prerequisite Knowledge Or Skills
       - name: atbr03b
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Students Suffering From Lack Of Basic Nutrition
+          This Class? Students Suffering From Lack Of Basic Nutrition
       - name: atbr03c
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Students Suffering From Not Enough Sleep
+          This Class? Students Suffering From Not Enough Sleep
       - name: atbr03d
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Students Absent From Class
+          This Class? Students Absent From Class
       - name: atbr03e
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Disruptive Students
+          This Class? Disruptive Students
       - name: atbr03f
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Uninterested Students
+          This Class? Uninterested Students
       - name: atbr03g
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Students With Mental, Emotional, Or Psychological Impairment
+          This Class? Students With Mental, Emotional, Or Psychological Impairment
       - name: atbr03h
         description: In Your View, To What Extent Do The Following Limit How You Teach
-            This Class? Students Needing Extra Support In Reading
+          This Class? Students Needing Extra Support In Reading
       - name: atbr04
         description: In A Typical Week, How Much Time Do You Spend On <Language Of
-            Test> Language Instruction And/Or Activities With The Students? (Minutes
-            Per Week)
+          Test> Language Instruction And/Or Activities With The Students? (Minutes
+          Per Week)
       - name: atbr05
         description: Regardless Of Whether Or Not You Have Formally Scheduled Time
-            For Reading Instruction, In A Typical Week About How Much Time Do You
-            Spend On Reading Instruction And/Or Activities With The Students? (Minutes
-            Per Week)
+          For Reading Instruction, In A Typical Week About How Much Time Do You Spend
+          On Reading Instruction And/Or Activities With The Students? (Minutes Per
+          Week)
       - name: atbr06a
         description: When You Have Reading Instruction And/Or Do Reading Activities,
-            How Often Do You Organize Students In The Following Ways? I Teach Reading
-            As A Whole-Class Activity
+          How Often Do You Organize Students In The Following Ways? I Teach Reading
+          As A Whole-Class Activity
       - name: atbr06b
         description: When You Have Reading Instruction And/Or Do Reading Activities,
-            How Often Do You Organize Students In The Following Ways? I Create Same-
-            Ability Groups
+          How Often Do You Organize Students In The Following Ways? I Create Same-
+          Ability Groups
       - name: atbr06c
         description: When You Have Reading Instruction And/Or Do Reading Activities,
-            How Often Do You Organize Students In The Following Ways? I Create Mixed-
-            Ability Groups
+          How Often Do You Organize Students In The Following Ways? I Create Mixed-
+          Ability Groups
       - name: atbr06d
         description: When You Have Reading Instruction And/Or Do Reading Activities,
-            How Often Do You Organize Students In The Following Ways? I Use Individualized
-            Instruction For Reading
+          How Often Do You Organize Students In The Following Ways? I Use Individualized
+          Instruction For Reading
       - name: atbr06e
         description: When You Have Reading Instruction And/Or Do Reading Activities,
-            How Often Do You Organize Students In The Following Ways? Students Work
-            Independently On An Assigned Goal Or Plan
+          How Often Do You Organize Students In The Following Ways? Students Work
+          Independently On An Assigned Goal Or Plan
       - name: atbr07aa
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Literary Reading Materials: Short
-            Stories (E.G., Fables, Fairy Tales, Action Stories, Science Fiction, Detective
-            Stories)'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Literary Reading Materials: Short
+          Stories (E.G., Fables, Fairy Tales, Action Stories, Science Fiction, Detective
+          Stories)'
       - name: atbr07ab
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Literary Reading Materials: Longer
-            Fiction Books With Chapters'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Literary Reading Materials: Longer
+          Fiction Books With Chapters'
       - name: atbr07ac
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Literary Reading Materials: Plays'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Literary Reading Materials: Plays'
       - name: atbr07ad
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Literary Reading Materials: Poems/Poetry'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Literary Reading Materials: Poems/Poetry'
       - name: atbr07ba
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Informational Reading Materials:
-            Nonfiction Subject Area Books Or Textbooks'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Informational Reading Materials:
+          Nonfiction Subject Area Books Or Textbooks'
       - name: atbr07bb
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Informational Reading Materials:
-            Longer Nonfiction Books With Chapters'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Informational Reading Materials:
+          Longer Nonfiction Books With Chapters'
       - name: atbr07bc
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Informational Reading Materials:
-            Nonfiction Articles That Describe And Explain About Things, People, Events,
-            Or How Things Work (E.G., Newspaper Articles, Brochures)'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Informational Reading Materials:
+          Nonfiction Articles That Describe And Explain About Things, People, Events,
+          Or How Things Work (E.G., Newspaper Articles, Brochures)'
       - name: atbr07bd
         description: 'When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Have The Students Read The Following
-            Types Of Text (In Print Or Digitally)? Informational Reading Materials:
-            Non-Continuous Texts (E.G., Diagrams, Maps, Illustrations, Photographs,
-            Tables)'
+          With The Students, How Often Do You Have The Students Read The Following
+          Types Of Text (In Print Or Digitally)? Informational Reading Materials:
+          Non-Continuous Texts (E.G., Diagrams, Maps, Illustrations, Photographs,
+          Tables)'
       - name: atbr08a
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Read Aloud To Students
+          With The Students, How Often Do You Do The Following? Read Aloud To Students
       - name: atbr08b
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Ask Students To
-            Read Aloud
+          With The Students, How Often Do You Do The Following? Ask Students To Read
+          Aloud
       - name: atbr08c
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Ask Students To
-            Read Silently On Their Own
+          With The Students, How Often Do You Do The Following? Ask Students To Read
+          Silently On Their Own
       - name: atbr08d
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Teach Students Strategies
-            For Decoding Sounds And Words
+          With The Students, How Often Do You Do The Following? Teach Students Strategies
+          For Decoding Sounds And Words
       - name: atbr08e
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Teach Students New
-            Vocabulary Systematically
+          With The Students, How Often Do You Do The Following? Teach Students New
+          Vocabulary Systematically
       - name: atbr08f
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Provide Opportunities
-            For Students To Develop Fluency
+          With The Students, How Often Do You Do The Following? Provide Opportunities
+          For Students To Develop Fluency
       - name: atbr08g
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Teach Or Model Skimming
-            Or Scanning Strategies
+          With The Students, How Often Do You Do The Following? Teach Or Model Skimming
+          Or Scanning Strategies
       - name: atbr08h
         description: When You Have Reading Instruction And/Or Do Reading Activities
-            With The Students, How Often Do You Do The Following? Teach Digital Literacy
-            Skills (E.G., Read, Write, And Communicate Using Digital Tools And Media)
+          With The Students, How Often Do You Do The Following? Teach Digital Literacy
+          Skills (E.G., Read, Write, And Communicate Using Digital Tools And Media)
       - name: atbr09a
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Provide Reading Materials That Match The Students’ Interests
+          Class? Provide Reading Materials That Match The Students’ Interests
       - name: atbr09b
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Provide Materials That Are Appropriate For The Reading Levels Of
-            Individual Students
+          Class? Provide Materials That Are Appropriate For The Reading Levels Of
+          Individual Students
       - name: atbr09c
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Link New Content To Students’ Prior Knowledge
+          Class? Link New Content To Students’ Prior Knowledge
       - name: atbr09d
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Encourage Students To Develop Their Understandings Of The Text
+          Class? Encourage Students To Develop Their Understandings Of The Text
       - name: atbr09e
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Encourage Student Discussions Of Texts
+          Class? Encourage Student Discussions Of Texts
       - name: atbr09f
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Encourage Students To Challenge The Opinion Expressed In The Text
+          Class? Encourage Students To Challenge The Opinion Expressed In The Text
       - name: atbr09g
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Encourage Students To Read Texts With Multiple Perspectives
+          Class? Encourage Students To Read Texts With Multiple Perspectives
       - name: atbr09h
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Give Students Time To Read Books Of Their Own Choosing
+          Class? Give Students Time To Read Books Of Their Own Choosing
       - name: atbr09i
         description: How Often Do You Do The Following In Teaching Reading To This
-            Class? Give Individualized Feedback To Each Student
+          Class? Give Individualized Feedback To Each Student
       - name: atbr10a
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Locate Information
-            Within The Text
+          To Help Develop Reading Comprehension Skills Or Strategies? Locate Information
+          Within The Text
       - name: atbr10b
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Identify The
-            Main Ideas Of What They Have Read
+          To Help Develop Reading Comprehension Skills Or Strategies? Identify The
+          Main Ideas Of What They Have Read
       - name: atbr10c
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Explain Or
-            Support Their Understanding With Text Evidence
+          To Help Develop Reading Comprehension Skills Or Strategies? Explain Or Support
+          Their Understanding With Text Evidence
       - name: atbr10d
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Compare What
-            They Have Read With Experiences They Have Had
+          To Help Develop Reading Comprehension Skills Or Strategies? Compare What
+          They Have Read With Experiences They Have Had
       - name: atbr10e
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Compare What
-            They Have Read With Other Things They Have Read
+          To Help Develop Reading Comprehension Skills Or Strategies? Compare What
+          They Have Read With Other Things They Have Read
       - name: atbr10f
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Make Predictions
-            About What Will Happen Next In The Text They Are Reading
+          To Help Develop Reading Comprehension Skills Or Strategies? Make Predictions
+          About What Will Happen Next In The Text They Are Reading
       - name: atbr10g
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Make Generalizations
-            And Draw Inferences Based On What They Have Read
+          To Help Develop Reading Comprehension Skills Or Strategies? Make Generalizations
+          And Draw Inferences Based On What They Have Read
       - name: atbr10h
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Evaluate And
-            Critique The Style Or Structure Of The Text They Have Read
+          To Help Develop Reading Comprehension Skills Or Strategies? Evaluate And
+          Critique The Style Or Structure Of The Text They Have Read
       - name: atbr10i
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Determine
-            The Author’S Perspective Or Intention
+          To Help Develop Reading Comprehension Skills Or Strategies? Determine The
+          Author’S Perspective Or Intention
       - name: atbr10j
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Self-Monitor
-            Their Reading (E.G., Recognize When They Don'T Understand)
+          To Help Develop Reading Comprehension Skills Or Strategies? Self-Monitor
+          Their Reading (E.G., Recognize When They Don'T Understand)
       - name: atbr10k
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Determine
-            If A Website Is Useful For A Specific Purpose
+          To Help Develop Reading Comprehension Skills Or Strategies? Determine If
+          A Website Is Useful For A Specific Purpose
       - name: atbr10l
         description: How Often Do You Ask The Students To Do The Following Things
-            To Help Develop Reading Comprehension Skills Or Strategies? Evaluate The
-            Credibility Of A Website
+          To Help Develop Reading Comprehension Skills Or Strategies? Evaluate The
+          Credibility Of A Website
       - name: atbr11a
         description: After Students Have Read Something, How Often Do You Ask Them
-            To Do The Following? Write Something About Or In Response To What They
-            Have Read
+          To Do The Following? Write Something About Or In Response To What They Have
+          Read
       - name: atbr11b
         description: After Students Have Read Something, How Often Do You Ask Them
-            To Do The Following? Answer Oral Questions About Or Orally Summarize What
-            They Have Read
+          To Do The Following? Answer Oral Questions About Or Orally Summarize What
+          They Have Read
       - name: atbr11c
         description: After Students Have Read Something, How Often Do You Ask Them
-            To Do The Following? Talk With Each Other About What They Have Read
+          To Do The Following? Talk With Each Other About What They Have Read
       - name: atbr11d
         description: After Students Have Read Something, How Often Do You Ask Them
-            To Do The Following? Take A Written Quiz Or Test About What They Have
-            Read
+          To Do The Following? Take A Written Quiz Or Test About What They Have Read
       - name: atbr11e
         description: After Students Have Read Something, How Often Do You Ask Them
-            To Do The Following? Create A Multi-Model Response (E.G., Image, Audio,
-            Text, Video, Performance)
+          To Do The Following? Create A Multi-Model Response (E.G., Image, Audio,
+          Text, Video, Performance)
       - name: atbr12a
         description: Do The Students In This Class Ever Have Digital Devices (Desktop
-            Computers, Laptops, Or Tablets) Available To Use During Reading Instruction?
+          Computers, Laptops, Or Tablets) Available To Use During Reading Instruction?
       - name: atbr12ba
         description: What Access Do The Students Have To Digital Devices? The School
-            Provides Each Student With A Digital Device
+          Provides Each Student With A Digital Device
       - name: atbr12bb
         description: What Access Do The Students Have To Digital Devices? The Class
-            Has Digital Devices That Students Can Share
+          Has Digital Devices That Students Can Share
       - name: atbr12bc
         description: What Access Do The Students Have To Digital Devices? The School
-            Has Digital Devices That The Class Can Use Sometimes
+          Has Digital Devices That The Class Can Use Sometimes
       - name: atbr12bd
         description: What Access Do The Students Have To Digital Devices? Students
-            Bring Their Own Digital Devices
+          Bring Their Own Digital Devices
       - name: atbr12c
         description: When Doing Reading Activities With The Whole Class, How Often
-            Do You Have Students Use Digital Devices?
+          Do You Have Students Use Digital Devices?
       - name: atbr12da
         description: In Addition, How Often Do You Have Specific Groups Of Students
-            Do Personalized Reading Activities Using Digital Devices? Low-Performing
-            Students
+          Do Personalized Reading Activities Using Digital Devices? Low-Performing
+          Students
       - name: atbr12db
         description: In Addition, How Often Do You Have Specific Groups Of Students
-            Do Personalized Reading Activities Using Digital Devices? High-Performing
-            Students
+          Do Personalized Reading Activities Using Digital Devices? High-Performing
+          Students
       - name: atbr12dc
         description: In Addition, How Often Do You Have Specific Groups Of Students
-            Do Personalized Reading Activities Using Digital Devices? Students With
-            Special Needs
+          Do Personalized Reading Activities Using Digital Devices? Students With
+          Special Needs
       - name: atbr12ea
         description: During Reading Instruction, How Often Do You Have Students Use
-            Digital Devices To Do The Following? Read Digital Texts
+          Digital Devices To Do The Following? Read Digital Texts
       - name: atbr12eb
         description: During Reading Instruction, How Often Do You Have Students Use
-            Digital Devices To Do The Following? Look Up Facts And Definitions
+          Digital Devices To Do The Following? Look Up Facts And Definitions
       - name: atbr12ec
         description: During Reading Instruction, How Often Do You Have Students Use
-            Digital Devices To Do The Following? Do A Research Project On A Particular
-            Topic Or Problem
+          Digital Devices To Do The Following? Do A Research Project On A Particular
+          Topic Or Problem
       - name: atbr12ed
         description: During Reading Instruction, How Often Do You Have Students Use
-            Digital Devices To Do The Following? Write Stories Or Other Texts
+          Digital Devices To Do The Following? Write Stories Or Other Texts
       - name: atbr12ee
         description: During Reading Instruction, How Often Do You Have Students Use
-            Digital Devices To Do The Following? Create A Presentation Or Communication
-            (E.G., Video)
+          Digital Devices To Do The Following? Create A Presentation Or Communication
+          (E.G., Video)
       - name: atbr13a
         description: Do You Have A Library Or Reading Corner In Your Classroom?
       - name: atbr13b
         description: About How Many Books With Different Titles Are In Your Classroom
-            Library?
+          Library?
       - name: atbr13c
         description: About How Many Magazines With Different Titles Are In Your Classroom
-            Library?
+          Library?
       - name: atbr13d
         description: How Often Do You Give The Students In Your Class Time To Use
-            The Classroom Library Or Reading Corner?
+          The Classroom Library Or Reading Corner?
       - name: atbr13e
         description: Can The Students Borrow Books From The Classroom Library Or Reading
-            Corner To Take Home?
+          Corner To Take Home?
       - name: atbr14
         description: How Often Do You Take Or Send The Students To The <School Or
-            Local Library>?
+          Local Library>?
       - name: atbr15
         description: How Often Do You Assign Reading As Part Of Homework (For Any
-            Subject)?
+          Subject)?
       - name: atbr16
         description: In General, How Much Time Do You Expect Students To Spend On
-            Homework Involving Reading (For Any Subject) Each Time You Assign It?
+          Homework Involving Reading (For Any Subject) Each Time You Assign It?
       - name: atbr17a
         description: How Often Do You Do The Following With The Reading Homework Assignments
-            For This Class? Correct Assignments And Give Feedback To Students
+          For This Class? Correct Assignments And Give Feedback To Students
       - name: atbr17b
         description: How Often Do You Do The Following With The Reading Homework Assignments
-            For This Class? Discuss The Homework In Class
+          For This Class? Discuss The Homework In Class
       - name: atbr17c
         description: How Often Do You Do The Following With The Reading Homework Assignments
-            For This Class? Monitor Whether Or Not The Homework Was Completed
+          For This Class? Monitor Whether Or Not The Homework Was Completed
       - name: atbr18a
         description: How Much Importance Do You Place On The Following Assessment
-            Strategies In Reading? Observing Students As They Work
+          Strategies In Reading? Observing Students As They Work
       - name: atbr18b
         description: How Much Importance Do You Place On The Following Assessment
-            Strategies In Reading? Asking Students To Answer Questions During Class
+          Strategies In Reading? Asking Students To Answer Questions During Class
       - name: atbr18c
         description: How Much Importance Do You Place On The Following Assessment
-            Strategies In Reading? Short, Regular Written Assessments (Paper Or Digital)
+          Strategies In Reading? Short, Regular Written Assessments (Paper Or Digital)
       - name: atbr18d
         description: How Much Importance Do You Place On The Following Assessment
-            Strategies In Reading? Longer Tests (E.G., Unit Tests Or Exams)
+          Strategies In Reading? Longer Tests (E.G., Unit Tests Or Exams)
       - name: atbr18e
         description: How Much Importance Do You Place On The Following Assessment
-            Strategies In Reading? Long-Term Projects (E.G., Reading Logs)
+          Strategies In Reading? Long-Term Projects (E.G., Reading Logs)
       - name: atbr19
         description: About How Often Do Students In This Class Take Reading Assessments
-            On Digital Devices?
+          On Digital Devices?
       - name: atbgeas
         description: School Emph On Acad Success-Tchr/Scl
       - name: atdgeas
@@ -5638,7 +5632,6 @@ models:
         description: Scope Of This File (Ruf)
       - name: pirls_type
         description: Indicates if the record is from PIRLS Bridge or PIRLS Normal
-
   - name: world_iea_pirls__dictionary
     description: Dictionary
     columns:

@@ -1,8 +1,8 @@
+---
 version: 2
-
 models:
   - name: br_stf_corte_aberta__decisoes
-    description: "Decisões de corte aberta do STF"
+    description: Decisões de corte aberta do STF
     columns:
       - name: ano
         description: Ano da decisão
@@ -38,11 +38,10 @@ models:
         description: Data da decisão
       - name: data_baixa_processo
         description: Data de baixa do processo
-
-
   - name: br_stf_corte_aberta__dicionario
-    description: "Dicionário de dados referente a tabela de decisões de corte aberta do STF"
-    columns: 
+    description: Dicionário de dados referente a tabela de decisões de corte aberta
+      do STF
+    columns:
       - name: id_tabela
         description: ID da tabela
       - name: nome_coluna

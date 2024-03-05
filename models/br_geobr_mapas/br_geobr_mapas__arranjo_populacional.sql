@@ -1,17 +1,19 @@
-{{ 
-  config(
-    alias='arranjo_populacional',
-    schema='br_geobr_mapas',
-    materialized='table',
+{{
+    config(
+        alias="arranjo_populacional",
+        schema="br_geobr_mapas",
+        materialized="table",
     )
- }}
-SELECT 
-SAFE_CAST(REPLACE(id_arranjo_populacional,".0","") AS STRING) id_arranjo_populacional,
-SAFE_CAST(arranjo_populacional AS STRING) arranjo_populacional,
-SAFE_CAST(populacao_urbana_2010 AS INT64) populacao_urbana_2010,
-SAFE_CAST(populacao_rural_2010 AS INT64) populacao_rural_2010,
-SAFE_CAST(REPLACE(populacao_2010,".0","") AS INT64) populacao_2010,
-SAFE_CAST(REPLACE(id_municipio,".0","") AS STRING) id_municipio,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria,
-FROM basedosdados-staging.br_geobr_mapas_staging.arranjo_populacional as t
+}}
+select
+    safe_cast(
+        replace(id_arranjo_populacional, ".0", "") as string
+    ) id_arranjo_populacional,
+    safe_cast(arranjo_populacional as string) arranjo_populacional,
+    safe_cast(populacao_urbana_2010 as int64) populacao_urbana_2010,
+    safe_cast(populacao_rural_2010 as int64) populacao_rural_2010,
+    safe_cast(replace(populacao_2010, ".0", "") as int64) populacao_2010,
+    safe_cast(replace(id_municipio, ".0", "") as string) id_municipio,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe.st_geogfromtext(geometria) geometria,
+from `basedosdados-staging.br_geobr_mapas_staging.arranjo_populacional` as t

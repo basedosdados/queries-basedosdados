@@ -1,8 +1,8 @@
+---
 version: 2
-
 models:
-  - name: candidatos
-    description: "microdados de candidatos"
+  - name: br_tse_eleicoes__candidatos
+    description: Microdados de candidatos
     columns:
       - name: ano
         description: Ano
@@ -11,7 +11,7 @@ models:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos 
+        description: ID Município - IBGE 7 Dígitos
       - name: id_municipio_tse
         description: ID Município - Tribunal Superior Eleitoral (TSE)
       - name: id_candidato_bd
@@ -70,8 +70,8 @@ models:
         description: Composição Federação
       - name: prestou_contas
         description: Indicador de prestação de contas
-  - name: bens_candidato
-    description: "microdados bens candidato"
+  - name: br_tse_eleicoes__bens_candidato
+    description: Microdados bens candidato
     columns:
       - name: ano
         description: Ano
@@ -91,8 +91,8 @@ models:
         description: Descrição do Item
       - name: valor_item
         description: Valor do Item (R$)
-  - name: receitas_candidato
-    description: microdados receitas candidato
+  - name: br_tse_eleicoes__receitas_candidato
+    description: Microdados receitas candidato
     columns:
       - name: ano
         description: Ano
@@ -175,7 +175,8 @@ models:
       - name: cnae_2_doador
         description: CNAE 2 do Doador
       - name: descricao_cnae_2_doador
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do doador
       - name: cpf_cnpj_doador_orig
         description: CPF ou CNPJ do doador originário
       - name: nome_doador_orig
@@ -185,7 +186,8 @@ models:
       - name: tipo_doador_orig
         description: Tipo do doador originário
       - name: descricao_cnae_2_doador_orig
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do doador originário
       - name: nome_administrador
         description: Nome do administrador
       - name: cpf_administrador
@@ -208,8 +210,8 @@ models:
         description: CNPJ do prestador de contas
       - name: entrega_conjunto
         description: Entrega em conjunto
-  - name: despesas_candidato
-    description: microdados despesas candidato
+  - name: br_tse_eleicoes__despesas_candidato
+    description: Microdados despesas candidato
     columns:
       - name: ano
         description: Ano
@@ -282,7 +284,8 @@ models:
       - name: cnae_2_fornecedor
         description: Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
       - name: descricao_cnae_2_fornecedor
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do fornecedor
       - name: tipo_fornecedor
         description: Tipo do fornecedor
       - name: esfera_partidaria_fornecedor
@@ -303,7 +306,7 @@ models:
         description: Nome do partido do fornecedor
       - name: cargo_fornecedor
         description: Cargo do fornecedor
-  - name: receitas_comite
+  - name: br_tse_eleicoes__receitas_comite
     description: Receitas de comitês eleitorais
     columns:
       - name: ano
@@ -357,7 +360,8 @@ models:
       - name: nome_doador_rf
         description: Nome do doador - Receita Federal
       - name: descricao_cnae_2_doador
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do doador
       - name: numero_partido_doador
         description: Número do partido do doador
       - name: numero_candidato_doador
@@ -371,10 +375,11 @@ models:
       - name: tipo_doador_orig
         description: Tipo do doador originário
       - name: descricao_cnae_2_doador_orig
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do doador originário
       - name: nome_doador_orig_rf
         description: Nome do doador originário - Receita Federal
-  - name: receitas_orgao_partidario
+  - name: br_tse_eleicoes__receitas_orgao_partidario
     description: Receitas de comitês eleitorais
     columns:
       - name: ano
@@ -438,7 +443,8 @@ models:
       - name: cnae_2_doador
         description: Classificação Nacional de Atividades Econômicas 2.0 do doador
       - name: descricao_cnae_2_doador
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do doador
       - name: cpf_cnpj_doador
         description: CPF ou CNPJ do doador
       - name: nome_doador
@@ -476,6 +482,102 @@ models:
       - name: tipo_doador_orig
         description: Tipo do doador originário
       - name: descricao_cnae_2_doador_orig
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
+        description: Descrição da Classificação Nacional de Atividades Econômicas
+          2.0 do doador originário
       - name: nome_doador_orig_rf
         description: Nome do doador originário - Receita Federal
+  - name: br_tse_eleicoes__resultados_candidato
+    description: Resultados a nível de candidato.
+    columns:
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: cargo
+        description: Cargo
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: numero_candidato
+        description: Número do candidato
+      - name: sequncial_candidato
+        description: Sequencial do candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: nome_candidato
+        description: Nome do candidato
+      - name: resultado
+        description: Resultado
+      - name: votos
+        description: Número de votos
+  - name: br_tse_eleicoes__resultados_candidato_secao
+    description: Resultados a nível de candidato e seção eleitoral.
+    columns:
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: zona
+        description: Zona eleitoral
+      - name: secao
+        description: Seção eleitoral
+      - name: cargo
+        description: Cargo
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: sequencial_candidato
+        description: Sequencial do candidato
+      - name: numero_candidato
+        description: Número de candidato
+      - name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
+      - name: votos
+        description: Número de votos
+  - name: br_tse_eleicoes__resultados_partido_secao
+    description: Resultados a nível de partido e seção eleitoral.
+    columns:
+      - name: ano
+        description: Ano
+      - name: turno
+        description: Turno
+      - name: tipo_eleicao
+        description: Tipo da eleição
+      - name: sigla_uf
+        description: Sigla da unidade da federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: id_municipio_tse
+        description: ID Município - TSE
+      - name: zona
+        description: Zona eleitoral
+      - name: secao
+        description: Seção eleitoral
+      - name: cargo
+        description: Cargo
+      - name: numero_partido
+        description: Número do partido
+      - name: sigla_partido
+        description: Sigla do partido
+      - name: votos_nominais
+        description: Número de votos nominais
+      - name: votos_nao_nominais
+        description: Número de votos não-nominais

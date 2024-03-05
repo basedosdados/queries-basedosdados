@@ -1,0 +1,115 @@
+---
+version: 2
+models:
+  - name: br_ibge_pevs__producao_extracao_vegetal
+    description: Quantidade produzida e valor da produção na extração vegetal, por
+      tipo de produto extrativo
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio, tipo_produto, produto]
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: tipo_produto
+        description: Tipo do produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: produto
+        description: Nome produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: unidade
+        description: Unidade de medida do produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: quantidade
+        description: Quantidade da produção
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: valor
+        description: Valor da produção
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+  - name: br_ibge_pevs__producao_silvicultura
+    description: Quantidade produzida e valor da produção na silvicultura, por tipo
+      de produto da silvicultura
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - categoria_produto
+            - tipo_produto
+            - subtipo_produto
+            - produto
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: categoria_produto
+        description: Categoria do produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: tipo_produto
+        description: Tipo do produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: subtipo_produto
+        description: Subtipo do produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: produto
+        description: Nome produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: unidade
+        description: Unidade de medida do produto
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: quantidade
+        description: Quantidade da produção
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
+      - name: valor
+        description: Valor da produção
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05

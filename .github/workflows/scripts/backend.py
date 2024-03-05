@@ -185,7 +185,7 @@ class Backend:
                     }
                 }
             }
-        
+
         """
         variables = {
             "dataset_id": self._get_dataset_id_from_name(gcp_dataset_id=gcp_dataset_id)

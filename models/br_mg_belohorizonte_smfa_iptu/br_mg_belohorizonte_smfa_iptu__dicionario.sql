@@ -1,10 +1,18 @@
-{{ config(alias='dicionario', schema='br_mg_belohorizonte_smfa_iptu') }}
+{{ config(alias="dicionario", schema="br_mg_belohorizonte_smfa_iptu") }}
 
 
-SELECT 
-SAFE_CAST(id_tabela AS STRING) id_tabela,
-SAFE_CAST(nome_coluna AS STRING) nome_coluna,
-SAFE_CAST(chave AS STRING) chave,
-SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
-REPLACE(REPLACE(valor, '(Zona de Especial Interesse Social - 2', 'Zona de Especial Interesse Social - 2'), '(Zona de Preservação Ambiental', 'Zona de Preservação Ambiental') AS valor
-FROM basedosdados-staging.br_mg_belohorizonte_smfa_iptu_staging.dicionario AS t
+select
+    safe_cast(id_tabela as string) id_tabela,
+    safe_cast(nome_coluna as string) nome_coluna,
+    safe_cast(chave as string) chave,
+    safe_cast(cobertura_temporal as string) cobertura_temporal,
+    replace(
+        replace(
+            valor,
+            '(Zona de Especial Interesse Social - 2',
+            'Zona de Especial Interesse Social - 2'
+        ),
+        '(Zona de Preservação Ambiental',
+        'Zona de Preservação Ambiental'
+    ) as valor
+from `basedosdados-staging.br_mg_belohorizonte_smfa_iptu_staging.dicionario` as t

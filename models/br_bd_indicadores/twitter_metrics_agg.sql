@@ -1,16 +1,16 @@
-SELECT
-  EXTRACT(DATE FROM TIMESTAMP_MILLIS(upload_ts*1000)) AS upload_day,
-  SUM(retweet_count) AS retweets,
-  SUM(reply_count) AS replies,
-  SUM(like_count) AS likes,
-  SUM(quote_count) AS quote_tweets,
-  SUM(impression_count) AS impressions,
-  SUM(user_profile_clicks) AS profile_clicks,
-  SUM(url_link_clicks) AS links_clicks,
-  ANY_VALUE(following_count) AS followings,
-  ANY_VALUE(followers_count) AS followers,
-  ANY_VALUE(tweet_count) AS tweets,
-  ANY_VALUE(listed_count) AS listed
-FROM `basedosdados-dev.br_bd_indicadores.twitter_metrics`
-GROUP BY upload_day
-ORDER BY upload_day
+select
+    extract(date from timestamp_millis(upload_ts * 1000)) as upload_day,
+    sum(retweet_count) as retweets,
+    sum(reply_count) as replies,
+    sum(like_count) as likes,
+    sum(quote_count) as quote_tweets,
+    sum(impression_count) as impressions,
+    sum(user_profile_clicks) as profile_clicks,
+    sum(url_link_clicks) as links_clicks,
+    any_value(following_count) as followings,
+    any_value(followers_count) as followers,
+    any_value(tweet_count) as tweets,
+    any_value(listed_count) as listed
+from `basedosdados-dev.br_bd_indicadores.twitter_metrics`
+group by upload_day
+order by upload_day
