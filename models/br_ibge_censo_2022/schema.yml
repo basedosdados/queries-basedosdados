@@ -837,7 +837,9 @@ models:
       - name: valor
         description: Valor
   - name: br_ibge_censo_2022__domicilio_quantidade_esgotamento_sanitario_municipio
-    description: Domicílios particulares permanentes ocupados, por existência de banheiro ou sanitário e número de banheiros de uso exclusivo do domicílio e por tipo de esgotamento sanitário.
+    description: Domicílios particulares permanentes ocupados, por existência de banheiro
+      ou sanitário e número de banheiros de uso exclusivo do domicílio e por tipo
+      de esgotamento sanitário.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -868,7 +870,8 @@ models:
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_esgotamento_sanitario_municipio
-    description: Domicílios particulares permanentes ocupados, por tipo de esgotamento sanitário
+    description: Domicílios particulares permanentes ocupados, por tipo de esgotamento
+      sanitário
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -895,7 +898,8 @@ models:
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_canalizacao_abastecimento_agua_municipio
-    description: Domicílios particulares permanentes ocupados, por existência de canalização de água e principal forma de abastecimento de água
+    description: Domicílios particulares permanentes ocupados, por existência de canalização
+      de água e principal forma de abastecimento de água
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -921,7 +925,8 @@ models:
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__domicilio_ligacao_abastecimento_agua_municipio
-    description: Domicílios particulares permanentes ocupados, por existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água.
+    description: Domicílios particulares permanentes ocupados, por existência de ligação
+      à rede geral de distribuição de água e principal forma de abastecimento de água.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio, tipo_ligacao_rede_geral]
@@ -970,7 +975,8 @@ models:
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__morador_cor_raca_esgotamento_sanitario_municipio
-    description: Moradores em domicílios particulares permanentes ocupados, por tipo de esgotamento sanitário, segundo grupos de idade e cor ou raça.
+    description: Moradores em domicílios particulares permanentes ocupados, por tipo
+      de esgotamento sanitário, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1003,7 +1009,8 @@ models:
       - name: moradores
         description: 'Moradores em domicílios particulares permanentes ocupados        '
   - name: br_ibge_censo_2022__morador_cor_raca_tipo_domicilio_municipio
-    description: Moradores em domicílios particulares permanentes ocupados, por tipo do domicílio, segundo grupos de idade e cor ou raça.
+    description: Moradores em domicílios particulares permanentes ocupados, por tipo
+      do domicílio, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1060,7 +1067,9 @@ models:
       - name: domicilios
         description: Domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__morador_cor_raca_ligacao_abastecimento_agua_municipio
-    description:  Moradores em domicílios particulares permanentes ocupados, por existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água, segundo grupos de idade e cor ou raça.
+    description: Moradores em domicílios particulares permanentes ocupados, por existência
+      de ligação à rede geral de distribuição de água e principal forma de abastecimento
+      de água, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -1094,7 +1103,8 @@ models:
       - name: moradores
         description: Moradores em domicílios particulares permanentes ocupados
   - name: br_ibge_censo_2022__morador_cor_raca_destino_lixo_municipio
-    description: Moradores em domicílios particulares permanentes ocupados, por destino do lixo, segundo grupos de idade e cor ou raça.
+    description: Moradores em domicílios particulares permanentes ocupados, por destino
+      do lixo, segundo grupos de idade e cor ou raça.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:

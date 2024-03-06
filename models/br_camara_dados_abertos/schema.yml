@@ -1186,8 +1186,8 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
-      - name: titulo
-        description: Título
+      - name: titulo_deputado
+        description: Título do deputado
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
@@ -1617,3 +1617,85 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__dia')
               field: ref('dia.dia')
+  - name: br_camara_dados_abertos__despesa
+    description: Dados sobre as despesas cobertas pela Cota para Exercício da Atividade
+      Parlamentar de cada deputado desde 2008
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - nome_parlamentar
+            - id_legislatura
+            - categoria_despesa
+            - subcategoria_despesa
+            - fornecedor
+            - cnpj_cpf_fornecedor
+            - numero_documento_fiscal
+            - tipo_documento
+            - data_emissao
+            - valor_retido
+            - valor_liquido
+            - nome_passageiro
+            - descricao_passagem_aerea
+            - data_pagamento_restituicao
+            - url_documento
+    columns:
+      - name: nome_parlamentar
+        description: Nome do parlamentar
+      - name: cpf
+        description: Cadastro de Pessoa Física (CPF) do parlamentar
+      - name: id_deputado
+        description: ID do deputado
+      - name: ano_legislatura
+        description: Ano de início da legislatura
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: codigo_legislatura
+        description: Número identificador da legislatura
+      - name: sigla_uf
+        description: Sigla da unidade da federação por qual o respectivo parlamentar
+          foi eleito
+      - name: sigla_partido
+        description: Sigla do partido ao qual o parlamentar é/era filiado
+      - name: categoria_despesa
+        description: Título da categoria de despesa à qual seja pertinente o registro
+      - name: subcategoria_despesa
+        description: Título descritivo da subcategoria de despesa
+      - name: fornecedor
+        description: Nome da pessoa física ou empresa fornecedora do serviço ou produto
+          ao qual se refere o registro de despesa
+      - name: cnpj_cpf_fornecedor
+        description: CNPJ ou CPF do fornecedor
+      - name: numero_documento_fiscal
+        description: O número de face do documento fiscal comprovante da despesa
+      - name: tipo_documento
+        description: Indicador numérico do tipo de documento fiscal associado à despesa
+      - name: data_emissao
+        description: Data de emissão do documento comprobatório da despesa a que se
+          refere o registro.
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: valor_documento
+        description: Valor de face do documento comprobatório da despesa
+      - name: valor_retido
+        description: Valor retido
+      - name: valor_liquido
+        description: Valor da despesa efetivamente debitado da Cota Parlamentar
+      - name: numero_parcela
+        description: Valor numérico diferente de 0 quando a despesa cadastrada é reembolsada
+          pela CEAP de forma parcelada
+      - name: nome_passageiro
+        description: Nos registros referentes a passagens aéreas, o campo traz o nome
+          da pessoa para quem foi emitida a passagem.
+      - name: descricao_passagem_aerea
+        description: Descrição dos trechos de viagem do bilhete
+      - name: data_pagamento_restituicao
+        description: Data e hora, em formato ISO 8601, de quando o parlamentar realizou
+          a restituição à Câmara de valores referentes à despesa citada no registro
+      - name: valor_restituicao
+        description: Valor que o parlamentar devolveu à Câmara
+      - name: url_documento
+        description: URL do documento
