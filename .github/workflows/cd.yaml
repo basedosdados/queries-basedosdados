@@ -2,7 +2,7 @@
 name: CD
 on:
   pull_request:
-    types: types: [labeled,closed]
+    types: [labeled,closed]
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
