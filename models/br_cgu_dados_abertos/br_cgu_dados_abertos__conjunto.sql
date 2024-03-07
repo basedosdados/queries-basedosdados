@@ -1,4 +1,5 @@
-{{ config(alias='conjunto',schema='br_cgu_dados_abertos') }}
+{{ config(alias="conjunto", schema="br_cgu_dados_abertos") }}
+--
 select
     safe_cast(nullif(id, "") as string) id,
     safe_cast(nullif(titulo, "") as string) nome,
