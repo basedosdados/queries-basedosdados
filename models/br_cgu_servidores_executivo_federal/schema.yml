@@ -1,18 +1,18 @@
+---
 version: 2
-
 models:
   - name: afastamentos
     description: Informações de afastamentos de servidores
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
-            que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+          que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
       - name: nome
         description: Nome completo do servidor.
       - name: cpf
@@ -28,13 +28,13 @@ models:
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
-            que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+          que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
       - name: nome
         description: Nome completo do servidor.
       - name: cpf
@@ -67,7 +67,7 @@ models:
         description: Tipo de vínculo
       - name: situacao_vinculo
         description: Situação do vínculo do servidor com o órgão de lotação e/ou de
-            exercício.
+          exercício.
       - name: regime_juridico
         description: Regime jurídico
       - name: jornada_trabalho
@@ -91,17 +91,18 @@ models:
       - name: origem
         description: Origem do dado (BACEN ou SIAPE)
   - name: observacoes
-    description: Caracteriza eventuais observações para situações excepcionais na remuneração dos Servidores, Aposentados e Pensionistas
+    description: Caracteriza eventuais observações para situações excepcionais na
+      remuneração dos Servidores, Aposentados e Pensionistas
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
-            que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+          que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
       - name: nome
         description: Nome completo do servidor.
       - name: cpf
@@ -110,19 +111,19 @@ models:
         description: Descrição da obsvervação
       - name: origem
         description: Origem do dado enviado à CGU (Servidores SIAPE, Servidores BACEN,
-            Aposentados BACEN, Pensionistas BACEN, etc)
+          Aposentados BACEN, Pensionistas BACEN, etc)
   - name: cadastro_pensionistas
     description: Informações sobre o cadastro de pensionistas
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
-            que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+          que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
       - name: nome
         description: Nome completo do servidor.
       - name: cpf
@@ -149,17 +150,17 @@ models:
         description: Código da unidade organizacional do instituidor da pensão
       - name: uorg_lotacao_instituidor_pensao
         description: Nome da unidade organizacional (parte do órgão) do instituidor
-            da pensão
+          da pensão
       - name: id_org_lotacao_instituidor_pensao
         description: Código da organização do instituidor da pensão
       - name: org_lotacao_instituidor_pensao
         description: Nome da organização do instituidor da pensão
       - name: id_orgsup_lotacao_instituidor_pensao
         description: Código do órgão superior (unidade da administração direta, e.g.
-            ministérios) do instituidor da pensão
+          ministérios) do instituidor da pensão
       - name: orgsup_lotacao_instituidor_pensao
         description: Nome do órgão superior (unidade da administração direta, e.g.
-            ministérios) do instituidor da pensão
+          ministérios) do instituidor da pensão
       - name: id_tipo_vinculo
         description: Código do tipo de vínculo
       - name: tipo_vinculo
@@ -172,15 +173,15 @@ models:
         description: Jornada de trabalho semanal do instituidor da pensão
       - name: data_ingresso_cargo_funcao_instituidor_pensao
         description: Data de ingresso do servidor no cargo ou função do instituidor
-            da pensão
+          da pensão
       - name: data_nomeacao_cargo_funcao_instituidor_pensao
         description: Data de nomeação do servidor no cargo ou função do instituidor
-            da pensão
+          da pensão
       - name: data_ingresso_orgao_instituidor_pensao
         description: Data de ingresso do instituidor da pensão no órgão
       - name: data_diploma_ingresso_servico_publico_instituidor_pensao
         description: Data do diploma de ingresso do instituidor da pensão no serviço
-            público
+          público
       - name: documento_ingresso_servico_publico_instituidor_pensao
         description: Documento de ingresso do instituidor da pensão no serviço público
       - name: diploma_ingresso_cargo_funcao_instituidor_pensao
@@ -192,7 +193,8 @@ models:
       - name: origem
         description: Origem do dado (BACEN, SIAPE ou Defesa)
   - name: remuneracao
-    description: Remuneração dos servidores civis e militares ativos e inativos, pensionistas e aposentados
+    description: Remuneração dos servidores civis e militares ativos e inativos, pensionistas
+      e aposentados
     columns:
       - name: ano
         description: Ano
@@ -234,10 +236,10 @@ models:
         description: Imposto de Renda Retido na Fonte (IRRF) em Dólar
       - name: pss_rgps_brl
         description: Plano de Seguridade Social (PSS) ou Regime Geral de Previdência
-            Social (RGPS) em Real
+          Social (RGPS) em Real
       - name: pss_rgps_usd
         description: Plano de Seguridade Social (PSS) ou Regime Geral de Previdência
-            Social (RGPS) em Dólar
+          Social (RGPS) em Dólar
       - name: demais_deducoes_brl
         description: Demais deduções em Real
       - name: demais_deducoes_usd
@@ -260,16 +262,16 @@ models:
         description: Remuneração após deduções obrigatória em Dólar
       - name: verba_indenizatoria_civil_brl
         description: Verba indenizatória registradas em sistemas de pessoal - civil
-            em Real
+          em Real
       - name: verba_indenizatoria_civil_usd
         description: Verba indenizatória registradas em sistemas de pessoal - civil
-            em Dólar
+          em Dólar
       - name: verba_indenizatoria_militar_brl
         description: Verba indenizatória registradas em sistemas de pessoal - militar
-            em Real
+          em Real
       - name: verba_indenizatoria_militar_usd
         description: Verba indenizatória registradas em sistemas de pessoal - militar
-            em Dólar
+          em Dólar
       - name: verba_indenizatoria_deslig_voluntario_brl
         description: Verba indenizatória programa desligamento voluntário em Real
       - name: verba_indenizatoria_deslig_voluntario_usd
@@ -280,19 +282,19 @@ models:
         description: Total da verba indenizatória em Dólar
       - name: origem
         description: Origem do dado enviado à CGU (Servidores SIAPE, Servidores BACEN,
-            Militares, Pensionistas BACEN, etc)
+          Militares, Pensionistas BACEN, etc)
   - name: cadastro_reserva_reforma_militares
     description: Informações de cadastro de militares na reserva e reforma
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
-            que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+          que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
       - name: nome
         description: Nome completo do servidor.
       - name: cpf
@@ -325,7 +327,7 @@ models:
         description: Tipo de vínculo
       - name: situacao_vinculo
         description: Situação do vínculo do servidor com o órgão de lotação e/ou de
-            exercício.
+          exercício.
       - name: regime_juridico
         description: Regime jurídico
       - name: jornada_trabalho
@@ -351,15 +353,15 @@ models:
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
-            se referem).
+          se referem).
       - name: sigla_uf
         description: UF de exercício do servidor
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
-            que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+          que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
       - name: nome
         description: Nome completo do servidor.
       - name: cpf
@@ -388,8 +390,8 @@ models:
         description: Descrição da atividade exercida pelo servidor
       - name: opcao_parcial
         description: Indica se o servidor optou pela remuneração do cargo efetivo,
-            do posto ou graduação, ou do emprego, acrescida do percentual de 60% (sessenta
-            por cento) do respectivo cargo em comissão
+          do posto ou graduação, ou do emprego, acrescida do percentual de 60% (sessenta
+          por cento) do respectivo cargo em comissão
       - name: id_uorg_lotacao
         description: Código da unidade organizacional onde o servidor está lotado
       - name: uorg_lotacao
@@ -416,12 +418,12 @@ models:
         description: Nome do órgão superior onde o servidor está em exercício
       - name: id_tipo_vinculo
         description: Código do tipo de vínculo, 1 Função ou Cargo de Confiança; 2
-            Cargo Emprego; 3 Demais situações - agentes públicos; 4 Posto/Graduação.
+          Cargo Emprego; 3 Demais situações - agentes públicos; 4 Posto/Graduação.
       - name: tipo_vinculo
         description: Tipo de vínculo
       - name: situacao_vinculo
         description: Situação do vínculo do servidor com o órgão de lotação e/ou de
-            exercício.
+          exercício.
       - name: data_inicio_afastamento
         description: Data de início do afastamento do servidor, em caso de afastamento
       - name: data_termino_afastamento

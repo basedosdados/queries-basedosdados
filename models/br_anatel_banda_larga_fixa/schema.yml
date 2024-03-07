@@ -1,8 +1,10 @@
+---
 version: 2
-
 models:
   - name: br_anatel_banda_larga_fixa__microdados
-    description: "Microdados de banda larga fixa (também conhecido como Serviço de Comunicação Multimídia) a partir de 2007 que traz dados mensais acerca da empresa ofertante e das especificações técnicas do serviço."
+    description: Microdados de banda larga fixa (também conhecido como Serviço de
+      Comunicação Multimídia) a partir de 2007 que traz dados mensais acerca da empresa
+      ofertante e das especificações técnicas do serviço.
     columns:
       - name: ano
         description: Ano
@@ -28,9 +30,9 @@ models:
         description: Tipo de Produto
       - name: acessos
         description: Número total de contratos
-
   - name: br_anatel_banda_larga_fixa__densidade_brasil
-    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano desde março de 2007"
+    description: Total de acessos e densidade por domicílio da Banda Larga Fixa no
+      Brasil por mês e ano desde março de 2007
     columns:
       - name: ano
         description: Ano
@@ -38,9 +40,9 @@ models:
         description: Mês
       - name: densidade
         description: Densidade de acessos por 100 domicílios
-
   - name: br_anatel_banda_larga_fixa__densidade_uf
-    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007"
+    description: Total de acessos e densidade por domicílio da Banda Larga Fixa nos
+      estados por mês e ano desde março de 2007
     columns:
       - name: ano
         description: Ano
@@ -50,9 +52,9 @@ models:
         description: Sigla da Unidade da Federação
       - name: densidade
         description: Densidade de acessos por 100 domicílios
-        
   - name: br_anatel_banda_larga_fixa__densidade_municipio
-    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007"
+    description: Total de acessos e densidade por domicílio da Banda Larga Fixa nos
+      estados por mês e ano desde março de 2007
     columns:
       - name: ano
         description: Ano
@@ -61,12 +63,13 @@ models:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos    
+        description: ID Município - IBGE 7 Dígitos
       - name: densidade
         description: Densidade de acessos por 100 domicílios
-
   - name: br_anatel_banda_larga_fixa__microdados_atualizado
-    description: "Microdados de banda larga fixa (também conhecido como Serviço de Comunicação Multimídia) a partir de 2007 que traz dados mensais acerca da empresa ofertante e das especificações técnicas do serviço."
+    description: Microdados de banda larga fixa (também conhecido como Serviço de
+      Comunicação Multimídia) a partir de 2007 que traz dados mensais acerca da empresa
+      ofertante e das especificações técnicas do serviço.
     columns:
       - name: ano
         description: Ano
@@ -92,9 +95,9 @@ models:
         description: Tipo de Produto
       - name: acessos
         description: Número total de contratos
-
   - name: br_anatel_banda_larga_fixa__densidade_brasil_atualizado
-    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano desde março de 2007"
+    description: Total de acessos e densidade por domicílio da Banda Larga Fixa no
+      Brasil por mês e ano desde março de 2007
     columns:
       - name: ano
         description: Ano
@@ -102,9 +105,9 @@ models:
         description: Mês
       - name: densidade
         description: Densidade de acessos por 100 domicílios
-
   - name: br_anatel_banda_larga_fixa__densidade_uf_atualizado
-    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007"
+    description: Total de acessos e densidade por domicílio da Banda Larga Fixa nos
+      estados por mês e ano desde março de 2007
     columns:
       - name: ano
         description: Ano
@@ -114,9 +117,9 @@ models:
         description: Sigla da Unidade da Federação
       - name: densidade
         description: Densidade de acessos por 100 domicílios
-        
   - name: br_anatel_banda_larga_fixa__densidade_municipio_atualizado
-    description: "Total de acessos e densidade por domicílio da Banda Larga Fixa nos estados por mês e ano desde março de 2007"
+    description: Total de acessos e densidade por domicílio da Banda Larga Fixa nos
+      estados por mês e ano desde março de 2007
     columns:
       - name: ano
         description: Ano
@@ -125,6 +128,6 @@ models:
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
-        description: ID Município - IBGE 7 Dígitos    
+        description: ID Município - IBGE 7 Dígitos
       - name: densidade
         description: Densidade de acessos por 100 domicílios

@@ -1,35 +1,35 @@
-{{ config(
-    alias='geracao_usina', 
-    schema='br_ons_avaliacao_operacao',
-    materialized = 'incremental',
-    partition_by={
-      "field": "ano",
-      "data_type": "int64",
-      "range": {
-        "start": 2000,
-        "end": 2024,
-        "interval": 1}
-     }) 
+{{
+    config(
+        alias="geracao_usina",
+        schema="br_ons_avaliacao_operacao",
+        materialized="incremental",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2000, "end": 2024, "interval": 1},
+        },
+    )
 }}
-WITH ons as (
-SELECT
-SAFE_CAST(data AS DATE) data,
-SAFE_CAST(hora AS TIME) hora,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_subsistema AS STRING) id_subsistema,
-SAFE_CAST(subsistema AS STRING) subsistema,
-SAFE_CAST(REPLACE(id_empreendimento_aneel, '-', '') AS STRING) id_empreendimento_aneel,
-SAFE_CAST(usina AS STRING) usina,
-SAFE_CAST(tipo_usina AS STRING) tipo_usina,
-SAFE_CAST(tipo_modalidade_operacao AS STRING) tipo_modalidade_operacao,
-SAFE_CAST(tipo_combustivel AS STRING) tipo_combustivel,
-SAFE_CAST(geracao AS FLOAT64) geracao
-FROM basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_usina AS t
-)
-SELECT DISTINCT *
-FROM ons
-{% if is_incremental() %} 
-WHERE data > (SELECT max(data) FROM {{ this }} )
-{% endif %}
+with
+    ons as (
+        select
+            safe_cast(data as date) data,
+            safe_cast(hora as time) hora,
+            safe_cast(ano as int64) ano,
+            safe_cast(mes as int64) mes,
+            safe_cast(sigla_uf as string) sigla_uf,
+            safe_cast(id_subsistema as string) id_subsistema,
+            safe_cast(subsistema as string) subsistema,
+            safe_cast(
+                replace(id_empreendimento_aneel, '-', '') as string
+            ) id_empreendimento_aneel,
+            safe_cast(usina as string) usina,
+            safe_cast(tipo_usina as string) tipo_usina,
+            safe_cast(tipo_modalidade_operacao as string) tipo_modalidade_operacao,
+            safe_cast(tipo_combustivel as string) tipo_combustivel,
+            safe_cast(geracao as float64) geracao
+        from `basedosdados-staging.br_ons_avaliacao_operacao_staging.geracao_usina` as t
+    )
+select distinct *
+from ons
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}

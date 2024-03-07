@@ -1,8 +1,9 @@
+---
 version: 2
-
 models:
   - name: br_ms_sinasc__microdados
-    description: Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde.
+    description: Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério
+      da Saúde.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -17,7 +18,7 @@ models:
           - not_null
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ano.ano 
+              field: ano.ano
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
@@ -35,7 +36,8 @@ models:
       - name: local_nascimento
         description: Local onde ocorreu o nascimento
       - name: codigo_estabelecimento
-        description: Código do Cadastro Nacional de estabelecimento onde ocorreu o nascimento
+        description: Código do Cadastro Nacional de estabelecimento onde ocorreu o
+          nascimento
       - name: data_nascimento
         description: Data do nascimento do recém nascido
         tests:
@@ -75,7 +77,8 @@ models:
       - name: pre_natal_agr
         description: Número de consultas de pré‐natal agrupada
       - name: classificacao_pre_natal
-        description: Códigos de classificação de adequação ao pré natal, gerado pelo sistema
+        description: Códigos de classificação de adequação ao pré natal, gerado pelo
+          sistema
       - name: quantidade_filhos_vivos
         description: Número de filhos vivos
       - name: quantidade_filhos_mortos
@@ -177,7 +180,8 @@ models:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
       - name: diferenca_data
-        description: Diferença entre a data de óbito e data do recebimento original da DO
+        description: Diferença entre a data de óbito e data do recebimento original
+          da DO
       - name: data_declaracao
         description: Data do preenchimento da declaração
         tests:

@@ -1,8 +1,9 @@
+---
 version: 2
-
 models:
   - name: br_cvm_oferta_publica_distribuicao__dia
-    description: Ofertas de distribuição (ações, fundos, debêntures, CRI, etc) registradas ou dispensadas de registro.
+    description: Ofertas de distribuição (ações, fundos, debêntures, CRI, etc) registradas
+      ou dispensadas de registro.
     columns:
       - name: numero_processo
         description: Número do processo administrativo
@@ -33,7 +34,8 @@ models:
       - name: modalidade_registro_oferta
         description: Modalidade de registro da oferta. Aplicável a ofertas registradas.
       - name: modalidade_dispensa_oferta
-        description: Modalidade de dispensa da oferta. Aplicável a ofertas dispensadas de registro.
+        description: Modalidade de dispensa da oferta. Aplicável a ofertas dispensadas
+          de registro.
       - name: data_abertura_processo
         description: Data de abertura do processo administrativo
       - name: data_protocolo
@@ -71,9 +73,11 @@ models:
       - name: oferta_inicial
         description: Oferta inicial (IPO)
       - name: oferta_incentivo_fiscal
-        description: Indica se a oferta é elegível ao incentivo previsto na Lei nº 12.431/11.
+        description: Indica se a oferta é elegível ao incentivo previsto na Lei nº
+          12.431/11.
       - name: oferta_regime_fiduciario
-        description: Indica se os créditos que lastream a emissão dos ativos (valores mobiliários) objeto da oferta contam com regime fiduciário
+        description: Indica se os créditos que lastream a emissão dos ativos (valores
+          mobiliários) objeto da oferta contam com regime fiduciário
       - name: atualizacao_monetaria
         description: Atualização monetária
       - name: juros

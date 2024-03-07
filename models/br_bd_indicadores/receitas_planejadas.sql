@@ -1,10 +1,10 @@
-SELECT
-SAFE_CAST(ano_competencia AS INT64) ano_competencia,
-SAFE_CAST(mes_competencia AS INT64) mes_competencia,
-SAFE_CAST(ano_caixa AS INT64) ano_caixa,
-SAFE_CAST(mes_caixa AS INT64) mes_caixa,
-SAFE_CAST(categoria AS STRING) categoria,
-SAFE_CAST(tipo AS STRING) tipo,
-SAFE_CAST(frequencia AS STRING) frequencia,
-SAFE_CAST(valor AS FLOAT64) valor
-FROM basedosdados-staging.br_bd_indicadores_staging.receitas_planejadas AS t
+select
+    safe_cast(ano_competencia as int64) ano_competencia,
+    safe_cast(mes_competencia as int64) mes_competencia,
+    safe_cast(ano_caixa as int64) ano_caixa,
+    safe_cast(mes_caixa as int64) mes_caixa,
+    safe_cast(categoria as string) categoria,
+    safe_cast(tipo as string) tipo,
+    safe_cast(frequencia as string) frequencia,
+    safe_cast(valor as float64) valor
+from `basedosdados-staging.br_bd_indicadores_staging.receitas_planejadas` as t

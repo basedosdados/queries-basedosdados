@@ -1,43 +1,52 @@
 {{
     config(
-        materialized='incremental',
+        materialized="incremental",
         partition_by={
             "field": "upload_day",
             "data_type": "date",
             "granularity": "month",
-        }
+        },
     )
 }}
 
 
-SELECT *
-FROM
-(SELECT
-SAFE_CAST(upload_ts AS INT64) upload_ts,
-EXTRACT(DATE FROM TIMESTAMP_MILLIS(upload_ts*1000)) AS upload_day,
-SAFE_CAST(id AS STRING) id,
-SAFE_CAST(text AS STRING) text,
-SAFE_CAST(created_at AS STRING) created_at,
-SAFE_CAST(retweet_count AS INT64) retweet_count,
-SAFE_CAST(reply_count AS INT64) reply_count,
-SAFE_CAST(like_count AS INT64) like_count,
-SAFE_CAST(quote_count AS INT64) quote_count,
-SAFE_CAST(impression_count AS FLOAT64) impression_count,
-SAFE_CAST(user_profile_clicks AS FLOAT64) user_profile_clicks,
-SAFE_CAST(url_link_clicks AS FLOAT64) url_link_clicks,
-SAFE_CAST(following_count AS INT64) following_count,
-SAFE_CAST(followers_count AS INT64) followers_count,
-SAFE_CAST(tweet_count AS INT64) tweet_count,
-SAFE_CAST(listed_count AS INT64) listed_count
-FROM `basedosdados-dev.br_bd_indicadores_staging.twitter_metrics`)
-WHERE
-    upload_day <= CURRENT_DATE('America/Sao_Paulo')
+select *
+from
+    (
+        select
+            safe_cast(upload_ts as int64) upload_ts,
+            extract(date from timestamp_millis(upload_ts * 1000)) as upload_day,
+            safe_cast(id as string) id,
+            safe_cast(text as string) text,
+            safe_cast(created_at as string) created_at,
+            safe_cast(retweet_count as int64) retweet_count,
+            safe_cast(reply_count as int64) reply_count,
+            safe_cast(like_count as int64) like_count,
+            safe_cast(quote_count as int64) quote_count,
+            safe_cast(impression_count as float64) impression_count,
+            safe_cast(user_profile_clicks as float64) user_profile_clicks,
+            safe_cast(url_link_clicks as float64) url_link_clicks,
+            safe_cast(following_count as int64) following_count,
+            safe_cast(followers_count as int64) followers_count,
+            safe_cast(tweet_count as int64) tweet_count,
+            safe_cast(listed_count as int64) listed_count
+        from `basedosdados-dev.br_bd_indicadores_staging.twitter_metrics`
+    )
+where
+    upload_day <= current_date('America/Sao_Paulo')
 
-{% if is_incremental() %}
+    {% if is_incremental() %}
 
-{% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(upload_day) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(upload_day)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
+        {% set max_partition = (
+            run_query(
+                "SELECT gr FROM (SELECT IF(max(upload_day) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(upload_day)) as gr FROM "
+                ~ this
+                ~ ")"
+            )
+            .columns[0]
+            .values()[0]
+        ) %}
 
-AND
-    upload_day > ("{{ max_partition }}")
+        and upload_day > ("{{ max_partition }}")
 
-{% endif %}
+    {% endif %}

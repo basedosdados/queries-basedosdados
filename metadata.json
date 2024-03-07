@@ -20379,5 +20379,98 @@
                 ]
             }
         ]
+    },
+    "br_fbsp_absp": {
+        "name": "Anuário Brasileiro de Segurança Pública",
+        "description": "Concebido com o objetivo de suprir a falta de conhecimento consolidado, sistematizada e confiável no campo, o Anuário Brasileiro de Segurança Pública compila e analisa dados de registros policiais sobre criminalidade, informações sobre o sistema prisional e gastos com segurança pública, entre outros recortes introduzidos a cada edição.\r\n\r\nA publicação é uma ferramenta importante para a promoção da transparência e da prestação de contas na área da segurança pública, influenciando a melhoria da qualidade dos dados por parte dos gestores. Além disso, o anuário contribui para a produção de conhecimento, para o incentivo à avaliação de políticas públicas, para a introdução de novos temas na agenda de discussão do campo e para ações de incidência política realizadas por diversas organizações da sociedade civil.",
+        "themes": [
+            {
+                "slug": "seguranca",
+                "name": "Segurança, Crime, Violência, e Conflito"
+            }
+        ],
+        "tags": [
+            {
+                "slug": "assassinato",
+                "name": "assassinato"
+            },
+            {
+                "slug": "estupro",
+                "name": "estupro"
+            },
+            {
+                "slug": "homicidio",
+                "name": "homicidio"
+            },
+            {
+                "slug": "letalidade",
+                "name": "letalidade"
+            },
+            {
+                "slug": "mortalidade",
+                "name": "mortalidade"
+            },
+            {
+                "slug": "patrimonio",
+                "name": "patrimonio"
+            }
+        ],
+        "tables": [
+            {
+                "slug": "violencia_escola",
+                "name": "Violência nas Escolas",
+                "description": "Tabela com indicadores que auxiliam entender o cenário de violência nas escolas",
+                "cloudTables": [
+                    {
+                        "gcpProjectId": "basedosdados",
+                        "gcpDatasetId": "br_fbsp_absp",
+                        "gcpTableId": "violencia_escola"
+                    }
+                ],
+                "status": {
+                    "name": "Em revisão",
+                    "slug": "under_review"
+                },
+                "license": null,
+                "pipeline": null,
+                "publishedBy": {
+                    "firstName": "Laura",
+                    "lastName": "Amaral",
+                    "email": "laura.amaral@basedosdados.org"
+                },
+                "dataCleanedBy": {
+                    "firstName": "Luiz",
+                    "lastName": "Eduardo",
+                    "email": "luiz.sinx@gmail.com"
+                },
+                "dataCleaningDescription": "",
+                "dataCleaningCodeUrl": null,
+                "rawDataUrl": null,
+                "auxiliaryFilesUrl": null,
+                "architectureUrl": null,
+                "columns": [
+                    {
+                        "name": "ano",
+                        "description": "Ano"
+                    },
+                    {
+                        "name": "item",
+                        "description": "Item referente ao tema da pesquisa"
+                    },
+                    {
+                        "name": "quantidade_escola",
+                        "description": "Quantidade de escolas que aderiram a resposta"
+                    },
+                    {
+                        "name": "sigla_uf",
+                        "description": "Sigla da Unidade da Federação"
+                    },
+                    {
+                        "name": "tema",
+                        "description": "Tema da pesquisa"
+                    }
+                ]
+            }
+        ]
     }
 }

@@ -62,7 +62,7 @@ def to_partitions(data: pd.DataFrame, partition_columns: list[str], savepath: st
             )
     else:
         raise BaseException("Data need to be a pandas DataFrame")
-    
+
 # Loop para cada ano de 1995 a 2023
 for anos in range(1995,2024):
     # Lendo o arquivo CSV usando pandas
@@ -139,7 +139,7 @@ for anos in range(1995,2024):
             'valor_terreno',
             'fracao_ideal',
             ]
-    
+
     for coluna_virgula in colunas_virgula:
         df[coluna_virgula] = df[coluna_virgula].apply(lambda x: str(x).replace(',', '.'))
 
@@ -164,7 +164,7 @@ for anos in range(1995,2024):
                 'cep',
                 'valor_construcao'
                 ]
-    
+
     for coluna_ponto_zero in colunas_ponto_zero:
         df[coluna_ponto_zero] = df[coluna_ponto_zero].apply(lambda x: str(x).replace('.0', ''))
 

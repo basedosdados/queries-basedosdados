@@ -1,14 +1,17 @@
-{{ config(
-    alias='custo_marginal_operacao_semi_horario', 
-    schema='br_ons_estimativa_custos') 
+{{
+    config(
+        alias="custo_marginal_operacao_semi_horario",
+        schema="br_ons_estimativa_custos",
+    )
 }}
 
-SELECT
-SAFE_CAST(data AS DATE) data,
-SAFE_CAST(hora AS TIME) hora,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_subsistema AS STRING) id_subsistema,
-SAFE_CAST(subsistema AS STRING) subsistema,
-SAFE_CAST(custo_marginal_operacao AS FLOAT64) custo_marginal_operacao
-FROM basedosdados-staging.br_ons_estimativa_custos_staging.custo_marginal_operacao_semi_horario AS t
+select
+    safe_cast(data as date) data,
+    safe_cast(hora as time) hora,
+    safe_cast(ano as int64) ano,
+    safe_cast(mes as int64) mes,
+    safe_cast(id_subsistema as string) id_subsistema,
+    safe_cast(subsistema as string) subsistema,
+    safe_cast(custo_marginal_operacao as float64) custo_marginal_operacao
+from
+    `basedosdados-staging.br_ons_estimativa_custos_staging.custo_marginal_operacao_semi_horario` t

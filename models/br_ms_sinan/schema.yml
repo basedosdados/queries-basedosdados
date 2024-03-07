@@ -1,5 +1,6 @@
+---
 version: 2
-models :
+models:
   - name: microdados_influenza_srag
     description: O  Ministério da Saúde (MS), por meio da Secretaria de Vigilância
       em Saúde (SVS), desenvolve a vigilância da Síndrome Respiratória Aguda Grave

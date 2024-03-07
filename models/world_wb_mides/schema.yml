@@ -1,6 +1,7 @@
+---
 version: 2
-models :
-  - name: empenho
+models:
+  - name: world_wb_mides__empenho
     description: Dados a nível de empenho.
     columns:
       - name: acao
@@ -67,7 +68,7 @@ models :
         description: ID Tabela
       - name: valor
         description: Valor
-  - name: licitacao
+  - name: world_wb_mides__licitacao
     description: Dados a nível de licitação.
     columns:
       - name: ano
@@ -135,7 +136,7 @@ models :
         description: Valor Corrigido
       - name: valor_orcamento
         description: Valor do Orçamento
-  - name: licitacao_item
+  - name: world_wb_mides__licitacao_item
     description: Dados a nível de licitação-item.
     columns:
       - name: ano
@@ -186,7 +187,7 @@ models :
         description: Valor Unitário Cotação
       - name: valor_vencedor
         description: Valor Homologado
-  - name: licitacao_participante
+  - name: world_wb_mides__licitacao_participante
     description: Dados a nível de licitação-participante.
     columns:
       - name: ano
@@ -223,7 +224,7 @@ models :
         description: PF ou PJ
       - name: vencedor
         description: Participante Vencedor
-  - name: orgao_unidade_gestora
+  - name: world_wb_mides__orgao_unidade_gestora
     description: Dados auxiliares a nível de órgão e unidade gestora.
     columns:
       - name: ano
@@ -243,3 +244,101 @@ models :
           ou licitação) está vinculada
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+  - name: world_wb_mides__pagamento
+    description: Dados a nível de pagamento
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: data
+        description: Data do pagamento
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: orgao
+        description: Sequencial identificador do órgão
+      - name: id_unidade_gestora
+        description: Sequencial identificador da unidade gestora
+      - name: id_empenho_bd
+        description: Código único de identificação do empenho
+      - name: id_empenho
+        description: Sequencial identificador do empenho
+      - name: numero_empenho
+        description: Número do empenho
+      - name: id_liquidacao_bd
+        description: Código único de identificação da licitação
+      - name: id_liquidacao
+        description: Sequencial identificador da liquidação
+      - name: numero_liquidacao
+        description: Número da liquidação
+      - name: id_pagamento_bd
+        description: Código único de identificação do pagamento
+      - name: id_pagamento
+        description: Sequencial identificador do pagamento
+      - name: numero
+        description: Número do pagamento
+      - name: fonte
+        description: Fonte do recurso
+      - name: credor
+        description: Nome/Razão Social do credor
+      - name: documento_credor
+        description: Número do documento do credor
+      - name: indicador_restos_pagar
+        description: Indica se ao pagamento realizado é de exercícios anteriores
+      - name: valor_inicial
+        description: Valor pago na fonte
+      - name: valor_anulacao
+        description: Valor da anulação ou estorno, caso haja deduções
+      - name: valor_ajuste
+        description: Valor de correção entre o valor final e valor inicial, caso haja
+          diferença
+      - name: valor_final
+        description: Resultado do valor original descontado das deduções
+      - name: valor_liquido_recebido
+        description: Resultado do valor original descontado das deduções retidas na
+          fonte
+  - name: world_wb_mides__liquidacao
+    description: Dados a nível de liquidação
+    columns:
+      - name: ano
+        description: Ano
+      - name: mes
+        description: Mês
+      - name: data
+        description: Data da liquidação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+      - name: orgao
+        description: Sequencial identificador do órgão
+      - name: id_unidade_gestora
+        description: Sequencial identificador da unidade gestora
+      - name: id_empenho_bd
+        description: Código único de identificação do empenho
+      - name: id_empenho
+        description: Sequencial identificador do empenho
+      - name: numero_empenho
+        description: Número do empenho
+      - name: id_liquidacao_bd
+        description: Código único de identificação da liquidacao
+      - name: id_liquidacao
+        description: Sequencial identificador da liquidacao
+      - name: numero
+        description: Número da liquidação
+      - name: nome_responsavel
+        description: Nome do liquidante
+      - name: documento_responsavel
+        description: Número do documento do liquidante
+      - name: indicador_restos_pagar
+        description: Indica se a liquidação realizada é de exercícios anteriores
+      - name: valor_inicial
+        description: Valor bruto liquidado
+      - name: valor_anulacao
+        description: Valor da anulação ou estorno, caso haja deduções
+      - name: valor_ajuste
+        description: Valor ajuste
+      - name: valor_final
+        description: Valor líquido da liquidação

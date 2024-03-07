@@ -1,8 +1,16 @@
+---
 version: 2
-
 models:
   - name: mundo_transfermarkt_competicoes_internacionais__champions_league
-    description: A tabela da Champions League abrange edições a partir da temporada de 2003, quando a fonte dos dados, coletados através de web scraping, começou a fornecer informações detalhadas sobre vencedores e estatísticas de partidas. Durante esse período, a competição envolveu uma série de equipes de elite representando os melhores clubes da Europa. A competição apresenta equipes de várias nações europeias e é conhecida por suas emocionantes partidas, incluindo a fase de grupos, oitavas de final, quartas de final, semifinais e, finalmente, a grande final. A presença de valores nulos em algumas estatísticas pode refletir a natureza variável da fonte de dados e as diferentes edições do torneio.
+    description: A tabela da Champions League abrange edições a partir da temporada
+      de 2003, quando a fonte dos dados, coletados através de web scraping, começou
+      a fornecer informações detalhadas sobre vencedores e estatísticas de partidas.
+      Durante esse período, a competição envolveu uma série de equipes de elite representando
+      os melhores clubes da Europa. A competição apresenta equipes de várias nações
+      europeias e é conhecida por suas emocionantes partidas, incluindo a fase de
+      grupos, oitavas de final, quartas de final, semifinais e, finalmente, a grande
+      final. A presença de valores nulos em algumas estatísticas pode refletir a natureza
+      variável da fonte de dados e as diferentes edições do torneio.
     columns:
       - name: temporada
         description: Anos da temporada do campeonato
@@ -82,7 +90,7 @@ models:
       - name: prorrogacao
         description: Indicador se o jogo foi vencido na prorrogação
       - name: penalti
-        description: Indicador se o jogo foi vencido nos pênaltis      
+        description: Indicador se o jogo foi vencido nos pênaltis
       - name: gols_1_tempo_mandante
         description: Gols no primeiro tempo do time mandante
       - name: gols_1_tempo_visitante
