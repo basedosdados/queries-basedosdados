@@ -1713,3 +1713,4 @@ models:
         description: Valor que o parlamentar devolveu à Câmara
       - name: url_documento
         description: URL do documento
+
