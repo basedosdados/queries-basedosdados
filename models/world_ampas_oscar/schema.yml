@@ -10,6 +10,8 @@ models:
     columns:
       - name: name
         description: Winner name
+      - name: birth_year
+        description: Year of birth
       - name: birth_date
         description: Date of birth
       - name: birthplace

@@ -8,6 +8,7 @@
 
 select distinct
     safe_cast(name as string) name,
+    safe_cast(birth_year as int64) birth_year,
     safe_cast(birth_date as date) birth_date,
     safe_cast(birthplace as string) birthplace,
     safe_cast(race_ethnicity as string) race_ethnicity,
