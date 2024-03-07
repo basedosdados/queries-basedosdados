@@ -27,6 +27,8 @@ select distinct
         then 'Nota fiscal eletrônica'
         else indtipodocumento
     end as tipo_documento,
+    safe_cast(numano as int64) as ano_competencia,
+    safe_cast(nummes as int64) as mes_competencia,
     safe_cast(
         split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datemissao)), 'T')[
             offset(0)

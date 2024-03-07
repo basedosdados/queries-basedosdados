@@ -1631,6 +1631,8 @@ models:
             - cnpj_cpf_fornecedor
             - numero_documento_fiscal
             - tipo_documento
+            - ano_competencia
+            - mes_competencia
             - data_emissao
             - valor_retido
             - valor_liquido
@@ -1651,7 +1653,7 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
-      - name: codigo_legislatura
+      - name: id_legislatura
         description: Número identificador da legislatura
       - name: sigla_uf
         description: Sigla da unidade da federação por qual o respectivo parlamentar
@@ -1671,6 +1673,18 @@ models:
         description: O número de face do documento fiscal comprovante da despesa
       - name: tipo_documento
         description: Indicador numérico do tipo de documento fiscal associado à despesa
+      - name: ano_competencia
+        description: Ano da competência financeira do documento comprobatório da despesa
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
+      - name: mes_competencia
+        description: Mês de competência financeira do documento comprobatório da despesa
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: data_emissao
         description: Data de emissão do documento comprobatório da despesa a que se
           refere o registro.
