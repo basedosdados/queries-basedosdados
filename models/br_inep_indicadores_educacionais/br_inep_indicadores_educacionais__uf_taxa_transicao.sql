@@ -84,4 +84,7 @@ select
     safe_cast(taxa_migracao_eja_em_1_ano as float64) taxa_migracao_eja_em_1_ano,
     safe_cast(taxa_migracao_eja_em_2_ano as float64) taxa_migracao_eja_em_2_ano,
     safe_cast(taxa_migracao_eja_em_3_ano as float64) taxa_migracao_eja_em_3_ano,
-from `basedosdados-staging.br_inep_indicadores_educacionais_staging.uf_taxa_transicao` as t
+from
+    `basedosdados-staging.br_inep_indicadores_educacionais_staging.uf_taxa_transicao`
+    as t
+
