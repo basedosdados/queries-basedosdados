@@ -5,7 +5,7 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2014, "end": 2023, "interval": 1},
+            "range": {"start": 2014, "end": 2024, "interval": 1},
         },
         cluster_by=["id_municipio", "mes", "sigla_uf"],
         labels={"project_id": "basedosdados"},
