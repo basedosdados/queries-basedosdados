@@ -87,4 +87,3 @@ select
 from
     `basedosdados-staging.br_inep_indicadores_educacionais_staging.uf_taxa_transicao`
     as t
-
