@@ -30,6 +30,7 @@ select
     safe_cast(atu_em_3_ano as float64) atu_em_3_ano,
     safe_cast(atu_em_4_ano as float64) atu_em_4_ano,
     safe_cast(atu_em_nao_seriado as float64) atu_em_nao_seriado,
+    safe_cast(had_ei as float64) had_ei,
     safe_cast(had_ei_creche as float64) had_ei_creche,
     safe_cast(had_ei_pre_escola as float64) had_ei_pre_escola,
     safe_cast(had_ef as float64) had_ef,

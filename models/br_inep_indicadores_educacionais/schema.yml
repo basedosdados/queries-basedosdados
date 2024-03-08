@@ -2406,6 +2406,8 @@ models:
         description: Média de Alunos por Turma - Ensino Médio 4º ano
       - name: atu_em_nao_seriado
         description: Média de Alunos por Turma - Ensino Médio Não Seriado
+      - name: had_ei
+        description: Média de Horas-Aula diária - Educação Infantil
       - name: had_ei_creche
         description: Média de Horas-Aula diária - Educação Infantil Creche
       - name: had_ei_pre_escola
