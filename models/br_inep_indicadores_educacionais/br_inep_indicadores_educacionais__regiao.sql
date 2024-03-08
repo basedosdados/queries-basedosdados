@@ -1,18 +1,13 @@
 {{
     config(
-        alias="municipio",
+        alias="regiao",
         materialized="table",
         schema="br_inep_indicadores_educacionais",
-        partition_by={
-            "field": "ano",
-            "data_type": "int64",
-            "range": {"start": 2006, "end": 2023, "interval": 1},
-        },
     )
 }}
 select
     safe_cast(ano as int64) ano,
-    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(regiao as string) regiao,
     safe_cast(localizacao as string) localizacao,
     safe_cast(rede as string) rede,
     safe_cast(atu_ei as float64) atu_ei,
@@ -230,5 +225,4 @@ select
     safe_cast(icg_nivel_4 as float64) icg_nivel_4,
     safe_cast(icg_nivel_5 as float64) icg_nivel_5,
     safe_cast(icg_nivel_6 as float64) icg_nivel_6,
-from `basedosdados-staging.br_inep_indicadores_educacionais_staging.municipio` as t
-where id_municipio is not null
+from `basedosdados-staging.br_inep_indicadores_educacionais_staging.regiao` as t
