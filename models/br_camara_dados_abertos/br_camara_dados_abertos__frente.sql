@@ -1,7 +1,6 @@
-# register flow
 {{ config(alias="frente", schema="br_camara_dados_abertos") }}
 select
-    safe_cast(id as string) id,
+    safe_cast(id as string) id_frente,
     safe_cast(titulo as string) titulo,
     safe_cast(datacriacao as date) data_criacao,
     safe_cast(idlegislatura as string) id_legislatura,
