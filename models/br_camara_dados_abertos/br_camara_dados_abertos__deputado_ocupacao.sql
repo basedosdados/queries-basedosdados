@@ -1,4 +1,5 @@
 {{ config(alias="deputado_ocupacao", schema="br_camara_dados_abertos") }}
+# register
 select distinct
     safe_cast(id as string) id_deputado,
     safe_cast(anoinicio as int64) ano_inicio,
