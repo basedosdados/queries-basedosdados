@@ -4,6 +4,5 @@ select distinct
     safe_cast(titulo as string) titulo_deputado,
     safe_cast(replace(id_deputado, ".0", "") as string) id_deputado,
     initcap(nome_deputado) nome_deputado,
-    safe_cast(titulo_deputado as string) titulo_deputado,
     safe_cast(url_foto_deputado as string) url_foto_deputado,
 from `basedosdados-staging.br_camara_dados_abertos_staging.frente_deputado` as t
