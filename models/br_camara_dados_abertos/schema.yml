@@ -845,11 +845,6 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
-      - name: url_orgao
-        description: URL do orgão
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: tipo_orgao
         description: Tipo do orgão
         tests:
