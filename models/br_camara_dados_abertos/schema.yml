@@ -1201,11 +1201,6 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
-      - name: titulo_deputado
-        description: Título do deputado
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: url_foto_deputado
         description: URL da foto do deputado
         tests:
@@ -1713,4 +1708,3 @@ models:
         description: Valor que o parlamentar devolveu à Câmara
       - name: url_documento
         description: URL do documento
-
