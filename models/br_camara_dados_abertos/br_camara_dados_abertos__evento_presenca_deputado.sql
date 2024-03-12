@@ -1,4 +1,3 @@
-# register flow
 {{ config(alias="evento_presenca_deputado", schema="br_camara_dados_abertos") }}
 select distinct
     safe_cast(idevento as string) id_evento,

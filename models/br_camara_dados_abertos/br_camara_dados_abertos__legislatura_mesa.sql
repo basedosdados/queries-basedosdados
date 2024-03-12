@@ -1,6 +1,6 @@
 {{ config(alias="legislatura_mesa", schema="br_camara_dados_abertos") }}
 select
-    safe_cast(idlegislatura as string) id,
+    safe_cast(idlegislatura as string) id_legislatura,
     safe_cast(datainicio as datetime) data_inicio,
     safe_cast(datafim as datetime) data_final,
     safe_cast(idorgao as string) id_orgao,
