@@ -1,18 +1,19 @@
 {{
     config(
-        alias="municipio",
+        alias="escola",
         materialized="table",
         schema="br_inep_indicadores_educacionais",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2006, "end": 2023, "interval": 1},
+            "range": {"start": 2007, "end": 2023, "interval": 1},
         },
     )
 }}
 select
     safe_cast(ano as int64) ano,
     safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_escola as string) id_escola,
     safe_cast(localizacao as string) localizacao,
     safe_cast(rede as string) rede,
     safe_cast(atu_ei as float64) atu_ei,
@@ -196,10 +197,7 @@ select
     safe_cast(afd_eja_medio_grupo_3 as float64) afd_eja_medio_grupo_3,
     safe_cast(afd_eja_medio_grupo_4 as float64) afd_eja_medio_grupo_4,
     safe_cast(afd_eja_medio_grupo_5 as float64) afd_eja_medio_grupo_5,
-    safe_cast(ird_baixa_regularidade as float64) ird_baixa_regularidade,
-    safe_cast(ird_media_baixa as float64) ird_media_baixa,
-    safe_cast(ird_media_alta as float64) ird_media_alta,
-    safe_cast(ird_alta as float64) ird_alta,
+    safe_cast(ird_media_regularidade_docente as float64) ird_media_regularidade_docente,
     safe_cast(ied_ef_nivel_1 as float64) ied_ef_nivel_1,
     safe_cast(ied_ef_nivel_2 as float64) ied_ef_nivel_2,
     safe_cast(ied_ef_nivel_3 as float64) ied_ef_nivel_3,
@@ -224,11 +222,7 @@ select
     safe_cast(ied_em_nivel_4 as float64) ied_em_nivel_4,
     safe_cast(ied_em_nivel_5 as float64) ied_em_nivel_5,
     safe_cast(ied_em_nivel_6 as float64) ied_em_nivel_6,
-    safe_cast(icg_nivel_1 as float64) icg_nivel_1,
-    safe_cast(icg_nivel_2 as float64) icg_nivel_2,
-    safe_cast(icg_nivel_3 as float64) icg_nivel_3,
-    safe_cast(icg_nivel_4 as float64) icg_nivel_4,
-    safe_cast(icg_nivel_5 as float64) icg_nivel_5,
-    safe_cast(icg_nivel_6 as float64) icg_nivel_6,
-from `basedosdados-staging.br_inep_indicadores_educacionais_staging.municipio` as t
-where id_municipio is not null
+    safe_cast(
+        icg_nivel_complexidade_gestao_escola as string
+    ) icg_nivel_complexidade_gestao_escola,
+from `basedosdados-staging.br_inep_indicadores_educacionais_staging.escola` as t
