@@ -2,7 +2,7 @@
     config(
         alias="bpc",
         schema="br_cgu_beneficios_cidadao",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "ano_competencia",
             "data_type": "int64",
@@ -42,4 +42,18 @@ with
             = safe_cast(t2.id_municipio_rf as int64)
     )
 select * except (data)
-from bpc
+from
+    bpc
+    {% if is_incremental() %}
+        date(cast(ano_competencia as int64), cast(mes_competencia as int64), 1) > (
+            select
+                max(
+                    date(
+                        cast(ano_competencia as int64),
+                        cast(mes_competencia as int64),
+                        1
+                    )
+                )
+            from {{ this }}
+        )
+    {% endif %}
