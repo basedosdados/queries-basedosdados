@@ -42,18 +42,5 @@ with
             = safe_cast(t2.id_municipio_rf as int64)
     )
 select * except (data)
-from
-    bpc
-    {% if is_incremental() %}
-        date(cast(ano_competencia as int64), cast(mes_competencia as int64), 1) > (
-            select
-                max(
-                    date(
-                        cast(ano_competencia as int64),
-                        cast(mes_competencia as int64),
-                        1
-                    )
-                )
-            from {{ this }}
-        )
-    {% endif %}
+from bpc
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
