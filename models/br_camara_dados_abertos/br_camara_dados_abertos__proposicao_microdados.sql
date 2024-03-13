@@ -5,8 +5,8 @@
         materialized="table",
         partition_by={
             "field": "ano",
-            "data_type": "int64",
-            "range": {"start": 1935, "end": 2024, "interval": 1},
+            "data_type": "INT64",
+            "range": {"start": 1935, "end": 2023, "interval": 1},
         },
     )
 }}
@@ -23,7 +23,7 @@ select
             format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(dataapresentacao)), 'T'
         )[offset(1)] as time
     ) horario,
-    safe_cast(id as string) id,
+    safe_cast(id as string) id_proposicao,
     safe_cast(uri as string) url,
     safe_cast(numero as string) numero,
     safe_cast(siglatipo as string) sigla,

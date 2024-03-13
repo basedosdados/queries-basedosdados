@@ -1,9 +1,9 @@
 {{ config(alias="orgao", schema="br_camara_dados_abertos") }}
 select
+    regexp_extract(uri, r'/orgaos/(\d+)') id_orgao,
     safe_cast(nome as string) nome,
     safe_cast(apelido as string) apelido,
     safe_cast(sigla as string) sigla,
-    safe_cast(uri as string) url_orgao,
     safe_cast(tipoorgao as string) tipo_orgao,
     safe_cast(
         split(format_timestamp('%Y-%m-%dT%H:%M:%E*S', timestamp(datainicio)), 'T')[

@@ -57,7 +57,7 @@ models:
             - id_equipe
             - tipo_equipe
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -129,7 +129,7 @@ models:
             - id_vinculo
             - indicador_atende_sus
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -188,7 +188,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05          
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -688,7 +688,7 @@ models:
             - tipo_especialidade_leito
             - tipo_leito
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -721,7 +721,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05          
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -924,7 +924,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05          
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -968,7 +968,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05          
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -1016,7 +1016,7 @@ models:
             - portaria
             - data_portaria
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -1067,7 +1067,7 @@ models:
             - portaria
             - data_portaria
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -1121,7 +1121,7 @@ models:
             - data_portaria
             - portaria
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -1173,7 +1173,7 @@ models:
             - tipo_habilitacao
             - data_portaria
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -1226,7 +1226,7 @@ models:
             - indicador_servico_hospitalar_nao_sus
             - indicador_servico_hospitalar_sus
       - not_null_proportion_multiple_columns:
-          at_least: 0.05            
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano

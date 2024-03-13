@@ -2,62 +2,60 @@
 with
     sql as (
         select
+            regexp_extract(uri, r'/([^/]+)$') as id_deputado,
             safe_cast(nome as string) nome,
-            safe_cast(nome_civil as string) nome_civil,
-            safe_cast(data_nascimento as date) data_nascimento,
-            safe_cast(data_falecimento as date) data_falecimento,
-            regexp_extract(id_deputado, r'/([^/]+)$') as id_deputado,
+            safe_cast(nomecivil as string) nome_civil,
+            safe_cast(datanascimento as date) data_nascimento,
+            safe_cast(datafalecimento as date) data_falecimento,
             case
-                when id_municipio_nascimento = 'SAO PAULO'
+                when municipionascimento = 'SAO PAULO'
                 then 'São Paulo'
-                when id_municipio_nascimento = 'Moji-Mirim'
+                when municipionascimento = 'Moji-Mirim'
                 then 'Mogi Mirim'
-                when id_municipio_nascimento = "São Lourenço D'Oeste"
+                when municipionascimento = "São Lourenço D'Oeste"
                 then 'São Lourenço do Oeste'
-                when id_municipio_nascimento = "Santa Bárbara D'Oeste"
+                when municipionascimento = "Santa Bárbara D'Oeste"
                 then "Santa Bárbara d'Oeste"
-                when id_municipio_nascimento = "Araióses"
+                when municipionascimento = "Araióses"
                 then "Araioses"
-                when id_municipio_nascimento = "Cacador"
+                when municipionascimento = "Cacador"
                 then "Caçador"
-                when id_municipio_nascimento = "Pindaré Mirim"
+                when municipionascimento = "Pindaré Mirim"
                 then "Pindaré-Mirim"
-                when id_municipio_nascimento = "Belém de São Francisco"
+                when municipionascimento = "Belém de São Francisco"
                 then "Belém do São Francisco"
-                when id_municipio_nascimento = "Sud Menucci"
+                when municipionascimento = "Sud Menucci"
                 then "Sud Mennucci"
-                when id_municipio_nascimento = 'Duerê'
+                when municipionascimento = 'Duerê'
                 then "Dueré"
-                when id_municipio_nascimento = 'Santana do Livramento'
+                when municipionascimento = 'Santana do Livramento'
                 then "Sant'Ana do Livramento"
-                when id_municipio_nascimento = "Herval D'Oeste"
+                when municipionascimento = "Herval D'Oeste"
                 then "Herval d'Oeste"
-                when id_municipio_nascimento = "Guaçui"
+                when municipionascimento = "Guaçui"
                 then "Guaçuí"
-                when id_municipio_nascimento = "Lençois Paulista"
+                when municipionascimento = "Lençois Paulista"
                 then "Lençóis Paulista"
-                when id_municipio_nascimento = "Amambaí"
+                when municipionascimento = "Amambaí"
                 then "Amambai"
-                when id_municipio_nascimento = "Santo Estevão"
+                when municipionascimento = "Santo Estevão"
                 then "Santo Estêvão"
-                when id_municipio_nascimento = "Poxoréu"
+                when municipionascimento = "Poxoréu"
                 then "Poxoréo"
-                when id_municipio_nascimento = "Trajano de Morais"
+                when municipionascimento = "Trajano de Morais"
                 then "Trajano de Moraes"
-                else id_municipio_nascimento
-            end as id_municipio_nascimento,
-            safe_cast(sigla_uf_nascimento as string) sigla_uf_nascimento,
-            case
-                when sexo = 'M'
-                then 'Masculino'
-                when sexo = 'F'
-                then 'Feminino'
-                else sexo
-            end as sexo,
-            safe_cast(id_inicial_legislatura as string) id_inicial_legislatura,
-            safe_cast(id_final_legislatura as string) id_final_legislatura,
-            safe_cast(url_site as string) url_site,
-            safe_cast(url_rede_social as string) url_rede_social,
+                else municipionascimento
+            end as municipionascimento,
+            safe_cast(ufnascimento as string) sigla_uf_nascimento,
+            replace(
+                replace(safe_cast(siglasexo as string), 'M', 'Masculino'),
+                'F',
+                'Feminino'
+            ) sexo,
+            safe_cast(idlegislaturainicial as string) id_inicial_legislatura,
+            safe_cast(idlegislaturafinal as string) id_final_legislatura,
+            safe_cast(urlwebsite as string) url_site,
+            safe_cast(urlwebsite as string) url_rede_social,
         from `basedosdados-staging.br_camara_dados_abertos_staging.deputado`
     ),
     uniao_valores as (
@@ -65,7 +63,7 @@ with
         from sql as a
         left join
             `basedosdados.br_bd_diretorios_brasil.municipio` as b
-            on a.id_municipio_nascimento = b.nome
+            on a.municipionascimento = b.nome
             and a.sigla_uf_nascimento = b.sigla_uf
     )
 select

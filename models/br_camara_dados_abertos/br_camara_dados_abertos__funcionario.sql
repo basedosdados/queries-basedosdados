@@ -1,4 +1,3 @@
-# register flow
 {{ config(alias="funcionario", schema="br_camara_dados_abertos") }}
 select distinct
     safe_cast(nome as string) nome,
