@@ -2,7 +2,7 @@
     config(
         alias="garantia_safra",
         schema="br_cgu_beneficios_cidadao",
-        materialized="incremental",
+        materialized="table",
         partition_by={
             "field": "ano_referencia",
             "data_type": "int64",
@@ -38,5 +38,14 @@ with
             = safe_cast(t2.id_municipio_rf as int64)
     )
 select * except (data)
-from garantia_safra
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+from garantia_safra << << << < head
+{% if is_incremental() %}
+    where data > (select max(data) from {{ this }})
+{% endif %}
+    == ==
+    == =
+    >> >>
+    >> > parent of 97 de6b9(
+        add materialized incremental tables in novo_bolsa_familia,
+        garantia_safra and bpc
+    )
