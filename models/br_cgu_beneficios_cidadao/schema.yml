@@ -194,8 +194,8 @@ models:
             - ano_referencia
             - mes_referencia
             - nome_favorecido
-            - sigla_uf
             - id_municipio
+            - cpf_favorecido
             - nis_favorecido
             - valor_parcela
       - not_null_proportion_multiple_columns:
