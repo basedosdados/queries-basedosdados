@@ -27,4 +27,4 @@ select distinct
     safe_cast(nis as string) nis_favorecido,
     safe_cast(nome as string) nome_favorecido,
     safe_cast(valor_beneficio as float64) valor_parcela,
-from `basedosdados-staging.br_cgu_beneficios_cidadao_staging.auxilio_brasil` as t
+from `basedosdados-dev.br_cgu_beneficios_cidadao_staging.auxilio_brasil` as t

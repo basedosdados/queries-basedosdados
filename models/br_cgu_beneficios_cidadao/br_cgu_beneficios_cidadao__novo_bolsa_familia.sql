@@ -37,7 +37,7 @@ with
             on safe_cast(t1.id_municipio_siafi as int64)
             = safe_cast(t2.id_municipio_rf as int64)
     )
-select * except (data)
+select * except (data) << << << < head
 from novo_bolsa_familia << << << < head
 {% if is_incremental() %}
     where data > (select max(data) from {{ this }})
@@ -49,3 +49,22 @@ from novo_bolsa_familia << << << < head
         add materialized incremental tables in novo_bolsa_familia,
         garantia_safra and bpc
     )
+    == ==
+    == =
+from
+    novo_bolsa_familia
+    {% if is_incremental() %}
+        date(cast(ano_competencia as int64), cast(mes_competencia as int64), 1) > (
+            select
+                max(
+                    date(
+                        cast(ano_competencia as int64),
+                        cast(mes_competencia as int64),
+                        1
+                    )
+                )
+            from {{ this }}
+        )
+    {% endif %}
+    >> >>
+    >> > parent of d8643ab(fix bucket staging and incremental)
