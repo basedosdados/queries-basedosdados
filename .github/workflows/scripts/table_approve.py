@@ -111,7 +111,7 @@ def push_table_to_bq(
     Dataset(dataset_id).update(mode="prod")
     delete_storage_path = file_path.replace("./downloaded_data/", "")
     print(
-        f"DELETE HEADER FILE FROM basedosdados/staing/{dataset_id}_staging/{table_id}/{delete_storage_path}"
+        f"DELETE HEADER FILE FROM basedosdados/staging/{dataset_id}_staging/{table_id}/{delete_storage_path}"
     )
     st = Storage(dataset_id=dataset_id, table_id=table_id)
     st.delete_file(filename=delete_storage_path, mode="staging")
@@ -146,14 +146,6 @@ def save_header_files(dataset_id, table_id):
             print("Found blob: ", str(blob.name))
             print("Renamed blob: ", blob_path)
             break
-    ### save table header in storage
-
-    print(f"DOWNLOAD HEADER FILE FROM basedosdados-dev.{dataset_id}_staging.{table_id}")
-    query = f"""
-    SELECT * FROM `basedosdados-dev.{dataset_id}_staging.{table_id}` LIMIT 1
-    """
-    df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
-    df = df.drop(columns=partitions)
 
     file_name = blob_path.split("/")[-1]
     file_type = file_name.split(".")[-1]
@@ -161,12 +153,20 @@ def save_header_files(dataset_id, table_id):
     path = Path(blob_path.replace(f"/{file_name}", ""))
     path.mkdir(parents=True, exist_ok=True)
 
+    ### save table header in storage
     if file_type == "csv":
+        print(f"DOWNLOAD HEADER FILE FROM basedosdados-dev.{dataset_id}_staging.{table_id}")
+        query = f"""
+        SELECT * FROM `basedosdados-dev.{dataset_id}_staging.{table_id}` LIMIT 1
+        """
+        df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
+        df = df.drop(columns=partitions)
+
         file_path = f"./{path}/table_approve_temp_file_271828.csv"
         df.to_csv(file_path, index=False)
     elif file_type == "parquet":
         file_path = f"./{path}/table_approve_temp_file_271828.parquet"
-        df.to_parquet(file_path)
+        blob.download_to_filename(file_path)
     print("SAVE HEADER FILE: ", file_path)
     return file_path
 

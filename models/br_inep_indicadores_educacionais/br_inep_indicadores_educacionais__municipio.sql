@@ -1,14 +1,13 @@
 {{
     config(
         alias="municipio",
-        schema="br_inep_indicadores_educacionais",
         materialized="table",
+        schema="br_inep_indicadores_educacionais",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2006, "end": 2022, "interval": 1},
+            "range": {"start": 2006, "end": 2023, "interval": 1},
         },
-        cluster_by=["id_municipio"],
     )
 }}
 select
@@ -230,6 +229,6 @@ select
     safe_cast(icg_nivel_3 as float64) icg_nivel_3,
     safe_cast(icg_nivel_4 as float64) icg_nivel_4,
     safe_cast(icg_nivel_5 as float64) icg_nivel_5,
-    safe_cast(icg_nivel_6 as float64) icg_nivel_6
+    safe_cast(icg_nivel_6 as float64) icg_nivel_6,
 from `basedosdados-staging.br_inep_indicadores_educacionais_staging.municipio` as t
 where id_municipio is not null
