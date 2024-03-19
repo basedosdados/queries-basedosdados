@@ -15,12 +15,10 @@ with
             case
                 when idade = 'Menos de 1 mês'
                 then 0
-                when idade = 'Menos de 1 ano'
-                then 0
                 when regexp_contains(idade, r'[0-9]+ mês')
-                then 0
+                then safe_cast(regexp_extract(idade, r'[0-9]+ mês') as int64) / 12
                 when regexp_contains(idade, r'[0-9]+ meses')
-                then 0
+                then safe_cast(regexp_extract(idade, r'([0-9])+ meses') as int64) / 12
                 when regexp_contains(idade, r'[0-9]+ anos')
                 then cast(regexp_extract(idade, r'([0-9]+) anos') as int64)
                 when regexp_contains(idade, r'[0-9]+ ano')
@@ -33,6 +31,7 @@ with
 select
     t2.cod as id_municipio,
     ibge.* except (municipio, nome_municipio, sigla_uf, idade_num),
+    idade_num as idade_anos,
     case
         when idade_num between 0 and 4
         then '0 a 4 anos'
