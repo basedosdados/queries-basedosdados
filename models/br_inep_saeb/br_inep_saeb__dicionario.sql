@@ -7,3 +7,4 @@ select
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor
 from `basedosdados-staging.br_inep_saeb_staging.dicionario` as t
+where id_tabela is not null

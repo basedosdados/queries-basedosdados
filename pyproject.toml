@@ -27,3 +27,4 @@ openpyxl = "^3.0.9"
 ruamel-yaml = "^0.17.21"
 markdown = "^3.3.6"
 basedosdados = {version = "2.0.0b13", extras = ["upload"]}
+gql = "^3.5.0"

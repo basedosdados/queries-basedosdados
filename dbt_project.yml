@@ -8,14 +8,12 @@ config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
 profile: default
-
 # Options to disable elementary models
 vars:
   disable_run_results: false
   disable_tests_results: false
   disable_dbt_artifacts_autoupload: false
   disable_dbt_invocation_autoupload: false
-
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -29,7 +27,6 @@ target-path: target  # directory which will store compiled SQL files
 clean-targets:  # directories to be removed by `dbt clean`
   - target
   - dbt_modules
-
 # Grant acess
 # bq data control: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language
 # dbt grant statements use https://discourse.getdbt.com/t/the-exact-grant-statements-we-use-in-a-dbt-project/430
@@ -114,12 +111,18 @@ models:
     br_cgu_beneficios_cidadao:
       +materialized: table
       +schema: br_cgu_beneficios_cidadao
-    br_cgu_servidores_executivo_federal:
+    br_cgu_dados_abertos:
       +materialized: table
-      +schema: br_cgu_servidores_executivo_federal
+      +schema: br_cgu_dados_abertos
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
+    br_cgu_servidores_executivo_federal:
+      +materialized: table
+      +schema: br_cgu_servidores_executivo_federal
+    br_cnj_improbidade_administrativa:
+      +materialized: table
+      +schema: br_cnj_improbidade_administrativa
     br_cnpq_bolsas:
       +materialized: table
       +schema: br_cnpq_bolsas
@@ -177,6 +180,9 @@ models:
     br_inep_censo_educacao_superior:
       +materialized: table
       +schema: br_inep_censo_educacao_superior
+    br_inep_censo_escolar:
+      +materialized: table
+      +schema: br_inep_censo_escolar
     br_inep_enem:
       +materialized: table
       +schema: br_inep_enem
@@ -288,6 +294,9 @@ models:
     mundo_transfermarkt_competicoes_internacionais:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes_internacionais
+    world_ampas_oscar:
+      +materialized: table
+      +schema: world_ampas_oscar
     world_iea_pirls:
       +materialized: table
       +schema: world_iea_pirls
