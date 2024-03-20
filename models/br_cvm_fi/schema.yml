@@ -9,6 +9,10 @@ models:
             - plano_contabil_balancete
             - codigo_conta
             - cnpj
+            - cnpj_basico
+            - ano
+            - mes
+            - saldo_conta
     description: O balancete é um documento gerado mensalmente pela contabilidade
       do fundo.
     columns:
