@@ -192,6 +192,9 @@ models:
     br_inep_saeb:
       +materialized: table
       +schema: br_inep_saeb
+    br_inep_sinopse_estatistica_educacao_basica:
+      +materialized: table
+      +schema: br_inep_sinopse_estatistica_educacao_basica
     br_inmet_bdmep:
       +materialized: table
       +schema: br_inmet_bdmep
