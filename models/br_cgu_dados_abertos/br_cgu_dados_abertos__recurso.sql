@@ -1,5 +1,4 @@
 {{ config(alias="recurso", schema="br_cgu_dados_abertos") }}
---
 select
     safe_cast(nullif(id, "") as string) id,
     safe_cast(nullif(id_conjunto, "") as string) id_conjunto,

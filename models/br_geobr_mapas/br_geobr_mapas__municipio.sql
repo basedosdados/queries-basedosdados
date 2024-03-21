@@ -7,7 +7,7 @@
 }}
 
 select
-    safe_cast(id_municipio as string) id_municipio,
-    safe_cast(sigla_uf as string) sigla_uf,
-    safe.st_geogfromtext(geometria) geometria
+    safe_cast(replace(code_muni, '.0', '') as string) id_municipio,
+    safe_cast(abbrev_state as string) sigla_uf,
+    safe.st_geogfromtext(geometry) geometria
 from `basedosdados-staging.br_geobr_mapas_staging.municipio` as t

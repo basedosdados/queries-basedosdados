@@ -2,7 +2,7 @@
     config(
         alias="novo_bolsa_familia",
         schema="br_cgu_beneficios_cidadao",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "ano_competencia",
             "data_type": "int64",
@@ -39,3 +39,4 @@ with
     )
 select * except (data)
 from novo_bolsa_familia
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
