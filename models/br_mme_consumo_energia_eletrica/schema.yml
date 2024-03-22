@@ -13,13 +13,26 @@ models:
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: tipo_consumo
         description: Tipo de Consumo
       - name: numero_consumidores
         description: Número de consumidores de energia elétrica atendidos pela rede
       - name: consumo
         description: Consumo de energia elétrica na rede (MWh)
+        tests: [not_null]
