@@ -144,7 +144,7 @@ select
     case
         when pa_racacor = '00' then '0' else cast(ltrim(pa_racacor, '0') as string)
     end as raca_cor_paciente,
-    safe_cast(ltrim(pa_etnia, '0') as string) etnia_paciente,
+    safe_cast(pa_etnia as string) etnia_paciente,
     safe_cast(idademin as int64) idade_minima_paciente,
     safe_cast(idademax as int64) idade_maxima_paciente,
     case
