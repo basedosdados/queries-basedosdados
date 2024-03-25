@@ -30,7 +30,7 @@ with
     )
 select
     t2.cod as id_municipio,
-    ibge.* except (municipio, nome_municipio, sigla_uf, idade_num),
+    ibge.* except (municipio, nome_municipio, sigla_uf, idade_num, populacao_residente),
     idade_num as idade_anos,
     case
         when idade_num between 0 and 4
@@ -74,7 +74,8 @@ select
         when idade_num between 95 and 99
         then '95 a 99 anos'
         else '100 anos ou mais'
-    end as grupo_idade
+    end as grupo_idade,
+    populacao_residente
 from ibge
 left join
     `basedosdados-dev.br_ibge_censo_2022_staging.auxiliary_table` t2
