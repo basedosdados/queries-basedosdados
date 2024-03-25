@@ -20,14 +20,15 @@ jobs:
         uses: tj-actions/changed-files@v35
         with:
           separator: ','
-      - name: Setup Python 3.9
-        uses: actions/setup-python@v2
+      - name: Set up poetry
+        run: pipx install poetry
+      - name: Set up python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-actions.txt
+          cache: poetry
+          python-version: '3.9'
+      - name: Install requirements
+        run: poetry install --only=dev
       - name: Run script to test DBT model
         run: |-
           python .github/workflows/scripts/table_test.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }}
