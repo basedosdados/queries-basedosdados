@@ -28,7 +28,7 @@ jobs:
           cache: poetry
           python-version: '3.9'
       - name: Install requirements
-        run: poetry install --only=dev
+        run: poetry install --with=dev
       - name: Run script to test DBT model
         run: |-
           python .github/workflows/scripts/table_test.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --prefect-backend-token ${{ secrets.PREFECT_BACKEND_TOKEN }}
