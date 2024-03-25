@@ -228,6 +228,9 @@ models:
       +post-hook:
         - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
         - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
+    br_mme_consumo_energia_eletrica:
+      +materialized: table
+      +schema: br_mme_consumo_energia_eletrica
     br_mp_pep:
       +materialized: table
       +schema: br_mp_pep
