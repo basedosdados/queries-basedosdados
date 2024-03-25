@@ -96,7 +96,9 @@ select
     safe_cast(clasaval as string) tipo_classificacao_acreditacao_hospitalar,
     safe_cast(substr(cast(dt_acred as string), 1, 4) as int64) as ano_acreditacao,
     safe_cast(substr(cast(dt_acred as string), 5, 2) as int64) as mes_acreditacao,
-    safe_cast({{ clean_cols("AV_PNASS") }} as int64) tipo_avaliacao_pnass,
+    safe_cast(
+        cast({{ clean_cols("AV_PNASS") }} as string) as int64
+    ) tipo_avaliacao_pnass,
     safe_cast(substr(cast(dt_pnass as string), 1, 4) as int64) as ano_avaliacao_pnass,
     safe_cast(substr(cast(dt_pnass as string), 5, 2) as int64) as mes_avaliacao_pnass,
     safe_cast(nivate_a as int64) indicador_atencao_ambulatorial,
