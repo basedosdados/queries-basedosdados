@@ -1,6 +1,6 @@
 {{ config(alias="proposicao_autor", schema="br_camara_dados_abertos") }}
 
-select
+select distinct
     safe_cast(idproposicao as string) id_proposicao,
     replace(safe_cast(iddeputadoautor as string), ".0", "") id_deputado,
     initcap(safe_cast(tipoautor as string)) tipo_autor,
@@ -9,4 +9,4 @@ select
     upper(safe_cast(siglaufautor as string)) sigla_uf_autor,
     safe_cast(ordemassinatura as string) ordem_assinatura,
     safe_cast(proponente as string) proponente,
-from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_autor` as t
+from `basedosdados-dev.br_camara_dados_abertos_staging.proposicao_autor` as t
