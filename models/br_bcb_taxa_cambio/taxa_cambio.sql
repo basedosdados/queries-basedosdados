@@ -4,7 +4,7 @@
     )
 }}
 select
-    safe_cast(ano as string) ano,
+    safe_cast(ano as string) as ano,
     safe_cast(data_cotacao as date) data_cotacao,
     safe_cast(hora_cotacao as time) hora_cotacao,
     safe_cast(moeda as string) moeda,
