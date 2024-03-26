@@ -15,5 +15,5 @@ select
         then null
         else safe_cast(numero_consumidores as int64)
     end as numero_consumidores,
-    safe_cast(consumo as int64) as consumo
+    safe_cast(consumo as float64) as consumo
 from `basedosdados-staging.br_mme_consumo_energia_eletrica_staging.uf` as t
