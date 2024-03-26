@@ -88,5 +88,6 @@ with
             url_ultimo_status,
         from table
     )
-select *
+select distinct *
 from query_total
+where not (ano = 2011 and id_proposicao = '510035')
