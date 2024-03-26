@@ -69,7 +69,10 @@ cols_missing = list(set(all_cols) - set(df.columns))
 
 for i in arch.loc[arch["bigquery_type"] == "STRING"]["name"]:
     if i in df.columns:
-        df[i] = df[i].astype("Int64").astype(str)
+        # NOTE: fillna("") porque a coerção astype("Int64").astype("String")
+        # cria <NA> e ao salvar o csv, <NA> não é salvo como um valor
+        # vazio i.e "", ele salva como <NA> e isso é intepretado como uma string no BQ
+        df[i] = df[i].astype("Int64").astype("string").fillna("")  # type: ignore
 
 for i in arch.loc[arch["bigquery_type"] == "INT64"]["name"]:
     if i in df.columns:
