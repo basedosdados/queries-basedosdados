@@ -1,6 +1,6 @@
 {{ config(alias="proposicao_autor", schema="br_camara_dados_abertos") }}
 
-select
+select distinct
     safe_cast(idproposicao as string) id_proposicao,
     replace(safe_cast(iddeputadoautor as string), ".0", "") id_deputado,
     initcap(safe_cast(tipoautor as string)) tipo_autor,

@@ -11,11 +11,17 @@
     )
 }}
 
-select
-    safe_cast(replace(ano, ".0", "") as int64) ano,
-    regexp_extract(uriproposicao, r'/proposicoes/(\d+)') as id_proposicao,
-    safe_cast(siglatipo as string) tipo_proposicao,
-    safe_cast(numero as string) numero,
-    safe_cast(codtema as string) tema,
-    safe_cast(relevancia as int64) relevancia,
-from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_tema` as t
+with
+    tables as (
+        select
+            safe_cast(replace(ano, ".0", "") as int64) as ano,
+            regexp_extract(uriproposicao, r'/proposicoes/(\d+)') as id_proposicao,
+            safe_cast(siglatipo as string) as tipo_proposicao,
+            safe_cast(numero as string) as numero,
+            safe_cast(tema as string) as tema,
+            safe_cast(relevancia as int64) as relevancia
+        from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_tema`
+    )
+select *
+from tables
+where not (ano = 2011 and id_proposicao = '510035')
