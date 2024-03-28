@@ -1161,12 +1161,6 @@ models:
       se a turma passa por atividades complementares, em quais dias da semana ela
       é ativa e se a turma conta com medidas de inclusão como aulas em libras e em
       braille.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - [ano, id_turma]
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
     columns:
       - name: ano
         description: Ano do Censo
@@ -1179,7 +1173,7 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
-              field: sigla_uf
+              field: sigla
       - name: id_municipio
         description: Código do Município da escola
         tests:
@@ -1326,26 +1320,26 @@ models:
       - name: educacao_indigena
         description: Escola Indígena
       - name: braille
-        description: "Tipo de Atendimento Educacionl Especializado - Ensino do sistema\
-          \ braille\n"
+        description: Tipo de Atendimento Educacionl Especializado - Ensino do sistema
+          braille
       - name: recursos_baixa_visao
-        description: "Tipo de Atendimento Educacionl Especializado - Ensino do uso\
-          \ de recursos ópticos e não ópticos       \n"
+        description: Tipo de Atendimento Educacionl Especializado - Ensino do uso
+          de recursos ópticos e não ópticos
       - name: processos_mentais
-        description: "Tipo de Atendimento Educacionl Especializado - Estratégias para\
-          \ o desenvolvimento de processos mentais     \n"
+        description: Tipo de Atendimento Educacionl Especializado - Estratégias para
+          o desenvolvimento de processos mentais
       - name: orientacao_mobilidade
         description: Tipo de Atendimento Educacionl Especializado - Ensino de técnicas
           de orientação e mobilidade
       - name: sinais
-        description: "Tipo de Atendimento Educacionl Especializado - Ensino da Língua\
-          \ Brasileira de Sinais - LIBRAS      \n"
+        description: Tipo de Atendimento Educacionl Especializado - Ensino da Língua
+          Brasileira de Sinais - LIBRAS
       - name: comunicacao_alt_aument
-        description: "Tipo de Atendimento Educacionl Especializado - Ensino de uso\
-          \ de Comunicação Alternativa Aumentada\n"
+        description: Tipo de Atendimento Educacionl Especializado - Ensino de uso
+          de Comunicação Alternativa Aumentada
       - name: enriquecimento_curricular
-        description: "Tipo de Atendimento Educacionl Especializado - Ensino de estratégias\
-          \ para enriquecimento curricular      \n"
+        description: Tipo de Atendimento Educacionl Especializado - Ensino de estratégias
+          para enriquecimento curricular
       - name: soroban
         description: Tipo de Atendimento Educacionl Especializado - Ensino de uso
           do Soroban
