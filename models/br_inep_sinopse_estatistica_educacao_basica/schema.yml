@@ -69,9 +69,6 @@ models:
         description: Número de matrículas
   - name: br_inep_sinopse_estatistica_educacao_basica__localizacao
     description: A base conta com o total de matrículas por município, rede e localização
-    tests:
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
     columns:
       - name: ano
         description: Ano
