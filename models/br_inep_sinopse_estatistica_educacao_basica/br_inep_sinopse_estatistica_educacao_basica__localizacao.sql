@@ -14,7 +14,18 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(
+        case
+            when id_municipio = "3201705"
+            then "3201605"
+            when id_municipio = "4201704"
+            then "4201604"
+            when id_municipio = "4201753"
+            then "4201653"
+            when id_municipio = "5201703"
+            then "5201603"
+        end as string
+    ) id_municipio,
     safe_cast(rede as string) rede,
     safe_cast(etapa_ensino as string) etapa_ensino,
     safe_cast(localizacao as string) localizacao,
