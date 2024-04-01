@@ -1,5 +1,8 @@
 name: Deploy Elementary Report
-on: workflow_dispatch
+on: 
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
 jobs:
   elementary:
     runs-on: ubuntu-latest
