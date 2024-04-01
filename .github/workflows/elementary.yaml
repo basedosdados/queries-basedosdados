@@ -21,7 +21,7 @@ jobs:
             &&
             edr send-report
               --google-service-account-path "/tmp/gcs_keyfile.json"
-              --gcs-bucket-name "${{ secrets.GCS_BUCKET_NAME }}"
+              --gcs-bucket-name "basedosdados"
               --update-bucket-website "true"
           bigquery-keyfile: ${{ secrets.BIGQUERY_KEYFILE }}
           gcs-keyfile: ${{ secrets.GCS_KEYFILE }} 
