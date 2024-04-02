@@ -881,14 +881,14 @@ models:
         description: ID da Unidade da Federação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: id
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: id_uf
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_setor_censitario
         description: Geocódigo de Setor Censitário
       - name: area_setor
