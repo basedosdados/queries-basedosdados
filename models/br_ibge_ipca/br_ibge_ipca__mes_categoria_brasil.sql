@@ -10,7 +10,15 @@
         ],
     )
 }}
-select
+
+
+with
+    drop_duplicates as (
+        select distinct *
+        from `basedosdados-staging.br_ibge_ipca_staging.mes_categoria_brasil`
+    )
+
+select distinct
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
     safe_cast(id_categoria as string) id_categoria,
@@ -20,7 +28,7 @@ select
     safe_cast(variacao_mensal as float64) variacao_mensal,
     safe_cast(variacao_anual as float64) variacao_anual,
     safe_cast(variacao_doze_meses as float64) variacao_doze_meses
-from `basedosdados-staging.br_ibge_ipca_staging.mes_categoria_brasil` as t
+from drop_duplicates as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)
