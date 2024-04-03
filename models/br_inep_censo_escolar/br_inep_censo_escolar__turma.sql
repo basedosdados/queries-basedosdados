@@ -90,3 +90,4 @@ select
     ) disciplina_atendimento_especiais,
     safe_cast(disciplina_diver_socio_cultural as int64) disciplina_diver_socio_cultural,
 from `basedosdados-staging.br_inep_censo_escolar_staging.turma` as t
+where safe_cast(ano as int64) < 2023
