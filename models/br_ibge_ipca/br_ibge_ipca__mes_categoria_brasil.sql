@@ -18,7 +18,7 @@ with
         from `basedosdados-staging.br_ibge_ipca_staging.mes_categoria_brasil`
     )
 
-select distinct
+select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
     safe_cast(id_categoria as string) id_categoria,
