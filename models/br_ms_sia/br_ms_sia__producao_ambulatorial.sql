@@ -197,7 +197,9 @@ select
     safe_cast(pa_fler as string) flag_erro_corpo_apac,
 from sia_add_municipios
 {% if is_incremental() %}
-    where
-        date(cast(ano as int64), cast(mes as int64), 1)
-        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+    left join
+        {{ this }} as materialized
+        on sia_add_municipios.ano = materialized.ano
+        and sia_add_municipios.mes = materialized.mes
+    where materialized.ano is null and materialized.mes is null
 {% endif %}
