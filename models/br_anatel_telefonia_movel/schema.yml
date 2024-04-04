@@ -54,38 +54,89 @@ models:
       - name: acessos
         description: Número total de acessos
   - name: br_anatel_telefonia_movel__densidade_brasil
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     description: Densidade de acessos por domicílios de Telefonia móvel no Brasil
       por mês e ano
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
       - name: mes
         description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: mes
       - name: densidade
         description: Densidade de acessos por 100 domicílios
   - name: br_anatel_telefonia_movel__densidade_uf
     description: Densidade de acessos por domicílios de Telefonia móvel nos estados
       por mês e ano
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes, sigla_uf]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
       - name: mes
         description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: mes
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: densidade
         description: Densidade de acessos por 100 domicílios
   - name: br_anatel_telefonia_movel__densidade_municipio
     description: Densidade de acessos por domicílios de Telefonia móvel nos municípios
       por mês e ano
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes, id_municipio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ref('ano.ano')
       - name: mes
         description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: mes
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: densidade
         description: Densidade de acessos por 100 domicílios
