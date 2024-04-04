@@ -372,19 +372,19 @@ pyarrow = ">=3.0.0"
 
 [[package]]
 name = "dbt-bigquery"
-version = "1.5.6"
+version = "1.5.9"
 description = "The Bigquery adapter plugin for dbt"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "dbt-bigquery-1.5.6.tar.gz", hash = "sha256:4655cf2ee0acda986b80e6c5d55cae57871bef22d868dfe29d8d4a5bca98a1ba"},
-    {file = "dbt_bigquery-1.5.6-py3-none-any.whl", hash = "sha256:3f37544716880cbd17b32bc0c9728a0407b5615b2cd08e1bb904a7a83c46eb6c"},
+    {file = "dbt-bigquery-1.5.9.tar.gz", hash = "sha256:06e3f8ebb8f696f028084fb9fc1c934b472b28996a76a051f65c548712e15651"},
+    {file = "dbt_bigquery-1.5.9-py3-none-any.whl", hash = "sha256:b63ce45ea34dab8fcfa0592f9843cb35d6744ddd1a84efff577971964fa85db2"},
 ]
 
 [package.dependencies]
 agate = ">=1.6.3,<1.7.0"
 dbt-core = ">=1.5.0,<1.6.0"
-google-cloud-bigquery = ">=3.0,<4.0"
+google-cloud-bigquery = {version = ">=3.0,<4.0", extras = ["pandas"]}
 google-cloud-dataproc = ">=5.0,<6.0"
 google-cloud-storage = ">=2.4,<3.0"
 
@@ -646,10 +646,13 @@ files = [
 ]
 
 [package.dependencies]
+db-dtypes = {version = ">=0.3.0,<2.0.0dev", optional = true, markers = "extra == \"pandas\""}
 google-api-core = ">=1.31.5,<2.0.dev0 || >2.3.0,<3.0.0dev"
 google-cloud-core = ">=1.6.0,<3.0.0dev"
 google-resumable-media = ">=0.6.0,<3.0dev"
 packaging = ">=20.0.0"
+pandas = {version = ">=1.1.0", optional = true, markers = "extra == \"pandas\""}
+pyarrow = {version = ">=3.0.0", optional = true, markers = "extra == \"pandas\""}
 python-dateutil = ">=2.7.2,<3.0dev"
 requests = ">=2.21.0,<3.0.0dev"
 
@@ -2838,4 +2841,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.9"
-content-hash = "0def9d00f7a70c98da4e0d4ae2db848c68a9f56e6f17e532c398e87b373bd2d8"
+content-hash = "a102f8b62ef85b71268f5d4b74ce5e65d37546f6bac49e308e497b0cd554e09c"
