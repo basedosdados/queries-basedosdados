@@ -870,12 +870,9 @@ models:
     description: description
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - id_uf
-              - id_municipio
-              - id_setor_censitario
+          combination_of_columns: [id_uf, id_municipio, id_setor_censitario]
       - not_null_proportion_multiple_columns:
-            at_least: 0.05
+          at_least: 0.05
     columns:
       - name: id_uf
         description: ID da Unidade da Federação
@@ -905,9 +902,9 @@ models:
         description: Total de Domicílios Coletivos (DCCM + DCSM)
       - name: media_moradores_domicilios
         description: Média de moradores em Domicílios Particulares Ocupados (Total
-            pessoas em Domicílios Particulares Ocupados / DPPO + DPIO)
+          pessoas em Domicílios Particulares Ocupados / DPPO + DPIO)
       - name: porcentagem_domicilios_imputados
         description: Percentual de Domicílios Particulares Ocupados Imputados (Total
-            DPO imputados / Total DPO)
+          DPO imputados / Total DPO)
       - name: domicilios_particulares_ocupados
         description: Total de Domicílios Particulares Ocupados (DPPO + DPIO)
