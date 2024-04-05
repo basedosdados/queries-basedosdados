@@ -1186,6 +1186,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__escola')
               field: rede
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: [municipal, estadual, federal, privada]
       - name: id_escola
         description: Código da Escola
       - name: id_turma
