@@ -28,7 +28,7 @@ with
             on producao_ambulatorial.pa_ufmun = mun.id_municipio_6
     ),
 
-    producao_ambulatorial as (
+    sia as (
 
         select
             safe_cast(ano as int64) ano,
@@ -223,12 +223,12 @@ with
     )
 
 select *
-from producao_ambulatorial
+from sia
 
 {% if is_incremental() %}
     left join
         {{ this }} as materialized
-        on sia_add_municipios.ano = materialized.ano
-        and sia_add_municipios.mes = materialized.mes
+        on sia.ano = materialized.ano
+        and sia.mes = materialized.mes
     where materialized.ano is null and materialized.mes is null
 {% endif %}
