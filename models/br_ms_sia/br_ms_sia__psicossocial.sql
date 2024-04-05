@@ -2,7 +2,7 @@
     config(
         alias="psicossocial",
         schema="br_ms_sia",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "ano",
             "data_type": "int64",
@@ -20,7 +20,7 @@ with
             psicossocial.*,
             mun.id_municipio as id_municipio_executante,
             mun_res.id_municipio as id_municipio_residencia
-        from `basedosdados.br_ms_sia_staging.psicossocial` as psicossocial
+        from `basedosdados-staging.br_ms_sia_staging.psicossocial` as psicossocial
         left join
             (
                 select id_municipio, id_municipio_6
