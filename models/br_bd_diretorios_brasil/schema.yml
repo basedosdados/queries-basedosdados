@@ -280,7 +280,12 @@ models:
       - name: sigla_uf
         description: Sigla do Estado
       - name: situacao_setor
-        description: – ID de situação do setor - Situação urbana - IDs 1, 2 e 3; 1 - Área urbanizada de cidade ou vila 2 - Área não urbanizada de cidade ou vila 3 - Área urbana isolada - Situação rural – IDs 4, 5, 6, 7 e 8; 4 - Aglomerado rural de extensão urbana 5 - Aglomerado rural isolado, povoado 6 - Aglomerado rural isolado, núcleo 7 - Aglomerado rural isolado, outros aglomerados 8 - Zona rural, exclusive aglomerado rural
+        description: – ID de situação do setor - Situação urbana - IDs 1, 2 e 3; 1
+          - Área urbanizada de cidade ou vila 2 - Área não urbanizada de cidade ou
+          vila 3 - Área urbana isolada - Situação rural – IDs 4, 5, 6, 7 e 8; 4 -
+          Aglomerado rural de extensão urbana 5 - Aglomerado rural isolado, povoado
+          6 - Aglomerado rural isolado, núcleo 7 - Aglomerado rural isolado, outros
+          aglomerados 8 - Zona rural, exclusive aglomerado rural
       - name: tipo_setor
         description: Tipo de setor censitário
       - name: id_microrregiao
