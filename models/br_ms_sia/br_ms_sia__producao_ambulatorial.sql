@@ -222,13 +222,13 @@ with
         from sia_add_municipios
     )
 
-select sia.*
+select *
 from sia
 
 {% if is_incremental() %}
-    left join
-        {{ this }} as materialized
-        on sia.ano = materialized.ano
-        and sia.mes = materialized.mes
-    where materialized.ano is null and materialized.mes is null
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+        or date(cast(ano as int64), cast(mes as int64), 1)
+        < (select min(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}
