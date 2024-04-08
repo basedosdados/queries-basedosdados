@@ -222,7 +222,7 @@ with
         from sia_add_municipios
     )
 
-select *
+select sia.*
 from sia
 
 {% if is_incremental() %}
