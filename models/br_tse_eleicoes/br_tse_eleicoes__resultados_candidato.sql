@@ -8,7 +8,6 @@
             "data_type": "int64",
             "range": {"start": 1945, "end": 2022, "interval": 1},
         },
-        cluster_by=["sigla_uf"],
     )
 }}
 

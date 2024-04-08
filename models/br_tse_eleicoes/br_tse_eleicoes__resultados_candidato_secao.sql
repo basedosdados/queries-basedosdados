@@ -1,31 +1,35 @@
 {{
     config(
-        schema="br_tse_eleicoes",
-        alias="resultados_candidato_secao",
-        materialized="table",
+        schema='br_tse_eleicoes',
+        alias = 'resultados_candidato_secao',
+        materialized='table',
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 1994, "end": 2022, "interval": 2},
+            "range": {
+                "start": 1994,
+                "end": 2022,
+                "interval": 2
+            }
         },
         cluster_by=["sigla_uf"],
     )
 }}
 
-select
-    safe_cast(ano as int64) ano,
-    safe_cast(turno as int64) turno,
-    safe_cast(tipo_eleicao as string) tipo_eleicao,
-    safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(id_municipio as string) id_municipio,
-    safe_cast(id_municipio_tse as string) id_municipio_tse,
-    safe_cast(zona as string) zona,
-    safe_cast(secao as string) secao,
-    safe_cast(cargo as string) cargo,
-    safe_cast(numero_partido as string) numero_partido,
-    safe_cast(sigla_partido as string) sigla_partido,
-    safe_cast(sequencial_candidato as string) sequencial_candidato,
-    safe_cast(numero_candidato as string) numero_candidato,
-    safe_cast(id_candidato_bd as string) id_candidato_bd,
-    safe_cast(votos as int64) votos
-from `basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato_secao` as t
+SELECT 
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(turno AS INT64) turno,
+SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
+SAFE_CAST(zona AS STRING) zona,
+SAFE_CAST(secao AS STRING) secao,
+SAFE_CAST(cargo AS STRING) cargo,
+SAFE_CAST(numero_partido AS STRING) numero_partido,
+SAFE_CAST(sigla_partido AS STRING) sigla_partido,
+SAFE_CAST(sequencial_candidato AS STRING) sequencial_candidato,
+SAFE_CAST(numero_candidato AS STRING) numero_candidato,
+SAFE_CAST(id_candidato_bd AS STRING) id_candidato_bd,
+SAFE_CAST(votos AS INT64) votos
+FROM basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato_secao AS t

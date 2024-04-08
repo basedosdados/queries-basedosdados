@@ -2,7 +2,7 @@
 version: 2
 models:
   - name: br_tse_eleicoes__candidatos
-    description: Microdados de candidatos
+    description: "Candidatos"
     columns:
       - name: ano
         description: Ano
@@ -58,20 +58,8 @@ models:
         description: E-mail
       - name: raca
         description: Raça ou cor
-      - name: situacao_totalizacao
-        description: Situação Totalização
-      - name: numero_federacao
-        description: Número Federação
-      - name: nome_federacao
-        description: Nome Federação
-      - name: sigla_federacao
-        description: Sigla Federação
-      - name: composicao_federacao
-        description: Composição Federação
-      - name: prestou_contas
-        description: Indicador de prestação de contas
   - name: br_tse_eleicoes__bens_candidato
-    description: Microdados bens candidato
+    description: "Bens candidato"
     columns:
       - name: ano
         description: Ano
@@ -92,7 +80,7 @@ models:
       - name: valor_item
         description: Valor do Item (R$)
   - name: br_tse_eleicoes__receitas_candidato
-    description: Microdados receitas candidato
+    description: "Receitas candidato"
     columns:
       - name: ano
         description: Ano
@@ -211,7 +199,7 @@ models:
       - name: entrega_conjunto
         description: Entrega em conjunto
   - name: br_tse_eleicoes__despesas_candidato
-    description: Microdados despesas candidato
+    description: "Despesas candidato"
     columns:
       - name: ano
         description: Ano
@@ -307,7 +295,7 @@ models:
       - name: cargo_fornecedor
         description: Cargo do fornecedor
   - name: br_tse_eleicoes__receitas_comite
-    description: Receitas de comitês eleitorais
+    description: "Receitas de comitês eleitorais"
     columns:
       - name: ano
         description: Ano
@@ -380,7 +368,7 @@ models:
       - name: nome_doador_orig_rf
         description: Nome do doador originário - Receita Federal
   - name: br_tse_eleicoes__receitas_orgao_partidario
-    description: Receitas de comitês eleitorais
+    description: "Receitas de comitês eleitorais"
     columns:
       - name: ano
         description: Ano
@@ -487,7 +475,7 @@ models:
       - name: nome_doador_orig_rf
         description: Nome do doador originário - Receita Federal
   - name: br_tse_eleicoes__resultados_candidato
-    description: Resultados a nível de candidato.
+    description: "Resultados a nível de candidato"
     columns:
       - name: ano
         description: Ano
@@ -520,7 +508,7 @@ models:
       - name: votos
         description: Número de votos
   - name: br_tse_eleicoes__resultados_candidato_secao
-    description: Resultados a nível de candidato e seção eleitoral.
+    description: "Resultados a nível de candidato e seção eleitoral"
     columns:
       - name: ano
         description: Ano
@@ -553,7 +541,7 @@ models:
       - name: votos
         description: Número de votos
   - name: br_tse_eleicoes__resultados_partido_secao
-    description: Resultados a nível de partido e seção eleitoral.
+    description: "Resultados a nível de partido e seção eleitoral"
     columns:
       - name: ano
         description: Ano
