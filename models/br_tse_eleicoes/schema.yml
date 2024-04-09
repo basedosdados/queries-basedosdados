@@ -1,6 +1,6 @@
 version: 2
 models :
-  - name: bens_candidato
+  - name: br_tse_eleicoes__bens_candidato
     description: Declaração de bens de candidatos em eleições brasileiras.
     columns:
       - name: ano
@@ -21,7 +21,7 @@ models :
         description: Tipo Item
       - name: valor_item
         description: Valor do Item
-  - name: candidatos
+  - name: br_tse_eleicoes__candidatos
     description: Dados de candidatos em eleições brasileiras.
     columns:
       - name: ano
@@ -78,7 +78,7 @@ models :
         description: Tipo da Eleição
       - name: titulo_eleitoral
         description: Título eleitoral
-  - name: despesas_candidato
+  - name: br_tse_eleicoes__despesas_candidato
     description: Dados de despesas em campanhas eleitorais a nível de despesa.
     columns:
       - name: ano
@@ -174,7 +174,7 @@ models :
         description: Turno
       - name: valor_despesa
         description: Valor da despesa
-  - name: detalhes_votacao_municipio
+  - name: br_tse_eleicoes__detalhes_votacao_municipio
     description: Dados de detalhes das votações em eleições brasileiras a nível de
       município.
     columns:
@@ -222,7 +222,7 @@ models :
         description: Número de votos nulos
       - name: votos_validos
         description: Número de votos válidos
-  - name: detalhes_votacao_municipio_zona
+  - name: br_tse_eleicoes__detalhes_votacao_municipio_zona
     description: Dados de detalhes das votações em eleições brasileiras a nível de
       zona eleitoral.
     columns:
@@ -272,7 +272,7 @@ models :
         description: Número de votos válidos
       - name: zona
         description: Zona eleitoral
-  - name: detalhes_votacao_secao
+  - name: br_tse_eleicoes__detalhes_votacao_secao
     description: Dados de detalhes de votação em eleições brasileiras a nível de seção
       eleitoral.
     columns:
@@ -322,7 +322,7 @@ models :
         description: Votos pendentes
       - name: zona
         description: Zona eleitoral
-  - name: partidos
+  - name: br_tse_eleicoes__partidos
     description: 'Dados de partidos em eleições brasileiras a nível de partido. ATENÇÃO:
       a coluna `sequencial_coligacao` identifica as linhas, mas fora isso há duplicadas
       por questões de erro do TSE.'
@@ -365,7 +365,7 @@ models :
         description: Tipo da eleição
       - name: turno
         description: Turno
-  - name: perfil_eleitorado_local_votacao
+  - name: br_tse_eleicoes__perfil_eleitorado_local_votacao
     description: Perfil eleitorado a nível de local de votação.
     columns:
       - name: ano
@@ -416,7 +416,7 @@ models :
         description: Turno
       - name: zona
         description: Zona eleitoral
-  - name: perfil_eleitorado_municipio_zona
+  - name: br_tse_eleicoes__perfil_eleitorado_municipio_zona
     description: Dados de perfil do eleitorado a nível de zona eleitoral.
     columns:
       - name: ano
@@ -445,7 +445,7 @@ models :
         description: Situação da biometria
       - name: zona
         description: Zona eleitoral
-  - name: perfil_eleitorado_secao
+  - name: br_tse_eleicoes__perfil_eleitorado_secao
     description: Perfil eleitorado a nível de seção eleitoral.
     columns:
       - name: ano
@@ -478,7 +478,7 @@ models :
         description: Situação da biometria
       - name: zona
         description: Zona eleitoral
-  - name: receitas_candidato
+  - name: br_tse_eleicoes__receitas_candidato
     description: Dados de financiamento de campanha de receita para candidatos.
     columns:
       - name: ano
@@ -597,7 +597,7 @@ models :
         description: Turno
       - name: valor_receita
         description: Valor da receita
-  - name: receitas_comite
+  - name: br_tse_eleicoes__receitas_comite
     description: Receitas de comitês eleitorais
     columns:
       - name: ano
@@ -670,7 +670,7 @@ models :
         description: Tipo da eleição
       - name: valor_receita
         description: Valor da receita
-  - name: receitas_orgao_partidario
+  - name: br_tse_eleicoes__receitas_orgao_partidario
     description: Receitas de Órgãos Partidários
     columns:
       - name: ano
@@ -771,7 +771,7 @@ models :
         description: Tipo de prestação de contas
       - name: valor_receita
         description: Valor da receita
-  - name: resultados_candidato
+  - name: br_tse_eleicoes__resultados_candidato
     description: Dados de resultados eleitorais a nível de candidato.
     columns:
       - name: ano
@@ -804,7 +804,7 @@ models :
         description: Turno
       - name: votos
         description: Número de votos
-  - name: resultados_candidato_municipio
+  - name: br_tse_eleicoes__resultados_candidato_municipio
     description: Dados de votação em eleições brasileiras a nível candidato-município.
     columns:
       - name: ano
@@ -835,7 +835,7 @@ models :
         description: Turno
       - name: votos
         description: Número de votos
-  - name: resultados_candidato_municipio_zona
+  - name: br_tse_eleicoes__resultados_candidato_municipio_zona
     description: Dados de votação em eleições brasileiras a nível candidato-município-zona.
     columns:
       - name: ano
@@ -868,7 +868,7 @@ models :
         description: Número de votos
       - name: zona
         description: Zona eleitoral
-  - name: resultados_candidato_secao
+  - name: br_tse_eleicoes__resultados_candidato_secao
     description: Dados de resultados eleitorais a nível de candidato-seção.
     columns:
       - name: ano
@@ -901,7 +901,7 @@ models :
         description: Número de votos
       - name: zona
         description: Zona eleitoral
-  - name: resultados_partido_municipio
+  - name: br_tse_eleicoes__resultados_partido_municipio
     description: Dados de resultados em eleições brasileiras a nível de partido-município.
     columns:
       - name: ano
@@ -926,7 +926,7 @@ models :
         description: Número de votos não-nominais
       - name: votos_nominais
         description: Número de votos nominais
-  - name: resultados_partido_municipio_zona
+  - name: br_tse_eleicoes__resultados_partido_municipio_zona
     description: Dados de resultados em eleições brasileiras a nível de partido-zona.
     columns:
       - name: ano
@@ -953,7 +953,7 @@ models :
         description: Número de votos nominais
       - name: zona
         description: Zona eleitoral
-  - name: resultados_partido_secao
+  - name: br_tse_eleicoes__resultados_partido_secao
     description: Dados de resultados em eleições brasileiras a nível de partido-seção.
     columns:
       - name: ano
@@ -982,7 +982,7 @@ models :
         description: Número de votos nominais
       - name: zona
         description: Zona eleitoral
-  - name: vagas
+  - name: br_tse_eleicoes__vagas
     description: Número de vagas em disputa na eleição por município-cargo.
     columns:
       - name: ano
