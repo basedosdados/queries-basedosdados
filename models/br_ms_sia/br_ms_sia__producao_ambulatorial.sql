@@ -2,7 +2,7 @@
     config(
         alias="producao_ambulatorial",
         schema="br_ms_sia",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "ano",
             "data_type": "int64",
