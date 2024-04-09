@@ -11,6 +11,9 @@ models:
       grupos, oitavas de final, quartas de final, semifinais e, finalmente, a grande
       final. A presença de valores nulos em algumas estatísticas pode refletir a natureza
       variável da fonte de dados e as diferentes edições do torneio.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.20    
     columns:
       - name: temporada
         description: Anos da temporada do campeonato
@@ -37,8 +40,12 @@ models:
         description: Público máximo
       - name: time_mandante
         description: Time mandante
+        tests:
+          - not_null        
       - name: time_visitante
         description: Time visitante
+        tests:
+          - not_null        
       - name: tecnico_mandante
         description: Técnico do time mandante
       - name: tecnico_visitante

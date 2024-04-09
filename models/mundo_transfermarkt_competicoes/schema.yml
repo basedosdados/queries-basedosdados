@@ -16,11 +16,19 @@ models:
       \ Chapecoense e Atlético-MG não ocorreu em decorrência do desastre que atingiu\
       \ a equipe do Chapecoense na época, resultando assim em W.O. duplo;\nFonte:\
       \ https://www.transfermarkt.com/campeonato-brasileiro-serie-a/startseite/wettbewerb/BRA1"
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.20     
     columns:
       - name: ano_campeonato
         description: Ano do campeonato
+        tests:
+          - dbt_utils.sequential_values:
+              interval: 1        
       - name: data
         description: Data da partida
+        tests:
+          - not_null             
       - name: rodada
         description: Rodada
       - name: estadio
@@ -33,8 +41,12 @@ models:
         description: Público máximo
       - name: time_mandante
         description: Time mandante
+        tests:
+          - not_null           
       - name: time_visitante
         description: Time visitante
+        tests:
+          - not_null           
       - name: tecnico_mandante
         description: Técnico do time mandante
       - name: tecnico_visitante
@@ -94,11 +106,19 @@ models:
       e 2020, 91 equipes competiram, com onze já nas oitavas de final, enquanto a
       edição de 2021 trouxe 92 equipes. A presença de valores nulos reflete a natureza
       variável da fonte de dados.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.20       
     columns:
       - name: ano_campeonato
         description: Ano do campeonato
+        tests:
+          - dbt_utils.sequential_values:
+              interval: 2        
       - name: data
         description: Data da partida
+        tests:
+          - not_null           
       - name: horario
         description: Horário da partida
       - name: fase
@@ -115,8 +135,12 @@ models:
         description: Público máximo
       - name: time_mandante
         description: Time mandante
+        tests:
+          - not_null           
       - name: time_visitante
         description: Time visitante
+        tests:
+          - not_null           
       - name: tecnico_mandante
         description: Técnico do time mandante
       - name: tecnico_visitante
