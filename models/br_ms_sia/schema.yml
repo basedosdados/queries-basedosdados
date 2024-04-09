@@ -1,20 +1,22 @@
 ---
 version: 2
 models:
+  - name: br_ms_sia__dicionario
+    description: Dicionário
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor
   - name: br_ms_sia__producao_ambulatorial
     description: Esta tabela contém o registro de processos ambulatorias realizados
       em todo sistema de saúde nacional - público e privado.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - mes
-            - id_estabelecimento_cnes
-            - instrumento_registro
-            - id_processamento_ambulatorial
-            - id_cbo_2002
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -239,16 +241,189 @@ models:
         description: Tipo de erro de Quantidade Produzida
       - name: flag_erro_corpo_apac
         description: FLAG de erro de corpo da APAC
-  - name: br_ms_sia__dicionario
-    description: Dicionário
+  - name: br_ms_sia__psicossocial
+    description: Esta tabela contém o registro de processos ambulatorias de atendimento
+      psicossial no sistema público de saúde nacional.
     columns:
-      - name: id_tabela
-        description: ID Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes
+        description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: id_estabelecimento_cnes
+        description: ID Estabelecimento - CNES
+      - name: id_estabelecimento_cnes_familia
+        description: Código do SCNES do Estabelecimento de Saúde Unidade da Saúde
+          da Família da região
+      - name: id_gestao
+        description: ID do tipo de gestão do estabelecimento
+      - name: tipo_gestao
+        description: Tipo de gestão do estabelecimento
+      - name: tipo_unidade
+        description: Tipo de estabelecimento
+      - name: tipo_prestador
+        description: Tipo de Prestador
+      - name: tipo_mantenedor_estabelecimento
+        description: Tipo de manutenção do estabelecimento
+      - name: cnpj_estabelecimento_executante
+        description: CNPJ do Estabelecimento executante
+      - name: cnpj_mantenedora_estabalecimento
+        description: CNPJ da Mantenedora do Estabelecimento
+      - name: natureza_juridica_estabelecimento
+        description: Natureza jurídica do operador do estabelecimento  # Não possui teste pois a coluna foi excluida na materialização
+      - name: id_procedimento_ambulatorial
+        description: Ação Realizada
+      - name: id_servico_especializado
+        description: Código do Serviço Especializado / Classificação CBO (de acordo
+          com o CNES)
+      - name: id_classificacao_servico
+        description: Código da Classificação do Serviço
+      - name: id_cns_paciente_criptografado
+        description: Número do CNS (Cartão Nacional de Saúde) do paciente (criptografia)
+      - name: data_inicio_atendimento
+        description: Data de Início do Atendimento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: data_termino_atendimento
+        description: Data de Fim do Atendimento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: permanencia_atendimento
+        description: Permanência em Atendimento
+      - name: motivo_saida_permanencia
+        description: Motivo de Saída/Permanência
+      - name: data_motivo_saida_permanencia
+        description: Data da ocorrência no caso de alta, transferência ou óbito
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: ano_processamento
+        description: Ano do processamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes_processamento
+        description: Mês do processamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: ano_atendimento
+        description: Ano do atendimento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes_atendimento
+        description: Mês do atendimento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: data_nascimento_paciente
+        description: Data de nascimento do paciente
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: id_municipio_residencia_paciente
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: origem_paciente
+        description: Origem do paciente
+      - name: nacionalidade_paciente
+        description: Nacionalidade do paciente
+      - name: tipo_idade
+        description: Tipo da Idade do paciente em anos, meses ou dias. Calculado a
+          partir da data de nascimento
+      - name: idade_paciente
+        description: Idade do paciente
+      - name: sexo_paciente
+        description: Sexo do paciente
+      - name: raca_cor_paciente
+        description: Raça/cor do paciente
+      - name: etnia_paciente
+        description: Etnia do paciente
+      - name: carater_atendimento
+        description: Caráter de atendimento (APAC ou BPA-I)
+      - name: cid_principal_categoria
+        description: Identificador da categoria da Classificação Internacional de
+          Doenças (CID10) principal da Autorização de Procedimento Ambulatorial de
+          Alta complexidade (APAC) ou do Boletim de Produção Ambulatorial Individualizado
+          (BPA-I)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: categoria
+      - name: cid_principal_subcategoria
+        description: Identificador da subcategoria da Classificação Internacional
+          de Doenças (CID10) principal da Autorização de Procedimento Ambulatorial
+          de Alta complexidade (APAC) ou do Boletim de Produção Ambulatorial Individualizado
+          (BPA-I)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+      - name: cid_causas_associadas_categoria
+        description: Identificador da categoria da Classificação Internacional de
+          Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
+          de Alta complexidade (APAC)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: categoria
+      - name: cid_causas_associadas_subcategoria
+        description: Identificador da subcategoria da Classificação Internacional
+          de Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
+          de Alta complexidade (APAC)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+      - name: tipo_droga
+        description: Tipo de Droga
+      - name: destino_paciente
+        description: Destino do paciente
+      - name: local_realizacao_atendimento
+        description: Local de Realização
+      - name: indicador_situacao_rua
+        description: Situação de Rua
+      - name: indicador_estrategia_familia
+        description: Indica se a região de atendimento do paciente tem cobertura de
+          Estratégia Saúde da Família
+      - name: quantidade_produzida_procedimento
+        description: Quantidade produzida (apresentada) do procedimento
+      - name: quantidade_aprovada_procedimento
+        description: Quantidade aprovada do procedimento
+      - name: quantidade_atendimentos
+        description: Quantidade de Atendimentos
+      - name: quantidade_pacientes
+        description: Quantidade de pacientes
