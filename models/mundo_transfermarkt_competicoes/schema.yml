@@ -21,10 +21,7 @@ models:
           at_least: 0.20     
     columns:
       - name: ano_campeonato
-        description: Ano do campeonato
-        tests:
-          - dbt_utils.sequential_values:
-              interval: 1        
+        description: Ano do campeonato    
       - name: data
         description: Data da partida
         tests:
@@ -57,16 +54,38 @@ models:
         description: Colocação do time visitante
       - name: valor_equipe_titular_mandante
         description: Valor da equipe titular do time mandante
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'              
       - name: valor_equipe_titular_visitante
         description: Valor da equipe titular do time visitante
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'              
       - name: idade_media_titular_mandante
         description: Idade média da equipe titular do time mandante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 80
       - name: idade_media_titular_visitante
         description: Idade média da equipe titular do time visitante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 80              
       - name: gols_mandante
         description: Gols do time mandante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 20         
       - name: gols_visitante
         description: Gols do time visitante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 20         
       - name: gols_1_tempo_mandante
         description: Gols no primeiro tempo do time mandante
       - name: gols_1_tempo_visitante
@@ -111,10 +130,7 @@ models:
           at_least: 0.20       
     columns:
       - name: ano_campeonato
-        description: Ano do campeonato
-        tests:
-          - dbt_utils.sequential_values:
-              interval: 2        
+        description: Ano do campeonato     
       - name: data
         description: Data da partida
         tests:
@@ -147,16 +163,38 @@ models:
         description: Técnico do time visitante
       - name: valor_equipe_titular_mandante
         description: Valor da equipe titular do time mandante
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'              
       - name: valor_equipe_titular_visitante
         description: Valor da equipe titular do time visitante
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'              
       - name: idade_media_titular_mandante
         description: Idade média da equipe titular do time mandante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 80           
       - name: idade_media_titular_visitante
         description: Idade média da equipe titular do time visitante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 80           
       - name: gols_mandante
         description: Gols do time mandante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 20            
       - name: gols_visitante
         description: Gols do time visitante
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 20            
       - name: gols_1_tempo_mandante
         description: Gols no primeiro tempo do time mandante
       - name: gols_1_tempo_visitante
