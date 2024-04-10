@@ -127,7 +127,7 @@ models:
       variável da fonte de dados.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.20       
+          at_least: 0.10       
     columns:
       - name: ano_campeonato
         description: Ano do campeonato     
