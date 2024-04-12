@@ -1,4 +1,15 @@
-{{ config(alias="lavoura_temporaria", schema="br_ibge_pam") }}
+{{{
+    config(
+        alias="lavoura_temporaria",
+        schema="br_ibge_pam",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 1974, "end": 2022, "interval": 1},
+        },
+        cluster_by=["sigla_uf", "id_municipio"],
+    )
+}}
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
