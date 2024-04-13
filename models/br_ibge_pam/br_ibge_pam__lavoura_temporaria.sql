@@ -1,4 +1,4 @@
-{{{
+{{
     config(
         alias="lavoura_temporaria",
         schema="br_ibge_pam",
