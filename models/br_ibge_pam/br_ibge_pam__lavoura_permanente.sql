@@ -1,4 +1,5 @@
 {{
+    
     config(
         alias="lavoura_permanente",
         schema="br_ibge_pam",
