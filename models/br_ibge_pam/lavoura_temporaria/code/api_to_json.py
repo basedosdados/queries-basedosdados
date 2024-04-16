@@ -5,22 +5,20 @@ import glob
 from tqdm.asyncio import tqdm
 from aiohttp import ClientTimeout, TCPConnector
 from tqdm import tqdm
-from typing import Any, Dict, List
 
 API_URL_BASE        = "https://servicodados.ibge.gov.br/api/v3/agregados/{}/periodos/{}/variaveis/{}?localidades={}[{}]&classificacao={}[{}]"
-AGREGADO            = "1613" # É a tabela no SIDRA
+AGREGADO            = "1612" # É a tabela no SIDRA
 PERIODOS            = range(1974, 2022 + 1)
-VARIAVEIS           = ["2313", "1002313", "216", "1000216", "214", "112","215",
+VARIAVEIS           = ["109", "1000109", "216", "1000216", "214", "112", "215",
                        "1000215"] # As variáveis da tabela
 NIVEL_GEOGRAFICO    = "N6" # N6 = Municipal
 LOCALIDADES         = "all"
-CLASSIFICACAO       = "82" # Código pré-definido por agregado
-CATEGORIAS          = ["2717", "2718", "45981", "2719", "2720", "2721", "40472",
-                       "2722", "2723", "31619", "31620", "40473", "2724", "2725",
-                       "2726", "2727", "2728", "2729", "2730", "2731", "2732",
-                       "2733", "2734", "2735", "2736", "2737", "2738", "2739",
-                       "2740", "90001", "2741", "2742", "2743", "2744", "2745",
-                       "2746", "2747", "2748"] # Produtos
+CLASSIFICACAO       = "81" # Código pré-definido por agregado
+CATEGORIAS          = ["2688", "40471", "2689", "2690", "2691", "2692", "2693",
+                       "2694", "2695", "2696", "40470", "2697", "2698", "2699",
+                       "2700", "2701", "2702", "2703", "109179", "2704", "2705",
+                       "2706", "2707", "2708", "2709", "2710", "2711", "2712",
+                       "2713", "2714", "2715", "2716", "109180"] # Produtos
 ANOS_BAIXADOS       = [int(glob.os.path.basename(f).split(".")[0]) for f in glob.glob(f"../json/*.json")]
 ANOS_RESTANTES      = [int(ANO) for ANO in PERIODOS if ANO not in ANOS_BAIXADOS]
 
