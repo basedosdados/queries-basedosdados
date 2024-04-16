@@ -37,7 +37,18 @@ left join
 {% if is_incremental() %}
     where
         safe_cast(parse_date('%Y%m', mes_referencia) as date) > (
-            select max(safe_cast(parse_date('%Y%m', mes_referencia) as date))
+            select
+                max(
+                    safe_cast(
+                        parse_date(
+                            '%Y%m',
+                            concat(
+                                cast(ano_referencia as string),
+                                lpad(cast(mes_referencia as string), 2, '0')
+                            )
+                        ) as date
+                    )
+                )
             from {{ this }}
         )
 {% endif %}
