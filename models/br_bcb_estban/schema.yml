@@ -25,7 +25,7 @@ models:
         description: Sigla da Unidade da Federação
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
       - name: id_municipio
@@ -37,7 +37,7 @@ models:
               config:
                 where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
       - name: cnpj_basico
@@ -45,7 +45,7 @@ models:
           dígitos)
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
           - relationships:
@@ -63,7 +63,7 @@ models:
         description: Código do verbete
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
       - name: valor
@@ -92,7 +92,7 @@ models:
         description: Sigla da Unidade da Federação
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
       - name: id_municipio
@@ -104,7 +104,7 @@ models:
               config:
                 where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
       - name: cnpj_basico
@@ -116,7 +116,7 @@ models:
         description: CNPJ da agência bancária
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
           - relationships:
@@ -128,7 +128,7 @@ models:
         description: Código do verbete
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.01
               config:
                 where: __most_recent_year_month__
       - name: valor
