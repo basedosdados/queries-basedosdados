@@ -16,7 +16,7 @@
         ],
     )
 }}
-select
+select 
     safe_cast(substr(mes_competencia, 1, 4) as int64) ano_competencia,
     safe_cast(substr(mes_competencia, 5, 2) as int64) mes_competencia,
     safe_cast(substr(mes_referencia, 1, 4) as int64) ano_referencia,
