@@ -27,7 +27,7 @@ select
     safe_cast(nis as string) nis_favorecido,
     safe_cast(t1.nome as string) nome_favorecido,
     safe_cast(valor as float64) valor_parcela,
-from `basedosdados-dev.br_cgu_beneficios_cidadao_staging.novo_bolsa_familia` t1
+from `basedosdados-staging.br_cgu_beneficios_cidadao_staging.novo_bolsa_familia` t1
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` t2
     on safe_cast(t1.id_municipio_siafi as int64)
