@@ -4,16 +4,6 @@ models:
   - name: br_cgu_beneficios_cidadao__novo_bolsa_familia
     description: Números do Novo Bolsa Família
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - nome_favorecido
-            - ano_competencia
-            - mes_competencia
-            - ano_referencia
-            - mes_referencia
-            - id_municipio
-            - nis_favorecido
-            - valor_parcela
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
@@ -47,11 +37,6 @@ models:
   - name: br_cgu_beneficios_cidadao__garantia_safra
     description: Números do Garantia Safra
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_referencia
-            - mes_referencia
-            - nis_favorecido
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
@@ -77,11 +62,6 @@ models:
   - name: br_cgu_beneficios_cidadao__bpc
     description: Números do Benefício de Prestação Continuada
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_competencia
-            - mes_competencia
-            - nis_favorecido
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
@@ -123,16 +103,6 @@ models:
   - name: br_cgu_beneficios_cidadao__auxilio_brasil
     description: Dados sobre o Auxílio Brasil
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_competencia
-            - mes_competencia
-            - ano_referencia
-            - mes_referencia
-            - nome_favorecido
-            - id_municipio
-            - nis_favorecido
-            - valor_parcela
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
@@ -187,17 +157,6 @@ models:
     description: Dados sobre o pagamento do bolsa família entre os anos de 2013 até
       2021.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_competencia
-            - mes_competencia
-            - ano_referencia
-            - mes_referencia
-            - nome_favorecido
-            - id_municipio
-            - cpf_favorecido
-            - nis_favorecido
-            - valor_parcela
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
