@@ -102,6 +102,14 @@ df["sigla_uf"].unique()  # type: ignore
 
 bq_storage_cols_order = [i["name"] for i in bq_cols["columns"]]
 
+df["rede"].unique() # type: ignore
+
+df["rede"] = df["rede"].replace(  # type: ignore
+    {"1": "federal", "2": "estadual", "3": "municipal", "4": "privada"}
+)
+
+df["rede"].unique() # type: ignore
+
 for keys, df_split in df.groupby(partitions):
     ano, sigla_uf = keys  # type: ignore
     path = os.path.join(OUTPUT, f"ano={ano}", f"sigla_uf={sigla_uf}")

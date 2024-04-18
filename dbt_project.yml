@@ -168,6 +168,9 @@ models:
     br_ibge_ipca15:
       +materialized: table
       +schema: br_ibge_ipca15
+    br_ibge_pam:
+      +materialized: table
+      +schema: br_ibge_pam
     br_ibge_pevs:
       +materialized: table
       +schema: br_ibge_pevs
