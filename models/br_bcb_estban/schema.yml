@@ -14,8 +14,8 @@ models:
             - id_municipio
             - cnpj_basico
             - id_verbete
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -23,19 +23,36 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
       - name: cnpj_basico
         description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros
           dígitos)
         tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
           - relationships:
               to: ref('br_bd_diretorios_brasil__empresa')
               field: cnpj_basico
+              config:
+                where: __most_recent_year_month__
       - name: instituicao
         description: Nome da Instituição Financeira (IF)
       - name: agencias_esperadas
@@ -44,6 +61,11 @@ models:
         description: Quantidade de agências processadas da IF no município
       - name: id_verbete
         description: Código do verbete
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
       - name: valor
         description: Valores
   - name: br_bcb_estban__agencia
@@ -59,8 +81,8 @@ models:
             - id_municipio
             - cnpj_agencia
             - id_verbete
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -68,12 +90,23 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
       - name: cnpj_basico
         description: Cadastro Nacional de Pessoa Jurídica (CNPJ) básico (8 primeiros
           dígitos)
@@ -82,10 +115,21 @@ models:
       - name: cnpj_agencia
         description: CNPJ da agência bancária
         tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
           - relationships:
               to: ref('br_bd_diretorios_brasil__empresa')
               field: cnpj
+              config:
+                where: __most_recent_year_month__
       - name: id_verbete
         description: Código do verbete
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.01
+              config:
+                where: __most_recent_year_month__
       - name: valor
         description: Valores
