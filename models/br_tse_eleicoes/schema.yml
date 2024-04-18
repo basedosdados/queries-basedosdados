@@ -1,5 +1,6 @@
+---
 version: 2
-models :
+models:
   - name: br_tse_eleicoes__bens_candidato
     description: Declaração de bens de candidatos em eleições brasileiras.
     columns:
@@ -44,8 +45,16 @@ models :
         description: ID Candidato - Base dos Dados
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
       - name: instrucao
         description: Instrução
       - name: municipio_nascimento
@@ -70,6 +79,10 @@ models :
         description: Sigla do partido
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: sigla_uf_nascimento
         description: Sigla da unidade da federação de nascimento
       - name: situacao
@@ -991,8 +1004,16 @@ models :
         description: Cargo
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
       - name: sigla_uf
         description: Sigla da unidade da federação
       - name: tipo_eleicao
