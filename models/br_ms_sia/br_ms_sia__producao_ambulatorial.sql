@@ -31,6 +31,13 @@ with
                 from `basedosdados.br_bd_diretorios_brasil.municipio`
             ) as mun
             on producao_ambulatorial.pa_ufmun = mun.id_municipio_6
+        {% if is_incremental() %}
+            where
+                date(cast(ano as int64), cast(mes as int64), 1) not in (
+                    select distinct (date(cast(ano as int64), cast(mes as int64), 1))
+                    from {{ this }}
+                )
+        {% endif %}
     ),
 
     sia as (
