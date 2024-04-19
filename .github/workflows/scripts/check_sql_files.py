@@ -7,14 +7,14 @@ def check_sql_files(file):
         with open(file, "r") as f:
             lines = f.readlines()
             for line in lines:
-                if "basedosdados-staging" in line:
+                if "basedosdados-dev" in line:
                     found_staging = True
-                    print(f"Found 'basedosdados-staging' in {file}")
+                    print(f"Found 'basedosdados-dev' in {file}")
                     break
     return found_staging
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Check for 'basedosdados-staging' occurrences in SQL files.")
+    parser = argparse.ArgumentParser(description="Check for 'basedosdados-dev' occurrences in SQL files.")
     parser.add_argument("file", help="Path to the SQL file to check")
     args = parser.parse_args()
 
