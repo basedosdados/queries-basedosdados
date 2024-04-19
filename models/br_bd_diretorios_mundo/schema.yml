@@ -40,13 +40,13 @@ models:
       - name: id_ncm
         description: Identificador da Nomenclatura Comum do Mercosul (NCM)
       - name: id_unidade
-        description: Identificador da unidade estátisca do id_ncm
+        description: Identificador da unidade estatística do id_ncm
       - name: id_sh6
         description: Identificador de 6 dígitos do Sistema Harmonizado (SH6) relacionado
           com o id_ncm
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil__sistema_harmonizado')
+              to: ref('br_bd_diretorios_mundo__sistema_harmonizado')
               field: id_sh6
       - name: id_ppe
         description: Identificador da Pauta de Produtos Exportados (PPE) do id_ncm
@@ -60,8 +60,12 @@ models:
       - name: id_isic_classe
         description: Identificador da classe da Classificação de Setores Industriais
           ISIC (International Standard Industrial Classification) do id_ncm
-      - name: id_exp_subset
-        description: Não informado
+      - name: id_siit
+        description: Identificador da classificação de Setores Industriais por Intensidade
+          Tecnológica (SIIT) do id_ncm
+      - name: id_cuci_item
+        description: Identificador do item da Classificação Uniforme para o Comércio
+          Internacional (CUCI) do id_ncm
       - name: nome_unidade
         description: Nome da unidade estatística do id_ncm
       - name: nome_ncm_portugues
