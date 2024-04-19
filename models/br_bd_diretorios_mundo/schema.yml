@@ -27,3 +27,92 @@ models:
         description: Nacionalidade
       - name: sigla_continente
         description: Sigla do continente do país
+  - name: br_bd_diretorios_mundo__nomenclatura_comum_mercosul
+    description: A Nomenclatura Comum do Mercosul (NCM) é um sistema ordenado que
+      permite, pela aplicação de regras e procedimentos próprios, determinar um único
+      código numérico para uma dada mercadoria.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [id_ncm]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.0
+    columns:
+      - name: id_ncm
+        description: Identificador da Nomenclatura Comum do Mercosul (NCM)
+      - name: id_unidade
+        description: Identificador da unidade estátisca do id_ncm
+      - name: id_sh6
+        description: Identificador de 6 dígitos do Sistema Harmonizado (SH6) relacionado
+          com o id_ncm
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__sistema_harmonizado')
+              field: id_sh6
+      - name: id_ppe
+        description: Identificador da Pauta de Produtos Exportados (PPE) do id_ncm
+      - name: id_ppi
+        description: Identificador da Pauta de Produtos Importados (PPI) do id_ncm
+      - name: id_fator_agregado_ncm
+        description: Identificadores de Fator Agregado (FA) do id_ncm
+      - name: id_cgce_n3
+        description: Identificador da Classificação por Grandes Categorias Econômicas
+          (CGCE) do id_ncm
+      - name: id_isic_classe
+        description: Identificador da classe da Classificação de Setores Industriais
+          ISIC (International Standard Industrial Classification) do id_ncm
+      - name: id_exp_subset
+        description: Não informado
+      - name: nome_unidade
+        description: Nome da unidade estatística do id_ncm
+      - name: nome_ncm_portugues
+        description: Descrição do id_ncm em português
+      - name: nome_ncm_espanhol
+        description: Descrição do id_ncm em espanhol
+      - name: nome_ncm_ingles
+        description: Descrição do id_ncm em inglês
+  - name: br_bd_diretorios_mundo__sistema_harmonizado
+    description: O "Sistema Harmonizado de Designação e de Codificação de Mercadorias",
+      ou simplesmente "Sistema Harmonizado", tem o objetivo maior foi a criação de
+      um sistema único mundial de designação e de codificação de mercadorias.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [id_sh6]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.00
+    columns:
+      - name: id_sh6
+        description: Identificador de 6 dígitos do Sistema Harmonizado (SH6)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__nomenclatura_comum_mercosul')
+              field: id_sh6
+      - name: id_sh4
+        description: Identificador de 4 dígitos do Sistema Harmonizado (SH6)
+      - name: id_sh2
+        description: Identificador de 2 dígitos do Sistema Harmonizado (SH6)
+      - name: id_ncm_secrom
+        description: Não informado
+      - name: nome_sh6_portugues
+        description: Descrição do id_sh6 em português
+      - name: nome_sh4_portugues
+        description: Descrição do id_sh4 em português
+      - name: nome_sh2_portugues
+        description: Descrição do id_sh2 em português
+      - name: nome_sec_portugues
+        description: Descrição do em português
+      - name: nome_sh6_espanhol
+        description: Descrição do id_sh6 em espanhol
+      - name: nome_sh4_espanhol
+        description: Descrição do id_sh4 em espanhol
+      - name: nome_sh2_espanhol
+        description: Descrição do id_sh2 em espanhol
+      - name: nome_sec_espanhol
+        description: Descrição do em espanhol
+      - name: nome_sh6_ingles
+        description: Descrição do id_sh6 em inglês
+      - name: nome_sh4_ingles
+        description: Descrição do id_sh4 em inglês
+      - name: nome_sh2_ingles
+        description: Descrição do id_sh2 em inglês
+      - name: nome_sec_ingles
+        description: Descrição do em inglês
