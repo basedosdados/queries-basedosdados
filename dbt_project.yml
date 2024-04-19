@@ -186,6 +186,9 @@ models:
     br_inep_censo_escolar:
       +materialized: table
       +schema: br_inep_censo_escolar
+    br_inep_ideb:
+      +materialized: table
+      +schema: br_inep_ideb
     br_inep_enem:
       +materialized: table
       +schema: br_inep_enem
