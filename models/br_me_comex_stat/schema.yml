@@ -4,6 +4,17 @@ models:
   - name: br_me_comex_stat__municipio_exportacao
     description: Base de dados detalhada por município da empresa exportadora e Posição
       do Sistema Harmonizado (SH4)
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_sh4
+            - id_pais
+            - sigla_uf
+            - id_municipio
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -11,12 +22,26 @@ models:
         description: Mês
       - name: id_sh4
         description: ID Sistema Harmonizado
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__sistema_harmonizado')
+              field: id_sh4
       - name: id_pais
-        description: ID País
+        description: ID do País
+      - name: sigla_pais_iso3
+        description: Sigla ISO3 do País
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__municipio')
+              field: sigla_pais_iso3
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
@@ -24,6 +49,17 @@ models:
   - name: br_me_comex_stat__municipio_importacao
     description: Base de dados detalhada por município da empresa importadora e Posição
       do Sistema Harmonizado (SH4)
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_sh4
+            - id_pais
+            - sigla_uf
+            - id_municipio
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -31,12 +67,26 @@ models:
         description: Mês
       - name: id_sh4
         description: ID Sistema Harmonizado
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__sistema_harmonizado')
+              field: id_sh4
       - name: id_pais
-        description: ID País
+        description: ID do País
+      - name: sigla_pais_iso3
+        description: Sigla ISO3 do País
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__municipio')
+              field: sigla_pais_iso3
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
@@ -44,6 +94,18 @@ models:
   - name: br_me_comex_stat__ncm_importacao
     description: Base de dados dos produtos importados pelo Brasil segundo a Nomenclatura
       Comum do Mercosul
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - sigla_uf_ncm
+            - id_ncm
+            - id_pais
+            - id_via
+            - id_urf
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -51,12 +113,26 @@ models:
         description: Mês
       - name: id_ncm
         description: ID Produto - Nomenclatura Comum do Mercosul
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
+              field: id_ncm
       - name: id_unidade
         description: ID Unidade
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
+              field: id_unidade
       - name: id_pais
-        description: ID País
+        description: ID do País
+      - name: sigla_pais_iso3
+        description: Sigla ISO3 do País
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__municipio')
+              field: sigla_pais_iso3
       - name: sigla_uf_ncm
-        description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
+        description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosul
       - name: id_via
         description: ID Via de Transporte
       - name: id_urf
@@ -72,8 +148,19 @@ models:
       - name: valor_seguro
         description: Valor do Seguro
   - name: br_me_comex_stat__ncm_exportacao
-    description: Base de dados detalhada de exportação por NCM. Os arquivos auxiliares
-      com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+    description: Base de dados detalhada de exportação por NCM.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - sigla_uf_ncm
+            - id_ncm
+            - id_pais
+            - id_via
+            - id_urf
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -81,10 +168,24 @@ models:
         description: Mês
       - name: id_ncm
         description: ID Produto - Nomenclatura Comum do Mercosul
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
+              field: id_ncm
       - name: id_unidade
         description: ID Unidade
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
+              field: id_unidade
       - name: id_pais
-        description: ID País
+        description: ID do País
+      - name: sigla_pais_iso3
+        description: Sigla ISO3 do País
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_mundo__municipio')
+              field: sigla_pais_iso3
       - name: sigla_uf_ncm
         description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
       - name: id_via
@@ -103,7 +204,7 @@ models:
       - name: id_tabela
         description: ID da tabela
       - name: coluna
-        description: Coluna
+        description: Nome da coluna
       - name: chave
         description: Chave
       - name: cobertura_temporal
