@@ -203,11 +203,11 @@ models:
     columns:
       - name: id_tabela
         description: ID da tabela
-      - name: coluna
+      - name: nome_coluna
         description: Nome da coluna
       - name: chave
         description: Chave
       - name: cobertura_temporal
-        description: Cobertura Temporal
+        description: Cobertura temporal
       - name: valor
         description: Valor
