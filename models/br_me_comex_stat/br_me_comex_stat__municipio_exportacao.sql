@@ -2,27 +2,35 @@
     config(
         alias="municipio_exportacao",
         schema="br_me_comex_stat",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 1997, "end": 2023, "interval": 1},
+            "range": {"start": 1997, "end": 2025, "interval": 1},
         },
         cluster_by=["mes", "sigla_uf"],
-        labels={"project_id": "basedosdados", "tema": "economia"},
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 6 OR DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) < 0)',
-        ],
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
-    safe_cast(id_sh4 as string) id_sh4,
+    safe_cast(lpad(id_sh4, 4, '0') as string) id_sh4,
     safe_cast(id_pais as string) id_pais,
-    safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(id_municipio as string) id_municipio,
+    {{ transform_mdic_country_code("id_pais") }} as sigla_pais_iso3,
+    safe_cast(case when sigla_uf = 'ND' then null else sigla_uf end as string) sigla_uf,
+    safe_cast(
+        case
+            when id_municipio = '9300000' or id_municipio = '9999999'
+            then null
+            else id_municipio
+        end as string
+    ) id_municipio,
     safe_cast(peso_liquido_kg as int64) peso_liquido_kg,
     safe_cast(valor_fob_dolar as int64) valor_fob_dolar
 from `basedosdados-staging.br_me_comex_stat_staging.municipio_exportacao` as t
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+{% endif %}
