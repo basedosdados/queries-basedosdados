@@ -484,7 +484,7 @@ df_faixa_etaria["faixa_etaria"] = df_faixa_etaria["faixa_etaria"].replace(
         "6_anos_ou_mais": 3,
         "ate_5_anos": 4,
         "6_a_10_anos": 5,
-        "11_a_14_anos ": 6,
+        "11_a_14_anos": 6,
         "15_a_17_anos": 7,
         "18_a_19_anos": 8,
         "20_anos_ou_mais": 9,
