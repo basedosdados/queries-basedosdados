@@ -27,7 +27,7 @@ select
     safe_cast(quantidade_estatistica as int64) quantidade_estatistica,
     safe_cast(peso_liquido_kg as int64) peso_liquido_kg,
     safe_cast(valor_fob_dolar as int64) valor_fob_dolar
-from `basedosdados-dev.br_me_comex_stat_staging.ncm_exportacao` as t
+from `basedosdados-staging.br_me_comex_stat_staging.ncm_exportacao` as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)
