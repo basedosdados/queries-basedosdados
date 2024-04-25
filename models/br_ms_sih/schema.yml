@@ -1,0 +1,142 @@
+version: 2
+
+models:
+  - name: br_ms_sih__servicos_profissionais
+    description: Insert `servicos_profissionais` table description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - id_aih
+      - not_null_proportion_multiple_columns:
+            at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+      - name: mes
+        description: Mês
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: mes
+      - name: ano_internacao
+        description: Ano da internação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+      - name: mes_internacao
+        description: Mes da internação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: mes
+      - name: data_entrada_internacao
+        description: Data do início da internação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: data_saida_iternacao
+        description: Data do final da internação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: sigla_uf
+        description: Sigla unidade da fedaração
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__uf')
+                field: sigla
+      - name: id_municipio_estabelecimento_aih
+        description: Município de localização do Estabelecimento Executante da AIH
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
+      - name: id_municipio_paciente
+        description: Município de residência do paciente
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
+      - name: id_gestor
+        description: Unidade de Federação + Código Município de Gestão ou UF0000 se
+            o Estabelecimento Executante está sob Gestão Estadual.
+      - name: id_estabelecimento_cnes
+        description: ID do estabelecimento de saúde executante da Autorização de Internação
+            Hospitalar (AIH)
+      - name: id_aih
+        description: ID Autorização de Internação Hospitalar (AIH)
+      - name: id_procedimento_principal
+        description: Procedimento principal realizado na AIH.
+      - name: tipo_servico
+        description: Classificação do tipo de serviço
+      - name: id_prestador_servico
+        description: CNES, CPF ou CNPJ do prestador do serviço do ato profissional
+      - name: id_procedimento
+        description: Procedimento referente ao ato profissional
+      - name: cbo_2002_profissional
+        description: Identificador de Ocupação Brasileira do Profissional que realizou
+            o ato ou “00000” caso não tenha sido
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__cbo_2002')
+                field: cbo_2002.cbo_2002
+      - name: quantidade_procedimentos
+        description: Quantidade de procedimentos realizados
+      - name: id_cid_principal
+        description: Identificador principal da Classificação Internacional de Doenças
+            e Problemas Relacionados com a Saúde (CID)
+      - name: id_cid_principal_subcategoria
+        description: Subcategoria do identificador principal da Classificação Internacional de Doenças
+            e Problemas Relacionados com a Saúde (CID)
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__cid_10')
+                field: subcategoria
+      - name: id_cid_secundario
+        description: Identificador secundário da Classificação Internacional de Doenças
+            e Problemas Relacionados com a Saúde (CID)
+      - name: id_cid_secundario_subcategoria
+        description: Subcategoria do identificador secundário da Classificação Internacional de Doenças
+            e Problemas Relacionados com a Saúde (CID)
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__cid_10')
+                field: subcategoria
+      - name: complexidade_ato_profissional
+        description: Complexidade do ato profissional
+      - name: quantidade_atos_profissionais
+        description: Quantidade de atos profissionais
+      - name: quantidade_pontos
+        description: Quantidade de pontos
+      - name: nota_fiscal
+        description: Nota fiscal do material empregado quando órtese/prótese, quando não, o campo representa a data do ato
+      - name: valor_ato_profissional
+        description: Valor do ato profissional
+      - name: indicador_uf_paciente
+        description: Indica se a UF de residência do paciente é diferente da UF de localização do estabelecimento
+      - name: indicador_uf_paciente
+        description: Indica se a UF de residência do paciente é diferente da UF de
+            localização do estabelecimento
+      - name: indicador_id_aih
+        description: Indica quais id_aih são únicos
+      - name: tipo_financiamento_ato_profissional
+        description: Tipo de financiamento do ato profissional
+      - name: tipo_subtipo_financiamento_ato_profissional
+        description: Tipo de financiamento (04-FAEC) + Subtipo de financiamento relacionado ao tipo de financiamento (04-FAEC) do ato profissional
+      - name: tipo_documento_pf
+        description: Documento de pessoa jurídica
+      - name: tipo_documento_pj
+        description: Documento de pessoa física
+      - name: tipo_valor
+        description: 'Tipo de valor: 1 - SP /2 –SH'
+      - name: sequencia
+        description: Código sequencial
+      - name: nome_remessa
+        description: Nome da remessa
