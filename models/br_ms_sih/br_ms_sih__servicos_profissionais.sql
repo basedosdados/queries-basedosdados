@@ -2,7 +2,7 @@
     config(
         alias="servicos_profissionais",
         schema="br_ms_sih",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "ano",
             "data_type": "int64",
@@ -32,7 +32,7 @@ select
     safe_cast(sp_procrea as string) id_procedimento_principal,
     safe_cast(serv_cla as string) tipo_servico,
     safe_cast(sp_cpfcgc as string) id_prestador_servico,
-    safe_cast(sp_atoprof as string) id_procedimento,
+    safe_cast(sp_atoprof as string) id_procedimento_secundario,
     safe_cast(sp_pf_cbo as string) cbo_2002_profissional,
     safe_cast(ltrim(sp_qt_proc) as int64) quantidade_procedimentos,
     safe_cast(
@@ -94,10 +94,15 @@ select
     safe_cast(in_tp_val as string) tipo_valor,
     safe_cast(ltrim(sequencia) as string) sequencia,
     safe_cast(remessa as string) nome_remessa,
-from `basedosdados-dev.br_ms_sih_staging.servicos_profissionais` as sih
+from `basedosdados-staging.br_ms_sih_staging.servicos_profissionais` as sih
 left join
     (
         select id_municipio, id_municipio_6,
         from `basedosdados.br_bd_diretorios_brasil.municipio`
     ) as mun
     on sih.sp_m_hosp = mun.id_municipio_6
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+{% endif %}
