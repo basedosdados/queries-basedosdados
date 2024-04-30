@@ -9,63 +9,49 @@ models:
               - id_aih
               - ano
               - mes
-      - not_null_proportion_multiple_columns:
-            at_least: 0.05
+              - sigla_uf
+              - id_municipio_estabelecimento_aih
+            config:
+              where: __most_recent_year_month__              
     columns:
       - name: ano
         description: Ano
         tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+          - not_null
       - name: mes
         description: Mês
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: mes
       - name: ano_internacao
         description: Ano da internação
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
       - name: mes_internacao
         description: Mes da internação
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: mes
       - name: data_entrada_internacao
         description: Data do início da internação
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
       - name: data_saida_iternacao
         description: Data do final da internação
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
       - name: sigla_uf
         description: Sigla unidade da fedaração
         tests:
           - relationships:
                 to: ref('br_bd_diretorios_data_tempo__uf')
                 field: sigla
+                config:
+                  where: __most_recent_year_month__                  
       - name: id_municipio_estabelecimento_aih
         description: Município de localização do Estabelecimento Executante da AIH
         tests:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
                 field: id_municipio
+                config:
+                  where: __most_recent_year_month__                  
       - name: id_municipio_paciente
         description: Município de residência do paciente
         tests:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+                field: id_municipio_6
+                config:
+                  where: __most_recent_year_month__                
       - name: id_gestor
         description: Unidade de Federação + Código Município de Gestão ou UF0000 se
             o Estabelecimento Executante está sob Gestão Estadual.
@@ -80,7 +66,7 @@ models:
         description: Classificação do tipo de serviço
       - name: id_prestador_servico
         description: CNES, CPF ou CNPJ do prestador do serviço do ato profissional
-      - name: id_procedimento
+      - name: id_procedimento_secundario
         description: Procedimento referente ao ato profissional
       - name: cbo_2002_profissional
         description: Identificador de Ocupação Brasileira do Profissional que realizou
@@ -89,6 +75,8 @@ models:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__cbo_2002')
                 field: cbo_2002.cbo_2002
+                config:
+                  where: __most_recent_year_month__                  
       - name: quantidade_procedimentos
         description: Quantidade de procedimentos realizados
       - name: id_cid_principal
@@ -101,6 +89,8 @@ models:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__cid_10')
                 field: subcategoria
+                config:
+                  where: __most_recent_year_month__                  
       - name: id_cid_secundario
         description: Identificador secundário da Classificação Internacional de Doenças
             e Problemas Relacionados com a Saúde (CID)
@@ -111,6 +101,8 @@ models:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__cid_10')
                 field: subcategoria
+                config:
+                  where: __most_recent_year_month__                  
       - name: complexidade_ato_profissional
         description: Complexidade do ato profissional
       - name: quantidade_atos_profissionais
@@ -121,8 +113,8 @@ models:
         description: Nota fiscal do material empregado quando órtese/prótese, quando não, o campo representa a data do ato
       - name: valor_ato_profissional
         description: Valor do ato profissional
-      - name: indicador_uf_paciente
-        description: Indica se a UF de residência do paciente é diferente da UF de localização do estabelecimento
+      - name: indicador_uf_hospital
+        description: Indica se a UF de residência do hospital é diferente da UF de localização do estabelecimento
       - name: indicador_uf_paciente
         description: Indica se a UF de residência do paciente é diferente da UF de
             localização do estabelecimento
