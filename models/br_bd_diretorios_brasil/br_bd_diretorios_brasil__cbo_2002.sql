@@ -20,4 +20,4 @@ select
     ) descricao_subgrupo_principal,
     safe_cast(grande_grupo as string) grande_grupo,
     safe_cast(initcap(descricao_grande_grupo) as string) descricao_grande_grupo
-from `basedosdados-dev.br_bd_diretorios_brasil_staging.cbo_2002` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.cbo_2002` as t
