@@ -2,11 +2,13 @@ version: 2
 
 models:
   - name: br_ms_sih__servicos_profissionais
-    description: Insert `servicos_profissionais` table description here
+    description: Sistema de Informações Hospitalares do SUS (SIH/SUS)
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
               - id_aih
+              - ano
+              - mes
       - not_null_proportion_multiple_columns:
             at_least: 0.05
     columns:
