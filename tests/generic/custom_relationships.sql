@@ -29,7 +29,7 @@
                 count(*) as total_missing,
                 (select count(*) from child) as total_child_records,
                 round(
-                    ((count(*) * 100) / (select count(*) from child)), 2
+                    ((count(*)) / (select count(*) from child)), 2
                 ) as failure_rate
             from validation
         )

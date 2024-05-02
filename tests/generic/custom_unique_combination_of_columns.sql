@@ -23,7 +23,7 @@
             select
                 duplicates_count,
                 total_rows,
-                round(((duplicates_count * 100) / total_rows), 2) as proportion
+                round(((duplicates_count) / total_rows), 2) as proportion
             from summary
         )
 
