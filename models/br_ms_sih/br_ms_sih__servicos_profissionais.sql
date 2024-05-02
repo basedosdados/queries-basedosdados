@@ -15,6 +15,7 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
+    safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(sp_aa as int64) ano_internacao,
     safe_cast(sp_mm as int64) mes_internacao,
     safe_cast(
@@ -23,7 +24,6 @@ select
     safe_cast(
         format_date('%Y-%m-%d', safe.parse_date('%Y%m%d', sp_dtsaida)) as date
     ) data_saida_iternacao,
-    safe_cast(sp_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio_estabelecimento_aih,
     safe_cast(sp_m_pac as string) id_municipio_paciente,
     safe_cast(sp_gestor as string) id_gestor,

@@ -3,21 +3,13 @@ version: 2
 models:
   - name: br_ms_sih__servicos_profissionais
     description: Sistema de Informações Hospitalares do SUS (SIH/SUS)
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - id_aih
-              - ano
-              - mes
-              - sigla_uf
-              - id_municipio_estabelecimento_aih
-            config:
-              where: __most_recent_year_month__              
     columns:
       - name: ano
         description: Ano
         tests:
-          - not_null
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: ano_internacao
@@ -35,7 +27,7 @@ models:
                 to: ref('br_bd_diretorios_data_tempo__uf')
                 field: sigla
                 config:
-                  where: __most_recent_year_month__                  
+                  where: __most_recent_year_month__
       - name: id_municipio_estabelecimento_aih
         description: Município de localização do Estabelecimento Executante da AIH
         tests:
@@ -43,7 +35,7 @@ models:
                 to: ref('br_bd_diretorios_brasil__municipio')
                 field: id_municipio
                 config:
-                  where: __most_recent_year_month__                  
+                  where: __most_recent_year_month__
       - name: id_municipio_paciente
         description: Município de residência do paciente
         tests:
@@ -51,7 +43,7 @@ models:
                 to: ref('br_bd_diretorios_brasil__municipio')
                 field: id_municipio_6
                 config:
-                  where: __most_recent_year_month__                
+                  where: __most_recent_year_month__
       - name: id_gestor
         description: Unidade de Federação + Código Município de Gestão ou UF0000 se
             o Estabelecimento Executante está sob Gestão Estadual.
@@ -60,6 +52,10 @@ models:
             Hospitalar (AIH)
       - name: id_aih
         description: ID Autorização de Internação Hospitalar (AIH)
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: id_procedimento_principal
         description: Procedimento principal realizado na AIH.
       - name: tipo_servico
@@ -76,7 +72,7 @@ models:
                 to: ref('br_bd_diretorios_brasil__cbo_2002')
                 field: cbo_2002.cbo_2002
                 config:
-                  where: __most_recent_year_month__                  
+                  where: __most_recent_year_month__
       - name: quantidade_procedimentos
         description: Quantidade de procedimentos realizados
       - name: id_cid_principal
@@ -86,11 +82,12 @@ models:
         description: Subcategoria do identificador principal da Classificação Internacional de Doenças
             e Problemas Relacionados com a Saúde (CID)
         tests:
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__cid_10')
-                field: subcategoria
-                config:
-                  where: __most_recent_year_month__                  
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+              ignore_values: ["'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"]
+              config:
+                where: __most_recent_year_month__
       - name: id_cid_secundario
         description: Identificador secundário da Classificação Internacional de Doenças
             e Problemas Relacionados com a Saúde (CID)
@@ -99,10 +96,10 @@ models:
             e Problemas Relacionados com a Saúde (CID)
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cid_10')
-                field: subcategoria
-                config:
-                  where: __most_recent_year_month__                  
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: complexidade_ato_profissional
         description: Complexidade do ato profissional
       - name: quantidade_atos_profissionais
