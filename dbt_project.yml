@@ -42,9 +42,6 @@ models:
     columns: true
   basedosdados:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: table  # Materialization type (table, table or incremental)
-      +schema: example  # Overrides the default schema (defaults to what is set on profiles.yml)
     br_anatel_banda_larga_fixa:
       +materialized: table
       +schema: br_anatel_banda_larga_fixa
@@ -153,12 +150,15 @@ models:
     br_geobr_mapas:
       +materialized: table
       +schema: br_geobr_mapas
-    br_ibge_censo_demografico:
-      +materialized: table
-      +schema: br_ibge_censo_demografico
     br_ibge_censo_2022:
       +materialized: table
       +schema: br_ibge_censo_2022
+    br_ibge_censo_demografico:
+      +materialized: table
+      +schema: br_ibge_censo_demografico
+    br_ibge_estadic:
+      +materialized: table
+      +schema: br_ibge_estadic
     br_ibge_inpc:
       +materialized: table
       +schema: br_ibge_inpc
@@ -177,9 +177,21 @@ models:
     br_ibge_pib:
       +materialized: table
       +schema: br_ibge_pib
+    br_ibge_pnad:
+      +materialized: table
+      +schema: br_ibge_pnad
+    br_ibge_pnad_covid:
+      +materialized: table
+      +schema: br_ibge_pnad_covid
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
+    br_ibge_pof:
+      +materialized: table
+      +schema: br_ibge_pof
+    br_inep_ana:
+      +materialized: table
+      +schema: br_inep_ana
     br_inep_censo_educacao_superior:
       +materialized: table
       +schema: br_inep_censo_educacao_superior
@@ -192,6 +204,12 @@ models:
     br_inep_enem:
       +materialized: table
       +schema: br_inep_enem
+    br_inep_formacao_docente:
+      +materialized: table
+      +schema: br_inep_formacao_docente
+    br_inep_indicador_nivel_socioeconomico:
+      +materialized: table
+      +schema: br_inep_indicador_nivel_socioeconomico
     br_inep_indicadores_educacionais:
       +materialized: table
       +schema: br_inep_indicadores_educacionais
@@ -219,12 +237,24 @@ models:
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
+    br_me_cno:
+      +materialized: table
+      +schema: br_me_cno
     br_me_cnpj:
       +materialized: table
       +schema: br_me_cnpj
     br_me_comex_stat:
       +materialized: table
       +schema: br_me_comex_stat
+    br_me_rais:
+      +materialized: table
+      +schema: br_me_rais
+    br_me_sic:
+      +materialized: table
+      +schema: br_me_sic
+    br_mec_prouni:
+      +materialized: table
+      +schema: br_mec_prouni
     br_mercadolivre_ofertas:
       +materialized: table
       +schema: br_mercadolivre_ofertas
@@ -234,9 +264,6 @@ models:
     br_mg_belohorizonte_smfa_iptu:
       +materialized: table
       +schema: br_mg_belohorizonte_smfa_iptu
-      +post-hook:
-        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
-        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_mme_consumo_energia_eletrica:
       +materialized: table
       +schema: br_mme_consumo_energia_eletrica
@@ -251,7 +278,7 @@ models:
       +schema: br_ms_sia
     br_ms_sih:
       +materialized: table
-      +schema: br_ms_sih      
+      +schema: br_ms_sih
     br_ms_sim:
       +materialized: table
       +schema: br_ms_sim
@@ -261,6 +288,9 @@ models:
     br_ms_sinasc:
       +materialized: table
       +schema: br_ms_sinasc
+    br_ms_vacinacao_covid19:
+      +materialized: table
+      +schema: br_ms_vacinacao_covid19
     br_ons_avaliacao_operacao:
       +materialized: table
       +schema: br_ons_avaliacao_operacao
@@ -270,6 +300,9 @@ models:
     br_poder360_pesquisas:
       +materialized: table
       +schema: br_poder360_pesquisas
+    br_rf_cafir:
+      +materialized: table
+      +schema: br_rf_cafir
     br_rj_isp_estatisticas_seguranca:
       +materialized: table
       +schema: br_rj_isp_estatisticas_seguranca
@@ -285,27 +318,33 @@ models:
     br_stf_corte_aberta:
       +materialized: table
       +schema: br_stf_corte_aberta
+    br_trase_supply_chain:
+      +materialized: table
+      +schema: br_trase_supply_chain
     br_tse_eleicoes:
       +materialized: table
       +schema: br_tse_eleicoes
     br_tse_eleicoes_2022:
       +materialized: table
       +schema: br_tse_eleicoes_2022
-    br_trase_supply_chain:
-      +materialized: table
-      +schema: br_trase_supply_chain
-    br_rf_cafir:
-      +materialized: table
-      +schema: br_rf_cafir
+    example:
+      +materialized: table  # Materialization type (table, table or incremental)
+      +schema: example  # Overrides the default schema (defaults to what is set on profiles.yml)
     fundacao_lemann:
       +materialized: table
       +schema: fundacao_lemann
+    mundo_bm_wdi:
+      +materialized: table
+      +schema: mundo_bm_wdi
     mundo_transfermarkt_competicoes:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes
     mundo_transfermarkt_competicoes_internacionais:
       +materialized: table
       +schema: mundo_transfermarkt_competicoes_internacionais
+    test_dataset:
+      +materialized: table
+      +schema: test_dataset
     world_ampas_oscar:
       +materialized: table
       +schema: world_ampas_oscar
@@ -324,8 +363,5 @@ models:
     world_wwf_hydrosheds:
       +materialized: table
       +schema: world_wwf_hydrosheds
-    test_dataset:
-      +materialized: table
-      +schema: test_dataset
   elementary:
     +schema: elementary

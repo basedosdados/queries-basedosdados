@@ -553,19 +553,6 @@ models:
         description: Longitude da Coordenada de Localização da Espécie do Endereço
       - name: ponto
         description: Ponto geográfico criado a partir das colunas longitude e latitude.
-  - name: br_ibge_censo_2022__dicionario
-    description: Dicionário
-    columns:
-      - name: id_tabela
-        description: ID Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
   - name: br_ibge_censo_2022__domicilio_quantidade_esgotamento_sanitario_municipio
     description: Domicílios particulares permanentes ocupados, por existência de banheiro
       ou sanitário e número de banheiros de uso exclusivo do domicílio e por tipo
@@ -908,3 +895,27 @@ models:
           DPO imputados / Total DPO)
       - name: domicilios_particulares_ocupados
         description: Total de Domicílios Particulares Ocupados (DPPO + DPIO)
+  - name: br_ibge_censo_2022__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_ibge_censo_2022.
+      Para taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor

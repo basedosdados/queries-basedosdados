@@ -1264,19 +1264,6 @@ models:
         description: Você usa computador na escola?
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
-  - name: br_inep_saeb__dicionario
-    description: Dicionário de dados do SAEB
-    columns:
-      - name: id_tabela
-        description: ID da tabela
-      - name: coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
   - name: br_inep_saeb__proficiencia
     description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma
       série histórica e compatibilizada à partir de 1995 com informações sobre o aluno,
@@ -1368,3 +1355,27 @@ models:
         description: Percentual de alunos que se enquadram no nível nove de aprendizagem
       - name: nivel_10
         description: Percentual de alunos que se enquadram no nível dez de aprendizagem
+  - name: br_inep_saeb__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_inep_saeb. Para
+      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor
