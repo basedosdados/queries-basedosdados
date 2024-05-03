@@ -45,8 +45,6 @@
         select distinct failed_column, missing_value from {{ union_parts | join(' union all select distinct failed_column, missing_value from ') }}
     {% endset %}
 
-    {% do log(final_query, info=True) %}
-
     {{ return(final_query) }}
 
 {% endtest %}
