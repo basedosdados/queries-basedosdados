@@ -249,6 +249,9 @@ models:
     br_ms_sia:
       +materialized: table
       +schema: br_ms_sia
+    br_ms_sih:
+      +materialized: table
+      +schema: br_ms_sih      
     br_ms_sim:
       +materialized: table
       +schema: br_ms_sim
