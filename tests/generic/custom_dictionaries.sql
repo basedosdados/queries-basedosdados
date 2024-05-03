@@ -9,8 +9,8 @@
 
     {%- for column_name in columns_covered_by_dictionary %}
         {% set subquery_name = "exceptions_" ~ loop.index %}
-        {% set left_table_name = "left_table_" ~ loop.index %}
-        {% set right_table_name = "right_table_" ~ loop.index %}
+        {% set left_table_name = "data_table_" ~ loop.index %}
+        {% set right_table_name = "dictionary_table_" ~ loop.index %}
 
         {% set subquery %}
             {{ left_table_name }} as (
