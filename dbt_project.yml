@@ -180,6 +180,9 @@ models:
     br_ibge_pnadc:
       +materialized: table
       +schema: br_ibge_pnadc
+    br_ibge_ppm:
+      +materialized: table
+      +schema: br_ibge_ppm
     br_inep_censo_educacao_superior:
       +materialized: table
       +schema: br_inep_censo_educacao_superior
