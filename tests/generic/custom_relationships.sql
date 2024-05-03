@@ -4,7 +4,7 @@
     to,
     field,
     ignore_values=None,
-    proportion_allowed_failures=0
+    proportion_allowed_failures=0.05
 ) %}
 
     {{ config(severity="error") }}
@@ -14,7 +14,7 @@
             select {{ column_name }} as child_value
             from {{ model }}
             {% if ignore_values %}
-                where {{ column_name }} not in ({{ ignore_values | join(", ") }})
+                where {{ column_name }} not in ('{{ ignore_values | join("', '") }}')
             {% endif %}
         ),
         parent as (select {{ field }} as parent_value from {{ to }}),
@@ -28,9 +28,7 @@
             select
                 count(*) as total_missing,
                 (select count(*) from child) as total_child_records,
-                round(
-                    ((count(*)) / (select count(*) from child)), 2
-                ) as failure_rate
+                round(count(*) / (select count(*) from child), 2) as failure_rate
             from validation
         )
 

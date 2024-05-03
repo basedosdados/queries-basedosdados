@@ -1,5 +1,5 @@
 {% test custom_unique_combinations_of_columns(
-    model, combination_of_columns, proportion_allowed_failures=5
+    model, combination_of_columns, proportion_allowed_failures=0.05
 ) %}
 
     {{ config(severity="error") }}
@@ -23,27 +23,27 @@
             select
                 duplicates_count,
                 total_rows,
-                round(((duplicates_count) / total_rows), 2) as proportion
+                round(duplicates_count / total_rows, 2) as failure_rate
             from summary
         )
 
     select
         duplicates_count,
         total_rows,
-        proportion,
+        failure_rate,
         case
-            when proportion > {{ proportion_allowed_failures }}
+            when failure_rate > {{ proportion_allowed_failures }}
             then
                 'Test failed: Proportion of non-unique '
-                || proportion
+                || failure_rate
                 || '% exceeds allowed proportion '
                 || '{{ proportion_allowed_failures }}%'
             else
                 'Test passed: Proportion of non-unique '
-                || proportion
+                || failure_rate
                 || '% within acceptable limits'
         end as log_message
     from final_summary
-    where proportion > {{ proportion_allowed_failures }}
+    where failure_rate > {{ proportion_allowed_failures }}
 
 {% endtest %}
