@@ -7,7 +7,7 @@
             "data_type": "int64",
             "range": {"start": 1974, "end": 2022, "interval": 1},
         },
-        cluster_by=["sigla_uf", "id_municipio"],
+        cluster_by=["sigla_uf"],
     )
 }}
 select
