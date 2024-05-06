@@ -1,15 +1,15 @@
+---
 version: 2
-
 models:
   - name: br_ms_sih__servicos_profissionais
-    description: Sistema de Informações Hospitalares do SUS (SIH/SUS)        
+    description: Sistema de Informações Hospitalares do SUS (SIH/SUS)
     columns:
       - name: ano
         description: Ano
         tests:
           - not_null:
               config:
-                where: __most_recent_year_month__      
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: ano_internacao
@@ -24,38 +24,38 @@ models:
         description: Sigla unidade da fedaração
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__uf')
-                field: sigla
-                config:
-                  where: __most_recent_year_month__                      
+              to: ref('br_bd_diretorios_data_tempo__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio_estabelecimento_aih
         description: Município de localização do Estabelecimento Executante da AIH
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
-                config:
-                  where: __most_recent_year_month__                  
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio_paciente
         description: Município de residência do paciente
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
-                config:
-                  where: __most_recent_year_month__                
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
+              config:
+                where: __most_recent_year_month__
       - name: id_gestor
         description: Unidade de Federação + Código Município de Gestão ou UF0000 se
-            o Estabelecimento Executante está sob Gestão Estadual.
+          o Estabelecimento Executante está sob Gestão Estadual.
       - name: id_estabelecimento_cnes
         description: ID do estabelecimento de saúde executante da Autorização de Internação
-            Hospitalar (AIH)
+          Hospitalar (AIH)
       - name: id_aih
         description: ID Autorização de Internação Hospitalar (AIH)
         tests:
           - not_null:
               config:
-                where: __most_recent_year_month__           
+                where: __most_recent_year_month__
       - name: id_procedimento_principal
         description: Procedimento principal realizado na AIH.
       - name: tipo_servico
@@ -66,40 +66,41 @@ models:
         description: Procedimento referente ao ato profissional
       - name: cbo_2002_profissional
         description: Identificador de Ocupação Brasileira do Profissional que realizou
-            o ato ou “00000” caso não tenha sido
+          o ato ou “00000” caso não tenha sido
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cbo_2002')
-                field: cbo_2002.cbo_2002
-                config:
-                  where: __most_recent_year_month__                  
+              to: ref('br_bd_diretorios_brasil__cbo_2002')
+              field: cbo_2002.cbo_2002
+              config:
+                where: __most_recent_year_month__
       - name: quantidade_procedimentos
         description: Quantidade de procedimentos realizados
       - name: id_cid_principal
         description: Identificador principal da Classificação Internacional de Doenças
-            e Problemas Relacionados com a Saúde (CID)
+          e Problemas Relacionados com a Saúde (CID)
       - name: id_cid_principal_subcategoria
-        description: Subcategoria do identificador principal da Classificação Internacional de Doenças
-            e Problemas Relacionados com a Saúde (CID)
+        description: Subcategoria do identificador principal da Classificação Internacional
+          de Doenças e Problemas Relacionados com a Saúde (CID)
         tests:
           - custom_relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
-              ignore_values: ["'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"]       
+              ignore_values:
+                - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
               config:
-                where: __most_recent_year_month__                      
+                where: __most_recent_year_month__
       - name: id_cid_secundario
         description: Identificador secundário da Classificação Internacional de Doenças
-            e Problemas Relacionados com a Saúde (CID)
+          e Problemas Relacionados com a Saúde (CID)
       - name: id_cid_secundario_subcategoria
-        description: Subcategoria do identificador secundário da Classificação Internacional de Doenças
-            e Problemas Relacionados com a Saúde (CID)
+        description: Subcategoria do identificador secundário da Classificação Internacional
+          de Doenças e Problemas Relacionados com a Saúde (CID)
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
               config:
-                where: __most_recent_year_month__                 
+                where: __most_recent_year_month__
       - name: complexidade_ato_profissional
         description: Complexidade do ato profissional
       - name: quantidade_atos_profissionais
@@ -107,20 +108,23 @@ models:
       - name: quantidade_pontos
         description: Quantidade de pontos
       - name: nota_fiscal
-        description: Nota fiscal do material empregado quando órtese/prótese, quando não, o campo representa a data do ato
+        description: Nota fiscal do material empregado quando órtese/prótese, quando
+          não, o campo representa a data do ato
       - name: valor_ato_profissional
         description: Valor do ato profissional
       - name: indicador_uf_hospital
-        description: Indica se a UF de residência do hospital é diferente da UF de localização do estabelecimento
+        description: Indica se a UF de residência do hospital é diferente da UF de
+          localização do estabelecimento
       - name: indicador_uf_paciente
         description: Indica se a UF de residência do paciente é diferente da UF de
-            localização do estabelecimento
+          localização do estabelecimento
       - name: indicador_id_aih
         description: Indica quais id_aih são únicos
       - name: tipo_financiamento_ato_profissional
         description: Tipo de financiamento do ato profissional
       - name: tipo_subtipo_financiamento_ato_profissional
-        description: Tipo de financiamento (04-FAEC) + Subtipo de financiamento relacionado ao tipo de financiamento (04-FAEC) do ato profissional
+        description: Tipo de financiamento (04-FAEC) + Subtipo de financiamento relacionado
+          ao tipo de financiamento (04-FAEC) do ato profissional
       - name: tipo_documento_pf
         description: Documento de pessoa jurídica
       - name: tipo_documento_pj
@@ -132,7 +136,9 @@ models:
       - name: nome_remessa
         description: Nome da remessa
   - name: br_ms_sih__dicionario
-    description: Dicionário para tradução dos códigos das tabelas do do conjunto SIH/SUS. Para códigos definidos por outras instituições, como id_municipio ou cnaes, buscar por diretórios.
+    description: Dicionário para tradução dos códigos das tabelas do do conjunto SIH/SUS.
+      Para códigos definidos por outras instituições, como id_municipio ou cnaes,
+      buscar por diretórios.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
@@ -141,7 +147,7 @@ models:
             - chave
             - cobertura_temporal
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: id_tabela
         description: ID Tabela

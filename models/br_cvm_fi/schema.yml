@@ -6,7 +6,13 @@ models:
       do fundo.
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [ano, mes,cnpj, data_competencia, plano_contabil_balancete,codigo_conta ]
+          combination_of_columns:
+            - ano
+            - mes
+            - cnpj
+            - data_competencia
+            - plano_contabil_balancete
+            - codigo_conta
           config:
             where: __most_recent_year_month__
     columns:
