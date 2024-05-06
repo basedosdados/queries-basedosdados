@@ -135,3 +135,27 @@ models:
         description: Código sequencial
       - name: nome_remessa
         description: Nome da remessa
+  - name: br_ms_sih__dicionario
+    description: Dicionário para tradução dos códigos das tabelas do do conjunto SIH/SUS.
+      Para códigos definidos por outras instituições, como id_municipio ou cnaes,
+      buscar por diretórios.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor
