@@ -1,33 +1,34 @@
+---
 version: 2
-
 models:
   - name: br_ibge_ppm__producao_pecuaria
-    description: Dados de pecuária contendo o número de vacas ordenhadas e ovinos tosquiados.
+    description: Dados de pecuária contendo o número de vacas ordenhadas e ovinos
+      tosquiados.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - [ano, sigla_uf, id_municipio, produto]
+          combination_of_columns:
+            - [ano, sigla_uf, id_municipio, produto]
       - not_null_proportion_multiple_columns:
-            at_least: 0.05
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: ovinos_tosquiados
         description: Número de ovinos tosquiados
       - name: vacas_ordenhadas
@@ -36,29 +37,28 @@ models:
     description: Efetivo dos rebanhos (cabeça), por tipo de rebanho.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+          combination_of_columns: [insert unique keys here]
       - not_null_proportion_multiple_columns:
-            at_least: 0.05
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: tipo_rebanho
         description: Tipo de rebanho
       - name: quantidade
@@ -67,29 +67,28 @@ models:
     description: Produção de origem animal, por tipo de produto e valor da produção.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+          combination_of_columns: [insert unique keys here]
       - not_null_proportion_multiple_columns:
-            at_least: 0.05
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: produto
         description: Produto
       - name: unidade
@@ -99,32 +98,32 @@ models:
       - name: valor
         description: Valor da produção
   - name: br_ibge_ppm__producao_aquicultura
-    description: Produção da aquicultura, de acordo com a quantidade produzida em quilogramas e valor da produção em mil reais.
+    description: Produção da aquicultura, de acordo com a quantidade produzida em
+      quilogramas e valor da produção em mil reais.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+          combination_of_columns: [insert unique keys here]
       - not_null_proportion_multiple_columns:
-            at_least: 0.05
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: produto
         description: Produto
       - name: quantidade
