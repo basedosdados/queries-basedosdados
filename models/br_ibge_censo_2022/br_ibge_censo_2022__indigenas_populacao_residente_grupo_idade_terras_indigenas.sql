@@ -63,7 +63,7 @@ with
                 pessoas_residentes_em_terras_indigenas_pessoas_ as int64
             ) populacao_residente,
         from
-            `basedosdados-dev.br_ibge_censo_2022_staging.indigenas_populacao_residente_grupo_idade_terras_indigenas`
+            `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_populacao_residente_grupo_idade_terras_indigenas`
     )
 select
     ibge.* except (idade, idade_num, pessoas_indigenas, populacao_residente),

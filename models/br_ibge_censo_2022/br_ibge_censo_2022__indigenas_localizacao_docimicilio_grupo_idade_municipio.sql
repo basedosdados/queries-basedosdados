@@ -26,7 +26,7 @@ with
             safe_cast(sexo as string) sexo,
             safe_cast(pessoas_indigenas_pessoas_ as int64) pessoas,
         from
-            `basedosdados-dev.br_ibge_censo_2022_staging.indigenas_localizacao_docimicilio_grupo_idade_municipio`
+            `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_localizacao_docimicilio_grupo_idade_municipio`
     )
 select
     ibge.* except (idade, idade_num, pessoas),

@@ -26,7 +26,7 @@ with
             safe_cast(sexo as string) sexo,
             safe_cast(pessoas_quilombolas_pessoas_ as int64) pessoas,
         from
-            `basedosdados-dev.br_ibge_censo_2022_staging.quilombolas_localizacao_domicilio_grupo_idade_municipio`
+            `basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_localizacao_domicilio_grupo_idade_municipio`
             as t
     )
 select

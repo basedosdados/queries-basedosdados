@@ -68,5 +68,5 @@ select
         ) as float64
     ) razao_sexo_populacao_indigena,
 from
-    `basedosdados-dev.br_ibge_censo_2022_staging.indigenas_indice_envelhecimento_terras_indigenas`
+    `basedosdados-staging.br_ibge_censo_2022_staging.indigenas_indice_envelhecimento_terras_indigenas`
     as t

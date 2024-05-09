@@ -63,7 +63,7 @@ with
                 pessoas_residentes_em_territorios_quilombolas_pessoas_ as int64
             ) populacao_residente,
         from
-            `basedosdados-dev.br_ibge_censo_2022_staging.quilombolas_populacao_residente_grupo_idade_territorio_quilombola`
+            `basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_populacao_residente_grupo_idade_territorio_quilombola`
     )
 select
     ibge.* except (idade, idade_num, pessoas_quilombolas, populacao_residente),

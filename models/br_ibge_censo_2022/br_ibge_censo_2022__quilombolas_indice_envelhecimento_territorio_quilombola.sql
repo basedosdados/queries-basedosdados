@@ -73,5 +73,5 @@ select
         ) as float64
     ) razao_sexo_quilombola,
 from
-    `basedosdados-dev.br_ibge_censo_2022_staging.quilombolas_indice_envelhecimento_territorio_quilombola`
+    `basedosdados-staging.br_ibge_censo_2022_staging.quilombolas_indice_envelhecimento_territorio_quilombola`
     as t
