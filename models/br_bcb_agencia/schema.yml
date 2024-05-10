@@ -7,6 +7,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, cnpj]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -14,24 +16,17 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: data_inicio
         description: Data de criação da agência
       - name: cnpj
         description: Cadastro Nacional de Pessoa Júridica (CNPJ)
         tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
           - relationships:
               to: ref('br_bd_diretorios_brasil__empresa')
               field: cnpj
@@ -53,8 +48,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cep')
               field: cep.cep
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: endereco
         description: endereço da agência
       - name: complemento

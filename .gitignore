@@ -17,3 +17,5 @@ models/*/tmp/
 models/*/input/
 models/*/output/
 models/*/extra/
+venv*
+edr_target/

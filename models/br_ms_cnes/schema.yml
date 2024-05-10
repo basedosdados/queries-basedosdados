@@ -2,19 +2,36 @@
 version: 2
 models:
   - name: equipamento
-    description: Esta tabela contém o catálogo de equipamentos em atividade ou não
+    description: Esta tabela  contém o catálogo de equipamentos em atividade ou não
       nos estabelecimentos de saúde
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - id_equipamento
+            - tipo_equipamento
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mes
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: id_equipamento
         description: Identificador do equipamento
       - name: tipo_equipamento
@@ -30,17 +47,35 @@ models:
   - name: equipe
     description: Esta tabela contém o cadastro de equipes em atividade ou não nos
       estabelecimentos de saúde.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - sigla_uf
+            - id_estabelecimento_cnes
+            - id_equipe
+            - tipo_equipe
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: id_equipe
         description: ID da equipe dado pelo código do Município, area e sequencial
           da equipe
@@ -82,15 +117,37 @@ models:
         description: Indicador de atendimento a população Pronasci
   - name: profissional
     description: A tabela fornece o cadastro dos profissionais de saúde nos estabelecimentos.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - cartao_nacional_saude
+            - nome
+            - cbo_2002
+            - id_vinculo
+            - indicador_atende_sus
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: id_municipio_6_residencia
         description: ID Município IBGE - 6 Dígitos do local de residência do profissional
       - name: nome
@@ -127,11 +184,18 @@ models:
   - name: estabelecimento
     description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos
       de saúde brasileiros.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: ano_atualizacao
@@ -140,6 +204,10 @@ models:
         description: Mês de atualização da informação pelo estabelecimento
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_6
         description: ID Município - IBGE 6 Dígitos
       - name: id_regiao_saude
@@ -154,6 +222,7 @@ models:
         description: Código do CEP
       - name: id_estabelecimento_cnes
         description: ID estabelecimento - CNES
+        tests: [not_null]
       - name: tipo_pessoa
         description: Indicador de pessoa física ou jurídica
       - name: cpf_cnpj
@@ -610,6 +679,16 @@ models:
           plano de saúde privado
   - name: leito
     description: leitos disponíveis nos estabelecimentos de saúde
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - tipo_especialidade_leito
+            - tipo_leito
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -617,8 +696,15 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: tipo_especialidade_leito
         description: Especialidade do leito
       - name: tipo_leito
@@ -631,6 +717,11 @@ models:
         description: Quantidade de leitos para o SUS
   - name: dados_complementares
     description: Dados complementares dos estabelecimentos de saúde
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -640,8 +731,13 @@ models:
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: cns_medico_responsavel_administrador_responsavel_tecnico
         description: CNS do médico responsável - Administrador ou Responsável Técnico
       - name: cns_medico_responsavel_oncologista_pediatrico
@@ -824,6 +920,11 @@ models:
           CNES
   - name: estabelecimento_filantropico
     description: Esta tabela apresenta um cadastro de estabelecimentos de saúde filantrópicos.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -833,8 +934,13 @@ models:
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -858,6 +964,11 @@ models:
   - name: estabelecimento_ensino
     description: Esta tabela apresenta informações sobre os estabelecimentos habilitados
       para atividades de ensino.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -867,8 +978,13 @@ models:
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -890,17 +1006,35 @@ models:
   - name: gestao_metas
     description: Esta tabela apresenta informações sobre os contratos de gestão de
       metas dos estabelecimentos de sáude.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - tipo_habilitacao
+            - portaria
+            - data_portaria
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -923,17 +1057,35 @@ models:
         description: Mês da portaria
   - name: incentivos
     description: A tabela fornece informações sobre os incentivos do estabelecimento.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - tipo_habilitacao
+            - portaria
+            - data_portaria
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -956,17 +1108,38 @@ models:
         description: Mês da portaria
   - name: habilitacao
     description: A tabela fornece informações sobre as habilitações do estabelecimento.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - tipo_habilitacao
+            - nivel_habilitacao
+            - ano_competencia_inicial
+            - mes_competencia_inicial
+            - data_portaria
+            - portaria
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: quantidade_leitos
         description: Quantidade de leitos
       - name: ano_competencia_inicial
@@ -991,17 +1164,34 @@ models:
         description: Mês da portaria
   - name: regra_contratual
     description: A tabela fornece informações sobre os contratos dos estabelecimentos.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - tipo_habilitacao
+            - data_portaria
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -1023,17 +1213,38 @@ models:
   - name: servico_especializado
     description: A tabela fornece informações sobre serviços especializados ofertados
       pelo estabelecimento.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_estabelecimento_cnes
+            - tipo_classificacao_bd
+            - tipo_servico_especializado_unico
+            - indicador_servico_ambulatorial_sus
+            - indicador_servico_nao_sus
+            - indicador_servico_hospitalar_nao_sus
+            - indicador_servico_hospitalar_sus
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests: [not_null]
       - name: mes
         description: Mês
+        tests: [not_null]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
+        tests: [not_null]
       - name: tipo_servico_especializado
         description: Código do serviço especializado
       - name: tipo_classificacao
@@ -1056,3 +1267,27 @@ models:
         description: Indicador de serviço especializado único
       - name: quantidade_nacional_estabelecimento_saude_terceiro
         description: Quantidade nacional do estabelecimento de saúde terceiro
+  - name: br_ms_cnes__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_ms_cnes. Para
+      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor

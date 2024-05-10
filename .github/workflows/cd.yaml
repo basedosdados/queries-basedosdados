@@ -98,4 +98,4 @@ jobs:
         run: poetry install --only=dev
       - name: Run script for changing metadata status
         run: |-
-          python .github/workflows/scripts/change_metadata_status.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --status published --email ${{ secrets.BACKEND_EMAIL }} --password ${{ secrets.BACKEND_PASSWORD }}
+          poetry run python .github/workflows/scripts/change_metadata_status.py --modified-files ${{ steps.changed-files.outputs.all_modified_files }} --graphql-url ${{ secrets.BACKEND_GRAPHQL_URL }} --status published --email ${{ secrets.BACKEND_EMAIL }} --password ${{ secrets.BACKEND_PASSWORD }}

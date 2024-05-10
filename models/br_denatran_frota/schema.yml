@@ -6,6 +6,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_municipio, tipo_veiculo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -25,31 +27,23 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: tipo_veiculo
         description: Tipo de veículo
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: quantidade
         description: Quantidade de veículos
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
   - name: br_denatran_frota__uf_tipo
     description: Frota de veículos por Unidade da Federação (UF) e tipo
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, sigla_uf, tipo_veiculo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -69,15 +63,7 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: tipo_veiculo
         description: Tipo de veículo
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: quantidade
         description: Quantidade de veículos
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05

@@ -2,24 +2,30 @@
 version: 2
 models:
   - name: documentos_balancete
+    description: O balancete é um documento gerado mensalmente pela contabilidade
+      do fundo.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - ano
+            - mes
+            - cnpj
             - data_competencia
             - plano_contabil_balancete
             - codigo_conta
-            - cnpj
-    description: O balancete é um documento gerado mensalmente pela contabilidade
-      do fundo.
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: cnpj
         description: CNPJ do fundo
-      - name: cnpj_basico
-        description: CNPJ Básico do fundo
       - name: data_competencia
         description: Data de competência
       - name: plano_contabil_balancete
@@ -34,16 +40,26 @@ models:
     columns:
       - name: ano
         description: Ano
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: id_fundo
         description: Tipo do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: bloco
         description: Bloco
       - name: cnpj
         description: CNPJ do Fundo
-      - name: cnpj_basico
-        description: CNPJ Básico do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: denominacao_social
         description: Denominação Social
       - name: data_competencia
@@ -85,8 +101,6 @@ models:
         description: Data de vencimento
       - name: cnpj_fundo_investido
         description: CNPJ do fundo investido
-      - name: cnpj_basico_fundo_investido
-        description: CNPJ Básico do fundo investido
       - name: denominacao_social_fundo_investido
         description: Denominação social do fundo investido
       - name: codigo_swap
@@ -103,8 +117,6 @@ models:
         description: Data fim da vigência
       - name: cnpj_emissor
         description: CNPJ do emissor
-      - name: cnpj_basico_emissor
-        description: CNPJ Básico do emissor
       - name: nome_emissor
         description: Nome do Emissor
       - name: indicador_titulo_pos_fixado
@@ -167,12 +179,18 @@ models:
     columns:
       - name: ano
         description: Ano
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: cnpj
         description: CNPJ do Fundo
-      - name: cnpj_basico
-        description: CNPJ Básico do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: denominacao_social
         description: Denominação Social
       - name: data_competencia
@@ -494,8 +512,16 @@ models:
     columns:
       - name: id_fundo
         description: Tipo do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: cnpj
         description: CNPJ do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: cnpj_basico
         description: CNPJ Básico do Fundo
       - name: denominacao_social
@@ -584,9 +610,6 @@ models:
       - name: indicador_aplicacao_total_recursos_exterior
         description: Indica se o fundo pode aplicar 100% dos recursos no exterior
   - name: documentos_informe_diario
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [data_competencia, id_fundo, cnpj]
     description: O Informe Diário é um demonstrativo que contém as seguintes informações
       do fundo, relativas à data de competência - Valor total da carteira do fundo;
       Patrimônio líquido; Valor da cota; Captações realizadas no dia; Resgates pagos
@@ -594,16 +617,30 @@ models:
     columns:
       - name: ano
         description: Ano
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: id_fundo
         description: Tipo do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: cnpj
         description: CNPJ do Fundo
-      - name: cnpj_basico
-        description: CNPJ Básico do Fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: data_competencia
         description: Data de Competência
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: valor_total
         description: Valor total da carteira
       - name: valor_cota
@@ -622,16 +659,26 @@ models:
     columns:
       - name: ano
         description: Ano
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: cnpj
         description: CNPJ do fundo
-      - name: cnpj_basico
-        description: CNPJ Básico do fundo
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: denominacao_social
         description: Denominacao Social
       - name: data_competencia
         description: Data de competência do documento
+        tests:
+          - not_null:
+              config:
+                where: __most_recent_year_month__
       - name: versao
         description: Versão do documento
       - name: quantidade_clientes_cotitstas_pessoa_fisica_private_banking
