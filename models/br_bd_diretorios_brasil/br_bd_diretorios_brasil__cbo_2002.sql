@@ -9,7 +9,7 @@
 
 select
     safe_cast(cbo_2002 as string) cbo_2002,
-    safe_cast(descricao as string) descricao,
+    safe_cast(initcap(descricao) as string) descricao,
     safe_cast(familia as string) familia,
     safe_cast(descricao_familia as string) descricao_familia,
     safe_cast(subgrupo as string) subgrupo,
