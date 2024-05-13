@@ -8,11 +8,6 @@
             "data_type": "int64",
             "range": {"start": 2005, "end": 2024, "interval": 1},
         },
-        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
-        ],
     )
 }}
 with
@@ -61,17 +56,51 @@ select
     -- fazer replace em valores de linha com 14 zeros para null. 14 zeros é o tamanho
     -- de um cpf/cnpj nulo
     safe_cast(regexp_replace(cnpj_man, '0{14}', '') as string) cnpj_mantenedora,
-    safe_cast({{ clean_cols("COD_IR") }} as string) tipo_retencao_tributos_mantenedora,
+    replace(
+        safe_cast({{ clean_cols("COD_IR") }} as string), 'nan', null
+    ) tipo_retencao_tributos_mantenedora,
     safe_cast(vinc_sus as int64) indicador_vinculo_sus,
     safe_cast(tpgestao as string) tipo_gestao,
-    safe_cast({{ clean_cols("ESFERA_A") }} as string) tipo_esfera_administrativa,
-    safe_cast(retencao as string) tipo_retencao_tributos,
+    replace(
+        safe_cast({{ clean_cols("ESFERA_A") }} as string), 'nan', null
+    ) tipo_esfera_administrativa,
+    replace(
+        safe_cast(
+            case
+                when regexp_replace(safe_cast(retencao as string), '^0+', '') = ''
+                then '0'
+                else regexp_replace(safe_cast(retencao as string), '^0+', '')
+            end as string
+        ),
+        'nan',
+        null
+    ) as tipo_retencao_tributos,
     safe_cast({{ clean_cols("ATIVIDAD") }} as string) tipo_atividade_ensino_pesquisa,
-    safe_cast(natureza as string) tipo_natureza_administrativa,
-    safe_cast(nat_jur as string) id_natureza_juridica,
-    safe_cast(clientel as string) tipo_fluxo_atendimento,
+    replace(
+        safe_cast(
+            case
+                when regexp_replace(safe_cast(natureza as string), '^0+', '') = ''
+                then '0'
+                else regexp_replace(safe_cast(natureza as string), '^0+', '')
+            end as string
+        ),
+        'nan',
+        null
+    ) as tipo_natureza_administrativa,
+    nullif(safe_cast(nat_jur as string), '') id_natureza_juridica,
+    replace(
+        safe_cast(
+            case
+                when regexp_replace(safe_cast(clientel as string), '^0+', '') = ''
+                then '0'
+                else regexp_replace(safe_cast(clientel as string), '^0+', '')
+            end as string
+        ),
+        'nan',
+        null
+    ) as tipo_fluxo_atendimento,
     safe_cast({{ clean_cols("TP_UNID") }} as string) tipo_unidade,
-    safe_cast({{ clean_cols("TURNO_AT") }} as string) tipo_turno,
+    replace(safe_cast({{ clean_cols("TURNO_AT") }} as string), 'nan', null) tipo_turno,
     safe_cast({{ clean_cols("NIV_HIER") }} as string) tipo_nivel_hierarquia,
     safe_cast({{ clean_cols("TP_PREST") }} as string) tipo_prestador,
     safe_cast(co_banco as string) banco,
@@ -89,11 +118,23 @@ select
     safe_cast(
         safe.parse_date('%Y%m%d', cast(dt_exped as string)) as date
     ) data_expedicao_alvara,
-    safe_cast({{ clean_cols("ORGEXPED") }} as string) tipo_orgao_expedidor,
-    safe_cast(
-        {{ clean_cols("AV_ACRED") }} as string
+    replace(
+        safe_cast({{ clean_cols("ORGEXPED") }} as string), 'nan', null
+    ) tipo_orgao_expedidor,
+    replace(
+        safe_cast({{ clean_cols("AV_ACRED") }} as string), 'nan', null
     ) tipo_avaliacao_acreditacao_hospitalar,
-    safe_cast(clasaval as string) tipo_classificacao_acreditacao_hospitalar,
+    replace(
+        safe_cast(
+            case
+                when regexp_replace(safe_cast(clasaval as string), '^0+', '') = ''
+                then '0'
+                else regexp_replace(safe_cast(clasaval as string), '^0+', '')
+            end as string
+        ),
+        'nan',
+        null
+    ) as tipo_classificacao_acreditacao_hospitalar,
     safe_cast(substr(cast(dt_acred as string), 1, 4) as int64) as ano_acreditacao,
     safe_cast(substr(cast(dt_acred as string), 5, 2) as int64) as mes_acreditacao,
     safe_cast(
