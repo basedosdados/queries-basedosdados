@@ -3,7 +3,7 @@ from time import sleep
 import re
 from backend import Backend
 from utils import expand_alls, get_datasets_tables_from_modified_files
-from scripts.table_test import get_flow_run_state, get_materialization_flow_id, get_flow_status_logs
+from table_test import get_flow_run_state, get_materialization_flow_id, get_flow_status_logs
 
 if __name__ == "__main__":
     # Start argument parser
