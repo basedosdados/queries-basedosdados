@@ -3,8 +3,6 @@ name: Triggers Elementary Models
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
   schedule:
     - cron: 00 23 * * 1
   workflow_dispatch:
