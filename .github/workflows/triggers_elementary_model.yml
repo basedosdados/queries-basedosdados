@@ -9,7 +9,6 @@ on:
 
 jobs:
   run_elementary_models:
-    needs: elementary
     name: Run elementary model
     runs-on: ubuntu-latest
     steps:
