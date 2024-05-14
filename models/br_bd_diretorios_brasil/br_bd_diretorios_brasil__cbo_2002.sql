@@ -19,5 +19,6 @@ select
         initcap(descricao_subgrupo_principal) as string
     ) descricao_subgrupo_principal,
     safe_cast(grande_grupo as string) grande_grupo,
-    safe_cast(initcap(descricao_grande_grupo) as string) descricao_grande_grupo
+    safe_cast(initcap(descricao_grande_grupo) as string) descricao_grande_grupo,
+    safe_cast(indicador_cbo_2002_ativa as int64) indicador_cbo_2002_ativa
 from `basedosdados-staging.br_bd_diretorios_brasil_staging.cbo_2002` as t
