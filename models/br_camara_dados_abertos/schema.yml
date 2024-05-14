@@ -194,6 +194,12 @@ models:
         description: Descrição sobre a votação
       - name: id_proposicao
         description: ID proposição
+        tests:
+          - custom_relationships:
+              to: ref('br_camara_dados_abertos__proposicao_microdados')
+              field: id_proposicao
+              ignore_values: ['33463', '130292', '42069']
+              proportion_allowed_failures: 0
       - name: ano_proposicao
         description: Ano da proposição
         tests:
