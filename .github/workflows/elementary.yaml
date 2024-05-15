@@ -3,6 +3,8 @@ name: Deploy Elementary Report
 on:
   push:
     branches: [main, master]
+  pull_request:
+    branches: [main, master]
   schedule:
     - cron: 00 22 * * 1-5
   workflow_dispatch:
@@ -19,8 +21,7 @@ jobs:
           adapter-version: 1.5.9
           profiles-yml: ${{ secrets.ELEMENTARY_PROFILES_YML }}
           edr-command: edr report --file-path "report.html" --days-back 90 && edr send-report --google-service-account-path
-            "/tmp/gcs_keyfile.json" --gcs-bucket-name "basedosdados" --update-bucket-website --days-back 90
-            "true"
+            "/tmp/gcs_keyfile.json" --gcs-bucket-name "basedosdados" --update-bucket-website "true" --days-back 90
           bigquery-keyfile: ${{ secrets.BIGQUERY_KEYFILE }}
           gcs-keyfile: ${{ secrets.GCS_KEYFILE }}
       - name: Upload report
