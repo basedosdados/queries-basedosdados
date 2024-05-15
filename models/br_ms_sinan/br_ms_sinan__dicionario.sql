@@ -10,4 +10,4 @@ select
     safe_cast(chave as string) chave,
     safe_cast(replace(cobertura_temporal, '-1', '(1)') as string) cobertura_temporal,
     safe_cast(valor as string) valor
-from `basedosdados-dev.br_ms_sinan_staging.dicionario` as t
+from `basedosdados-staging.br_ms_sinan_staging.dicionario` as t
