@@ -24,6 +24,9 @@ models:
         description: Grande Grupo
       - name: descricao_grande_grupo
         description: Descrição do Grande Grupo
+      - name: indicador_cbo_2002_ativa
+        description: Indica se o código de 6 dígitos da CBO de 2002 permanece ativo
+          ou não
   - name: br_bd_diretorios_brasil__empresa
     description: A tabela apresenta informações do Cadastro Nacional da Pessoa Jurídica
       (CNPJ), que é um banco de dados administrado pela Secretaria Especial da Receita
