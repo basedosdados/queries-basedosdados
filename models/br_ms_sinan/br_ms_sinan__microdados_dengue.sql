@@ -9,7 +9,7 @@
             "range": {"start": 2000, "end": 2025, "interval": 1},
         },
         cluster_by=["sigla_uf_notificacao", "sigla_uf_residencia"],
-        labels={"project_id": "basedosdados"},
+        labels={"tema": "saude"},
     )
 }}
 {%- set columns = adapter.get_columns_in_relation(this) -%}
@@ -310,6 +310,19 @@ with
             safe_cast(outros as string) apresenta_sintoma_outro,
             safe_cast(sin_out as string) apresenta_qual_sintoma,
             safe_cast(laco_n as string) prova_laco,
+            case
+                when dt_choque = ''
+                then null
+                else
+                    safe_cast(
+                        format_date(
+                            '%Y-%m-%d',
+                            safe.parse_date(
+                                '%Y%m%d', regexp_replace(dt_choque, r'[^0-9]', '')
+                            )
+                        ) as date
+                    )
+            end data_choque,
             safe_cast(hospitaliz as string) internacao,
             case
                 when dt_interna = ''
@@ -324,7 +337,6 @@ with
                         ) as date
                     )
             end data_internacao,
-
             case
                 when uf = '11'
                 then 'RO'
@@ -428,6 +440,19 @@ with
             safe_cast(grav_consc as string) grave_consciencia,
             safe_cast(grav_orgao as string) grave_orgaos,
             case
+                when dt_grav = ''
+                then null
+                else
+                    safe_cast(
+                        format_date(
+                            '%Y-%m-%d',
+                            safe.parse_date(
+                                '%Y%m%d', regexp_replace(dt_grav, r'[^0-9]', '')
+                            )
+                        ) as date
+                    )
+            end data_sinais_gravidade,
+            case
                 when dt_col_hem = ''
                 then null
                 else
@@ -518,17 +543,54 @@ with
                         ) as date
                     )
             end data_resultado_sorologia1_chikungunya,
-
+            case
+                when dt_soror2 = ''
+                then null
+                else
+                    safe_cast(
+                        format_date(
+                            '%Y-%m-%d',
+                            safe.parse_date(
+                                '%Y%m%d', regexp_replace(dt_soror2, r'[^0-9]', '')
+                            )
+                        ) as date
+                    )
+            end data_resultado_sorologia2_chikungunya,
             safe_cast(res_chiks1 as string) resultado_sorologia1_chikungunya,
             safe_cast(s1_igm as string) sorologia1_igm,
             safe_cast(s1_igg as string) sorologia1_igg,
             safe_cast(s1_tit1 as string) sorologia1_tit1,
+            case
+                when dt_chik_s2 = ''
+                then null
+                else
+                    safe_cast(
+                        format_date(
+                            '%Y-%m-%d',
+                            safe.parse_date(
+                                '%Y%m%d', regexp_replace(dt_chik_s2, r'[^0-9]', '')
+                            )
+                        ) as date
+                    )
+            end data_sorologia2_chikungunya,
             safe_cast(res_chiks2 as string) resultado_sorologia2_chikungunya,
             safe_cast(s2_igm as string) sorologia2_igm,
             safe_cast(s2_igg as string) sorologia2_igg,
             safe_cast(s2_tit1 as string) sorologia2_tit1,
             safe_cast(resul_prnt as string) resultado_prnt,
-
+            case
+                when dt_prnt = ''
+                then null
+                else
+                    safe_cast(
+                        format_date(
+                            '%Y-%m-%d',
+                            safe.parse_date(
+                                '%Y%m%d', regexp_replace(dt_prnt, r'[^0-9]', '')
+                            )
+                        ) as date
+                    )
+            end data_prnt,
             case
                 when dt_ns1 = ''
                 then null
@@ -879,6 +941,11 @@ with
             apresenta_sintoma_outro,
             apresenta_qual_sintoma,
             prova_laco,
+            case
+                when extract(year from data_choque) > extract(year from current_date)
+                then null
+                else data_choque
+            end data_choque,
             internacao,
             data_internacao,
             sigla_uf_internacao,
@@ -913,6 +980,13 @@ with
             grave_consciencia,
             grave_orgaos,
             data_hematocrito,
+            case
+                when
+                    extract(year from data_sinais_gravidade)
+                    > extract(year from current_date)
+                then null
+                else data_sinais_gravidade
+            end data_sinais_gravidade,
             hematocrito_maior,
             case
                 when extract(year from data_plaquetas) > extract(year from current_date)
@@ -941,10 +1015,29 @@ with
             sorologia1_igg,
             sorologia1_tit1,
             resultado_sorologia2_chikungunya,
+            case
+                when
+                    extract(year from data_sorologia2_chikungunya)
+                    > extract(year from current_date)
+                then null
+                else data_sorologia2_chikungunya
+            end data_sorologia2_chikungunya,
+            case
+                when
+                    extract(year from data_resultado_sorologia2_chikungunya)
+                    > extract(year from current_date)
+                then null
+                else data_resultado_sorologia2_chikungunya
+            end data_resultado_sorologia2_chikungunya,
             sorologia2_igm,
             sorologia2_igg,
             sorologia2_tit1,
             resultado_prnt,
+            case
+                when extract(year from data_prnt) > extract(year from current_date)
+                then null
+                else data_prnt
+            end data_prnt,
             data_ns1,
             resultado_ns1,
             data_viral,
@@ -1010,4 +1103,3 @@ select
         {% if not loop.last %}, {% endif %}
     {% endfor %}
 from table_final
-
