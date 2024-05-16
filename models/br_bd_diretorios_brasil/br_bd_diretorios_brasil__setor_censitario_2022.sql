@@ -29,4 +29,5 @@ select
     safe_cast(nm_rgint as string) as nome_regiao_intermediaria,
     safe_cast(cd_concurb as string) as id_concentracao_urbana,
     safe_cast(nm_concurb as string) as nome_concentracao_urbana,
-from `basedosdados-staging.br_ibge_censo_2022_staging.domicilio_morador_setor_censitario`
+from
+    `basedosdados-staging.br_ibge_censo_2022_staging.domicilio_morador_setor_censitario`
