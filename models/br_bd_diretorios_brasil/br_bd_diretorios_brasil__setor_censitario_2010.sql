@@ -20,4 +20,4 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(situacao_setor as string) situacao_setor,
     safe_cast(tipo_setor as string) tipo_setor
-from `basedosdados-dev.br_bd_diretorios_brasil_staging.setor_censitario` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.setor_censitario` as t
