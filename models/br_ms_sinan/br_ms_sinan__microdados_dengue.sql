@@ -1010,3 +1010,4 @@ select
         {% if not loop.last %}, {% endif %}
     {% endfor %}
 from table_final
+
