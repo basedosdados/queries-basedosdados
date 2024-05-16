@@ -275,18 +275,22 @@ models:
         description: Seção
       - name: descricao_secao
         description: Descrição da Seção
-  - name: br_bd_diretorios_brasil__setor_censitario
-    description: Description
+  - name: br_bd_diretorios_brasil__setor_censitario_2010
+    description: Diretório de referência para os setores censitário de 2010. Contem
+      o id_setor_censitario, que permite ligar informações (município, distritro,
+      etc)
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [ano, id_setor_censitario]
+          combination_of_columns: [id_setor_censitario]
     columns:
-      - name: ano
-        description: Ano
       - name: id_setor_censitario
         description: ID do setor censitário
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_rm
         description: ID da região metropolitana ou RIDE
       - name: nome_rm
@@ -314,6 +318,66 @@ models:
           aglomerados 8 - Zona rural, exclusive aglomerado rural
       - name: tipo_setor
         description: Tipo de setor censitário
+      - name: id_microrregiao
+        description: ID da microrregião
+      - name: nome_microrregiao
+        description: Nome da microrregião
+      - name: id_mesorregiao
+        description: ID da microrregião
+      - name: nome_mesorregiao
+        description: Nome da mesorregião
+      - name: id_regiao_imediata
+        description: ID da região geográfica imediata
+      - name: nome_regiao_imediata
+        description: Nome da região geográfica imediata
+      - name: id_regiao_intermediaria
+        description: ID da região geográfica intermediária
+      - name: nome_regiao_intermediaria
+        description: Nome da região geográfica intermediária
+      - name: id_concentracao_urbana
+        description: ID da Concentração Urbana
+      - name: nome_concentracao_urbana
+        description: Nome da Concentração Urbana
+  - name: br_bd_diretorios_brasil__setor_censitario_2022
+    description: Diretório de referência para os setores censitário de 2022. Contem
+      o id_setor_censitario, que permite ligar informações (município, distritro,
+      etc).
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [id_setor_censitario]
+    columns:
+      - name: id_setor_censitario
+        description: ID do setor censitário
+      - name: area_km2
+        description: Área em quilómetro quadrado
+      - name: id_regiao
+        description: ID da região
+      - name: nome_regiao
+        description: Nome da Região
+      - name: id_uf
+        description: ID da UF
+      - name: nome_uf
+        description: Nome da UF
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: nome
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: nome_municipio
+        description: Nome do município
+      - name: id_distrito
+        description: ID do distrito
+      - name: nome_distrito
+        description: Nome do distrito
+      - name: id_subdistrito
+        description: ID do subdistrito
+      - name: nome_subdistrito
+        description: Nome do subdistrito
       - name: id_microrregiao
         description: ID da microrregião
       - name: nome_microrregiao
