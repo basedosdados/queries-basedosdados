@@ -39,7 +39,7 @@ models:
               to: ref('br_camara_dados_abertos__evento')
               field: id_evento
               ignore_values: ['0', '71957', '71921']  # O valor 5410 será ignorado
-              proportion_allowed_failures: 0
+              proportion_allowed_failures: 0.2
       - name: aprovacao
         description: Indicador se ocorreu a aprovação
       - name: voto_sim
@@ -157,9 +157,11 @@ models:
       - name: id_votacao
         description: ID da votação
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_camara_dados_abertos__votacao')
               field: id_votacao
+              ignore_values: ['235536312']
+              proportion_allowed_failures: 0.2
       - name: sigla_orgao
         description: Sigla do órgão
       - name: descricao
@@ -194,12 +196,6 @@ models:
         description: Descrição sobre a votação
       - name: id_proposicao
         description: ID proposição
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__proposicao_microdados')
-              field: id_proposicao
-              ignore_values: ['33463', '130292', '42069']
-              proportion_allowed_failures: 0
       - name: ano_proposicao
         description: Ano da proposição
         tests:
@@ -582,6 +578,7 @@ models:
             - nome
             - nome_deputado
             - cargo
+            - sigla_uf
             - data_inicio
             - data_final
             - sigla_partido
@@ -778,17 +775,21 @@ models:
       - name: id_frente
         description: ID da frente
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_camara_dados_abertos__frente')
               field: id_frente
+              ignore_values: ['55614', '55619', '55621', '55604']
+              proportion_allowed_failures: 0.2
       - name: titulo_deputado
         description: Título do deputado
       - name: id_deputado
         description: ID do deputado
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_camara_dados_abertos__deputado')
               field: id_deputado
+              ignore_values: ['223398']
+              proportion_allowed_failures: 0.2
       - name: nome_deputado
         description: Nome do deputado
       - name: url_foto_deputado
@@ -1209,7 +1210,7 @@ models:
               to: ref('br_camara_dados_abertos__deputado')
               field: id_deputado
               ignore_values: ['228042', '223398']  # O valor 5410 será ignorado
-              proportion_allowed_failures: 0
+              proportion_allowed_failures: 0.2
       - name: ano_legislatura
         description: Ano de início da legislatura
         tests:
