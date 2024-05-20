@@ -8,11 +8,6 @@
             "data_type": "int64",
             "range": {"start": 2005, "end": 2024, "interval": 1},
         },
-        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
-        ],
     )
 }}
 
@@ -46,17 +41,41 @@ select
     safe_cast(id_municipio as string) as id_municipio,
     safe_cast(cnes as string) as id_estabelecimento_cnes,
     safe_cast(id_equipe as string) as id_equipe,
-    safe_cast(tipo_eqp as string) as tipo_equipe,
+    safe_cast(
+        case
+            when regexp_replace(tipo_eqp, '^0+', '') = ''
+            then '0'
+            else regexp_replace(tipo_eqp, '^0+', '')
+        end as string
+    ) as tipo_equipe,
     safe_cast(nome_eqp as string) as equipe,
     safe_cast(nomearea as string) as area,
     safe_cast(id_segm as string) as id_segmento,
-    safe_cast(tiposegm as string) as tipo_segmento,
+    safe_cast(
+        case
+            when regexp_replace(tiposegm, '^0+', '') = ''
+            then '0'
+            else regexp_replace(tiposegm, '^0+', '')
+        end as string
+    ) as tipo_segmento,
     safe_cast(descsegm as string) as descricao_segmento,
     -- - inserir subsrt para criar ano e mes
     safe_cast(substr(dt_ativa, 1, 4) as int64) as ano_ativacao_equipe,
     safe_cast(substr(dt_ativa, 5, 6) as int64) as mes_ativacao_equipe,
-    safe_cast(motdesat as string) as motivo_desativacao_equipe,
-    safe_cast(tp_desat as string) as tipo_desativacao_equipe,
+    safe_cast(
+        case
+            when regexp_replace(motdesat, '^0+', '') = ''
+            then '0'
+            else regexp_replace(motdesat, '^0+', '')
+        end as string
+    ) as motivo_desativacao_equipe,
+    safe_cast(
+        case
+            when regexp_replace(tp_desat, '^0+', '') = ''
+            then '0'
+            else regexp_replace(tp_desat, '^0+', '')
+        end as string
+    ) as tipo_desativacao_equipe,
     safe_cast(substr(dt_desat, 1, 4) as int64) as ano_desativacao_equipe,
     safe_cast(substr(dt_desat, 5, 6) as int64) as mes_desativacao_equipe,
     safe_cast(quilombo as int64) as indicador_atende_populacao_assistida_quilombolas,

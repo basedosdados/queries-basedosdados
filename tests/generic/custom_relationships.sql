@@ -14,7 +14,9 @@
             select {{ column_name }} as child_value
             from {{ model }}
             {% if ignore_values %}
-                where {{ column_name }} not in ('{{ ignore_values | join("', '") }}')
+                where
+                    {{ column_name }} not in ('{{ ignore_values | join("', '") }}')
+                    and {{ column_name }} is not null
             {% endif %}
         ),
         parent as (select {{ field }} as parent_value from {{ to }}),
