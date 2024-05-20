@@ -16,7 +16,6 @@ models:
             - sexo
             - localizacao
             - udh
-            - nome_udh
             - ano
       - not_null_proportion_multiple_columns:
           at_least: 0.05
