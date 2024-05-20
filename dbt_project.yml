@@ -222,6 +222,9 @@ models:
     br_inmet_bdmep:
       +materialized: table
       +schema: br_inmet_bdmep
+    br_ipea_avs:
+      +materialized: table
+      +schema: br_ipea_avs
     br_inpe_prodes:
       +materialized: table
       +schema: br_inpe_prodes
