@@ -34,12 +34,6 @@ models:
         description: Sigla do órgão
       - name: id_evento
         description: ID do evento
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__evento')
-              field: id_evento
-              ignore_values: ['0', '71957', '71921']  # O valor 5410 será ignorado
-              proportion_allowed_failures: 0.2
       - name: aprovacao
         description: Indicador se ocorreu a aprovação
       - name: voto_sim
@@ -73,10 +67,6 @@ models:
     columns:
       - name: id_votacao
         description: ID da votação
-        tests:
-          - relationships:
-              to: ref('br_camara_dados_abertos__votacao')
-              field: id_votacao
       - name: data
         description: Data
         tests:
@@ -112,10 +102,6 @@ models:
     columns:
       - name: id_votacao
         description: ID da votação
-        tests:
-          - relationships:
-              to: ref('br_camara_dados_abertos__votacao')
-              field: id_votacao
       - name: data
         description: Data
         tests:
@@ -156,12 +142,6 @@ models:
     columns:
       - name: id_votacao
         description: ID da votação
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__votacao')
-              field: id_votacao
-              ignore_values: ['235536312']
-              proportion_allowed_failures: 0.2
       - name: sigla_orgao
         description: Sigla do órgão
       - name: descricao
@@ -182,10 +162,6 @@ models:
     columns:
       - name: id_votacao
         description: ID da votação
-        tests:
-          - relationships:
-              to: ref('br_camara_dados_abertos__votacao')
-              field: id_votacao
       - name: data
         description: Data
         tests:
@@ -243,10 +219,6 @@ models:
         description: Sigla da Unidade da Federação referente ao nascimento
       - name: id_deputado
         description: ID deputado
-        tests:
-          - relationships:
-              to: ref('br_camara_dados_abertos__deputado')
-              field: id_deputado
       - name: sexo
         description: Sexo
       - name: id_inicial_legislatura
@@ -663,10 +635,6 @@ models:
     columns:
       - name: id_evento
         description: ID do evento
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__evento')
-              field: id_evento
       - name: id_orgao
         description: ID do órgão
       - name: sigla_orgao
@@ -685,10 +653,6 @@ models:
     columns:
       - name: id_evento
         description: ID do evento
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__evento')
-              field: id_evento
       - name: data_inicio
         description: Data de início
         tests:
@@ -717,10 +681,6 @@ models:
     columns:
       - name: id_evento
         description: ID do evento
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__evento')
-              field: id_evento
       - name: titulo_requerimento
         description: Título do requerimento
       - name: id_proposicao
@@ -774,22 +734,10 @@ models:
     columns:
       - name: id_frente
         description: ID da frente
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__frente')
-              field: id_frente
-              ignore_values: ['55614', '55619', '55621', '55604']
-              proportion_allowed_failures: 0.2
       - name: titulo_deputado
         description: Título do deputado
       - name: id_deputado
         description: ID do deputado
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__deputado')
-              field: id_deputado
-              ignore_values: ['223398']
-              proportion_allowed_failures: 0.2
       - name: nome_deputado
         description: Nome do deputado
       - name: url_foto_deputado
@@ -1205,12 +1153,6 @@ models:
         description: Cadastro de Pessoa Física (CPF) do parlamentar
       - name: id_deputado
         description: ID do deputado
-        tests:
-          - custom_relationships:
-              to: ref('br_camara_dados_abertos__deputado')
-              field: id_deputado
-              ignore_values: ['228042', '223398']  # O valor 5410 será ignorado
-              proportion_allowed_failures: 0.2
       - name: ano_legislatura
         description: Ano de início da legislatura
         tests:

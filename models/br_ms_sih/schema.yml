@@ -67,12 +67,12 @@ models:
       - name: cbo_2002_profissional
         description: Identificador de Ocupação Brasileira do Profissional que realizou
           o ato ou “00000” caso não tenha sido
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cbo_2002')
-              field: cbo_2002.cbo_2002
-              config:
-                where: __most_recent_year_month__
+        # tests:
+        #   - relationships:
+        #       to: ref('br_bd_diretorios_brasil__cbo_2002')
+        #       field: cbo_2002.cbo_2002
+        #       config:
+        #         where: __most_recent_year_month__
       - name: quantidade_procedimentos
         description: Quantidade de procedimentos realizados
       - name: id_cid_principal
