@@ -161,43 +161,25 @@ models:
         description: Valor
   - name: br_ms_sih__aihs_reduzidas
     description: Movimento de AIH - Arquivos Reduzidos
-    tests:
-      - custom_dictionary_coverage:
-            columns_covered_by_dictionary:
-              - tipo_aih
-              - motivo_autorizacao_aih
-              - motivo_saida
-              - tipo_uti
-              - carater_internacao
-              - natureza_juridica_estabelecimento_ate_2012
-              - etnia_paciente
-              - grau_instrucao_paciente
-              - indicador_vinculo_previdencia
-              - indicador_gestante_risco
-              - procedimento_solicitado
-              - procedimento_realizado
-              - indicador_infeccao_hospitalar
-              - complexidade
-            dictionary_model: ref('br_ms_sih__dicionario')
     columns:
       - name: ano
         description: Ano de processamento da AIH, no formato aaaa
         tests:
           - not_null:
-                config:
-                    where: __most_recent_year_month__
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês de processamento da AIH, no formato mm
         tests:
           - not_null:
-                config:
-                    where: __most_recent_year_month__
+              config:
+                where: __most_recent_year_month__
       - name: id_aih
         description: Número da AIH.
         tests:
           - not_null:
-                config:
-                    where: __most_recent_year_month__
+              config:
+                where: __most_recent_year_month__
       - name: tipo_aih
         description: Identificação do tipo da AIH.
       - name: motivo_autorizacao_aih
@@ -219,31 +201,33 @@ models:
       - name: data_saida
         description: Data de saída, no formato aaaammdd.
       - name: id_municipio_estabelecimento
-        description: ID Município IBGE 6 dígitos do estabelecimento.
+        description: Município do estabelecimento.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
-                config:
-                    where: __most_recent_year_month__
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: Código CNES do hospital.
       - name: natureza_juridica_estabelecimento
         description: Natureza jurídica do estabelecimento, conforme a Comissão Nacional
-            de Classificação - CONCLA
+          de Classificação - CONCLA
       - name: natureza_juridica_estabelecimento_ate_2012
         description: Natureza jurídica do hospital (com conteúdo até maio/12).
-            Era utilizada a classificação de Regime e Natureza.
+          Era utilizada a classificação de Regime e Natureza.
       - name: cnpj_estabelecimento
         description: CNPJ do estabelecimento.
       - name: tipo_gestao_estabelecimento
         description: Indica o tipo de gestão do hospital.
       - name: id_municipio_gestor
-        description: ID Município IBGE 6 dígitos do município gestor
+        description: Município gestor
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
+              config:
+                where: __most_recent_year_month__
       - name: tipo_gestor
         description: Tipo de gestor.
       - name: cpf_gestor
@@ -253,11 +237,32 @@ models:
       - name: cnpj_mantenedora
         description: CNPJ da mantenedora.
       - name: id_municipio_paciente
-        description: ID Município IBGE 6 dígitos do município de Residência do Paciente
+        description: Município de Residência do Paciente
         tests:
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
+              ignore_values:
+                - '530180'
+                - '530140'
+                - '530040'
+                - '530050'
+                - '530110'
+                - '530080'
+                - '530130'
+                - '530060'
+                - '530070'
+                - '530135'
+                - '530160'
+                - '530100'
+                - '530150'
+                - '530090'
+                - '530170'
+                - '530120'
+                - '530020'
+                - '530030'
+              config:
+                where: __most_recent_year_month__
       - name: cep_paciente
         description: CEP do paciente.
       - name: data_nascimento_paciente
@@ -276,16 +281,16 @@ models:
         description: Código da nacionalidade do paciente
       - name: cbo_2002_paciente
         description: Ocupação do paciente, segundo a Classificação Brasileira de Ocupações
-            – CBO.
+          – CBO.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cbo_2002')
-                field: cbo_2002.cbo_2002
-                config:
-                    where: __most_recent_year_month__
+              to: ref('br_bd_diretorios_brasil__cbo_2002')
+              field: cbo_2002.cbo_2002
+              config:
+                where: __most_recent_year_month__
       - name: indicador_paciente_homonimo
         description: Indicador se o paciente da AIH é homônimo do paciente de outra
-            AIH.
+          AIH.
       - name: grau_instrucao_paciente
         description: Grau de instrução do paciente.
       - name: quantidade_filhos_paciente
@@ -324,64 +329,42 @@ models:
         description: Categoria do CID de Notificação.
       - name: cid_notificacao_subcategoria
         description: Subcategoria do CID de Notificação.
-        # tests:
-        #   - custom_relationships:
-        #         to: ref('br_bd_diretorios_brasil__cid_10')
-        #         field: subcategoria
-        #         ignore_values:
-        #           - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
-        #         config:
-        #             where: __most_recent_year_month__
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_causa_categoria
         description: Categoria do CID de causa.
       - name: cid_causa_subcategoria
         description: Subcategoria do CID de causa.
-        # tests:
-        #   - custom_relationships:
-        #         to: ref('br_bd_diretorios_brasil__cid_10')
-        #         field: subcategoria
-        #         ignore_values:
-        #           - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
-        #         config:
-        #             where: __most_recent_year_month__
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_principal_categoria
         description: Código da categoria do diagnóstico principal (CID10).
       - name: cid_principal_subcategoria
         description: Código da subcategoria diagnóstico principal (CID10).
-        # tests:
-        #   - custom_relationships:
-        #         to: ref('br_bd_diretorios_brasil__cid_10')
-        #         field: subcategoria
-        #         ignore_values:
-        #           - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
-        #         config:
-        #             where: __most_recent_year_month__
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_secundario_categoria
-        description: Código da categoria do diagnostico secundário (CID10). Preenchido com zeros
-            a partir de 201501.
+        description: Código da categoria do diagnostico secundário (CID10). Preenchido
+          com zeros a partir de 201501.
       - name: cid_secundario_subcategoria
-        description: Código da subcategoria do diagnostico secundário (CID10). Preenchido com zeros
-            a partir de 201501.
-        # tests:
-        #   - custom_relationships:
-        #         to: ref('br_bd_diretorios_brasil__cid_10')
-        #         field: subcategoria
-        #         ignore_values:
-        #           - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
-        #         config:
-        #             where: __most_recent_year_month__
+        description: Código da subcategoria do diagnostico secundário (CID10). Preenchido
+          com zeros a partir de 201501.
       - name: cid_diagnostico_secundario_1_categoria
         description: Categoria do CID do Diagnóstico secundário 1.
       - name: cid_diagnostico_secundario_1_subcategoria
         description: Categoria do CID do Diagnóstico secundário 1.
-        # tests:
-        #   - custom_relationships:
-        #         to: ref('br_bd_diretorios_brasil__cid_10')
-        #         field: subcategoria
-        #         ignore_values:
-        #           - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
-        #         config:
-        #             where: __most_recent_year_month__
       - name: cid_diagnostico_secundario_2_categoria
         description: Categoria do CID do Diagnóstico secundário 2.
       - name: cid_diagnostico_secundario_2_subcategoria
@@ -436,24 +419,22 @@ models:
         description: Categoria do CID da morte.
       - name: cid_morte_subcategoria
         description: Subcategoria do CID da morte.
-        # tests:
-        #   - custom_relationships:
-        #         to: ref('br_bd_diretorios_brasil__cid_10')
-        #         field: subcategoria
-        #         ignore_values:
-        #           - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
-        #         config:
-        #             where: __most_recent_year_month__
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: indicador_obito
         description: Indica Óbito
       - name: remessa
         description: Número da remessa.
       - name: justificativa_auditor
         description: Justificativa do auditor para aceitação da AIH sem o número do
-            Cartão Nacional de Saúde.
+          Cartão Nacional de Saúde.
       - name: justificativa_estabelecimento
         description: Justificativa do estabelecimento para aceitação da AIH sem o
-            número do Cartão Nacional de Saúde.
+          número do Cartão Nacional de Saúde.
       - name: quantidade_dias_uti_mes
         description: Quantidade de dias de UTI no mês.
       - name: quantidade_dias_unidade_intermediaria
@@ -466,16 +447,16 @@ models:
         description: Dias de permanência.
       - name: valor_complemento_federal_servicos_hospitalares
         description: Valor do complemento federal de serviços hospitalares. Está incluído
-            no valor total da AIH.
+          no valor total da AIH.
       - name: valor_complemento_federal_servicos_profissionais
         description: Valor do complemento federal de serviços profissionais. Está
-            incluído no valor total da AIH.
+          incluído no valor total da AIH.
       - name: valor_complemento_gestor_servicos_hospitalares
         description: Valor do complemento do gestor (estadual ou municipal) de serviços
-            hospitalares. Está incluído no valor total da AIH.
+          hospitalares. Está incluído no valor total da AIH.
       - name: valor_complemento_gestor_servicos_profissionais
         description: Valor do complemento do gestor (estadual ou municipal) de serviços
-            profissionais. Está incluído no valor total da AIH.
+          profissionais. Está incluído no valor total da AIH.
       - name: valor_uci
         description: Valor de Unidade de Cuidados Intensivos (UCI).
       - name: valor_serivico_hospitalar
