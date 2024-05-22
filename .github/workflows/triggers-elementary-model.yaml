@@ -4,7 +4,6 @@ on:
   schedule:
     - cron: 00 23 * * 1
   workflow_dispatch:
-
 jobs:
   run_elementary_models:
     name: Run elementary model
