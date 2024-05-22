@@ -9,6 +9,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
@@ -39,6 +40,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
@@ -73,6 +75,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
@@ -107,6 +110,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
@@ -141,6 +145,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
@@ -175,6 +180,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
@@ -209,6 +215,7 @@ models:
     columns:
       - name: ano
         description: Ano
+        test: [not_null]
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
