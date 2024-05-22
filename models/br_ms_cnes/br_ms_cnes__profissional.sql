@@ -54,7 +54,7 @@ select
     end as tipo_conselho,
     -- replace de valores de linha com 15 zeros para null. 15 zeros é valor do campo
     -- CNS_PROF que indica null
-    safe_cast(regexp_replace(cns_prof, '0{15}', null) as string) cartao_nacional_saude,
+    safe_cast(cns_prof as string) cartao_nacional_saude,
     safe_cast(cbo as string) cbo_2002_original,
     safe_cast(
         case
