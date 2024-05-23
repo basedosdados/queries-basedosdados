@@ -98,13 +98,21 @@ select
     safe_cast(homonimo as int64) indicador_paciente_homonimo,
     safe_cast(instru as int64) grau_instrucao_paciente,
     safe_cast(num_filhos as int64) quantidade_filhos_paciente,
-    safe_cast(cnaer as string) id_acidente_trabalho,
+    safe_cast(
+        trim(case when trim(cnaer) = '000' then null else cnaer end) as string
+    ) id_acidente_trabalho,
     safe_cast(vincprev as int64) indicador_vinculo_previdencia,
-    safe_cast(insc_pn as string) id_gestante_pre_natal,
+    safe_cast(
+        trim(
+            case when trim(insc_pn) = '0000000000' then null else insc_pn end
+        ) as string
+    ) id_gestante_pre_natal,
     safe_cast(gestrisco as int64) indicador_gestante_risco,
     safe_cast(contracep1 as int64) tipo_contraceptivo_principal,
     safe_cast(contracep2 as int64) tipo_contraceptivo_secundario,
-    safe_cast(seq_aih5 as string) sequencial_longa_permanencia,
+    safe_cast(
+        trim(case when trim(seq_aih5) = '000' then null else seq_aih5 end) as string
+    ) sequencial_longa_permanencia,
     safe_cast(regexp_replace(proc_solic, r'^0', '') as int64) procedimento_solicitado,
     safe_cast(regexp_replace(proc_rea, r'^0', '') as int64) procedimento_realizado,
     safe_cast(infehosp as int64) indicador_infeccao_hospitalar,
@@ -292,7 +300,7 @@ select
     safe_cast(
         trim(
             case
-                when length(trim(cid_morte)) = 4 and trim(diagsec9) not like '0000'
+                when length(trim(cid_morte)) = 4 and trim(cid_morte) not like '0000'
                 then cid_morte
                 else null
             end

@@ -350,14 +350,8 @@ models:
       - name: descricao_capitulo
         description: Descrição do Capítulo da CID-10
       - name: causa_violencia
-        description: Causa - Violência (Categorias W32 W33 W34 X85 X86 X87 X88 X89
-          X90 X91 X92 X93 X94 X95 X96 X97 X98 X99 Y00 Y01 Y02 Y03 Y04 Y05 Y06 Y07
-          Y08 Y09 Y10 Y11 Y12 Y13 Y14 Y15 Y16 Y17 Y18 Y19 Y20 Y21 Y22 Y23 Y24 Y25
-          Y26 Y27 Y28 Y29 Y30 Y31 Y32 Y33 Y34 Y35 Y87 Y89)
+        description: Causa - Violência
       - name: causa_overdose
-        description: Causa - Overdose (Categorias F10 F11 F12 F14 F16 F19 T40 T41
-          T42 T43 T44 T45 T46 T47 T48 T49 T50 X42 X43 X44 X45 X46 X47 X48 X49 X60
-          X61 X62 X63 X64 X65 X66 X67 X68 X69 Y12 Y13 Y14 Y15 Y16 Y49 Y50 Y51 Z64
-          Z65)
+        description: Causa - Overdose
       - name: cid_datasus
         description: Indica se a origem do CID-10 vem do DATASUS
