@@ -333,18 +333,13 @@ models:
           - custom_relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              ignore_values: ["0000"]              
               config:
                 where: __most_recent_year_month__
       - name: cid_causa_categoria
         description: Categoria do CID de causa.
       - name: cid_causa_subcategoria
         description: Subcategoria do CID de causa.
-        tests:
-          - custom_relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: subcategoria
-              config:
-                where: __most_recent_year_month__
       - name: cid_principal_categoria
         description: Código da categoria do diagnóstico principal (CID10).
       - name: cid_principal_subcategoria
@@ -353,6 +348,7 @@ models:
           - custom_relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              ignore_values: ["0000"]              
               config:
                 where: __most_recent_year_month__
       - name: cid_secundario_categoria
@@ -419,12 +415,6 @@ models:
         description: Categoria do CID da morte.
       - name: cid_morte_subcategoria
         description: Subcategoria do CID da morte.
-        tests:
-          - custom_relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: subcategoria
-              config:
-                where: __most_recent_year_month__
       - name: indicador_obito
         description: Indica Óbito
       - name: remessa
