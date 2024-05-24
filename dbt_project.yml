@@ -255,6 +255,9 @@ models:
     br_me_sic:
       +materialized: table
       +schema: br_me_sic
+    br_me_siconfi:
+      +materialized: table
+      +schema: br_me_siconfi
     br_mec_prouni:
       +materialized: table
       +schema: br_mec_prouni
