@@ -1,11 +1,4 @@
-{{
-    config(
-        alias="municipio",
-        schema="br_inep_saeb",
-        materialized="table",
-        labels={"project_id": "basedosdados-dev", "tema": "educacao"},
-    )
-}}
+{{ config(alias="municipio", schema="br_inep_saeb", materialized="table") }}
 
 select
     safe_cast(ano as int64) ano,
