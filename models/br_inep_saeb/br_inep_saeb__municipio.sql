@@ -1,20 +1,17 @@
-{{
-    config(
-        alias="municipio",
-        schema="br_inep_saeb",
-        materialized="table",
-        labels={"tema": "educacao"},
-    )
-}}
+{{ config(alias="municipio", schema="br_inep_saeb", materialized="table") }}
 
 select
     safe_cast(ano as int64) ano,
-    safe_cast(rede as string) rede,
-    safe_cast(localizacao as string) localizacao,
+    safe_cast(lower(rede) as string) rede,
+    safe_cast(lower(localizacao) as string) localizacao,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(disciplina as string) disciplina,
-    safe_cast(serie as int64) serie,
+    safe_cast(
+        case
+            when serie = "12" then "3" when serie = "13" then "4" else serie
+        end as int64
+    ) serie,
     round(safe_cast(media as float64), 2) media,
     round(safe_cast(nivel_0 as float64), 2) nivel_0,
     round(safe_cast(nivel_1 as float64), 2) nivel_1,
