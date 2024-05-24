@@ -8,7 +8,11 @@ with
             safe_cast(localizacao as string) localizacao,
             safe_cast(sigla_uf as string) sigla_uf,
             safe_cast(disciplina as string) disciplina,
-            safe_cast(serie as int64) serie,
+            safe_cast(
+                case
+                    when serie = "12" then "3" when serie = "13" then "4" else serie
+                end as int64
+            ) serie,
             safe_cast(media as float64) media,
             safe_cast(nivel_0 as float64) nivel_0,
             safe_cast(nivel_1 as float64) nivel_1,
