@@ -23,11 +23,19 @@ models:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
               ignore_values: [RE]
-              proportion_allowed_failures: 0.2
+              proportion_allowed_failures: 0.0
       - name: nome_municipio
         description: Nome do município
       - name: cargo
         description: Cargo
+        tests:
+          - accepted_values:
+              values:
+                - presidente
+                - congresso nacional
+                - prefeito
+                - governador
+                - senador
       - name: data
         description: Data
         tests:
@@ -35,7 +43,8 @@ models:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
       - name: data_referencia
-        description: Data de referência
+        description: Data de referencia da coleta da pesquisa, pode ser um unico dia
+          ou intervalo de dias.
       - name: instituto
         description: Instituto realizador
       - name: contratante
@@ -54,6 +63,10 @@ models:
         description: Tipo
       - name: turno
         description: Turno
+        tests:
+          - accepted_values:
+              values: [1, 2]
+              quote: false
       - name: tipo_voto
         description: Tipo do voto
         tests: [not_null]
@@ -77,4 +90,7 @@ models:
         tests: [not_null]
       - name: percentual
         description: Percentual
-        tests: [not_null]
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 150
