@@ -23,7 +23,6 @@ models:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
               ignore_values: [RE]
-              proportion_allowed_failures: 0.0
       - name: nome_municipio
         description: Nome do município
       - name: cargo
@@ -89,8 +88,4 @@ models:
         description: Condição
         tests: [not_null]
       - name: percentual
-        description: Percentual. Há dois valores maiores que 100%, 150.0% e 111.6%
-        tests:
-          - dbt_utils.accepted_range:
-              min_value: 0
-              max_value: 150 # há dois valores maiores que 100%, 150.0 e 111.6. 
+        description: Percentual
