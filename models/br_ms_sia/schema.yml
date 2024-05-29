@@ -1,19 +1,6 @@
 ---
 version: 2
 models:
-  - name: br_ms_sia__dicionario
-    description: Dicionário
-    columns:
-      - name: id_tabela
-        description: ID Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
   - name: br_ms_sia__producao_ambulatorial
     description: Esta tabela contém o registro de processos ambulatorias realizados
       em todo sistema de saúde nacional - público e privado.
@@ -24,6 +11,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
       - name: sigla_uf
@@ -32,20 +21,20 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
       - name: natureza_juridica_estabelecimento
         description: Natureza jurídica do operador do estabelecimento
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__natureza_juridica')
-              field: natureza_juridica.id_natureza_juridica
       - name: tipo_unidade
         description: Tipo de estabelecimento
       - name: tipo_prestador
@@ -82,11 +71,13 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cbo_2002')
               field: cbo_2002.cbo_2002
+              config:
+                where: __most_recent_year_month__
       - name: codigo_autorizacao_apac
         description: Código da Autorização de Procedimento Ambulatorial de Alta complexidade
           (APAC) e/ou custo ou número de autorização do Boletim de Produção Ambulatorial
           Individualizado (BPA-I), conforme o caso. No BPA-I não é obrigatório, portanto,
-          não é criticado
+          não é criticado.
       - name: codigo_ocorrencia
         description: Código de ocorrência
       - name: tipo_financiamento_producao
@@ -99,6 +90,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+              config:
+                where: __most_recent_year_month__
       - name: mes_processamento_procedimento
         description: Mês de processamento/movimento
       - name: ano_realizacao_procedimento
@@ -107,6 +100,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+              config:
+                where: __most_recent_year_month__
       - name: mes_realizacao_procedimento
         description: Mês da realização do procedimento/competência
       - name: cid_principal_categoria
@@ -118,6 +113,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: categoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_principal_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) principal da Autorização de Procedimento Ambulatorial
@@ -127,6 +124,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_secundario_categoria
         description: Identificador da categoria da Classificação Internacional de
           Doenças (CID10) secundário da Autorização de Procedimento Ambulatorial de
@@ -135,6 +134,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: categoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_secundario_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) secundário da Autorização de Procedimento Ambulatorial
@@ -143,6 +144,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_causas_associadas_categoria
         description: Identificador da categoria da Classificação Internacional de
           Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
@@ -151,6 +154,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: categoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_causas_associadas_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
@@ -159,6 +164,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: carater_atendimento
         description: Caráter de atendimento (APAC ou BPA-I)
       - name: id_paciente_proto
@@ -241,6 +248,19 @@ models:
         description: Tipo de erro de Quantidade Produzida
       - name: flag_erro_corpo_apac
         description: FLAG de erro de corpo da APAC
+  - name: br_ms_sia__dicionario
+    description: Dicionário
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor
   - name: br_ms_sia__psicossocial
     description: Esta tabela contém o registro de processos ambulatorias de atendimento
       psicossial no sistema público de saúde nacional.
@@ -251,24 +271,32 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+              config:
+                where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
+              config:
+                where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
       - name: id_estabelecimento_cnes_familia
@@ -305,12 +333,16 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+              config:
+                where: __most_recent_year_month__
       - name: data_termino_atendimento
         description: Data de Fim do Atendimento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+              config:
+                where: __most_recent_year_month__
       - name: permanencia_atendimento
         description: Permanência em Atendimento
       - name: motivo_saida_permanencia
@@ -321,42 +353,56 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+              config:
+                where: __most_recent_year_month__
       - name: ano_processamento
         description: Ano do processamento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+              config:
+                where: __most_recent_year_month__
       - name: mes_processamento
         description: Mês do processamento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
+              config:
+                where: __most_recent_year_month__
       - name: ano_atendimento
         description: Ano do atendimento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+              config:
+                where: __most_recent_year_month__
       - name: mes_atendimento
         description: Mês do atendimento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
+              config:
+                where: __most_recent_year_month__
       - name: data_nascimento_paciente
         description: Data de nascimento do paciente
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio_residencia_paciente
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
       - name: origem_paciente
         description: Origem do paciente
       - name: nacionalidade_paciente
@@ -383,6 +429,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: categoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_principal_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) principal da Autorização de Procedimento Ambulatorial
@@ -392,6 +440,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_causas_associadas_categoria
         description: Identificador da categoria da Classificação Internacional de
           Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
@@ -400,6 +450,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: categoria
+              config:
+                where: __most_recent_year_month__
       - name: cid_causas_associadas_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
@@ -408,6 +460,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
+              config:
+                where: __most_recent_year_month__
       - name: tipo_droga
         description: Tipo de Droga
       - name: destino_paciente

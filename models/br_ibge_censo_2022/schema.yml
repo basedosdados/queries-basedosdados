@@ -553,19 +553,6 @@ models:
         description: Longitude da Coordenada de Localização da Espécie do Endereço
       - name: ponto
         description: Ponto geográfico criado a partir das colunas longitude e latitude.
-  - name: br_ibge_censo_2022__dicionario
-    description: Dicionário
-    columns:
-      - name: id_tabela
-        description: ID Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
   - name: br_ibge_censo_2022__domicilio_quantidade_esgotamento_sanitario_municipio
     description: Domicílios particulares permanentes ocupados, por existência de banheiro
       ou sanitário e número de banheiros de uso exclusivo do domicílio e por tipo
@@ -908,3 +895,323 @@ models:
           DPO imputados / Total DPO)
       - name: domicilios_particulares_ocupados
         description: Total de Domicílios Particulares Ocupados (DPPO + DPIO)
+  - name: br_ibge_censo_2022__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_ibge_censo_2022.
+      Para taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor
+  - name: br_ibge_censo_2022__quilombolas_localizacao_domicilio_grupo_idade_municipio
+    description: Tabela 8176 - População quilombola, por localização do domicílio,
+      grupos de idade e sexo
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: localizacao_domicilio
+        description: Localização do Domicílio
+      - name: idade_anos
+        description: Idade
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 120
+              where: idade_anos is not null
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: sexo
+        description: Sexo
+      - name: pessoas
+        description: Pessoas Quilombolas
+  - name: br_ibge_censo_2022__quilombolas_indice_envelhecimento_localizacao_domicilio_municipio
+    description: Tabela 8178 - Índice de envelhecimento, idade mediana e razão de
+      sexo da população quilombola por localização do domicílio.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio, localizacao_domicilio]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: localizacao_domicilio
+        description: Localização do Domicílio
+      - name: indice_envelhecimento
+        description: Índice de envelhecimento da população quilombola
+      - name: idade_mediana
+        description: Idade mediana da população quilombola
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 120
+              where: idade_mediana is not null
+      - name: razao_sexo
+        description: Razão de sexo da população quilombola
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'
+              where: razao_sexo is not null
+  - name: br_ibge_censo_2022__quilombolas_populacao_residente_grupo_idade_territorio_quilombola
+    description: Tabela 9765 - População residente em territórios quilombolas, total
+      e quilombola, por grupos de idade e sexo, segundo os Territórios Quilombolas
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: territorio_quilombola
+        description: Nome Território Quilombola
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: sexo
+        description: Sexo
+      - name: idade_anos
+        description: Idade
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 120
+              where: idade_anos is not null
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: pessoas_quilombolas
+        description: Pessoas quilombolas residentes em territórios quilombolas
+      - name: populacao_residente
+        description: Pessoas residentes em territórios quilombolas
+  - name: br_ibge_censo_2022__quilombolas_indice_envelhecimento_territorio_quilombola
+    description: Tabela 9767 - Índice de envelhecimento, idade mediana e razão de
+      sexo da população residente em territórios quilombolas, total e quilombola,
+      segundo os Territórios Quilombolas
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_territorio_quilombola]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_territorio_quilombola
+        description: ID do Território Quilombola
+      - name: territorio_quilombola
+        description: Nome do Território Quilombola
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: indice_envelhecimento
+        description: Índice de envelhecimento da população residente em territórios
+          quilombolas
+      - name: idade_mediana
+        description: Idade mediana da população residente em territórios quilombolas
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 120
+              where: idade_mediana is not null
+      - name: razao_sexo
+        description: Razão de sexo da população residente em territórios quilombolas
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'
+              where: razao_sexo is not null
+      - name: indice_envelhecimento_populacao_quilombola
+        description: Índice de envelhecimento da população quilombola residente em
+          territórios quilombolas
+      - name: idade_mediana_populacao_quilombola
+        description: Idade mediana da população quilombola residente em territórios
+          quilombolas
+      - name: razao_sexo_quilombola
+        description: Razão de sexo da população quilombola residente em territórios
+          quilombolas
+  - name: br_ibge_censo_2022__indigenas_localizacao_docimicilio_grupo_idade_municipio
+    description: Tabela 8175 - População indígena, por localização do domicílio, grupos
+      de idade e sexo
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id
+      - name: localizacao_domicilio
+        description: Localização do Domicílio
+      - name: idade_anos
+        description: Idade
+      - name: grupo_idade
+        description: Grupo de Idade
+      - name: sexo
+        description: Sexo
+      - name: pessoas
+        description: Pessoas Indígenas
+  - name: br_ibge_censo_2022__indigenas_indice_envelhecimento_localizacao_domicilio_municipio
+    description: Tabela 8177 - Índice de envelhecimento, idade mediana e razão de
+      sexo da população indígena, segundo localização do domicílio e quesito de declaração
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_municipio
+            - localizacao_domicilio
+            - quesito_declaracao_indigena
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_municipio
+        description: ID Município IBGE 7 dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: localizacao_domicilio
+        description: Localização do Domicílio
+      - name: quesito_declaracao_indigena
+        description: Quesito de declaração indígena
+      - name: indice_envelhecimento
+        description: Índice de envelhecimento da população indígena
+      - name: idade_mediana
+        description: Idade mediana da população indígena
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 120
+              where: idade_mediana is not null
+      - name: razao_sexo
+        description: Razão de sexo da população indígena
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'
+              where: razao_sexo is not null
+  - name: br_ibge_censo_2022__indigenas_populacao_residente_grupo_idade_terras_indigenas
+    description: Tabela 9764 - População residente em terras indígenas, total e indígenas,
+      por grupos de idade, sexo e quesito de declaração indígena, segundo as Terras
+      Indígenas
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_terra_indigena
+            - quesito_declaracao_indigena
+            - sexo
+            - idade_anos
+            - ano
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_terra_indigena
+        description: ID da Terra Indígena
+      - name: terra_indigena
+        description: Nome Terra Indígena
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: quesito_declaracao_indigena
+        description: Quesito declaração indígena
+      - name: sexo
+        description: Sexo
+      - name: idade_anos
+        description: Idade
+      - name: grupo_idade
+        description: Grupo de idade
+      - name: pessoas_indigenas
+        description: Pessoas indígenas residentes em terras indígenas
+      - name: populacao_residente
+        description: Pessoas residentes em terras indígenas
+  - name: br_ibge_censo_2022__indigenas_indice_envelhecimento_terras_indigenas
+    description: Tabela 9766 - Índice de envelhecimento, idade mediana e razão de
+      sexo da população residente em terras indígenas, total e indígenas, segundo
+      quesito de declaração e as Terras Indígenas
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - id_terra_indigena
+            - terra_indigena
+            - sigla_uf
+            - quesito_declaracao_indigena
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+      - name: id_terra_indigena
+        description: ID da Terra Indígena
+      - name: terra_indigena
+        description: Nome da Terra Indígena
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: quesito_declaracao_indigena
+        description: Quesito declaração indígena
+      - name: indice_envelhecimento
+        description: Índice de envelhecimento da população residente em terras indígenas
+      - name: idade_mediana
+        description: Idade mediana da população residente em terras indígenas
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 120
+              where: idade_mediana is not null
+      - name: razao_sexo
+        description: Razão de sexo da população residente em terras indígenas
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 1'
+              where: razao_sexo is not null
+      - name: indice_envelhecimento_populacao_indigena
+        description: Índice de envelhecimento da população indígena residente em terras
+          indígenas
+      - name: idade_mediana_populacao_indigena
+        description: Idade mediana da população indígena residente em terras indígenas
+      - name: razao_sexo_populacao_indigena
+        description: Razão de sexo da população indígena residente em terras indígenas

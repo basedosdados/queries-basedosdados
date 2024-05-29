@@ -1,6 +1,32 @@
 ---
 version: 2
 models:
+  - name: br_bd_diretorios_brasil__cbo_2002
+    description: Diretório da Classificação Brasileira de Ocupações 2002.
+    columns:
+      - name: cbo_2002
+        description: Classificação Brasileira de Ocupações 2002
+      - name: descricao
+        description: Descrição da CBO2002
+      - name: familia
+        description: Família
+      - name: descricao_familia
+        description: Descrição da Família
+      - name: subgrupo
+        description: Subgrupo
+      - name: descricao_subgrupo
+        description: Descrição do Subgrupo
+      - name: subgrupo_principal
+        description: Subgrupo Principal
+      - name: descricao_subgrupo_principal
+        description: Descrição do Subgrupo Principal
+      - name: grande_grupo
+        description: Grande Grupo
+      - name: descricao_grande_grupo
+        description: Descrição do Grande Grupo
+      - name: indicador_cbo_2002_ativa
+        description: Indica se o código de 6 dígitos da CBO de 2002 permanece ativo
+          ou não
   - name: br_bd_diretorios_brasil__empresa
     description: A tabela apresenta informações do Cadastro Nacional da Pessoa Jurídica
       (CNPJ), que é um banco de dados administrado pela Secretaria Especial da Receita
@@ -308,3 +334,24 @@ models:
         description: ID da Concentração Urbana
       - name: nome_concentracao_urbana
         description: Nome da Concentração Urbana
+  - name: br_bd_diretorios_brasil__cid_10
+    description: Diretório da Classificação Internacional de Doenças (CID) 10.
+    columns:
+      - name: subcategoria
+        description: Subcategoria da CID-10
+      - name: descricao_subcategoria
+        description: Descrição da Subcategoria da CID-10
+      - name: categoria
+        description: Categoria da CID-10
+      - name: descricao_categoria
+        description: Descrição da Categoria da CID-10
+      - name: capitulo
+        description: Capítulo da CID-10
+      - name: descricao_capitulo
+        description: Descrição do Capítulo da CID-10
+      - name: causa_violencia
+        description: Causa - Violência
+      - name: causa_overdose
+        description: Causa - Overdose
+      - name: cid_datasus
+        description: Indica se a origem do CID-10 vem do DATASUS

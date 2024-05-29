@@ -6,11 +6,7 @@ models:
       e valor da produção das lavouras temporárias
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - sigla_uf
-            - id_municipio
-            - produto
+          combination_of_columns: [ano, sigla_uf, id_municipio, produto]
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
@@ -49,11 +45,7 @@ models:
       médio e valor da produção das lavouras permanentes
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - sigla_uf
-            - id_municipio
-            - produto
+          combination_of_columns: [ano, sigla_uf, id_municipio, produto]
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:

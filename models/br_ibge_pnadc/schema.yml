@@ -1869,19 +1869,6 @@ models:
       - name: V1032200
         description: Peso replicado do domicílio e das pessoas (Peso anual de 1ª visita
           com correção de não entrevista com calibração pela projeção de população)
-  - name: br_ibge_pnadc__dicionario
-    description: Dicionário
-    columns:
-      - name: id_tabela
-        description: ID Tabela
-      - name: nome_coluna
-        description: Nome da coluna
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura temporal
-      - name: valor
-        description: Valor
   - name: br_ibge_pnadc__educacao
     description: Microdados da Pesquisa Suplementar Anual referentes a educação
     tests:
@@ -3493,3 +3480,27 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.01
+  - name: br_ibge_pnadc__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_ibge_pnadc. Para
+      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor

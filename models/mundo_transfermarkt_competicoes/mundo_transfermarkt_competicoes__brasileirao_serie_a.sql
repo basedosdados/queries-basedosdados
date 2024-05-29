@@ -6,7 +6,7 @@
         partition_by={
             "field": "ano_campeonato",
             "data_type": "int64",
-            "range": {"start": 2003, "end": 2023, "interval": 1},
+            "range": {"start": 2003, "end": 2024, "interval": 1},
         },
         labels={"tema": "esporte"},
         post_hook=[
@@ -29,14 +29,44 @@ select
     safe_cast(tecnico_vis as string) tecnico_visitante,
     safe_cast(replace (colocacao_man, ".0", "") as int64) colocacao_mandante,
     safe_cast(replace (colocacao_vis, ".0", "") as int64) colocacao_visitante,
-    safe_cast(
-        replace (valor_equipe_titular_man, ".0", "") as int64
-    ) valor_equipe_titular_mandante,
-    safe_cast(
-        replace (valor_equipe_titular_vis, ".0", "") as int64
-    ) valor_equipe_titular_visitante,
-    safe_cast(idade_media_titular_man as float64) idade_media_titular_mandante,
-    safe_cast(idade_media_titular_vis as float64) idade_media_titular_visitante,
+    case
+        when instr(valor_equipe_titular_man, 'm') > 0
+        then safe_cast(regexp_replace(valor_equipe_titular_man, '[^0-9]', '') as int64)
+        else safe_cast(replace (valor_equipe_titular_man, ".0", "") as int64)
+    end as valor_equipe_titular_mandante,
+    case
+        when instr(valor_equipe_titular_vis, 'm') > 0
+        then safe_cast(regexp_replace(valor_equipe_titular_vis, '[^0-9]', '') as int64)
+        else safe_cast(replace (valor_equipe_titular_vis, ".0", "") as int64)
+    end as valor_equipe_titular_visitante,
+    case
+        when instr(idade_media_titular_man, '.') = 0
+        then
+            safe_cast(
+                concat(
+                    substr(
+                        idade_media_titular_man, 1, length(idade_media_titular_man) - 1
+                    ),
+                    '.',
+                    substr(idade_media_titular_man, -1)
+                ) as float64
+            )
+        else safe_cast(idade_media_titular_man as float64)
+    end as idade_media_titular_mandante,
+    case
+        when instr(idade_media_titular_vis, '.') = 0
+        then
+            safe_cast(
+                concat(
+                    substr(
+                        idade_media_titular_vis, 1, length(idade_media_titular_vis) - 1
+                    ),
+                    '.',
+                    substr(idade_media_titular_vis, -1)
+                ) as float64
+            )
+        else safe_cast(idade_media_titular_vis as float64)
+    end as idade_media_titular_visitante,
     safe_cast(replace (gols_man, ".0", "") as int64) gols_mandante,
     safe_cast(replace (gols_vis, ".0", "") as int64) gols_visitante,
     safe_cast(replace (gols_1_tempo_man, ".0", "") as int64) gols_1_tempo_mandante,
@@ -60,5 +90,6 @@ select
     safe_cast(replace (chutes_fora_man, ".0", "") as int64) chutes_fora_mandante,
     safe_cast(replace (chutes_fora_vis, ".0", "") as int64) chutes_fora_visitante
 from
-    `basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a` t
+    `basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a`
+    as t
 where data is not null

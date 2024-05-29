@@ -10,8 +10,8 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
         ],
     )
 }}
@@ -48,7 +48,7 @@ select
     cast(substr(cmpt_ini, 5, 2) as int64) as mes_competencia_inicial,
     cast(substr(cmpt_fim, 1, 4) as int64) as ano_competencia_final,
     cast(substr(cmpt_fim, 5, 2) as int64) as mes_competencia_final,
-    safe_cast(sgruphab as string) tipo_habilitacao,
+    ltrim(safe_cast(sgruphab as string), '0') as tipo_habilitacao,
     safe_cast(portaria as string) portaria,
     cast(
         concat(

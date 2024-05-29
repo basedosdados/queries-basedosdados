@@ -137,7 +137,18 @@ models:
       - name: data_situacao_especial
         description: Data da Situação Especial
   - name: br_me_cnpj__dicionario
-    description: Dicionário
+    description: Dicionário para tradução dos códigos do conjunto br_me_cnpj. Para
+      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: id_tabela
         description: ID Tabela
@@ -146,6 +157,6 @@ models:
       - name: chave
         description: Chave
       - name: cobertura_temporal
-        description: Cobertura temporal
+        description: Cobertura Temporal
       - name: valor
         description: Valor

@@ -1,8 +1,9 @@
 import argparse
+import os
 
 def check_sql_files(file):
     found_staging = False
-    if file.endswith(".sql"):
+    if os.path.exists(file) and file.endswith(".sql"):
         with open(file, "r") as f:
             lines = f.readlines()
             for line in lines:
@@ -20,4 +21,4 @@ if __name__ == "__main__":
     if check_sql_files(args.file):
         exit(1)
     else:
-        print("No occurrences of 'basedosdados-dev' found in SQL files.")
+        print("No occurrences of 'basedosdados-staging' found in SQL files.")

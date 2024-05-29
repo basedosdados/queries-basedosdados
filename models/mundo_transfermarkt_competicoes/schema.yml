@@ -18,14 +18,13 @@ models:
       \ https://www.transfermarkt.com/campeonato-brasileiro-serie-a/startseite/wettbewerb/BRA1"
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.20     
+          at_least: 0.20
     columns:
       - name: ano_campeonato
-        description: Ano do campeonato    
+        description: Ano do campeonato
       - name: data
         description: Data da partida
-        tests:
-          - not_null             
+        tests: [not_null]
       - name: rodada
         description: Rodada
       - name: estadio
@@ -38,12 +37,10 @@ models:
         description: Público máximo
       - name: time_mandante
         description: Time mandante
-        tests:
-          - not_null           
+        tests: [not_null]
       - name: time_visitante
         description: Time visitante
-        tests:
-          - not_null           
+        tests: [not_null]
       - name: tecnico_mandante
         description: Técnico do time mandante
       - name: tecnico_visitante
@@ -56,12 +53,12 @@ models:
         description: Valor da equipe titular do time mandante
         tests:
           - dbt_utils.expression_is_true:
-              expression: '>= 1'              
+              expression: '>= 1'
       - name: valor_equipe_titular_visitante
         description: Valor da equipe titular do time visitante
         tests:
           - dbt_utils.expression_is_true:
-              expression: '>= 1'              
+              expression: '>= 1'
       - name: idade_media_titular_mandante
         description: Idade média da equipe titular do time mandante
         tests:
@@ -73,19 +70,19 @@ models:
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 80              
+              max_value: 80
       - name: gols_mandante
         description: Gols do time mandante
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 20         
+              max_value: 20
       - name: gols_visitante
         description: Gols do time visitante
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 20         
+              max_value: 20
       - name: gols_1_tempo_mandante
         description: Gols no primeiro tempo do time mandante
       - name: gols_1_tempo_visitante
@@ -127,14 +124,13 @@ models:
       variável da fonte de dados.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.10       
+          at_least: 0.10
     columns:
       - name: ano_campeonato
-        description: Ano do campeonato     
+        description: Ano do campeonato
       - name: data
         description: Data da partida
-        tests:
-          - not_null           
+        tests: [not_null]
       - name: horario
         description: Horário da partida
       - name: fase
@@ -151,12 +147,10 @@ models:
         description: Público máximo
       - name: time_mandante
         description: Time mandante
-        tests:
-          - not_null           
+        tests: [not_null]
       - name: time_visitante
         description: Time visitante
-        tests:
-          - not_null           
+        tests: [not_null]
       - name: tecnico_mandante
         description: Técnico do time mandante
       - name: tecnico_visitante
@@ -165,36 +159,36 @@ models:
         description: Valor da equipe titular do time mandante
         tests:
           - dbt_utils.expression_is_true:
-              expression: '>= 1'              
+              expression: '>= 1'
       - name: valor_equipe_titular_visitante
         description: Valor da equipe titular do time visitante
         tests:
           - dbt_utils.expression_is_true:
-              expression: '>= 1'              
+              expression: '>= 1'
       - name: idade_media_titular_mandante
         description: Idade média da equipe titular do time mandante
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 80           
+              max_value: 80
       - name: idade_media_titular_visitante
         description: Idade média da equipe titular do time visitante
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 80           
+              max_value: 80
       - name: gols_mandante
         description: Gols do time mandante
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 20            
+              max_value: 20
       - name: gols_visitante
         description: Gols do time visitante
         tests:
           - dbt_utils.accepted_range:
               min_value: 0
-              max_value: 20            
+              max_value: 20
       - name: gols_1_tempo_mandante
         description: Gols no primeiro tempo do time mandante
       - name: gols_1_tempo_visitante
