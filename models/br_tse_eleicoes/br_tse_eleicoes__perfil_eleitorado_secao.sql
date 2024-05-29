@@ -16,36 +16,20 @@
     )
 }}
 
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
-SAFE_CAST(situacao_biometria AS STRING) situacao_biometria,
-SAFE_CAST(zona AS STRING) zona,
-SAFE_CAST(secao AS STRING) secao,
-SAFE_CAST(genero AS STRING) genero,
-SAFE_CAST(estado_civil AS STRING) estado_civil,
-SAFE_CAST(grupo_idade AS STRING) grupo_idade,
-SAFE_CAST(instrucao AS STRING) instrucao,
-SAFE_CAST(eleitores AS STRING) eleitores,
-SAFE_CAST(eleitores_biometria AS STRING) eleitores_biometria,
-SAFE_CAST(eleitores_deficiencia AS STRING) eleitores_deficiencia,
-SAFE_CAST(eleitores_inclusao_nome_social AS STRING) eleitores_inclusao_nome_social
-FROM basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_secao AS t
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_municipio_tse as string) id_municipio_tse,
+    safe_cast(situacao_biometria as string) situacao_biometria,
+    safe_cast(zona as string) zona,
+    safe_cast(secao as string) secao,
+    safe_cast(genero as string) genero,
+    safe_cast(estado_civil as string) estado_civil,
+    safe_cast(grupo_idade as string) grupo_idade,
+    safe_cast(instrucao as string) instrucao,
+    safe_cast(eleitores as string) eleitores,
+    safe_cast(eleitores_biometria as string) eleitores_biometria,
+    safe_cast(eleitores_deficiencia as string) eleitores_deficiencia,
+    safe_cast(eleitores_inclusao_nome_social as string) eleitores_inclusao_nome_social
+from `basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_secao` as t

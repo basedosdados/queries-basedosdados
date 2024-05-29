@@ -16,41 +16,24 @@
     )
 }}
 
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(turno AS INT64) turno,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(numero AS STRING) numero,
-SAFE_CAST(sigla AS STRING) sigla,
-SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(tipo_agremiacao AS STRING) tipo_agremiacao,
-SAFE_CAST(sequencial_coligacao AS STRING) sequencial_coligacao,
-SAFE_CAST(nome_coligacao AS STRING) nome_coligacao,
-SAFE_CAST(composicao_coligacao AS STRING) composicao_coligacao,
-SAFE_CAST(numero_federacao AS STRING) numero_federacao,
-SAFE_CAST(nome_federacacao AS STRING) nome_federacacao,
-SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
-SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
-SAFE_CAST(situacao_legenda AS STRING) situacao_legenda
-FROM basedosdados-staging.br_tse_eleicoes_staging.partidos AS t
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(turno as int64) turno,
+    safe_cast(tipo_eleicao as string) tipo_eleicao,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_municipio_tse as string) id_municipio_tse,
+    safe_cast(cargo as string) cargo,
+    safe_cast(numero as string) numero,
+    safe_cast(sigla as string) sigla,
+    safe_cast(nome as string) nome,
+    safe_cast(tipo_agremiacao as string) tipo_agremiacao,
+    safe_cast(sequencial_coligacao as string) sequencial_coligacao,
+    safe_cast(nome_coligacao as string) nome_coligacao,
+    safe_cast(composicao_coligacao as string) composicao_coligacao,
+    safe_cast(numero_federacao as string) numero_federacao,
+    safe_cast(nome_federacacao as string) nome_federacacao,
+    safe_cast(sigla_federacao as string) sigla_federacao,
+    safe_cast(composicao_federacao as string) composicao_federacao,
+    safe_cast(situacao_legenda as string) situacao_legenda
+from `basedosdados-staging.br_tse_eleicoes_staging.partidos` as t

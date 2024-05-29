@@ -3,9 +3,16 @@ version: 2
 models:
   - name: br_tse_eleicoes__bens_candidato
     description: Declaração de bens de candidatos em eleições brasileiras.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: descricao_item
         description: Descrição do Item
       - name: id_candidato_bd
@@ -24,9 +31,18 @@ models:
         description: Valor do Item
   - name: br_tse_eleicoes__candidatos
     description: Dados de candidatos em eleições brasileiras.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, sigla_uf, id_municipio_tse, sequencial, numero, cpf, id_candidato_bd]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: cpf
@@ -93,9 +109,16 @@ models:
         description: Título eleitoral
   - name: br_tse_eleicoes__despesas_candidato
     description: Dados de despesas em campanhas eleitorais a nível de despesa.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: cargo_fornecedor
@@ -190,11 +213,20 @@ models:
   - name: br_tse_eleicoes__detalhes_votacao_municipio
     description: Dados de detalhes das votações em eleições brasileiras a nível de
       município.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, cargo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: abstencoes
         description: Número de Abstenções
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: aptos
         description: Número de eleitores aptos
       - name: aptos_totalizadas
@@ -229,6 +261,8 @@ models:
         description: Turno
       - name: votos_brancos
         description: Número de votos brancos
+      - name: votos_nominais
+        description: Número de votos nominais
       - name: votos_legenda
         description: Número de votos em coligações
       - name: votos_nulos
@@ -238,11 +272,20 @@ models:
   - name: br_tse_eleicoes__detalhes_votacao_municipio_zona
     description: Dados de detalhes das votações em eleições brasileiras a nível de
       zona eleitoral.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, cargo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: abstencoes
         description: Número de Abstenções
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: aptos
         description: Número de eleitores aptos
       - name: aptos_totalizadas
@@ -279,6 +322,8 @@ models:
         description: Número de votos brancos
       - name: votos_legenda
         description: Número de votos em coligações
+      - name: votos_nominais
+        description: Número de votos nominais
       - name: votos_nulos
         description: Número de votos nulos
       - name: votos_validos
@@ -288,11 +333,20 @@ models:
   - name: br_tse_eleicoes__detalhes_votacao_secao
     description: Dados de detalhes de votação em eleições brasileiras a nível de seção
       eleitoral.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, secao, cargo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: abstencoes
         description: Número de abstenções
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: aptos
         description: Número de eleitores aptos
       - name: cargo
@@ -339,9 +393,18 @@ models:
     description: 'Dados de partidos em eleições brasileiras a nível de partido. ATENÇÃO:
       a coluna `sequencial_coligacao` identifica as linhas, mas fora isso há duplicadas
       por questões de erro do TSE.'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, sigla_uf, id_municipio_tse, cargo, numero]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: composicao_coligacao
@@ -380,13 +443,22 @@ models:
         description: Turno
   - name: br_tse_eleicoes__perfil_eleitorado_local_votacao
     description: Perfil eleitorado a nível de local de votação.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: bairro
         description: Bairro
       - name: cep
         description: CEP
+      - name: eleitores_secao
+        description: Quantidade de eleitores na seção
       - name: endereco
         description: Endereço
       - name: id_municipio
@@ -401,10 +473,6 @@ models:
         description: Nome
       - name: numero
         description: Número
-      - name: quantidade_eleitores
-        description: Quantidade de eleitores
-      - name: quantidade_eleitores_eleicao
-        description: Quantidade de eleitores na eleição
       - name: secao
         description: Seção eleitoral
       - name: sigla_uf
@@ -431,9 +499,18 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__perfil_eleitorado_municipio_zona
     description: Dados de perfil do eleitorado a nível de zona eleitoral.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio_tse, zona, estado_civil, genero, grupo_idade, instrucao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: eleitores
         description: Número de eleitores
       - name: eleitores_biometria
@@ -460,9 +537,18 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__perfil_eleitorado_secao
     description: Perfil eleitorado a nível de seção eleitoral.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_municipio_tse, zona, secao, estado_civil, genero, grupo_idade, instrucao]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: eleitores
         description: Número de eleitores
       - name: eleitores_biometria
@@ -493,9 +579,16 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__receitas_candidato
     description: Dados de financiamento de campanha de receita para candidatos.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: cargo_candidato_doador
@@ -612,9 +705,16 @@ models:
         description: Valor da receita
   - name: br_tse_eleicoes__receitas_comite
     description: Receitas de comitês eleitorais
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cnae_2_doador
         description: CNAE 2 do Doador
       - name: cnpj_prestador_contas
@@ -685,9 +785,16 @@ models:
         description: Valor da receita
   - name: br_tse_eleicoes__receitas_orgao_partidario
     description: Receitas de Órgãos Partidários
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo_candidato_doador
         description: Cargo do candidato doador
       - name: cnae_2_doador
@@ -786,9 +893,18 @@ models:
         description: Valor da receita
   - name: br_tse_eleicoes__resultados_candidato
     description: Dados de resultados eleitorais a nível de candidato.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, sigla_uf, id_municipio_tse, cargo, sequencial_candidato, numero_candidato, nome_candidato]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_candidato_bd
@@ -819,9 +935,18 @@ models:
         description: Número de votos
   - name: br_tse_eleicoes__resultados_candidato_municipio
     description: Dados de votação em eleições brasileiras a nível candidato-município.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, sequencial_candidato, numero_candidato]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_candidato_bd
@@ -850,9 +975,18 @@ models:
         description: Número de votos
   - name: br_tse_eleicoes__resultados_candidato_municipio_zona
     description: Dados de votação em eleições brasileiras a nível candidato-município-zona.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, sequencial_candidato, numero_candidato]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_candidato_bd
@@ -883,9 +1017,18 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_candidato_secao
     description: Dados de resultados eleitorais a nível de candidato-seção.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, secao, sequencial_candidato, numero_candidato]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_candidato_bd
@@ -916,9 +1059,18 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_partido_municipio
     description: Dados de resultados em eleições brasileiras a nível de partido-município.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, cargo, numero_partido]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_municipio
@@ -935,15 +1087,24 @@ models:
         description: Tipo da eleição
       - name: turno
         description: Turno
-      - name: votos_nao_nominais
-        description: Número de votos não-nominais
+      - name: votos_legenda
+        description: Número de votos na legenda
       - name: votos_nominais
         description: Número de votos nominais
   - name: br_tse_eleicoes__resultados_partido_municipio_zona
     description: Dados de resultados em eleições brasileiras a nível de partido-zona.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, cargo, numero_partido]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_municipio
@@ -960,17 +1121,26 @@ models:
         description: Tipo da eleição
       - name: turno
         description: Turno
-      - name: votos_nao_nominais
-        description: Número de votos não-nominais
+      - name: votos_legenda
+        description: Número de votos na legenda
       - name: votos_nominais
         description: Número de votos nominais
       - name: zona
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_partido_secao
     description: Dados de resultados em eleições brasileiras a nível de partido-seção.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, secao, cargo, numero_partido]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_municipio
@@ -989,17 +1159,26 @@ models:
         description: Tipo da eleição
       - name: turno
         description: Turno
-      - name: votos_nao_nominais
-        description: Número de votos não-nominais
+      - name: votos_legenda
+        description: Número de votos na legenda
       - name: votos_nominais
         description: Número de votos nominais
       - name: zona
         description: Zona eleitoral
   - name: br_tse_eleicoes__vagas
     description: Número de vagas em disputa na eleição por município-cargo.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, tipo_eleicao, sigla_uf, id_municipio_tse, cargo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: cargo
         description: Cargo
       - name: id_municipio
@@ -1020,3 +1199,21 @@ models:
         description: Tipo da eleição
       - name: vagas
         description: Número de vagas
+  - name: br_tse_eleicoes__dicionario
+    description: Dicionário
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [id_tabela, nome_coluna, chave, cobertura_temporal]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura temporal
+      - name: valor
+        description: Valor

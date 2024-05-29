@@ -16,12 +16,12 @@
     )
 }}
 
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(vagas AS INT64) vagas
-FROM basedosdados-staging.br_tse_eleicoes_staging.vagas AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(tipo_eleicao as string) tipo_eleicao,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_municipio_tse as string) id_municipio_tse,
+    safe_cast(cargo as string) cargo,
+    safe_cast(vagas as int64) vagas
+from `basedosdados-staging.br_tse_eleicoes_staging.vagas` as t

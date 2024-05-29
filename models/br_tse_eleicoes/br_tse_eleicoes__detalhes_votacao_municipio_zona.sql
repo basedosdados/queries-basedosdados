@@ -7,7 +7,7 @@
             "field": "ano",
             "data_type": "int64",
             "range": {
-                "start": 1998,
+                "start": 1994,
                 "end": 2022,
                 "interval": 2
             }
@@ -16,28 +16,29 @@
     )
 }}
 
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(turno AS INT64) turno,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
-SAFE_CAST(zona AS STRING) zona,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(aptos AS INT64) aptos,
-SAFE_CAST(secoes AS INT64) secoes,
-SAFE_CAST(secoes_agregadas AS INT64) secoes_agregadas,
-SAFE_CAST(aptos_totalizadas AS INT64) aptos_totalizadas,
-SAFE_CAST(secoes_totalizadas AS INT64) secoes_totalizadas,
-SAFE_CAST(comparecimento AS INT64) comparecimento,
-SAFE_CAST(abstencoes AS INT64) abstencoes,
-SAFE_CAST(votos_validos AS INT64) votos_validos,
-SAFE_CAST(votos_brancos AS INT64) votos_brancos,
-SAFE_CAST(votos_nulos AS INT64) votos_nulos,
-SAFE_CAST(votos_legenda AS INT64) votos_legenda,
-SAFE_CAST(proporcao_comparecimento AS FLOAT64) proporcao_comparecimento,
-SAFE_CAST(proporcao_votos_validos AS FLOAT64) proporcao_votos_validos,
-SAFE_CAST(proporcao_votos_brancos AS FLOAT64) proporcao_votos_brancos,
-SAFE_CAST(proporcao_votos_nulos AS FLOAT64) proporcao_votos_nulos
-FROM basedosdados-staging.br_tse_eleicoes_staging.detalhes_votacao_municipio_zona AS t
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(turno as int64) turno,
+    safe_cast(tipo_eleicao as string) tipo_eleicao,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_municipio_tse as string) id_municipio_tse,
+    safe_cast(zona as string) zona,
+    safe_cast(cargo as string) cargo,
+    safe_cast(aptos as int64) aptos,
+    safe_cast(secoes as int64) secoes,
+    safe_cast(secoes_agregadas as int64) secoes_agregadas,
+    safe_cast(aptos_totalizadas as int64) aptos_totalizadas,
+    safe_cast(secoes_totalizadas as int64) secoes_totalizadas,
+    safe_cast(comparecimento as int64) comparecimento,
+    safe_cast(abstencoes as int64) abstencoes,
+    safe_cast(votos_validos as int64) votos_validos,
+    safe_cast(votos_brancos as int64) votos_brancos,
+    safe_cast(votos_nulos as int64) votos_nulos,
+    safe_cast(votos_nominais as int64) votos_nominais,
+    safe_cast(votos_legenda as int64) votos_legenda,
+    safe_cast(proporcao_comparecimento as float64) proporcao_comparecimento,
+    safe_cast(proporcao_votos_validos as float64) proporcao_votos_validos,
+    safe_cast(proporcao_votos_brancos as float64) proporcao_votos_brancos,
+    safe_cast(proporcao_votos_nulos as float64) proporcao_votos_nulos
+from `basedosdados-staging.br_tse_eleicoes_staging.detalhes_votacao_municipio_zona` as t

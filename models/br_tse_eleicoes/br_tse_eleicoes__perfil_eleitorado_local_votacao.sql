@@ -16,45 +16,28 @@
     )
 }}
 
-SELECT
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(turno AS INT64) turno,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
-SAFE_CAST(zona AS STRING) zona,
-SAFE_CAST(secao AS STRING) secao,
-SAFE_CAST(tipo_secao_agregada AS STRING) tipo_secao_agregada ,
-SAFE_CAST(numero AS STRING) numero,
-SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(tipo AS STRING) tipo,
-SAFE_CAST(endereco AS STRING) endereco,
-SAFE_CAST(bairro AS STRING) bairro,
-SAFE_CAST(cep AS STRING) cep,
-SAFE_CAST(telefone AS STRING) telefone,
-SAFE_CAST(latitude AS FLOAT64) latitude,
-SAFE_CAST(longitude AS FLOAT64) longitude,
-SAFE_CAST(situacao AS STRING) situacao,
-SAFE_CAST(situacao_zona AS STRING) situacao_zona,
-SAFE_CAST(situacao_secao AS STRING) situacao_secao,
-SAFE_CAST(situacao_localidade AS STRING) situacao_localidade,
-SAFE_CAST(situacao_secao_acessibilidade AS STRING) situacao_secao_acessibilidade,
-SAFE_CAST(quantidade_eleitores AS INT64) quantidade_eleitores,
-SAFE_CAST(quantidade_eleitores_eleicao AS INT64) quantidade_eleitores_eleicao,
-FROM basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_local_votacao AS t
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+select
+    safe_cast(ano as int64) ano,
+    safe_cast(turno as int64) turno,
+    safe_cast(sigla_uf as string) sigla_uf,
+    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(id_municipio_tse as string) id_municipio_tse,
+    safe_cast(zona as string) zona,
+    safe_cast(secao as string) secao,
+    safe_cast(tipo_secao_agregada as string) tipo_secao_agregada,
+    safe_cast(numero as string) numero,
+    safe_cast(nome as string) nome,
+    safe_cast(tipo as string) tipo,
+    safe_cast(endereco as string) endereco,
+    safe_cast(bairro as string) bairro,
+    safe_cast(cep as string) cep,
+    safe_cast(telefone as string) telefone,
+    safe_cast(latitude as float64) latitude,
+    safe_cast(longitude as float64) longitude,
+    safe_cast(situacao as string) situacao,
+    safe_cast(situacao_zona as string) situacao_zona,
+    safe_cast(situacao_secao as string) situacao_secao,
+    safe_cast(situacao_localidade as string) situacao_localidade,
+    safe_cast(situacao_secao_acessibilidade as string) situacao_secao_acessibilidade,
+    safe_cast(eleitores_secao as int64) eleitores_secao,
+from `basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_local_votacao` as t
