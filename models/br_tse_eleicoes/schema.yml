@@ -5,7 +5,7 @@ models:
     description: Declaração de bens de candidatos em eleições brasileiras.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -23,6 +23,10 @@ models:
         description: Sequencial do Candidato
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: tipo_eleicao
         description: Tipo da Eleição
       - name: tipo_item
@@ -35,7 +39,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, sigla_uf, id_municipio_tse, sequencial, numero, cpf, id_candidato_bd]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -49,6 +53,10 @@ models:
         description: CPF
       - name: data_nascimento
         description: Data de nascimento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: email
         description: Email
       - name: estado_civil
@@ -111,7 +119,7 @@ models:
     description: Dados de despesas em campanhas eleitorais a nível de despesa.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -125,6 +133,10 @@ models:
         description: Cargo do fornecedor
       - name: cnae_2_fornecedor
         description: Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: cnae_2.cnae_2
       - name: cnpj_candidato
         description: CNPJ do candidato
       - name: cnpj_prestador_contas
@@ -217,7 +229,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, cargo]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: abstencoes
         description: Número de Abstenções
@@ -276,7 +288,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, cargo]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: abstencoes
         description: Número de Abstenções
@@ -337,7 +349,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, secao, cargo]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: abstencoes
         description: Número de abstenções
@@ -397,7 +409,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, sigla_uf, id_municipio_tse, cargo, numero]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -445,7 +457,7 @@ models:
     description: Perfil eleitorado a nível de local de votação.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -503,7 +515,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio_tse, zona, estado_civil, genero, grupo_idade, instrucao]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -541,7 +553,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, id_municipio_tse, zona, secao, estado_civil, genero, grupo_idade, instrucao]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -581,7 +593,7 @@ models:
     description: Dados de financiamento de campanha de receita para candidatos.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -595,6 +607,10 @@ models:
         description: Cargo do candidato doador
       - name: cnae_2_doador
         description: Classificação Nacional de Atividades Econômicas 2.0 do doador
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: cnae_2.cnae_2
       - name: cnpj_candidato
         description: CNPJ do candidato
       - name: cnpj_prestador_contas
@@ -613,6 +629,10 @@ models:
         description: Data de prestação de contas
       - name: data_receita
         description: Data da receita
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do doador
@@ -707,7 +727,7 @@ models:
     description: Receitas de comitês eleitorais
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -717,6 +737,10 @@ models:
               field: ano.ano
       - name: cnae_2_doador
         description: CNAE 2 do Doador
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: cnae_2.cnae_2
       - name: cnpj_prestador_contas
         description: CNPJ do prestador de contas
       - name: cpf_cnpj_doador
@@ -727,6 +751,10 @@ models:
         description: CPF do membro
       - name: data_receita
         description: Data da receita
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do doador
@@ -787,7 +815,7 @@ models:
     description: Receitas de Órgãos Partidários
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -799,6 +827,10 @@ models:
         description: Cargo do candidato doador
       - name: cnae_2_doador
         description: Classificação Nacional de Atividades Econômicas 2.0 do doador
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: cnae_2.cnae_2
       - name: cnpj_prestador_contas
         description: CNPJ do prestador de contas
       - name: cpf_cnpj_doador
@@ -809,6 +841,10 @@ models:
         description: Data de prestação de contas
       - name: data_receita
         description: Data da receita
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do doador
@@ -897,7 +933,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, sigla_uf, id_municipio_tse, cargo, sequencial_candidato, numero_candidato, nome_candidato]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -939,7 +975,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, sequencial_candidato, numero_candidato]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -979,7 +1015,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, sequencial_candidato, numero_candidato]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1021,7 +1057,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, secao, sequencial_candidato, numero_candidato]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1063,7 +1099,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, cargo, numero_partido]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1097,7 +1133,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, cargo, numero_partido]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1133,7 +1169,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, turno, tipo_eleicao, id_municipio_tse, zona, secao, cargo, numero_partido]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1171,7 +1207,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, tipo_eleicao, sigla_uf, id_municipio_tse, cargo]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1205,7 +1241,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [id_tabela, nome_coluna, chave, cobertura_temporal]
       - not_null_proportion_multiple_columns:
-          at_least: 0.05
+          at_least: 0.95
     columns:
       - name: id_tabela
         description: ID Tabela
