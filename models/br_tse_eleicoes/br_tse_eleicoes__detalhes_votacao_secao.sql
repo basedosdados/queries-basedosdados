@@ -28,7 +28,7 @@ select
     safe_cast(votos_nominais as int64) votos_nominais,
     safe_cast(votos_brancos as int64) votos_brancos,
     safe_cast(votos_nulos as int64) votos_nulos,
-    safe_cast(votos_coligacao as int64) votos_coligacao,
+    safe_cast(votos_legenda as int64) votos_legenda,
     safe_cast(votos_nulos_apu_sep as int64) votos_nulos_apu_sep,
     safe_cast(votos_pendentes as int64) votos_pendentes,
     safe_cast(proporcao_comparecimento as float64) proporcao_comparecimento,
