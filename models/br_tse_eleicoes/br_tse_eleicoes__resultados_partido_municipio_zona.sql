@@ -1,16 +1,12 @@
 {{
     config(
-        schema='br_tse_eleicoes',
-        alias = 'resultados_partido_municipio_zona',
-        materialized='table',
+        schema="br_tse_eleicoes",
+        alias="resultados_partido_municipio_zona",
+        materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {
-                "start": 1994,
-                "end": 2022,
-                "interval": 2
-            }
+            "range": {"start": 1994, "end": 2022, "interval": 2},
         },
         cluster_by=["sigla_uf"],
     )
@@ -29,4 +25,6 @@ select
     safe_cast(sigla_partido as string) sigla_partido,
     safe_cast(votos_nominais as int64) votos_nominais,
     safe_cast(votos_nao_nominais as int64) votos_nao_nominais
-from `basedosdados-staging.br_tse_eleicoes_staging.resultados_partido_municipio_zona` as t
+from
+    `basedosdados-staging.br_tse_eleicoes_staging.resultados_partido_municipio_zona`
+    as t

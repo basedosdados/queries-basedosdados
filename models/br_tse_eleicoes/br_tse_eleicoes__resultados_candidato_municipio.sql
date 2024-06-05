@@ -1,16 +1,12 @@
 {{
     config(
-        schema='br_tse_eleicoes',
-        alias = 'resultados_candidato_municipio',
-        materialized='table',
+        schema="br_tse_eleicoes",
+        alias="resultados_candidato_municipio",
+        materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {
-                "start": 1998,
-                "end": 2022,
-                "interval": 2
-            }
+            "range": {"start": 1998, "end": 2022, "interval": 2},
         },
         cluster_by=["sigla_uf"],
     )

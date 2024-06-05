@@ -1,16 +1,12 @@
 {{
     config(
-        schema='br_tse_eleicoes',
-        alias = 'perfil_eleitorado_municipio_zona',
-        materialized='table',
+        schema="br_tse_eleicoes",
+        alias="perfil_eleitorado_municipio_zona",
+        materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {
-                "start": 1998,
-                "end": 2022,
-                "interval": 2
-            }
+            "range": {"start": 1998, "end": 2022, "interval": 2},
         },
         cluster_by=["sigla_uf"],
     )
@@ -30,4 +26,5 @@ select
     safe_cast(eleitores as string) eleitores,
     safe_cast(eleitores_biometria as string) eleitores_biometria,
     safe_cast(eleitores_deficiencia as string) eleitores_deficiencia
-from `basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_municipio_zona` as t
+from
+    `basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_municipio_zona` as t

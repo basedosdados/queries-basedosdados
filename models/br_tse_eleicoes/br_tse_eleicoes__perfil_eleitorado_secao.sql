@@ -1,16 +1,12 @@
 {{
     config(
-        schema='br_tse_eleicoes',
-        alias = 'perfil_eleitorado_secao',
-        materialized='table',
+        schema="br_tse_eleicoes",
+        alias="perfil_eleitorado_secao",
+        materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {
-                "start": 2008,
-                "end": 2022,
-                "interval": 2
-            }
+            "range": {"start": 2008, "end": 2022, "interval": 2},
         },
         cluster_by=["sigla_uf"],
     )
