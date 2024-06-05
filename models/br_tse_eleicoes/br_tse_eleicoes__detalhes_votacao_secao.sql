@@ -32,7 +32,7 @@ select
     safe_cast(votos_nulos_apu_sep as int64) votos_nulos_apu_sep,
     safe_cast(proporcao_comparecimento as float64) proporcao_comparecimento,
     safe_cast(proporcao_votos_nominais as float64) proporcao_votos_nominais,
-    safe_cast(proporcao_votos_coligacao as float64) proporcao_votos_coligacao,
+    safe_cast(proporcao_votos_legenda as float64) proporcao_votos_legenda,
     safe_cast(proporcao_votos_brancos as float64) proporcao_votos_brancos,
     safe_cast(proporcao_votos_nulos as float64) proporcao_votos_nulos
 from `basedosdados-staging.br_tse_eleicoes_staging.detalhes_votacao_secao` as t
