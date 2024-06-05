@@ -397,8 +397,6 @@ models:
         description: Número de votos nulos
       - name: votos_nulos_apu_sep
         description: Votos nulos apurados separadamente
-      - name: votos_pendentes
-        description: Votos pendentes
       - name: zona
         description: Zona eleitoral
   - name: br_tse_eleicoes__partidos
