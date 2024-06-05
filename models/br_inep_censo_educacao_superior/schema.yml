@@ -557,3 +557,205 @@ models:
         description: Cobertura Temporal
       - name: valor
         description: Valor
+  - name: br_inep_censo_educacao_superior__ies
+    description: Dados a nível de instituição de ensino superior (IES).
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, id_ies]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.35
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary:
+            - tipo_organizacao_academica
+            - tipo_categoria_administrativa
+          dictionary_model: ref('br_inep_censo_educacao_superior__dicionario')
+    columns:
+      - name: ano
+        description: Ano de referência do Censo da Educação Superior
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação da sede administrativa ou reitoria
+          da IES
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: id_municipio
+        description: ID Município da sede administrativa ou reitoria da IES - IBGE
+          7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: tipo_organizacao_academica
+        description: Tipo de Organização Acadêmica da IES
+      - name: tipo_categoria_administrativa
+        description: Tipo de Categoria Administrativa da IES
+      - name: nome_mantenedora
+        description: Nome da mantenedora da IES
+      - name: id_mantenedora
+        description: Código único de identificação da mantenedora da IES
+      - name: id_ies
+        description: Código único de identificação da IES
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__instituicao_ensino_superior')
+              field: id_ies
+      - name: nome
+        description: Nome da IES
+      - name: sigla
+        description: Sigla da IES
+      - name: endereco
+        description: Endereço da sede administrativa/reitoria da IES
+      - name: numero
+        description: Número do endereço
+      - name: complemento
+        description: Complemento do endereço
+      - name: bairro
+        description: Bairro
+      - name: cep
+        description: CEP
+      - name: quantidade_tecnicos
+        description: Quantidade de funcionários técnico-administrativos
+      - name: quantidade_tecnicos_ef_incompleto_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com ensino fundamental incompleto
+      - name: quantidade_tecnicos_ef_incompleto_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com ensino fundamental incompleto
+      - name: quantidade_tecnicos_ef_completo_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com ensino fundamental completo
+      - name: quantidade_tecnicos_ef_completo_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com ensino fundamental completo
+      - name: quantidade_tecnicos_em_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com ensino médio
+      - name: quantidade_tecnicos_em_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com ensino médio
+      - name: quantidade_tecnicos_es_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com nível superior
+      - name: quantidade_tecnicos_es_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com nível superior
+      - name: quantidade_tecnicos_especializacao_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com especialização
+      - name: quantidade_tecnicos_especializacao_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com especialização
+      - name: quantidade_tecnicos_mestrado_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com mestrado
+      - name: quantidade_tecnicos_mestrado_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com mestrado
+      - name: quantidade_tecnicos_doutorado_feminino
+        description: Quantidade de funcionários técnico-administrativos do sexo feminino
+          com doutorado
+      - name: quantidade_tecnicos_doutorado_masculino
+        description: Quantidade de funcionários técnico-administrativos do sexo masculino
+          com doutorado
+      - name: indicador_biblioteca_acesso_portal_capes
+        description: Informa se as bibliotecas da IES têm acesso ao portal Capes de
+          periódicos
+      - name: indicador_biblioteca_acesso_outras_bases
+        description: Informa se as bibliotecas da IES têm acesso a outras bases de
+          dados licenciadas ou compradas
+      - name: indicador_biblioteca_assina_outras_bases
+        description: Informa se as bibliotecas da IES assinam outras bases de dados
+          licenciadas ou compradas
+      - name: indicador_biblioteca_repositorio_institucional
+        description: Informa se a IES possui base de dados online que reúne de maneira
+          organizada a produção científica da instituição
+      - name: indicador_biblioteca_busca_integrada
+        description: Informa se a IES oferece ferramenta eletrônica que possibilita
+          pesquisar simultaneamente diversas fontes de informação e obter resultado
+          em uma única interface
+      - name: indicador_biblioteca_internet
+        description: Informa se as bibliotecas da IES oferecem serviços pela internet
+      - name: indicador_biblioteca_rede_social
+        description: Informa se as bibliotecas participam de Redes Sociais
+      - name: indicador_biblioteca_catalogo_online
+        description: Informa se a IES possui ferramenta de recuperação de informação
+          que permite ao usuário consultar, de forma local ou remota, a existência
+          e disponibilidade de itens do acervo das bibliotecas
+      - name: quantidade_biblioteca_periodicos_eletronicos
+        description: Quantidade de títulos de periódicos eletrônicos adquiridos pelas
+          bibliotecas por meio de compra, doação ou permuta
+      - name: quantidade_biblioteca_livros_eletronicos
+        description: Quantidade de títulos de livros eletrônicos disponibilizados
+          pelas bibliotecas convertidos ao formato digital ou originalmente produzidos
+          nesse formato para serem lidos em computador ou outros dispositivos
+      - name: quantidade_docentes
+        description: Quantidade total de docentes (em exercício e afastados)
+      - name: quantidade_docentes_exercicio
+        description: Quantidade total de docentes em exercício
+      - name: quantidade_docentes_exercicio_feminino
+        description: Quantidade de docentes em exercício do sexo feminino
+      - name: quantidade_docentes_exercicio_masculino
+        description: Quantidade de docentes em exercício do sexo masculino
+      - name: quantidade_docentes_exercicio_sem_graduacao
+        description: Quantidade de docentes em exercício sem curso de graduação
+      - name: quantidade_docentes_exercicio_graduacao
+        description: Quantidade de docentes em exercício com curso de graduação
+      - name: quantidade_docentes_exercicio_especializacao
+        description: Quantidade de docentes em exercício com especialização
+      - name: quantidade_docentes_exercicio_mestrado
+        description: Quantidade de docentes em exercício com mestrado
+      - name: quantidade_docentes_exercicio_doutorado
+        description: Quantidade de docentes em exercício com doutorado
+      - name: quantidade_docentes_exercicio_integral
+        description: Quantidade de docentes em exercício em tempo integral
+      - name: quantidade_docentes_exercicio_integral_dedicacao_exclusiva
+        description: Quantidade de docentes em exercício em tempo integral com dedicação
+          exclusiva
+      - name: quantidade_docentes_exercicio_integral_sem_dedicacao_exclusiva
+        description: Quantidade de docentes em exercício em tempo integral sem dedicação
+          exclusiva
+      - name: quantidade_docentes_exercicio_parcial
+        description: Quantidade de docentes em exercício em tempo parcial
+      - name: quantidade_docentes_exercicio_horista
+        description: Quantidade de docentes em exercício horista
+      - name: quantidade_docentes_exercicio_0_29
+        description: Quantidade de docentes em exercício - até 29 anos
+      - name: quantidade_docentes_exercicio_30_34
+        description: Quantidade de docentes em exercício - de 30 a 34 anos
+      - name: quantidade_docentes_exercicio_35_39
+        description: Quantidade de docentes em exercício - de 35 a 39 anos
+      - name: quantidade_docentes_exercicio_40_44
+        description: Quantidade de docentes em exercício - de 40 a 44 anos
+      - name: quantidade_docentes_exercicio_45_49
+        description: Quantidade de docentes em exercício - de 45 a 49 anos
+      - name: quantidade_docentes_exercicio_50_54
+        description: Quantidade de docentes em exercício - de 50 a 54 anos
+      - name: quantidade_docentes_exercicio_55_59
+        description: Quantidade de docentes em exercício - de 55 a 59 anos
+      - name: quantidade_docentes_exercicio_60_mais
+        description: Quantidade de docentes em exercício - de 60 anos ou mais
+      - name: quantidade_docentes_exercicio_branca
+        description: Quantidade de docentes em exercício - Cor/Raça branca
+      - name: quantidade_docentes_exercicio_preta
+        description: Quantidade de docentes em exercício - Cor/Raça preta
+      - name: quantidade_docentes_exercicio_parda
+        description: Quantidade de docentes em exercício - Cor/Raça parda
+      - name: quantidade_docentes_exercicio_amarela
+        description: Quantidade de docentes em exercício - Cor/Raça amarela
+      - name: quantidade_docentes_exercicio_indigena
+        description: Quantidade de docentes em exercício - Cor/Raça indígena
+      - name: quantidade_docentes_exercicio_cor_nao_declarada
+        description: Quantidade de docentes em exercício - Cor/Raça não dispõe da
+          informação ou não declarada
+      - name: quantidade_docentes_exercicio_brasileiro
+        description: Quantidade de docentes em exercício - nacionalidade brasileira
+          ou brasileira - nascido no exterior ou naturalizado
+      - name: quantidade_docentes_exercicio_estrangeiro
+        description: Quantidade de docentes em exercício - nacionalidade estrangeira
+      - name: quantidade_docentes_exercicio_deficiencia
+        description: Quantidade de docentes em exercício - com deficiência
