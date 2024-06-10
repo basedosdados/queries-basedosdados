@@ -54,9 +54,6 @@ models:
     br_ans_beneficiario:
       +materialized: incremental
       +schema: br_ans_beneficiario
-      +post-hook:
-        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
-        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes
@@ -198,15 +195,15 @@ models:
     br_inep_censo_escolar:
       +materialized: table
       +schema: br_inep_censo_escolar
-    br_inep_ideb:
-      +materialized: table
-      +schema: br_inep_ideb
     br_inep_enem:
       +materialized: table
       +schema: br_inep_enem
     br_inep_formacao_docente:
       +materialized: table
       +schema: br_inep_formacao_docente
+    br_inep_ideb:
+      +materialized: table
+      +schema: br_inep_ideb
     br_inep_indicador_nivel_socioeconomico:
       +materialized: table
       +schema: br_inep_indicador_nivel_socioeconomico
@@ -231,6 +228,9 @@ models:
     br_inpe_sisam:
       +materialized: table
       +schema: br_inpe_sisam
+    br_ipea_avs:
+      +materialized: table
+      +schema: br_ipea_avs
     br_jota:
       +materialized: table
       +schema: br_jota
@@ -252,6 +252,9 @@ models:
     br_me_sic:
       +materialized: table
       +schema: br_me_sic
+    br_me_siconfi:
+      +materialized: table
+      +schema: br_me_siconfi
     br_mec_prouni:
       +materialized: table
       +schema: br_mec_prouni

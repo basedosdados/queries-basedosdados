@@ -380,3 +380,24 @@ models:
         description: Nome da Concentração Urbana
       - name: area_km2
         description: Área em quilómetro quadrado
+  - name: br_bd_diretorios_brasil__cid_10
+    description: Diretório da Classificação Internacional de Doenças (CID) 10.
+    columns:
+      - name: subcategoria
+        description: Subcategoria da CID-10
+      - name: descricao_subcategoria
+        description: Descrição da Subcategoria da CID-10
+      - name: categoria
+        description: Categoria da CID-10
+      - name: descricao_categoria
+        description: Descrição da Categoria da CID-10
+      - name: capitulo
+        description: Capítulo da CID-10
+      - name: descricao_capitulo
+        description: Descrição do Capítulo da CID-10
+      - name: causa_violencia
+        description: Causa - Violência
+      - name: causa_overdose
+        description: Causa - Overdose
+      - name: cid_datasus
+        description: Indica se a origem do CID-10 vem do DATASUS
