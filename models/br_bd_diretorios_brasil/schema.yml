@@ -291,9 +291,11 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-      - name: id_rm
+      - name: nome_municipio
+        description: Nome do município
+      - name: id_regiao_metropolitana
         description: ID da região metropolitana ou RIDE
-      - name: nome_rm
+      - name: nome_regiao_metropolitana
         description: Nome da região metropolitana ou RIDE
       - name: id_distrito
         description: ID do distrito
@@ -310,34 +312,14 @@ models:
       - name: sigla_uf
         description: Sigla do Estado
       - name: situacao_setor
-        description: – ID de situação do setor - Situação urbana - IDs 1, 2 e 3; 1
-          - Área urbanizada de cidade ou vila 2 - Área não urbanizada de cidade ou
-          vila 3 - Área urbana isolada - Situação rural – IDs 4, 5, 6, 7 e 8; 4 -
-          Aglomerado rural de extensão urbana 5 - Aglomerado rural isolado, povoado
-          6 - Aglomerado rural isolado, núcleo 7 - Aglomerado rural isolado, outros
-          aglomerados 8 - Zona rural, exclusive aglomerado rural
+        description: ID de situação do setor - Situação urbana - IDs 1, 2 e 3; 1 -
+          Área urbanizada de cidade ou vila 2 - Área não urbanizada de cidade ou vila
+          3 - Área urbana isolada - Situação rural – IDs 4, 5, 6, 7 e 8; 4 - Aglomerado
+          rural de extensão urbana 5 - Aglomerado rural isolado, povoado 6 - Aglomerado
+          rural isolado, núcleo 7 - Aglomerado rural isolado, outros aglomerados 8
+          - Zona rural, exclusive aglomerado rural
       - name: tipo_setor
         description: Tipo de setor censitário
-      - name: id_microrregiao
-        description: ID da microrregião
-      - name: nome_microrregiao
-        description: Nome da microrregião
-      - name: id_mesorregiao
-        description: ID da microrregião
-      - name: nome_mesorregiao
-        description: Nome da mesorregião
-      - name: id_regiao_imediata
-        description: ID da região geográfica imediata
-      - name: nome_regiao_imediata
-        description: Nome da região geográfica imediata
-      - name: id_regiao_intermediaria
-        description: ID da região geográfica intermediária
-      - name: nome_regiao_intermediaria
-        description: Nome da região geográfica intermediária
-      - name: id_concentracao_urbana
-        description: ID da Concentração Urbana
-      - name: nome_concentracao_urbana
-        description: Nome da Concentração Urbana
   - name: br_bd_diretorios_brasil__setor_censitario_2022
     description: Diretório de referência para os setores censitário de 2022. Contem
       o id_setor_censitario, que permite ligar informações (município, distritro,
@@ -348,8 +330,6 @@ models:
     columns:
       - name: id_setor_censitario
         description: ID do setor censitário
-      - name: area_km2
-        description: Área em quilómetro quadrado
       - name: id_regiao
         description: ID da região
       - name: nome_regiao
@@ -398,3 +378,5 @@ models:
         description: ID da Concentração Urbana
       - name: nome_concentracao_urbana
         description: Nome da Concentração Urbana
+      - name: area_km2
+        description: Área em quilómetro quadrado
