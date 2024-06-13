@@ -1,4 +1,18 @@
+{{
+    config(
+        alias="curso",
+        schema="br_inep_censo_educacao_superior",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2009, "end": 2022, "interval": 1},
+        },
+        cluster_by="sigla_uf",
+    )
+}}
+
 select
+
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
@@ -11,8 +25,8 @@ select
     safe_cast(id_ies as string) id_ies,
     safe_cast(nome_curso as string) nome_curso,
     safe_cast(id_curso as string) id_curso,
-    safe_cast(id_curso_cine as string) id_curso_cine,
     safe_cast(nome_curso_cine as string) nome_curso_cine,
+    safe_cast(id_curso_cine as string) id_curso_cine,
     safe_cast(id_area_geral as string) id_area_geral,
     safe_cast(nome_area_geral as string) nome_area_geral,
     safe_cast(id_area_especifica as string) id_area_especifica,
@@ -401,5 +415,5 @@ select
     ) quantidade_matriculas_mobilidade_academica,
     safe_cast(
         quantidade_concluintes_mobilidade_academica as int64
-    ) quantidade_concluintes_mobilidade_academica
+    ) quantidade_concluintes_mobilidade_academica,
 from `basedosdados-staging.br_inep_censo_educacao_superior_staging.curso` as t

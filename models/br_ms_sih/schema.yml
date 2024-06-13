@@ -333,7 +333,7 @@ models:
           - custom_relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
-              ignore_values: ["0000"]              
+              ignore_values: ['0000']
               config:
                 where: __most_recent_year_month__
       - name: cid_causa_categoria
@@ -348,7 +348,7 @@ models:
           - custom_relationships:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
-              ignore_values: ["0000"]              
+              ignore_values: ['0000']
               config:
                 where: __most_recent_year_month__
       - name: cid_secundario_categoria
