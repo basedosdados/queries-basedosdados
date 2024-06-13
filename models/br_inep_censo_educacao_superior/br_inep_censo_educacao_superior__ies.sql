@@ -1,3 +1,16 @@
+{{
+    config(
+        alias="ies",
+        schema="br_inep_censo_educacao_superior",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2009, "end": 2022, "interval": 1},
+        },
+        cluster_by="sigla_uf",
+    )
+}}
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
@@ -169,5 +182,5 @@ select
     ) quantidade_docentes_exercicio_estrangeiro,
     safe_cast(
         quantidade_docentes_exercicio_deficiencia as int64
-    ) quantidade_docentes_exercicio_deficiencia
+    ) quantidade_docentes_exercicio_deficiencia,
 from `basedosdados-staging.br_inep_censo_educacao_superior_staging.ies` as t

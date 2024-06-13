@@ -1,7 +1,7 @@
 {{
     config(
         schema="br_tse_eleicoes",
-        alias="resultados_partido_secao",
+        alias="resultados_partido_municipio_zona",
         materialized="table",
         partition_by={
             "field": "ano",
@@ -19,10 +19,11 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(id_municipio_tse as string) id_municipio_tse,
     safe_cast(zona as string) zona,
-    safe_cast(secao as string) secao,
     safe_cast(cargo as string) cargo,
     safe_cast(numero_partido as string) numero_partido,
     safe_cast(sigla_partido as string) sigla_partido,
     safe_cast(votos_nominais as int64) votos_nominais,
-    safe_cast(votos_nao_nominais as int64) votos_nao_nominais
-from `basedosdados-staging.br_tse_eleicoes_staging.resultados_partido_secao` as t
+    safe_cast(votos_legenda as int64) votos_legenda
+from
+    `basedosdados-staging.br_tse_eleicoes_staging.resultados_partido_municipio_zona`
+    as t
