@@ -202,9 +202,9 @@ with
             mes
         from `basedosdados-staging.br_bcb_agencia_staging.agencia` as t
         -- os arquivos mensais possuem cabeçalhos e rodapés que variam de posição;
-        -- Este filtro remove linhas com valores intereiramente
+        -- Este filtro remove linhas com valores inteiramente
         -- nulos
-        where fone = '00000nan'
+        where fone != '00000nan'
     )
 
 select
