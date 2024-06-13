@@ -28,7 +28,7 @@ models:
         description: Sigla da Unidade da Federação
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
               config:
                 where: __most_recent_year_month__
       - name: id_municipio
@@ -38,7 +38,7 @@ models:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
               config:
                 where: __most_recent_year_month__
       - name: data_inicio
@@ -47,7 +47,7 @@ models:
         description: Cadastro Nacional de Pessoa Júridica (CNPJ)
         tests:
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
               config:
                 where: __most_recent_year_month__
       - name: nome_agencia
@@ -71,7 +71,7 @@ models:
               config:
                 where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
               config:
                 where: __most_recent_year_month__
       - name: endereco
