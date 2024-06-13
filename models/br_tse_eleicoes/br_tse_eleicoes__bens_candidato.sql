@@ -8,10 +8,8 @@
             "data_type": "int64",
             "range": {"start": 2006, "end": 2022, "interval": 2},
         },
-        cluster_by=["sigla_uf"],
     )
 }}
-
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
