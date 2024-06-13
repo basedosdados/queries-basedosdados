@@ -1216,17 +1216,18 @@ models:
       - name: razao_sexo_populacao_indigena
         description: Razão de sexo da população indígena residente em terras indígenas
   - name: br_ibge_censo_2022__indigenas_populacao_alfabetizada_grupo_idade_municipio
-    description: Tabela 8180 - Pessoas indígenas de 15 anos ou mais de idade, total e as alfabetizadas, por sexo e grupos de idade
+    description: Tabela 8180 - Pessoas indígenas de 15 anos ou mais de idade, total
+      e as alfabetizadas, por sexo e grupos de idade
     tests:
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: sexo
         description: Sexo
       - name: grupo_idade
@@ -1236,17 +1237,18 @@ models:
       - name: populacao_indigena
         description: Pessoas indígenas de 15 anos ou mais de idade
   - name: br_ibge_censo_2022__populacao_alfabetizada_cor_raca_grupo_idade_municipio
-    description: Tabela 9542 - Pessoas de 15 anos ou mais de idade, total e as alfabetizadas, por sexo, cor ou raça e grupos de idade
+    description: Tabela 9542 - Pessoas de 15 anos ou mais de idade, total e as alfabetizadas,
+      por sexo, cor ou raça e grupos de idade
     tests:
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: cor_raca
         description: Cor ou raça
       - name: sexo
@@ -1258,17 +1260,18 @@ models:
       - name: populacao
         description: 'Pessoas de 15 anos ou mais de idade '
   - name: br_ibge_censo_2022__taxa_alfabetizacao_cor_raca_grupo_idade_municipio
-    description: Tabela 9543 - Taxa de alfabetização das pessoas de 15 anos ou mais de idade por sexo, cor ou raça e grupos de idade
+    description: Tabela 9543 - Taxa de alfabetização das pessoas de 15 anos ou mais
+      de idade por sexo, cor ou raça e grupos de idade
     tests:
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: cor_raca
         description: Cor ou raça
       - name: sexo
@@ -1278,21 +1281,22 @@ models:
       - name: taxa_alfabetizacao
         description: Taxa de alfabetização das pessoas de 15 anos ou mais de idade
   - name: br_ibge_censo_2022__indigenas_taxa_alfabetizacao_grupo_idade_municipio
-    description: Tabela 8181 - Taxa de alfabetização das pessoas indígenas de 15 anos ou mais de idade por sexo e grupos de idade
+    description: Tabela 8181 - Taxa de alfabetização das pessoas indígenas de 15 anos
+      ou mais de idade por sexo e grupos de idade
     tests:
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: id_municipio
         description: ID Município IBGE 7 dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: sexo
         description: Sexo
       - name: grupo_idade
         description: Grupo de Idade
       - name: taxa_alfabetizacao
         description: Taxa de alfabetização das pessoas indígenas de 15 anos ou mais
-            de idade
+          de idade
