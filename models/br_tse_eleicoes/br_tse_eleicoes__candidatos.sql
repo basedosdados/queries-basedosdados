@@ -8,10 +8,8 @@
             "data_type": "int64",
             "range": {"start": 1994, "end": 2022, "interval": 2},
         },
-        cluster_by=["sigla_uf"],
     )
 }}
--- precisa ser atualizada com as colunas de federação
 select
     safe_cast(ano as int64) ano,
     safe_cast(tipo_eleicao as string) tipo_eleicao,
@@ -39,14 +37,5 @@ select
     safe_cast(sigla_uf_nascimento as string) sigla_uf_nascimento,
     safe_cast(municipio_nascimento as string) municipio_nascimento,
     safe_cast(email as string) email,
-    safe_cast(raca as string) raca,
--- SAFE_CAST(situacao_totalizacao AS STRING) situacao_totalizacao,
--- SAFE_CAST(numero_federacao AS STRING) numero_federacao,
--- SAFE_CAST(nome_federacao AS STRING) nome_federacao,
--- SAFE_CAST(sigla_federacao AS STRING) sigla_federacao,
--- SAFE_CAST(composicao_federacao AS STRING) composicao_federacao,
--- CASE
--- WHEN prestou_contas='N' THEN 'Nao'
--- WHEN prestou_contas='S' THEN 'Sim'
--- END AS prestou_contas
+    safe_cast(raca as string) raca
 from `basedosdados-staging.br_tse_eleicoes_staging.candidatos` as t
