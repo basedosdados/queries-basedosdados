@@ -17,8 +17,6 @@ models:
   - name: br_ms_pns__microdados_2019
     description: Microdados da Pesquisa Nacional da Saúde (PNS) realizada em 2013.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [V0024]
       - custom_dictionary_coverage:
           columns_covered_by_dictionary:
             - V0015
@@ -3405,8 +3403,6 @@ models:
   - name: br_ms_pns__microdados_2013
     description: Microdados da Pesquisa Nacional da Saúde (PNS) realizada em 2013.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [V0024]
       - custom_dictionary_coverage:
           columns_covered_by_dictionary:
             - V0015
