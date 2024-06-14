@@ -61,4 +61,3 @@ left join
         select * from `basedosdados.br_bd_diretorios_brasil.distrito` where ano = 2010
     ) as d
     on a.id_distrito = d.id_distrito
-

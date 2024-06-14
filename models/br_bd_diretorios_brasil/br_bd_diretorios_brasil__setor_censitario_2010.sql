@@ -48,4 +48,3 @@ left join
         select * from `basedosdados.br_bd_diretorios_brasil.distrito` where ano = 2010
     ) as c
     on a.id_distrito = c.id_distrito
-
