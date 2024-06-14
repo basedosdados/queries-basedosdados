@@ -28,6 +28,8 @@ models:
         description: Nome da esfera orçamentária do custo
       - name: id_natureza_juridica
         description: Código da natureza jurídica do Órgão
+      - name: nome_natureza_juridica
+        description: Nome da natureza jurídica do Órgão
       - name: id_resultado_primario
         description: Código da classificação da despesa orçamentária por indicador
           de resultado primário
