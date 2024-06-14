@@ -44,5 +44,8 @@ left join
     `basedosdados.br_bd_diretorios_brasil.municipio` as b
     on a.id_municipio = b.id_municipio
 left join
-    `basedosdados.br_bd_diretorios_brasil.distrito` as c
+    (
+        select * from `basedosdados.br_bd_diretorios_brasil.distrito` where ano = 2010
+    ) as c
     on a.id_distrito = c.id_distrito
+
