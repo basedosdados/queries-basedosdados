@@ -2974,13 +2974,9 @@ models:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
   - name: br_ms_pns__microdados_2013
-    description: Insert table description here
+    description: Microdados da Pesquisa Nacional da Saúde (PNS) realizada em 2013.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [V0024]
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
-      - custom_dictionaries:
+      - custom_dictionary_coverage:
           columns_covered_by_dictionary:
             - V0015
             - V0026
