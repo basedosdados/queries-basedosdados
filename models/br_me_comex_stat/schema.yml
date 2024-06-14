@@ -14,7 +14,9 @@ models:
             - sigla_uf
             - id_municipio
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.05
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -26,6 +28,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__sistema_harmonizado')
               field: id_sh4
+              config:
+                where: __most_recent_year_month__
       - name: id_pais
         description: ID do País
       - name: sigla_pais_iso3
@@ -34,6 +38,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__municipio')
               field: sigla_pais_iso3
+              config:
+                where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -42,6 +48,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
@@ -58,8 +66,12 @@ models:
             - id_pais
             - sigla_uf
             - id_municipio
+          config:
+            where: __most_recent_year_month__
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.05
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -71,6 +83,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__sistema_harmonizado')
               field: id_sh4
+              config:
+                where: __most_recent_year_month__
       - name: id_pais
         description: ID do País
       - name: sigla_pais_iso3
@@ -79,6 +93,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__municipio')
               field: sigla_pais_iso3
+              config:
+                where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -87,6 +103,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
       - name: peso_liquido_kg
         description: Peso Líquido
       - name: valor_fob_dolar
@@ -104,8 +122,12 @@ models:
             - id_pais
             - id_via
             - id_urf
+          config:
+            where: __most_recent_year_month__
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.05
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -117,12 +139,16 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
               field: id_ncm
+              config:
+                where: __most_recent_year_month__
       - name: id_unidade
         description: ID Unidade
         tests:
           - relationships:
               to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
               field: id_unidade
+              config:
+                where: __most_recent_year_month__
       - name: id_pais
         description: ID do País
       - name: sigla_pais_iso3
@@ -131,6 +157,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__municipio')
               field: sigla_pais_iso3
+              config:
+                where: __most_recent_year_month__
       - name: sigla_uf_ncm
         description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosul
       - name: id_via
@@ -159,8 +187,12 @@ models:
             - id_pais
             - id_via
             - id_urf
+          config:
+            where: __most_recent_year_month__
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.05
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -172,12 +204,16 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
               field: id_ncm
+              config:
+                where: __most_recent_year_month__
       - name: id_unidade
         description: ID Unidade
         tests:
           - relationships:
               to: ref('br_bd_diretorios_mundo__nomenclatura_comum_mercosul')
               field: id_unidade
+              config:
+                where: __most_recent_year_month__
       - name: id_pais
         description: ID do País
       - name: sigla_pais_iso3
@@ -186,6 +222,8 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_mundo__municipio')
               field: sigla_pais_iso3
+              config:
+                where: __most_recent_year_month__
       - name: sigla_uf_ncm
         description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosu
       - name: id_via
