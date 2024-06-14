@@ -64,7 +64,7 @@ select
     safe_cast(c006 as string) c006,
     safe_cast(c00701 as int64) c00701,
     safe_cast(c00702 as int64) c00702,
-    safe_cast(c00703 as int64) c00703,
+    safe_cast(nullif(c00703, '9999') as int64) c00703,
     safe_cast(c008 as int64) c008,
     safe_cast(c009 as string) c009,
     safe_cast(c01001 as string) c01001,
