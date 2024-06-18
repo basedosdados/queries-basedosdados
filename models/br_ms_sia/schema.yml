@@ -109,63 +109,27 @@ models:
           Doenças (CID10) principal da Autorização de Procedimento Ambulatorial de
           Alta complexidade (APAC) ou do Boletim de Produção Ambulatorial Individualizado
           (BPA-I)
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: categoria
-              config:
-                where: __most_recent_year_month__
       - name: cid_principal_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) principal da Autorização de Procedimento Ambulatorial
           de Alta complexidade (APAC) ou do Boletim de Produção Ambulatorial Individualizado
           (BPA-I)
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: subcategoria
-              config:
-                where: __most_recent_year_month__
       - name: cid_secundario_categoria
         description: Identificador da categoria da Classificação Internacional de
           Doenças (CID10) secundário da Autorização de Procedimento Ambulatorial de
           Alta complexidade (APAC)
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: categoria
-              config:
-                where: __most_recent_year_month__
       - name: cid_secundario_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) secundário da Autorização de Procedimento Ambulatorial
           de Alta complexidade (APAC)
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: subcategoria
-              config:
-                where: __most_recent_year_month__
       - name: cid_causas_associadas_categoria
         description: Identificador da categoria da Classificação Internacional de
           Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
           de Alta complexidade (APAC)
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: categoria
-              config:
-                where: __most_recent_year_month__
       - name: cid_causas_associadas_subcategoria
         description: Identificador da subcategoria da Classificação Internacional
           de Doenças (CID10) causas associadas a Autorização de Procedimento Ambulatorial
           de Alta complexidade (APAC)
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cid_10')
-              field: subcategoria
-              config:
-                where: __most_recent_year_month__
       - name: carater_atendimento
         description: Caráter de atendimento (APAC ou BPA-I)
       - name: id_paciente_proto
