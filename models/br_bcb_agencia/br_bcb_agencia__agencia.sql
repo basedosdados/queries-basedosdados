@@ -6,7 +6,7 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2007, "end": 2024, "interval": 1},
+            "range": {"start": 2007, "end": 2025, "interval": 1},
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
@@ -201,6 +201,10 @@ with
             ano,
             mes
         from `basedosdados-staging.br_bcb_agencia_staging.agencia` as t
+        -- os arquivos mensais possuem cabeçalhos e rodapés que variam de posição;
+        -- Este filtro remove linhas com valores inteiramente
+        -- nulos
+        where fone != '00000nan'
     )
 
 select
@@ -225,6 +229,8 @@ select
 from wrang_data
 {% if is_incremental() %}
     where
-        date(cast(ano as int64), cast(mes as int64), 1)
-        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+        date(cast(ano as int64), cast(mes as int64), 1) not in (
+            select distinct (date(cast(ano as int64), cast(mes as int64), 1))
+            from {{ this }}
+        )
 {% endif %}

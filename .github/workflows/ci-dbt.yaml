@@ -2,7 +2,7 @@
 name: CI dbt
 on:
   pull_request:
-    paths: ['**.sql', '**.yaml', '**.yml']
+    branches: [main]
 jobs:
   lint:
     name: Lint dbt
@@ -22,4 +22,4 @@ jobs:
       - name: Lint sql
         run: poetry run sqlfmt --diff .
       - name: Lint yaml
-        run: poetry run yamlfix --exclude ".kubernetes/**/*" .
+        run: poetry run yamlfix --exclude ".kubernetes/**/*" --check .
