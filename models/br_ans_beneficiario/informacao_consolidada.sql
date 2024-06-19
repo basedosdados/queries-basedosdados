@@ -100,7 +100,7 @@ with
             coalesce(
                 safe.parse_date('%d/%m/%Y', dt_carga),
                 safe.parse_date('%Y-%m-%d', dt_carga)
-            ),
+            ) data_carga,
         from `basedosdados-staging.br_ans_beneficiario_staging.informacao_consolidada` t
         join
             `basedosdados.br_bd_diretorios_brasil.municipio` bd
