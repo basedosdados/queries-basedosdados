@@ -1,16 +1,15 @@
-select
-    {{
-        config(
-            schema="br_tse_eleicoes",
-            alias="despesas_candidato",
-            materialized="table",
-            partition_by={
-                "field": "ano",
-                "data_type": "int64",
-                "range": {"start": 2002, "end": 2022, "interval": 2},
-            },
-        )
-    }}
+{{
+    config(
+        schema="br_tse_eleicoes",
+        alias="despesas_candidato",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2002, "end": 2022, "interval": 2},
+        },
+    )
+}}
 select 
     safe_cast(ano as int64) ano,
     safe_cast(turno as int64) turno,
