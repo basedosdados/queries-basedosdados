@@ -355,3 +355,13 @@ models:
         description: Causa - Overdose
       - name: cid_datasus
         description: Indica se a origem do CID-10 vem do DATASUS
+  - name: br_bd_diretorios_brasil__natureza_juridica
+    description: A tabela reúne as naturezas jurídicas conforme a Comissão Nacional
+      de Classificação (Concla)
+    columns:
+      - name: id_natureza_juridica
+        description: ID da Natureza Jurídica
+      - name: descricao
+        description: Descrição da natureza jurídica
+      - name: escopo
+        description: Propósito da natureza jurídica
