@@ -232,23 +232,26 @@ models:
   - name: br_bd_diretorios_brasil__cnae_2
     description: Diretório da Classificação Nacional de Atividades Econômicas 2.0.
     columns:
-      - name: cnae_2
-        description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
-        tests: [not_null]
-      - name: descricao
-        description: Descrição da CNAE 2.0
-      - name: grupo
-        description: Grupo
-      - name: descricao_grupo
-        description: Descrição do Grupo
-      - name: divisao
-        description: Divisão
-      - name: descricao_divisao
-        description: Descrição da Divisão
       - name: secao
         description: Seção
       - name: descricao_secao
         description: Descrição da Seção
+      - name: divisao
+        description: Divisão
+      - name: descricao_divisao
+        description: Descrição da Divisão
+      - name: grupo
+        description: Grupo
+      - name: descricao_grupo
+        description: Descrição do Grupo
+      - name: classe
+        description: Classe
+      - name: descricao_classe
+        description: Descrição da Classe
+      - name: subclasse
+        description: Subclasse
+      - name: descricao_subclasse
+        description: Descrição da Subclasse
   - name: br_bd_diretorios_brasil__cnae_2_3_subclasses
     description: Diretório da Classificação Nacional de Atividades Econômicas - Subclasses
       2.3.
@@ -355,3 +358,13 @@ models:
         description: Causa - Overdose
       - name: cid_datasus
         description: Indica se a origem do CID-10 vem do DATASUS
+  - name: br_bd_diretorios_brasil__natureza_juridica
+    description: A tabela reúne as naturezas jurídicas conforme a Comissão Nacional
+      de Classificação (Concla)
+    columns:
+      - name: id_natureza_juridica
+        description: ID da Natureza Jurídica
+      - name: descricao
+        description: Descrição da natureza jurídica
+      - name: escopo
+        description: Propósito da natureza jurídica
