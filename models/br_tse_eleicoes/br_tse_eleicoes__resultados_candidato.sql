@@ -10,7 +10,7 @@
         },
     )
 }}
-select 
+select
     safe_cast(ano as int64) ano,
     safe_cast(turno as int64) turno,
     safe_cast(tipo_eleicao as string) tipo_eleicao,
