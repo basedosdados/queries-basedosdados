@@ -97,7 +97,10 @@ with
             cast(qt_beneficiario_ativo as int64) quantidade_beneficiario_ativo,
             cast(qt_beneficiario_aderido as int64) quantidade_beneficiario_aderido,
             cast(qt_beneficiario_cancelado as int64) quantidade_beneficiario_cancelado,
-            cast(parse_date('%d/%m/%Y', dt_carga) as date) data_carga,
+            coalesce(
+                safe.parse_date('%d/%m/%Y', dt_carga),
+                safe.parse_date('%Y-%m-%d', dt_carga)
+            ) data_carga,
         from `basedosdados-staging.br_ans_beneficiario_staging.informacao_consolidada` t
         join
             `basedosdados.br_bd_diretorios_brasil.municipio` bd
