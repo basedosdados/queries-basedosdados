@@ -224,4 +224,4 @@ select
         investimento_recurso_nao_oneroso_estado as float64
     ) investimento_recurso_nao_oneroso_estado,
     safe_cast(investimento_total_estado as float64) investimento_total_estado,
-from `basedosdados.br_mdr_snis_staging.prestador_agua_esgoto` as t
+from `basedosdados-staging.br_mdr_snis_staging.prestador_agua_esgoto` as t
