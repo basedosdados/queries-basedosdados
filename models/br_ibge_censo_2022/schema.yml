@@ -1274,14 +1274,6 @@ models:
         description: 'Complemento: Elemento 5'
       - name: complemento_valor_5
         description: 'Complemento: Valor 5'
-      - name: latitude
-        description: Latitude do Endereço
-      - name: longitude
-        description: Longitude do Endereço
-      - name: ponto
-        description: Ponto geográfico criado a partir das colunas longitude e latitude
-      - name: nivel_geocodificacao_coordenadas
-        description: Nível de geocodificação das coordenadas
       - name: descricao_estabelecimento
         description: Identificação do estabelecimento
       - name: tipo_especie
@@ -1294,3 +1286,11 @@ models:
         description: Tipo de finalidade de construção
       - name: tipo_edificacao_domicilio
         description: Tipo da edificação dos domicílios
+      - name: nivel_geocodificacao_coordenadas
+        description: Nível de geocodificação das coordenadas
+      - name: latitude
+        description: Latitude do Endereço
+      - name: longitude
+        description: Longitude do Endereço
+      - name: ponto
+        description: Ponto geográfico criado a partir das colunas longitude e latitude
