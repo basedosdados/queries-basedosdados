@@ -3,6 +3,7 @@
         alias="pais",
         schema="br_bd_diretorios_mundo",
         materialized="table",
+        cluster_by="sigla_pais_iso3",
     )
 }}
 
