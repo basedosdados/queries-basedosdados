@@ -1,5 +1,6 @@
 {{
     config(
+        alias="cep",
         schema="br_bd_diretorios_brasil",
         materialized="table",
         partition_by={
