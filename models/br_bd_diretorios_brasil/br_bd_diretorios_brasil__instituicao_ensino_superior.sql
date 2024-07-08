@@ -14,4 +14,6 @@ select
     safe_cast(situacao_funcionamento as string) situacao_funcionamento,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(sigla_uf as string) sigla_uf
-from `basedosdados-dev.br_bd_diretorios_brasil_staging.instituicao_ensino_superior` as t
+from
+    `basedosdados-staging.br_bd_diretorios_brasil_staging.instituicao_ensino_superior`
+    as t

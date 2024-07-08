@@ -3,4 +3,4 @@ select
     safe_cast(sigla as string) sigla,
     safe_cast(nome as string) nome,
     safe_cast(regiao as string) regiao
-from `basedosdados-dev.br_bd_diretorios_brasil_staging.uf` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.uf` as t

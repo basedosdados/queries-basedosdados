@@ -164,10 +164,10 @@ with
             `basedosdados.br_me_cnpj.dicionario` t
             on a.identificador_matriz_filial = t.chave
         left join
-            `basedosdados-dev.br_bd_diretorios_brasil_staging.bairro_code_iso3` g
+            `basedosdados-staging.br_bd_diretorios_brasil_staging.bairro_code_iso3` g
             on a.bairro = g.bairro
         left join
-            `basedosdados-dev.br_bd_diretorios_mundo_staging.pais_code` f
+            `basedosdados-staging.br_bd_diretorios_mundo_staging.pais_code` f
             on a.id_pais = f.co_pais
         where
             b.nome_coluna = 'identificador_matriz_filial'

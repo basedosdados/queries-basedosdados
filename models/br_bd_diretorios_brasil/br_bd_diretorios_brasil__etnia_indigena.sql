@@ -9,4 +9,4 @@
 select
     safe_cast(id_etnia_indigena as string) id_etnia_indigena,
     safe_cast(nome as string) nome
-from `basedosdados-dev.br_bd_diretorios_brasil_staging.etnia_indigena` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.etnia_indigena` as t

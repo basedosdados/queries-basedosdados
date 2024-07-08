@@ -26,4 +26,4 @@ select
     safe_cast(outras_ofertas_educacionais as string) outras_ofertas_educacionais,
     safe_cast(latitude as string) latitude,
     safe_cast(longitude as string) longitude
-from `basedosdados-dev.br_bd_diretorios_brasil_staging.escola` as t
+from `basedosdados-staging.br_bd_diretorios_brasil_staging.escola` as t
