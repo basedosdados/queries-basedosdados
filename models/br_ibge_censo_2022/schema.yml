@@ -1300,3 +1300,102 @@ models:
       - name: taxa_alfabetizacao
         description: Taxa de alfabetização das pessoas indígenas de 15 anos ou mais
           de idade
+  - name: br_ibge_censo_2022__cadastro_enderecos
+    description: O Cadastro Nacional de Endereços para Fins Estatísticos - CNEFE é
+      uma base de dados de abrangência nacional criada em 2005. Esse cadastro contempla
+      endereços georreferenciados de domicílios e estabelecimentos de todo o país
+      para o ano de 2022.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [id_endereco, tipo_especie]
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary:
+            - nivel_geocodificacao_coordenadas
+            - tipo_especie
+            - tipo_estabelecimento
+            - tipo_construcao
+            - tipo_finalidade_construcao
+            - tipo_edificacao_domicilio
+          dictionary_model: ref('br_ibge_censo_2022__dicionario')
+    columns:
+      - name: sigla_uf
+        description: ID da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: id_distrito
+        description: ID do Distrito
+      - name: id_subdistrito
+        description: ID do Subdistrito
+      - name: id_setor_censitario
+        description: ID do Setor Censitário
+        tests: [not_null]
+      - name: cep
+        description: CEP
+        tests: [not_null]
+      - name: id_endereco
+        description: Identificador do endereço
+        tests: [not_null]
+      - name: numero_quadra
+        description: Número da quadra
+      - name: numero_face
+        description: Número da face
+      - name: localidade
+        description: Localidade
+      - name: tipo_segmento_logradouro
+        description: Tipo do segmento do logradouro
+      - name: titulo_segmento_logradouro
+        description: Título do segmento do logradouro
+      - name: nome_logradouro
+        description: Nome do logradouro
+      - name: numero_logradouro
+        description: Número no logradouro
+      - name: modificador_numero
+        description: Modificador do número
+      - name: complemento_elemento_1
+        description: 'Complemento: Elemento 1'
+      - name: complemento_valor_1
+        description: 'Complemento: Valor 1'
+      - name: complemento_elemento_2
+        description: 'Complemento: Elemento 2'
+      - name: complemento_valor_2
+        description: 'Complemento: Valor 2'
+      - name: complemento_elemento_3
+        description: 'Complemento: Elemento 3'
+      - name: complemento_valor_3
+        description: 'Complemento: Valor 3'
+      - name: complemento_elemento_4
+        description: 'Complemento: Elemento 4'
+      - name: complemento_valor_4
+        description: 'Complemento: Valor 4'
+      - name: complemento_elemento_5
+        description: 'Complemento: Elemento 5'
+      - name: complemento_valor_5
+        description: 'Complemento: Valor 5'
+      - name: descricao_estabelecimento
+        description: Identificação do estabelecimento
+      - name: tipo_especie
+        description: Espécie de endereço
+      - name: tipo_estabelecimento
+        description: Tipo de estabelecimento
+      - name: tipo_construcao
+        description: Tipo de construção ou reforma
+      - name: tipo_finalidade_construcao
+        description: Tipo de finalidade de construção
+      - name: tipo_edificacao_domicilio
+        description: Tipo da edificação dos domicílios
+      - name: nivel_geocodificacao_coordenadas
+        description: Nível de geocodificação das coordenadas
+      - name: latitude
+        description: Latitude do Endereço
+      - name: longitude
+        description: Longitude do Endereço
+      - name: ponto
+        description: Ponto geográfico criado a partir das colunas longitude e latitude
