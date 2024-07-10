@@ -11,7 +11,7 @@ with
         select
             safe_cast(id_setor_censitario as string) id_setor_censitario,
             safe_cast(id_municipio as string) id_municipio,
-            safe_cast(id_rm as string) id_regiao_metropolitana,
+            safe_cast(id_regiao_metropolitana as string) id_regiao_metropolitana,
             safe_cast(id_distrito as string) id_distrito,
             safe_cast(id_subdistrito as string) id_subdistrito,
             safe_cast(nome_subdistrito as string) nome_subdistrito,
@@ -20,8 +20,7 @@ with
             safe_cast(sigla_uf as string) sigla_uf,
             safe_cast(situacao_setor as string) situacao_setor,
             safe_cast(tipo_setor as string) tipo_setor
-        from
-            `basedosdados-staging.br_bd_diretorios_brasil_staging.setor_censitario` as t
+        from `basedosdados.br_bd_diretorios_brasil.setor_censitario_2010` as t
     )
 
 select
@@ -44,7 +43,5 @@ left join
     `basedosdados.br_bd_diretorios_brasil.municipio` as b
     on a.id_municipio = b.id_municipio
 left join
-    (
-        select * from `basedosdados.br_bd_diretorios_brasil.distrito` where ano = 2010
-    ) as c
+    (select * from `basedosdados.br_bd_diretorios_brasil.distrito_2010`) as c
     on a.id_distrito = c.id_distrito

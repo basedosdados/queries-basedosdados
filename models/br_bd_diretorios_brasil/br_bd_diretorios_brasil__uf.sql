@@ -1,3 +1,11 @@
+{{
+    config(
+        alias="uf",
+        schema="br_bd_diretorios_brasil",
+        materialized="table",
+    )
+}}
+
 select
     safe_cast(id_uf as string) id_uf,
     safe_cast(sigla as string) sigla,
