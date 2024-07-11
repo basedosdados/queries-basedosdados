@@ -333,29 +333,42 @@ models:
       - name: descricao_secao
         description: Descrição da Seção
   - name: br_bd_diretorios_brasil__cnae_2
-    description: Diretório da Classificação Nacional de Atividades Econômicas 2.0.
+    description: Este diretório congrega versões 2.0, 2.1, 2.2 e 2.3 da Classificação
+      Nacional de Atividades Econômicas (CNAE).
     tests:
       - dbt_utils.unique_combination_of_columns:
-          tags: [diretorio]
-          combination_of_columns: [cnae_2]
+          combination_of_columns: [subclasse]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
     columns:
-      - name: cnae_2
-        description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
-        tests: [not_null]
-      - name: descricao
-        description: Descrição da CNAE 2.0
-      - name: grupo
-        description: Grupo
-      - name: descricao_grupo
-        description: Descrição do Grupo
-      - name: divisao
-        description: Divisão
-      - name: descricao_divisao
-        description: Descrição da Divisão
+      - name: subclasse
+        description: Subclasse da Classificação de Atividades Econômicas (CNAE)
+      - name: descricao_subclasse
+        description: Descrição da subclasse da CNAE
       - name: secao
-        description: Seção
+        description: Seção da cnae
       - name: descricao_secao
         description: Descrição da Seção
+      - name: divisao
+        description: Divisão da CNAE
+      - name: descricao_divisao
+        description: Descrição da divisão
+      - name: grupo
+        description: Grupo da CNAE
+      - name: descricao_grupo
+        description: Descrição do grupo
+      - name: classe
+        description: Classe da CNAE
+      - name: descricao_classe
+        description: Descrição da classe
+      - name: indicador_cnae_2_0
+        description: Indica se o código está presente na CNAE 2.0
+      - name: indicador_cnae_2_1
+        description: Indica se o código está presente na CNAE 2.1
+      - name: indicador_cnae_2_2
+        description: Indica se o código está presente na CNAE 2.2
+      - name: indicador_cnae_2_3
+        description: Indica se o código está presente na CNAE 2.3
   - name: br_bd_diretorios_brasil__cnae_2_3_subclasses
     description: Diretório da Classificação Nacional de Atividades Econômicas - Subclasses
       2.3.
