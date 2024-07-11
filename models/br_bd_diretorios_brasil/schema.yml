@@ -345,22 +345,22 @@ models:
         description: Subclasse da Classificação de Atividades Econômicas (CNAE)
       - name: descricao_subclasse
         description: Descrição da subclasse da CNAE
-      - name: secao
-        description: Seção da cnae
-      - name: descricao_secao
-        description: Descrição da Seção
-      - name: divisao
-        description: Divisão da CNAE
-      - name: descricao_divisao
-        description: Descrição da divisão
-      - name: grupo
-        description: Grupo da CNAE
-      - name: descricao_grupo
-        description: Descrição do grupo
       - name: classe
         description: Classe da CNAE
       - name: descricao_classe
         description: Descrição da classe
+      - name: grupo
+        description: Grupo da CNAE
+      - name: descricao_grupo
+        description: Descrição do grupo
+      - name: divisao
+        description: Divisão da CNAE
+      - name: descricao_divisao
+        description: Descrição da divisão
+      - name: secao
+        description: Seção da cnae
+      - name: descricao_secao
+        description: Descrição da Seção
       - name: indicador_cnae_2_0
         description: Indica se o código está presente na CNAE 2.0
       - name: indicador_cnae_2_1
