@@ -16,8 +16,6 @@ models:
           dictionary_model: ref('br_ms_sisvan__dicionario')
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [acompanhamento]
-          config:
-            where: ano = 2015
     columns:
       - name: ano
         description: Ano

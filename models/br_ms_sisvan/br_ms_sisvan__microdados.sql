@@ -45,4 +45,4 @@ select
     safe_cast(co_estado_nutri_idoso as string) as estado_nutricional_idoso,
     safe_cast(co_estado_nutri_imc_semgest as string) as estado_nutricional_gestantes,
     safe_cast(co_sistema_origem_acomp as string) as sistema_origem
-from `basedosdados-dev.br_ms_sisvan_staging.microdados` as t
+from `basedosdados-staging.br_ms_sisvan_staging.microdados` as t
