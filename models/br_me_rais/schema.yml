@@ -235,9 +235,11 @@ models:
       - name: cnae_2_subclasse
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Subclasse
         tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cnae_2_subclasse')
-              field: cnae_2_subclasse.cnae_2_subclasse
+          - custom_relationships:
+              tags: [cnae]
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: subclasse
+              ignore_values: ['9999997', '8630505', '3312101', '9999999', 00000-1]
       - name: tamanho_estabelecimento
         description: Tamanho do Estabelecimento
       - name: tipo_estabelecimento
