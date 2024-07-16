@@ -297,6 +297,9 @@ models:
     br_ms_sinasc:
       +materialized: table
       +schema: br_ms_sinasc
+    br_ms_sisvan:
+      +materialized: table
+      +schema: br_ms_sisvan
     br_ms_vacinacao_covid19:
       +materialized: table
       +schema: br_ms_vacinacao_covid19
