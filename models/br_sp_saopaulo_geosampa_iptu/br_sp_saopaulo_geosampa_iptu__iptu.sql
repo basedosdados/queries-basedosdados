@@ -40,4 +40,4 @@ select distinct
     safe_cast(testada_imovel as float64) testada_imovel,
     safe_cast(valor_terreno as int64) valor_terreno,
     safe_cast(valor_construcao as int64) valor_construcao,
-from `basedosdados-dev.br_sp_saopaulo_geosampa_iptu_staging.iptu` as t
+from `basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu` as t
