@@ -65,7 +65,7 @@ models:
         description: Athlete competing for the event
       - name: athlete_id
         description: Athlete id which can be used to join with athlete bio.
-      - name: pos
+      - name: position
         description: Position that the athlete ranked for the event
       - name: medal
         description: Whether or not the athlete won a medal, and if so gold, silver,
