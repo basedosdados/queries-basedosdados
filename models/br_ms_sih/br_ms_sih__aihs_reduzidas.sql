@@ -16,7 +16,7 @@ select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
     safe_cast(sigla_uf as int64) sigla_uf,
-    safe_cast(n_aih as int64) id_aih,
+    safe_cast(n_aih as string) id_aih,
     safe_cast(ident as int64) tipo_aih,
     safe_cast(gestor_cod as int64) motivo_autorizacao_aih,
     safe_cast(ltrim(sequencia) as string) sequencial_aih,
@@ -327,8 +327,4 @@ select
     safe_cast(us_tot as float64) valor_dolar,
     safe_cast(val_tot as float64) valor_aih,
 from `basedosdados-staging.br_ms_sih_staging.aihs_reduzidas` as t
-{% if is_incremental() %}
-    where
-        date(cast(ano as int64), cast(mes as int64), 1)
-        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
-{% endif %}
+{% if is_incremental() %} where cast(ano as int64) = 2024 {% endif %}
