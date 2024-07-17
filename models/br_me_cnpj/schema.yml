@@ -3,16 +3,36 @@ version: 2
 models:
   - name: br_me_cnpj__empresas
     description: Empresas
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [data, cnpj_basico]
+          config:
+            where: __most_recent_date__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [porte, qualificacao_responsavel]
+          dictionary_model: ref('br_me_cnpj__dicionario')
+          config:
+            where: __most_recent_date__
     columns:
       - name: data
         description: Data
         tests: [is_row_count_increasing]
       - name: cnpj_basico
         description: CNPJ Básico
+        tests: [not_null]
+        config:
+          where: __most_recent_date__
       - name: razao_social
         description: Razão Social
       - name: natureza_juridica
         description: Natureza Jurídica
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__natureza_juridica')
+              field: id_natureza_juridica
+              ignore_values: ['8885']
+              config:
+                where: __most_recent_date__
       - name: qualificacao_responsavel
         description: Qualificação do/a Responsável
       - name: capital_social
@@ -23,12 +43,25 @@ models:
         description: Ente Federativo
   - name: br_me_cnpj__socios
     description: Sócios
+    tests:
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary:
+            - qualificacao_representante_legal
+            - faixa_etaria
+            - qualificacao
+            - tipo
+            - id_pais
+          dictionary_model: ref('br_me_cnpj__dicionario')
+          config:
+            where: __most_recent_date__
     columns:
       - name: data
         description: Data
-        tests: [is_row_count_increasing]
       - name: cnpj_basico
         description: CNPJ básico
+        tests: [not_null]
+        config:
+          where: __most_recent_date__
       - name: tipo
         description: Tipo
       - name: nome
@@ -39,6 +72,12 @@ models:
         description: Qualificação
       - name: data_entrada_sociedade
         description: Data de Entrada na Sociedade
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+              config:
+                where: __most_recent_date__
       - name: id_pais
         description: ID País
       - name: cpf_representante_legal
@@ -51,31 +90,73 @@ models:
         description: Faixa Etária
   - name: br_me_cnpj__simples
     description: Simples Nacional
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [cnpj_basico]
     columns:
       - name: cnpj_basico
         description: CNPJ Básico
+        tests: [not_null]
+        config:
+          where: __most_recent_date__
       - name: opcao_simples
         description: Opção pelo Simples Nacional
       - name: data_opcao_simples
         description: Data de Opção pelo Simples Nacional
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_exclusao_simples
         description: Data de Exclusão do Simples Nacional
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: opcao_mei
         description: Opção pelo MEI
       - name: data_opcao_mei
         description: Data de Opção pelo MEI
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_exclusao_mei
         description: Data de Exclusão do MEI
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
   - name: br_me_cnpj__estabelecimentos
     description: Estabelecimentos
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [cnpj]
+          config:
+            where: __most_recent_date__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary:
+            - motivo_situacao_cadastral
+            - identificador_matriz_filial
+            - situacao_cadastral
+            - id_pais
+          dictionary_model: ref('br_me_cnpj__dicionario')
+          config:
+            where: __most_recent_date__
     columns:
       - name: data
         description: Data
         tests: [is_row_count_increasing]
       - name: cnpj
         description: CNPJ
+        tests: [not_null]
+        config:
+          where: __most_recent_date__
       - name: cnpj_basico
         description: CNPJ Básico (8 primeiros dígitos)
+        tests: [not_null]
+        config:
+          where: __most_recent_date__
       - name: cnpj_ordem
         description: CNPJ Ordem
       - name: cnpj_dv
@@ -98,12 +179,32 @@ models:
         description: Data de Início da Atividade
       - name: cnae_fiscal_principal
         description: CNAE Fiscal Principal
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: subclasse
+              ignore_values: ['8888888']
+              config:
+                where: __most_recent_date__
       - name: cnae_fiscal_secundaria
         description: CNAEs Fiscais Secundárias
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [EX, BR]
+              config:
+                where: __most_recent_date__
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+              config:
+                where: __most_recent_date__
       - name: id_municipio_rf
         description: ID Município - Receita Federal
       - name: tipo_logradouro
@@ -136,6 +237,12 @@ models:
         description: Situação Especial
       - name: data_situacao_especial
         description: Data da Situação Especial
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+              config:
+                where: __most_recent_date__
   - name: br_me_cnpj__dicionario
     description: Dicionário para tradução dos códigos do conjunto br_me_cnpj. Para
       taduzir códigos compartilhados entre instituições, como id_municipio, buscar
