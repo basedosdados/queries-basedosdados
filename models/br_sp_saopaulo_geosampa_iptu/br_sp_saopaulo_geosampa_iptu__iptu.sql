@@ -1,17 +1,18 @@
 {{
     config(
         materialized="table",
+        alias="iptu",
+        schema="br_sp_saopaulo_geosampa_iptu",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 1995, "end": 2023, "interval": 1},
+            "range": {"start": 1995, "end": 2024, "interval": 1},
         },
     )
 }}
 
 
-select
-
+select distinct
     safe_cast(ano as int64) ano,
     safe_cast(data_cadastramento as date) data_cadastramento,
     safe_cast(numero_notificacao as string) numero_notificacao,
@@ -23,7 +24,7 @@ select
     safe_cast(numero_condominio as string) numero_condominio,
     safe_cast(complemento as string) complemento,
     safe_cast(bairro as string) bairro,
-    safe_cast(cep as string) cep,
+    case when cep in ('nan', '0') then null else cep end as cep,
     safe_cast(ano_construcao_corrigida as int64) ano_construcao_corrigida,
     safe_cast(fator_obsolescencia as float64) fator_obsolescencia,
     initcap(referencia_imovel) as referencia_imovel,
@@ -39,5 +40,4 @@ select
     safe_cast(testada_imovel as float64) testada_imovel,
     safe_cast(valor_terreno as int64) valor_terreno,
     safe_cast(valor_construcao as int64) valor_construcao,
-
 from `basedosdados-staging.br_sp_saopaulo_geosampa_iptu_staging.iptu` as t
