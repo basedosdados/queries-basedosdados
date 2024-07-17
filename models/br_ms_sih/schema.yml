@@ -86,7 +86,21 @@ models:
               to: ref('br_bd_diretorios_brasil__cid_10')
               field: subcategoria
               ignore_values:
-                - "'R501','Q314','S571','N182','U109','M723','M725','N975','N184','R500','N183','Q356','B501','N185','U099'"
+                - R501
+                - Q314
+                - S571
+                - N182
+                - U109
+                - M723
+                - M725
+                - N975
+                - N184
+                - R500
+                - N183
+                - Q356
+                - B501
+                - N185
+                - U099
               config:
                 where: __most_recent_year_month__
       - name: id_cid_secundario
