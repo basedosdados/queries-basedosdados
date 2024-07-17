@@ -102,8 +102,7 @@ left join
         from `basedosdados.br_bd_diretorios_brasil.municipio`
     ) as mun
     on sih.sp_m_hosp = mun.id_municipio_6
-{% if is_incremental() %}
-    where
+    {% if is_incremental() %}
         date(cast(ano as int64), cast(mes as int64), 1)
         > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
-{% endif %}
+    {% endif %}

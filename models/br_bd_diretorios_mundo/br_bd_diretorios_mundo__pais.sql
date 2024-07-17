@@ -1,10 +1,4 @@
-{{
-    config(
-        alias="pais",
-        schema="br_bd_diretorios_mundo",
-        materialized="table",
-    )
-}}
+{{ config(alias="pais", schema="br_bd_diretorios_mundo", materialized="table") }}
 
 select
     safe_cast(id_pais_m49 as string) id_pais_m49,
