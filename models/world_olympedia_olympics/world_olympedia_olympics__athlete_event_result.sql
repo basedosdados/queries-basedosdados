@@ -8,7 +8,7 @@ select
     safe_cast(result_id as string) result_id,
     safe_cast(athlete as string) athlete,
     safe_cast(athlete_id as string) athlete_id,
-    safe_cast(pos as string) pos,
+    safe_cast(pos as string) position,
     safe_cast(medal as string) medal,
     safe_cast(isteamsport as bool) is_team_sport,
 from `basedosdados-staging.world_olympedia_olympics_staging.athlete_event_result` as t
