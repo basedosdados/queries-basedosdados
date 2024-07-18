@@ -72,12 +72,6 @@ models:
         description: Qualificação
       - name: data_entrada_sociedade
         description: Data de Entrada na Sociedade
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
-              config:
-                where: __most_recent_date__
       - name: id_pais
         description: ID País
       - name: cpf_representante_legal
@@ -103,30 +97,14 @@ models:
         description: Opção pelo Simples Nacional
       - name: data_opcao_simples
         description: Data de Opção pelo Simples Nacional
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
       - name: data_exclusao_simples
         description: Data de Exclusão do Simples Nacional
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
       - name: opcao_mei
         description: Opção pelo MEI
       - name: data_opcao_mei
         description: Data de Opção pelo MEI
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
       - name: data_exclusao_mei
         description: Data de Exclusão do MEI
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
   - name: br_me_cnpj__estabelecimentos
     description: Estabelecimentos
     tests:
@@ -237,12 +215,6 @@ models:
         description: Situação Especial
       - name: data_situacao_especial
         description: Data da Situação Especial
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
-              config:
-                where: __most_recent_date__
   - name: br_me_cnpj__dicionario
     description: Dicionário para tradução dos códigos do conjunto br_me_cnpj. Para
       taduzir códigos compartilhados entre instituições, como id_municipio, buscar
