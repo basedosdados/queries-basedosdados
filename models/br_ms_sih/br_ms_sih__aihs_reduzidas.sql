@@ -327,4 +327,8 @@ select
     safe_cast(us_tot as float64) valor_dolar,
     safe_cast(val_tot as float64) valor_aih,
 from `basedosdados-staging.br_ms_sih_staging.aihs_reduzidas` as t
-{% if is_incremental() %} where cast(ano as int64) = 2024 {% endif %}
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+{% endif %}
