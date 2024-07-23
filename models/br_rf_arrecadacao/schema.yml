@@ -1,0 +1,134 @@
+---
+version: 2
+models:
+  - name: br_rf_arrecadacao__uf
+    description: Contém os dados de arrecadação mensal por Unidade da Federação, contendo
+      receitas administradas e não administradas pela Receita Federal do Brasil.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [insert unique keys here]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
+    columns:
+      - name: ano
+        description: Ano de referência.
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes
+        description: Mês de referência.
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação.
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: imposto_importacao
+        description: Imposto sobre a Importação.
+      - name: imposto_exportacao
+        description: Imposto sobre a Exportação.
+      - name: ipi_fumo
+        description: Imposto sobre Produtos Industrializado incidente sobre setor
+          de fumo.
+      - name: ipi_bebidas
+        description: Imposto sobre Produtos Industrializado incidente sobre setor
+          de bebidas.
+      - name: ipi_automoveis
+        description: Imposto sobre Produtos Industrializado incidente sobre setor
+          de automóveis.
+      - name: ipi_importacoes
+        description: Imposto sobre Produtos Industrializado vinculado à importação.
+      - name: ipi_outros
+        description: Imposto sobre Produtos Industrializado incidente sobre outros
+          produtos.
+      - name: irpf
+        description: Imposto sobre a Renda da Pessoa Física.
+      - name: irpj_entidades_financeiras
+        description: Imposto sobre a Renda da Pessoa Jurídica incidente em entidades
+          financeiras.
+      - name: irpj_demais_empresas
+        description: Imposto sobre a Renda da Pessoa Jurídica incidente em demais
+          empresas.
+      - name: irrf_rendimentos_trabalho
+        description: Imposto sobre a Renda Retido na Fonte referente à rendimentos
+          do trabalho.
+      - name: irrf_rendimentos_capital
+        description: Imposto sobre a Renda Retido na Fonte referente à rendimentos
+          do capital.
+      - name: irrf_remessas_exterior
+        description: Imposto sobre a Renda Retido na Fonte referente à remessas para
+          o exterior.
+      - name: irrf_outros_rendimentos
+        description: Imposto sobre a Renda Retido na Fonte referente à outros rendimentos.
+      - name: iof
+        description: Imposto sobre Operações Financeiras.
+      - name: itr
+        description: Imposto sobre a Propriedade Territorial Rural.
+      - name: ipmf
+        description: 'Imposto Provisório sobre Movimentação Financeira. '
+      - name: cpmf
+        description: Contribuição Provisória sobre Movimentação Financeira.
+      - name: cofins
+        description: Contribuição para o Financiamento da Seguridade Social.
+      - name: cofins_entidades_financeiras
+        description: 'Contribuição para o Financiamento da Seguridade Social referente
+          à entidades financeiras. '
+      - name: cofins_demais_empresas
+        description: Contribuição para o Financiamento da Seguridade Social referente
+          à demais empresas.
+      - name: pis_pasep
+        description: 'Programa de Integração Social e o Programa de Formação do Patrimônio
+          do Servidor Público. '
+      - name: pis_pasep_entidades_financeiras
+        description: Programa de Integração Social e o Programa de Formação do Patrimônio
+          do Servidor Público referente à entidades financeiras.
+      - name: pis_pasep_demais_empresas
+        description: Programa de Integração Social e o Programa de Formação do Patrimônio
+          do Servidor Público referente à demais empresas.
+      - name: csll
+        description: 'Contribuição Social sobre o Lucro Líquido. '
+      - name: csll_entidades_financeiras
+        description: Contribuição Social sobre o Lucro Líquido referente à entidades
+          financeiras.
+      - name: csll_demais_empresas
+        description: Contribuição Social sobre o Lucro Líquido referente à demais
+          empresas.
+      - name: cide_combustiveis_parcela_nao_dedutivel
+        description: Parcela não dedutível da Contribuição de Intervenção no Domínio
+          Econômico aplicada à combustíveis.
+      - name: cide_combustiveis
+        description: Contribuição de Intervenção no Domínio Econômico aplicada à combustíveis.
+      - name: cpsss_1
+        description: 'Contribuição para o Plano de Seguridade Social do Servidor Público. '
+      - name: cpsss_2
+        description: 'Contribuição para o Plano de Seguridade Social do Servidor Público. '
+      - name: contribuicao_fundaf
+        description: 'Contribuições para o Fundo Especial de Desenvolvimento e Aperfeiçoamento
+          das Atividades de Fiscalização (Fundaf). '
+      - name: refis
+        description: Programa de Recuperação Fiscal.
+      - name: paes
+        description: Parcelamento Especial.
+      - name: retencoes_fonte
+        description: 'Retenções na fonte de CSLL, Cofins e Pis/Pasep, previstas no
+          art. 30 da Lei nº 10.833, de 29 de dezembro de 2003. '
+      - name: pagamento_unificado
+        description: Pagamentos referentes a vários tributos feitos em um único documento
+          de arrecadação, tipo parcelamentos, retenções, Simples etc.
+      - name: outras_receitas_rfb
+        description: 'Outras receitas administradas pela RFB. '
+      - name: demais_receitas
+        description: 'Outras receitas não administradas pela RFB. '
+      - name: receita_previdenciaria
+        description: Total da Receita Previdenciária.
+      - name: receita_previdenciaria_propria
+        description: Receita Previdenciária Própria.
+      - name: receita_previdenciaria_demais
+        description: Receita Previdenciária Demais.
+      - name: receitas_outros_orgaos
+        description: Receitas administradas por outros órgãos.
