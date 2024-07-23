@@ -174,14 +174,15 @@ if __name__ == "__main__":
     launched_flow_run_ids = []
     for dataset_id, table_id, alias in existing_datasets_tables:
         print(
-            f"Launching materialization flow for {dataset_id}.{table_id} (alias={alias})..."
+            f"Launching flow for testing {dataset_id}.{table_id} (alias={alias})..."
         )
         parameters = {
             "dataset_id": dataset_id,
             "dbt_alias": alias,
             "mode": args.materialization_mode,
             "table_id": table_id,
-            "dbt_command": args.dbt_command
+            "dbt_command": args.dbt_command,
+            "download_csv_file": False
         }
 
         mutation = """

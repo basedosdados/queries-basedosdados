@@ -54,9 +54,6 @@ models:
     br_ans_beneficiario:
       +materialized: incremental
       +schema: br_ans_beneficiario
-      +post-hook:
-        - REVOKE `roles/bigquery.dataViewer` ON TABLE {{ this }} FROM "specialGroup:allUsers"
-        - GRANT `roles/bigquery.dataViewer` ON TABLE {{ this }} TO "group:bd-pro@basedosdados.org"
     br_b3_cotacoes:
       +materialized: table
       +schema: br_b3_cotacoes
@@ -198,15 +195,15 @@ models:
     br_inep_censo_escolar:
       +materialized: table
       +schema: br_inep_censo_escolar
-    br_inep_ideb:
-      +materialized: table
-      +schema: br_inep_ideb
     br_inep_enem:
       +materialized: table
       +schema: br_inep_enem
     br_inep_formacao_docente:
       +materialized: table
       +schema: br_inep_formacao_docente
+    br_inep_ideb:
+      +materialized: table
+      +schema: br_inep_ideb
     br_inep_indicador_nivel_socioeconomico:
       +materialized: table
       +schema: br_inep_indicador_nivel_socioeconomico
@@ -231,9 +228,15 @@ models:
     br_inpe_sisam:
       +materialized: table
       +schema: br_inpe_sisam
+    br_ipea_avs:
+      +materialized: table
+      +schema: br_ipea_avs
     br_jota:
       +materialized: table
       +schema: br_jota
+    br_mdr_snis:
+      +materialized: table
+      +schema: br_mdr_snis
     br_me_caged:
       +materialized: table
       +schema: br_me_caged
@@ -252,6 +255,9 @@ models:
     br_me_sic:
       +materialized: table
       +schema: br_me_sic
+    br_me_siconfi:
+      +materialized: table
+      +schema: br_me_siconfi
     br_mec_prouni:
       +materialized: table
       +schema: br_mec_prouni
@@ -276,6 +282,9 @@ models:
     br_ms_cnes:
       +materialized: table
       +schema: br_ms_cnes
+    br_ms_pns:
+      +materialized: table
+      +schema: br_ms_pns
     br_ms_sia:
       +materialized: table
       +schema: br_ms_sia
@@ -291,6 +300,9 @@ models:
     br_ms_sinasc:
       +materialized: table
       +schema: br_ms_sinasc
+    br_ms_sisvan:
+      +materialized: table
+      +schema: br_ms_sisvan
     br_ms_vacinacao_covid19:
       +materialized: table
       +schema: br_ms_vacinacao_covid19
@@ -360,6 +372,9 @@ models:
     world_oecd_public_finance:
       +materialized: table
       +schema: world_oecd_public_finance
+    world_olympedia_olympics:
+      +materialized: table
+      +schema: world_olympedia_olympics
     world_wb_mides:
       +materialized: table
       +schema: world_wb_mides

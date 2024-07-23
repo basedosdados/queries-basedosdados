@@ -10,8 +10,8 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
         ],
     )
 }}
@@ -33,7 +33,7 @@ with
         left join
             (
                 select id_municipio, id_municipio_6,
-                from `basedosdados-dev.br_bd_diretorios_brasil.municipio`
+                from `basedosdados.br_bd_diretorios_brasil.municipio`
             ) as mun
             on raw_cnes_habilitacao_without_duplicates.codufmun = mun.id_municipio_6
     )
@@ -49,7 +49,7 @@ select
     safe_cast(substr(cmpt_ini, 5, 2) as int64) as mes_competencia_inicial,
     safe_cast(substr(cmpt_fim, 1, 4) as int64) as ano_competencia_final,
     safe_cast(substr(cmpt_fim, 5, 2) as int64) as mes_competencia_final,
-    safe_cast(sgruphab as string) tipo_habilitacao,
+    ltrim(safe_cast(sgruphab as string), '0') as tipo_habilitacao,
     case
         when
             safe_cast(sgruphab as string) in (
