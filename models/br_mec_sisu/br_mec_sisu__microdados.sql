@@ -135,10 +135,10 @@ select
         when status_matricula = 'SUBSTITUÍDA OUTRA IES'
         then '9'
     end as status_matricula
-from `basedosdados-dev.br_mec_sisu_staging.microdados` s
+from `basedosdados-staging.br_mec_sisu_staging.microdados` s
 left join
-    `basedosdados-dev.br_bd_diretorios_brasil.municipio` d1
+    `basedosdados-staging.br_bd_diretorios_brasil.municipio` d1
     on lower(s.nome_municipio_campus) = lower(d1.nome)
 left join
-    `basedosdados-dev.br_bd_diretorios_brasil.municipio` d2
+    `basedosdados-staging.br_bd_diretorios_brasil.municipio` d2
     on lower(s.nome_municipio_candidato) = lower(d2.nome)
