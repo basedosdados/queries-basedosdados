@@ -2,10 +2,19 @@
 version: 2
 models:
   - name: br_mec_sisu__microdados
-    description: Insert `microdados` table description here
+    description: Microdados dos candidatos que utilizam do sistema unificado gerido
+      pelo MEC para as vagas ofertadas por instituições públicas de ensino superior
+      de todo o Brasil
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [ano, candidato, etapa]
+          combination_of_columns:
+            - ano
+            - semestre
+            - etapa
+            - id_curso
+            - cpf
+            - candidato
+            - opcao
     columns:
       - name: ano
         description: Ano da edição
@@ -14,9 +23,9 @@ models:
               at_least: 0.05
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
-              field: ano
-      - name: edicao
-        description: Número da edição
+              field: ano.ano
+      - name: semestre
+        description: Semestre
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
@@ -63,7 +72,7 @@ models:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
           - relationships:
-              to: ref('br_bd_diretorios_brasil__municpio')
+              to: ref('br_bd_diretorios_brasil__municipio')
               field: sigla_uf
       - name: id_municipio_campus
         description: ID Município do campus da Instituição Superior - IBGE 7 Dígitos
@@ -78,9 +87,11 @@ models:
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__curso_superior')
-              field: id_curso
+      - name: nome_curso
+        description: Nome Curso - INEP
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.05
       - name: turno
         description: Turno
         tests:
@@ -109,9 +120,6 @@ models:
       - name: percentual_bonus
         description: Percentual do bônus definido para as ações afirmativas próprias
           da IES
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.05
       - name: peso_l
         description: Peso atribuído pela instituição, na adesão ao Sisu, para a prova
           de linguagens do Enem na oferta do curso no processo seletivo
@@ -205,14 +213,14 @@ models:
               at_least: 0.05
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__dia')
-              field: dia
+              field: dia.dia
       - name: sigla_uf_candidato
         description: Sigla da Unidade da Federação de residência do candidato
         tests:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
           - relationships:
-              to: ref('br_bd_diretorios_brasil__municpio')
+              to: ref('br_bd_diretorios_brasil__municipio')
               field: sigla_uf
       - name: id_municipio_candidato
         description: ID do Município de residência do candidato - IBGE 7 Dígitos

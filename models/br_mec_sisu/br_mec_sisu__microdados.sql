@@ -12,41 +12,23 @@
         labels={"tema": "educacao"},
     )
 }}
-
 select
     safe_cast(ano as int64) as ano,
-    safe_cast(edicao as string) as edicao,
-    safe_cast(etapa as string) as etapa,
+    safe_cast(edicao as string) as semestre,
+    case
+        when etapa = '4' then 'Chamada Regular' when etapa = '7' then 'Lista de Espera'
+    end as etapa,
     safe_cast(sigla_uf_ies as string) as sigla_uf_ies,
     safe_cast(id_ies as string) as id_ies,
     safe_cast(sigla_ies as string) as sigla_ies,
-    safe_cast(sigla_uf_campus as string) as sigla_uf_campus,
+    safe_cast(d1.sigla_uf as string) as sigla_uf_campus,
     safe_cast(d1.id_municipio as string) as id_municipio_campus,
     safe_cast(id_campus as string) as id_campus,
     safe_cast(campus as string) as campus,
     safe_cast(id_curso as string) as id_curso,
-    case
-        when turno = 'Integral'
-        then '1'
-        when turno = 'Matutino'
-        then '2'
-        when turno = 'Vespertino'
-        then '3'
-        when turno = 'Noturno'
-        then '4'
-        when turno = 'EaD'
-        then '5'
-    end as turno,
-    case
-        when periodicidade = 'Trimestral'
-        then '3'
-        when periodicidade = 'Quadrimestral'
-        then '4'
-        when periodicidade = 'Semestral'
-        then '6'
-        when periodicidade = 'Anual'
-        then '12'
-    end as periodicidade,
+    safe_cast(nome_curso as string) as nome_curso,
+    safe_cast(turno as string) as turno,
+    safe_cast(periodicidade as string) as periodicidade,
     safe_cast(tipo_cota as string) as tipo_cota,
     safe_cast(ds_modalidade_concorrencia as string) as modalidade_concorrencia,
     safe_cast(quantidade_vagas_concorrencia as int64) as quantidade_vagas_concorrencia,
@@ -81,7 +63,7 @@ select
         then concat('20', data_nascimento)
         else data_nascimento
     end as data_nascimento,
-    safe_cast(sigla_uf_candidato as string) as sigla_uf_candidato,
+    safe_cast(d2.sigla_uf as string) as sigla_uf_candidato,
     safe_cast(d2.id_municipio as string) as id_municipio_candidato,
     safe_cast(opcao as string) as opcao,
     safe_cast(nota_l as float64) as nota_l,
@@ -109,36 +91,38 @@ select
     ) as status_aprovado,
     case
         when status_matricula = 'CANCELADA'
-        then '1'
+        then 'Cancelada'
         when status_matricula = 'DOCUMENTACAO REJEITADA'
-        then '2'
+        then 'Documentação rejeitada'
         when status_matricula = 'DOCUMENTAÇÃO REJEITADA'
-        then '2'
+        then 'Documentação rejeitada'
         when status_matricula = 'EFETIVADA'
-        then '3'
+        then 'Efetivada'
         when status_matricula = 'NÃO COMPARECEU'
-        then '4'
+        then 'Não compareceu'
         when status_matricula = 'NÃO CONVOCADO'
-        then '5'
+        then 'Não convocado'
         when status_matricula = 'PENDENTE'
-        then '6'
+        then 'Pendente'
         when status_matricula = 'SUBSTITUIDA - FORA DO PRAZO'
-        then '7'
+        then 'Substituída - fora do prazo'
         when status_matricula = 'SUBSTITUIDA - MATRICULA FORA DO PRAZO'
-        then '7'
+        then 'Substituída - fora do prazo'
         when status_matricula = 'SUBSTITUIDA - MESMA IES'
-        then '8'
+        then 'Substituída - mesma IES'
         when status_matricula = 'SUBSTITUIDA - OUTRA IES'
-        then '9'
+        then 'Substituída - outra IES'
         when status_matricula = 'SUBSTITUÍDA MESMA IES'
-        then '8'
+        then 'Substituída - mesma IES'
         when status_matricula = 'SUBSTITUÍDA OUTRA IES'
-        then '9'
+        then 'Substituída - outra IES'
     end as status_matricula
 from `basedosdados-staging.br_mec_sisu_staging.microdados` s
 left join
     `basedosdados-staging.br_bd_diretorios_brasil.municipio` d1
-    on lower(s.nome_municipio_campus) = lower(d1.nome)
+    on (s.sigla_uf_campus = d1.sigla_uf)
+    and (lower(s.nome_municipio_campus) = lower(d1.nome))
 left join
     `basedosdados-staging.br_bd_diretorios_brasil.municipio` d2
-    on lower(s.nome_municipio_candidato) = lower(d2.nome)
+    on (s.sigla_uf_candidato = d2.sigla_uf)
+    and (lower(s.nome_municipio_candidato) = lower(d2.nome))
