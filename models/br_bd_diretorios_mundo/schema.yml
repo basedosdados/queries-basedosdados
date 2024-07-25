@@ -22,7 +22,7 @@ models:
       - name: sigla_pais_pnud
         description: Sigla do País - PNUD
       - name: sigla_pais_coi
-        description: Sigla do País - COI
+        description: Sigla do País - Comité Olímpico Internacional
       - name: sigla_pais_fifa
         description: Sigla do País - FIFA
       - name: nome
