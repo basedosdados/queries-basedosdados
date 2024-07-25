@@ -157,16 +157,16 @@ with
             email,
         from `basedosdados.br_me_cnpj.estabelecimentos` a
         inner join
-            `basedosdados.br_me_cnpj.dicionente_federativoario` b
+            `basedosdados.br_me_cnpj.dicionario` b
             on a.identificador_matriz_filial = b.chave
         inner join
             `basedosdados.br_me_cnpj.dicionario` t
             on a.identificador_matriz_filial = t.chave
         left join
-            `basedosdados-staging.br_bd_diretorios_brasil_staging.bairro_code_iso3` g
+            `basedosdados-dev.br_bd_diretorios_brasil_staging.bairro_code_iso3` g
             on a.bairro = g.bairro
         left join
-            `basedosdados-staging.br_bd_diretorios_mundo_staging.pais_code` f
+            `basedosdados-dev.br_bd_diretorios_mundo_staging.pais_code` f
             on a.id_pais = f.co_pais
         where
             a.data = (select max_date from max_bdpro_date)
