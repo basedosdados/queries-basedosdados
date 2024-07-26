@@ -1311,7 +1311,7 @@ with
                         ) as date
                     )
             end data_sinais_gravidade
-        from `basedosdados-dev.br_ms_sinan_staging.microdados_chikungunya`
+        from `basedosdados-staging.br_ms_sinan_staging.microdados_chikungunya`
     )
 
 select
