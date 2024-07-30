@@ -5,16 +5,17 @@
         materialized="table",
         cluster_by=["id_municipio", "sigla_uf"],
         labels={"tema": "economia"},
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (TRUE))',
+        ],
     )
 }}
 
 with
-    max_dia as (
-
-        select cnpj, max(data) as max_data
-        from `basedosdados.br_me_cnpj.estabelecimentos`
-        group by cnpj
+    max_bdpro_date as (
+        select max(data) as max_date from `basedosdados.br_me_cnpj.estabelecimentos`
     ),
+
     estabelecimento as (
         select distinct
             a.cnpj,
@@ -153,10 +154,8 @@ with
             concat(ddd_1, " ", telefone_1) as telefone_1,
             concat(ddd_2, " ", telefone_2) as telefone_2,
             concat(ddd_fax, " ", fax) as fax,
-            email
-
+            email,
         from `basedosdados.br_me_cnpj.estabelecimentos` a
-        inner join max_dia e on a.cnpj = e.cnpj and a.data = e.max_data
         inner join
             `basedosdados.br_me_cnpj.dicionario` b
             on a.identificador_matriz_filial = b.chave
@@ -170,7 +169,8 @@ with
             `basedosdados-dev.br_bd_diretorios_mundo_staging.pais_code` f
             on a.id_pais = f.co_pais
         where
-            b.nome_coluna = 'identificador_matriz_filial'
+            a.data = (select max_date from max_bdpro_date)
+            and b.nome_coluna = 'identificador_matriz_filial'
             and t.nome_coluna = 'situacao_cadastral'
     ),
     empresa as (
@@ -181,17 +181,10 @@ with
             ente_federativo,
             capital_social,
             b.valor as porte,
+            a.data
         from `basedosdados.br_me_cnpj.empresas` a
-        inner join
-            (
-                select cnpj_basico, max(data) as max_data
-                from `basedosdados.br_me_cnpj.empresas`
-                group by 1
-            ) c
-            on a.cnpj_basico = c.cnpj_basico
-            and a.data = c.max_data
         inner join `basedosdados.br_me_cnpj.dicionario` b on a.porte = b.chave
-        where b.nome_coluna = 'porte'
+        where b.nome_coluna = 'porte' and a.data = (select max_date from max_bdpro_date)
     ),
     simples as (
         select distinct cnpj_basico, opcao_simples, opcao_mei
@@ -230,7 +223,7 @@ select
     telefone_1,
     telefone_2,
     fax,
-    email
+    email,
 from estabelecimento a
 left join empresa b on a.cnpj_basico = b.cnpj_basico
 left join simples c on a.cnpj_basico = c.cnpj_basico
