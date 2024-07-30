@@ -53,7 +53,7 @@ models:
           - dbt_utils.not_null_proportion:
               at_least: 0.05
           - relationships:
-              to: ref('br_bd_diretorios_brasil__municpio')
+              to: ref('br_bd_diretorios_brasil__municipio')
               field: sigla_uf
       - name: id_campus
         description: ID do campus da Instituição Superior
