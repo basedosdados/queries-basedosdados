@@ -189,9 +189,10 @@ models:
       - name: id_ies_ofertante
         description: Código da Instituição de Ensino Superior (IES) vinculada à escola
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_bd_diretorios_brasil__instituicao_ensino_superior')
               field: id_ies
+              ignore_values: ['21869', '21869', '21869', '18210', '19333', '21869']  # 6 ocorrências unicas de incompatibilidade
       - name: local_funcionamento_predio_escolar
         description: O local de funcionamento da escola é um prédio escolar
       - name: tipo_local_funcionamento_predio_escolar
