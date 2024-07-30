@@ -5,7 +5,7 @@
         materialized="table",
     )
 }}
-
+-- Atualizado com mais 883 id_ies unicos: 07/2024
 select
     safe_cast(id_ies as string) id_ies,
     safe_cast(nome as string) nome,
