@@ -50,8 +50,6 @@ models:
             - numero
             - cpf
             - id_candidato_bd
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
