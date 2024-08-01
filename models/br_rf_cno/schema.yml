@@ -197,8 +197,8 @@ models:
       - name: caixa_postal
         description: Caixa postal no exterior
   - name: br_rf_cno__dicionario
-    description: Dicionário para tradução dos códigos do conjunto br_ms_sisvan. Para
-      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+    description: Dicionário para tradução dos códigos do conjunto br_rf_cno. Para
+      traduzir códigos compartilhados entre instituições, como id_municipio, buscar
       por diretórios
     tests:
       - dbt_utils.unique_combination_of_columns:

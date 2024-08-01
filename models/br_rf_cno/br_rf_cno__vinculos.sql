@@ -1,4 +1,15 @@
-{{ config(alias="vinculos", schema="br_rf_cno", materialized="table") }}
+{{
+    config(
+        alias="vinculos",
+        schema="br_rf_cno",
+        materialized="incremental",
+        partition_by={
+            "field": "data",
+            "data_type": "date",
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+    )
+}}
 
 
 select
@@ -12,3 +23,5 @@ select
         ltrim(qualificacao_contribuinte, '0') as string
     ) qualificacao_contribuinte,
 from `basedosdados-staging.br_rf_cno_staging.vinculos` as t
+
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}

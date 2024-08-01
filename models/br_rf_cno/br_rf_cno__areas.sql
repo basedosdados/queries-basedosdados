@@ -1,4 +1,15 @@
-{{ config(alias="areas", schema="br_rf_cno", materialized="table") }}
+{{
+    config(
+        alias="areas",
+        schema="br_rf_cno",
+        materialized="incremental",
+        partition_by={
+            "field": "data",
+            "data_type": "date",
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+    )
+}}
 
 select
     safe_cast(data as date) data_extracao,
@@ -10,3 +21,4 @@ select
     safe_cast(tipo_area_complementar as string) tipo_area_complementar,
     safe_cast(metragem as float64) metragem,
 from `basedosdados-staging.br_rf_cno_staging.areas` as t
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}

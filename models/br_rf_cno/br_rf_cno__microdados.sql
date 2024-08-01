@@ -1,4 +1,15 @@
-{{ config(alias="microdados", schema="br_rf_cno", materialized="table") }}
+{{
+    config(
+        alias="microdados",
+        schema="br_rf_cno",
+        materialized="incremental",
+        partition_by={
+            "field": "data",
+            "data_type": "date",
+        },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+    )
+}}
 
 select
     safe_cast(data as date) data_extracao,
@@ -33,3 +44,5 @@ left join
         from `basedosdados.br_bd_diretorios_brasil.municipio`
     ) b
     on ltrim(microdados.id_municipio_rf, '0') = b.id_municipio_rf
+
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
