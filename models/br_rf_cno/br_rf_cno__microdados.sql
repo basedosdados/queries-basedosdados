@@ -26,7 +26,7 @@ select
     safe_cast(numero_logradouro as string) numero_logradouro,
     safe_cast(complemento as string) complemento,
     safe_cast(caixa_postal as string) caixa_postal,
-from `basedosdados-dev.staging_staging.microdados` microdados
+from `basedosdados-staging.br_rf_cno_staging.microdados` microdados
 left join
     (
         select id_municipio, id_municipio_rf
