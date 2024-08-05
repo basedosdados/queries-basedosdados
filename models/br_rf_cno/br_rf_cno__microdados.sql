@@ -4,7 +4,7 @@
         schema="br_rf_cno",
         materialized="incremental",
         partition_by={
-            "field": "data",
+            "field": "data_extracao",
             "data_type": "date",
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
