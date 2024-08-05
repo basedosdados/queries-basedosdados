@@ -24,6 +24,7 @@ select
             then "4201653"
             when id_municipio = "5201703"
             then "5201603"
+            else id_municipio
         end as string
     ) id_municipio,
     safe_cast(rede as string) rede,
