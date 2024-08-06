@@ -157,7 +157,7 @@ models:
       - name: anos_escolares
         description: Anos Escolares
         tests:
-         - accepted_values:
+          - accepted_values:
               values: [iniciais (1-5), finais (6-9), todos (1-4)]
       - name: taxa_aprovacao
         description: Taxa de Aprovação
