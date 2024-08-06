@@ -4,8 +4,8 @@
         schema="br_rf_cno",
         materialized="incremental",
         partition_by={
-            "field": "data",
-            "data_type": "data_extracao",
+            "field": "data_extracao",
+            "data_type": "date",
         },
     )
 }}
