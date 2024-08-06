@@ -7,7 +7,6 @@
             "field": "data_extracao",
             "data_type": "date",
         },
-        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
 
