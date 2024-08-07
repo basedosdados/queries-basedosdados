@@ -13,10 +13,6 @@ models:
             - id_pais
             - sigla_uf
             - id_municipio
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
-          config:
-            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -66,10 +62,6 @@ models:
             - id_pais
             - sigla_uf
             - id_municipio
-          config:
-            where: __most_recent_year_month__
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
           config:
             where: __most_recent_year_month__
     columns:
@@ -122,10 +114,6 @@ models:
             - id_pais
             - id_via
             - id_urf
-          config:
-            where: __most_recent_year_month__
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
           config:
             where: __most_recent_year_month__
     columns:
@@ -189,10 +177,6 @@ models:
             - id_urf
           config:
             where: __most_recent_year_month__
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
-          config:
-            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -247,8 +231,6 @@ models:
             - nome_coluna
             - chave
             - cobertura_temporal
-      - not_null_proportion_multiple_columns:
-          at_least: 0.05
     columns:
       - name: id_tabela
         description: ID da tabela

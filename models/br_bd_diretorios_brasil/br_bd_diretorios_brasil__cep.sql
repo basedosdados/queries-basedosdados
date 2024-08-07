@@ -1,5 +1,5 @@
 {{ config(alias="cep", schema="br_bd_diretorios_brasil", materialized="table") }}
-
+--
 with
     t1 as (
         select
@@ -60,7 +60,7 @@ select
     t1.centroide
 from t1
 left join
-    `basedosdados-staging.br_bd_diretorios_brasil.municipio` as municipio
+    `basedosdados.br_bd_diretorios_brasil.municipio` as municipio
     on t1.id_municipio = municipio.id_municipio
 left join logradouro_max on t1.cep = logradouro_max.cep
 left join localidade_max on t1.cep = localidade_max.cep
