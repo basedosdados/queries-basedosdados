@@ -10,7 +10,7 @@
         ],
     )
 }}
-
+--
 with
     max_bdpro_date as (
         select max(data) as max_date from `basedosdados.br_me_cnpj.estabelecimentos`
