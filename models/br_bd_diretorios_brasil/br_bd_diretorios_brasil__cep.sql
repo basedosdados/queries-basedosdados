@@ -1,5 +1,5 @@
 {{ config(alias="cep", schema="br_bd_diretorios_brasil", materialized="table") }}
-
+--
 with
     t1 as (
         select
