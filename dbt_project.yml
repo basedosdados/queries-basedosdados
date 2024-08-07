@@ -261,6 +261,9 @@ models:
     br_mec_prouni:
       +materialized: table
       +schema: br_mec_prouni
+    br_mec_sisu:
+      +materialized: table
+      +schema: br_mec_sisu
     br_mercadolivre_ofertas:
       +materialized: table
       +schema: br_mercadolivre_ofertas
@@ -315,6 +318,9 @@ models:
     br_rf_cafir:
       +materialized: table
       +schema: br_rf_cafir
+    br_rf_cno:
+      +materialized: table
+      +schema: br_rf_cno
     br_rj_isp_estatisticas_seguranca:
       +materialized: table
       +schema: br_rj_isp_estatisticas_seguranca
