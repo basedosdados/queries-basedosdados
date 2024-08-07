@@ -44,4 +44,6 @@ left join
     ) b
     on ltrim(microdados.id_municipio_rf, '0') = b.id_municipio_rf
 
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+{% if is_incremental() %}
+    where safe_cast(data as date) > (select max(data_extracao) from {{ this }})
+{% endif %}

@@ -15,4 +15,6 @@ select
     safe_cast(id_cno as string) id_cno,
     safe_cast(cnae_2_subclasse as string) cnae_2_subclasse,
 from `basedosdados-staging.br_rf_cno_staging.cnaes` as t
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+{% if is_incremental() %}
+    where safe_cast(data as date) > (select max(data_extracao) from {{ this }})
+{% endif %}
