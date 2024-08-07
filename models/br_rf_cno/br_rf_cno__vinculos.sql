@@ -23,4 +23,6 @@ select
     ) qualificacao_contribuinte,
 from `basedosdados-staging.br_rf_cno_staging.vinculos` as t
 
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+{% if is_incremental() %}
+    where safe_cast(data as date) > (select max(data_extracao) from {{ this }})
+{% endif %}
