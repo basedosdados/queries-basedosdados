@@ -6,9 +6,7 @@ models:
       receitas administradas e não administradas pela Receita Federal do Brasil.
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [insert unique keys here]
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          combination_of_columns: [ano, mes, sigla_uf]
     columns:
       - name: ano
         description: Ano de referência.
@@ -16,119 +14,251 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: sigla_uf
         description: Sigla da Unidade da Federação.
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: imposto_importacao
         description: Imposto sobre a Importação.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: imposto_exportacao
         description: Imposto sobre a Exportação.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: ipi_fumo
         description: Imposto sobre Produtos Industrializado incidente sobre setor
           de fumo.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: ipi_bebidas
         description: Imposto sobre Produtos Industrializado incidente sobre setor
           de bebidas.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: ipi_automoveis
         description: Imposto sobre Produtos Industrializado incidente sobre setor
           de automóveis.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: ipi_importacoes
         description: Imposto sobre Produtos Industrializado vinculado à importação.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: ipi_outros
         description: Imposto sobre Produtos Industrializado incidente sobre outros
           produtos.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irpf
         description: Imposto sobre a Renda da Pessoa Física.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irpj_entidades_financeiras
         description: Imposto sobre a Renda da Pessoa Jurídica incidente em entidades
           financeiras.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irpj_demais_empresas
         description: Imposto sobre a Renda da Pessoa Jurídica incidente em demais
           empresas.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irrf_rendimentos_trabalho
         description: Imposto sobre a Renda Retido na Fonte referente à rendimentos
           do trabalho.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irrf_rendimentos_capital
         description: Imposto sobre a Renda Retido na Fonte referente à rendimentos
           do capital.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irrf_remessas_exterior
         description: Imposto sobre a Renda Retido na Fonte referente à remessas para
           o exterior.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: irrf_outros_rendimentos
         description: Imposto sobre a Renda Retido na Fonte referente à outros rendimentos.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: iof
         description: Imposto sobre Operações Financeiras.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: itr
         description: Imposto sobre a Propriedade Territorial Rural.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: ipmf
-        description: 'Imposto Provisório sobre Movimentação Financeira. '
+        description: Imposto Provisório sobre Movimentação Financeira.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.06
       - name: cpmf
         description: Contribuição Provisória sobre Movimentação Financeira.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.45
       - name: cofins
         description: Contribuição para o Financiamento da Seguridade Social.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.12
       - name: cofins_entidades_financeiras
-        description: 'Contribuição para o Financiamento da Seguridade Social referente
-          à entidades financeiras. '
+        description: Contribuição para o Financiamento da Seguridade Social referente
+          à entidades financeiras.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.80
       - name: cofins_demais_empresas
         description: Contribuição para o Financiamento da Seguridade Social referente
           à demais empresas.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.80
       - name: pis_pasep
-        description: 'Programa de Integração Social e o Programa de Formação do Patrimônio
-          do Servidor Público. '
+        description: Programa de Integração Social e o Programa de Formação do Patrimônio
+          do Servidor Público.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.12
       - name: pis_pasep_entidades_financeiras
         description: Programa de Integração Social e o Programa de Formação do Patrimônio
           do Servidor Público referente à entidades financeiras.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.80
       - name: pis_pasep_demais_empresas
         description: Programa de Integração Social e o Programa de Formação do Patrimônio
           do Servidor Público referente à demais empresas.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.80
       - name: csll
-        description: 'Contribuição Social sobre o Lucro Líquido. '
+        description: Contribuição Social sobre o Lucro Líquido.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.12
       - name: csll_entidades_financeiras
         description: Contribuição Social sobre o Lucro Líquido referente à entidades
           financeiras.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.80
       - name: csll_demais_empresas
         description: Contribuição Social sobre o Lucro Líquido referente à demais
           empresas.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.80
       - name: cide_combustiveis_parcela_nao_dedutivel
         description: Parcela não dedutível da Contribuição de Intervenção no Domínio
           Econômico aplicada à combustíveis.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.03
       - name: cide_combustiveis
         description: Contribuição de Intervenção no Domínio Econômico aplicada à combustíveis.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.75
       - name: cpsss_1
-        description: 'Contribuição para o Plano de Seguridade Social do Servidor Público. '
+        description: Contribuição para o Plano de Seguridade Social do Servidor Público.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.12
       - name: cpsss_2
-        description: 'Contribuição para o Plano de Seguridade Social do Servidor Público. '
+        description: Contribuição para o Plano de Seguridade Social do Servidor Público.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.50
       - name: contribuicao_fundaf
-        description: 'Contribuições para o Fundo Especial de Desenvolvimento e Aperfeiçoamento
-          das Atividades de Fiscalização (Fundaf). '
+        description: Contribuições para o Fundo Especial de Desenvolvimento e Aperfeiçoamento
+          das Atividades de Fiscalização (Fundaf).
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.55
       - name: refis
         description: Programa de Recuperação Fiscal.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.03
       - name: paes
         description: Parcelamento Especial.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.03
       - name: retencoes_fonte
-        description: 'Retenções na fonte de CSLL, Cofins e Pis/Pasep, previstas no
-          art. 30 da Lei nº 10.833, de 29 de dezembro de 2003. '
+        description: Retenções na fonte de CSLL, Cofins e Pis/Pasep, previstas no
+          art. 30 da Lei nº 10.833, de 29 de dezembro de 2003.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.02
       - name: pagamento_unificado
         description: Pagamentos referentes a vários tributos feitos em um único documento
           de arrecadação, tipo parcelamentos, retenções, Simples etc.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.04
       - name: outras_receitas_rfb
-        description: 'Outras receitas administradas pela RFB. '
+        description: Outras receitas administradas pela RFB.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
       - name: demais_receitas
-        description: 'Outras receitas não administradas pela RFB. '
+        description: Outras receitas não administradas pela RFB.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.25
       - name: receita_previdenciaria
         description: Total da Receita Previdenciária.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.25
       - name: receita_previdenciaria_propria
         description: Receita Previdenciária Própria.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.15
       - name: receita_previdenciaria_demais
         description: Receita Previdenciária Demais.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.15
       - name: receitas_outros_orgaos
         description: Receitas administradas por outros órgãos.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.50
