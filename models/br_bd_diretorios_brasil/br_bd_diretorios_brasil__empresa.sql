@@ -6,11 +6,11 @@
         cluster_by=["id_municipio", "sigla_uf"],
         labels={"tema": "economia"},
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (TRUE))',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (TRUE)',
         ],
     )
 }}
-
+--
 with
     max_bdpro_date as (
         select max(data) as max_date from `basedosdados.br_me_cnpj.estabelecimentos`
