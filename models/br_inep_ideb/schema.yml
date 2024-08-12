@@ -130,3 +130,46 @@ models:
         description: IDEB (Média Padronizada x Indicador de rendimento)
       - name: projecao
         description: Projeção
+  - name: br_inep_ideb__brasil
+    description: Dados do Ideb agregados para o Brasil a nível de rede-anos_escolares-ano
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, rede, ensino, anos_escolares]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.7
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: rede
+        description: Rede Escolar (Dependência Administrativa)
+        tests:
+          - accepted_values:
+              values: [estadual, municipal, privada, publica, total]
+      - name: ensino
+        description: Tipo de Ensino
+        tests:
+          - accepted_values:
+              values: [fundamental, medio]
+      - name: anos_escolares
+        description: Anos Escolares
+        tests:
+          - accepted_values:
+              values: [iniciais (1-5), finais (6-9), todos (1-4)]
+      - name: taxa_aprovacao
+        description: Taxa de Aprovação
+      - name: indicador_rendimento
+        description: Indicador de Rendimento (P)
+      - name: nota_saeb_matematica
+        description: Nota SAEB - Matemática
+      - name: nota_saeb_lingua_portuguesa
+        description: Nota SAEB - Língua Portuguesa
+      - name: nota_saeb_media_padronizada
+        description: Nota SAEB - Média Padronizada (N)
+      - name: ideb
+        description: IDEB (Nota SAEB - Média Padronizada x Indicador de Rendimento)
+      - name: projecao
+        description: Projeção
