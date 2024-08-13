@@ -1,3 +1,12 @@
+"""
+Script para baixar is dados da taxa de alfabetização divulgado pelo SAEB.
+Fonte: https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb/resultados
+
+São duas tabelas:
+- brasil_taxa_alfabetizacao
+- uf_taxa_alfabetizacao
+"""
+
 import pandas as pd
 import basedosdados as bd
 import os
@@ -6,6 +15,7 @@ os.getcwd()
 
 INPUT = os.path.join(os.getcwd(), "input")
 OUTPUT = os.path.join(os.getcwd(), "output")
+
 URL = "https://download.inep.gov.br/saeb/resultados/saeb_2021_brasil_estados_municipios_c_tx_alfabetizado.xlsx"
 
 os.makedirs(INPUT, exist_ok=True)
@@ -50,7 +60,14 @@ df_br = df_br.rename(
     errors="raise",
 )
 
-df_br.to_csv(os.path.join(OUTPUT, "brasil_taxa_alfabetizacao.csv"), index=False)
+df_br_from_bigquery = bd.read_sql(
+    "select * from `basedosdados.br_inep_saeb.brasil_taxa_alfabetizacao`",
+    billing_project_id="basedosdados-dev",
+)
+
+pd.concat([df_br_from_bigquery, df_br]).to_csv(  # type: ignore
+    os.path.join(OUTPUT, "brasil_taxa_alfabetizacao.csv"), index=False
+)
 
 # Estados
 
@@ -67,7 +84,7 @@ bd_dirs_ufs = bd.read_sql(
     billing_project_id="basedosdados-dev",
 )
 
-uf_map = dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")]) # type: ignore
+uf_map = dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")])  # type: ignore
 
 df_ufs["NO_UF"].unique()
 
@@ -89,7 +106,14 @@ df_ufs = df_ufs.rename(
     errors="raise",
 )
 
-df_ufs.to_csv(os.path.join(OUTPUT, "uf_taxa_alfabetizacao.csv"), index=False)
+df_ufs_from_bigquery = bd.read_sql(
+    "select * from `basedosdados.br_inep_saeb.uf_taxa_alfabetizacao`",
+    billing_project_id="basedosdados-dev",
+)
+
+pd.concat([df_ufs_from_bigquery, df_ufs]).to_csv(  # type: ignore
+    os.path.join(OUTPUT, "uf_taxa_alfabetizacao.csv"), index=False
+)
 
 # Upload
 
