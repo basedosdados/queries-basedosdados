@@ -175,6 +175,9 @@ models:
         description: Projeção
   - name: br_inep_ideb__uf
     description: Ideb a nível de UF, por ano, rede e anos escolares.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.7
     columns:
       - name: ano
         description: Ano
