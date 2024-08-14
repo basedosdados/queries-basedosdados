@@ -20,4 +20,6 @@ select
     safe_cast(tipo_area_complementar as string) tipo_area_complementar,
     safe_cast(metragem as float64) metragem,
 from `basedosdados-staging.br_rf_cno_staging.areas` as t
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+{% if is_incremental() %}
+    where safe_cast(data as date) > (select max(data_extracao) from {{ this }})
+{% endif %}
