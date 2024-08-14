@@ -220,3 +220,46 @@ models:
         description: IDEB (N x P)
       - name: projecao
         description: Projeção
+  - name: br_inep_ideb__regiao
+    description: Ideb a nível de região, por ano, rede e anos escolares.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.7
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: regiao
+        description: Região
+      - name: rede
+        description: Rede Escolar
+        tests:
+          - accepted_values:
+              values: [privada, publica, total, estadual]
+      - name: ensino
+        description: Tipo de Ensino
+        test:
+          - accepted_values:
+              values: [medio, fundamental]
+      - name: anos_escolares
+        description: Anos Escolares
+        test:
+          - accepted_values:
+              values: [iniciais (1-5), finais (6-9), todos (1-4)]
+      - name: taxa_aprovacao
+        description: Taxa de Aprovação
+      - name: indicador_rendimento
+        description: Indicador de Rendimento (P)
+      - name: nota_saeb_matematica
+        description: Nota SAEB - Matemática
+      - name: nota_saeb_lingua_portuguesa
+        description: Nota SAEB - Língua Portuguesa
+      - name: nota_saeb_media_padronizada
+        description: Nota SAEB - Média Padronizada (N)
+      - name: ideb
+        description: IDEB (N x P)
+      - name: projecao
+        description: Projeção
