@@ -6,6 +6,7 @@ from utils import (
     get_nivel_serie_disciplina,
     get_disciplina_serie,
     convert_to_pd_dtype,
+    drop_empty_lines
 )
 
 CWD = os.path.dirname(os.getcwd())
@@ -111,15 +112,20 @@ br_saeb_latest_output["rede"].unique()
 br_saeb_latest_output = (
     # apenas MT e LP
     br_saeb_latest_output.loc[br_saeb_latest_output["disciplina"].isin(["mt", "lp"])]
-    .pipe(
-        # vamos remover em_regular (Ensino Médio Integrado)
-        lambda df: df.loc[df["serie"] != "em_regular"]
-    )
     .assign(
         disciplina=lambda df: df["disciplina"].str.upper(),
         rede=lambda df: df["rede"].str.lower(),
         localizacao=lambda df: df["localizacao"].str.lower(),
-        serie=lambda df: df["serie"].replace({"em": "3", "em_integral": "4"}),
+        serie=lambda df: df["serie"].replace(
+            {
+                # em é 12, vai virar 3
+                "em": "3",
+                # em_integral (Ensino Medio Integrado) é 13, vai virar 12
+                "em_integral": "12",
+                # em_regular (Ensino Médio Tradicional + Integrado) é 14, vai virar 13
+                "em_regular": "13",
+            }
+        ),
     )
 )
 
@@ -128,6 +134,8 @@ br_saeb_latest_output["ano"] = 2021
 br_saeb_latest_output.head()
 
 br_saeb_latest_output.info()
+
+br_saeb_latest_output.shape
 
 tb = bd.Table(dataset_id="br_inep_saeb", table_id="brasil")
 
@@ -143,10 +151,28 @@ col_dtypes = {
 br_saeb_latest_output = br_saeb_latest_output.astype(col_dtypes)[col_dtypes.keys()]
 
 upstream_df = bd.read_sql(
-    "select * from `basedosdados.br_inep_saeb.brasil`",
+    "select * from `basedosdados-dev.br_inep_saeb.brasil` where ano <> 2021",
     billing_project_id="basedosdados-dev",
 )
 
+assert isinstance(upstream_df, pd.DataFrame)
+
+upstream_df.shape
+
+upstream_df = drop_empty_lines(upstream_df)
+
+upstream_df.shape
+
+br_saeb_latest_output.shape
+drop_empty_lines(br_saeb_latest_output).shape
+
 pd.concat([br_saeb_latest_output, upstream_df]).to_csv(  # type: ignore
     os.path.join(OUTPUT, "brasil.csv"), index=False
+)
+
+# Update table
+tb.create(
+    os.path.join(OUTPUT, "brasil.csv"),
+    if_table_exists="replace",
+    if_storage_data_exists="replace",
 )

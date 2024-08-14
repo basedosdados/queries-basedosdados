@@ -6,6 +6,7 @@ from utils import (
     get_nivel_serie_disciplina,
     get_disciplina_serie,
     convert_to_pd_dtype,
+    drop_empty_lines
 )
 
 CWD = os.path.dirname(os.getcwd())
@@ -114,31 +115,77 @@ bd_dirs_ufs = bd.read_sql(
     billing_project_id="basedosdados-dev",
 )
 
-
 ufs_saeb_latest_output = (
-    # apenas MT e LP
+    # Apenas MT e LP. Não sei porque não subiram outras disciplinas
     ufs_saeb_latest_output.loc[ufs_saeb_latest_output["disciplina"].isin(["mt", "lp"])]
-    .pipe(
-        # vamos remover em_regular (Ensino Médio Integrado)
-        lambda df: df.loc[df["serie"] != "em_regular"]
-    )
     .assign(
         disciplina=lambda df: df["disciplina"].str.upper(),
         rede=lambda df: df["rede"].str.lower(),
         localizacao=lambda df: df["localizacao"].str.lower(),
-        serie=lambda df: df["serie"].replace({"em": "3", "em_integral": "4"}),
+        # NOTE: O saeb é aplicado no ensino fundamental e médio
+        # 2, 5 e 9 serie do ensino fundamental
+        # O xlsx divulgado pelo INEP traz uma coluna no formato {media|nivel}_{numero}_{disciplina}
+        # Exemplo: `nivel_3_MT5`, `nivel_0_LP12`, veja `RENAMES_UFS`
+        #
+        # As colunas para o ensino médio são essas:
+        #
+        # 12: Ensino Médio Tradicional
+        # 13: Ensino Médio Integrado
+        # 14: Ensino Médio Tradicional + Integrado
+        #
+        # Os dados na BD estão em uma formato sem sentido
+        # A coluna serie tem 2, 5 e 9, tudo certo, mas tem 3, 12 e 13. O que é 3? 14 virou 3?
+        #
+        # O que aconteceu foi:
+        #
+        # 12 (ensino medio tradicional) virou 3
+        # 14 (Ensino Médio Tradicional + Integrado) virou 13
+        # 13 (Ensino Médio Integrado) virou 12
+        #
+        # Veja https://github.com/basedosdados/mais/blob/a5fd53d117d3f0a83d6cf87327a9b4209cf7fcdb/bases/br_inep_saeb/code/br_inep_saeb_brasil.ipynb#L1348-L1351
+        #
+        # A categoria 13 e 14 que virou 12 e 13 na tabela da BD
+        # começou aparacer apenas em 2021. Anteiormente era apenas
+        # 2, 5, 9 e 12, representado 2, 5 e 9 série do ensino fundamental
+        # e 12 o ensino médio tradicional
+        #
+        # Veja que o resultado da query abaixo é zero porque a categoria não
+        # existia para `ano < 2021`
+        #
+        # `select count(*) from `basedosdados.br_inep_saeb.uf` where ano < 2021 and serie in (12, 13)`
+        #
+        # São várias linhas com valores nulos. Deveriam ser removidas, imo.
+        #
+        # Vamos manter o mesmo formato no sense
+        serie=lambda df: df["serie"].replace(
+            {
+                # em é 12, vai virar 3
+                "em": "3",
+                # em_integral (Ensino Medio Integrado) é 13, vai virar 12
+                "em_integral": "12",
+                # em_regular (Ensino Médio Tradicional + Integrado) é 14, vai virar 13
+                "em_regular": "13",
+            }
+        ),
         sigla_uf=lambda df: df["nome_uf"].replace(
-            dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")])
-        ),  # type: ignore
+            dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")])  # type: ignore
+        ),
     )
     .drop(columns=["nome_uf"])
 )
 
+# Add column ano = 2021
 ufs_saeb_latest_output["ano"] = 2021
 
 ufs_saeb_latest_output.head()
 
 ufs_saeb_latest_output.info()
+
+ufs_saeb_latest_output.shape
+
+drop_empty_lines(ufs_saeb_latest_output).shape
+
+ufs_saeb_latest_output = drop_empty_lines(ufs_saeb_latest_output)
 
 tb = bd.Table(dataset_id="br_inep_saeb", table_id="uf")
 
@@ -154,10 +201,26 @@ col_dtypes = {
 ufs_saeb_latest_output = ufs_saeb_latest_output.astype(col_dtypes)[col_dtypes.keys()]
 
 upstream_df = bd.read_sql(
-    "select * from `basedosdados.br_inep_saeb.uf`",
+    "select * from `basedosdados-dev.br_inep_saeb.uf` where ano <> 2021",
     billing_project_id="basedosdados-dev",
 )
 
+assert isinstance(upstream_df, pd.DataFrame)
+
+upstream_df["serie"].unique()
+
+upstream_df.shape
+drop_empty_lines(upstream_df).shape
+
+upstream_df = drop_empty_lines(upstream_df)
+
 pd.concat([ufs_saeb_latest_output, upstream_df]).to_csv(  # type: ignore
     os.path.join(OUTPUT, "uf.csv"), index=False
+)
+
+# Update table
+tb.create(
+    os.path.join(OUTPUT, "uf.csv"),
+    if_table_exists="replace",
+    if_storage_data_exists="replace",
 )

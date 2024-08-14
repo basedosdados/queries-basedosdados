@@ -6,6 +6,7 @@ from utils import (
     get_nivel_serie_disciplina,
     get_disciplina_serie,
     convert_to_pd_dtype,
+    drop_empty_lines,
 )
 
 CWD = os.path.dirname(os.getcwd())
@@ -119,6 +120,7 @@ mun_saeb_latest_output = (
                 "disciplina",
                 "serie",
             ],
+            how="left",
         )
     )
     .drop(columns=["variable"])
@@ -142,23 +144,34 @@ bd_dirs_ufs = bd.read_sql(
 
 
 mun_saeb_latest_output = (
-    # apenas MT e LP
+    # Apenas MT e LP
     mun_saeb_latest_output.loc[mun_saeb_latest_output["disciplina"].isin(["mt", "lp"])]
-    .pipe(
-        # vamos remover em_regular (Ensino Médio Integrado)
-        lambda df: df.loc[df["serie"] != "em_regular"]
-    )
     .assign(
         disciplina=lambda df: df["disciplina"].str.upper(),
         rede=lambda df: df["rede"].str.lower(),
         localizacao=lambda df: df["localizacao"].str.lower(),
-        serie=lambda df: df["serie"].replace({"em": "3", "em_integral": "4"}),
         sigla_uf=lambda df: df["nome_uf"].replace(
             dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")])  # type: ignore
+        ),
+        serie=lambda df: df["serie"].replace(
+            {
+                # em é 12, vai virar 3
+                "em": "3",
+                # em_integral (Ensino Medio Integrado) é 13, vai virar 12
+                "em_integral": "12",
+                # em_regular (Ensino Médio Tradicional + Integrado) é 14, vai virar 13
+                "em_regular": "13",
+            }
         ),
     )
     .drop(columns=["nome_uf"])
 )
+
+mun_saeb_latest_output.shape
+
+mun_saeb_latest_output = drop_empty_lines(mun_saeb_latest_output)
+
+mun_saeb_latest_output.shape
 
 mun_saeb_latest_output["ano"] = 2021
 
@@ -180,10 +193,21 @@ col_dtypes = {
 mun_saeb_latest_output = mun_saeb_latest_output.astype(col_dtypes)[col_dtypes.keys()]
 
 upstream_df = bd.read_sql(
-    "select * from `basedosdados.br_inep_saeb.municipio`",
+    "select * from `basedosdados.br_inep_saeb.municipio` where ano <> 2021",
     billing_project_id="basedosdados-dev",
 )
 
+assert isinstance(upstream_df, pd.DataFrame)
+
+upstream_df = drop_empty_lines(upstream_df)
+
 pd.concat([mun_saeb_latest_output, upstream_df]).to_csv(  # type: ignore
     os.path.join(OUTPUT, "municipio.csv"), index=False
+)
+
+# Update table
+tb.create(
+    os.path.join(OUTPUT, "municipio.csv"),
+    if_table_exists="replace",
+    if_storage_data_exists="replace",
 )
