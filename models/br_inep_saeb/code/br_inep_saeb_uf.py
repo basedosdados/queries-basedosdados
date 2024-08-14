@@ -6,7 +6,7 @@ from utils import (
     get_nivel_serie_disciplina,
     get_disciplina_serie,
     convert_to_pd_dtype,
-    drop_empty_lines
+    drop_empty_lines,
 )
 
 CWD = os.path.dirname(os.getcwd())
@@ -122,49 +122,14 @@ ufs_saeb_latest_output = (
         disciplina=lambda df: df["disciplina"].str.upper(),
         rede=lambda df: df["rede"].str.lower(),
         localizacao=lambda df: df["localizacao"].str.lower(),
-        # NOTE: O saeb é aplicado no ensino fundamental e médio
-        # 2, 5 e 9 serie do ensino fundamental
-        # O xlsx divulgado pelo INEP traz uma coluna no formato {media|nivel}_{numero}_{disciplina}
-        # Exemplo: `nivel_3_MT5`, `nivel_0_LP12`, veja `RENAMES_UFS`
-        #
-        # As colunas para o ensino médio são essas:
-        #
-        # 12: Ensino Médio Tradicional
-        # 13: Ensino Médio Integrado
-        # 14: Ensino Médio Tradicional + Integrado
-        #
-        # Os dados na BD estão em uma formato sem sentido
-        # A coluna serie tem 2, 5 e 9, tudo certo, mas tem 3, 12 e 13. O que é 3? 14 virou 3?
-        #
-        # O que aconteceu foi:
-        #
-        # 12 (ensino medio tradicional) virou 3
-        # 14 (Ensino Médio Tradicional + Integrado) virou 13
-        # 13 (Ensino Médio Integrado) virou 12
-        #
-        # Veja https://github.com/basedosdados/mais/blob/a5fd53d117d3f0a83d6cf87327a9b4209cf7fcdb/bases/br_inep_saeb/code/br_inep_saeb_brasil.ipynb#L1348-L1351
-        #
-        # A categoria 13 e 14 que virou 12 e 13 na tabela da BD
-        # começou aparacer apenas em 2021. Anteiormente era apenas
-        # 2, 5, 9 e 12, representado 2, 5 e 9 série do ensino fundamental
-        # e 12 o ensino médio tradicional
-        #
-        # Veja que o resultado da query abaixo é zero porque a categoria não
-        # existia para `ano < 2021`
-        #
-        # `select count(*) from `basedosdados.br_inep_saeb.uf` where ano < 2021 and serie in (12, 13)`
-        #
-        # São várias linhas com valores nulos. Deveriam ser removidas, imo.
-        #
-        # Vamos manter o mesmo formato no sense
         serie=lambda df: df["serie"].replace(
             {
-                # em é 12, vai virar 3
-                "em": "3",
-                # em_integral (Ensino Medio Integrado) é 13, vai virar 12
-                "em_integral": "12",
-                # em_regular (Ensino Médio Tradicional + Integrado) é 14, vai virar 13
-                "em_regular": "13",
+                # em é 12
+                "em": "12",
+                # em_integral (Ensino Medio Integrado) é 13
+                "em_integral": "13",
+                # em_regular (Ensino Médio Tradicional + Integrado) é 14
+                "em_regular": "14",
             }
         ),
         sigla_uf=lambda df: df["nome_uf"].replace(
@@ -210,7 +175,6 @@ assert isinstance(upstream_df, pd.DataFrame)
 upstream_df["serie"].unique()
 
 upstream_df.shape
-drop_empty_lines(upstream_df).shape
 
 upstream_df = drop_empty_lines(upstream_df)
 

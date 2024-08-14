@@ -118,12 +118,12 @@ br_saeb_latest_output = (
         localizacao=lambda df: df["localizacao"].str.lower(),
         serie=lambda df: df["serie"].replace(
             {
-                # em é 12, vai virar 3
-                "em": "3",
-                # em_integral (Ensino Medio Integrado) é 13, vai virar 12
-                "em_integral": "12",
-                # em_regular (Ensino Médio Tradicional + Integrado) é 14, vai virar 13
-                "em_regular": "13",
+                # em é 12
+                "em": "12",
+                # em_integral (Ensino Medio Integrado) é 13
+                "em_integral": "13",
+                # em_regular (Ensino Médio Tradicional + Integrado) é 14
+                "em_regular": "14",
             }
         ),
     )
@@ -164,6 +164,7 @@ upstream_df = drop_empty_lines(upstream_df)
 upstream_df.shape
 
 br_saeb_latest_output.shape
+
 drop_empty_lines(br_saeb_latest_output).shape
 
 pd.concat([br_saeb_latest_output, upstream_df]).to_csv(  # type: ignore

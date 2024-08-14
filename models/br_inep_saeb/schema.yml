@@ -1356,9 +1356,6 @@ models:
               values: [LP, MT]
       - name: serie
         description: Série/Ano Escolar
-        tests:
-          - accepted_values:
-              values: [3, 5, 9, 12, 13, 4]
       - name: media
         description: Média da proficiência
       - name: nivel_0
