@@ -3,7 +3,6 @@
         alias="municipio",
         schema="br_inep_saeb",
         materialized="table",
-        labels={"project_id": "basedosdados-dev", "tema": "educacao"},
     )
 }}
 
