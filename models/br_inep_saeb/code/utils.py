@@ -1,3 +1,5 @@
+import pandas as pd
+
 RENAMES_BR = {
     "ANO_SAEB": "ano",
     "DEPENDENCIA_ADM": "rede",
@@ -180,3 +182,20 @@ def convert_to_pd_dtype(type: str) -> str:
         return "float64"
     else:
         assert False
+
+
+def drop_empty_lines(df: pd.DataFrame) -> pd.DataFrame:
+    return df.copy().loc[
+        (df["media"].notna())
+        | (df["nivel_0"].notna())
+        | (df["nivel_1"].notna())
+        | (df["nivel_2"].notna())
+        | (df["nivel_3"].notna())
+        | (df["nivel_4"].notna())
+        | (df["nivel_5"].notna())
+        | (df["nivel_6"].notna())
+        | (df["nivel_7"].notna())
+        | (df["nivel_8"].notna())
+        | (df["nivel_9"].notna())
+        | (df["nivel_10"].notna())
+    ]

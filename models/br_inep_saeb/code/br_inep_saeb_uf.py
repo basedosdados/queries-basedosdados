@@ -6,6 +6,7 @@ from utils import (
     get_nivel_serie_disciplina,
     get_disciplina_serie,
     convert_to_pd_dtype,
+    drop_empty_lines,
 )
 
 CWD = os.path.dirname(os.getcwd())
@@ -114,31 +115,42 @@ bd_dirs_ufs = bd.read_sql(
     billing_project_id="basedosdados-dev",
 )
 
-
 ufs_saeb_latest_output = (
-    # apenas MT e LP
+    # Apenas MT e LP. Não sei porque não subiram outras disciplinas
     ufs_saeb_latest_output.loc[ufs_saeb_latest_output["disciplina"].isin(["mt", "lp"])]
-    .pipe(
-        # vamos remover em_regular (Ensino Médio Integrado)
-        lambda df: df.loc[df["serie"] != "em_regular"]
-    )
     .assign(
         disciplina=lambda df: df["disciplina"].str.upper(),
         rede=lambda df: df["rede"].str.lower(),
         localizacao=lambda df: df["localizacao"].str.lower(),
-        serie=lambda df: df["serie"].replace({"em": "3", "em_integral": "4"}),
+        serie=lambda df: df["serie"].replace(
+            {
+                # em é 12
+                "em": "12",
+                # em_integral (Ensino Medio Integrado) é 13
+                "em_integral": "13",
+                # em_regular (Ensino Médio Tradicional + Integrado) é 14
+                "em_regular": "14",
+            }
+        ),
         sigla_uf=lambda df: df["nome_uf"].replace(
-            dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")])
-        ),  # type: ignore
+            dict([(i["nome"], i["sigla"]) for i in bd_dirs_ufs.to_dict("records")])  # type: ignore
+        ),
     )
     .drop(columns=["nome_uf"])
 )
 
+# Add column ano = 2021
 ufs_saeb_latest_output["ano"] = 2021
 
 ufs_saeb_latest_output.head()
 
 ufs_saeb_latest_output.info()
+
+ufs_saeb_latest_output.shape
+
+drop_empty_lines(ufs_saeb_latest_output).shape
+
+ufs_saeb_latest_output = drop_empty_lines(ufs_saeb_latest_output)
 
 tb = bd.Table(dataset_id="br_inep_saeb", table_id="uf")
 
@@ -154,10 +166,25 @@ col_dtypes = {
 ufs_saeb_latest_output = ufs_saeb_latest_output.astype(col_dtypes)[col_dtypes.keys()]
 
 upstream_df = bd.read_sql(
-    "select * from `basedosdados.br_inep_saeb.uf`",
+    "select * from `basedosdados-dev.br_inep_saeb.uf` where ano <> 2021",
     billing_project_id="basedosdados-dev",
 )
 
+assert isinstance(upstream_df, pd.DataFrame)
+
+upstream_df["serie"].unique()
+
+upstream_df.shape
+
+upstream_df = drop_empty_lines(upstream_df)
+
 pd.concat([ufs_saeb_latest_output, upstream_df]).to_csv(  # type: ignore
     os.path.join(OUTPUT, "uf.csv"), index=False
+)
+
+# Update table
+tb.create(
+    os.path.join(OUTPUT, "uf.csv"),
+    if_table_exists="replace",
+    if_storage_data_exists="replace",
 )
