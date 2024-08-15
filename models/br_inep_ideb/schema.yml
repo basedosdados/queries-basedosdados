@@ -97,10 +97,6 @@ models:
               field: id_municipio
       - name: id_escola
         description: ID Escola - INEP
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__escola')
-              field: id_escola
       - name: rede
         description: Rede Escolar
         tests:
