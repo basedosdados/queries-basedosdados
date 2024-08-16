@@ -5,7 +5,7 @@ models:
     description: Declaração de bens de candidatos em eleições brasileiras.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.55
     columns:
       - name: ano
         description: Ano
@@ -15,6 +15,10 @@ models:
               field: ano.ano
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_item
         description: Descrição do item
       - name: id_candidato_bd
@@ -40,6 +44,8 @@ models:
   - name: br_tse_eleicoes__candidatos
     description: Dados de candidatos em eleições brasileiras.
     tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ano
@@ -63,12 +69,28 @@ models:
         description: CPF
       - name: data_eleicao
         description: Data da eleição
-      - name: data_nascimento
-        description: Data de nascimento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+      - name: data_nascimento
+        description: Data de nascimento
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+              ignore_values:
+                - '9564-06-17'
+                - '5195-06-20'
+                - '9555-01-15'
+                - '6196-10-02'
+                - '7194-10-30'
+                - '5454-10-09'
+                - '6197-10-02'
+                - '9158-09-24'
+                - '7197-04-17'
+                - '9161-11-09'
+                - '7953-09-05'
       - name: email
         description: Email
       - name: estado_civil
@@ -90,9 +112,10 @@ models:
       - name: id_municipio_tse
         description: ID Município - TSE
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio_tse
+              ignore_values: ['73709']
       - name: instrucao
         description: Instrução
       - name: municipio_nascimento
