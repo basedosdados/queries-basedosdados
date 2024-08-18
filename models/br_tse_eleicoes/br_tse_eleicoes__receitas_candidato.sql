@@ -10,11 +10,12 @@
         },
     )
 }}
-
 select
     safe_cast(ano as int64) ano,
     safe_cast(turno as int64) turno,
+    safe_cast(id_eleicao as string) id_eleicao,
     safe_cast(tipo_eleicao as string) tipo_eleicao,
+    safe_cast(data_eleicao as string) data_eleicao,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(id_municipio_tse as string) id_municipio_tse,

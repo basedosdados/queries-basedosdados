@@ -1,10 +1,8 @@
-{{ config(alias="dicionario", schema="br_inep_sinopse_estatistica_educacao_basica") }}
+{{ config(alias="dicionario", schema="br_rf_cno", materialized="table") }}
 select
     safe_cast(id_tabela as string) id_tabela,
     safe_cast(nome_coluna as string) nome_coluna,
     safe_cast(chave as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor,
-from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.dicionario`
-    as t
+from `basedosdados-staging.br_rf_cno_staging.dicionario` as t
