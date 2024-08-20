@@ -6,14 +6,13 @@ import itertools
 import pandas as pd
 import os
 
-OUTPUT = os.path.join(os.getcwd(), "output")
+ROOT = os.path.join("models", "br_inep_saeb")
+INPUT = os.path.join(ROOT, "input")
+OUTPUT = os.path.join(ROOT, "output")
 
 os.makedirs(OUTPUT, exist_ok=True)
 
-df = bd.read_sql(
-    "select * from `basedosdados-dev.br_inep_saeb_staging.dicionario`",
-    billing_project_id="basedosdados-dev",
-)
+df = pd.read_csv(os.path.join(INPUT, "staging_br_inep_saeb_dicionario_dicionario.csv"))
 
 df = df.loc[(df["cobertura_temporal"] != "1") & (df["cobertura_temporal"] != "D"),]
 
@@ -28,11 +27,6 @@ def parse_temporal_coverage(temporal_coverage: str) -> list[dict[str, int]]:
         # single year
         if len(value) == 4:
             return dict(single_year=int(value))
-
-        # x, x
-        # if "," in value:
-        #     # TODO: Generic format
-        #     return None
 
         # x(y) or x(y)z
         if "(" in value:
@@ -171,33 +165,30 @@ def transform_df(table_id: str, df: pd.DataFrame) -> pd.DataFrame:
     return d
 
 
-new_arch = {
+new_dict = {
     table_id: transform_df(table_id, df_by_table)
     for (table_id, df_by_table) in dfs.items()
 }
 
-new_arch_5ano = new_arch["aluno_ef_5ano"].copy()
+OUTPUT_FILE = os.path.join(OUTPUT, "dicionario.csv")
 
-new_arch_5ano["temporal_coverage_parsed"] = new_arch_5ano["temporal_coverage_parsed"]
-
-counts = (
-    new_arch_5ano[["cobertura_temporal", "temporal_coverage_parsed"]]
-    .value_counts(dropna=False)
-    .reset_index()
+dict_output = (
+    pd.concat(new_dict.values())
+    .drop(columns=["cobertura_temporal"])
+    .explode("temporal_coverage_parsed")
+    .rename(columns={"temporal_coverage_parsed": "cobertura_temporal"}, errors="raise")
 )
 
-counts[["cobertura_temporal", "temporal_coverage_parsed"]]
+dict_output["id_tabela"].unique()
 
-new_arch_5ano.drop(columns=["cobertura_temporal"]).explode(
-    "temporal_coverage_parsed"
-).rename(columns={"temporal_coverage_parsed": "cobertura_temporal"}).to_csv(
-    os.path.join(OUTPUT, "dicionario.csv"), index=False
-)
+dict_output["id_tabela"] = dict_output["id_tabela"].replace({"aluno_ef_2_ano": "aluno_ef_2ano"})
+
+dict_output.to_csv(OUTPUT_FILE, index=False)
 
 tb = bd.Table(dataset_id="br_inep_saeb", table_id="dicionario")
 
 tb.create(
-    os.path.join(OUTPUT, "dicionario.csv"),
+    OUTPUT_FILE,
     if_table_exists="replace",
     if_storage_data_exists="replace",
 )
