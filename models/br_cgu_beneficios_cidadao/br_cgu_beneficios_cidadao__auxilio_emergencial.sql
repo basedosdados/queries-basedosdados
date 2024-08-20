@@ -15,6 +15,7 @@
         cluster_by=["sigla_uf", "id_municipio"],
     )
 }}
+
 select
     safe_cast(split(mes, '-')[offset(0)] as int64) as ano,
     safe_cast(split(mes, '-')[offset(1)] as int64) as mes,
