@@ -13,36 +13,36 @@ select
     safe_cast(
         case
             when co_unid = '10'
-            then lower('QUILOGRAMA LIQUIDO')
+            then 'quilograma liquido'
             when co_unid = '11'
-            then lower('NUMERO (UNIDADE)')
+            then 'numero (unidade)'
             when co_unid = '12'
-            then lower('MILHEIRO')
+            then 'milheiro'
             when co_unid = '13'
-            then lower('PARES')
+            then 'pares'
             when co_unid = '14'
-            then lower('METRO')
+            then 'metro'
             when co_unid = '15'
-            then lower('METRO QUADRADO')
+            then 'metro quadrado'
             when co_unid = '16'
-            then lower('METRO CUBICO')
+            then 'metro cubico'
             when co_unid = '17'
-            then lower('LITRO')
+            then 'litro'
             when co_unid = '18'
-            then lower('MIL QUILOWATT HORA')
+            then 'mil quilowatt hora'
             when co_unid = '19'
-            then lower('QUILATE')
+            then 'quilate'
             when co_unid = '20'
-            then lower('DUZIA')
+            then 'duzia'
             when co_unid = '21'
-            then lower('TONELADA METRICA LIQUIDA')
+            then 'tonelada metrica liquida'
             when co_unid = '22'
-            then lower('GRAMA LIQUIDO')
+            then 'grama liquido'
             when co_unid = '23'
-            then lower('BILHOES DE UNIDADES INTERNACIONAIS')
+            then 'bilhoes de unidades internacionais'
             when co_unid = '24'
-            then lower('QUILOGRAMA BRUTO')
-            else lower(co_unid)
+            then 'quilograma bruto'
+            else co_unid
         end as string
     ) as nome_unidade,
     safe_cast(no_ncm_por as string) nome_ncm_portugues,
