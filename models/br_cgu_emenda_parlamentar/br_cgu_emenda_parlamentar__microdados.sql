@@ -80,7 +80,7 @@ with
         select *, sigla_uf.sigla as sigla_uf,
         from tabela_1
         left join
-            `basedosdados-dev.br_bd_diretorios_brasil.uf` as sigla_uf
+            `basedosdados.br_bd_diretorios_brasil.uf` as sigla_uf
             on localidade_estado = upper(sigla_uf.nome)
     ),
     tabela_3 as (
