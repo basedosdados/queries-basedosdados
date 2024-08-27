@@ -6,7 +6,7 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2002, "end": 2022, "interval": 2},
+            "range": {"start": 2002, "end": 2024, "interval": 2},
         },
     )
 }}
@@ -15,7 +15,7 @@ select
     safe_cast(turno as int64) turno,
     safe_cast(id_eleicao as string) id_eleicao,
     safe_cast(tipo_eleicao as string) tipo_eleicao,
-    safe_cast(data_eleicao as string) data_eleicao,
+    safe_cast(data_eleicao as date) data_eleicao,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(id_municipio_tse as string) id_municipio_tse,
@@ -66,7 +66,7 @@ select
     safe_cast(numero_recibo_doacao as string) numero_recibo_doacao,
     safe_cast(numero_documento_doacao as string) numero_documento_doacao,
     safe_cast(tipo_prestacao_contas as string) tipo_prestacao_contas,
-    safe_cast(data_prestacao_contas as string) data_prestacao_contas,
+    safe_cast(data_prestacao_contas as date) data_prestacao_contas,
     safe_cast(sequencial_prestador_contas as string) sequencial_prestador_contas,
     safe_cast(cnpj_prestador_contas as string) cnpj_prestador_contas,
     safe_cast(entrega_conjunto as string) entrega_conjunto
