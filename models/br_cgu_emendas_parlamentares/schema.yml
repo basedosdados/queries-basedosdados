@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: br_cgu_emenda_parlamentar__microdados
+  - name: br_cgu_emendas_parlamentares__microdados
     description: Dados referente a emendas parlamentares
     tests:
       - dbt_utils.unique_combination_of_columns:
