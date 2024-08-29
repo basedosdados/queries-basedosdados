@@ -1,6 +1,6 @@
 {{
     config(
-        alias="microdados", schema="br_cgu_emenda_parlamentar", materialized="table"
+        alias="microdados", schema="br_cgu_emendas_parlamentares", materialized="table"
     )
 }}
 
