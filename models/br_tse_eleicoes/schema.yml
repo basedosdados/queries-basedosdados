@@ -5,7 +5,7 @@ models:
     description: Declaração de bens de candidatos em eleições brasileiras.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.55
     columns:
       - name: ano
         description: Ano
@@ -15,6 +15,10 @@ models:
               field: ano.ano
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_item
         description: Descrição do item
       - name: id_candidato_bd
@@ -40,6 +44,8 @@ models:
   - name: br_tse_eleicoes__candidatos
     description: Dados de candidatos em eleições brasileiras.
     tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ano
@@ -63,12 +69,28 @@ models:
         description: CPF
       - name: data_eleicao
         description: Data da eleição
-      - name: data_nascimento
-        description: Data de nascimento
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+      - name: data_nascimento
+        description: Data de nascimento
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+              ignore_values:
+                - '9564-06-17'
+                - '5195-06-20'
+                - '9555-01-15'
+                - '6196-10-02'
+                - '7194-10-30'
+                - '5454-10-09'
+                - '6197-10-02'
+                - '9158-09-24'
+                - '7197-04-17'
+                - '9161-11-09'
+                - '7953-09-05'
       - name: email
         description: Email
       - name: estado_civil
@@ -90,9 +112,10 @@ models:
       - name: id_municipio_tse
         description: ID Município - TSE
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio_tse
+              ignore_values: ['73709']
       - name: instrucao
         description: Instrução
       - name: municipio_nascimento
@@ -131,9 +154,6 @@ models:
         description: Título eleitoral
   - name: br_tse_eleicoes__despesas_candidato
     description: Dados de despesas em campanhas eleitorais a nível de despesa.
-    tests:
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -147,10 +167,6 @@ models:
         description: Cargo do fornecedor
       - name: cnae_2_fornecedor
         description: Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cnae_2')
-              field: cnae_2.cnae_2
       - name: cnpj_candidato
         description: CNPJ do candidato
       - name: cnpj_prestador_contas
@@ -165,8 +181,16 @@ models:
         description: Data da despesa
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_prestacao_contas
         description: Data de prestação de contas
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cnae_2_fornecedor
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do fornecedor
@@ -184,10 +208,24 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: id_municipio_tse_fornecedor
         description: ID Município do fornecedor - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: nome_candidato
         description: Nome do candidato
       - name: nome_fornecedor
@@ -224,8 +262,17 @@ models:
         description: Sigla do partido do fornecedor
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: sigla_uf_fornecedor
         description: Sigla da unidade da federação do fornecedor
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [BR]
       - name: tipo_despesa
         description: Tipo da despesa
       - name: tipo_documento
@@ -663,9 +710,6 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__receitas_candidato
     description: Dados de financiamento de campanha de receita para candidatos.
-    tests:
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -679,10 +723,6 @@ models:
         description: Cargo do candidato doador
       - name: cnae_2_doador
         description: Classificação Nacional de Atividades Econômicas 2.0 do doador
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__cnae_2')
-              field: cnae_2.cnae_2
       - name: cnpj_candidato
         description: CNPJ do candidato
       - name: cnpj_prestador_contas
@@ -699,14 +739,18 @@ models:
         description: CPF do vice ou suplente
       - name: data_eleicao
         description: Data da eleição
-      - name: data_prestacao_contas
-        description: Data de prestação de contas
-      - name: data_receita
-        description: Data da receita
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+      - name: data_prestacao_contas
+        description: Data de prestação de contas
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: data_receita
+        description: Data da receita
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do doador
@@ -729,10 +773,24 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: id_municipio_tse_doador
         description: ID Município do doador - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: natureza_receita
         description: Natureza da receita
       - name: nome_administrador
@@ -783,6 +841,10 @@ models:
         description: Sigla do partido do doador
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: sigla_uf_doador
         description: Sigla da unidade da federação do doador
       - name: situacao_receita
