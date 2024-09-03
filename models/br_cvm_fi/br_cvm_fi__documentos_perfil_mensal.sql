@@ -1,6 +1,7 @@
 {{
     config(
         schema="br_cvm_fi",
+        alias="documentos_perfil_mensal",
         materialized="table",
         partition_by={
             "field": "ano",

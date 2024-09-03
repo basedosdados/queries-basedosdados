@@ -1,6 +1,7 @@
 {{
     config(
         schema="br_cvm_fi",
+        alias="documentos_extratos_informacoes",
         materialized="table",
         partition_by={
             "field": "ano",
