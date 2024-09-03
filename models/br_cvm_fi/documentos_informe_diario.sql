@@ -5,7 +5,7 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2000, "end": 2023, "interval": 1},
+            "range": {"start": 2000, "end": 2025, "interval": 1},
         },
         cluster_by=["mes", "id_fundo"],
     )
