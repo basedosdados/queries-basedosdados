@@ -1,11 +1,12 @@
 {{
     config(
+        alias="documentos_carteiras_fundos_investimentos",
         schema="br_cvm_fi",
         materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2005, "end": 2023, "interval": 1},
+            "range": {"start": 2005, "end": 2025, "interval": 1},
         },
         cluster_by=["mes", "id_fundo"],
     )
