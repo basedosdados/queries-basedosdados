@@ -49,6 +49,16 @@ select
     safe_cast(nome_fornecedor as string) nome_fornecedor,
     safe_cast(nome_fornecedor_rf as string) nome_fornecedor_rf,
     safe_cast(cnae_2_fornecedor as string) cnae_2_fornecedor,
+    case
+        when length(cnae_2_fornecedor) = 5
+        then safe_cast(cnae_2_fornecedor as string)
+        else null
+    end as cnae_2_fornecedor_classe,
+    case
+        when length(cnae_2_fornecedor) > 5
+        then safe_cast(cnae_2_fornecedor as string)
+        else null
+    end as cnae_2_fornecedor_subclasse,
     safe_cast(descricao_cnae_2_fornecedor as string) descricao_cnae_2_fornecedor,
     safe_cast(tipo_fornecedor as string) tipo_fornecedor,
     safe_cast(esfera_partidaria_fornecedor as string) esfera_partidaria_fornecedor,

@@ -167,6 +167,18 @@ models:
         description: Cargo do fornecedor
       - name: cnae_2_fornecedor
         description: Classificação Nacional de Atividades Econômicas 2.0 do fornecedor
+      - name: cnae_2_fornecedor_classe
+        description: Classe da CNAE
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil.cnae_2')
+              field: classe
+      - name: cnae_2_fornecedor_subclasse
+        description: Subclasse da Classificação de Atividades Econômicas (CNAE)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil.cnae_2')
+              field: subclasse
       - name: cnpj_candidato
         description: CNPJ do candidato
       - name: cnpj_prestador_contas
@@ -723,6 +735,18 @@ models:
         description: Cargo do candidato doador
       - name: cnae_2_doador
         description: Classificação Nacional de Atividades Econômicas 2.0 do doador
+      - name: cnae_2_doador_classe
+        description: Classe da CNAE
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil.cnae_2')
+              field: classe
+      - name: cnae_2_doador_subclasse
+        description: Subclasse da Classificação de Atividades Econômicas (CNAE)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil.cnae_2')
+              field: subclasse
       - name: cnpj_candidato
         description: CNPJ do candidato
       - name: cnpj_prestador_contas

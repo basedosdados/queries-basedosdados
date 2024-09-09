@@ -53,6 +53,12 @@ select
     safe_cast(esfera_partidaria_doador as string) esfera_partidaria_doador,
     safe_cast(numero_candidato_doador as string) numero_candidato_doador,
     safe_cast(cnae_2_doador as string) cnae_2_doador,
+    case
+        when length(cnae_2_doador) = 5 then safe_cast(cnae_2_doador as string) else null
+    end as cnae_2_doador_classe,
+    case
+        when length(cnae_2_doador) > 5 then safe_cast(cnae_2_doador as string) else null
+    end as cnae_2_doador_subclasse,
     safe_cast(descricao_cnae_2_doador as string) descricao_cnae_2_doador,
     safe_cast(cpf_cnpj_doador_orig as string) cpf_cnpj_doador_orig,
     safe_cast(nome_doador_orig as string) nome_doador_orig,
