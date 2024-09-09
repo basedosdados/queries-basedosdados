@@ -1,4 +1,5 @@
 {{ config(alias="dicionario", schema="br_inep_saeb") }}
+
 select
     safe_cast(id_tabela as string) id_tabela,
     safe_cast(coluna as string) nome_coluna,
