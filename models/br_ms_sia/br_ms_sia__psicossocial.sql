@@ -148,5 +148,7 @@ select
     safe_cast(qtdpcn as string) quantidade_pacientes,
 from sia_add_municipios as t
 {% if is_incremental() %}
-    where date(cast(ano as int64), cast(mes as int64), 1) > date(2024, 3, 1)
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}
