@@ -238,10 +238,6 @@ select *
 from sia
 
 {% if is_incremental() %}
-    where
-        date(cast(ano as int64), cast(mes as int64), 1) not in (
-            select distinct (date(cast(ano as int64), cast(mes as int64), 1))
-            from {{ this }}
-        )
+    where date(cast(ano as int64), cast(mes as int64), 1) > date(2024, 3, 1)
 
 {% endif %}
