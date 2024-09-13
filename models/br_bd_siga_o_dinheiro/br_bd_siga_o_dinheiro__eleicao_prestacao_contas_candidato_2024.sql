@@ -1,7 +1,7 @@
 {{
     config(
         alias="eleicao_prestacao_contas_candidato_2024",
-        schema="br_jota",
+        schema="br_bd_siga_o_dinheiro",
         materialized="table",
     )
 }}
@@ -29,7 +29,8 @@ with
             sum(
                 case when categoria = 'Operacoes' then valor end
             ) as valor_despesa_operacoes,
-        from `basedosdados.br_jota.eleicao_prestacao_contas_candidato_origem_2024`
+        from
+            `basedosdados.br_bd_siga_o_dinheiro.eleicao_prestacao_contas_candidato_origem_2024`
         where sequencial_candidato is not null
         group by 1
     )
@@ -51,7 +52,8 @@ select
     valor_despesa_outros / valor_despesa_total as proporcao_despesa_outros,
     valor_despesa_operacoes / valor_despesa_total as proporcao_despesa_operacoes,
     valores.* except (sequencial_candidato)
-from `basedosdados.br_jota.eleicao_perfil_candidato_2024` as candidato_info
+from
+    `basedosdados.br_bd_siga_o_dinheiro.eleicao_perfil_candidato_2024` as candidato_info
 left join
     soma_receitas_candidato as valores
     on candidato_info.sequencial = valores.sequencial_candidato
