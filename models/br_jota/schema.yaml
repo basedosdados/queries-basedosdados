@@ -102,3 +102,9 @@ models:
       - name: valor_despesa_publicidade
       - name: valor_despesa_outros
       - name: valor_despesa_operacoes
+  - name: eleicao_auxiliar_categoria_origem
+    description: Informação auxiliares de categoria origem
+    columns:
+      - name: receita_despesa
+      - name: origem
+      - name: categoria
