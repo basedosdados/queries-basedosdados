@@ -1,7 +1,7 @@
 {{
     config(
         alias="eleicao_perfil_candidato_2024",
-        schema="br_jota",
+        schema="br_bd_siga_o_dinheiro",
         materialized="table",
     )
 }}
