@@ -19,5 +19,5 @@ select
     sum(valor_despesa_publicidade) as valor_despesa_publicidade,
     sum(valor_despesa_outros) as valor_despesa_outros,
     sum(valor_despesa_operacoes) as valor_despesa_operacoes,
-from `basedosdados-perguntas.br_jota.eleicao_prestacao_contas_candidato_2024`
+from `basedosdados.br_jota.eleicao_prestacao_contas_candidato_2024`
 group by 1, 2, 3, 4, 5, 6

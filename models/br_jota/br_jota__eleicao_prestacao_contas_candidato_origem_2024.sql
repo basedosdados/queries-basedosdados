@@ -50,7 +50,7 @@ with
 select t1.*, t2.categoria
 from receita_despesa as t1
 left join
-    `basedosdados-perguntas.br_jota.eleicao_auxiliar_categoria_origem` as t2
+    `basedosdados.br_jota.eleicao_auxiliar_categoria_origem` as t2
     on t1.origem = regexp_replace(normalize(t2.origem, nfd), r"\pM", '')
 where data_conta <= current_date()
 order by data_conta
