@@ -1864,6 +1864,47 @@ docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.1)", "sphinx-
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)"]
 
 [[package]]
+name = "polars"
+version = "1.7.0"
+description = "Blazingly fast DataFrame library"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "polars-1.7.0-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:515201ae296a3ef770102dab196f207581b617c7a053cf200aff57fdca03001f"},
+    {file = "polars-1.7.0-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:5c7b03a60b3490f7ca17e0a69208b29bea1a70f62b394443035f196c751ca126"},
+    {file = "polars-1.7.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:56042ca1e35c2e6a08e2f37d981a46af685e273cde08944328921a22ed5e1926"},
+    {file = "polars-1.7.0-cp38-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:bdb11cc9807d3886a8ea516a9d829fb9d8570d11b80be9310f825d1331011dbd"},
+    {file = "polars-1.7.0-cp38-abi3-win_amd64.whl", hash = "sha256:3d0fe4b8505c918114bbef6c8f8bd7a245ce3b7cd59f3c9fba2c9cd1f24606f9"},
+    {file = "polars-1.7.0.tar.gz", hash = "sha256:cd90892c8ed0ee755fdf0a0ebc08489c6f0094eaa7eed5edb48956c3e431ef8c"},
+]
+
+[package.extras]
+adbc = ["adbc-driver-manager[dbapi]", "adbc-driver-sqlite[dbapi]"]
+all = ["polars[async,cloudpickle,database,deltalake,excel,fsspec,graph,iceberg,numpy,pandas,plot,pyarrow,pydantic,style,timezone]"]
+async = ["gevent"]
+calamine = ["fastexcel (>=0.9)"]
+cloudpickle = ["cloudpickle"]
+connectorx = ["connectorx (>=0.3.2)"]
+database = ["nest-asyncio", "polars[adbc,connectorx,sqlalchemy]"]
+deltalake = ["deltalake (>=0.15.0)"]
+excel = ["polars[calamine,openpyxl,xlsx2csv,xlsxwriter]"]
+fsspec = ["fsspec"]
+gpu = ["cudf-polars-cu12"]
+graph = ["matplotlib"]
+iceberg = ["pyiceberg (>=0.5.0)"]
+numpy = ["numpy (>=1.16.0)"]
+openpyxl = ["openpyxl (>=3.0.0)"]
+pandas = ["pandas", "polars[pyarrow]"]
+plot = ["altair (>=5.4.0)"]
+pyarrow = ["pyarrow (>=7.0.0)"]
+pydantic = ["pydantic"]
+sqlalchemy = ["polars[pandas]", "sqlalchemy"]
+style = ["great-tables (>=0.8.0)"]
+timezone = ["backports-zoneinfo", "tzdata"]
+xlsx2csv = ["xlsx2csv (>=0.8.0)"]
+xlsxwriter = ["xlsxwriter"]
+
+[[package]]
 name = "pre-commit"
 version = "3.8.0"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
@@ -2872,4 +2913,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.9"
-content-hash = "449d554196de70d2bc05c8e9a343e3cfd2ccbadaf913590818f0ed8d27e8fef3"
+content-hash = "98e3b8ca5ac1d40be1d09241e907e7e1bc99e54cf66e550091591fad6dabbdb3"
