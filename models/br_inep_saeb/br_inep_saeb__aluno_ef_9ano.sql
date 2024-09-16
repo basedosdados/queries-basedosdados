@@ -13,7 +13,6 @@
     )
 }}
 
-
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
