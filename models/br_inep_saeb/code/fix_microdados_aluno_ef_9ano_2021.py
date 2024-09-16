@@ -83,6 +83,19 @@ on = [
 
 
 def find_disc(value: str) -> str:
+    """
+    Returns two characters identifying the subject from a variable
+
+    Parameters
+    ----------
+    value
+        Variable name
+
+    Examples
+    --------
+    >>> find_disc("PROFICIENCIA_CH_SAEB")
+    >>> "CH"
+    """
     last_two_char = value[-2:]
     if last_two_char not in ["LP", "MT", "CH", "CN"]:
         return value.split("_")[-2]
@@ -90,6 +103,19 @@ def find_disc(value: str) -> str:
 
 
 def renames_variables(value: tuple[str, str]) -> str:
+    """
+    Rename variables using subject
+
+    Parameters
+    ----------
+    value:
+        Tuple (two values), lhs is variable name and rhs is subject
+
+    Examples
+    --------
+    >>> renames_variables(("PROFICIENCIA_CH_SAEB", "CH"))
+    >>> "PROFICIENCIA__SAEB"
+    """
     variable, disc = value
     parts = variable.split("_")
 
@@ -107,6 +133,9 @@ other_index_cols = [
 
 
 def wide_to_long(df: pl.DataFrame) -> pl.DataFrame:
+    """
+    Convert a DataFrame from wide to long format
+    """
     return (
         df.unpivot(on=on, index=[*index_cols, *other_index_cols])
         .with_columns(
