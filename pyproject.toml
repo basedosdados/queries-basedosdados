@@ -28,5 +28,5 @@ ruamel-yaml = "^0.18.6"
 markdown = "^3.3.6"
 basedosdados = {version = "2.0.0b16", extras = ["upload"]}
 gql = "^3.5.0"
-polars = "^1.7.0"
 databasers-utils = {git = "https://github.com/basedosdados/databasers-utils.git#main"}
+polars = "^1.7.0"
