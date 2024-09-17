@@ -55,7 +55,7 @@ select
         else null
     end as cnae_2_fornecedor_classe,
     case
-        when length(cnae_2_fornecedor) > 5
+        when length(cnae_2_fornecedor) = 7
         then safe_cast(cnae_2_fornecedor as string)
         else null
     end as cnae_2_fornecedor_subclasse,

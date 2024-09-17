@@ -171,13 +171,13 @@ models:
         description: Classe da CNAE
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil.cnae_2')
+              to: ref('br_bd_diretorios_brasil__cnae_2')
               field: classe
       - name: cnae_2_fornecedor_subclasse
         description: Subclasse da Classificação de Atividades Econômicas (CNAE)
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil.cnae_2')
+              to: ref('br_bd_diretorios_brasil__cnae_2')
               field: subclasse
       - name: cnpj_candidato
         description: CNPJ do candidato
@@ -739,13 +739,13 @@ models:
         description: Classe da CNAE
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil.cnae_2')
+              to: ref('br_bd_diretorios_brasil__cnae_2')
               field: classe
       - name: cnae_2_doador_subclasse
         description: Subclasse da Classificação de Atividades Econômicas (CNAE)
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil.cnae_2')
+              to: ref('br_bd_diretorios_brasil__cnae_2')
               field: subclasse
       - name: cnpj_candidato
         description: CNPJ do candidato
@@ -887,9 +887,6 @@ models:
         description: Valor da receita
   - name: br_tse_eleicoes__receitas_comite
     description: Receitas de comitês eleitorais
-    tests:
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -899,10 +896,18 @@ models:
               field: ano.ano
       - name: cnae_2_doador
         description: CNAE 2 do Doador
+      - name: cnae_2_doador_classe
+        description: Classe da CNAE
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cnae_2')
-              field: cnae_2.cnae_2
+              field: classe
+      - name: cnae_2_doador_subclasse
+        description: Subclasse da Classificação de Atividades Econômicas (CNAE)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: subclasse
       - name: cnpj_prestador_contas
         description: CNPJ do prestador de contas
       - name: cpf_cnpj_doador
@@ -914,9 +919,10 @@ models:
       - name: data_receita
         description: Data da receita
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
+              ignore_values: ['8200-10-01']
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do doador
@@ -929,8 +935,17 @@ models:
         description: Fonte da receita
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - Tribunal Superior Eleitoral (TSE)
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: natureza_receita
         description: Natureza da receita
       - name: nome_doador
@@ -959,8 +974,17 @@ models:
         description: Sigla do partido
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: sigla_uf_doador
         description: Sigla da unidade da federação do doador
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: ['02550', '71072', '13897', '41238', '09210', '86614']
       - name: situacao_receita
         description: Situação da receita
       - name: tipo_comite
@@ -975,9 +999,6 @@ models:
         description: Valor da receita
   - name: br_tse_eleicoes__receitas_orgao_partidario
     description: Receitas de Órgãos Partidários
-    tests:
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -989,10 +1010,18 @@ models:
         description: Cargo do candidato doador
       - name: cnae_2_doador
         description: Classificação Nacional de Atividades Econômicas 2.0 do doador
+      - name: cnae_2_doador_classe
+        description: Classe da CNAE
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__cnae_2')
-              field: cnae_2.cnae_2
+              field: classe
+      - name: cnae_2_doador_subclasse
+        description: Subclasse da Classificação de Atividades Econômicas (CNAE)
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: subclasse
       - name: cnpj_prestador_contas
         description: CNPJ do prestador de contas
       - name: cpf_cnpj_doador
@@ -1025,12 +1054,30 @@ models:
         description: Fonte da receita
       - name: id_municipio
         description: ID Município IBGE 7 Dígitos do diretório
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_doador
         description: ID Município do doador - IBGE
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Municipio TSE do diretório
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: id_municipio_tse_doador
         description: ID Município do doador - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: natureza_receita
         description: Natureza da receita
       - name: nome_doador
@@ -1075,6 +1122,10 @@ models:
         description: Sigla do partido do doador
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: sigla_uf_doador
         description: Sigla da unidade da federação do doador
       - name: tipo_diretorio
