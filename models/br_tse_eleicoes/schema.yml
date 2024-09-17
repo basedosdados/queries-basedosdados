@@ -195,8 +195,6 @@ models:
         description: CPF do vice ou suplente
       - name: data_despesa
         description: Data da despesa
-      - name: data_despesa
-        description: Data da despesa
         tests:
           - custom_relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
