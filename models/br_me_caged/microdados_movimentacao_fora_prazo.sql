@@ -5,15 +5,11 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2020, "end": 2023, "interval": 1},
+            "range": {"start": 2020, "end": 2024, "interval": 1},
         },
         cluster_by=["mes", "sigla_uf"],
         labels={"project_id": "basedosdados", "tema": "economia"},
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE(2024,1,30),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6 OR  DATE_DIFF(DATE(2023,5,1),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 0)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (True)',
-        ],
     )
 }}
 select
@@ -22,7 +18,7 @@ select
     safe_cast(a.sigla_uf as string) sigla_uf,
     safe_cast(b.id_municipio as string) id_municipio,
     safe_cast(cnae_2_secao as string) cnae_2_secao,
-    safe_cast(cnae_2_subclasse as string) cnae_2_subclasse,
+    safe_cast(lpad(cnae_2_subclasse, 7, '0') as string) cnae_2_subclasse,
     safe_cast(saldo_movimentacao as int64) saldo_movimentacao,
     safe_cast(cbo_2002 as string) cbo_2002,
     safe_cast(categoria as string) categoria,

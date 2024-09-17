@@ -10,8 +10,8 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
         ],
     )
 }}
@@ -48,13 +48,33 @@ select
     -- UFMUNRES que indica null
     safe_cast(regexp_replace(ufmunres, '0{6}', '') as string) id_municipio_6_residencia,
     safe_cast(nomeprof as string) nome,
-    safe_cast(vinculac as string) id_vinculo,
-    safe_cast(registro as string) id_registro_conselho,
-    safe_cast(conselho as string) id_conselho,
+    case
+        when vinculac = 'nan' then null else safe_cast(vinculac as string)
+    end as tipo_vinculo,
+    case
+        when registro = 'nan' then null else safe_cast(registro as string)
+    end as id_registro_conselho,
+    case
+        when conselho = 'nan' then null else safe_cast(conselho as string)
+    end as tipo_conselho,
     -- replace de valores de linha com 15 zeros para null. 15 zeros é valor do campo
     -- CNS_PROF que indica null
-    safe_cast(regexp_replace(cns_prof, '0{15}', '') as string) cartao_nacional_saude,
-    safe_cast(cbo as string) cbo_2002,
+    safe_cast(cns_prof as string) cartao_nacional_saude,
+    safe_cast(cbo as string) cbo_2002_original,
+    safe_cast(
+        case
+            when length(cbo) = 6 and regexp_contains(cbo, r'^[0-9]{6}$')
+            then cbo
+            else null
+        end as string
+    ) cbo_2002,
+    safe_cast(
+        case
+            when length(cbo) = 5 and regexp_contains(cbo, r'^[0-9]{5}$')
+            then cbo
+            else null
+        end as string
+    ) cbo_1994,
     safe_cast(terceiro as int64) indicador_estabelecimento_terceiro,
     safe_cast(vincul_c as int64) indicador_vinculo_contratado_sus,
     safe_cast(vincul_a as int64) indicador_vinculo_autonomo_sus,

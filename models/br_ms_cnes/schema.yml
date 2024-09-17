@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: equipamento
+  - name: br_ms_cnes__equipamento
     description: Esta tabela  contém o catálogo de equipamentos em atividade ou não
       nos estabelecimentos de saúde
     tests:
@@ -12,26 +12,53 @@ models:
             - id_estabelecimento_cnes
             - id_equipamento
             - tipo_equipamento
+            - quantidade_equipamentos
+            - quantidade_equipamentos_ativos
+            - indicador_equipamento_disponivel_sus
+            - indicador_equipamento_indisponivel_sus
+          config:
+            where: __most_recent_year_month__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [id_equipamento, tipo_equipamento]
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mes
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: id_equipamento
         description: Identificador do equipamento
       - name: tipo_equipamento
@@ -44,7 +71,7 @@ models:
         description: Indicador de equipamento disponível para o SUS
       - name: indicador_equipamento_indisponivel_sus
         description: Indicador de equipamento não disponível para o SUS
-  - name: equipe
+  - name: br_ms_cnes__equipe
     description: Esta tabela contém o cadastro de equipes em atividade ou não nos
       estabelecimentos de saúde.
     tests:
@@ -56,26 +83,53 @@ models:
             - id_estabelecimento_cnes
             - id_equipe
             - tipo_equipe
+          config:
+            where: __most_recent_year_month__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary:
+            - motivo_desativacao_equipe
+            - tipo_desativacao_equipe
+            - tipo_segmento
+            - tipo_equipe
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: id_equipe
         description: ID da equipe dado pelo código do Município, area e sequencial
           da equipe
@@ -115,7 +169,7 @@ models:
         description: Indicador de atendimento a população Indígena
       - name: indicador_atende_populacao_assistida_pronasci
         description: Indicador de atendimento a população Pronasci
-  - name: profissional
+  - name: br_ms_cnes__profissional
     description: A tabela fornece o cadastro dos profissionais de saúde nos estabelecimentos.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -126,42 +180,82 @@ models:
             - cartao_nacional_saude
             - nome
             - cbo_2002
-            - id_vinculo
+            - tipo_vinculo
             - indicador_atende_sus
+          config:
+            where: __most_recent_year_month__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [tipo_vinculo, tipo_conselho]
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: id_municipio_6_residencia
         description: ID Município IBGE - 6 Dígitos do local de residência do profissional
       - name: nome
         description: Nome do profissional
-      - name: id_vinculo
+      - name: tipo_vinculo
         description: Código do vínculo empregatício com o estabelecimento
       - name: id_registro_conselho
         description: Número do registro no conselho de classe
-      - name: id_conselho
+      - name: tipo_conselho
         description: Código do conselho de classe
       - name: cartao_nacional_saude
         description: CNS - Cartão Nacional de Saúde
+      - name: cbo_2002_original
+        description: Código da Classificação Brasileira de Ocupações (CB0) 2002 sem
+          tratamento aplicado
       - name: cbo_2002
-        description: Código da especialidade
+        description: Código da Classificação Brasileira de Ocupações (CB0) 2002
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cbo_2002')
+              field: cbo_2002.cbo_2002
+              config:
+                where: __most_recent_year_month__
+      - name: cbo_1994
+        description: Código da Classificação Brasileira de Ocupações (CB0) 1994
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cbo_1994')
+              field: cbo_1994.cbo_1994
+              config:
+                where: __most_recent_year_month__
       - name: indicador_estabelecimento_terceiro
         description: Indica se o estabelecimento é de terceiros ou não
       - name: indicador_vinculo_contratado_sus
@@ -181,33 +275,71 @@ models:
         description: Carga horária hospitalar
       - name: carga_horaria_ambulatorial
         description: Carga horária Ambulatorial
-  - name: estabelecimento
+  - name: br_ms_cnes__estabelecimento
     description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos
       de saúde brasileiros.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+          config:
+            where: __most_recent_year_month__
+      # NOTE: colunas: tipo_orgao_expedidor | tipo_unidade | tipo_classificacao_acreditacao_hospitalar | tipo_grau_dependencia
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary:
+            - tipo_pessoa
+            - tipo_retencao_tributos_mantenedora
+            - tipo_gestao
+            - tipo_esfera_administrativa
+            - tipo_retencao_tributos
+            - tipo_atividade_ensino_pesquisa
+            - tipo_natureza_administrativa
+            - tipo_fluxo_atendimento
+            - tipo_turno
+            - tipo_prestador
+            - tipo_avaliacao_acreditacao_hospitalar
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: ano_atualizacao
         description: Ano de atualização da informação pelo estabelecimento
+        tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes_atualizacao
         description: Mês de atualização da informação pelo estabelecimento
+        config:
+          where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio_6
         description: ID Município - IBGE 6 Dígitos
       - name: id_regiao_saude
@@ -223,6 +355,8 @@ models:
       - name: id_estabelecimento_cnes
         description: ID estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: tipo_pessoa
         description: Indicador de pessoa física ou jurídica
       - name: cpf_cnpj
@@ -247,6 +381,14 @@ models:
         description: Natureza da organização
       - name: id_natureza_juridica
         description: Natureza jurídica
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__natureza_juridica')
+              field: id_natureza_juridica
+              ignore_values: ['1000', '2000', '3000', '4000', '8885']
+              proportion_allowed_failures: 0
+              config:
+                where: __most_recent_year_month__
       - name: tipo_fluxo_atendimento
         description: Fluxo da clientela
       - name: tipo_unidade
@@ -677,7 +819,7 @@ models:
       - name: indicador_atendimento_regulacao_plano_saude_privado
         description: Indica a existência de atendimento prestado regulação/convênio
           plano de saúde privado
-  - name: leito
+  - name: br_ms_cnes__leito
     description: leitos disponíveis nos estabelecimentos de saúde
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -687,6 +829,14 @@ models:
             - id_estabelecimento_cnes
             - tipo_especialidade_leito
             - tipo_leito
+          config:
+            where: __most_recent_year_month__
+      # NOTE: aguardando pedido lai
+      # - custom_dictionary_coverage:
+      #     columns_covered_by_dictionary: [tipo_especialidade_leito, tipo_leito]
+      #     dictionary_model: ref('br_ms_cnes__dicionario')
+      #     config:
+      #       where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -694,17 +844,29 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: tipo_especialidade_leito
         description: Especialidade do leito
       - name: tipo_leito
@@ -715,11 +877,13 @@ models:
         description: Quantidade de leitos contratados
       - name: quantidade_sus
         description: Quantidade de leitos para o SUS
-  - name: dados_complementares
+  - name: br_ms_cnes__dados_complementares
     description: Dados complementares dos estabelecimentos de saúde
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -727,17 +891,29 @@ models:
         description: Mes
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: cns_medico_responsavel_administrador_responsavel_tecnico
         description: CNS do médico responsável - Administrador ou Responsável Técnico
       - name: cns_medico_responsavel_oncologista_pediatrico
@@ -918,11 +1094,18 @@ models:
       - name: indicador_existencia_requisito_quimio_radio
         description: Indica a existência de algum requisito de quimio/rádio para este
           CNES
-  - name: estabelecimento_filantropico
+  - name: br_ms_cnes__estabelecimento_filantropico
     description: Esta tabela apresenta um cadastro de estabelecimentos de saúde filantrópicos.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+          config:
+            where: __most_recent_year_month__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [tipo_habilitacao]
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -930,17 +1113,29 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
               at_least: 0.05
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -951,8 +1146,6 @@ models:
         description: Mês Competência final
       - name: tipo_habilitacao
         description: Código do tipo de habilitação do estabelecimento
-      - name: tipo_regra_contratual
-        description: Código do tipo da regra contratual do estabalecimento
       - name: portaria
         description: Portaria relacionada a regra contratual
       - name: data_portaria
@@ -961,12 +1154,19 @@ models:
         description: Ano da portaria
       - name: mes_portaria
         description: Mês da portaria
-  - name: estabelecimento_ensino
+  - name: br_ms_cnes__estabelecimento_ensino
     description: Esta tabela apresenta informações sobre os estabelecimentos habilitados
       para atividades de ensino.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, id_estabelecimento_cnes]
+          config:
+            where: __most_recent_year_month__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [tipo_habilitacao]
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
@@ -974,17 +1174,29 @@ models:
         description: Mês
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -1003,7 +1215,7 @@ models:
         description: Ano da portaria
       - name: mes_portaria
         description: Mês da portaria
-  - name: gestao_metas
+  - name: br_ms_cnes__gestao_metas
     description: Esta tabela apresenta informações sobre os contratos de gestão de
       metas dos estabelecimentos de sáude.
     tests:
@@ -1015,26 +1227,45 @@ models:
             - tipo_habilitacao
             - portaria
             - data_portaria
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [tipo_habilitacao, tipo_gestao_metas]
+          dictionary_model: ref('br_ms_cnes__dicionario')
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -1055,7 +1286,7 @@ models:
         description: Ano da portaria
       - name: mes_portaria
         description: Mês da portaria
-  - name: incentivos
+  - name: br_ms_cnes__incentivos
     description: A tabela fornece informações sobre os incentivos do estabelecimento.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -1066,13 +1297,25 @@ models:
             - tipo_habilitacao
             - portaria
             - data_portaria
+          config:
+            where: __most_recent_year_month__
+      # NOTE: aguardando pedido LAI para reativar;
+      # - custom_dictionary_coverage:
+      #     columns_covered_by_dictionary: [tipo_habilitacao, tipo_incentivo]
+      #     dictionary_model: ref('br_ms_cnes__dicionario')
+      #     config:
+      #       where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -1081,11 +1324,17 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -1106,7 +1355,7 @@ models:
         description: Ano da portaria
       - name: mes_portaria
         description: Mês da portaria
-  - name: habilitacao
+  - name: br_ms_cnes__habilitacao
     description: A tabela fornece informações sobre as habilitações do estabelecimento.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -1120,26 +1369,50 @@ models:
             - mes_competencia_inicial
             - data_portaria
             - portaria
+          config:
+            where: __most_recent_year_month__
+      # NOTE: aguardando pedido LAI para reativar;
+      # - custom_dictionary_coverage:
+      #     columns_covered_by_dictionary: [tipo_habilitacao, nivel_habilitacao]
+      #     dictionary_model: ref('br_ms_cnes__dicionario')
+      #     config:
+      #       where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: quantidade_leitos
         description: Quantidade de leitos
       - name: ano_competencia_inicial
@@ -1162,7 +1435,7 @@ models:
         description: Ano da portaria
       - name: mes_portaria
         description: Mês da portaria
-  - name: regra_contratual
+  - name: br_ms_cnes__regra_contratual
     description: A tabela fornece informações sobre os contratos dos estabelecimentos.
     tests:
       - dbt_utils.unique_combination_of_columns:
@@ -1172,26 +1445,49 @@ models:
             - id_estabelecimento_cnes
             - tipo_habilitacao
             - data_portaria
+          config:
+            where: __most_recent_year_month__
+      - custom_dictionary_coverage:
+          columns_covered_by_dictionary: [tipo_habilitacao, tipo_regra_contratual]
+          dictionary_model: ref('br_ms_cnes__dicionario')
+          config:
+            where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: ano_competencia_inicial
         description: Ano Competência inicial
       - name: mes_competencia_inicial
@@ -1200,8 +1496,10 @@ models:
         description: Ano Competência final
       - name: mes_competencia_final
         description: Mês Competência final
-      - name: habilitacao
+      - name: tipo_habilitacao
         description: Código da habilitação
+      - name: tipo_regra_contratual
+        description: Tipo da regra contratual
       - name: portaria
         description: Portaria
       - name: data_portaria
@@ -1210,7 +1508,7 @@ models:
         description: Ano da portaria
       - name: mes_portaria
         description: Mês da portaria
-  - name: servico_especializado
+  - name: br_ms_cnes__servico_especializado
     description: A tabela fornece informações sobre serviços especializados ofertados
       pelo estabelecimento.
     tests:
@@ -1219,38 +1517,65 @@ models:
             - ano
             - mes
             - id_estabelecimento_cnes
-            - tipo_classificacao_bd
+            - tipo_servico_especializado
+            - subtipo_servico_especializado
             - tipo_servico_especializado_unico
+            - tipo_caracterizacao
             - indicador_servico_ambulatorial_sus
             - indicador_servico_nao_sus
             - indicador_servico_hospitalar_nao_sus
             - indicador_servico_hospitalar_sus
+          config:
+            where: __most_recent_year_month__
+      # NOTE: aguardando pedido LAI para reativar;
+      # - custom_dictionary_coverage:
+      #     columns_covered_by_dictionary:
+      #       - tipo_servico_especializado
+      #       - subtipo_servico_especializado
+      #       - tipo_servico_especializado_unico
+      #     dictionary_model: ref('br_ms_cnes__dicionario')
+      #     config:
+      #       where: __most_recent_year_month__
     columns:
       - name: ano
         description: Ano
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: mes
         description: Mês
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              config:
+                where: __most_recent_year_month__
       - name: id_municipio
         description: ID Município IBGE - 7 Dígitos
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
+              config:
+                where: __most_recent_year_month__
           - dbt_utils.not_null_proportion:
-              at_least: 0.05
+              at_least: 0.95
+              config:
+                where: __most_recent_year_month__
       - name: id_estabelecimento_cnes
         description: ID Estabelecimento - CNES
         tests: [not_null]
+        config:
+          where: __most_recent_year_month__
       - name: tipo_servico_especializado
-        description: Código do serviço especializado
-      - name: tipo_classificacao
-        description: Código da classificação do serviço
-      - name: tipo_classificacao_bd
-        description: Código da classificação do serviço criado pela equipe da BD
+        description: Código do tipo do serviço especializado
+      - name: subtipo_servico_especializado
+        description: Código do subtipo do serviço especializado
       - name: tipo_servico_especializado_unico
         description: Código do serviço especializado único
       - name: tipo_caracterizacao
@@ -1267,3 +1592,27 @@ models:
         description: Indicador de serviço especializado único
       - name: quantidade_nacional_estabelecimento_saude_terceiro
         description: Quantidade nacional do estabelecimento de saúde terceiro
+  - name: br_ms_cnes__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_ms_cnes. Para
+      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor

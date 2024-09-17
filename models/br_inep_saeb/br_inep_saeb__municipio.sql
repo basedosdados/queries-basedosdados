@@ -3,9 +3,9 @@
         alias="municipio",
         schema="br_inep_saeb",
         materialized="table",
-        labels={"tema": "educacao"},
     )
 }}
+
 
 select
     safe_cast(ano as int64) ano,

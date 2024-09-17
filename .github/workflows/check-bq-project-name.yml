@@ -1,0 +1,34 @@
+---
+name: Check BQ project name
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['**/*.sql']
+jobs:
+  check_bucket_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get changed files
+        id: get_files
+        uses: dorny/paths-filter@v2
+        with:
+          list-files: shell
+          filters: |
+            pr:
+              - added|deleted|modified: '**'
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Run Python script
+        run: |-
+          for file in ${{ steps.get_files.outputs.pr_files }}; do
+            if [[ $file == *.sql ]]; then
+              echo "SQL file detected: $file"
+              python .github/workflows/scripts/check_sql_files.py $file
+            else
+              echo "Não é um arquivo SQL: $file"
+            fi
+          done

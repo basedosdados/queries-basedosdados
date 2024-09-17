@@ -8,6 +8,11 @@
             "data_type": "int64",
             "range": {"start": 2007, "end": 2024, "interval": 1},
         },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        post_hook=[
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
+        ],
     )
 }}
 
@@ -47,8 +52,8 @@ select
     safe_cast(sigla_uf as string) as sigla_uf,
     safe_cast(id_municipio as string) as id_municipio,
     safe_cast(cnes as string) as id_estabelecimento_cnes,
-    safe_cast(codleito as string) as tipo_especialidade_leito,
-    safe_cast(tp_leito as string) as tipo_leito,
+    ltrim(safe_cast(codleito as string), '0') as tipo_especialidade_leito,
+    ltrim(safe_cast(tp_leito as string), '0') as tipo_leito,
     safe_cast(qt_exist as int64) as quantidade_total,
     safe_cast(qt_contr as int64) as quantidade_contratado,
     safe_cast(qt_sus as int64) as quantidade_sus

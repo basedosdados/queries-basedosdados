@@ -10,8 +10,8 @@
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter                     ON {{this}}                     GRANT TO ("allUsers")                     FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter        ON  {{this}}                     GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org")                     FILTER USING (True)',
+            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
+            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
         ],
     )
 }}
@@ -43,8 +43,8 @@ select
     safe_cast(ano as int64) as ano,
     safe_cast(mes as int64) as mes,
     safe_cast(sigla_uf as string) sigla_uf,
-    cast(substr(cast(dt_atual as string), 1, 4) as int64) as ano_atualizacao,
-    cast(substr(cast(dt_atual as string), 5, 2) as int64) as mes_atualizacao,
+    safe_cast(substr(cast(dt_atual as string), 1, 4) as int64) as ano_atualizacao,
+    safe_cast(substr(cast(dt_atual as string), 5, 2) as int64) as mes_atualizacao,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(codufmun as string) id_municipio_6,
     safe_cast({{ clean_cols("REGSAUDE") }} as string) id_regiao_saude,
@@ -61,17 +61,47 @@ select
     -- fazer replace em valores de linha com 14 zeros para null. 14 zeros é o tamanho
     -- de um cpf/cnpj nulo
     safe_cast(regexp_replace(cnpj_man, '0{14}', '') as string) cnpj_mantenedora,
-    safe_cast({{ clean_cols("COD_IR") }} as string) tipo_retencao_tributos_mantenedora,
+    case
+        when safe_cast({{ clean_cols("COD_IR") }} as string) = 'nan'
+        then null
+        else safe_cast({{ clean_cols("COD_IR") }} as string)
+    end as tipo_retencao_tributos_mantenedora,
     safe_cast(vinc_sus as int64) indicador_vinculo_sus,
     safe_cast(tpgestao as string) tipo_gestao,
-    safe_cast({{ clean_cols("ESFERA_A") }} as string) tipo_esfera_administrativa,
-    safe_cast(retencao as string) tipo_retencao_tributos,
+    case
+        when safe_cast({{ clean_cols("ESFERA_A") }} as string) = 'nan'
+        then null
+        else safe_cast({{ clean_cols("ESFERA_A") }} as string)
+    end as tipo_esfera_administrativa,
+    case
+        when regexp_replace(safe_cast(retencao as string), '^0+', '') = ''
+        then '0'
+        when safe_cast(retencao as string) = 'nan'
+        then null
+        else regexp_replace(safe_cast(retencao as string), '^0+', '')
+    end as tipo_retencao_tributos,
     safe_cast({{ clean_cols("ATIVIDAD") }} as string) tipo_atividade_ensino_pesquisa,
-    safe_cast(natureza as string) tipo_natureza_administrativa,
-    safe_cast(nat_jur as string) id_natureza_juridica,
-    safe_cast(clientel as string) tipo_fluxo_atendimento,
+    case
+        when regexp_replace(safe_cast(natureza as string), '^0+', '') = ''
+        then '0'
+        when safe_cast(natureza as string) = 'nan'
+        then null
+        else regexp_replace(safe_cast(natureza as string), '^0+', '')
+    end as tipo_natureza_administrativa,
+    nullif(safe_cast(nat_jur as string), '') id_natureza_juridica,
+    case
+        when regexp_replace(safe_cast(clientel as string), '^0+', '') = ''
+        then '0'
+        when safe_cast(clientel as string) = 'nan'
+        then null
+        else regexp_replace(safe_cast(clientel as string), '^0+', '')
+    end as tipo_fluxo_atendimento,
     safe_cast({{ clean_cols("TP_UNID") }} as string) tipo_unidade,
-    safe_cast({{ clean_cols("TURNO_AT") }} as string) tipo_turno,
+    case
+        when safe_cast({{ clean_cols("TURNO_AT") }} as string) = 'nan'
+        then null
+        else safe_cast({{ clean_cols("TURNO_AT") }} as string)
+    end as tipo_turno,
     safe_cast({{ clean_cols("NIV_HIER") }} as string) tipo_nivel_hierarquia,
     safe_cast({{ clean_cols("TP_PREST") }} as string) tipo_prestador,
     safe_cast(co_banco as string) banco,
@@ -79,28 +109,35 @@ select
     safe_cast(c_corren as string) conta_corrente,
     safe_cast(contratm as string) id_contrato_municipio_sus,
     safe_cast(
-        parse_date('%Y%m%d', cast(dt_publm as string)) as date
+        safe.parse_date('%Y%m%d', cast(dt_publm as string)) as date
     ) data_publicacao_contrato_municipal,
     safe_cast(
-        parse_date('%Y%m%d', cast(dt_puble as string)) as date
+        safe.parse_date('%Y%m%d', cast(dt_puble as string)) as date
     ) data_publicacao_contrato_estadual,
     safe_cast(contrate as string) id_contrato_estado_sus,
     safe_cast(alvara as string) numero_alvara,
     safe_cast(
-        parse_date('%Y%m%d', cast(dt_exped as string)) as date
+        safe.parse_date('%Y%m%d', cast(dt_exped as string)) as date
     ) data_expedicao_alvara,
-    safe_cast({{ clean_cols("ORGEXPED") }} as string) tipo_orgao_expedidor,
-    safe_cast(
-        {{ clean_cols("AV_ACRED") }} as string
-    ) tipo_avaliacao_acreditacao_hospitalar,
-    safe_cast(clasaval as string) tipo_classificacao_acreditacao_hospitalar,
-    cast(substr(cast(dt_acred as string), 1, 4) as int64) as ano_acreditacao,
-    cast(substr(cast(dt_acred as string), 5, 2) as int64) as mes_acreditacao,
-    safe_cast(
-        cast({{ clean_cols("AV_PNASS") }} as string) as int64
-    ) tipo_avaliacao_pnass,
-    cast(substr(cast(dt_pnass as string), 1, 4) as int64) as ano_avaliacao_pnass,
-    cast(substr(cast(dt_pnass as string), 5, 2) as int64) as mes_avaliacao_pnass,
+    case
+        when safe_cast({{ clean_cols("ORGEXPED") }} as string) = 'nan'
+        then null
+        else safe_cast({{ clean_cols("ORGEXPED") }} as string)
+    end as tipo_orgao_expedidor,
+    case
+        when safe_cast({{ clean_cols("AV_ACRED") }} as string) = 'nan'
+        then null
+        else safe_cast({{ clean_cols("AV_ACRED") }} as string)
+    end as tipo_avaliacao_acreditacao_hospitalar,
+    case
+        when regexp_replace(safe_cast(clasaval as string), '^0+', '') = ''
+        then '0'
+        when safe_cast(clasaval as string) = 'nan'
+        then null
+        else regexp_replace(safe_cast(clasaval as string), '^0+', '')
+    end as tipo_classificacao_acreditacao_hospitalar,
+    safe_cast(substr(cast(dt_pnass as string), 1, 4) as int64) as ano_avaliacao_pnass,
+    safe_cast(substr(cast(dt_pnass as string), 5, 2) as int64) as mes_avaliacao_pnass,
     safe_cast(nivate_a as int64) indicador_atencao_ambulatorial,
     safe_cast(gesprg1e as int64) indicador_gestao_basica_ambulatorial_estadual,
     safe_cast(gesprg1m as int64) indicador_gestao_basica_ambulatorial_municipal,
@@ -272,6 +309,7 @@ select
 from cnes_add_muni
 {% if is_incremental() %}
     where
+
         date(cast(ano as int64), cast(mes as int64), 1)
         > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 {% endif %}

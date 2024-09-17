@@ -23,4 +23,5 @@ repos:
         name: yamlfix
         types: [yaml]
         language: system
-        entry: yamlfix --exclude ".kubernetes/**/*" .
+        entry: yamlfix --exclude ".kubernetes/**/*" --exclude ".venv/**/*" --exclude
+          "dbt_packages/**/*" --exclude "target/**/*" .

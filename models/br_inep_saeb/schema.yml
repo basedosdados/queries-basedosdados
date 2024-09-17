@@ -1264,23 +1264,10 @@ models:
         description: Você usa computador na escola?
       - name: utiliza_computador_licao_casa
         description: Você usa computador para lição/trabalho da disciplina?
-  - name: br_inep_saeb__dicionario
-    description: Dicionário para as tabelas do SAEB
-    columns:
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura Temporal
-      - name: coluna
-        description: Coluna
-      - name: id_tabela
-        description: ID da tabela
-      - name: valor
-        description: Valor
   - name: br_inep_saeb__proficiencia
     description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma
       série histórica e compatibilizada à partir de 1995 com informações sobre o aluno,
-      a escola e o resultado do exame
+      a escola e o resultado do exame.
     columns:
       - name: amostra
         description: Amostra
@@ -1329,17 +1316,206 @@ models:
   - name: br_inep_saeb__municipio
     description: Tabela resumo dos dados do SAEB com a média e percentual de alunos
       dentro de cada nível de aprendizado segundo o Inep a nível municipal
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - rede
+            - localizacao
+            - id_municipio
+            - disciplina
+            - serie
     columns:
       - name: ano
         description: Ano
       - name: rede
         description: Rede Escolar
+        tests:
+          - accepted_values:
+              values:
+                - municipal
+                - estadual
+                - federal
+                - privada
+                - total - estadual e municipal
+                - total - federal, estadual e municipal
+                - total - federal, estadual, municipal e privada
       - name: localizacao
         description: Localização da escola
+        tests:
+          - accepted_values:
+              values: [urbana, rural, total]
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+      - name: disciplina
+        description: Disciplina
+        tests:
+          - accepted_values:
+              values: [LP, MT]
+      - name: serie
+        description: Série/Ano Escolar
+      - name: media
+        description: Média da proficiência
+      - name: nivel_0
+        description: Percentual de alunos que se enquadram no nível zero de aprendizagem
+      - name: nivel_1
+        description: Percentual de alunos que se enquadram no nível um de aprendizagem
+      - name: nivel_2
+        description: Percentual de alunos que se enquadram no nível dois de aprendizagem
+      - name: nivel_3
+        description: Percentual de alunos que se enquadram no nível três de aprendizagem
+      - name: nivel_4
+        description: Percentual de alunos que se enquadram no nível quatro de aprendizagem
+      - name: nivel_5
+        description: Percentual de alunos que se enquadram no nível cinco de aprendizagem
+      - name: nivel_6
+        description: Percentual de alunos que se enquadram no nível seis de aprendizagem
+      - name: nivel_7
+        description: Percentual de alunos que se enquadram no nível sete de aprendizagem
+      - name: nivel_8
+        description: Percentual de alunos que se enquadram no nível oito de aprendizagem
+      - name: nivel_9
+        description: Percentual de alunos que se enquadram no nível nove de aprendizagem
+      - name: nivel_10
+        description: Percentual de alunos que se enquadram no nível dez de aprendizagem
+  - name: br_inep_saeb__dicionario
+    description: Dicionário para tradução dos códigos do conjunto br_inep_saeb. Para
+      taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor
+  - name: br_inep_saeb__brasil
+    description: Tabela resumo dos dados do SAEB com a média e percentual de alunos
+      dentro de cada nível de aprendizado segundo o Inep a nível Brasil
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - rede
+            - localizacao
+            - disciplina
+            - serie
+      - not_null_proportion_multiple_columns:
+          at_least: 0.25
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: rede
+        description: Rede Escolar
+        tests:
+          - accepted_values:
+              values:
+                - municipal
+                - estadual
+                - federal
+                - privada
+                - total - estadual e municipal
+                - total - federal, estadual e municipal
+                - total - federal, estadual, municipal e privada
+      - name: localizacao
+        description: Localização da escola
+        tests:
+          - accepted_values:
+              values: [total, urbana, rural]
+      - name: disciplina
+        description: Disciplina
+        tests:
+          - accepted_values:
+              values: [LP, MT]
+      - name: serie
+        description: Série/Ano Escolar
+      - name: media
+        description: Média da proficiência
+      - name: nivel_0
+        description: Percentual de alunos que se enquadram no nível zero de aprendizagem
+      - name: nivel_1
+        description: Percentual de alunos que se enquadram no nível um de aprendizagem
+      - name: nivel_2
+        description: Percentual de alunos que se enquadram no nível dois de aprendizagem
+      - name: nivel_3
+        description: Percentual de alunos que se enquadram no nível três de aprendizagem
+      - name: nivel_4
+        description: Percentual de alunos que se enquadram no nível quatro de aprendizagem
+      - name: nivel_5
+        description: Percentual de alunos que se enquadram no nível cinco de aprendizagem
+      - name: nivel_6
+        description: Percentual de alunos que se enquadram no nível seis de aprendizagem
+      - name: nivel_7
+        description: Percentual de alunos que se enquadram no nível sete de aprendizagem
+      - name: nivel_8
+        description: Percentual de alunos que se enquadram no nível oito de aprendizagem
+      - name: nivel_9
+        description: Percentual de alunos que se enquadram no nível nove de aprendizagem
+      - name: nivel_10
+        description: Percentual de alunos que se enquadram no nível dez de aprendizagem
+  - name: br_inep_saeb__uf
+    description: Tabela resumo dos dados do SAEB com a média e percentual de alunos
+      dentro de cada nível de aprendizado segundo o Inep a nível estadual
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - rede
+            - localizacao
+            - sigla_uf
+            - disciplina
+            - serie
+      - not_null_proportion_multiple_columns:
+          at_least: 0.25
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: rede
+        description: Rede Escolar
+        tests:
+          - accepted_values:
+              values:
+                - municipal
+                - estadual
+                - federal
+                - privada
+                - total - estadual e municipal
+                - total - federal, estadual e municipal
+                - total - federal, estadual, municipal e privada
+      - name: localizacao
+        description: Localização da escola
+        tests:
+          - accepted_values:
+              values: [total, urbana, rural]
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: disciplina
         description: Disciplina
       - name: serie
@@ -1368,3 +1544,54 @@ models:
         description: Percentual de alunos que se enquadram no nível nove de aprendizagem
       - name: nivel_10
         description: Percentual de alunos que se enquadram no nível dez de aprendizagem
+  - name: br_inep_saeb__brasil_taxa_alfabetizacao
+    description: Taxa de alfabetização para o Brasil referente ao 2º ano divulgado
+      pelo SAEB
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, rede, localizacao, area]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: rede
+        description: Rede Escolar
+      - name: localizacao
+        description: Localização da escola
+      - name: area
+        description: 'Área onde a escola está localizada: interior, capital ou total'
+      - name: taxa_alfabetizacao
+        description: Taxa de alfabetização
+  - name: br_inep_saeb__uf_taxa_alfabetizacao
+    description: Taxa de alfabetização por UF referente ao 2º ano divulgado pelo SAEB
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, sigla_uf, rede, localizacao, area]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.95
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: rede
+        description: Rede Escolar
+      - name: localizacao
+        description: Localização da escola
+      - name: area
+        description: 'Área onde a escola está localizada: interior, capital ou total'
+      - name: taxa_alfabetizacao
+        description: Taxa de alfabetização

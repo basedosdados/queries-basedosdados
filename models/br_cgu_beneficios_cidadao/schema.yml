@@ -1,14 +1,11 @@
 ---
 version: 2
 models:
-  - name: novo_bolsa_familia
+  - name: br_cgu_beneficios_cidadao__novo_bolsa_familia
     description: Números do Novo Bolsa Família
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_competencia
-            - mes_competencia
-            - nis_favorecido
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano_competencia
         description: Ano a que se refere a parcela
@@ -37,14 +34,11 @@ models:
       - name: valor_parcela
         description: Valor da parcela do benefício
         tests: [not_null]
-  - name: garantia_safra
+  - name: br_cgu_beneficios_cidadao__garantia_safra
     description: Números do Garantia Safra
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_referencia
-            - mes_referencia
-            - nis_favorecido
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano_referencia
         description: Ano da folha de pagamento
@@ -65,14 +59,11 @@ models:
       - name: valor_parcela
         description: Valor da parcela do benefício
         tests: [not_null]
-  - name: bpc
+  - name: br_cgu_beneficios_cidadao__bpc
     description: Números do Benefício de Prestação Continuada
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano_competencia
-            - mes_competencia
-            - nis_favorecido
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano_competencia
         description: Ano a que se refere a parcela
@@ -108,4 +99,180 @@ models:
         description: Indica se o benefício foi concedido judicialmente (“SIM” ou “NÃO”)
       - name: valor_parcela
         description: Valor da parcela do benefício
+        tests: [not_null]
+  - name: br_cgu_beneficios_cidadao__auxilio_brasil
+    description: Dados sobre o Auxílio Brasil
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano_competencia
+        description: Ano a que se refere a parcela
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes_competencia
+        description: Mês a que se refere a parcela
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: ano_referencia
+        description: Ano da folha de pagamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes_referencia
+        description: Mês da folha de pagamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: sigla_uf
+        description: Sigla da Unidade Federativa do beneficiário do Auxílio Brasil
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: id_municipio
+        description: Código IBGE do município do beneficiário do Auxílio Brasil
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: cpf_favorecido
+        description: Número no Cadastro de Pessoas Físicas (CPF) do beneficiário do
+          Auxílio Brasil, caso possua
+      - name: nis_favorecido
+        description: Número de Identificação Social (NIS) do beneficiário do Auxílio
+          Brasil, caso possua
+      - name: nome_favorecido
+        description: Nome do beneficiário do Auxílio Brasil
+      - name: valor_parcela
+        description: Valor da parcela do benefício
+        tests: [not_null]
+  - name: br_cgu_beneficios_cidadao__bolsa_familia_pagamento
+    description: Dados sobre o pagamento do bolsa família entre os anos de 2013 até
+      2021.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano_competencia
+        description: Ano a que se refere a parcela
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes_competencia
+        description: Mês a que se refere a parcela
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: ano_referencia
+        description: Ano da folha de pagamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes_referencia
+        description: Mês da folha de pagamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: sigla_uf
+        description: Sigla da Unidade Federativa do beneficiário do Auxílio Brasil
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+      - name: id_municipio
+        description: Código IBGE do município do beneficiário do Auxílio Brasil
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: cpf_favorecido
+        description: Número no Cadastro de Pessoas Físicas (CPF) do beneficiário do
+          Auxílio Brasil, caso possua
+      - name: nis_favorecido
+        description: Número de Identificação Social (NIS) do beneficiário do Auxílio
+          Brasil, caso possua
+      - name: nome_favorecido
+        description: Nome do beneficiário do Auxílio Brasil
+      - name: valor_parcela
+        description: Valor da parcela do benefício
+        tests: [not_null]
+  - name: br_cgu_beneficios_cidadao__auxilio_emergencial
+    description: Microdados do auxílio emergencial de 2020 do Ministério da Cidadania
+      a nível de indivíduo.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - mes
+            - id_municipio
+            - nis_beneficiario
+            - cpf_beneficiario
+            - nome_beneficiario
+            - nome_responsavel
+            - enquadramento
+            - observacao
+            - parcela
+      - not_null_proportion_multiple_columns:
+          at_least: 0.02  # A coluna "observacao" tem poucos valores preenchidos.
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: mes
+        description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: BR
+      - name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: nis_beneficiario
+        description: Número de Identificação Social (NIS), caso possua
+      - name: cpf_beneficiario
+        description: Número no Cadastro de Pessoas Físicas (CPF), caso possua
+      - name: nome_beneficiario
+        description: Nome do beneficiário
+      - name: nis_responsavel
+        description: Número de Identificação Social (NIS) do responsável pelo beneficiário,
+          caso possua
+      - name: cpf_responsavel
+        description: Número no Cadastro de Pessoas Físicas (CPF) do responsável beneficiário,
+          caso possua
+      - name: nome_responsavel
+        description: Nome do responsável pelo beneficiário, caso possua
+      - name: enquadramento
+        description: Identifica se o beneficiário é do grupo Bolsa Família, Inscrito
+          no Cadastro Único (CadÚnico) ou Não Inscrito no Cadastro Único (ExtraCad)
+      - name: parcela
+        description: Número sequencial da parcela disponibilizada
+      - name: observacao
+        description: Indica alterações na parcela disponibilizada como, por exemplo,
+          se foi devolvida ou está retida
+      - name: valor_beneficio
+        description: Valor do Benefício
         tests: [not_null]

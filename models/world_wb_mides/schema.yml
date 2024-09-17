@@ -55,19 +55,6 @@ models:
         description: Valor bruto do empenho
       - name: valor_reforco
         description: Valor do reforço, caso haja incrementos
-  - name: world_wb_mides__dicionario
-    description: Dicionário
-    columns:
-      - name: chave
-        description: Chave
-      - name: cobertura_temporal
-        description: Cobertura Temporal
-      - name: coluna
-        description: Coluna
-      - name: id_tabela
-        description: ID Tabela
-      - name: valor
-        description: Valor
   - name: world_wb_mides__licitacao
     description: Dados a nível de licitação.
     columns:
@@ -342,3 +329,27 @@ models:
         description: Valor ajuste
       - name: valor_final
         description: Valor líquido da liquidação
+  - name: world_wb_mides__dicionario
+    description: Dicionário para tradução dos códigos do conjunto world_wb_mides.
+      Para taduzir códigos compartilhados entre instituições, como id_municipio, buscar
+      por diretórios
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_tabela
+            - nome_coluna
+            - chave
+            - cobertura_temporal
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_tabela
+        description: ID Tabela
+      - name: nome_coluna
+        description: Nome da coluna
+      - name: chave
+        description: Chave
+      - name: cobertura_temporal
+        description: Cobertura Temporal
+      - name: valor
+        description: Valor

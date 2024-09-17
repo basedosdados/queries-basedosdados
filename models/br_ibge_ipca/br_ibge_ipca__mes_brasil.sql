@@ -10,6 +10,11 @@
         ],
     )
 }}
+
+with
+    drop_duplicates as (
+        select distinct * from `basedosdados-staging.br_ibge_ipca_staging.mes_brasil`
+    )
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
@@ -19,7 +24,7 @@ select
     safe_cast(variacao_semestral as float64) variacao_semestral,
     safe_cast(variacao_anual as float64) variacao_anual,
     safe_cast(variacao_doze_meses as float64) variacao_doze_meses
-from `basedosdados-staging.br_ibge_ipca_staging.mes_brasil` as t
+from drop_duplicates as t
 
 {% if is_incremental() %}
     where
