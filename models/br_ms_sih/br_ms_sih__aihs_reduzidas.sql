@@ -12,19 +12,31 @@
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
+
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
     safe_cast(sigla_uf as int64) sigla_uf,
     safe_cast(n_aih as string) id_aih,
-    safe_cast(ident as int64) tipo_aih,
-    safe_cast(gestor_cod as int64) motivo_autorizacao_aih,
+    safe_cast(ident as string) tipo_aih,
+    case
+        when gestor_cod = '00000' then '0' else cast(ltrim(gestor_cod, '0') as string)
+    end as motivo_autorizacao_aih,
     safe_cast(ltrim(sequencia) as string) sequencial_aih,
-    safe_cast(espec as int64) especialidade_leito,
-    safe_cast(cobranca as int64) motivo_saida,
-    safe_cast(marca_uti as int64) tipo_uti,
-    safe_cast(marca_uci as int64) tipo_uci,
-    safe_cast(car_int as int64) carater_internacao,
+    case
+        when espec = '00' then '0' else cast(ltrim(espec, '0') as string)
+    end as especialidade_leito,
+    safe_cast(cobranca as string) motivo_saida,
+    case
+        when marca_uti = '00' then '0' else cast(ltrim(marca_uti, '0') as string)
+    end as tipo_uti,
+    case
+        when marca_uci = '00' then '0' else cast(ltrim(marca_uci, '0') as string)
+    end as tipo_uci,
+    case
+        when car_int = '00' then '0' else cast(ltrim(car_int, '0') as string)
+    end as carater_internacao,
     safe_cast(
         format_date('%Y-%m-%d', safe.parse_date('%Y%m%d', dt_inter)) as date
     ) data_internacao,
@@ -33,8 +45,8 @@ select
     ) data_saida,
     safe_cast(munic_mov as string) id_municipio_estabelecimento,
     safe_cast(cnes as string) id_estabelecimento_cnes,
-    safe_cast(nat_jur as int64) natureza_juridica_estabelecimento,
-    safe_cast(natureza as int64) natureza_juridica_estabelecimento_ate_2012,
+    safe_cast(nat_jur as string) natureza_juridica_estabelecimento,
+    safe_cast(natureza as string) natureza_juridica_estabelecimento_ate_2012,
     safe_cast(regexp_replace(cgc_hosp, r'^0', '') as string) cnpj_estabelecimento,
     safe_cast(gestao as string) tipo_gestao_estabelecimento,
     safe_cast(
@@ -91,33 +103,41 @@ select
         when 5
         then 'Indígena'
     end as raca_cor_paciente,
-    safe_cast(etnia as int64) etnia_paciente,
+    case
+        when etnia = '00' then '0' else cast(ltrim(etnia, '0') as string)
+    end as etnia_paciente,
     safe_cast(nacional as int64) codigo_nacionalidade_paciente,
     safe_cast(
         trim(case when trim(cbor) = '000000' then null else cbor end) as string
     ) cbo_2002_paciente,
     safe_cast(homonimo as int64) indicador_paciente_homonimo,
-    safe_cast(instru as int64) grau_instrucao_paciente,
+    safe_cast(instru as string) grau_instrucao_paciente,
     safe_cast(num_filhos as int64) quantidade_filhos_paciente,
     safe_cast(
         trim(case when trim(cnaer) = '000' then null else cnaer end) as string
     ) id_acidente_trabalho,
-    safe_cast(vincprev as int64) indicador_vinculo_previdencia,
+    safe_cast(vincprev as string) tipo_vinculo_previdencia,
     safe_cast(
         trim(
             case when trim(insc_pn) = '0000000000' then null else insc_pn end
         ) as string
     ) id_gestante_pre_natal,
     safe_cast(gestrisco as int64) indicador_gestante_risco,
-    safe_cast(contracep1 as int64) tipo_contraceptivo_principal,
-    safe_cast(contracep2 as int64) tipo_contraceptivo_secundario,
+    case
+        when contracep1 = '00' then '0' else cast(ltrim(contracep1, '0') as string)
+    end as tipo_contraceptivo_principal,
+    case
+        when contracep2 = '00' then '0' else cast(ltrim(contracep2, '0') as string)
+    end as tipo_contraceptivo_secundario,
     safe_cast(
         trim(case when trim(seq_aih5) = '000' then null else seq_aih5 end) as string
     ) sequencial_longa_permanencia,
-    safe_cast(regexp_replace(proc_solic, r'^0', '') as int64) procedimento_solicitado,
-    safe_cast(regexp_replace(proc_rea, r'^0', '') as int64) procedimento_realizado,
+    safe_cast(regexp_replace(proc_solic, r'^0', '') as string) procedimento_solicitado,
+    safe_cast(regexp_replace(proc_rea, r'^0', '') as string) procedimento_realizado,
     safe_cast(infehosp as int64) indicador_infeccao_hospitalar,
-    safe_cast(complex as int64) complexidade,
+    case
+        when complex = '00' then '0' else cast(ltrim(complex, '0') as string)
+    end as complexidade,
     safe_cast(ind_vdrl as string) indicador_exame_vdrl,
     safe_cast(financ as string) tipo_financiamento,
     safe_cast(faec_tp as string) subtipo_financiamento,
@@ -326,7 +346,8 @@ select
     safe_cast(val_uti as float64) valor_uti,
     safe_cast(us_tot as float64) valor_dolar,
     safe_cast(val_tot as float64) valor_aih,
-from `basedosdados-staging.br_ms_sih_staging.aihs_reduzidas` as t
+from `basedosdados-staging.br_ms_sih_staging.aihs_reduzidas`
+
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

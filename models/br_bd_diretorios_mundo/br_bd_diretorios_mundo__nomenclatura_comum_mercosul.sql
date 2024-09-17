@@ -1,4 +1,6 @@
 {{ config(alias="nomenclatura_comum_mercosul", schema="br_bd_diretorios_mundo") }}
+
+
 select
     safe_cast(co_ncm as string) id_ncm,
     safe_cast(co_unid as string) id_unidade,
@@ -50,4 +52,4 @@ select
     safe_cast(no_ncm_ing as string) nome_ncm_ingles,
 from
     `basedosdados-staging.br_bd_diretorios_mundo_staging.nomenclatura_comum_mercosul`
-    as t
+    as d
