@@ -146,6 +146,10 @@ models:
               field: sigla
       - name: sigla_uf_nascimento
         description: Sigla da unidade da federação de nascimento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: situacao
         description: Situação
       - name: tipo_eleicao
@@ -191,6 +195,22 @@ models:
         description: CPF do vice ou suplente
       - name: data_despesa
         description: Data da despesa
+      - name: data_despesa
+        description: Data da despesa
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+              ignore_values:
+                - '8200-02-20'
+                - '8008-09-05'
+                - '8200-08-02'
+                - '6200-09-06'
+                - '6200-09-30'
+                - '7200-08-21'
+                - '8006-09-29'
+                - '9200-05-05'
+                - '5919-11-11'
       - name: data_eleicao
         description: Data da eleição
         tests:
