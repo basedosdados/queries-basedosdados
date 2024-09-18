@@ -30,4 +30,6 @@ select
     safe_cast(transacao as string) transacao,
     parse_date("%d/%m/%Y", data_transacao) data_transacao,
     safe_cast(valor_transacao as float64) valor_transacao,
-from `basedosdados.br_cgu_cartao_pagamento_staging.microdados_governo_federal` as t
+from
+    `basedosdados-staging.br_cgu_cartao_pagamento_staging.microdados_governo_federal`
+    as t
