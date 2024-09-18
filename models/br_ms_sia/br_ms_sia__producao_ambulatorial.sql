@@ -239,9 +239,7 @@ from sia
 
 {% if is_incremental() %}
     where
-        date(cast(ano as int64), cast(mes as int64), 1) not in (
-            select distinct (date(cast(ano as int64), cast(mes as int64), 1))
-            from {{ this }}
-        )
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
 
 {% endif %}

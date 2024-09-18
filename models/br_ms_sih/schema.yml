@@ -311,7 +311,7 @@ models:
         description: Número de filhos do paciente.
       - name: id_acidente_trabalho
         description: Código de acidente de trabalho.
-      - name: indicador_vinculo_previdencia
+      - name: tipo_vinculo_previdencia
         description: Vínculo com a previdência.
       - name: id_gestante_pre_natal
         description: Número da gestante no pré-natal.
