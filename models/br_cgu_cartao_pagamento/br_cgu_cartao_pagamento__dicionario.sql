@@ -10,4 +10,4 @@ select
     safe_cast(trim(chave) as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor,
-from `basedosdados.br_cgu_cartao_pagamento_staging.dicionario` as t
+from `basedosdados-staging.br_cgu_cartao_pagamento_staging.dicionario` as t
