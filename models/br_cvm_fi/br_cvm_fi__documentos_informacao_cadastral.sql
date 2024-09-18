@@ -1,4 +1,11 @@
-{{ config(schema="br_cvm_fi", materialized="table", cluster_by="id_fundo") }}
+{{
+    config(
+        alias="documentos_informacao_cadastral",
+        schema="br_cvm_fi",
+        materialized="table",
+        cluster_by="id_fundo",
+    )
+}}
 select
     safe_cast(id_fundo as string) id_fundo,
     regexp_replace(cnpj, r'[^0-9]', '') as cnpj,

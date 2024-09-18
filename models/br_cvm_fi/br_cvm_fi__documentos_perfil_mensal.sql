@@ -1,11 +1,12 @@
 {{
     config(
         schema="br_cvm_fi",
+        alias="documentos_perfil_mensal",
         materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2019, "end": 2023, "interval": 1},
+            "range": {"start": 2019, "end": 2025, "interval": 1},
         },
         cluster_by=["mes", "data_competencia"],
     )
