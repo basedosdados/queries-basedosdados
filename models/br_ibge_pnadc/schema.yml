@@ -3,17 +3,40 @@ version: 2
 models:
   - name: br_ibge_pnadc__microdados
     description: Microdados PNADC
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [ano, trimestre, id_pessoa]
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: trimestre
         description: Trimestre
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__trimestre')
+              field: trimestre
       - name: id_uf
         description: ID Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: id_uf
       - name: sigla_uf
         description: Sigla da Unidade da Federação
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: capital
         description: Município da Capital
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: id_uf
       - name: rm_ride
         description: Região Metropolitana e Região Administrativa Integrada
       - name: id_upa

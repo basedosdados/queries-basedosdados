@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: documentos_balancete
+  - name: br_cvm_fi__documentos_balancete
     description: O balancete é um documento gerado mensalmente pela contabilidade
       do fundo.
     tests:
@@ -34,7 +34,7 @@ models:
         description: Código da conta
       - name: saldo_conta
         description: Saldo da Conta
-  - name: documentos_carteiras_fundos_investimento
+  - name: br_cvm_fi__documentos_carteiras_fundos_investimento
     description: A Composição e Diversificação das Aplicações (CDA) descreve os ativos
       que compõem as carteiras de fundos de investimento.
     columns:
@@ -173,7 +173,7 @@ models:
         description: Quantidade de ativos no exterior
       - name: valor_ativo_exterior
         description: Valor do ativo no exterior
-  - name: documentos_extratos_informacoes
+  - name: br_cvm_fi__documentos_extratos_informacoes
     description: O conjunto de dados disponibiliza os Extratos das Informações (versão
       2.0), referentes aos Fundos de Investimento da ICVM 555, nos últimos cinco anos.
     columns:
@@ -506,7 +506,7 @@ models:
       - name: porcentagem_exposicao_maxima_cotas_ficfip
         description: Exposição máxima permitida pelo Regulamento para ativo do tipo
           Cotas de FICFIP - art. 109, §8º, ICVM 555
-  - name: documentos_informacao_cadastral
+  - name: br_cvm_fi__documentos_informacao_cadastral
     description: Dados cadastrais de fundos de investimento estruturados e não estruturados
       (ICVM 555), tais como CNPJ, data de registro e situação do fundo.
     columns:
@@ -609,7 +609,7 @@ models:
         description: Nome do Controlador
       - name: indicador_aplicacao_total_recursos_exterior
         description: Indica se o fundo pode aplicar 100% dos recursos no exterior
-  - name: documentos_informe_diario
+  - name: br_cvm_fi__documentos_informe_diario
     description: O Informe Diário é um demonstrativo que contém as seguintes informações
       do fundo, relativas à data de competência - Valor total da carteira do fundo;
       Patrimônio líquido; Valor da cota; Captações realizadas no dia; Resgates pagos
@@ -653,7 +653,7 @@ models:
         description: Resgate no dia
       - name: quantidade_cotistas
         description: Número de cotistas
-  - name: documentos_perfil_mensal
+  - name: br_cvm_fi__documentos_perfil_mensal
     description: O conjunto de dados disponibiliza os perfis mensais referentes aos
       Fundos de Investimento da ICVM 555, nos últimos doze meses, a partir de janeiro/2019.
     columns:
