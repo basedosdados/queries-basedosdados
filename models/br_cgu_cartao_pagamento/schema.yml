@@ -117,7 +117,7 @@ models:
               field: data.data
       - name: valor_transacao
         description: Valor da transação realizada com o cartão
-  - name: br_cgu_cartao_pagamento__microdados_desfesa_civil
+  - name: br_cgu_cartao_pagamento__microdados_defesa_civil
     description: O Cartão de Pagamento de Defesa Civil (CPDC) é a forma exclusiva
       para o pagamento de despesas com ações de resposta promovidas por governos estaduais,
       do Distrito Federal e municipais com recursos transferidos pela União.
