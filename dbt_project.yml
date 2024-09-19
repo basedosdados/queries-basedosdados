@@ -105,6 +105,9 @@ models:
     br_cgu_beneficios_cidadao:
       +materialized: table
       +schema: br_cgu_beneficios_cidadao
+    br_cgu_cartao_pagamento:
+      +materialized: table
+      +schema: br_cgu_cartao_pagamento
     br_cgu_dados_abertos:
       +materialized: table
       +schema: br_cgu_dados_abertos
