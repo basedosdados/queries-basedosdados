@@ -10,6 +10,7 @@
         },
     )
 }}
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
@@ -38,6 +39,12 @@ select
     safe_cast(numero_partido_doador as string) numero_partido_doador,
     safe_cast(numero_candidato_doador as string) numero_candidato_doador,
     safe_cast(cnae_2_doador as string) cnae_2_doador,
+    case
+        when length(cnae_2_doador) = 5 then safe_cast(cnae_2_doador as string) else null
+    end as cnae_2_doador_classe,
+    case
+        when length(cnae_2_doador) > 5 then safe_cast(cnae_2_doador as string) else null
+    end as cnae_2_doador_subclasse,
     safe_cast(descricao_cnae_2_doador as string) descricao_cnae_2_doador,
     safe_cast(cpf_cnpj_doador_orig as string) cpf_cnpj_doador_orig,
     safe_cast(nome_doador_orig as string) nome_doador_orig,

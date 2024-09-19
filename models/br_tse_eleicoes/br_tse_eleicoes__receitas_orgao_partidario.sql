@@ -10,6 +10,7 @@
         },
     )
 }}
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf_diretorio as string) sigla_uf,
@@ -37,6 +38,12 @@ select
     safe_cast(descricao_receita as string) descricao_receita,
     safe_cast(sequencial_receita as string) sequencial_receita,
     safe_cast(cnae_2_doador as string) cnae_2_doador,
+    case
+        when length(cnae_2_doador) = 5 then safe_cast(cnae_2_doador as string) else null
+    end as cnae_2_doador_classe,
+    case
+        when length(cnae_2_doador) > 5 then safe_cast(cnae_2_doador as string) else null
+    end as cnae_2_doador_subclasse,
     safe_cast(descricao_cnae_2_doador as string) descricao_cnae_2_doador,
     safe_cast(cpf_cnpj_doador as string) cpf_cnpj_doador,
     safe_cast(nome_doador as string) nome_doador,
