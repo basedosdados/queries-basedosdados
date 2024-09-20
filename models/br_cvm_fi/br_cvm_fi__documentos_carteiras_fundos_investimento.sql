@@ -1,6 +1,6 @@
 {{
     config(
-        alias="documentos_carteiras_fundos_investimentos",
+        alias="documentos_carteiras_fundos_investimento",
         schema="br_cvm_fi",
         materialized="table",
         partition_by={
