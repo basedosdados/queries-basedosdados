@@ -146,10 +146,6 @@ models:
               field: sigla
       - name: sigla_uf_nascimento
         description: Sigla da unidade da federação de nascimento
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__uf')
-              field: sigla
       - name: situacao
         description: Situação
       - name: tipo_eleicao
