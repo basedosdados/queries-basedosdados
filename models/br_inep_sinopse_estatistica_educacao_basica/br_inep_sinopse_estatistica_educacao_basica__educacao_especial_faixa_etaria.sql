@@ -17,7 +17,7 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(tipo_classe as string) tipo_classe,
     safe_cast(faixa_etaria as string) faixa_etaria,
-    safe_cast(quantidade_matricula as int64) quantidade_matricula,
+    safe_cast(quantidade_matricula as numeric) quantidade_matricula,
 from
     `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.educacao_especial_faixa_etaria`
     as t
