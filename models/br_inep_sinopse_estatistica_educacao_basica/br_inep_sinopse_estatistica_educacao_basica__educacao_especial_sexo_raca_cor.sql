@@ -17,8 +17,10 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(tipo_classe as string) tipo_classe,
     safe_cast(sexo as string) sexo,
-    safe_cast(raca_cor as string) raca_cor,
-    safe_cast(quantidade_matricula as int64) quantidade_matricula,
+    safe_cast(
+        case when raca_cor = 'Fmarela' then 'Amarela' else raca_cor end as string
+    ) raca_cor,
+    safe_cast(quantidade_matricula as numeric) quantidade_matricula,
 from
     `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.educacao_especial_sexo_raca_cor`
     as t
