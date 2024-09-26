@@ -9,7 +9,9 @@
 with
     despesa as (
         select
-            case when cargo = 'Deputado Federal' then 'excluir' end as excluir,
+            case
+                when cargo = 'Vereador' and valor_despesa > 4773280.39 then 'excluir'
+            end as excluir,
             data_despesa as data_conta,
             sequencial_candidato,
             concat(ano, sequencial_candidato) as ano_sequencial_candidato,
@@ -25,7 +27,9 @@ with
 
     receita as (
         select
-            case when cargo = 'Deputado Federal' then 'excluir' end as excluir,
+            case
+                when cargo = 'Vereador' and valor_receita > 4773280.39 then 'excluir'
+            end as excluir,
             data_receita as data_conta,
             sequencial_candidato,
             concat(ano, sequencial_candidato) as ano_sequencial_candidato,
