@@ -10,7 +10,7 @@ with
     despesa as (
         select
             case
-                when cargo = 'Vereador' and valor_despesa > 4773280.39 then 'excluir'
+                when cargo = 'vereador' and valor_despesa > 4773280.39 then 'excluir'
             end as excluir,
             data_despesa as data_conta,
             sequencial_candidato,
@@ -28,7 +28,7 @@ with
     receita as (
         select
             case
-                when cargo = 'Vereador' and valor_receita > 4773280.39 then 'excluir'
+                when cargo = 'vereador' and valor_receita > 4773280.39 then 'excluir'
             end as excluir,
             data_receita as data_conta,
             sequencial_candidato,
