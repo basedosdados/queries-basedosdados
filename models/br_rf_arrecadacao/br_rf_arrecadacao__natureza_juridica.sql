@@ -1,7 +1,7 @@
 {{ config(alias='natureza_juridica',schema='br_rf_arrecadacao') }}
 WITH referencia_codigo AS (
   select id_natureza_juridica,SUBSTR(CAST(id_natureza_juridica AS STRING),0,3) as inicio_codigo 
-  FROM basedosdados-dev.br_bd_diretorios_brasil.natureza_juridica
+  FROM basedosdados-staging.br_bd_diretorios_brasil.natureza_juridica
 ) 
 select
 safe_cast(t.ano as int64) ano,
