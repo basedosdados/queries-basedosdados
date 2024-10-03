@@ -10,5 +10,5 @@ safe_cast(compensacao as float64) compensacao,
 safe_cast(restituicao as float64) restituicao,
 safe_cast(outros as float64) outros,
 safe_cast(arrecadacao_liquida as float64) arrecadacao_liquida,
-from `basedosdados-dev.br_rf_arrecadacao_staging.ir_ipi` as t
+from `basedosdados-staging.br_rf_arrecadacao_staging.ir_ipi` as t
 

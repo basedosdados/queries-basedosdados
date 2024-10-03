@@ -6,5 +6,5 @@ safe_cast(nome_uf as string) nome_uf,
 safe_cast(regiao_politica as string) regiao_politica,
 safe_cast(cidade_uf as string) cidade_uf,
 safe_cast(valor_arrecadado as float64) valor_arrecadado,
-from `basedosdados-dev.br_rf_arrecadacao_staging.itr` as t
+from `basedosdados-staging.br_rf_arrecadacao_staging.itr` as t
 

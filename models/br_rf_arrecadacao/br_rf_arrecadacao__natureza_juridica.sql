@@ -25,6 +25,6 @@ safe_cast(t.cpsss as float64) cpsss,
 safe_cast(t.pagamento_unificado as float64) pagamento_unificado,
 safe_cast(t.outras_receitas_rfb as float64) outras_receitas_rfb,
 safe_cast(t.demais_receitas as float64) demais_receitas,
-from `basedosdados-dev.br_rf_arrecadacao_staging.natureza_juridica` as t
+from `basedosdados-staging.br_rf_arrecadacao_staging.natureza_juridica` as t
 left join referencia_codigo on t.natureza_juridica_codigo = referencia_codigo.inicio_codigo
 
