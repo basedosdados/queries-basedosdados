@@ -5,8 +5,7 @@ models:
     description: Contém os dados de arrecadação mensal por Unidade da Federação, contendo receitas administradas e não administradas pela RFB.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+            combination_of_columns: [ano, mes, sigla_uf]
       - not_null_proportion_multiple_columns:
             at_least: 0.95
     columns:
@@ -136,8 +135,7 @@ models:
     description: Contém os dados de arrecadação bruta mensal realizadas em Documento de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos setores econômicos, identificados pela seção, constantes da tabela de Classificação Nacional de Atividades Econômicas (Cnae).
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+            combination_of_columns: [ano,mes,secao_sigla,secao_nome]
       - not_null_proportion_multiple_columns:
             at_least: 0.95
     columns:
@@ -205,8 +203,7 @@ models:
     description: Contém os dados de arrecadação bruta mensal realizadas em Documento de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos diversos tipos de Naturezas Jurídicas.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+            combination_of_columns: [ano,mes,natureza_juridica_codigo,natureza_juridica_nome]
       - not_null_proportion_multiple_columns:
             at_least: 0.95
     columns:
@@ -274,8 +271,7 @@ models:
     description: Contém os dados de arrecadação decendial do Imposto sobre a Renda (IR) e do Imposto sobre Produtos Industrializados (IPI), discriminados por arrecadação bruta, os respectivos eventos que afetam essa arrecadação bruta e a arrecadação líquida, valor este último passível de repasse aos Fundos de Participação dos Estados e do Municípios, FPM e FPE, de acordo com dispositivo constitucional.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+            combination_of_columns: [ano,mes,tributo,decendio]
       - not_null_proportion_multiple_columns:
             at_least: 0.95
     columns:
@@ -319,8 +315,7 @@ models:
     description: Contém os dados de arrecadação líquida mensal do Imposto sobre a Propriedade Territorial Rural (ITR), realizada pelas propriedades rurais, passível de repasse aos próprios municípios onde se localizam essas propriedades rurais, conforme a situação do município, conveniado ou não conveniado com a União para fiscalizar e cobrar o ITR, de acordo com dispositivo constitucional.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
+            combination_of_columns: [ano,mes,nome_uf,regiao_politica,cidade_uf]
       - not_null_proportion_multiple_columns:
             at_least: 0.95
     columns:
