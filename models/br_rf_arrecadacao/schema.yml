@@ -263,37 +263,40 @@ models:
           - dbt_utils.not_null_proportion:
               at_least: 0.50
   - name: br_rf_arrecadacao__cnae
-    description: Contém os dados de arrecadação bruta mensal realizadas em Documento de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos setores econômicos, identificados pela seção, constantes da tabela de Classificação Nacional de Atividades Econômicas (Cnae).
+    description: Contém os dados de arrecadação bruta mensal realizadas em Documento
+      de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos setores
+      econômicos, identificados pela seção, constantes da tabela de Classificação
+      Nacional de Atividades Econômicas(Cnae).
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns: [ano,mes,secao_sigla,secao_nome]
+          combination_of_columns: [ano, mes, secao_sigla, secao_nome]
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__mes')
-                field: mes.mes
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
       - name: secao_sigla
         description: Código da Seção da atividade econômica constante da Cnae.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cnae_2')
-                field: secao
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: secao
       - name: secao_nome
         description: Nome da Seção da atividade econômica constante da Cnae
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cnae_2')
-                field: descricao_secao
+              to: ref('br_bd_diretorios_brasil__cnae_2')
+              field: descricao_secao
       - name: imposto_importacao
         description: Imposto sobre a Importação.
       - name: imposto_exportacao
@@ -314,7 +317,7 @@ models:
         description: Contribuição para o Financiamento da Seguridade Social.
       - name: pis_pasep
         description: 'Programa de Integração Social e o Programa de Formação do Patrimônio
-            do Servidor Público. '
+          do Servidor Público. '
       - name: csll
         description: 'Contribuição Social sobre o Lucro Líquido. '
       - name: cide_combustiveis
@@ -325,43 +328,49 @@ models:
         description: 'Contribuição para o Plano de Seguridade Social do Servidor Público. '
       - name: pagamento_unificado
         description: Pagamentos referentes a vários tributos feitos em um único documento
-            de arrecadação, como parcelamentos, retenções, Simples etc.
+          de arrecadação, como parcelamentos, retenções, Simples etc.
       - name: outras_receitas_rfb
         description: 'Outras receitas administradas pela RFB. '
       - name: demais_receitas
         description: 'Outras receitas não administradas pela RFB. '
   - name: br_rf_arrecadacao__natureza_juridica
-    description: Contém os dados de arrecadação bruta mensal realizadas em Documento de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos diversos tipos de Naturezas Jurídicas.
+    description: Contém os dados de arrecadação bruta mensal realizadas em Documento
+      de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos diversos
+      tipos de Naturezas Jurídicas.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns: [ano,mes,natureza_juridica_codigo,natureza_juridica_nome]
+          combination_of_columns:
+            - ano
+            - mes
+            - natureza_juridica_codigo
+            - natureza_juridica_nome
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__mes')
-                field: mes.mes
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
       - name: natureza_juridica_codigo
         description: Código do tipo de Natureza Jurídica.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__natureza_juridica')
-                field: id_natureza_juridica
+              to: ref('br_bd_diretorios_brasil__natureza_juridica')
+              field: id_natureza_juridica
       - name: natureza_juridica_nome
         description: Nome do tipo da Natureza Jurídica.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__natureza_juridica')
-                field: descricao
+              to: ref('br_bd_diretorios_brasil__natureza_juridica')
+              field: descricao
       - name: imposto_importacao
         description: Imposto sobre a Importação.
       - name: imposto_exportacao
@@ -382,7 +391,7 @@ models:
         description: Contribuição para o Financiamento da Seguridade Social.
       - name: pis_pasep
         description: 'Programa de Integração Social e o Programa de Formação do Patrimônio
-            do Servidor Público. '
+          do Servidor Público. '
       - name: csll
         description: 'Contribuição Social sobre o Lucro Líquido. '
       - name: cide_combustiveis
@@ -393,91 +402,104 @@ models:
         description: 'Contribuição para o Plano de Seguridade Social do Servidor Público. '
       - name: pagamento_unificado
         description: Pagamentos referentes a vários tributos feitos em um único documento
-            de arrecadação, como parcelamentos, retenções, Simples etc.
+          de arrecadação, como parcelamentos, retenções, Simples etc.
       - name: outras_receitas_rfb
         description: 'Outras receitas administradas pela RFB. '
       - name: demais_receitas
         description: 'Outras receitas não administradas pela RFB. '
   - name: br_rf_arrecadacao__ir_ipi
-    description: Contém os dados de arrecadação decendial do Imposto sobre a Renda (IR) e do Imposto sobre Produtos Industrializados (IPI), discriminados por arrecadação bruta, os respectivos eventos que afetam essa arrecadação bruta e a arrecadação líquida, valor este último passível de repasse aos Fundos de Participação dos Estados e do Municípios, FPM e FPE, de acordo com dispositivo constitucional.
+    description: Contém os dados de arrecadação decendial do Imposto sobre a Renda
+      (IR) e do Imposto sobre Produtos Industrializados (IPI), discriminados por arrecadação
+      bruta, os respectivos eventos que afetam essa arrecadação bruta e a arrecadação
+      líquida, valor este último passível de repasse aos Fundos de Participação dos
+      Estados e do Municípios, FPM e FPE, de acordo com dispositivo constitucional.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns: [ano,mes,tributo,decendio]
+          combination_of_columns: [ano, mes, tributo, decendio]
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__mes')
-                field: mes.mes
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
       - name: tributo
         description: Identificação de Tributo (IR ou IPI).
       - name: decendio
         description: Decêndio de referência.
       - name: arrecadacao_bruta
-        description: "Valor da arrecadação bruta dos tributos sem nenhum acréscimo\n
-            ou dedução. É a etapa inicial da arrecadação, quando há o pagamento\n
-            efetuado pelo contribuinte."
+        description: "Valor da arrecadação bruta dos tributos sem nenhum acréscimo\n\
+          \ ou dedução. É a etapa inicial da arrecadação, quando há o pagamento\n\
+          \ efetuado pelo contribuinte."
       - name: retificacao
-        description: "Valor do saldo das retificações efetuadas nos Documentos de\n
-            Arrecadação de Receitas Federais (Darf). São alterações feitas nos\ndocumentos
-            de arrecadação em função de erro de preenchimento."
+        description: "Valor do saldo das retificações efetuadas nos Documentos de\n\
+          \ Arrecadação de Receitas Federais (Darf). São alterações feitas nos\ndocumentos\
+          \ de arrecadação em função de erro de preenchimento."
       - name: compensacao
-        description: "Valor do saldo das compensações efetuadas. Utilização de valores
-            pagos\nanteriormente para quitação de débitos de outros tributos, distintos
-            de\nIR ou IPI, e vice-versa."
+        description: "Valor do saldo das compensações efetuadas. Utilização de valores\
+          \ pagos\nanteriormente para quitação de débitos de outros tributos, distintos\
+          \ de\nIR ou IPI, e vice-versa."
       - name: restituicao
-        description: "Valor do saldo das restituições efetuadas pela Receita Federal
-            em função\nde pagamentos feitos a maior ou indevidos."
+        description: "Valor do saldo das restituições efetuadas pela Receita Federal\
+          \ em função\nde pagamentos feitos a maior ou indevidos."
       - name: outros
         description: Demais eventos que agem sobre o valor da arrecadação bruta
       - name: arrecadacao_liquida
-        description: "Valor resultante da arrecadação bruta, depois da incidência
-            dos demais\neventos de arrecadação."
+        description: "Valor resultante da arrecadação bruta, depois da incidência\
+          \ dos demais\neventos de arrecadação."
   - name: br_rf_arrecadacao__itr
-    description: Contém os dados de arrecadação líquida mensal do Imposto sobre a Propriedade Territorial Rural (ITR), realizada pelas propriedades rurais, passível de repasse aos próprios municípios onde se localizam essas propriedades rurais, conforme a situação do município, conveniado ou não conveniado com a União para fiscalizar e cobrar o ITR, de acordo com dispositivo constitucional.
+    description: Contém os dados de arrecadação líquida mensal do Imposto sobre a
+      Propriedade Territorial Rural (ITR), realizada pelas propriedades rurais, passível
+      de repasse aos próprios municípios onde se localizam essas propriedades rurais,
+      conforme a situação do município, conveniado ou não conveniado com a União para
+      fiscalizar e cobrar o ITR, de acordo com dispositivo constitucional.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns: [ano,mes,nome_uf,regiao_politica,cidade_uf]
+          combination_of_columns:
+            - ano
+            - mes
+            - nome_uf
+            - regiao_politica
+            - cidade_uf
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__mes')
-                field: mes.mes
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: mes.mes
       - name: nome_uf
-        description: "Nome da Unidade da Federação onde se localiza o município conveniado\n
-            ou não conveniado."
+        description: "Nome da Unidade da Federação onde se localiza o município conveniado\n\
+          \ ou não conveniado."
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: nome
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: nome
       - name: regiao_politica
-        description: "Nome da Região Política onde se localiza o município conveniado
-            ou não\nconveniado."
+        description: "Nome da Região Política onde se localiza o município conveniado\
+          \ ou não\nconveniado."
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: regiao
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: regiao
       - name: cidade_uf
-        description: "Nome do município conveniado ou não conveniado seguido da sigla
-            da\nUnidade da Federação onde se localiza o município."
+        description: "Nome do município conveniado ou não conveniado seguido da sigla\
+          \ da\nUnidade da Federação onde se localiza o município."
       - name: valor_arrecadado
         description: Valor arrecadado.
