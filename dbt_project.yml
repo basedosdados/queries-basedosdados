@@ -336,6 +336,9 @@ models:
     br_rj_isp_estatisticas_seguranca:
       +materialized: table
       +schema: br_rj_isp_estatisticas_seguranca
+    br_sfb_sicar:
+      +materialized: table
+      +schema: br_sfb_sicar
     br_sp_saopaulo_dieese_icv:
       +materialized: table
       +schema: br_sp_saopaulo_dieese_icv
