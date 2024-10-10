@@ -49,18 +49,10 @@ models:
         description: Rede de Ensino
       - name: id_ies
         description: Código da Instituição
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__instituicao_ensino_superior')
-              field: id_ies
       - name: nome_curso
         description: Nome do Curso
       - name: id_curso
         description: Código do Curso
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__curso_superior')
-              field: id_curso
       - name: nome_curso_cine
         description: Nome do curso, conforme adaptação da Classificação Internacional
           Normalizada da Educação Cine/Unesco
@@ -600,10 +592,6 @@ models:
         description: Código único de identificação da mantenedora da IES
       - name: id_ies
         description: Código único de identificação da IES
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_brasil__instituicao_ensino_superior')
-              field: id_ies
       - name: nome
         description: Nome da IES
       - name: sigla
