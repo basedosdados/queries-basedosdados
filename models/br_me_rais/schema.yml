@@ -135,39 +135,39 @@ models:
         description: Indicador Trabalho Parcial
       - name: indicador_trabalho_intermitente
         description: Indicador Trabalho Intermitente
-      - name: faixa_remun_media_sm
+      - name: faixa_remuneracao_media_sm
         description: Faixa Remuneração Média (Salários Mínimos)
-      - name: valor_remun_media_sm
+      - name: valor_remuneracao_media_sm
         description: Valor da Remuneração Média (Salários Mínimos)
-      - name: valor_remun_media_nominal
+      - name: valor_remuneracao_media
         description: Valor da Remuneração Média (Nominal)
-      - name: faixa_remun_dezembro_sm
+      - name: faixa_remuneracao_dezembro_sm
         description: Faixa Remuneração em Dezembro (Salários Mínimos)
-      - name: valor_remun_dezembro_sm
+      - name: valor_remuneracao_dezembro_sm
         description: Valor da Remuneração em Dezembro (Salários Mínimos)
-      - name: valor_remun_janeiro_nominal
+      - name: valor_remuneracao_janeiro
         description: Valor da Remuneração em Janeiro (Nominal)
-      - name: valor_remun_fevereiro_nominal
+      - name: valor_remuneracao_fevereiro
         description: Valor da Remuneração em Fevereiro (Nominal)
-      - name: valor_remun_marco_nominal
+      - name: valor_remuneracao_marco
         description: Valor da Remuneração em Março (Nominal)
-      - name: valor_remun_abril_nominal
+      - name: valor_remuneracao_abril
         description: Valor da Remuneração em Abril (Nominal)
-      - name: valor_remun_maio_nominal
+      - name: valor_remuneracao_maio
         description: Valor da Remuneração em Maio (Nominal)
-      - name: valor_remun_junho_nominal
+      - name: valor_remuneracao_junho
         description: Valor da Remuneração em Junho (Nominal)
-      - name: valor_remun_julho_nominal
+      - name: valor_remuneracao_julho
         description: Valor da Remuneração em Julho (Nominal)
-      - name: valor_remun_agosto_nominal
+      - name: valor_remuneracao_agosto
         description: Valor da Remuneração em Agosto (Nominal)
-      - name: valor_remun_setembro_nominal
+      - name: valor_remuneracao_setembro
         description: Valor da Remuneração em Setembro (Nominal)
-      - name: valor_remun_outubro_nominal
+      - name: valor_remuneracao_outubro
         description: Valor da Remuneração em Outubro (Nominal)
-      - name: valor_remun_novembro_nominal
+      - name: valor_remuneracao_novembro
         description: Valor da Remuneração em Novembro (Nominal)
-      - name: valor_remun_dezembro_nominal
+      - name: valor_remuneracao_dezembro
         description: Valor da Remuneração em Dezembro (Nominal)
       - name: tipo_salario
         description: Tipo do Salário
@@ -220,7 +220,7 @@ models:
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__subatividade_ibge')
-              field: subatividade_ibge.subatividade_ibge
+              field: id_subatividade
       - name: subsetor_ibge
         description: Subsetor - IBGE
       - name: cnae_1
@@ -235,11 +235,9 @@ models:
       - name: cnae_2_subclasse
         description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Subclasse
         tests:
-          - custom_relationships:
-              tags: [cnae]
-              to: ref('br_bd_diretorios_brasil__cnae_2')
-              field: subclasse
-              ignore_values: ['9999997', '8630505', '3312101', '9999999', 00000-1]
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__cnae_2_subclasse')
+              field: cnae_2_subclasse.cnae_2_subclasse
       - name: tamanho_estabelecimento
         description: Tamanho do Estabelecimento
       - name: tipo_estabelecimento
@@ -293,7 +291,7 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio
-      - name: quantidade_vinculos_ativo
+      - name: quantidade_vinculos_ativos
         description: Estoque de vínculos ativos em 31/12.
       - name: quantidade_vinculos_clt
         description: Estoque de vínculos, sob o regime CLT e Outros, ativos em 31/12
@@ -377,7 +375,7 @@ models:
       - name: subatividade_ibge
         description: Subatividade IBGE
         tests:
-          - custom_relationships:
+          - relationships:
               to: ref('br_bd_diretorios_brasil__subatividade_ibge')
               field: id_subatividade
       - name: cep

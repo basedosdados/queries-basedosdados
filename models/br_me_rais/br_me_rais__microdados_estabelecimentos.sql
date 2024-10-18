@@ -8,13 +8,14 @@
             "data_type": "int64",
             "range": {"start": 1985, "end": 2023, "interval": 1},
         },
-        cluster_by=["sigla_uf"],
+        cluster_by=["sigla_uf", "id_municipio"],
     )
 }}
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(id_municipio as string) id_municipio,
+    cast(regexp_replace(id_municipio, r'\.0$', '') as string) id_municipio,
     safe_cast(quantidade_vinculos_ativos as int64) quantidade_vinculos_ativos,
     safe_cast(quantidade_vinculos_clt as int64) quantidade_vinculos_clt,
     safe_cast(
@@ -23,7 +24,9 @@ select
     safe_cast(natureza as string) natureza_estabelecimento,
     safe_cast(natureza_juridica as string) natureza_juridica,
     safe_cast(tamanho as string) tamanho_estabelecimento,
-    safe_cast(tipo as string) tipo_estabelecimento,
+    cast(
+        cast(regexp_replace(tipo, r'^0+', '') as string) as string
+    ) as tipo_estabelecimento,
     safe_cast(indicador_cei_vinculado as int64) indicador_cei_vinculado,
     safe_cast(indicador_pat as int64) indicador_pat,
     safe_cast(indicador_simples as string) indicador_simples,
@@ -42,12 +45,16 @@ select
     case
         when bairros_sp = '????????????'
         then null
-        else cast(regexp_replace(bairros_sp, r'^0+', '') as string)
+        else trim(cast(regexp_replace(bairros_sp, r'^0+', '') as string))
     end as bairros_sp,
-    cast(regexp_replace(distritos_sp, r'^0+', '') as string) as distritos_sp,
-    cast(regexp_replace(bairros_fortaleza, r'^0+', '') as string) as bairros_fortaleza,
-    nullif(cast(regexp_replace(bairros_rj, r'^0+', '') as string), '') as bairros_rj,
-    cast(
-        regexp_replace(regioes_administrativas_df, r'^0+', '') as string
+    trim(cast(regexp_replace(distritos_sp, r'^0+', '') as string)) as distritos_sp,
+    trim(
+        cast(regexp_replace(bairros_fortaleza, r'^0+', '') as string)
+    ) as bairros_fortaleza,
+    trim(
+        nullif(cast(regexp_replace(bairros_rj, r'^0+', '') as string), '')
+    ) as bairros_rj,
+    trim(
+        cast(regexp_replace(regioes_administrativas_df, r'^0+', '') as string)
     ) as regioes_administrativas_df
 from `basedosdados-staging.br_me_rais_staging.microdados_estabelecimentos` as t
