@@ -1,7 +1,7 @@
 {{
     config(
-        alias="educacao_especial_faixa_etaria",
-        schema="br_inep_sinopse_estatistica_educacao_basica",
+        alias="localizacao",
+        schema="br_inep_educacao_especial",
         materialized="table",
         partition_by={
             "field": "ano",
@@ -16,8 +16,7 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(tipo_classe as string) tipo_classe,
-    safe_cast(faixa_etaria as string) faixa_etaria,
+    safe_cast(rede as string) rede,
+    safe_cast(localizacao as string) localizacao,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
-from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.educacao_especial_faixa_etaria`
-    as t
+from `basedosdados-staging.br_inep_educacao_especial_staging.localizacao` as t
