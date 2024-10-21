@@ -15,7 +15,7 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
-    cast(regexp_replace(id_municipio, r'\.0$', '') as string) id_municipio,
+    safe_cast(regexp_replace(id_municipio, r'\.0$', '') as string) id_municipio,
     safe_cast(tipo_vinculo as string) tipo_vinculo,
     safe_cast(vinculo_ativo_3112 as string) vinculo_ativo_3112,
     safe_cast(tipo_admissao as string) tipo_admissao,
@@ -86,32 +86,19 @@ select
         then 'Não identificado'
         when tipo_estabelecimento = 'CEI/CNO'
         then 'CEI'
-        else
-            cast(
-                cast(
-                    regexp_replace(tipo_estabelecimento, r'^0+', '') as string
-                ) as string
-            )
+        else safe_cast(regexp_replace(tipo_estabelecimento, r'^0+', '') as string)
     end as tipo_estabelecimento,
     safe_cast(natureza_juridica as string) natureza_juridica,
     safe_cast(indicador_simples as string) indicador_simples,
+    trim(safe_cast(regexp_replace(bairros_sp, r'^0+', '') as string)) as bairros_sp,
+    trim(safe_cast(regexp_replace(distritos_sp, r'^0+', '') as string)) as distritos_sp,
     trim(
-        cast(cast(regexp_replace(bairros_sp, r'^0+', '') as int64) as string)
-    ) as bairros_sp,
-    trim(
-        cast(cast(regexp_replace(distritos_sp, r'^0+', '') as int64) as string)
-    ) as distritos_sp,
-    trim(
-        cast(cast(regexp_replace(bairros_fortaleza, r'^0+', '') as int64) as string)
+        safe_cast(regexp_replace(bairros_fortaleza, r'^0+', '') as string)
     ) as bairros_fortaleza,
     trim(
-        cast(cast(regexp_replace(bairros_rj, r'^0+', '') as int64) as string)
+        nullif(safe_cast(regexp_replace(bairros_rj, r'^0+', '') as string), '')
     ) as bairros_rj,
     trim(
-        cast(
-            cast(
-                regexp_replace(regioes_administrativas_df, r'^0+', '') as int64
-            ) as string
-        )
-    ) as regioes_administrativas_df,
+        safe_cast(regexp_replace(regioes_administrativas_df, r'^0+', '') as string)
+    ) as regioes_administrativas_df
 from `basedosdados-staging.br_me_rais_staging.microdados_vinculos`
