@@ -15,7 +15,7 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(id_municipio as string) id_municipio,
+    safe_cast(regexp_replace(id_municipio, r'\.0$', '') as string) id_municipio,
     safe_cast(tipo_vinculo as string) tipo_vinculo,
     safe_cast(vinculo_ativo_3112 as string) vinculo_ativo_3112,
     safe_cast(tipo_admissao as string) tipo_admissao,
@@ -27,7 +27,7 @@ select
     safe_cast(causa_desligamento_3 as string) causa_desligamento_3,
     safe_cast(faixa_tempo_emprego as string) faixa_tempo_emprego,
     safe_cast(faixa_horas_contratadas as string) faixa_horas_contratadas,
-    safe_cast(tempo_emprego as float64) tempo_emprego,
+    round(safe_cast(tempo_emprego as float64), 2) tempo_emprego,
     safe_cast(quantidade_horas_contratadas as int64) quantidade_horas_contratadas,
     safe_cast(id_municipio_trabalho as string) id_municipio_trabalho,
     safe_cast(quantidade_dias_afastamento as int64) quantidade_dias_afastamento,
@@ -37,10 +37,14 @@ select
         indicador_trabalho_intermitente as string
     ) indicador_trabalho_intermitente,
     safe_cast(faixa_remuneracao_media_sm as string) faixa_remuneracao_media_sm,
-    safe_cast(valor_remuneracao_media_sm as float64) valor_remuneracao_media_sm,
+    round(
+        safe_cast(valor_remuneracao_media_sm as float64), 2
+    ) valor_remuneracao_media_sm,
     safe_cast(valor_remuneracao_media as float64) valor_remuneracao_media,
     safe_cast(faixa_remuneracao_dezembro_sm as string) faixa_remuneracao_dezembro_sm,
-    safe_cast(valor_remuneracao_dezembro_sm as float64) valor_remuneracao_dezembro_sm,
+    round(
+        safe_cast(valor_remuneracao_dezembro_sm as float64), 2
+    ) valor_remuneracao_dezembro_sm,
     safe_cast(valor_remuneracao_janeiro as float64) valor_remuneracao_janeiro,
     safe_cast(valor_remuneracao_fevereiro as float64) valor_remuneracao_fevereiro,
     safe_cast(valor_remuneracao_marco as float64) valor_remuneracao_marco,
@@ -82,19 +86,19 @@ select
         then 'Não identificado'
         when tipo_estabelecimento = 'CEI/CNO'
         then 'CEI'
-        else tipo_estabelecimento
+        else safe_cast(regexp_replace(tipo_estabelecimento, r'^0+', '') as string)
     end as tipo_estabelecimento,
     safe_cast(natureza_juridica as string) natureza_juridica,
     safe_cast(indicador_simples as string) indicador_simples,
-    cast(cast(regexp_replace(bairros_sp, r'^0+', '') as int64) as string) as bairros_sp,
-    cast(
-        cast(regexp_replace(distritos_sp, r'^0+', '') as int64) as string
-    ) as distritos_sp,
-    cast(
-        cast(regexp_replace(bairros_fortaleza, r'^0+', '') as int64) as string
+    trim(safe_cast(regexp_replace(bairros_sp, r'^0+', '') as string)) as bairros_sp,
+    trim(safe_cast(regexp_replace(distritos_sp, r'^0+', '') as string)) as distritos_sp,
+    trim(
+        safe_cast(regexp_replace(bairros_fortaleza, r'^0+', '') as string)
     ) as bairros_fortaleza,
-    cast(cast(regexp_replace(bairros_rj, r'^0+', '') as int64) as string) as bairros_rj,
-    cast(
-        cast(regexp_replace(regioes_administrativas_df, r'^0+', '') as int64) as string
-    ) as regioes_administrativas_df,
+    trim(
+        nullif(safe_cast(regexp_replace(bairros_rj, r'^0+', '') as string), '')
+    ) as bairros_rj,
+    trim(
+        safe_cast(regexp_replace(regioes_administrativas_df, r'^0+', '') as string)
+    ) as regioes_administrativas_df
 from `basedosdados-staging.br_me_rais_staging.microdados_vinculos`
