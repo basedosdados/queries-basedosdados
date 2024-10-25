@@ -202,9 +202,9 @@ models:
           altas habilidades/superdotação
       - name: quantidade_matricula
         description: Número de matrículas
-  - name: br_inep_educacao_especial__distorcao_idade_serie
-    description: 'Taxa de distorção idade-série da Educação Especial. Dados obtidos
-      via Pedido LAI (nº protocolo: 23546066150202238)'
+  - name: br_inep_educacao_especial__uf_distorcao_idade_serie
+    description: 'Taxa de distorção idade-série da Educação Especial por UF. Dados
+      obtidos via Pedido LAI (nº protocolo: 23546066150202238)'
     tests:
       - not_null_proportion_multiple_columns:
           at_least: 0.05
@@ -226,9 +226,30 @@ models:
           Iniciais, Anos Finais, Ensino Fundamental - EJA, ...)
       - name: tdi
         description: Taxa de distorção idade-série
-  - name: br_inep_educacao_especial__taxa_rendimento
+  - name: br_inep_educacao_especial__brasil_distorcao_idade_serie
+    description: 'Taxa de distorção idade-série da Educação Especial no Brasil. Dados
+      obtidos via Pedido LAI (nº protocolo: 23546066150202238)'
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: etapa_ensino
+        description: Etapa e/ou Sub-etapas de ensino (e.g. Creche, Pré-escola, Anos
+          Iniciais, Anos Finais, Ensino Fundamental - EJA, ...)
+      - name: tdi
+        description: Taxa de distorção idade-série
+  - name: br_inep_educacao_especial__uf_taxa_rendimento
     description: 'Taxas de rendimento (aprovação, reprovação e abandono) da Educação
-      Especial. Dados obtidos via Pedido LAI (nº protocolo: 23546054413202266)'
+      Especial por UF. Dados obtidos via Pedido LAI (nº protocolo: 23546054413202266)'
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -251,10 +272,35 @@ models:
         description: Taxa de reprovação
       - name: taxa_abandono
         description: Taxa de abandono
+  - name: br_inep_educacao_especial__brasil_taxa_rendimento
+    description: 'Taxas de rendimento (aprovação, reprovação e abandono) da Educação
+      Especial no Brasil. Dados obtidos via Pedido LAI (nº protocolo: 23546054413202266)'
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
+      - name: etapa_ensino
+        description: Etapa e/ou Sub-etapas de ensino (e.g. Creche, Pré-escola, Anos
+          Iniciais, Anos Finais, Ensino Fundamental - EJA, ...)
+      - name: taxa_aprovacao
+        description: Taxa de aprovação
+      - name: taxa_reprovacao
+        description: Taxa de reprovação
+      - name: taxa_abandono
+        description: Taxa de abandono
   - name: br_inep_educacao_especial__docente_aee
     description: 'Quantidade de docentes regentes e do Atendimento Educacional Especializado
       (AEE) no total e com Formação Continuada em Educação Especial. Dados obtidos
       via Pedido LAI (nº protocolo: 23546035869202316)'
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -289,6 +335,9 @@ models:
     description: 'Quantidade de docentes da Educação Básica Formação Continuada em
       Educação Especial por rede de ensino. Dados obtidos via Pedido LAI (nº protocolo:
       23546049990202406)'
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano
@@ -317,6 +366,9 @@ models:
     description: 'Quantidade de matrículas no Atendimento Educacional Especializado
       (AEE) por unidade da federação e rede de ensino. Dados obtidos via Pedido LAI
       (nº protocolo: 23546086048202330)'
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
     columns:
       - name: ano
         description: Ano

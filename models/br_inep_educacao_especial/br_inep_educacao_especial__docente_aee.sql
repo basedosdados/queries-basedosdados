@@ -10,8 +10,8 @@ select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
-    safe_cast(quantidade_docente_regente as int64) quantidade_docente_regente,
-    safe_cast(quantidade_docente_aee as int64) quantidade_docente_aee,
+    safe_cast(quantidade_docente_regente as numeric) quantidade_docente_regente,
+    safe_cast(quantidade_docente_aee as numeric) quantidade_docente_aee,
     safe_cast(
         quantidade_docente_regente_formacao_continuada as int64
     ) quantidade_docente_regente_formacao_continuada,
