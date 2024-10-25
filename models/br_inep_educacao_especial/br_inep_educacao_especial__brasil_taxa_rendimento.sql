@@ -12,4 +12,5 @@ select
     safe_cast(taxa_aprovacao as float64) taxa_aprovacao,
     safe_cast(taxa_reprovacao as float64) taxa_reprovacao,
     safe_cast(taxa_abandono as float64) taxa_abandono,
-from `basedosdados-staging.br_inep_educacao_especial_staging.brasil_taxa_rendimento` as t
+from
+    `basedosdados-staging.br_inep_educacao_especial_staging.brasil_taxa_rendimento` as t
