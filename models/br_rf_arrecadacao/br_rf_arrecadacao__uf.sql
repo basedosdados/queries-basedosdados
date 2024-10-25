@@ -62,4 +62,4 @@ select
     safe_cast(receita_previdenciaria_propria as float64) receita_previdenciaria_propria,
     safe_cast(receita_previdenciaria_demais as float64) receita_previdenciaria_demais,
     safe_cast(receitas_outros_orgaos as float64) receitas_outros_orgaos,
-from `basedosdados-staging.br_rf_arrecadacao_staging.uf` as t
+from `basedosdados-dev.br_rf_arrecadacao_staging.uf` as t

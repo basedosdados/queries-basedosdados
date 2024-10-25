@@ -1,10 +1,23 @@
-{{ config(alias="natureza_juridica", schema="br_rf_arrecadacao") }}
+{{
+    config(
+        schema="br_rf_arrecadacao",
+        alias="natureza_juridica",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2016, "end": 2024, "interval": 1},
+        },
+        cluster_by=["mes"],
+    )
+}}
+
 with
     referencia_codigo as (
         select
             id_natureza_juridica,
             substr(cast(id_natureza_juridica as string), 0, 3) as inicio_codigo
-        from basedosdados - staging.br_bd_diretorios_brasil.natureza_juridica
+        from basedosdados - dev.br_bd_diretorios_brasil.natureza_juridica
     )
 select
     safe_cast(t.ano as int64) ano,
@@ -12,7 +25,6 @@ select
     safe_cast(
         referencia_codigo.id_natureza_juridica as string
     ) natureza_juridica_codigo,
-    safe_cast(t.natureza_juridica_nome as string) natureza_juridica_nome,
     safe_cast(t.imposto_importacao as float64) imposto_importacao,
     safe_cast(t.imposto_exportacao as float64) imposto_exportacao,
     safe_cast(t.ipi as float64) ipi,
@@ -30,6 +42,6 @@ select
     safe_cast(t.pagamento_unificado as float64) pagamento_unificado,
     safe_cast(t.outras_receitas_rfb as float64) outras_receitas_rfb,
     safe_cast(t.demais_receitas as float64) demais_receitas,
-from `basedosdados-staging.br_rf_arrecadacao_staging.natureza_juridica` as t
-left join
+from `basedosdados-dev.br_rf_arrecadacao_staging.natureza_juridica` as t
+inner join
     referencia_codigo on t.natureza_juridica_codigo = referencia_codigo.inicio_codigo

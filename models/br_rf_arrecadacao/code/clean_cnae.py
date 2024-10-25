@@ -33,6 +33,7 @@ def rename_columns(df):
 def change_types(df):
     df['ano'] = df['ano'].astype('int')
     df['mes'] = get_month_number(df['mes'])
+    df['secao_nome'] = df['secao_nome'].str.title()
 
     #All remaining columns are monetary values
     for col in df.columns[4:]:

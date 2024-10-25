@@ -22,9 +22,24 @@ def change_types(df):
 
     return df
 
+def format_state(df):
+    df['sigla_uf'] = get_state_letters(df['nome_uf'])
+    return df.drop('nome_uf',axis=1)
+
+def format_region(df):
+    df['sigla_regiao'] = get_region_letters(df['regiao_politica'])
+    return df.drop('regiao_politica',axis=1)
+
+def format_city(df):
+    df['cidade'] = df['cidade_uf'].str.split(' - ').str[0]
+    return df.drop('cidade_uf',axis=1)
+
 if __name__ == '__main__':
     df = read_data(file_dir='../input/arrecadacao-itr.csv')
     df = remove_empty_rows(df)
     df = rename_columns(df)
     df = change_types(df)
+    df = format_state(df)
+    df = format_region(df)
+    df = format_city(df)
     save_data(df=df,file_dir='../output/br_rf_arrecadacao_itr',partition_cols=['ano','mes'])

@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 from typing import List
-from pathlib import Path 
+from pathlib import Path
 
 file_directory = os.path.dirname(__file__)
 
@@ -26,7 +26,7 @@ def replace_commas(value):
         return string_value.replace(',','',num_commas-1).replace(',','.')
     else:
         return string_value
-    
+
 def remove_dots(value):
     string_value = str(value)
     num_dots = string_value.count('.')
@@ -55,6 +55,53 @@ def get_month_number(month_column):
         'dez': '12'
     }
     return month_inits.replace(month_numbers).astype('int')
+
+def get_state_letters(state_column):
+
+    state_lower = state_column.str.lower()
+    states = {
+        "acre": "AC",
+        "alagoas": "AL",
+        "amapá": "AP",
+        "amazonas": "AM",
+        "bahia": "BA",
+        "ceará": "CE",
+        "distrito federal": "DF",
+        "espírito santo": "ES",
+        "goiás": "GO",
+        "maranhão": "MA",
+        "mato grosso": "MT",
+        "mato grosso do sul": "MS",
+        "minas gerais": "MG",
+        "pará": "PA",
+        "paraíba": "PB",
+        "paraná": "PR",
+        "pernambuco": "PE",
+        "piauí": "PI",
+        "rio de janeiro": "RJ",
+        "rio grande do norte": "RN",
+        "rio grande do sul": "RS",
+        "rondônia": "RO",
+        "roraima": "RR",
+        "santa catarina": "SC",
+        "são paulo": "SP",
+        "sergipe": "SE",
+        "tocantins": "TO"
+    }
+    return state_lower.replace(states)
+
+def get_region_letters(region_names):
+
+    region_lower = region_names.str.lower()
+
+    regions = {
+        "norte" : "N",
+        "sul" : "S",
+        "centro-oeste" : "CO",
+        "sudeste" : "SE",
+        "nordeste" : "NE"
+    }
+    return region_lower.replace(regions)
 
 def to_partitions(
     data: pd.DataFrame,
