@@ -33,4 +33,4 @@ select
     safe_cast(pagamento_unificado as float64) pagamento_unificado,
     safe_cast(outras_receitas_rfb as float64) outras_receitas_rfb,
     safe_cast(demais_receitas as float64) demais_receitas,
-from `basedosdados-dev.br_rf_arrecadacao_staging.cnae` as t
+from `basedosdados-staging.br_rf_arrecadacao_staging.cnae` as t

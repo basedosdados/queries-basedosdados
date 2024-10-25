@@ -17,7 +17,7 @@ with
         select
             id_natureza_juridica,
             substr(cast(id_natureza_juridica as string), 0, 3) as inicio_codigo
-        from basedosdados - dev.br_bd_diretorios_brasil.natureza_juridica
+        from basedosdados - staging.br_bd_diretorios_brasil.natureza_juridica
     )
 select
     safe_cast(t.ano as int64) ano,
@@ -42,6 +42,6 @@ select
     safe_cast(t.pagamento_unificado as float64) pagamento_unificado,
     safe_cast(t.outras_receitas_rfb as float64) outras_receitas_rfb,
     safe_cast(t.demais_receitas as float64) demais_receitas,
-from `basedosdados-dev.br_rf_arrecadacao_staging.natureza_juridica` as t
+from `basedosdados-staging.br_rf_arrecadacao_staging.natureza_juridica` as t
 inner join
     referencia_codigo on t.natureza_juridica_codigo = referencia_codigo.inicio_codigo

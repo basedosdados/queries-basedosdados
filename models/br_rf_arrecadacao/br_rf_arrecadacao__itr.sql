@@ -19,4 +19,4 @@ select
     safe_cast(sigla_regiao as string) sigla_regiao,
     safe_cast(cidade as string) cidade,
     safe_cast(valor_arrecadado as float64) valor_arrecadado,
-from `basedosdados-dev.br_rf_arrecadacao_staging.itr` as t
+from `basedosdados-staging.br_rf_arrecadacao_staging.itr` as t
