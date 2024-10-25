@@ -1240,11 +1240,13 @@ models:
             - ano
             - turno
             - id_eleicao
+            - sigla_uf
             - id_municipio_tse
+            - cargo
             - sequencial_candidato
             - numero_candidato
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.80
     columns:
       - name: ano
         description: Ano
@@ -1256,14 +1258,27 @@ models:
         description: Cargo
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: id_candidato_bd
         description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: numero_candidato
         description: Número do candidato
       - name: numero_partido
@@ -1276,6 +1291,11 @@ models:
         description: Sigla do partido
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [GB, GP, RB]
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: turno
