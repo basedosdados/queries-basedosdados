@@ -4,9 +4,6 @@ import pandas as pd
 import basedosdados as bd
 import numpy as np
 
-pd.set_option("display.max_columns", None)
-pd.set_option("display.max_rows", None)
-
 INPUT = os.path.join(os.getcwd(), "input")
 OUTPUT = os.path.join(os.getcwd(), "output")
 
@@ -157,19 +154,19 @@ def read_sheet(
                 os.path.join(path, "data.csv"), index=False, mode="a", header=False
             )
 
+if __name__ == '__main__' :
+    lista = [
+        "educacao_especial_classes_comuns",
+        "educacao_especial_classes_exclusivas",
+    ]
 
-lista = [
-    "educacao_especial_classes_comuns",
-    "educacao_especial_classes_exclusivas",
-]
-
-for x in lista:
-    # for ano in range(2012, 2019):
-    read_sheet(
-        table=deficiencia[x]["table"],
-        ano=2011,
-        chave=deficiencia[x]["chave"],
-        valor=deficiencia[x]["valor"],
-        dicionario=deficiencia[x]["dicionario"],
-        skiprows=deficiencia[x]["skiprows"],
-    )
+    for x in lista:
+        # for ano in range(2012, 2019):
+        read_sheet(
+            table=deficiencia[x]["table"],
+            ano=2011,
+            chave=deficiencia[x]["chave"],
+            valor=deficiencia[x]["valor"],
+            dicionario=deficiencia[x]["dicionario"],
+            skiprows=deficiencia[x]["skiprows"],
+        )
