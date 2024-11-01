@@ -12,7 +12,7 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(rede as string) rede,
     safe_cast(
-        quantidade_docente_formacao_continuada as int64
+        quantidade_docente_formacao_continuada as numeric
     ) quantidade_docente_formacao_continuada,
 
 from `basedosdados-staging.br_inep_educacao_especial_staging.docente_formacao` as t
