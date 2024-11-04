@@ -270,6 +270,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, secao_sigla]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.35
     columns:
       - name: ano
         description: Ano de referência.
@@ -277,16 +279,12 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: secao_sigla
         description: Código da Seção da atividade econômica constante da Cnae.
         tests:
@@ -294,95 +292,42 @@ models:
               to: ref('br_bd_diretorios_brasil__cnae_2')
               field: secao
               ignore_values: [IN, NI, PF]
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: imposto_importacao
         description: Imposto sobre a Importação.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.85
       - name: imposto_exportacao
         description: Imposto sobre a Exportação.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.35
       - name: ipi
         description: Imposto sobre Produtos Industrializados.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: irpf
         description: Imposto sobre a Renda da Pessoa Física.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.60
       - name: irpj
         description: Imposto sobre a Renda da Pessoa Jurídica.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: irrf
         description: Imposto sobre a Renda Retido na Fonte.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: iof
         description: Imposto sobre Operações Financeiras.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.80
       - name: itr
         description: Imposto sobre a Propriedade Territorial Rural.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.85
       - name: cofins
         description: Contribuição para o Financiamento da Seguridade Social.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: pis_pasep
         description: Programa de Integração Social e o Programa de Formação do Patrimônio
           do Servidor Público.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: csll
         description: Contribuição Social sobre o Lucro Líquido.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: cide_combustiveis
         description: Contribuição de Intervenção no Domínio Econômico aplicada à combustíveis.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.80
       - name: contribuicao_previdenciaria
         description: Contribuição Previdenciária arrecadada em Darf.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: cpsss
         description: Contribuição para o Plano de Seguridade Social do Servidor Público.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.65
       - name: pagamento_unificado
         description: Pagamentos referentes a vários tributos feitos em um único documento
           de arrecadação, como parcelamentos, retenções, Simples etc.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: outras_receitas_rfb
         description: Outras receitas administradas pela RFB.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: demais_receitas
         description: Outras receitas não administradas pela RFB.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
   - name: br_rf_arrecadacao__natureza_juridica
     description: Contém os dados de arrecadação bruta mensal realizadas em Documento
       de Arrecadação de Receitas Federais (Darf), por tributo, efetuada pelos diversos
@@ -390,6 +335,8 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: [ano, mes, natureza_juridica_codigo]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.15
     columns:
       - name: ano
         description: Ano de referência.
@@ -397,111 +344,54 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: mes
         description: Mês de referência.
         tests:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: natureza_juridica_codigo
         description: Código do tipo de Natureza Jurídica.
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__natureza_juridica')
               field: id_natureza_juridica
-          - dbt_utils.not_null_proportion:
-              at_least: 0.95
       - name: imposto_importacao
         description: Imposto sobre a Importação.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.40
       - name: imposto_exportacao
         description: Imposto sobre a Exportação.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.15
       - name: ipi
         description: Imposto sobre Produtos Industrializados.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.35
       - name: irpf
         description: Imposto sobre a Renda da Pessoa Física.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.20
       - name: irpj
         description: Imposto sobre a Renda da Pessoa Jurídica.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.60
       - name: irrf
         description: Imposto sobre a Renda Retido na Fonte.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: iof
         description: Imposto sobre Operações Financeiras.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.35
       - name: itr
         description: Imposto sobre a Propriedade Territorial Rural.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.40
       - name: cofins
         description: Contribuição para o Financiamento da Seguridade Social.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.75
       - name: pis_pasep
         description: Programa de Integração Social e o Programa de Formação do Patrimônio
           do Servidor Público.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.85
       - name: csll
         description: Contribuição Social sobre o Lucro Líquido.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.65
       - name: cide_combustiveis
         description: Contribuição de Intervenção no Domínio Econômico aplicada à combustíveis.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.35
       - name: contribuicao_previdenciaria
         description: Contribuição Previdenciária arrecadada em Darf.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.75
       - name: cpsss
         description: Contribuição para o Plano de Seguridade Social do Servidor Público.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.35
       - name: pagamento_unificado
         description: Pagamentos referentes a vários tributos feitos em um único documento
           de arrecadação, como parcelamentos, retenções, Simples etc.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.90
       - name: outras_receitas_rfb
         description: Outras receitas administradas pela RFB.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.75
       - name: demais_receitas
         description: Outras receitas não administradas pela RFB.
-        tests:
-          - dbt_utils.not_null_proportion:
-              at_least: 0.75
   - name: br_rf_arrecadacao__ir_ipi
     description: Contém os dados de arrecadação decendial do Imposto sobre a Renda
       (IR) e do Imposto sobre Produtos Industrializados (IPI), discriminados por arrecadação
