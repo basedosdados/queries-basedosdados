@@ -17,7 +17,7 @@ with
         select
             id_natureza_juridica,
             substr(cast(id_natureza_juridica as string), 0, 3) as inicio_codigo
-        from basedosdados - staging.br_bd_diretorios_brasil.natureza_juridica
+        from basedosdados.br_bd_diretorios_brasil.natureza_juridica
     )
 select
     safe_cast(t.ano as int64) ano,
