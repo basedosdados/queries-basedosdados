@@ -448,7 +448,7 @@ models:
       fiscalizar e cobrar o ITR, de acordo com dispositivo constitucional.
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [ano, mes, sigla_uf, sigla_regiao, cidade]
+          combination_of_columns: [ano, mes, sigla_uf, nome_municipio]
       - not_null_proportion_multiple_columns:
           at_least: 0.95
     columns:
@@ -471,14 +471,13 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
-      - name: sigla_regiao
-        description: Sigla da Região Política onde se localiza o município conveniado
-          ou não conveniado.
+      - name: id_municipio
+        description: ID do município conveniado ou não conveniado.
         tests:
           - relationships:
-              to: ref('br_bd_diretorios_brasil__regiao')
-              field: sigla
-      - name: cidade
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
+      - name: nome_municipio
         description: Nome do município conveniado ou não conveniado.
       - name: valor_arrecadado
         description: Valor arrecadado.
