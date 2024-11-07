@@ -1,7 +1,7 @@
 {{
     config(
-        alias="educacao_especial_etapa_ensino",
-        schema="br_inep_sinopse_estatistica_educacao_basica",
+        alias="etapa_ensino",
+        schema="br_inep_educacao_especial",
         materialized="table",
         partition_by={
             "field": "ano",
@@ -24,6 +24,4 @@ select
         end as string
     ) etapa_ensino,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula
-from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.educacao_especial_etapa_ensino`
-    as t
+from `basedosdados-staging.br_inep_educacao_especial_staging.etapa_ensino` as t

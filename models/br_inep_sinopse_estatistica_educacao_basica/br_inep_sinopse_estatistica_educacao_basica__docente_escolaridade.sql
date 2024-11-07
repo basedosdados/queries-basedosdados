@@ -1,6 +1,6 @@
 {{
     config(
-        alias="educacao_especial_localizacao",
+        alias="docente_escolaridade",
         schema="br_inep_sinopse_estatistica_educacao_basica",
         materialized="table",
         partition_by={
@@ -16,9 +16,8 @@ select
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(tipo_classe as string) tipo_classe,
-    safe_cast(rede as string) rede,
-    safe_cast(localizacao as string) localizacao,
-    safe_cast(quantidade_matricula as numeric) quantidade_matricula,
+    safe_cast(escolaridade as string) escolaridade,
+    safe_cast(replace(quantidade_docente, ".0", "") as int64) quantidade_docente,
 from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.educacao_especial_localizacao`
+    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.docente_escolaridade`
     as t
