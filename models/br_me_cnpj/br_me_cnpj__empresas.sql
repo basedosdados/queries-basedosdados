@@ -31,4 +31,4 @@ with
     )
 select *
 from cnpj_empresas
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+{% if is_incremental() %} where data > '2024-09-01' {% endif %}
