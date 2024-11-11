@@ -1,15 +1,23 @@
 ---
 version: 2
 models:
-  - name: afastamentos
+  - name: br_cgu_servidores_executivo_federal__afastamentos
     description: Informações de afastamentos de servidores
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
           que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
@@ -19,19 +27,35 @@ models:
         description: CPF mascarado do servidor (6 dígitos do meio, e.g. ***.346.574-**)
       - name: data_inicio
         description: Data de início do afastamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_final
         description: Data final do afastamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: origem
         description: Origem do dado enviado à CGU (SIAPE ou BACEN)
-  - name: cadastro_aposentados
+  - name: br_cgu_servidores_executivo_federal__cadastro_aposentados
     description: Informações do cadastro de apossentadorias dos servidores
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
           que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
@@ -47,6 +71,10 @@ models:
         description: Tipo de aposentadoria
       - name: data_aposentadoria
         description: Data da aposentadoria
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cargo
         description: Descrição do cargo
       - name: id_uorg_lotacao
@@ -74,14 +102,30 @@ models:
         description: Jornada de trabalho semanal
       - name: data_ingresso_cargo_funcao
         description: Data de ingresso do servidor no cargo ou função
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_nomeacao_cargo_funcao
         description: Data de nomeação do servidor no cargo ou função
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_ingresso_orgao
         description: Data de ingresso do servidor no órgão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: documento_ingresso_servico_publico
         description: Documento de ingresso do servidor no serviço público
       - name: data_diploma_ingresso_servico_publico
         description: Data do diploma de ingresso do servidor no serviço público
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: diploma_ingresso_cargo_funcao
         description: Diploma de ingresso do servidor no cargo ou função.
       - name: diploma_ingresso_orgao
@@ -90,16 +134,24 @@ models:
         description: Diploma de ingresso do servidor no serviço público
       - name: origem
         description: Origem do dado (BACEN ou SIAPE)
-  - name: observacoes
+  - name: br_cgu_servidores_executivo_federal__observacoes
     description: Caracteriza eventuais observações para situações excepcionais na
       remuneração dos Servidores, Aposentados e Pensionistas
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
           que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
@@ -112,15 +164,23 @@ models:
       - name: origem
         description: Origem do dado enviado à CGU (Servidores SIAPE, Servidores BACEN,
           Aposentados BACEN, Pensionistas BACEN, etc)
-  - name: cadastro_pensionistas
+  - name: br_cgu_servidores_executivo_federal__cadastro_pensionistas
     description: Informações sobre o cadastro de pensionistas
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
           que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
@@ -144,6 +204,10 @@ models:
         description: Tipo de pensão
       - name: data_inicio_pensao
         description: Data de início da pensão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cargo_instituidor_pensao
         description: Descrição do cargo instituidor da pensão
       - name: id_uorg_lotacao_instituidor_pensao
@@ -174,14 +238,30 @@ models:
       - name: data_ingresso_cargo_funcao_instituidor_pensao
         description: Data de ingresso do servidor no cargo ou função do instituidor
           da pensão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_nomeacao_cargo_funcao_instituidor_pensao
         description: Data de nomeação do servidor no cargo ou função do instituidor
           da pensão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_ingresso_orgao_instituidor_pensao
         description: Data de ingresso do instituidor da pensão no órgão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_diploma_ingresso_servico_publico_instituidor_pensao
         description: Data do diploma de ingresso do instituidor da pensão no serviço
           público
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: documento_ingresso_servico_publico_instituidor_pensao
         description: Documento de ingresso do instituidor da pensão no serviço público
       - name: diploma_ingresso_cargo_funcao_instituidor_pensao
@@ -192,14 +272,22 @@ models:
         description: Diploma de ingresso do instituidor da pensão no serviço público
       - name: origem
         description: Origem do dado (BACEN, SIAPE ou Defesa)
-  - name: remuneracao
+  - name: br_cgu_servidores_executivo_federal__remuneracao
     description: Remuneração dos servidores civis e militares ativos e inativos, pensionistas
       e aposentados
     columns:
       - name: ano
         description: Ano
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: id_servidor
         description: ID do servidor no Portal da Transparência
       - name: cpf
@@ -283,15 +371,23 @@ models:
       - name: origem
         description: Origem do dado enviado à CGU (Servidores SIAPE, Servidores BACEN,
           Militares, Pensionistas BACEN, etc)
-  - name: cadastro_reserva_reforma_militares
+  - name: br_cgu_servidores_executivo_federal__cadastro_reserva_reforma_militares
     description: Informações de cadastro de militares na reserva e reforma
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
           que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
@@ -307,6 +403,10 @@ models:
         description: Tipo de aposentadoria
       - name: data_aposentadoria
         description: Data da aposentadoria
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cargo
         description: Descrição do cargo
       - name: id_uorg_lotacao
@@ -334,12 +434,28 @@ models:
         description: Jornada de trabalho semanal
       - name: data_ingresso_cargo_funcao
         description: Data de ingresso do servidor no cargo ou função
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_nomeacao_cargo_funcao
         description: Data de nomeação do servidor no cargo ou função
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_ingresso_orgao
         description: Data de ingresso do servidor no órgão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_diploma_ingresso_servico_publico
         description: Data do diploma de ingresso do servidor no serviço público
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: documento_ingresso_servico_publico
         description: Documento de ingresso do servidor no serviço público
       - name: diploma_ingresso_cargo_funcao
@@ -348,17 +464,29 @@ models:
         description: Diploma de ingresso do servidor no órgão
       - name: diploma_ingresso_servico_publico
         description: Diploma de ingresso do servidor no serviço público
-  - name: cadastro_servidores
+  - name: br_cgu_servidores_executivo_federal__cadastro_servidores
     description: Informações de cadastro dos servidores civis e militares
     columns:
       - name: ano
         description: Ano de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: mes
         description: Mês de referência do cadastro do servidor (ao qual as informações
           se referem).
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__mes')
+              field: ref('mes.mes')
       - name: sigla_uf
         description: UF de exercício do servidor
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_servidor
         description: Número de identificação interna do servidor no Portal da Transparência,
           que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
@@ -426,20 +554,44 @@ models:
           exercício.
       - name: data_inicio_afastamento
         description: Data de início do afastamento do servidor, em caso de afastamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_termino_afastamento
         description: Data de término do afastamento do servidor, em caso de afastamento
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: regime_juridico
         description: Regime jurídico
       - name: jornada_trabalho
         description: Jornada de trabalho semanal
       - name: data_ingresso_cargo_funcao
         description: Data de ingresso do servidor no cargo ou função
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_nomeacao_cargo_funcao
         description: Data de nomeação do servidor no cargo ou função
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_ingresso_orgao
         description: Data de ingresso do servidor no órgão
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_diploma_ingresso_servico_publico
         description: Data do diploma de ingresso do servidor no serviço público
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: diploma_ingresso_cargo_funcao
         description: Diploma de ingresso do servidor no cargo ou função.
       - name: diploma_ingresso_orgao
