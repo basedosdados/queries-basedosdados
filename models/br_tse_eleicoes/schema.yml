@@ -1404,6 +1404,20 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_candidato_secao
     description: Dados de resultados eleitorais a nível de candidato-seção.
+<<<<<<< HEAD
+=======
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - turno
+            - id_eleicao
+            - id_municipio_tse
+            - zona
+            - secao
+            - sequencial_candidato
+            - numero_candidato
+>>>>>>> d3be2f4 (Atualizando modelos br_tse_eleicoes)
     columns:
       - name: ano
         description: Ano
@@ -1419,6 +1433,10 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
       - name: numero_candidato
@@ -1577,6 +1595,20 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_partido_secao
     description: Dados de resultados em eleições brasileiras a nível de partido-seção.
+<<<<<<< HEAD
+=======
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ano
+            - turno
+            - id_eleicao
+            - id_municipio_tse
+            - zona
+            - secao
+            - cargo
+            - numero_partido
+>>>>>>> d3be2f4 (Atualizando modelos br_tse_eleicoes)
     columns:
       - name: ano
         description: Ano
@@ -1596,6 +1628,10 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
       - name: numero_partido
