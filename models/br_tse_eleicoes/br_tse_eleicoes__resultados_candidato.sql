@@ -10,6 +10,7 @@
         },
     )
 }}
+-- Segundo turno atualizado em 12/11/2024
 select
     safe_cast(ano as int64) ano,
     safe_cast(turno as int64) turno,
