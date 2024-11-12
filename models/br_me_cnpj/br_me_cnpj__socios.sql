@@ -8,10 +8,7 @@
             "data_type": "date",
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(data), MONTH) <= 6)',
-        ],
+        incremental_strategy="insert_overwrite",
     )
 }}
 with
@@ -36,4 +33,4 @@ with
     )
 select *
 from cnpj_socios
-{% if is_incremental() %} where data > '2024-09-01' {% endif %}
+{% if is_incremental() %} where data in ('2024-09-18', '2024-10-16') {% endif %}
