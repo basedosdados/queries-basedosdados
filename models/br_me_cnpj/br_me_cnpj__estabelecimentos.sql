@@ -8,7 +8,6 @@
             "data_type": "date",
         },
         cluster_by="sigla_uf",
-        incremental_strategy="insert_overwrite",
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
@@ -60,4 +59,4 @@ with
     )
 select *
 from cnpj_estabelecimentos
-{% if is_incremental() %} where data in ('2024-09-18', '2024-10-16') {% endif %}
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
