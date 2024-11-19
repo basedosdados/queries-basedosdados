@@ -8,13 +8,15 @@
             "field": "data",
             "data_type": "date",
         },
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
         incremental_strategy="insert_overwrite",
         pre_hook=[
             "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-            "DELETE FROM {{ this }}         WHERE data > '2024-03-15'",
+            "DELETE FROM {{ this }}         WHERE data > '2024-11-15'",
         ],
     )
 }}
+
 with
     cnpj_empresas as (
         select
