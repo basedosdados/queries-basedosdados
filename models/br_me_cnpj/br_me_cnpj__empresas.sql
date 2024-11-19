@@ -9,8 +9,14 @@
             "data_type": "date",
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+        incremental_strategy="insert_overwrite",
+        pre_hook=[
+            "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
+            "DELETE FROM {{ this }}         WHERE data > '2024-11-15'",
+        ],
     )
 }}
+
 with
     cnpj_empresas as (
         select
@@ -27,4 +33,4 @@ with
     )
 select *
 from cnpj_empresas
-{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}
+{% if is_incremental() %} where data = '2024-11-15' {% endif %}
