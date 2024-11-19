@@ -10,7 +10,7 @@
         incremental_strategy="insert_overwrite",
         pre_hook=[
             "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-            "DELETE FROM {{ this }}         WHERE data > '2024-11-15'",
+            "DELETE FROM {{ this }}         WHERE data > '2024-03-15'",
         ],
     )
 }}
@@ -36,4 +36,4 @@ with
     )
 select *
 from cnpj_socios
-{% if is_incremental() %} where data > '2024-11-15' {% endif %}
+{% if is_incremental() %} where data = '2024-11-15' {% endif %}
