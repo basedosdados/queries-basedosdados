@@ -17,9 +17,8 @@ select
     safe_cast(id_eleicao as string) id_eleicao,
     safe_cast(tipo_eleicao as string) tipo_eleicao,
     safe_cast(data_eleicao as date) data_eleicao,
+    safe_cast(titulo_eleitoral_candidato as string) titulo_eleitoral_candidato,
     safe_cast(sequencial_candidato as string) sequencial_candidato,
-    safe_cast(id_candidato_bd as string) id_candidato_bd,
-    safe_cast(id_tipo_item as string) id_tipo_item,
     safe_cast(tipo_item as string) tipo_item,
     safe_cast(descricao_item as string) descricao_item,
     safe_cast(valor_item as float64) valor_item
