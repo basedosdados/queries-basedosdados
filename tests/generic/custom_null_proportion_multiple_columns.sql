@@ -10,9 +10,7 @@
 
             select
                 {% for column in columns -%}
-                {% if column.name not in ignore_values %}
                 SUM(CASE WHEN {{ column.name }} IS NULL THEN 1 ELSE 0 END) AS {{ column.name }}{{ suffix }},
-                {% endif %}
                 {%- endfor %}
                 count(*) as total_records
                 from {{ model }}
@@ -21,11 +19,9 @@
         pivot_columns as (
 
             {% for column in columns -%}
-            {% if column.name not in ignore_values %}
             select '{{ column.name }}' as column_name, {{ column.name }}{{ suffix }} as quantity, total_records
             from null_counts
             {% if not loop.last %}union all {% endif %}
-            {% endif %}
             {%- endfor %}
         ),
 
@@ -34,7 +30,7 @@
                 *
             from pivot_columns
             where
-                quantity / total_records > (1 - {{ at_least }})
+                quantity / total_records > (1 - {{ at_least }}) and column_name not in ('{{ ignore_values | join("', '") }}')
 
 
         )
