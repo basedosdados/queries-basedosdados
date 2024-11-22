@@ -19,6 +19,6 @@ select
     safe_cast(itr.valor_arrecadado as float64) valor_arrecadado,
 from `basedosdados-staging.br_rf_arrecadacao_staging.itr` itr
 left join
-    `basedosdados-staging.br_bd_diretorios_brasil.municipio` m
+    `basedosdados.br_bd_diretorios_brasil.municipio` m
     on itr.cidade = m.nome
     and itr.sigla_uf = m.sigla_uf
