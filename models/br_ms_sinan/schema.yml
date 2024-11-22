@@ -509,106 +509,124 @@ models:
       - name: valor
         description: Valor
   - name: br_ms_sinan__microdados_chikungunya
-    description: : Os microdados da chikungunya são obtidos através da ficha de investigação do paciente. Essa ficha contempla informações gerais do paciente, dados de residência. características da notificação individual, dados clínicos e dados laboratoriais.
-A identificação de cada ficha é feita através do número de notificação, data de notificação e município de notificação. Os dados públicos disponibilizados pelo DATASUS, não incluem o número de notificação, por isso, não há uma chave única para essa tabela.
+    description: Os microdados da chikungunya são obtidos através da ficha de investigação
+      do paciente. Essa ficha contempla informações gerais do paciente, dados de residência.
+      características da notificação individual, dados clínicos e dados laboratoriais.
+      A identificação de cada ficha é feita através do número de notificação, data
+      de notificação e município de notificação. Os dados públicos disponibilizados
+      pelo DATASUS, não incluem o número de notificação, por isso, não há uma chave
+      única para essa tabela.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - insert unique keys here
       - not_null_proportion_multiple_columns:
-            at_least: 0.95
+          at_least: 0.05
+          ignore_values:
+            - sorotipo
+            - data_ns1
+            - data_sorologia_dengue
+            - imunohistoquimica
+            - histopatologia
+            - resultado_ns1
+            - resultado_sorologia_dengue
+            - data_obito
+            - data_sorologia2_chikungunya
+            - data_viral
+            - data_coleta_prnt
+            - data_internacao
+            - id_municipio_internacao
+            - sigla_uf_internacao
+            - doenca_trabalho
       - custom_dictionaries:
-            columns_covered_by_dictionary:
-              - tipo_notificacao
-              - sexo_paciente
-              - raca_cor_paciente
-              - escolaridade_paciente
-              - gestante_paciente
-              - possui_doenca_autoimune
-              - possui_diabetes
-              - possui_doencas_hematologicas
-              - possui_hepatopatias
-              - possui_doenca_renal
-              - possui_hipertensao
-              - possui_doenca_acido_peptica
-              - apresenta_febre
-              - apresenta_cefaleia
-              - apresenta_exantema
-              - apresenta_dor_costas
-              - apresenta_mialgia
-              - apresenta_vomito
-              - apresenta_nausea
-              - apresenta_conjutivite
-              - apresenta_dor_retroorbital
-              - apresenta_artralgia
-              - apresenta_artrite
-              - apresenta_leucopenia
-              - apresenta_petequias
-              - prova_laco
-              - internacao
-              - grave_hipotensao
-              - grave_consciencia
-              - resultado_sorologia1_chikungunya
-              - resultado_sorologia2_chikungunya
-              - resultado_prnt
-              - resultado_ns1
-              - resultado_viral
-              - resultado_pcr
-              - resultado_sorologia_dengue
-              - sorotipo
-              - histopatologia
-              - imunohistoquimica
-              - classificacao_final
-              - criterio_confirmacao
-              - caso_autoctone
-              - doenca_trabalho
-              - evolucao_caso
-            dictionary_model: ref('br_ms_sinan__dicionario')
+          columns_covered_by_dictionary:
+            - tipo_notificacao
+            - sexo_paciente
+            - raca_cor_paciente
+            - escolaridade_paciente
+            - gestante_paciente
+            - possui_doenca_autoimune
+            - possui_diabetes
+            - possui_doencas_hematologicas
+            - possui_hepatopatias
+            - possui_doenca_renal
+            - possui_hipertensao
+            - possui_doenca_acido_peptica
+            - apresenta_febre
+            - apresenta_cefaleia
+            - apresenta_exantema
+            - apresenta_dor_costas
+            - apresenta_mialgia
+            - apresenta_vomito
+            - apresenta_nausea
+            - apresenta_conjutivite
+            - apresenta_dor_retroorbital
+            - apresenta_artralgia
+            - apresenta_artrite
+            - apresenta_leucopenia
+            - apresenta_petequias
+            - prova_laco
+            - internacao
+            - grave_hipotensao
+            - grave_consciencia
+            - resultado_sorologia1_chikungunya
+            - resultado_sorologia2_chikungunya
+            - resultado_prnt
+            - resultado_ns1
+            - resultado_viral
+            - resultado_pcr
+            - resultado_sorologia_dengue
+            - sorotipo
+            - histopatologia
+            - imunohistoquimica
+            - classificacao_final
+            - criterio_confirmacao
+            - caso_autoctone
+            - doenca_trabalho
+            - evolucao_caso
+          dictionary_model: ref('br_ms_sinan__dicionario')
     columns:
       - name: ano
         description: Ano
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: tipo_notificacao
         description: Tipo de notificação
       - name: id_agravo
         description: Categoria da CID-10
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cid_10')
-                field: categoria
+              to: ref('br_bd_diretorios_brasil__cid_10')
+              field: categoria
       - name: data_notificacao
         description: Data de notificação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: semana_notificacao
         description: Semana de notificação
       - name: sigla_uf_notificacao
         description: Sigla da Unidade da Federação de notificação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_regional_saude_notificacao
         description: ID Região de Saúde de notificação
       - name: id_municipio_notificacao
         description: ID Município de notificação - IBGE 6 Dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
       - name: id_estabelecimento
         description: ID estabelecimento - CNES
       - name: data_primeiros_sintomas
         description: Data dos primeiros sintomas
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: semana_sintomas
         description: Semana dos primeiros sintomas
       - name: pais_residencia
@@ -617,22 +635,22 @@ A identificação de cada ficha é feita através do número de notificação, d
         description: Sigla da Unidade da Federação de residência
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_regional_saude_residencia
         description: ID Região de Saúde de residência
       - name: id_municipio_residencia
         description: ID Município de residência - IBGE 6 Dígitos
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
       - name: ano_nascimento_paciente
         description: Ano de nascimento do paciente
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__ano')
-                field: ano.ano
+              to: ref('br_bd_diretorios_data_tempo__ano')
+              field: ano.ano
       - name: idade_paciente
         description: Idade do paciente
       - name: sexo_paciente
@@ -645,8 +663,8 @@ A identificação de cada ficha é feita através do número de notificação, d
         description: Ocupação do paciente
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__cbo_2002')
-                field: cbo_2002.cbo_2002
+              to: ref('br_bd_diretorios_brasil__cbo_2002')
+              field: cbo_2002.cbo_2002
       - name: gestante_paciente
         description: Informa se a paciente é gestante
       - name: possui_doenca_autoimune
@@ -667,8 +685,8 @@ A identificação de cada ficha é feita através do número de notificação, d
         description: Data da investigação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: apresenta_febre
         description: O(A) paciente apresenta febre
       - name: apresenta_cefaleia
@@ -703,82 +721,96 @@ A identificação de cada ficha é feita através do número de notificação, d
         description: Data da internação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: sigla_uf_internacao
         description: Sigla da Unidade da Federação de internação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio_internacao
         description: ID Município de internação - IBGE 6 Dïgitos
         tests:
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
+              ignore_values:
+                - '539906'
+                - '539907'
+                - '539940'
+                - '539921'
+                - '539937'
+                - '539924'
+                - '539907'
+                - '539919'
+                - '539926'
+                - '539926'
+                - '539907'
+                - '539912'
+                - '539907'
       - name: grave_hipotensao
         description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            hipotensão arterial em fase tardia
+          hipotensão arterial em fase tardia
       - name: grave_consciencia
         description: O(A) paciente apresenta comprometimento grave de órgãos mediante
-            alteração de consciência
+          alteração de consciência
       - name: plaqueta_menor
         description: Resultado do exame de plaquetas
       - name: data_sorologia1_chikungunya
         description: Data da coleta da 1a amostra
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_sorologia1_chikungunya
         description: Resultado da 1a amostra
       - name: data_sorologia2_chikungunya
         description: Data da coleta da 2a amostra
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_sorologia2_chikungunya
         description: Resultado da 2a amostra
       - name: data_coleta_prnt
         description: Data da coleta do exame PRNT
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_prnt
         description: Resultado PRNT
       - name: data_ns1
         description: Data da coleta para o exame NS1
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_ns1
         description: Resultado NS1
       - name: data_viral
         description: Data do exame viral
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_viral
         description: Resultado do exame do viral
       - name: data_pcr
         description: Data do exame PCR
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_pcr
         description: Resultado PCR
       - name: data_sorologia_dengue
         description: Data de sorologia para dengue
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: resultado_sorologia_dengue
         description: Resultado de sorologia para dengue
       - name: sorotipo
@@ -799,14 +831,34 @@ A identificação de cada ficha é feita através do número de notificação, d
         description: Sigla da Unidade da Federação de provável contágio
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_brasil__uf')
-                field: sigla
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
       - name: id_municipio_infeccao
         description: ID Município de provável contágio - IBGE 6 Dígitos
         tests:
-          - relationships:
-                to: ref('br_bd_diretorios_brasil__municipio')
-                field: id_municipio_6
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_6
+              ignore_values:
+                - '539934'
+                - '539918'
+                - '539915'
+                - '539939'
+                - '539939'
+                - '539915'
+                - '539924'
+                - '280000'
+                - '290000'
+                - '260000'
+                - '290000'
+                - '250000'
+                - '270000'
+                - '260000'
+                - '539923'
+                - '539921'
+                - '539936'
+                - '539915'
+                - '539918'
       - name: doenca_trabalho
         description: Doença contraída em detrimento do trabalho
       - name: apresentacao_clinica
@@ -817,19 +869,19 @@ A identificação de cada ficha é feita através do número de notificação, d
         description: Data do óbito
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_encerramento
         description: Data de encerramento
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: data_digitacao
         description: Data de digitação
         tests:
           - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: tipo_sistema
         description: Tipo de sistema

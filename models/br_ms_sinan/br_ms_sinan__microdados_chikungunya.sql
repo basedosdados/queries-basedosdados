@@ -1,3 +1,15 @@
+{{
+    config(
+        schema="br_ms_sinan",
+        alias="microdados_chikungunya",
+        materialized="table",
+        partition_by={
+            "field": "ano",
+            "data_type": "int64",
+            "range": {"start": 2015, "end": 2024, "interval": 1},
+        },
+    )
+}}
 with
     sql_chik as (
         select
