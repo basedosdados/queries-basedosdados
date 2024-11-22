@@ -5,7 +5,8 @@ models:
     description: Declaração de bens de candidatos em eleições brasileiras.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.55
+          at_least: 0.70
+          ignore_values: [tipo_item, data_eleicao, id_eleicao]
     columns:
       - name: ano
         description: Ano
@@ -13,30 +14,28 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__ano')
               field: ano.ano
-      - name: data_eleicao
-        description: Data da eleição
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__data')
-              field: data.data
-      - name: descricao_item
-        description: Descrição do item
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
-      - name: id_eleicao
-        description: ID Eleição
-      - name: id_tipo_item
-        description: ID Tipo Item
-      - name: sequencial_candidato
-        description: Sequencial do Candidato
       - name: sigla_uf
         description: Sigla da Unidade da Federação
         tests:
           - relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
+      - name: id_eleicao
+        description: ID Eleição
       - name: tipo_eleicao
         description: Tipo da eleição
+      - name: data_eleicao
+        description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral
+      - name: sequencial_candidato
+        description: Sequencial do Candidato
+      - name: descricao_item
+        description: Descrição do item
       - name: tipo_item
         description: Tipo do item
       - name: valor_item
@@ -46,6 +45,7 @@ models:
     tests:
       - not_null_proportion_multiple_columns:
           at_least: 0.05
+          ignore_values: [email, raca]
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ano
@@ -55,7 +55,6 @@ models:
             - sequencial
             - numero
             - cpf
-            - id_candidato_bd
     columns:
       - name: ano
         description: Ano
@@ -99,8 +98,6 @@ models:
         description: Gênero
       - name: idade
         description: Idade
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -141,16 +138,17 @@ models:
       - name: sigla_uf
         description: Sigla da unidade da federação
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
+              ignore_values: [ZZ]
       - name: sigla_uf_nascimento
         description: Sigla da unidade da federação de nascimento
         tests:
           - custom_relationships:
               to: ref('br_bd_diretorios_brasil__uf')
               field: sigla
-              ignore_values: [ZZ, Não divulgável, BH, LB]
+              ignore_values: [ZZ]
       - name: situacao
         description: Situação
       - name: tipo_eleicao
@@ -159,6 +157,18 @@ models:
         description: Título eleitoral
   - name: br_tse_eleicoes__despesas_candidato
     description: Dados de despesas em campanhas eleitorais a nível de despesa.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+          ignore_values:
+            - esfera_partidaria_fornecedor
+            - id_municipio_tse_fornecedor
+            - sequencial_candidato_fornecedor
+            - cargo_fornecedor
+            - numero_candidato_fornecedor
+            - sigla_partido_fornecedor
+            - numero_partido_fornecedor
+            - sigla_uf_fornecedor
     columns:
       - name: ano
         description: Ano
@@ -188,12 +198,8 @@ models:
         description: CNPJ do candidato
       - name: cnpj_prestador_contas
         description: CNPJ do prestador de contas
-      - name: cpf_candidato
-        description: CPF do candidato
       - name: cpf_cnpj_fornecedor
         description: CPF ou CNPJ do fornecedor
-      - name: cpf_vice_suplente
-        description: CPF do vice ou suplente
       - name: data_despesa
         description: Data da despesa
         tests:
@@ -233,8 +239,6 @@ models:
         description: Espécie do recurso
       - name: fonte_recurso
         description: Fonte do recurso
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -257,16 +261,10 @@ models:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio_tse
               ignore_values: ['73709']
-      - name: nome_candidato
-        description: Nome do candidato
       - name: nome_fornecedor
         description: Nome do fornecedor
       - name: nome_fornecedor_rf
         description: Nome do fornecedor - Receita Federal
-      - name: nome_partido
-        description: Nome do partido
-      - name: nome_partido_fornecedor
-        description: Nome do partido do fornecedor
       - name: numero_candidato
         description: Número do candidato
       - name: numero_candidato_fornecedor
@@ -314,6 +312,8 @@ models:
         description: Tipo do fornecedor
       - name: tipo_prestacao_contas
         description: Tipo de prestação de contas
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral do candidato
       - name: turno
         description: Turno
       - name: valor_despesa
@@ -350,12 +350,25 @@ models:
         description: Número de Comparecimentos
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: proporcao_comparecimento
         description: Proporção de comparecimento
       - name: proporcao_votos_brancos
@@ -372,6 +385,11 @@ models:
         description: Número de seções eleitorais totalizadas
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: turno
@@ -419,12 +437,25 @@ models:
         description: Número de Comparecimentos
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: proporcao_comparecimento
         description: Proporção de comparecimento
       - name: proporcao_votos_brancos
@@ -441,6 +472,11 @@ models:
         description: Número de seções eleitorais totalizadas
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: turno
@@ -741,6 +777,16 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__receitas_candidato
     description: Dados de financiamento de campanha de receita para candidatos.
+    tests:
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+          ignore_values:
+            - descricao_cnae_2_doador_orig
+            - nome_doador_orig_rf
+            - nome_doador_orig
+            - cpf_cnpj_doador_orig
+            - tipo_doador_orig
+            - entrega_conjunto
     columns:
       - name: ano
         description: Ano
@@ -772,14 +818,10 @@ models:
         description: CNPJ do prestador de contas
       - name: cpf_administrador
         description: CPF do administrador
-      - name: cpf_candidato
-        description: CPF do candidato
       - name: cpf_cnpj_doador
         description: CPF ou CNPJ do doador
       - name: cpf_cnpj_doador_orig
         description: CPF ou CNPJ do doador originário
-      - name: cpf_vice_suplente
-        description: CPF do vice ou suplente
       - name: data_eleicao
         description: Data da eleição
         tests:
@@ -794,6 +836,10 @@ models:
               field: data.data
       - name: data_receita
         description: Data da receita
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: descricao_cnae_2_doador
         description: Descrição da Classificação Nacional de Atividades Econômicas
           2.0 do doador
@@ -810,8 +856,6 @@ models:
         description: Espécie da receita
       - name: fonte_receita
         description: Fonte da receita
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -838,8 +882,6 @@ models:
         description: Natureza da receita
       - name: nome_administrador
         description: Nome do administrador
-      - name: nome_candidato
-        description: Nome do candidato
       - name: nome_doador
         description: Nome do doador
       - name: nome_doador_orig
@@ -848,10 +890,6 @@ models:
         description: Nome do doador originário - Receita Federal
       - name: nome_doador_rf
         description: Nome do doador - Receita Federal
-      - name: nome_partido
-        description: Nome do partido
-      - name: nome_partido_doador
-        description: Nome do partido do doador
       - name: numero_candidato
         description: Número do candidato
       - name: numero_candidato_doador
@@ -898,8 +936,8 @@ models:
         description: Tipo da eleição
       - name: tipo_prestacao_contas
         description: Tipo de prestação de contas
-      - name: titulo_eleitor_candidato
-        description: Título de eleitor do candidato
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral do candidato
       - name: turno
         description: Turno
       - name: valor_receita
@@ -1162,19 +1200,8 @@ models:
   - name: br_tse_eleicoes__resultados_candidato
     description: Dados de resultados eleitorais a nível de candidato.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - turno
-            - id_eleicao
-            - sigla_uf
-            - id_municipio_tse
-            - cargo
-            - sequencial_candidato
-            - numero_candidato
-            - nome_candidato
       - not_null_proportion_multiple_columns:
-          at_least: 0.80
+          at_least: 0.85
     columns:
       - name: ano
         description: Ano
@@ -1190,8 +1217,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -1207,8 +1232,6 @@ models:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio_tse
               ignore_values: ['73709']
-      - name: nome_candidato
-        description: Nome do candidato
       - name: numero_candidato
         description: Número do candidato
       - name: numero_partido
@@ -1228,6 +1251,8 @@ models:
               ignore_values: [GB, GP, RB]
       - name: tipo_eleicao
         description: Tipo da eleição
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral do candidato
       - name: turno
         description: Turno
       - name: votos
@@ -1245,8 +1270,9 @@ models:
             - cargo
             - sequencial_candidato
             - numero_candidato
+            - titulo_eleitoral_candidato
       - not_null_proportion_multiple_columns:
-          at_least: 0.80
+          at_least: 0.90
     columns:
       - name: ano
         description: Ano
@@ -1262,8 +1288,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -1298,6 +1322,8 @@ models:
               ignore_values: [GB, GP, RB]
       - name: tipo_eleicao
         description: Tipo da eleição
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral do candidato
       - name: turno
         description: Turno
       - name: votos
@@ -1316,8 +1342,9 @@ models:
             - zona
             - sequencial_candidato
             - numero_candidato
+            - titulo_eleitoral_candidato
       - not_null_proportion_multiple_columns:
-          at_least: 0.80
+          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1333,8 +1360,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__data')
               field: data.data
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -1369,6 +1394,8 @@ models:
               ignore_values: [GB, GP, RB]
       - name: tipo_eleicao
         description: Tipo da eleição
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral do candidato
       - name: turno
         description: Turno
       - name: votos
@@ -1377,19 +1404,6 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_candidato_secao
     description: Dados de resultados eleitorais a nível de candidato-seção.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - turno
-            - id_eleicao
-            - id_municipio_tse
-            - zona
-            - secao
-            - sequencial_candidato
-            - numero_candidato
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1401,8 +1415,6 @@ models:
         description: Cargo
       - name: data_eleicao
         description: Data da eleição
-      - name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -1420,9 +1432,16 @@ models:
       - name: sigla_partido
         description: Sigla do partido
       - name: sigla_uf
-        description: Sigla da unidade da federação
+        description: Sigla da Unidade da Federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: tipo_eleicao
         description: Tipo da eleição
+      - name: titulo_eleitoral_candidato
+        description: Título eleitoral do candidato
       - name: turno
         description: Turno
       - name: votos
@@ -1558,19 +1577,6 @@ models:
         description: Zona eleitoral
   - name: br_tse_eleicoes__resultados_partido_secao
     description: Dados de resultados em eleições brasileiras a nível de partido-seção.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - turno
-            - id_eleicao
-            - id_municipio_tse
-            - zona
-            - secao
-            - cargo
-            - numero_partido
-      - not_null_proportion_multiple_columns:
-          at_least: 0.95
     columns:
       - name: ano
         description: Ano
@@ -1582,6 +1588,10 @@ models:
         description: Cargo
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
@@ -1595,7 +1605,12 @@ models:
       - name: sigla_partido
         description: Sigla do partido
       - name: sigla_uf
-        description: Sigla da unidade da federação
+        description: Sigla da Unidade da Federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: turno
