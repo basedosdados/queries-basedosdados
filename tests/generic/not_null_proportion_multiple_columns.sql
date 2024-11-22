@@ -48,18 +48,8 @@
 
                     {{
                         log(
-                            "Coluna: "
-                            ~ e
-                            ~ " - Quantidade: "
-                            ~ errors["quantity"][loop.index0]
-                            ~ " - Total: "
-                            ~ errors["total_records"][loop.index0]
-                            ~ " - Preenchimento: "
-                            ~ "%0.2f"
-                            | format(proc_err | float)
-                            ~ " - Preenchimento ideal: "
-                            ~ at_least * 100
-                            ~ " - Resultado: FAIL",
+                            "Coluna: " ~ e ~ " - Preenchimento de: " ~ "%0.2f"
+                            | format(proc_err | float) ~ "% - Resultado: FAIL",
                             info=True,
                         )
                     }}
