@@ -1,4 +1,4 @@
-{% test not_null_proportion_multiple_columns(model, at_least=0.05) %}
+{% test not_null_proportion_multiple_columns(model, ignore_values="", at_least=0.05) %}
 
     {%- set columns = adapter.get_columns_in_relation(model) -%}
     {% set suffix = "_nulls" %}
@@ -28,8 +28,7 @@
                 *
             from pivot_columns
             where
-                quantity / total_records > (1 - {{ at_least }})
-
+                quantity / total_records > (1 - {{ at_least }}) and column_name not in ('{{ ignore_values | join("', '") }}')
 
         )
         select * from faulty_columns
@@ -41,16 +40,30 @@
             ) -%}
     {% if errors["column_name"] != () %}
                 {% for e in errors["column_name"] | unique %}
+
+                    {% set proc_err = (
+                        errors["quantity"][loop.index0]
+                        / errors["total_records"][loop.index0]
+                    ) * 100 %}
+
                     {{
                         log(
-                            "LOG: Coluna com preenchimento menor que "
-                            ~ at_least * 100
-                            ~ "% ---> "
+                            "Coluna: "
                             ~ e
-                            ~ "  [FAIL]",
+                            ~ " - Quantidade: "
+                            ~ errors["quantity"][loop.index0]
+                            ~ " - Total: "
+                            ~ errors["total_records"][loop.index0]
+                            ~ " - Preenchimento: "
+                            ~ "%0.2f"
+                            | format(proc_err | float)
+                            ~ " - Preenchimento ideal: "
+                            ~ at_least * 100
+                            ~ " - Resultado: FAIL",
                             info=True,
                         )
                     }}
+
                     select '{{e}}' as column
                     {% if not loop.last %}
                         union all
