@@ -508,3 +508,443 @@ models:
         description: Cobertura Temporal
       - name: valor
         description: Valor
+  - name: br_ms_sinan__microdados_chikungunya
+    description: Insert table description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - insert unique keys here
+      - not_null_proportion_multiple_columns:
+            at_least: 0.95
+      - custom_dictionaries:
+            columns_covered_by_dictionary:
+              - tipo_notificacao
+              - sexo_paciente
+              - raca_cor_paciente
+              - escolaridade_paciente
+              - gestante_paciente
+              - possui_doenca_autoimune
+              - possui_diabetes
+              - possui_doencas_hematologicas
+              - possui_hepatopatias
+              - possui_doenca_renal
+              - possui_hipertensao
+              - possui_doenca_acido_peptica
+              - apresenta_febre
+              - apresenta_cefaleia
+              - apresenta_exantema
+              - apresenta_dor_costas
+              - apresenta_mialgia
+              - apresenta_vomito
+              - apresenta_nausea
+              - apresenta_conjutivite
+              - apresenta_dor_retroorbital
+              - apresenta_artralgia
+              - apresenta_artrite
+              - apresenta_leucopenia
+              - apresenta_epistaxe
+              - apresenta_petequias
+              - apresenta_gengivorragia
+              - apresenta_metrorragia
+              - apresenta_hematuria
+              - apresenta_sangramento
+              - apresenta_complicacao
+              - prova_laco
+              - internacao
+              - alarme_hipotensao
+              - alarme_plaqueta
+              - alarme_vomito
+              - alarme_sangramento
+              - alarme_hematocrito
+              - alarme_dor_abdominal
+              - alarme_letargia
+              - alarme_hepatomegalia
+              - alarme_liquidos
+              - grave_pulso
+              - grave_convulsao
+              - grave_enchimento_capilar
+              - grave_insuficiencia_respiratoria
+              - grave_taquicardia
+              - grave_extremidade_fria
+              - grave_hipotensao
+              - grave_hematemese
+              - grave_melena
+              - grave_metrorragia
+              - grave_sangramento
+              - grave_ast_alt
+              - grave_miocardite
+              - grave_consciencia
+              - resultado_sorologia1_chikungunya
+              - resultado_sorologia2_chikungunya
+              - resultado_prnt
+              - resultado_ns1
+              - resultado_viral
+              - resultado_pcr
+              - resultado_sorologia_dengue
+              - sorotipo
+              - histopatologia
+              - imunohistoquimica
+              - classificacao_final
+              - criterio_confirmacao
+              - caso_autoctone
+              - doenca_trabalho
+              - evolucao_caso
+            dictionary_model: ref('br_ms_sinan__dicionario')
+    columns:
+      - name: ano
+        description: Ano
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+      - name: tipo_notificacao
+        description: Tipo de notificação
+      - name: id_agravo
+        description: Categoria da CID-10
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__cid_10')
+                field: categoria
+      - name: data_notificacao
+        description: Data de notificação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: semana_notificacao
+        description: Semana de notificação
+      - name: sigla_uf_notificacao
+        description: Sigla da Unidade da Federação de notificação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: id_regional_saude_notificacao
+        description: ID Região de Saúde de notificação
+      - name: id_municipio_notificacao
+        description: ID Município de notificação - IBGE 6 Dígitos
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio_6
+      - name: id_estabelecimento
+        description: ID estabelecimento - CNES
+      - name: data_primeiros_sintomas
+        description: Data dos primeiros sintomas
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: semana_sintomas
+        description: Semana dos primeiros sintomas
+      - name: pais_residencia
+        description: País de residência
+      - name: sigla_uf_residencia
+        description: Sigla da Unidade da Federação de residência
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: id_regional_saude_residencia
+        description: ID Região de Saúde de residência
+      - name: id_municipio_residencia
+        description: ID Município de residência - IBGE 6 Dígitos
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio_6
+      - name: ano_nascimento_paciente
+        description: Ano de nascimento do paciente
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+      - name: idade_paciente
+        description: Idade do paciente
+      - name: sexo_paciente
+        description: Sexo do paciente
+      - name: raca_cor_paciente
+        description: Raça/Cor do paciente
+      - name: escolaridade_paciente
+        description: Escolaridade do paciente
+      - name: ocupacao_paciente
+        description: Ocupação do paciente
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__cbo_2002')
+                field: cbo_2002.cbo_2002
+      - name: gestante_paciente
+        description: Informa se a paciente é gestante
+      - name: possui_doenca_autoimune
+        description: Informa se o(a) paciente possui imunodeficiência
+      - name: possui_diabetes
+        description: Informa se o(a) paciente possui diabetes
+      - name: possui_doencas_hematologicas
+        description: Informa se o(a) paciente possui doenças hematológicas
+      - name: possui_hepatopatias
+        description: Informa se o(a) paciente possui hepatopatias
+      - name: possui_doenca_renal
+        description: Informa se o(a) paciente possui doença renal
+      - name: possui_hipertensao
+        description: Informa se o(a) paciente possui hipertensão
+      - name: possui_doenca_acido_peptica
+        description: Informa se o(a) paciente possui doença ácido péptica
+      - name: data_investigacao
+        description: Data da investigação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: apresenta_febre
+        description: O(A) paciente apresenta febre
+      - name: apresenta_cefaleia
+        description: O(A) paciente apresenta cefaleia
+      - name: apresenta_exantema
+        description: O(A) paciente apresenta exantema
+      - name: apresenta_dor_costas
+        description: O(A) paciente apresenta dor nas costas
+      - name: apresenta_mialgia
+        description: O(A) paciente apresenta mialgia
+      - name: apresenta_vomito
+        description: O(A) paciente apresenta vômito
+      - name: apresenta_nausea
+        description: O(A) paciente apresenta náusea
+      - name: apresenta_conjutivite
+        description: O(A) paciente apresenta conjutivite
+      - name: apresenta_dor_retroorbital
+        description: O(A) paciente apresenta dor retroorbital
+      - name: apresenta_artralgia
+        description: O(A) paciente apresenta artralgia
+      - name: apresenta_artrite
+        description: O(A) paciente apresenta artrite
+      - name: apresenta_leucopenia
+        description: O(A) paciente apresenta leucopenia
+      - name: apresenta_epistaxe
+        description: O(A) paciente apresenta epistaxe
+      - name: apresenta_petequias
+        description: O(A) paciente apresenta petequias
+      - name: apresenta_gengivorragia
+        description: O(A) paciente apresenta gengivorragias
+      - name: apresenta_metrorragia
+        description: O(A) paciente apresenta metrorragia
+      - name: apresenta_hematuria
+        description: O(A) paciente apresenta hematuria
+      - name: apresenta_sangramento
+        description: O(A) paciente apresenta sangramento
+      - name: apresenta_complicacao
+        description: O(A) paciente apresenta complicações
+      - name: prova_laco
+        description: Informa se o(a) paciente fez a prova do laço
+      - name: internacao
+        description: O(A) paciente foi hospitalizado
+      - name: data_internacao
+        description: Data da internação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: sigla_uf_internacao
+        description: Sigla da Unidade da Federação de internação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: id_municipio_internacao
+        description: ID Município de internação - IBGE 6 Dïgitos
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio_6
+      - name: alarme_hipotensao
+        description: O(A) paciente apresenta sinais de alarme com hipotensão postural
+            e/ou lipotímia
+      - name: alarme_plaqueta
+        description: O(A) paciente apresenta sinais de alarme com queda abrupta de
+            plaquetas
+      - name: alarme_vomito
+        description: O(A) paciente apresenta sinais de alarme com vômitos persistentes
+      - name: alarme_sangramento
+        description: O(A) paciente apresenta sinais de alarme com sangramento de mucosa/outras
+            hemorragias
+      - name: alarme_hematocrito
+        description: O(A) paciente apresenta sinais de alarme com aumento progressivo
+            do hematócrito
+      - name: alarme_dor_abdominal
+        description: O(A) paciente apresenta sinais de alarme com dor abdominal intensa
+            e contínua
+      - name: alarme_letargia
+        description: O(A) paciente apresenta sinais de alarme com letargia ou irritabilidade
+      - name: alarme_hepatomegalia
+        description: O(A) paciente apresenta sinais de alarme com hepatomegalia >=
+            2cm
+      - name: alarme_liquidos
+        description: O(A) paciente apresenta sinais de alarme com acúmulo de líquidos
+      - name: data_alarme
+        description: Data de início dos sinais de alarme
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: grave_pulso
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            pulso débil ou indetectável
+      - name: grave_convulsao
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            PA convergente <= 20mmHg
+      - name: grave_enchimento_capilar
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            tempo de enchimento capilar
+      - name: grave_insuficiencia_respiratoria
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            acúmulo de líquidos com insuficiência respiratória
+      - name: grave_taquicardia
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            taquicardia
+      - name: grave_extremidade_fria
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            extremidades frias
+      - name: grave_hipotensao
+        description: O(A) paciente apresenta extravasamento grave de plasma mediante
+            hipotensão arterial em fase tardia
+      - name: grave_hematemese
+        description: O(A) paciente apresenta sangramento grave mediante hematêmese
+      - name: grave_melena
+        description: O(A) paciente apresenta sangramento grave mediante melena
+      - name: grave_metrorragia
+        description: O(A) paciente apresenta sangramento grave mediante metrorragia
+            volumosa
+      - name: grave_sangramento
+        description: O(A) paciente apresenta sangramento grave mediante sangramento
+            do SNC
+      - name: grave_ast_alt
+        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
+            AST/ALT > 1000
+      - name: grave_miocardite
+        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
+            miocardite
+      - name: grave_consciencia
+        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
+            alteração de consciência
+      - name: grave_orgaos
+        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
+            outros órgãos
+      - name: data_sinais_gravidade
+        description: Data do início dos sinais de gravidade
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: plaqueta_menor
+        description: Resultado do exame de plaquetas
+      - name: data_sorologia1_chikungunya
+        description: Data da coleta da 1a amostra
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_sorologia1_chikungunya
+        description: Resultado da 1a amostra
+      - name: data_sorologia2_chikungunya
+        description: Data da coleta da 2a amostra
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_sorologia2_chikungunya
+        description: Resultado da 2a amostra
+      - name: data_coleta_prnt
+        description: Data da coleta do exame PRNT
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_prnt
+        description: Resultado PRNT
+      - name: data_ns1
+        description: Data da coleta para o exame NS1
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_ns1
+        description: Resultado NS1
+      - name: data_viral
+        description: Data do exame viral
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_viral
+        description: Resultado do exame do viral
+      - name: data_pcr
+        description: Data do exame PCR
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_pcr
+        description: Resultado PCR
+      - name: data_sorologia_dengue
+        description: Data de sorologia para dengue
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: resultado_sorologia_dengue
+        description: Resultado de sorologia para dengue
+      - name: sorotipo
+        description: Sorotipo
+      - name: histopatologia
+        description: Histopatologia
+      - name: imunohistoquimica
+        description: Imunoquistoquimica
+      - name: manifestacao_hemorragica
+        description: Informa se houve manifestação hemorrágica
+      - name: classificacao_final
+        description: Classificação final do caso
+      - name: criterio_confirmacao
+        description: Critério de confirmação
+      - name: caso_fhd
+        description: Grau, caso FhD
+      - name: caso_autoctone
+        description: O caso é autóctone de residência
+      - name: pais_infeccao
+        description: País de provável contágio
+      - name: sigla_uf_infeccao
+        description: Sigla da Unidade da Federação de provável contágio
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+      - name: id_municipio_infeccao
+        description: ID Município de provável contágio - IBGE 6 Dígitos
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio_6
+      - name: doenca_trabalho
+        description: Doença contraída em detrimento do trabalho
+      - name: apresentacao_clinica
+        description: Apresentação clínica
+      - name: evolucao_caso
+        description: Evolução do caso
+      - name: data_obito
+        description: Data do óbito
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: data_encerramento
+        description: Data de encerramento
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: data_digitacao
+        description: Data de digitação
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__data')
+                field: data.data
+      - name: tipo_sistema
+        description: Tipo de sistema
