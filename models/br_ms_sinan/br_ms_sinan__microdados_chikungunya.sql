@@ -511,15 +511,6 @@ with
                 else safe_cast(trim(leucopenia) as string)
             end apresenta_leucopenia,
             case
-                when trim(epistaxe) = ''
-                then null
-                when regexp_contains(trim(epistaxe), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(epistaxe), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(epistaxe) as string)
-            end apresenta_epistaxe,
-            case
                 when trim(petequia_n) = ''
                 then null
                 when regexp_contains(trim(petequia_n), '[^a-zA-Z0-9 ]')
@@ -528,51 +519,6 @@ with
                 then null
                 else safe_cast(trim(petequia_n) as string)
             end apresenta_petequias,
-            case
-                when trim(gengivo) = ''
-                then null
-                when regexp_contains(trim(gengivo), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(gengivo), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(gengivo) as string)
-            end apresenta_gengivorragia,
-            case
-                when trim(metro) = ''
-                then null
-                when regexp_contains(trim(metro), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(metro), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(metro) as string)
-            end apresenta_metrorragia,
-            case
-                when trim(hematura) = ''
-                then null
-                when regexp_contains(trim(hematura), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(hematura), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(hematura) as string)
-            end apresenta_hematuria,
-            case
-                when trim(sangram) = ''
-                then null
-                when regexp_contains(trim(sangram), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(sangram), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(sangram) as string)
-            end apresenta_sangramento,
-            case
-                when trim(complica) = ''
-                then null
-                when regexp_contains(trim(complica), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(complica), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(complica) as string)
-            end apresenta_complicacao,
             case
                 when trim(laco) = ''
                 then null
@@ -676,244 +622,6 @@ with
                 then null
                 else safe_cast(trim(municipio) as string)
             end id_municipio_internacao,
-            case
-                when trim(alrm_hipot) = ''
-                then null
-                when regexp_contains(trim(alrm_hipot), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_hipot), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_hipot) as string)
-            end alarme_hipotensao,
-            case
-                when trim(alrm_plaq) = ''
-                then null
-                when regexp_contains(trim(alrm_plaq), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_plaq), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_plaq) as string)
-            end alarme_plaqueta,
-            case
-                when trim(alrm_vom) = ''
-                then null
-                when regexp_contains(trim(alrm_vom), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_vom), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_vom) as string)
-            end alarme_vomito,
-            case
-                when trim(alrm_sang) = ''
-                then null
-                when regexp_contains(trim(alrm_sang), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_sang), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_sang) as string)
-            end alarme_sangramento,
-            case
-                when trim(alrm_hemat) = ''
-                then null
-                when regexp_contains(trim(alrm_hemat), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_hemat), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_hemat) as string)
-            end alarme_hematocrito,
-            case
-                when trim(alrm_abdom) = ''
-                then null
-                when regexp_contains(trim(alrm_abdom), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_abdom), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_abdom) as string)
-            end alarme_dor_abdominal,
-            case
-                when trim(alrm_letar) = ''
-                then null
-                when regexp_contains(trim(alrm_letar), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_letar), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_letar) as string)
-            end alarme_letargia,
-            case
-                when trim(alrm_hepat) = ''
-                then null
-                when regexp_contains(trim(alrm_hepat), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_hepat), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_hepat) as string)
-            end alarme_hepatomegalia,
-            case
-                when trim(alrm_liq) = ''
-                then null
-                when trim(alrm_liq) not in ('1', '2', '9')
-                then null
-                when regexp_contains(trim(alrm_liq), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(alrm_liq), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(alrm_liq) as string)
-            end alarme_liquidos,
-            case
-                when trim(dt_alrm) = ''
-                then null
-                else
-                    safe_cast(
-                        format_date(
-                            '%Y-%m-%d',
-                            safe.parse_date(
-                                '%Y%m%d', regexp_replace(dt_alrm, r'[^0-9]', '')
-                            )
-                        ) as date
-                    )
-            end data_alarme,
-            case
-                when trim(grav_pulso) = ''
-                then null
-                when regexp_contains(trim(grav_pulso), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_pulso), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_pulso) as string)
-            end grave_pulso,
-            case
-                when trim(grav_conv) = ''
-                then null
-                when regexp_contains(trim(grav_conv), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_conv), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_conv) as string)
-            end grave_convulsao,
-            case
-                when trim(grav_ench) = ''
-                then null
-                when regexp_contains(trim(grav_ench), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_ench), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_ench) as string)
-            end grave_enchimento_capilar,
-            case
-                when trim(grav_insuf) = ''
-                then null
-                when regexp_contains(trim(grav_insuf), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_insuf), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_insuf) as string)
-            end grave_insuficiencia_respiratoria,
-            case
-                when trim(grav_taqui) = ''
-                then null
-                when regexp_contains(trim(grav_taqui), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_taqui), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_taqui) as string)
-            end grave_taquicardia,
-            case
-                when trim(grav_extre) = ''
-                then null
-                when regexp_contains(trim(grav_extre), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_extre), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_extre) as string)
-            end grave_extremidade_fria,
-            case
-                when trim(grav_hipot) = ''
-                then null
-                when regexp_contains(trim(grav_hipot), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_hipot), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_hipot) as string)
-            end grave_hipotensao,
-            case
-                when trim(grav_hemat) = ''
-                then null
-                when regexp_contains(trim(grav_hemat), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_hemat), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_hemat) as string)
-            end grave_hematemese,
-            case
-                when trim(grav_melen) = ''
-                then null
-                when regexp_contains(trim(grav_melen), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_melen), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_melen) as string)
-            end grave_melena,
-            case
-                when trim(grav_metro) = ''
-                then null
-                when regexp_contains(trim(grav_metro), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_metro), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_metro) as string)
-            end grave_metrorragia,
-            case
-                when trim(grav_sang) = ''
-                then null
-                when regexp_contains(trim(grav_sang), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_sang), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_sang) as string)
-            end grave_sangramento,
-            case
-                when trim(grav_ast) = ''
-                then null
-                when regexp_contains(trim(grav_ast), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_ast), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_ast) as string)
-            end grave_ast_alt,
-            case
-                when trim(grav_mioc) = ''
-                then null
-                when regexp_contains(trim(grav_mioc), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_mioc), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_mioc) as string)
-            end grave_miocardite,
-            case
-                when trim(grav_consc) = ''
-                then null
-                when regexp_contains(trim(grav_consc), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(grav_consc), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(grav_consc) as string)
-            end grave_consciencia,
-            case
-                when trim(grav_orgao) = ''
-                then null
-                when regexp_contains(trim(grav_orgao), '[^a-zA-Z0-9 ]')
-                then null
-                when trim(grav_orgao) = 'v'
-                then null
-                else safe_cast(trim(grav_orgao) as string)
-            end grave_orgaos,
-            case
-                when trim(plaq_menor) = ''
-                then null
-                when regexp_contains(trim(plaq_menor), '[^a-zA-Z0-9 ]')
-                then null
-                else safe_cast(trim(plaq_menor) as string)
-            end plaqueta_menor,
             case
                 when trim(dt_chik_s1) = ''
                 then null
@@ -1070,15 +778,6 @@ with
                 else safe_cast(trim(imunoh_n) as string)
             end imunohistoquimica,
             case
-                when trim(mani_hemor) = ''
-                then null
-                when regexp_contains(trim(mani_hemor), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(mani_hemor), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(mani_hemor) as string)
-            end manifestacao_hemorragica,
-            case
                 when trim(classi_fin) = ''
                 then null
                 when trim(classi_fin) not in ('5', '10', '11', '12', '13')
@@ -1098,15 +797,6 @@ with
                 then null
                 else safe_cast(trim(criterio) as string)
             end criterio_confirmacao,
-            case
-                when trim(con_fhd) = ''
-                then null
-                when regexp_contains(trim(con_fhd), '[^a-zA-Z0-9 ]')
-                then null
-                when regexp_contains(trim(con_fhd), '[a-zA-Z]')
-                then null
-                else safe_cast(trim(con_fhd) as string)
-            end caso_fhd,
             case
                 when trim(tpautocto) = ''
                 then null
@@ -1297,20 +987,7 @@ with
                             )
                         ) as date
                     )
-            end data_coleta_prnt,
-            case
-                when trim(dt_grav) = ''
-                then null
-                else
-                    safe_cast(
-                        format_date(
-                            '%Y-%m-%d',
-                            safe.parse_date(
-                                '%Y%m%d', regexp_replace(dt_grav, r'[^0-9]', '')
-                            )
-                        ) as date
-                    )
-            end data_sinais_gravidade
+            end data_coleta_prnt
         from `basedosdados-staging.br_ms_sinan_staging.microdados_chikungunya`
     )
 
@@ -1370,13 +1047,7 @@ select
     apresenta_artralgia,
     apresenta_artrite,
     apresenta_leucopenia,
-    apresenta_epistaxe,
     apresenta_petequias,
-    apresenta_gengivorragia,
-    apresenta_metrorragia,
-    apresenta_hematuria,
-    apresenta_sangramento,
-    apresenta_complicacao,
     prova_laco,
     internacao,
     case
@@ -1386,41 +1057,6 @@ select
     end data_internacao,
     sigla_uf_internacao,
     id_municipio_internacao,
-    alarme_hipotensao,
-    alarme_plaqueta,
-    alarme_vomito,
-    alarme_sangramento,
-    alarme_hematocrito,
-    alarme_dor_abdominal,
-    alarme_letargia,
-    alarme_hepatomegalia,
-    alarme_liquidos,
-    case
-        when extract(year from data_alarme) > extract(year from current_date)
-        then null
-        else data_alarme
-    end data_alarme,
-    grave_pulso,
-    grave_convulsao,
-    grave_enchimento_capilar,
-    grave_insuficiencia_respiratoria,
-    grave_taquicardia,
-    grave_extremidade_fria,
-    grave_hipotensao,
-    grave_hematemese,
-    grave_melena,
-    grave_metrorragia,
-    grave_sangramento,
-    grave_ast_alt,
-    grave_miocardite,
-    grave_consciencia,
-    grave_orgaos,
-    case
-        when extract(year from data_sinais_gravidade) > extract(year from current_date)
-        then null
-        else data_sinais_gravidade
-    end data_sinais_gravidade,
-    plaqueta_menor,
     case
         when
             extract(year from data_sorologia1_chikungunya)
@@ -1470,10 +1106,8 @@ select
     sorotipo,
     histopatologia,
     imunohistoquimica,
-    manifestacao_hemorragica,
     classificacao_final,
     criterio_confirmacao,
-    caso_fhd,
     caso_autoctone,
     pais_infeccao,
     sigla_uf_infeccao,

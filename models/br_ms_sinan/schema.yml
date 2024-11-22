@@ -509,7 +509,8 @@ models:
       - name: valor
         description: Valor
   - name: br_ms_sinan__microdados_chikungunya
-    description: Insert table description here
+    description: : Os microdados da chikungunya são obtidos através da ficha de investigação do paciente. Essa ficha contempla informações gerais do paciente, dados de residência. características da notificação individual, dados clínicos e dados laboratoriais.
+A identificação de cada ficha é feita através do número de notificação, data de notificação e município de notificação. Os dados públicos disponibilizados pelo DATASUS, não incluem o número de notificação, por isso, não há uma chave única para essa tabela.
     tests:
       - dbt_utils.unique_combination_of_columns:
             combination_of_columns:
@@ -542,37 +543,10 @@ models:
               - apresenta_artralgia
               - apresenta_artrite
               - apresenta_leucopenia
-              - apresenta_epistaxe
               - apresenta_petequias
-              - apresenta_gengivorragia
-              - apresenta_metrorragia
-              - apresenta_hematuria
-              - apresenta_sangramento
-              - apresenta_complicacao
               - prova_laco
               - internacao
-              - alarme_hipotensao
-              - alarme_plaqueta
-              - alarme_vomito
-              - alarme_sangramento
-              - alarme_hematocrito
-              - alarme_dor_abdominal
-              - alarme_letargia
-              - alarme_hepatomegalia
-              - alarme_liquidos
-              - grave_pulso
-              - grave_convulsao
-              - grave_enchimento_capilar
-              - grave_insuficiencia_respiratoria
-              - grave_taquicardia
-              - grave_extremidade_fria
               - grave_hipotensao
-              - grave_hematemese
-              - grave_melena
-              - grave_metrorragia
-              - grave_sangramento
-              - grave_ast_alt
-              - grave_miocardite
               - grave_consciencia
               - resultado_sorologia1_chikungunya
               - resultado_sorologia2_chikungunya
@@ -719,20 +693,8 @@ models:
         description: O(A) paciente apresenta artrite
       - name: apresenta_leucopenia
         description: O(A) paciente apresenta leucopenia
-      - name: apresenta_epistaxe
-        description: O(A) paciente apresenta epistaxe
       - name: apresenta_petequias
         description: O(A) paciente apresenta petequias
-      - name: apresenta_gengivorragia
-        description: O(A) paciente apresenta gengivorragias
-      - name: apresenta_metrorragia
-        description: O(A) paciente apresenta metrorragia
-      - name: apresenta_hematuria
-        description: O(A) paciente apresenta hematuria
-      - name: apresenta_sangramento
-        description: O(A) paciente apresenta sangramento
-      - name: apresenta_complicacao
-        description: O(A) paciente apresenta complicações
       - name: prova_laco
         description: Informa se o(a) paciente fez a prova do laço
       - name: internacao
@@ -755,85 +717,12 @@ models:
           - relationships:
                 to: ref('br_bd_diretorios_brasil__municipio')
                 field: id_municipio_6
-      - name: alarme_hipotensao
-        description: O(A) paciente apresenta sinais de alarme com hipotensão postural
-            e/ou lipotímia
-      - name: alarme_plaqueta
-        description: O(A) paciente apresenta sinais de alarme com queda abrupta de
-            plaquetas
-      - name: alarme_vomito
-        description: O(A) paciente apresenta sinais de alarme com vômitos persistentes
-      - name: alarme_sangramento
-        description: O(A) paciente apresenta sinais de alarme com sangramento de mucosa/outras
-            hemorragias
-      - name: alarme_hematocrito
-        description: O(A) paciente apresenta sinais de alarme com aumento progressivo
-            do hematócrito
-      - name: alarme_dor_abdominal
-        description: O(A) paciente apresenta sinais de alarme com dor abdominal intensa
-            e contínua
-      - name: alarme_letargia
-        description: O(A) paciente apresenta sinais de alarme com letargia ou irritabilidade
-      - name: alarme_hepatomegalia
-        description: O(A) paciente apresenta sinais de alarme com hepatomegalia >=
-            2cm
-      - name: alarme_liquidos
-        description: O(A) paciente apresenta sinais de alarme com acúmulo de líquidos
-      - name: data_alarme
-        description: Data de início dos sinais de alarme
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
-      - name: grave_pulso
-        description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            pulso débil ou indetectável
-      - name: grave_convulsao
-        description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            PA convergente <= 20mmHg
-      - name: grave_enchimento_capilar
-        description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            tempo de enchimento capilar
-      - name: grave_insuficiencia_respiratoria
-        description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            acúmulo de líquidos com insuficiência respiratória
-      - name: grave_taquicardia
-        description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            taquicardia
-      - name: grave_extremidade_fria
-        description: O(A) paciente apresenta extravasamento grave de plasma mediante
-            extremidades frias
       - name: grave_hipotensao
         description: O(A) paciente apresenta extravasamento grave de plasma mediante
             hipotensão arterial em fase tardia
-      - name: grave_hematemese
-        description: O(A) paciente apresenta sangramento grave mediante hematêmese
-      - name: grave_melena
-        description: O(A) paciente apresenta sangramento grave mediante melena
-      - name: grave_metrorragia
-        description: O(A) paciente apresenta sangramento grave mediante metrorragia
-            volumosa
-      - name: grave_sangramento
-        description: O(A) paciente apresenta sangramento grave mediante sangramento
-            do SNC
-      - name: grave_ast_alt
-        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
-            AST/ALT > 1000
-      - name: grave_miocardite
-        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
-            miocardite
       - name: grave_consciencia
         description: O(A) paciente apresenta comprometimento grave de órgãos mediante
             alteração de consciência
-      - name: grave_orgaos
-        description: O(A) paciente apresenta comprometimento grave de órgãos mediante
-            outros órgãos
-      - name: data_sinais_gravidade
-        description: Data do início dos sinais de gravidade
-        tests:
-          - relationships:
-                to: ref('br_bd_diretorios_data_tempo__data')
-                field: data.data
       - name: plaqueta_menor
         description: Resultado do exame de plaquetas
       - name: data_sorologia1_chikungunya
@@ -898,14 +787,10 @@ models:
         description: Histopatologia
       - name: imunohistoquimica
         description: Imunoquistoquimica
-      - name: manifestacao_hemorragica
-        description: Informa se houve manifestação hemorrágica
       - name: classificacao_final
         description: Classificação final do caso
       - name: criterio_confirmacao
         description: Critério de confirmação
-      - name: caso_fhd
-        description: Grau, caso FhD
       - name: caso_autoctone
         description: O caso é autóctone de residência
       - name: pais_infeccao
