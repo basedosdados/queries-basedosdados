@@ -357,7 +357,6 @@ models:
     br_stf_corte_aberta:
       +materialized: table
       +schema: br_stf_corte_aberta
-
     br_trase_supply_chain:
       +materialized: table
       +schema: br_trase_supply_chain
