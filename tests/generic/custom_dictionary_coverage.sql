@@ -6,7 +6,13 @@
 
     {%- set combined_query_parts = [] -%}
     {%- set union_parts = [] -%}
-    {% set table_id = model.identifier %}
+
+    {% set model_sql = model | string %}
+    {% set start = model_sql.find("`") + 1 %}
+    {% set end = model_sql.rfind("`") %}
+    {% set full_path = model_sql[start:end] %}
+    {% set path_parts = full_path.split(".") %}
+    {% set table_id = path_parts[2].replace("`", "").strip() %}
 
     {%- for column_name in columns_covered_by_dictionary %}
         {% set subquery_name = "exceptions_" ~ loop.index %}
