@@ -342,6 +342,9 @@ models:
     br_sfb_sicar:
       +materialized: table
       +schema: br_sfb_sicar
+    br_simet_educacao_conectada:
+      +materialized: table
+      +schema: br_simet_educacao_conectada
     br_sp_saopaulo_dieese_icv:
       +materialized: table
       +schema: br_sp_saopaulo_dieese_icv
@@ -354,6 +357,7 @@ models:
     br_stf_corte_aberta:
       +materialized: table
       +schema: br_stf_corte_aberta
+
     br_trase_supply_chain:
       +materialized: table
       +schema: br_trase_supply_chain
