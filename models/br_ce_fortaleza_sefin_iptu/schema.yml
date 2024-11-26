@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: face_quadra
+  - name: br_ce_fortaleza_sefin_iptu__face_quadra
     description: Valores unitários de terreno das faces de quadra do ano corrente
       e infraestrutura do trecho de logradouro da face
     columns:

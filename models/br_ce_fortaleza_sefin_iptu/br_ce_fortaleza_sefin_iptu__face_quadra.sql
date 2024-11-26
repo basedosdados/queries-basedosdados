@@ -1,3 +1,4 @@
+{{ config(alias="face_quadra", schema="br_ce_fortaleza_sefin_iptu") }}
 select
     safe_cast(ano as int64) ano,
     safe_cast(id_face_quadra as string) id_face_quadra,
