@@ -24,9 +24,9 @@ select
     safe_cast(cargo as string) cargo,
     safe_cast(numero_partido as string) numero_partido,
     safe_cast(sigla_partido as string) sigla_partido,
-    safe_cast(numero_candidato as string) numero_candidato,
+    safe_cast(titulo_eleitoral_candidato as string) titulo_eleitoral_candidato,
     safe_cast(sequencial_candidato as string) sequencial_candidato,
-    safe_cast(id_candidato_bd as string) id_candidato_bd,
+    safe_cast(numero_candidato as string) numero_candidato,
     safe_cast(resultado as string) resultado,
     safe_cast(votos as int64) votos
 from

@@ -11,12 +11,14 @@
         cluster_by=["mes"],
     )
 }}
-
 select
-    safe_cast(ano as int64) ano,
-    safe_cast(mes as int64) mes,
-    safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(sigla_regiao as string) sigla_regiao,
-    safe_cast(cidade as string) cidade,
-    safe_cast(valor_arrecadado as float64) valor_arrecadado,
-from `basedosdados-staging.br_rf_arrecadacao_staging.itr` as t
+    safe_cast(itr.ano as int64) ano,
+    safe_cast(itr.mes as int64) mes,
+    safe_cast(itr.sigla_uf as string) sigla_uf,
+    safe_cast(m.id_municipio as string) id_municipio,
+    safe_cast(itr.valor_arrecadado as float64) valor_arrecadado,
+from `basedosdados-staging.br_rf_arrecadacao_staging.itr` itr
+left join
+    `basedosdados.br_bd_diretorios_brasil.municipio` m
+    on itr.cidade = m.nome
+    and itr.sigla_uf = m.sigla_uf
