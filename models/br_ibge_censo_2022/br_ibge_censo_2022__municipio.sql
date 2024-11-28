@@ -98,9 +98,9 @@ with
     alfabetizacao as (
         select
             2022 as ano,
-            safe_cast(municipio_codigo_ as string) id_municipio,
+            safe_cast(munic_pio__c_digo_ as string) id_municipio,
             round(
-                sum(if(alfabetizacao = 'Alfabetizadas', safe_cast(valor as int64), 0))
+                sum(if(alfabetiza__o = 'Alfabetizadas', safe_cast(valor as int64), 0))
                 / sum(safe_cast(valor as int64)),
                 5
             ) as taxa_alfabetizacao
