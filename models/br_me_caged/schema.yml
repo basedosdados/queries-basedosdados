@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-  - name: microdados_movimentacao
+  - name: br_me_caged__microdados_movimentacao
     description: Contém dados de movimentações declaradas dentro do prazo com competência
       de declaração.
     tests:

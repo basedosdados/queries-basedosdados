@@ -2,6 +2,7 @@
     config(
         schema="br_me_caged",
         materialized="table",
+        alias="movimentacao_excluida",
         partition_by={
             "field": "ano",
             "data_type": "int64",
