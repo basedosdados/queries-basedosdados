@@ -77,7 +77,7 @@ models:
         description: Origem da Informação
       - name: indicador_fora_prazo
         description: Indicador fora do prazo
-  - name: microdados_movimentacao_fora_prazo
+  - name: br_me_caged__microdados_movimentacao_fora_prazo
     description: Contém dados de movimentações declaradas fora do prazo com competência
       de declaração.
     tests:
@@ -153,7 +153,7 @@ models:
         description: Origem da Informação
       - name: indicador_fora_prazo
         description: Indicador fora do prazo
-  - name: microdados_movimentacao_excluida
+  - name: br_me_caged__microdados_movimentacao_excluida
     description: Contém dados de movimentações excluídas com competência de declaração.
     tests:
       - not_null_proportion_multiple_columns:
