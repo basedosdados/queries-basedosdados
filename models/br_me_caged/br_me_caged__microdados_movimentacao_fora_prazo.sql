@@ -6,9 +6,8 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2020, "end": 2024, "interval": 1},
+            "range": {"start": 2020, "end": 2025, "interval": 1},
         },
-        cluster_by=["mes", "sigla_uf"],
         labels={"project_id": "basedosdados", "tema": "economia"},
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
