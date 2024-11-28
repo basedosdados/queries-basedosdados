@@ -2,7 +2,7 @@
     config(
         schema="br_me_caged",
         materialized="incremental",
-        alias="movimentacao",
+        alias="microdados_movimentacao",
         partition_by={
             "field": "ano",
             "data_type": "int64",
