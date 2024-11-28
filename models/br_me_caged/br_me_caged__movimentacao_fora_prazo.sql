@@ -1,8 +1,8 @@
 {{
     config(
         schema="br_me_caged",
-        materialized="table",
-        alias="movimentacao_fora_prazo",
+        materialized="incremental",
+        alias="microdados_movimentacao_fora_prazo",
         partition_by={
             "field": "ano",
             "data_type": "int64",
@@ -51,3 +51,8 @@ from `basedosdados-staging.br_me_caged_staging.microdados_movimentacao_fora_praz
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` b
     on a.id_municipio = b.id_municipio_6
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+{% endif %}
