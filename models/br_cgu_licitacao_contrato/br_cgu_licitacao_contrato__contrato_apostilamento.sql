@@ -14,4 +14,5 @@ select
     safe_cast(situacao_apostilamento as string) situacao_apostilamento,
     safe_cast(parse_date('%d/%m/%Y', data_de_inclusao) as date) data_apostilamento,
     safe_cast(replace(valor_apostilamento, ",", ".") as float64) valor_apostilamento,
-from `basedosdados-dev.br_cgu_licitacao_contrato_staging.contrato_apostilamento` as t
+from
+    `basedosdados-staging.br_cgu_licitacao_contrato_staging.contrato_apostilamento` as t
