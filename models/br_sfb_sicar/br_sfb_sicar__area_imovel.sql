@@ -33,7 +33,7 @@ with
     )
 
 select *
-from `basedosdados-staging.br_sfb_sicar_staging.area_imovel`
+from area_imovel
 {% if is_incremental() %}
     where data_extracao > (select max(data_extracao) from {{ this }})
 {% endif %}
