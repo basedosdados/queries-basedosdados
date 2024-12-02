@@ -2,12 +2,7 @@
     config(
         schema="br_me_caged",
         materialized="table",
-        partition_by={
-            "field": "ano",
-            "data_type": "int64",
-            "range": {"start": 2020, "end": 2024, "interval": 1},
-        },
-        cluster_by=["mes", "sigla_uf"],
+        alias="microdados_movimentacao_excluida",
         labels={"project_id": "basedosdados", "tema": "economia"},
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )

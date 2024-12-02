@@ -18,7 +18,7 @@ class constants(Enum):
         "populacao_residente_indigena_municipio": "https://apisidra.ibge.gov.br/values/t/9718/n6/all/v/93,350/p/all/c1714/allxt/c2661/allxt",
         "domicilios_moradores_indigenas_municipio": "https://apisidra.ibge.gov.br/values/t/9728/n6/all/v/381,382,5930,6554,8691/p/all/c2661/allxt/d/v5930%202,v6554%202",
         "domicilios_pelo_menos_um_morador_indigenas_municipio": "https://apisidra.ibge.gov.br/values/t/9720/n6/all/v/5938,6554,7088,7089,7090/p/all/c2661/allxt/d/v5938%202,v6554%202",
-        "alfabetizacao_grupo_idade_sexo_raca": "https://apisidra.ibge.gov.br/values/t/9542/n6/all/v/allxp/p/all/c59/93024/c2/allxt/c86/allxt/c287/3000,6572,6573,6574,6575,6576,6577,6578,6579,6580,6581,6582,6583,6584,6585,6586,6587,6588,6589,6590,6591,6592,6593,6594,6595,6596,6597,6598,6599,6600,6601,6602,6603,6604,6605,6606,6607,6608,6609,6610,6611,6612,6613,6614,6615,6616,6617,6656,6657,6658,6659,9486,113623"
+        "alfabetizacao_grupo_idade_sexo_raca": "https://apisidra.ibge.gov.br/values/t/9542/n6/all/v/allxp/p/all/c59/allxt/c2/allxt/c86/allxt/c287/2999,3000,9482,9483,9484,93086,93087",
         }
 
     #NOTE: CNEFE não será baixado do SIDRA
@@ -52,4 +52,4 @@ class constants(Enum):
     'MT' : '51_MT.zip',
     'GO' : '52_GO.zip',
     'DF' : '53_DF.zip'
-    }
+}

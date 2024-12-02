@@ -1,13 +1,13 @@
 {{
     config(
         schema="br_me_caged",
-        materialized="table",
+        materialized="incremental",
+        alias="microdados_movimentacao_fora_prazo",
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2020, "end": 2024, "interval": 1},
+            "range": {"start": 2020, "end": 2025, "interval": 1},
         },
-        cluster_by=["mes", "sigla_uf"],
         labels={"project_id": "basedosdados", "tema": "economia"},
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
@@ -46,7 +46,12 @@ select
     safe_cast(indicador_aprendiz as string) indicador_aprendiz,
     safe_cast(origem_informacao as string) origem_informacao,
     safe_cast(indicador_fora_prazo as int64) indicador_fora_prazo
-from `basedosdados-staging.br_me_caged_staging.microdados_movimentacao` a
+from `basedosdados-staging.br_me_caged_staging.microdados_movimentacao_fora_prazo` a
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` b
     on a.id_municipio = b.id_municipio_6
+{% if is_incremental() %}
+    where
+        date(cast(ano as int64), cast(mes as int64), 1)
+        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+{% endif %}
