@@ -18,4 +18,4 @@ select
     safe_cast(codigo_empenho as string) id_empenho,
     safe_cast(parse_date('%d/%m/%Y', data_emissao_empenho) as date) data_emissao,
     safe_cast(replace(valor_empenho, ",", ".") as float64) valor,
-from `basedosdados-dev.br_cgu_licitacao_contrato_staging.licitacao_empenho` as t
+from `basedosdados-staging.br_cgu_licitacao_contrato_staging.licitacao_empenho` as t

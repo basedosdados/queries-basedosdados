@@ -18,4 +18,5 @@ select
     safe_cast(numero_termo_aditivo as string) id_termo_aditivo,
     safe_cast(parse_date('%d/%m/%Y', data_publicacao) as date) data_publicacao_dou,
     safe_cast(objeto as string) objeto,
-from `basedosdados-dev.br_cgu_licitacao_contrato_staging.contrato_termo_aditivo` as t
+from
+    `basedosdados-staging.br_cgu_licitacao_contrato_staging.contrato_termo_aditivo` as t

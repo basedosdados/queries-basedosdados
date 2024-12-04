@@ -25,4 +25,4 @@ select
             when flag_vencedor = 'SIM' then true when flag_vencedor = 'NÃO' then false
         end as boolean
     ) as vencedor
-from `basedosdados-dev.br_cgu_licitacao_contrato_staging.licitacao_participante`
+from `basedosdados-staging.br_cgu_licitacao_contrato_staging.licitacao_participante`

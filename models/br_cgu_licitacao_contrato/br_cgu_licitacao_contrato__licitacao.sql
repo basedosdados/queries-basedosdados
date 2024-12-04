@@ -25,8 +25,8 @@ select
     ) data_resultado_compra,
     safe_cast(parse_date('%d/%m/%Y', data_abertura) as date) data_abertura,
     safe_cast(replace(valor_licitacao, ",", ".") as float64) valor_licitacao,
-from `basedosdados-dev.br_cgu_licitacao_contrato_staging.licitacao` as licitacao
+from `basedosdados-staging.br_cgu_licitacao_contrato_staging.licitacao` as licitacao
 left join
-    `basedosdados-dev.br_bd_diretorios_brasil.municipio` as dir_municipio
+    `basedosdados.br_bd_diretorios_brasil.municipio` as dir_municipio
     on upper(dir_municipio.nome) = licitacao.municipio
     and dir_municipio.sigla_uf = licitacao.uf

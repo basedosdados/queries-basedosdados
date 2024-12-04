@@ -18,4 +18,4 @@ select
     safe_cast(descricao_complementar_item_compra as string) descricao_complementar_item,
     safe_cast(quantidade_item as int64) quantidade_item,
     safe_cast(replace(valor_item, ",", ".") as float64) valor_item,
-from `basedosdados-dev.br_cgu_licitacao_contrato_staging.contrato_item` as t
+from `basedosdados-staging.br_cgu_licitacao_contrato_staging.contrato_item` as t
