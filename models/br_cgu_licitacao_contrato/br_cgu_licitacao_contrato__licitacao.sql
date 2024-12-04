@@ -3,6 +3,7 @@
         alias="licitacao", schema="br_cgu_licitacao_contrato", materialized="table"
     )
 }}
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,

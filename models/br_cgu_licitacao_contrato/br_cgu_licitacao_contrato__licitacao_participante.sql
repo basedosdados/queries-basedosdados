@@ -5,6 +5,7 @@
         materialized="table",
     )
 }}
+
 select
     safe_cast(ano as int64) as ano,
     safe_cast(mes as int64) as mes,
