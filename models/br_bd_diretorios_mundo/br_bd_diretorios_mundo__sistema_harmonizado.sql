@@ -1,4 +1,6 @@
 {{ config(alias="sistema_harmonizado", schema="br_bd_diretorios_mundo") }}
+
+
 select
     safe_cast(co_sh6 as string) id_sh6,
     safe_cast(co_sh4 as string) id_sh4,
