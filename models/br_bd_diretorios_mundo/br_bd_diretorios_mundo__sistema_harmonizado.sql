@@ -18,4 +18,4 @@ select
     safe_cast(no_sh4_ing as string) nome_sh4_ingles,
     safe_cast(no_sh2_ing as string) nome_sh2_ingles,
     safe_cast(no_sec_ing as string) nome_sec_ingles,
-from `basedosdados-staging.br_bd_diretorios_mundo_staging.sistema_harmonizado` as t
+from `basedosdados-staging.br_bd_diretorios_mundo_staging.sistema_harmonizado` as x
