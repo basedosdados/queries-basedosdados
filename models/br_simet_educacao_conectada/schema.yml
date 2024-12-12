@@ -96,15 +96,15 @@ models:
           meses.
       - name: media_download_entorno
         description: Média de download no entorno nos últimos 6 meses
-      - name: media_entorno_upload
+      - name: media_upload_entorno
         description: Média de upload no entorno nos últimos 6 meses
-      - name: media_entorno_latencia
+      - name: media_latencia_entorno
         description: Média de latencia no entorno nos últimos 6 meses
-      - name: media_entorno_pacotes
+      - name: media_pacotes_entorno
         description: Média de perda de pacotes no entorno nos últimos 6 meses
-      - name: media_entorno_jitter_upload
+      - name: media_jitter_upload_entorno
         description: Média de jitter de upload no entorno nos últimos 6 meses
-      - name: media_entorno_jitter_download
+      - name: media_jitter_download_entorno
         description: Média de jitter de download no entorno nos últimos 6 meses
       - name: comparador_empresas
         description: Quais operadoras provedoras de Internet oferecem serviços no
@@ -119,7 +119,7 @@ models:
       - name: comparativo_latencia_entorno
         description: Comparativo da velocidade de latência da escola em relação ao
           seu entorno
-      - name: velelocidade_download_necessaria_mbit
+      - name: velocidade_download_necessaria_mbit
         description: Velocidade necessária para 50% da escola possa ver um vídeo ao
           mesmo tempo.
       - name: razao_download_por_aluno_kbps
