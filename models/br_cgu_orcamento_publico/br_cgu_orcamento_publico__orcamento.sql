@@ -32,4 +32,4 @@ select
     safe_cast(
         porcentagem_realizado_orcamento as float64
     ) porcentagem_realizado_orcamento,
-from `basedosdados-dev.br_cgu_orcamento_publico_staging.orcamento`
+from `basedosdados-staging.br_cgu_orcamento_publico_staging.orcamento`

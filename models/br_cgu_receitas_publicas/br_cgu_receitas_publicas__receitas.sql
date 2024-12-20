@@ -22,4 +22,4 @@ select
     safe_cast(valor_lancado as float64) valor_lancado,
     safe_cast(valor_realizado as float64) valor_realizado,
     safe_cast(percentual_realizado as float64) percentual_realizado,
-from `basedosdados-dev.br_cgu_receitas_publicas_staging.receitas` as t
+from `basedosdados-staging.br_cgu_receitas_publicas_staging.receitas` as t
