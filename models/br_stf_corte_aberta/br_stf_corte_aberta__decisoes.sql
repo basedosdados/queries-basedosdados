@@ -28,6 +28,6 @@ select
     initcap(assunto_processo) assunto_processo,
     initcap(ramo_direito) ramo_direito,
     safe_cast(date(data_autuacao) as date) data_autuacao,
-    safe_cast(data_decisao as date) data_decisao,
-    safe_cast(data_baixa_processo as date) data_baixa_processo
+    safe_cast(date(data_decisao) as date) data_decisao,
+    safe_cast(date(data_baixa_processo) as date) data_baixa_processo
 from `basedosdados-staging.br_stf_corte_aberta_staging.decisoes` as t
