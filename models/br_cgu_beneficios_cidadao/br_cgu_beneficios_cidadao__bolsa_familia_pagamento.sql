@@ -12,7 +12,7 @@
                 "interval": 1,
             },
         },
-        cluster_by=["sigla_uf", "id_municipio"],
+        cluster_by=["sigla_uf", "ano_referencia", "mes_referencia", "id_municipio"],
     )
 }}
 
