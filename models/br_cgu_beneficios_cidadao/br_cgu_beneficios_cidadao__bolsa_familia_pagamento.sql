@@ -16,7 +16,6 @@
     )
 }}
 
-
 select distinct
     safe_cast(split(mes_ref, '-')[offset(0)] as int64) as ano_competencia,
     safe_cast(split(mes_ref, '-')[offset(1)] as int64) as mes_competencia,
