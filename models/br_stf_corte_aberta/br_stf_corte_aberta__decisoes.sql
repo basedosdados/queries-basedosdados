@@ -29,5 +29,9 @@ select
     initcap(ramo_direito) ramo_direito,
     safe_cast(date(data_autuacao) as date) data_autuacao,
     safe_cast(date(data_decisao) as date) data_decisao,
-    safe_cast(date(data_baixa_processo) as date) data_baixa_processo
-from `basedosdados-staging.br_stf_corte_aberta_staging.decisoes` as t
+    case
+        when data_baixa_processo = '---'
+        then null
+        else safe_cast(data_baixa_processo as date)
+    end data_baixa_processo
+from basedosdados - dev.br_stf_corte_aberta_staging.decisoes
