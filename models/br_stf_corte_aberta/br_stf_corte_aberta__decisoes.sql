@@ -12,6 +12,7 @@
     )
 }}
 
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(classe as string) classe,
@@ -34,4 +35,4 @@ select
         then null
         else safe_cast(data_baixa_processo as date)
     end data_baixa_processo
-from basedosdados - staging.br_stf_corte_aberta_staging.decisoes
+from `basedosdados-staging.br_stf_corte_aberta_staging.decisoes` as t
