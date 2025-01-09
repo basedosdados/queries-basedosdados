@@ -12,10 +12,9 @@
                 "interval": 1,
             },
         },
-        cluster_by=["sigla_uf", "id_municipio"],
+        cluster_by=["sigla_uf", "ano_referencia", "mes_referencia", "id_municipio"],
     )
 }}
-
 select distinct
     safe_cast(split(mes_ref, '-')[offset(0)] as int64) as ano_competencia,
     safe_cast(split(mes_ref, '-')[offset(1)] as int64) as mes_competencia,
