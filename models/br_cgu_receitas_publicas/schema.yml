@@ -2,7 +2,7 @@
 version: 2
 models:
   - name: br_cgu_receitas_publicas__receitas
-    description: Insert table description here
+    description: Receitas Públicas do Governo Federal
     tests:
       - not_null_proportion_multiple_columns:
           at_least: 0.95

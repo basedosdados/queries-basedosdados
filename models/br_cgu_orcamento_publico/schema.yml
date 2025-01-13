@@ -2,7 +2,7 @@
 version: 2
 models:
   - name: br_cgu_orcamento_publico__orcamento
-    description: Orçamento Públic do Governo Federal
+    description: Orçamento Público do Governo Federal
     tests:
       - not_null_proportion_multiple_columns:
           at_least: 0.95
