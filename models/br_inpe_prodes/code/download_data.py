@@ -1,6 +1,7 @@
 import requests
 import concurrent.futures
 from itertools import product
+import os
 
 
 class DownloaderBrInpeProdes:
@@ -24,7 +25,7 @@ class DownloaderBrInpeProdes:
         url = self.url(bioma)
         response = requests.get(url)
         response.raise_for_status()
-
+        os.makedirs("../input", exist_ok=True)
         with open(f"../input/{bioma}_{self.year}.{format}", "w") as f:
             content_as_string = response.content.decode()
             f.write(content_as_string)
@@ -37,11 +38,10 @@ def start_downloader(info: tuple) -> None:
 
 
 def download_all_biomas_data() -> None:
-    years = range(2000, 2023)
+    years = range(2000, 2025)
     biomas_names = ['Amazônia', 'Caatinga', 'Cerrado', 'Mata Atlântica', 'Pampa', 'Pantanal']
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(start_downloader, product(years, biomas_names))
-
 
 if __name__ == "__main__":
     download_all_biomas_data()
