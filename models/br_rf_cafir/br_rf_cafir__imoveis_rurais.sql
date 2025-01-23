@@ -2,18 +2,12 @@
     config(
         schema="br_rf_cafir",
         alias="imoveis_rurais",
-        materialized="incremental",
+        materialized="table",
         partition_by={
             "field": "data_referencia",
             "data_type": "date",
-            "granularity": "day",
         },
         cluster_by=["sigla_uf"],
-        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(CURRENT_DATE(),DATE(data_referencia), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (EXTRACT(YEAR from data_referencia) = EXTRACT(YEAR from  CURRENT_DATE()))',
-        ],
     )
 }}
 
@@ -146,6 +140,3 @@ with
     )
 select *
 from final
-{% if is_incremental() %}
-    where data_referencia > (select max(data_referencia) from {{ this }})
-{% endif %}
