@@ -2,13 +2,12 @@
     config(
         schema="br_rf_cafir",
         alias="imoveis_rurais",
-        materialized="incremental",
+        materialized="table",
         partition_by={
             "field": "data_referencia",
             "data_type": "date",
         },
         cluster_by=["sigla_uf"],
-        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
 
@@ -141,6 +140,3 @@ with
     )
 select *
 from final
-{% if is_incremental() %}
-    where data_referencia > (select max(data_referencia) from {{ this }})
-{% endif %}
