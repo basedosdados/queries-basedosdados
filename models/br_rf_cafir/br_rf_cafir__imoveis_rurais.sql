@@ -2,7 +2,7 @@
     config(
         schema="br_rf_cafir",
         alias="imoveis_rurais",
-        materialized="table",
+        materialized="incremental",
         partition_by={
             "field": "data_referencia",
             "data_type": "date",
