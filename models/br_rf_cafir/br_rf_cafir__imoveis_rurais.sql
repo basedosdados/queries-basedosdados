@@ -8,6 +8,7 @@
             "data_type": "date",
         },
         cluster_by=["sigla_uf"],
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
 
@@ -140,3 +141,6 @@ with
     )
 select *
 from final
+{% if is_incremental() %}
+    where data_referencia > (select max(data_referencia) from {{ this }})
+{% endif %}
