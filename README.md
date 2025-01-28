@@ -8,9 +8,9 @@
     <em>Universalizando o acesso a dados de qualidade.</em>
 </p>
 
-# Pipelines
+# Queries-basedosdados
 
-Esse repositório contém fluxos de captura e subida de dados no datalake da Base dos Dados.
+Esse é um template para um pacote DBT a ser importado no cluster do projeto basedosdados, que irá gerar um servidor RPC para execução dos projetos específicos de cada projeto GCP.
 
 ## 👥 Como contribuir
 
