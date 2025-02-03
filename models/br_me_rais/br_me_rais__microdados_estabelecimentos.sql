@@ -2,7 +2,7 @@
     config(
         alias="microdados_estabelecimentos",
         schema="br_me_rais",
-        materialized="incremental",
+        materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
@@ -54,7 +54,3 @@ select
         safe_cast(regexp_replace(regioes_administrativas_df, r'^0+', '') as string)
     ) as regioes_administrativas_df
 from `basedosdados-staging.br_me_rais_staging.microdados_estabelecimentos` as t
-{% if is_incremental() %}
-    where
-        safe_cast(ano as int64) > (select safe_cast(max(ano) as int64) from {{ this }})
-{% endif %}
