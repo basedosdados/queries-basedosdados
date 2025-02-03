@@ -2,7 +2,8 @@
     config(
         alias="microdados_estabelecimentos",
         schema="br_me_rais",
-        materialized="table",
+        materialized="incremental",
+        incremental_strategy="insert_overwrite",
         partition_by={
             "field": "ano",
             "data_type": "int64",
@@ -11,7 +12,6 @@
         cluster_by=["sigla_uf"],
     )
 }}
-
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
@@ -54,3 +54,4 @@ select
         safe_cast(regexp_replace(regioes_administrativas_df, r'^0+', '') as string)
     ) as regioes_administrativas_df
 from `basedosdados-staging.br_me_rais_staging.microdados_estabelecimentos` as t
+{% if is_incremental() %} where safe_cast(ano as int64) > 2022 {% endif %}
