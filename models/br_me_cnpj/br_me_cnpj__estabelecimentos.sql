@@ -1,18 +1,13 @@
 {{
     config(
         schema="br_me_cnpj",
-        materialized="incremental",
         alias="estabelecimentos",
+        materialized="incremental",
         partition_by={
             "field": "data",
             "data_type": "date",
         },
-        cluster_by="sigla_uf",
-        incremental_strategy="insert_overwrite",
-        pre_hook=[
-            "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-            "DELETE FROM {{ this }}         WHERE data > '2024-11-15'",
-        ],
+        pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
 with
@@ -63,4 +58,4 @@ with
     )
 select *
 from cnpj_estabelecimentos
-{% if is_incremental() %} where data = '2024-11-15' {% endif %}
+{% if is_incremental() %} where data > (select max(data) from {{ this }}) {% endif %}

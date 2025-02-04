@@ -14,16 +14,16 @@ select
     safe_cast(co_cuci_item as string) id_cuci_item,
     safe_cast(
         case
-            when co_unid = '10'
-            then 'quilograma liquido'
             when co_unid = '11'
             then 'numero (unidade)'
+            when co_unid = '10'
+            then 'quilograma liquido'
             when co_unid = '12'
             then 'milheiro'
-            when co_unid = '13'
-            then 'pares'
             when co_unid = '14'
             then 'metro'
+            when co_unid = '13'
+            then 'pares'
             when co_unid = '15'
             then 'metro quadrado'
             when co_unid = '16'

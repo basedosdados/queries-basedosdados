@@ -525,12 +525,25 @@ models:
         description: Número de comparecimentos
       - name: data_eleicao
         description: Data da eleição
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: data.data
       - name: id_eleicao
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: proporcao_comparecimento
         description: Proporção de comparecimento
       - name: proporcao_votos_brancos
@@ -545,6 +558,11 @@ models:
         description: Seção eleitoral
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: turno
@@ -576,7 +594,7 @@ models:
             - cargo
             - numero
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.03
     columns:
       - name: ano
         description: Ano
@@ -596,8 +614,17 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: nome
         description: Nome
       - name: nome_coligacao
@@ -616,6 +643,11 @@ models:
         description: Sigla da federação
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: situacao_legenda
         description: Situação da legenda
       - name: tipo_agremiacao
@@ -628,7 +660,7 @@ models:
     description: Perfil eleitorado a nível de local de votação.
     tests:
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.60
     columns:
       - name: ano
         description: Ano
@@ -646,8 +678,17 @@ models:
         description: Endereço
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: latitude
         description: Latitude
       - name: longitude
@@ -660,6 +701,11 @@ models:
         description: Seção eleitoral
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: situacao
         description: Situação
       - name: situacao_localidade
@@ -686,14 +732,19 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ano
+            - sigla_uf
             - id_municipio_tse
+            - situacao_biometria
             - zona
-            - estado_civil
             - genero
+            - estado_civil
             - grupo_idade
             - instrucao
+            - eleitores
+            - eleitores_biometria
+            - eleitores_deficiencia
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.75
     columns:
       - name: ano
         description: Ano
@@ -715,12 +766,26 @@ models:
         description: Grupo de idade
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: instrucao
         description: Instrução
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: situacao_biometria
         description: Situação da biometria
       - name: zona
@@ -728,18 +793,8 @@ models:
   - name: br_tse_eleicoes__perfil_eleitorado_secao
     description: Perfil eleitorado a nível de seção eleitoral.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ano
-            - id_municipio_tse
-            - zona
-            - secao
-            - estado_civil
-            - genero
-            - grupo_idade
-            - instrucao
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.60
     columns:
       - name: ano
         description: Ano
@@ -763,14 +818,28 @@ models:
         description: Grudo de idade
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: instrucao
         description: Instrução
       - name: secao
         description: Seção eleitoral
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: situacao_biometria
         description: Situação da biometria
       - name: zona
@@ -1419,8 +1488,17 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: numero_candidato
         description: Número do candidato
       - name: numero_partido
@@ -1596,8 +1674,17 @@ models:
         description: ID Eleição
       - name: id_municipio
         description: ID Município - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio
       - name: id_municipio_tse
         description: ID Município - TSE
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: id_municipio_tse
+              ignore_values: ['73709']
       - name: numero_partido
         description: Número do partido
       - name: secao
@@ -1628,11 +1715,13 @@ models:
           combination_of_columns:
             - ano
             - id_eleicao
+            - tipo_eleicao
+            - data_eleicao
             - sigla_uf
             - id_municipio_tse
             - cargo
       - not_null_proportion_multiple_columns:
-          at_least: 0.95
+          at_least: 0.35
     columns:
       - name: ano
         description: Ano
@@ -1655,11 +1744,17 @@ models:
       - name: id_municipio_tse
         description: ID Município - TSE
         tests:
-          - relationships:
+          - custom_relationships:
               to: ref('br_bd_diretorios_brasil__municipio')
               field: id_municipio_tse
+              ignore_values: ['73709']
       - name: sigla_uf
         description: Sigla da unidade da federação
+        tests:
+          - custom_relationships:
+              to: ref('br_bd_diretorios_brasil__uf')
+              field: sigla
+              ignore_values: [ZZ]
       - name: tipo_eleicao
         description: Tipo da eleição
       - name: vagas

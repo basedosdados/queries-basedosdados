@@ -1,4 +1,6 @@
 {{ config(alias="sistema_harmonizado", schema="br_bd_diretorios_mundo") }}
+
+
 select
     safe_cast(co_sh6 as string) id_sh6,
     safe_cast(co_sh4 as string) id_sh4,
@@ -16,4 +18,4 @@ select
     safe_cast(no_sh4_ing as string) nome_sh4_ingles,
     safe_cast(no_sh2_ing as string) nome_sh2_ingles,
     safe_cast(no_sec_ing as string) nome_sec_ingles,
-from `basedosdados-staging.br_bd_diretorios_mundo_staging.sistema_harmonizado` as t
+from `basedosdados-staging.br_bd_diretorios_mundo_staging.sistema_harmonizado` as x

@@ -114,9 +114,18 @@ models:
     br_cgu_emendas_parlamentares:
       +materialized: table
       +schema: br_cgu_emendas_parlamentares
+    br_cgu_licitacao_contrato:
+      +materialized: table
+      +schema: br_cgu_licitacao_contrato
+    br_cgu_orcamento_publico:
+      +materialized: table
+      +schema: br_cgu_orcamento_publico
     br_cgu_pessoal_executivo_federal:
       +materialized: table
       +schema: br_cgu_pessoal_executivo_federal
+    br_cgu_receitas_publicas:
+      +materialized: table
+      +schema: br_cgu_receitas_publicas
     br_cgu_servidores_executivo_federal:
       +materialized: table
       +schema: br_cgu_servidores_executivo_federal
