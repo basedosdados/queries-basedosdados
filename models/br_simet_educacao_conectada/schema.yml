@@ -76,22 +76,22 @@ models:
           no entorno da escola.
       - name: quantidade_asn
         description: Número de provedores tiveram medições no entorno da escola.
-      - name: media_tcp_download_mbps
+      - name: media_tcp_download
         description: Valor relacionado ao desempenho da rede usando o protocolo TCP,
           especificamente medindo a velocidade média de download dos últimos 6 meses
           em megabits por segundo (Mbps).
-      - name: media_tcp_upload_mbps
+      - name: media_tcp_upload
         description: Valor relacionado ao desempenho da rede usando o protocolo TCP,
           especificamente medindo a velocidade média de upload dos últimos 6 meses
           em megabits por segundo (Mbps).
-      - name: media_latencia_ms
+      - name: media_latencia
         description: Média da latência em milissegundos(ms) dos últimos 6 meses
       - name: media_perda_pacote
         description: Média da perda de pacotes dos últimos 6 meses
-      - name: media_jitter_download_ms
+      - name: media_jitter_download
         description: Média do jitter de download em milissegundos(ms) dos últimos
           6 meses.
-      - name: media_jitter_upload_ms
+      - name: media_jitter_upload
         description: Média do jitter de upload em milissegundos(ms) dos últimos 6
           meses.
       - name: media_download_entorno
@@ -119,13 +119,13 @@ models:
       - name: comparativo_latencia_entorno
         description: Comparativo da velocidade de latência da escola em relação ao
           seu entorno
-      - name: velocidade_download_necessaria_mbit
+      - name: velocidade_download_necessaria
         description: Velocidade necessária para 50% da escola possa ver um vídeo ao
           mesmo tempo.
-      - name: razao_download_por_aluno_kbps
+      - name: razao_download_aluno
         description: Velocidade em mbit por segundo de download medida pelo SIMET
           dividido pelo número máximo de alunos em um determinado turno.
-      - name: tipo_download_por_aluno_kbit
+      - name: tipo_download_aluno
         description: Categorização da velocidade de download medida pelo SIMET dividido
           pelo número máximo de alunos em um determinado turno.
       - name: latitude
@@ -136,3 +136,7 @@ models:
         description: Longitude de acordo com todos os esforços de geolocalização.
           Quando não foi possível geolocalizar a escola, foi ultilizado o centróide
           do distrito onde ela está.
+      - name: ponto
+        description: União entre longitude de latutude para formar um único ponto.
+      - name: data_ultima_atualizacao
+        description: Data em que os dados foram extraídos da fonte original.

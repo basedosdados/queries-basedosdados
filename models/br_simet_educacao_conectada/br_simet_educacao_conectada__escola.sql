@@ -42,12 +42,12 @@ select
     safe_cast(quantidade_medicoes_entorno as int64) quantidade_medicoes_entorno,
     safe_cast(quantidade_ipv6 as int64) quantidade_ipv6,
     safe_cast(quantidade_asn as int64) quantidade_asn,
-    safe_cast(media_tcp_download_mbps as float64) media_tcp_download_mbps,
-    safe_cast(media_tcp_upload_mbps as float64) media_tcp_upload_mbps,
-    safe_cast(media_latencia_ms as float64) media_latencia_ms,
+    safe_cast(media_tcp_download_mbps as float64) media_tcp_download,
+    safe_cast(media_tcp_upload_mbps as float64) media_tcp_upload,
+    safe_cast(media_latencia_ms as float64) media_latencia,
     safe_cast(media_perda_pacote as float64) media_perda_pacote,
-    safe_cast(media_jitter_download_ms as float64) media_jitter_download_ms,
-    safe_cast(media_jitter_upload_ms as float64) media_jitter_upload_ms,
+    safe_cast(media_jitter_download_ms as float64) media_jitter_download,
+    safe_cast(media_jitter_upload_ms as float64) media_jitter_upload,
     safe_cast(media_download_entorno as float64) media_download_entorno,
     safe_cast(media_upload_entorno as float64) media_upload_entorno,
     safe_cast(media_latencia_entorno as float64) media_latencia_entorno,
@@ -60,10 +60,12 @@ select
     safe_cast(comparativo_latencia_entorno as string) comparativo_latencia_entorno,
     safe_cast(
         velocidade_download_necessaria_mbit as float64
-    ) velocidade_download_necessaria_mbit,
-    safe_cast(razao_download_por_aluno_kbps as float64) razao_download_por_aluno_kbps,
-    safe_cast(tipo_download_por_aluno_kbit as string) tipo_download_por_aluno_kbit,
+    ) velocidade_download_necessaria,
+    safe_cast(razao_download_por_aluno_kbps as float64) razao_download_aluno,
+    safe_cast(tipo_download_por_aluno_kbit as string) tipo_download_aluno,
     safe_cast(latitude as float64) latitude,
-    safe_cast(longitude as float64) longitude
+    safe_cast(longitude as float64) longitude,
+    st_geogpoint(safe_cast(longitude as float64), safe_cast(latitude as float64)) ponto,
+    date(2024, 12, 12) data_ultima_atualizacao
 
 from `basedosdados-staging.br_simet_educacao_conectada_staging.escola` as t
