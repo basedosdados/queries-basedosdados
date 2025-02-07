@@ -15,9 +15,9 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
-    regexp_replace(cnpj, r'[^0-9]', '') as cnpj,
-    substr(regexp_replace(cnpj, r'[^0-9]', ''), 1, 8) as cnpj_basico,
+    safe_cast(cnpj as string) cnpj,
     safe_cast(data_competencia as date) data_competencia,
+    safe_cast(tipo_fundo as string) tipo_fundo,
     safe_cast(plano_contabil_balancete as string) plano_contabil_balancete,
     safe_cast(codigo_conta as string) codigo_conta,
     safe_cast(saldo_conta as float64) saldo_conta,
