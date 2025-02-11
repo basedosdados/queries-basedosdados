@@ -29,3 +29,126 @@ models:
         description: Data e hora de registro do foco de incêndio
       - name: centroide
         description: Latitude e longitude do foco de queimada
+    models:
+  - name: br_inpe_queimadas__focos
+    description: Dados do INPE sobre focos de queimadas ocorridos no Brasil a partir do ano de 2003.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns: [latitude,longitude,ano,mes,dia,hora,minuto,segundo,potencia_radiativa_fogo]
+      - not_null_proportion_multiple_columns:
+            at_least: 0.60
+    columns:
+      - name: latitude
+        description: Latitude do centro do píxel de fogo ativo apresentada em unidade
+            de graus decimais.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: longitude
+        description: Longitude do centro do píxel de fogo ativo apresentada em unidade
+            de graus decimais
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: ano
+        description: Ano de referência da passagem do satélite segundo o fuso horário
+            de Greenwich (GMT).
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__ano')
+                field: ano.ano
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: mes
+        description: Mês de referência da passagem do satélite segundo o fuso horário
+            de Greenwich (GMT).
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__mes')
+                field: mes.mes
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: dia
+        description: Dia de referência da passagem do satélite segundo o fuso horário
+            de Greenwich (GMT).
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__dia')
+                field: dia.dia
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: hora
+        description: Hora de referência da passagem do satélite segundo o fuso horário
+            de Greenwich (GMT).
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__hora')
+                field: hora.hora
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: minuto
+        description: Minuto de referência da passagem do satélite segundo o fuso horário
+            de Greenwich (GMT).
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__minuto')
+                field: minuto.minuto
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: segundo
+        description: Segundo de referência da passagem do satélite segundo o fuso
+            horário de Greenwich (GMT).
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_data_tempo__segundo')
+                field: segundo.segundo
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: satelite
+        description: Nome do algoritmo utilizado e referencia ao satélite provedor
+            da imagem.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.30
+      - name: id_municipio
+        description: Identificação do Município.
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__municipio')
+                field: id_municipio
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: sigla_uf
+        description: Sigla da Unidade Federativa.
+        tests:
+          - relationships:
+                to: ref('br_bd_diretorios_brasil__uf')
+                field: sigla
+          - dbt_utils.not_null_proportion:
+              at_least: 0.95
+      - name: bioma
+        description: Nome do Bioma.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.30
+      - name: dias_sem_chuva
+        description: Número de dias sem chuva até a detecção do foco.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.30
+      - name: precipitacao
+        description: Valor da precipitação acumulada no dia até o momento da detecção do fogo.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.30
+      - name: risco_fogo
+        description: Valor do Risco de Fogo previsto para o dia da detecção do foco.
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.30
+      - name: potencia_radiativa_fogo
+        description: Fire Radiative Power, MW (megawatts).
+        tests:
+          - dbt_utils.not_null_proportion:
+              at_least: 0.30
+
