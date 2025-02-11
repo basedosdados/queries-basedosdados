@@ -1,8 +1,8 @@
 ---
 name: CD
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches: [main]
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
@@ -15,9 +15,6 @@ env:
   IMAGE_NAME: ghcr.io/basedosdados/queries-basedosdados
 jobs:
   build-container:
-    if: |
-      github.event.pull_request.merged == true
-      && github.event.pull_request.base.ref == 'main'
     name: Deployment
     runs-on: ubuntu-latest
     steps:
