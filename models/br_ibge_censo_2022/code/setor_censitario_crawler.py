@@ -135,21 +135,37 @@ def unpack_zip(zip_file_path: str) -> str:
             raise e
     return temp_dir
 
+def convert_gpkg_to_parquet(gpkg_file_path, output_parquet_path):
+    # Read the GPKG file using geopandas
+    gdf = gpd.read_file(gpkg_file_path)
+
+    gdf['geometry'] = gdf['geometry'].apply(lambda geom: geom.wkt)
+
+    gdf.to_parquet(output_parquet_path, index=False)
+    print(f"Data saved to {output_parquet_path}")
+
+
+
 if __name__== '__main__':
 
-    # NOTE: escolhemos usar os arquivos shp porque os arquivos gpkg estão com alguns setores duplicados (com poligonos diferentes para o mesmo setor)
+    # NOTE: Escolhemos usar os arquivos shp porque os arquivos gpkg estão com alguns setores duplicados (com poligonos diferentes para o mesmo setor)
+    # NOTE: Iniciamos usando a malha preliminar, posteriormente foi substituida pela malha oficial
+    # NOTE: Na malha oficial os arquivs gpkg continuam com setores duplicados
+    # FTP_SETOR_CENSITARIO = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/malha_com_atributos/"
+    # FTP_SETOR_CENSITARIO_PRELIMINAR = "http://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_preliminares/agregados_por_setores_csv/"
 
-    # FTP_SETOR_CENSITARIO = "http://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_preliminares/malha_com_atributos/setores/shp/BR/BR_Malha_Preliminar_2022.zip"
-    # FTP_SETOR_CENSITARIO_INDICADORES = "http://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_preliminares/agregados_por_setores_csv/BR/Agregados_preliminares_por_setores_censitarios_BR.zip"
-    SHP_FILE_PATH = '/home/laura/Documents/conjuntos/br_ibge_censo_2022/shp_files/BR_Malha_Preliminar_2022.shp'
-    OUTPUT_PARQUET_PATH ="/home/laura/Documents/conjuntos/br_ibge_censo_2022/BR_Malha_Preliminar_2022.parquet"
+    SHP_FILE_PATH = '/home/laura/Documents/conjuntos/br_ibge_censo_2022/setor_censitario/shp_files/BR_setores_CD2022.shp'
+    GPKG_FILE_PATH = '/home/laura/Documents/conjuntos/br_ibge_censo_2022/setor_censitario/BR_setores_CD2022.gpkg'
+    OUTPUT_PARQUET_PATH ="/home/laura/Documents/conjuntos/br_ibge_censo_2022/BR_setores_CD2022.parquet"
+    OUTPUT_PARQUET_PATH_V2 ="/home/laura/Documents/conjuntos/br_ibge_censo_2022/BR_setores_CD2022_v2.parquet"
 
-    # convert_shp_to_parquet(shp_file_path=SHP_FILE_PATH,
+    # convert_gpkg_to_parquet(gpkg_file_path=GPKG_FILE_PATH,
     #                        output_parquet_path=OUTPUT_PARQUET_PATH)
-
+    convert_shp_to_parquet(shp_file_path=SHP_FILE_PATH,
+                           output_parquet_path=OUTPUT_PARQUET_PATH_V2)
 
     tb = bd.Table(dataset_id='br_ibge_censo_2022', table_id='setor_censitario')
-    tb.create(path=OUTPUT_PARQUET_PATH,
+    tb.create(path=OUTPUT_PARQUET_PATH_V2,
               source_format='parquet',
               if_table_exists='replace',
               if_storage_data_exists='pass')

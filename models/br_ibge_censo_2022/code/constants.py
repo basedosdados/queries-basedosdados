@@ -19,6 +19,15 @@ class constants(Enum):
         "domicilios_moradores_indigenas_municipio": "https://apisidra.ibge.gov.br/values/t/9728/n6/all/v/381,382,5930,6554,8691/p/all/c2661/allxt/d/v5930%202,v6554%202",
         "domicilios_pelo_menos_um_morador_indigenas_municipio": "https://apisidra.ibge.gov.br/values/t/9720/n6/all/v/5938,6554,7088,7089,7090/p/all/c2661/allxt/d/v5938%202,v6554%202",
         "alfabetizacao_grupo_idade_sexo_raca": "https://apisidra.ibge.gov.br/values/t/9542/n6/all/v/allxp/p/all/c59/allxt/c2/allxt/c86/allxt/c287/2999,3000,9482,9483,9484,93086,93087",
+        "favela_comunidade_urbana_populacao_domicilio": "https://apisidra.ibge.gov.br/values/t/9887/n170/all/v/allxp/p/all/c3/59993",
+        "favela_comunidade_urbana_alfabetizacao":"https://apisidra.ibge.gov.br/values/t/9886/n170/all/v/1009907/p/all/c59/1023/c86/95251/c2/6794/c58/95253/d/v1009907%202",
+        "favela_comunidade_urbana_canalizacao_agua":"https://apisidra.ibge.gov.br/values/t/9897/n170/all/v/1009914/p/all/c1817/allxt/c301/72053/c86/95251/c2/6794/c58/95253/d/v1009914%202",
+        "favela_comunidade_urbana_banheiro":"https://apisidra.ibge.gov.br/values/t/9898/n170/all/v/1009914/p/all/c458/12032,12046,72118,72119/c11558/46292/c86/95251/c2/6794/c58/95253/d/v1009914%202",
+        "favela_comunidade_urbana_destino_lixo":"https://apisidra.ibge.gov.br/values/t/9899/n170/all/v/1009914/p/all/c67/1091,2520,72122,72123,72124/c86/95251/c2/6794/c58/95253/d/v1009914%202",
+        "favela_comunidade_urbana_indice_envelhecimento":"https://apisidra.ibge.gov.br/values/t/9885/n170/all/v/all/p/all/c86/95251/d/v9614%202",
+        "favela_comunidade_urbana_domicilio_particular_coletivo":"https://apisidra.ibge.gov.br/values/t/9887/n170/all/v/9909/p/all/c3/2504,2505,10004,10005,60001",
+        "favela_comunidade_urbana_populacao_cor_raca":"https://apisidra.ibge.gov.br/values/t/9884/n170/all/v/1009612/p/all/c86/allxt/c2/6794/c58/95253/d/v1009612%202",
+        "populacao_grupo_idade_sexo_raca_favela_comunidade_urbana": "https://apisidra.ibge.gov.br/values/t/9884/n170/all/v/allxp/p/all/c86/allxt/c2/allxt/c58/allxt"
         }
 
     #NOTE: CNEFE não será baixado do SIDRA
@@ -52,4 +61,5 @@ class constants(Enum):
     'MT' : '51_MT.zip',
     'GO' : '52_GO.zip',
     'DF' : '53_DF.zip'
+}
 }

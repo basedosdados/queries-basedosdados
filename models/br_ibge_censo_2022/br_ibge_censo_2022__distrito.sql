@@ -1,15 +1,11 @@
-{{
-    config(
-        alias="setor_censitario", schema="br_ibge_censo_2022", cluster_by=["id_uf"]
-    )
-}}
+{{ config(alias="distrito", schema="br_ibge_censo_2022", cluster_by=["id_uf"]) }}
 select
-    safe_cast(setores.cd_uf as string) id_uf,
-    safe_cast(setores.cd_mun as string) id_municipio,
-    safe_cast(left(setores.cd_setor, 15) as string) id_setor_censitario,
-    safe_cast(setores.area_km2 as float64) area,
+    safe_cast(distritos.cd_uf as string) id_uf,
+    safe_cast(distritos.cd_mun as string) id_municipio,
+    safe_cast(left(distritos.cd_dist, 15) as string) id_distrito,
+    safe_cast(distritos.area_km2 as float64) area,
     safe_cast(
-        safe.st_geogfromtext(setores.geometry, make_valid => true) as geography
+        safe.st_geogfromtext(distritos.geometry, make_valid => true) as geography
     ) geometria,
     safe_cast(v0001 as int64) pessoas,
     safe_cast(v0002 as int64) domicilios,
@@ -1429,36 +1425,36 @@ select
     safe_cast(v01409 as int64) v01409,
     safe_cast(v01410 as int64) v01410,
     safe_cast(v01411 as int64) v01411,
-from `basedosdados-staging.br_ibge_censo_2022_staging.setor_censitario` as setores
+from `basedosdados-staging.br_ibge_censo_2022_staging.distrito` as distritos
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_alfabetizacao_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_alfabetizacao_BR`
     as alfabetizacao
-    on left(setores.cd_setor, 15) = alfabetizacao.cd_setor
+    on distritos.cd_dist = alfabetizacao.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_caracteristicas_domicilio1_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_caracteristicas_domicilio1_BR`
     as domicilio1
-    on left(setores.cd_setor, 15) = domicilio1.cd_setor
+    on distritos.cd_dist = domicilio1.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_caracteristicas_domicilio2_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_caracteristicas_domicilio2_BR`
     as domicilio2
-    on left(setores.cd_setor, 15) = domicilio2.cd_setor
+    on distritos.cd_dist = domicilio2.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_caracteristicas_domicilio3_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_caracteristicas_domicilio3_BR`
     as domicilio3
-    on left(setores.cd_setor, 15) = domicilio3.cd_setor
+    on distritos.cd_dist = domicilio3.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_cor_ou_raca_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_cor_ou_raca_BR`
     as cor_ou_raca
-    on left(setores.cd_setor, 15) = cor_ou_raca.cd_setor
+    on distritos.cd_dist = cor_ou_raca.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_demografia_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_demografia_BR`
     as demografia
-    on left(setores.cd_setor, 15) = demografia.cd_setor
+    on distritos.cd_dist = demografia.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_obitos_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_obitos_BR`
     as obitos
-    on left(setores.cd_setor, 15) = obitos.cd_setor
+    on distritos.cd_dist = obitos.cd_dist
 left join
-    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_parentesco_BR`
+    `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_parentesco_BR`
     as parentesco
-    on left(setores.cd_setor, 15) = parentesco.cd_setor
+    on distritos.cd_dist = parentesco.cd_dist
