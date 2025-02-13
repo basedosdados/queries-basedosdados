@@ -3,6 +3,7 @@
         alias="setor_censitario", schema="br_ibge_censo_2022", cluster_by=["id_uf"]
     )
 }}
+-- update raw_data
 select
     safe_cast(setores.cd_uf as string) id_uf,
     safe_cast(setores.cd_mun as string) id_municipio,
