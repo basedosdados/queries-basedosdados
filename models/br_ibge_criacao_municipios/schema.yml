@@ -1,0 +1,41 @@
+---
+version: 2
+models:
+  - name: br_ibge_criacao_municipios__microdados
+    description: Insert `microdados` table description here
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [id_municipio_criado, id_municipio_origem]
+      - not_null_proportion_multiple_columns:
+          at_least: 0.05
+    columns:
+      - name: id_municipio_criado
+        description: ID Município criado - IBGE 7 Dígitos
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id_municipio')
+      - name: nome_municipio_criado
+        description: Nome do município de criado
+      - name: id_municipio_origem
+        description: 'ID Município de origem - IBGE 7 Dígitos '
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_brasil__municipio')
+              field: ref('id_municipio')
+      - name: nome_municipio_origem
+        description: Nome do município de origem
+      - name: lei
+        description: Lei da criação do município
+      - name: data_criacao
+        description: Data que foi criado o município
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: ref('data.data')
+      - name: data_instalacao
+        description: Data que foi efetivamente instalado
+        tests:
+          - relationships:
+              to: ref('br_bd_diretorios_data_tempo__data')
+              field: ref('data.data')
