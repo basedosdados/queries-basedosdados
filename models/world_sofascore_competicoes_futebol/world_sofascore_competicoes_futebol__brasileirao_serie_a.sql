@@ -15,6 +15,8 @@ select
     safe_cast(id_partida as string) id_partida,
     safe_cast(data as date) data,
     safe_cast(hora as time) hora,
+    safe_cast(temporada as string) temporada,
+    safe_cast(rodada as string) rodada,
     safe_cast(tempo as string) tempo,
     safe_cast(time_mandante as string) time_mandante,
     safe_cast(time_visitante as string) time_visitante,
