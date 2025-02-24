@@ -84,7 +84,7 @@ from profissional_x_estabelecimento
 {% if is_incremental() %}
     where
 
-        date(cast(ano as int64), cast(mes as int64), 1) > (
+        safe.date(cast(ano as int64), cast(mes as int64), 1) > (
             select max(safe.date(cast(ano as int64), cast(mes as int64), 1))
             from {{ this }}
         )
