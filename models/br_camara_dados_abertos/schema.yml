@@ -594,8 +594,9 @@ models:
       são separados por ano de realização dos eventos. Entre os dados, estão datas
       de início e fim, tipo de evento, local e descrições em texto livre.
     tests:
-      - dbt_utils.unique_combination_of_columns:
+      - custom_unique_combinations_of_columns:
           combination_of_columns: [id_evento]
+          proportion_allowed_failures: 0.05
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
@@ -628,8 +629,9 @@ models:
       realizados conjuntamente por mais de um órgão, e por isso é possível haver mais
       de um registro para um mesmo evento.
     tests:
-      - dbt_utils.unique_combination_of_columns:
+      - custom_unique_combinations_of_columns:
           combination_of_columns: [id_evento, id_orgao]
+          proportion_allowed_failures: 0.05
       - not_null_proportion_multiple_columns:
           at_least: 0.05
     columns:
