@@ -67,6 +67,9 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__segundo')
               field: segundo.segundo
+      - name: data_hora
+        description: Coluna agregada de data e hora da passagem do satélite o fuso
+          horário de Greenwich (GMT).
       - name: satelite
         description: Nome do algoritmo utilizado e referencia ao satélite provedor
           da imagem.
