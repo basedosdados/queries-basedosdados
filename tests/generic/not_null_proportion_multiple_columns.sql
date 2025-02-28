@@ -41,15 +41,54 @@
     {% if errors["column_name"] != () %}
                 {% for e in errors["column_name"] | unique %}
 
+                    {%- set colors = {
+                        "vermelho": "\033[31m",
+                        "amarelo": "\033[33m",
+                        "reset": "\033[0m",
+                    } %}
+
                     {% set proc_err = (
                         errors["quantity"][loop.index0]
                         / errors["total_records"][loop.index0]
                     ) * 100 %}
 
+                    {% set recommended_at_least = 0.99 - (
+                        errors["quantity"][loop.index0] | float
+                    ) / (errors["total_records"][loop.index0] | float) %}
+
+                    {%- set recommended_message = (
+                        " - "
+                        ~ colors.amarelo
+                        ~ "'at_least' Recomendado: "
+                        ~ "%0.2f"
+                        | format(recommended_at_least | float) ~ colors.reset
+                    ) %}
+
+                    {% if recommended_at_least <= 0.0 %}
+                        {%- set recommended_message = (
+                            " - "
+                            ~ colors.vermelho
+                            ~ "Coluna totalmente vazia!"
+                            ~ colors.reset
+                        ) %}
+                    {% endif %}
+
                     {{
                         log(
-                            "Coluna: " ~ e ~ " - Preenchimento de: " ~ "%0.2f"
-                            | format(proc_err | float) ~ "% - Resultado: FAIL",
+                            "Coluna: "
+                            ~ e
+                            ~ " - Resultado: "
+                            ~ colors.vermelho
+                            ~ "FAIL"
+                            ~ colors.reset
+                            ~ recommended_message
+                            ~ " - Quantidade Null: "
+                            ~ errors["quantity"][loop.index0]
+                            ~ " - Total: "
+                            ~ errors["total_records"][loop.index0]
+                            ~ " - Proporção Null: "
+                            ~ "%0.2f"
+                            | format(proc_err | float),
                             info=True,
                         )
                     }}
