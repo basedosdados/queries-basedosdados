@@ -69,6 +69,7 @@
                             " - "
                             ~ colors.vermelho
                             ~ "Coluna totalmente vazia!"
+                            ~ colors.reset
                         ) %}
                     {% endif %}
 
@@ -76,18 +77,18 @@
                         log(
                             "Coluna: "
                             ~ e
-                            ~ " - Quantidade: "
+                            ~ " - Resultado: "
+                            ~ colors.vermelho
+                            ~ "FAIL"
+                            ~ colors.reset
+                            ~ recommended_message
+                            ~ " - Quantidade Null: "
                             ~ errors["quantity"][loop.index0]
                             ~ " - Total: "
                             ~ errors["total_records"][loop.index0]
                             ~ " - Proporção Null: "
                             ~ "%0.2f"
-                            | format(proc_err | float)
-                            ~ recommended_message
-                            ~ " - Resultado: "
-                            ~ colors.vermelho
-                            ~ "FAIL"
-                            ~ colors.reset,
+                            | format(proc_err | float),
                             info=True,
                         )
                     }}
