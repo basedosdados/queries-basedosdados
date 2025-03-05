@@ -1,25 +1,42 @@
 {{
     config(
-        alias="microdados",
         schema="br_inpe_queimadas",
+        alias="microdados",
+        materialized="table",
         partition_by={
             "field": "ano",
             "data_type": "int64",
             "range": {"start": 2003, "end": 2025, "interval": 1},
         },
-        materialized="table",
-        labels={"tema": "meio-ambiente"},
+        cluster_by=["mes"],
     )
 }}
-select
-    safe_cast(ano as int64) ano,
-    safe_cast(sigla_uf as string) sigla_uf,
-    safe_cast(id_municipio as string) id_municipio,
-    safe_cast(bioma as string) bioma,
-    safe_cast(id_bdq as string) id_bdq,
-    safe_cast(id_foco as string) id_foco,
-    safe_cast(data_hora as datetime) data_hora,
-    st_geogpoint(
-        safe_cast(longitude as float64), safe_cast(latitude as float64)
-    ) centroide,
-from `basedosdados-staging.br_inpe_queimadas_staging.microdados` as t
+select distinct
+    safe_cast(f.latitude as float64) latitude,
+    safe_cast(f.longitude as float64) longitude,
+    safe_cast(f.ano as int64) ano,
+    safe_cast(f.mes as int64) mes,
+    safe_cast(f.dia as int64) dia,
+    safe_cast(f.hora as int64) hora,
+    safe_cast(f.minuto as int64) minuto,
+    safe_cast(f.segundo as int64) segundo,
+    datetime(
+        safe_cast(ano as int64),
+        safe_cast(mes as int64),
+        safe_cast(dia as int64),
+        safe_cast(hora as int64),
+        safe_cast(minuto as int64),
+        safe_cast(segundo as int64)
+    ) data_hora,
+    safe_cast(f.satelite as string) satelite,
+    safe_cast(m.id_municipio as string) id_municipio,
+    safe_cast(f.sigla_uf as string) sigla_uf,
+    safe_cast(f.bioma as string) bioma,
+    safe_cast(f.dias_sem_chuva as float64) dias_sem_chuva,
+    safe_cast(f.precipitacao as float64) precipitacao,
+    safe_cast(f.risco_fogo as float64) risco_fogo,
+    safe_cast(f.potencia_radiativa_fogo as float64) potencia_radiativa_fogo,
+from `basedosdados-staging.br_inpe_queimadas_staging.microdados` as f
+left join
+    `basedosdados.br_bd_diretorios_brasil.municipio` m
+    on f.municipio_uf = m.nome || ' - ' || m.sigla_uf
