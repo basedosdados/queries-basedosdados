@@ -16,10 +16,6 @@ select distinct
     safe_cast(f.longitude as float64) longitude,
     safe_cast(f.ano as int64) ano,
     safe_cast(f.mes as int64) mes,
-    safe_cast(f.dia as int64) dia,
-    safe_cast(f.hora as int64) hora,
-    safe_cast(f.minuto as int64) minuto,
-    safe_cast(f.segundo as int64) segundo,
     datetime(
         safe_cast(ano as int64),
         safe_cast(mes as int64),

@@ -9,12 +9,7 @@ models:
           combination_of_columns:
             - latitude
             - longitude
-            - ano
-            - mes
-            - dia
-            - hora
-            - minuto
-            - segundo
+            - data_hora
             - potencia_radiativa_fogo
       - not_null_proportion_multiple_columns:
           at_least: 0.70
@@ -39,34 +34,6 @@ models:
           - relationships:
               to: ref('br_bd_diretorios_data_tempo__mes')
               field: mes.mes
-      - name: dia
-        description: Dia de referência da passagem do satélite segundo o fuso horário
-          de Greenwich (GMT).
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__dia')
-              field: dia.dia
-      - name: hora
-        description: Hora de referência da passagem do satélite segundo o fuso horário
-          de Greenwich (GMT).
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__hora')
-              field: hora.hora
-      - name: minuto
-        description: Minuto de referência da passagem do satélite segundo o fuso horário
-          de Greenwich (GMT).
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__minuto')
-              field: minuto.minuto
-      - name: segundo
-        description: Segundo de referência da passagem do satélite segundo o fuso
-          horário de Greenwich (GMT).
-        tests:
-          - relationships:
-              to: ref('br_bd_diretorios_data_tempo__segundo')
-              field: segundo.segundo
       - name: data_hora
         description: Coluna agregada de data e hora da passagem do satélite o fuso
           horário de Greenwich (GMT).
