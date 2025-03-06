@@ -12,8 +12,6 @@
     )
 }}
 select distinct
-    safe_cast(f.latitude as float64) latitude,
-    safe_cast(f.longitude as float64) longitude,
     safe_cast(f.ano as int64) ano,
     safe_cast(f.mes as int64) mes,
     datetime(
@@ -24,11 +22,13 @@ select distinct
         safe_cast(minuto as int64),
         safe_cast(segundo as int64)
     ) data_hora,
-    safe_cast(f.satelite as string) satelite,
-    safe_cast(m.id_municipio as string) id_municipio,
-    safe_cast(f.sigla_uf as string) sigla_uf,
     safe_cast(f.bioma as string) bioma,
-    safe_cast(f.dias_sem_chuva as float64) dias_sem_chuva,
+    safe_cast(f.sigla_uf as string) sigla_uf,
+    safe_cast(m.id_municipio as string) id_municipio,
+    safe_cast(f.latitude as float64) latitude,
+    safe_cast(f.longitude as float64) longitude,
+    safe_cast(f.satelite as string) satelite,
+    safe_cast(f.dias_sem_chuva as int64) dias_sem_chuva,
     safe_cast(f.precipitacao as float64) precipitacao,
     safe_cast(f.risco_fogo as float64) risco_fogo,
     safe_cast(f.potencia_radiativa_fogo as float64) potencia_radiativa_fogo,
