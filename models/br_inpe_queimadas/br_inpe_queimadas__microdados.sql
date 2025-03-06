@@ -28,7 +28,7 @@ select distinct
     safe_cast(f.latitude as float64) latitude,
     safe_cast(f.longitude as float64) longitude,
     safe_cast(f.satelite as string) satelite,
-    safe_cast(f.dias_sem_chuva as int64) dias_sem_chuva,
+    safe_cast(f.dias_sem_chuva as float64) dias_sem_chuva,
     safe_cast(f.precipitacao as float64) precipitacao,
     safe_cast(f.risco_fogo as float64) risco_fogo,
     safe_cast(f.potencia_radiativa_fogo as float64) potencia_radiativa_fogo,
