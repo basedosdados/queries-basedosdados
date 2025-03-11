@@ -7,9 +7,9 @@ labels: [bug, triage]
 body:
   - type: textarea
     attributes:
-      label: ' 🐛 Descrição do Bug'
+      label: 🐛 Descrição do Bug
       description: Explique de forma clara e objetiva o que essa o bug que você está
-        enfrentando. (Se possível, acrescente logs, imagens e mensagens de erro)
+        enfrentando. (Acrescente logs, imagens e mensagens de erro)
     validations:
       required: true
   - type: textarea

@@ -18,11 +18,13 @@ body:
         você sugere.
   - type: textarea
     attributes:
+      label: 🚀 Benefícios para a Equipe Dados
+      description: Explique como essa funcionalidade contribuirá para a Equipe Dados
+  - type: textarea
+    attributes:
       label: 🚀 Benefícios para a BD
       description: Explique como essa funcionalidade contribuirá para a BD e seus
         usuários.
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: 🤝 Necessidade de colaboração externa
