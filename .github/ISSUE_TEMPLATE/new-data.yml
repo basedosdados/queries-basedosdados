@@ -1,5 +1,5 @@
 ---
-name: 📊 Data
+name: 📊 data
 description: Solicitação para adicionar novos dados à BD
 title: '[data] <dataset_id>'
 labels: []
@@ -13,16 +13,16 @@ body:
       required: true
   - type: input
     attributes:
-      label: 📋 Nome da(s) Tabela(s) (table_id)
-      description: Liste o(s) nome(s) da(s) tabela(s).
-      placeholder: '`table_id`'
+      label: 📂 Nome do Conjunto (dataset_id)
+      description: Qual o nome do conjunto de dados?
+      placeholder: '`dataset_id`'
     validations:
       required: true
   - type: input
     attributes:
-      label: 📂 Nome do Conjunto (dataset_id)
-      description: Qual o nome do conjunto de dados?
-      placeholder: '`dataset_id`'
+      label: 📋 Nome da(s) Tabela(s) (table_id)
+      description: Liste o(s) nome(s) da(s) tabela(s).
+      placeholder: '`table_id`'
     validations:
       required: true
   - type: textarea

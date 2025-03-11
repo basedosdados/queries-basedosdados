@@ -1,5 +1,5 @@
 ---
-name: ✨ Feature Request
+name: ✨ feature request
 description: 💡 Solicitação de uma nova funcionalidade para o repositório `queries-basedosdados`
 title: '[feature] <título>'
 labels: [enhancement]
@@ -16,8 +16,6 @@ body:
       label: 🛠️ Proposta de solução
       description: Descreva como a funcionalidade deve ser implementada ou qual abordagem
         você sugere.
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: 🚀 Benefícios para a BD

@@ -1,5 +1,5 @@
 ---
-name: 🐞 BugFix
+name: 🐞 bugfix
 description: 🚨 Relate um bug ou problema encontrado nos dados ou em alguma funcionadade
   da Base dos Dados
 title: '[bug] <title>'
@@ -9,20 +9,18 @@ body:
     attributes:
       label: ' 🐛 Descrição do Bug'
       description: Explique de forma clara e objetiva o que essa o bug que você está
-        enfrentando. (Se possível, acrescente logs e mensagens de erro)
+        enfrentando. (Se possível, acrescente logs, imagens e mensagens de erro)
     validations:
       required: true
   - type: textarea
     attributes:
       label: 🛠️ Proposta de solução
       description: Descreva a proposta de solução para o bug.
-  - type: checkboxes
+  - type: textarea
     attributes:
-      label: 📄 O bug está impactando algum nível a Base dos Dados.
-      description: Quebrando outras pipelines, gerando custo adicional e etc?
-      options:
-        - label: Sim
-        - label: Não
+      label: 📄 O bug está impactando algum nível a Base dos Dados?
+      description: O Bug está quebrando outras pipelines, gerando custo adicional
+        e etc? Se sim, relate abaixo
   - type: textarea
     attributes:
       label: 📍 Na sua visão, essa correção deveria ser priorizada?
