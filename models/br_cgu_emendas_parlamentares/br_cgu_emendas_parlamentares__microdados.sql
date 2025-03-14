@@ -57,7 +57,7 @@ with
             safe_cast(
                 `Valor Restos A Pagar Pagos` as float64
             ) as valor_resto_pagar_pagos
-        from `basedosdados-dev.br_cgu_emendas_parlamentares_staging.microdados`
+        from `basedosdados-staging.br_cgu_emendas_parlamentares_staging.microdados`
     ),
     tabela_2 as (
         select
