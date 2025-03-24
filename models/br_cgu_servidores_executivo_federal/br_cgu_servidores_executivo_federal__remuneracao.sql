@@ -19,7 +19,7 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
-    safe_cast(id_servidor as string) id_servidor,
+    safe_cast(replace(id_servidor, ".0", "") as string) id_servidor,
     safe_cast(cpf as string) cpf,
     safe_cast(nome as string) nome,
     safe_cast(
