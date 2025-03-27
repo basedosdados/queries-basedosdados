@@ -11,9 +11,11 @@ models:
             where: __most_recent_year_month__
     columns:
       - name: ano
-        description: Ano
+        description: Ano de referência da divulgação da movimentação. Esta variável
+          é chama de 'ano de competência' na fonte original.
       - name: mes
-        description: Mês
+        description: Mês de referência da divulgação da movimentação. Esta variável
+          é chama de 'mês de competência' na fonte original.
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -87,9 +89,15 @@ models:
             where: __most_recent_year_month__
     columns:
       - name: ano
-        description: Ano
+        description: Ano de referência da divulgação da movimentação. Esta variável
+          é chama de 'ano de competência' na fonte original.
       - name: mes
-        description: Mês
+        description: Mês de referência da divulgação da movimentação. Esta variável
+          é chama de 'mês de competência' na fonte original.
+      - name: ano_movimentacao
+        description: Ano da movimentação ocorrida fora do prazo.
+      - name: mes_movimentacao
+        description: Mês da movimentação ocorrida fora do prazo.
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -162,9 +170,15 @@ models:
             where: __most_recent_year_month__
     columns:
       - name: ano
-        description: Ano
+        description: Ano de referência da divulgação da movimentação. Esta variável
+          é chama de 'ano de competência' na fonte original.
       - name: mes
-        description: Mês
+        description: Mês de referência da divulgação da movimentação. Esta variável
+          é chama de 'mês de competência' na fonte original.
+      - name: ano_movimentacao
+        description: Ano da movimentação excluída.
+      - name: mes_movimentacao
+        description: Mês da movimentação excluída.
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
