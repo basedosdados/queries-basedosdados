@@ -5,14 +5,14 @@ import basedosdados as bd
 import numpy as np
 
 
-INPUT = os.path.join(os.getcwd(), "input")
-OUTPUT = os.path.join(os.getcwd(), "output")
+INPUT = os.path.join(os.getcwd(), "br_inep_sinopse_estatistica_educacao_basica/input")
+OUTPUT = os.path.join(os.getcwd(), "br_inep_sinopse_estatistica_educacao_basica/output")
 
 # os.makedirs(INPUT, exist_ok=True)
 # os.makedirs(OUTPUT, exist_ok=True)
 
 RENAMES_ETAPA_ENSINO_SERIE = {
-    "Educacao Basica": {
+    "Educação Básica": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
         "Até 24 anos": "Feminino_Até 24 anos",
@@ -30,7 +30,7 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "De 55 a 59 anos.1": "Masculino_55 a 59 anos",
         "60 anos ou mais.1": "Masculino_60 anos ou mais",
     },
-    "Educacao Infantil - Creche": {
+    "Educação Infantil - Creche": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
         "Até 24 anos": "Feminino_Até 24 anos",
@@ -48,7 +48,7 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "De 55 a 59 anos.1": "Masculino_55 a 59 anos",
         "60 anos ou mais.1": "Masculino_60 anos ou mais",
     },
-    "Educacao Infantil - Pré-Escola": {
+    "Educação Infantil - Pré-Escola": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
         "Até 24 anos": "Feminino_Até 24 anos",
@@ -138,7 +138,7 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "De 55 a 59 anos.1": "Masculino_55 a 59 anos",
         "60 anos ou mais.1": "Masculino_60 anos ou mais",
     },
-    "Educacao Profissional": {
+    "Educação Profissional": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
         "Até 24 anos": "Feminino_Até 24 anos",
@@ -174,7 +174,7 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "De 55 a 59 anos.1": "Masculino_55 a 59 anos",
         "60 anos ou mais.1": "Masculino_60 anos ou mais",
     },
-    "Educacao Especial - Classes Comuns": {
+    "Educação Especial - Classes Comuns": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
         "Até 24 anos": "Feminino_Até 24 anos",
@@ -192,7 +192,7 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "De 55 a 59 anos.1": "Masculino_55 a 59 anos",
         "60 anos ou mais.1": "Masculino_60 anos ou mais",
     },
-    "Educacao Especial - Classes Exclusivas": {
+    "Educação Especial - Classes Exclusivas": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
         "Até 24 anos": "Feminino_Até 24 anos",
@@ -215,92 +215,90 @@ RENAMES_ETAPA_ENSINO_SERIE = {
 
 localizacao = {
     "educacao_basica": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Basica"],
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Básica"],
         "chave": "2.3",
-        "valor": "Educacao Basica",
+        "valor": "Educação Básica",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "educacao_infantil_creche": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Infantil - Creche"],
-        #"chave": "2.9",
-        "chave": "2.8", # para anos anteriores a 2010
-        "valor": "Educacao Infantil - Creche",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Infantil - Creche"],
+        "chave": "2.9",
+        #"chave": "2.8", # para anos anteriores a 2010
+        "valor": "Educação Infantil - Creche",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "educacao_infantil_pre_escola": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Infantil - Pré-Escola"],
-        #"chave": "2.13",
-        "chave": "2.11", # Para anos anteriores a 2010
-        "valor": "Educacao Infantil - Pré-Escola",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Infantil - Pré-Escola"],
+        "chave": "2.13",
+        #"chave": "2.11", # Para anos anteriores a 2010
+        "valor": "Educação Infantil - Pré-Escola",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "ensino_fundamental": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Fundamental"],
-        #"chave": "2.18",
-        "chave": "2.15", # Para anos anteriores a 2010
+        "chave": "2.18",
+        #"chave": "2.15", # Para anos anteriores a 2010
         "valor": "Ensino Fundamental",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "ensino_fundamental_anos_iniciais": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Fundamental - Anos Iniciais"],
-        #"chave": "2.22",
-        "chave": "2.18", # Para anos anteriores a 2010
+        "chave": "2.22",
+        #"chave": "2.18", # Para anos anteriores a 2010
         "valor": "Ensino Fundamental - Anos Iniciais",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "ensino_fundamental_anos_finais": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Fundamental - Anos Finais"],
-        # "chave": "2.26",
-        "chave": "2.21", # Para anos anteriores a 2010
+        "chave": "2.26",
+        #"chave": "2.21", # Para anos anteriores a 2010
         "valor": "Ensino Fundamental - Anos Finais",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "ensino_medio": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Médio"],
-        #"chave": "2.30",
-        "chave": "2.24", # Para anos anteriores a 2010
+        "chave": "2.30",
+        #"chave": "2.24", # Para anos anteriores a 2010
         "valor": "Ensino Médio",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "educacao_profissional": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Profissional"],
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Profissional"],
         "chave": "2.35",
-        "chave": "2.28", # Para anos anteriores a 2010
-        "valor": "Educacao Profissional",
+        #"chave": "2.28", # Para anos anteriores a 2010
+        "valor": "Educação Profissional",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "EJA": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["EJA"],
-        #"chave": "2.40",
-        "chave": "2.32", # Para anos anteriores a 2010
+        "chave": "2.40",
+        #"chave": "2.32", # Para anos anteriores a 2010
         "valor": "EJA",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "educacao_especial_classes_comuns": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Especial - Classes Comuns"],
-        #"chave": "2.46",
-        "chave": "2.37", # Para anos anteriores a 2010
-        "valor": "Educacao Especial - Classes Comuns",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Especial - Classes Comuns"],
+        "chave": "2.46",
+        #"chave": "2.37", # Para anos anteriores a 2010
+        "valor": "Educação Especial - Classes Comuns",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
     "educacao_especial_classes_exclusivas": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE[
-            "Educacao Especial - Classes Exclusivas"
-        ],
-        #"chave": "2.52",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Especial - Classes Exclusivas"],
+        "chave": "2.52",
         #"chave": "2.51", # Para o ano de 2011
-        "chave": "2.41", # Para o ano anteriores a 2010
-        "valor": "Educacao Especial - Classes Exclusivas",
+        #"chave": "2.41", # Para o ano anteriores a 2010
+        "valor": "Educação Especial - Classes Exclusivas",
         "skiprows": 8,
         "table": "docente_faixa_etaria_sexo",
     },
@@ -313,11 +311,12 @@ def read_sheet(
     print("Tratando dados de", valor, ano)
     path_excel = os.path.join(
         INPUT,
-        # f"sinopse_estatística_educaç╞o_básica_{ano}",
+        # f"Sinopse_Estatistica_da_Educacao_Basica_{ano}",
         # f"Sinopse_Estatistica_da_Educaç╞o_Basica_{ano}.xlsx",
-        f"Sinopse_Estatistica_da_Educaç╞o_Basica_{ano}",
-        f"Sinopse_Estatistica_da_Educaç╞o_Basica_{ano}.xlsx",
+        f"Sinopse_Estatistica_da_Educacao_Basica_{ano}",
+        f"Sinopse_Estatistica_da_Educação_Basica_{ano}.xlsx"
     )
+
     df = pd.read_excel(
         path_excel,
         skiprows=skiprows,
@@ -374,8 +373,8 @@ def read_sheet(
                     value_name="quantidade_docente",
                 )
             )
-            .assign(tipo_classe=tipo_classe)
-            for tipo_classe, df in dfs_faixa_etaria.items()
+            .assign(etapa_ensino=etapa_ensino)
+            for etapa_ensino, df in dfs_faixa_etaria.items()
         ]
     )
 
@@ -392,12 +391,11 @@ def read_sheet(
     )
 
     df_faixa_etaria = df_faixa_etaria.rename(columns={"uf": "sigla_uf"}, errors="raise")
-
-    df_faixa_etaria["sexo"] = df_faixa_etaria["faixa_etaria"].apply(
+    df_faixa_etaria["faixa_etaria"] = df_faixa_etaria["faixa_etaria"].apply(
         lambda v: v.split("_")[-1]
     )
 
-    df_faixa_etaria["faixa_etaria"] = df_faixa_etaria["faixa_etaria"].apply(
+    df_faixa_etaria["sexo"] = df_faixa_etaria["faixa_etaria"].apply(
         lambda v: v.split("_")[0]
     )
 
@@ -436,7 +434,7 @@ if __name__ == '__main__' :
     for x in lista:
         read_sheet(
             table=localizacao[x]["table"],
-            ano=2007,
+            ano=2023,
             chave=localizacao[x]["chave"],
             valor=localizacao[x]["valor"],
             dicionario=localizacao[x]["dicionario"],
