@@ -5,21 +5,21 @@ import basedosdados as bd
 import numpy as np
 
 
-INPUT = os.path.join(os.getcwd(), "input")
-OUTPUT = os.path.join(os.getcwd(), "output")
+INPUT = os.path.join(os.getcwd(), "br_inep_sinopse_estatistica_educacao_basica/input")
+OUTPUT = os.path.join(os.getcwd(), "br_inep_sinopse_estatistica_educacao_basica/output")
 
 # os.makedirs(INPUT, exist_ok=True)
 # os.makedirs(OUTPUT, exist_ok=True)
 
 RENAMES_ETAPA_ENSINO_SERIE = {
-    "Educacao Basica": {
+    "Educação Basica": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -31,14 +31,14 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "Municipal.2": "Rural_Municipal",
         "Privada.2": "Rural_Privada",
     },
-    "Educacao Infantil": {
+    "Educação Infantil": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -50,53 +50,53 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "Municipal.2": "Rural_Municipal",
         "Privada.2": "Rural_Privada",
     },
-    "Educacao Infantil - Creche": {
-        "Unnamed: 1": "uf",
-        "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
-        "Pública.1": "Urbana_Pública",
-        "Federal.1": "Urbana_Federal",
-        "Estadual.1": "Urbana_Estadual",
-        "Municipal.1": "Urbana_Municipal",
-        "Privada.1": "Urbana_Privada",
-        "Pública.2": "Rural_Pública",
-        "Federal.2": "Rural_Federal",
-        "Estadual.2": "Rural_Estadual",
-        "Municipal.2": "Rural_Municipal",
-        "Privada.2": "Rural_Privada",
-        ####
-        # Para 2014
-        ####
+    "Educação Infantil - Creche": {
         # "Unnamed: 1": "uf",
         # "Unnamed: 3": "id_municipio",
-        # "Pública ": "Dependência Administrativa_Pública",
-        # "Federal": "Dependência Administrativa_Federal",
-        # "Estadual": "Dependência Administrativa_Estadual",
-        # "Municipal": "Dependência Administrativa_Municipal",
-        # "Privada": "Dependência Administrativa_Privada",
-        # "Pública": "Urbana_Pública",
+        # "Pública": " Total_Pública",
+        # "Federal": " Total_Federal",
+        # "Estadual": " Total_Estadual",
+        # "Municipal": " Total_Municipal",
+        # "Privada": " Total_Privada",
+        # "Pública.1": "Urbana_Pública",
         # "Federal.1": "Urbana_Federal",
         # "Estadual.1": "Urbana_Estadual",
         # "Municipal.1": "Urbana_Municipal",
         # "Privada.1": "Urbana_Privada",
-        # "Pública.1": "Rural_Pública",
+        # "Pública.2": "Rural_Pública",
         # "Federal.2": "Rural_Federal",
         # "Estadual.2": "Rural_Estadual",
         # "Municipal.2": "Rural_Municipal",
         # "Privada.2": "Rural_Privada",
-    },
-    "Educacao Infantil - Pré-Escola": {
+        ####
+        # Para 2014
+        ####
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
+        "Pública": "Urbana_Pública",
+        "Federal.1": "Urbana_Federal",
+        "Estadual.1": "Urbana_Estadual",
+        "Municipal.1": "Urbana_Municipal",
+        "Privada.1": "Urbana_Privada",
+        "Pública.1": "Rural_Pública",
+        "Federal.2": "Rural_Federal",
+        "Estadual.2": "Rural_Estadual",
+        "Municipal.2": "Rural_Municipal",
+        "Privada.2": "Rural_Privada",
+    },
+    "Educação Infantil - Pré-Escola": {
+        "Unnamed: 1": "uf",
+        "Unnamed: 3": "id_municipio",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -111,11 +111,11 @@ RENAMES_ETAPA_ENSINO_SERIE = {
     "Ensino Fundamental": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -130,11 +130,11 @@ RENAMES_ETAPA_ENSINO_SERIE = {
     "Ensino Fundamental - Anos Iniciais": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -149,11 +149,11 @@ RENAMES_ETAPA_ENSINO_SERIE = {
     "Ensino Fundamental - Anos Finais": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -168,11 +168,11 @@ RENAMES_ETAPA_ENSINO_SERIE = {
     "Ensino Médio": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -184,14 +184,14 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "Municipal.2": "Rural_Municipal",
         "Privada.2": "Rural_Privada",
     },
-    "Educacao Profissional": {
+    "Educação Profissional": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -204,52 +204,33 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "Privada.2": "Rural_Privada",
     },
     "EJA": {
-        "Unnamed: 1": "uf",
-        "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
-        "Pública.1": "Urbana_Pública",
-        "Federal.1": "Urbana_Federal",
-        "Estadual.1": "Urbana_Estadual",
-        "Municipal.1": "Urbana_Municipal",
-        "Privada.1": "Urbana_Privada",
-        "Pública.2": "Rural_Pública",
-        "Federal.2": "Rural_Federal",
-        "Estadual.2": "Rural_Estadual",
-        "Municipal.2": "Rural_Municipal",
-        "Privada.2": "Rural_Privada",
-        ####
-        # Para 2014
-        ####
         # "Unnamed: 1": "uf",
         # "Unnamed: 3": "id_municipio",
-        # "Publica ": "Dependência Administrativa_Pública",
-        # "Federal": "Dependência Administrativa_Federal",
-        # "Estadual": "Dependência Administrativa_Estadual",
-        # "Municipal": "Dependência Administrativa_Municipal",
-        # "Privada": "Dependência Administrativa_Privada",
-        # "Pública": "Urbana_Pública",
+        # "Pública": " Total_Pública",
+        # "Federal": " Total_Federal",
+        # "Estadual": " Total_Estadual",
+        # "Municipal": " Total_Municipal",
+        # "Privada": " Total_Privada",
+        # "Pública.1": "Urbana_Pública",
         # "Federal.1": "Urbana_Federal",
         # "Estadual.1": "Urbana_Estadual",
         # "Municipal.1": "Urbana_Municipal",
         # "Privada.1": "Urbana_Privada",
-        # "Pública.1": "Rural_Pública",
+        # "Pública.2": "Rural_Pública",
         # "Federal.2": "Rural_Federal",
         # "Estadual.2": "Rural_Estadual",
         # "Municipal.2": "Rural_Municipal",
         # "Privada.2": "Rural_Privada",
-    },
-    "Educacao Especial - Classes Comuns": {
+        ####
+        # Para 2014
+        ####
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -260,35 +241,54 @@ RENAMES_ETAPA_ENSINO_SERIE = {
         "Estadual.2": "Rural_Estadual",
         "Municipal.2": "Rural_Municipal",
         "Privada.2": "Rural_Privada",
+    },
+    "Educação Especial - Classes Comuns": {
+        # "Unnamed: 1": "uf",
+        # "Unnamed: 3": "id_municipio",
+        # "Pública": " Total_Pública",
+        # "Federal": " Total_Federal",
+        # "Estadual": " Total_Estadual",
+        # "Municipal": " Total_Municipal",
+        # "Privada": " Total_Privada",
+        # "Pública.1": "Urbana_Pública",
+        # "Federal.1": "Urbana_Federal",
+        # "Estadual.1": "Urbana_Estadual",
+        # "Municipal.1": "Urbana_Municipal",
+        # "Privada.1": "Urbana_Privada",
+        # "Pública.2": "Rural_Pública",
+        # "Federal.2": "Rural_Federal",
+        # "Estadual.2": "Rural_Estadual",
+        # "Municipal.2": "Rural_Municipal",
+        # "Privada.2": "Rural_Privada",
         #####
         # Para 2014
         ####
-        # "Unnamed: 1": "uf",
-        # "Unnamed: 3": "id_municipio",
-        # "Pública ": "Dependência Administrativa_Pública",
-        # "Federal": "Dependência Administrativa_Federal",
-        # "Estadual": "Dependência Administrativa_Estadual",
-        # "Municipal": "Dependência Administrativa_Municipal",
-        # "Privada": "Dependência Administrativa_Privada",
-        # "Pública": "Urbana_Pública",
-        # "Federal.1": "Urbana_Federal",
-        # "Estadual.1": "Urbana_Estadual",
-        # "Municipal.1": "Urbana_Municipal",
-        # "Privada.1": "Urbana_Privada",
-        # "Pública.1": "Rural_Pública",
-        # "Federal.2": "Rural_Federal",
-        # "Estadual.2": "Rural_Estadual",
-        # "Municipal.2": "Rural_Municipal",
-        # "Privada.2": "Rural_Privada",
-    },
-    "Educacao Especial - Classes Exclusivas": {
         "Unnamed: 1": "uf",
         "Unnamed: 3": "id_municipio",
-        "Pública": "Dependência Administrativa_Pública",
-        "Federal": "Dependência Administrativa_Federal",
-        "Estadual": "Dependência Administrativa_Estadual",
-        "Municipal": "Dependência Administrativa_Municipal",
-        "Privada": "Dependência Administrativa_Privada",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
+        "Pública.1": "Urbana_Pública",
+        "Federal.1": "Urbana_Federal",
+        "Estadual.1": "Urbana_Estadual",
+        "Municipal.1": "Urbana_Municipal",
+        "Privada.1": "Urbana_Privada",
+        "Pública.2": "Rural_Pública",
+        "Federal.2": "Rural_Federal",
+        "Estadual.2": "Rural_Estadual",
+        "Municipal.2": "Rural_Municipal",
+        "Privada.2": "Rural_Privada",
+    },
+    "Educação Especial - Classes Exclusivas": {
+        "Unnamed: 1": "uf",
+        "Unnamed: 3": "id_municipio",
+        "Pública": " Total_Pública",
+        "Federal": " Total_Federal",
+        "Estadual": " Total_Estadual",
+        "Municipal": " Total_Municipal",
+        "Privada": " Total_Privada",
         "Pública.1": "Urbana_Pública",
         "Federal.1": "Urbana_Federal",
         "Estadual.1": "Urbana_Estadual",
@@ -305,100 +305,98 @@ RENAMES_ETAPA_ENSINO_SERIE = {
 
 localizacao = {
     "educacao_basica": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Basica"],
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Basica"],
         "chave": "2.2",
-        "valor": "Educacao Basica",
+        "valor": "Educação Básica",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "educacao_infantil": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Infantil"],
-        "chave": "2.6",  # Para o ano de 2010
-        #"chave": "2.7",
-        "valor": "Educacao Infantil",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Infantil"],
+        #"chave": "2.6",  # Para o ano de 2010
+        "chave": "2.7", # 2011 em frente
+        "valor": "Educação Infantil",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "ensino_infantil_creche": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Infantil - Creche"],
-        "chave": "Creche 2.7",  # Para o ano de 2010
-        #"chave": "Creche 2.8",
-        "valor": "Educacao Infantil - Creche",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Infantil - Creche"],
+        #"chave": "Creche 2.7",  # Para o ano de 2010
+        "chave": "Creche 2.8", # 2011 em frente
+        "valor": "Educação Infantil - Creche",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "educacao_infantil_pre_escola": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Infantil - Pré-Escola"],
-        "chave": "Pré-Escola 2.10",  # Para o ano de 2010
-        #"chave": "Pré-Escola 2.12",
-        "valor": "Educacao Infantil - Pré-Escola",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Infantil - Pré-Escola"],
+        #"chave": "Pré-Escola 2.10",  # Para o ano de 2010
+        "chave": "Pré-Escola 2.12", # 2011 em frente
+        "valor": "Educação Infantil - Pré-Escola",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "ensino_fundamental": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Fundamental"],
-        #"chave": "2.17",
-        "chave": "2.14",  # Para o ano de 2010
+        "chave": "2.17", # 2011 em frente
+        #"chave": "2.14",  # Para o ano de 2010
         "valor": "Ensino Fundamental",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "ensino_fundamental_anos_iniciais": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Fundamental - Anos Iniciais"],
-        #"chave": "Anos Iniciais 2.21",
-        "chave": "Anos Iniciais 2.17",  # Para o ano de 2010
+        "chave": "Anos Iniciais 2.21", # 2011 em frente
+        #"chave": "Anos Iniciais 2.17",  # Para o ano de 2010
         "valor": "Ensino Fundamental - Anos Iniciais",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "ensino_fundamental_anos_finais": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Fundamental - Anos Finais"],
-        #"chave": "Anos Finais 2.25",
-        "chave": "Anos Finais 2.20",  # Para o ano de 2010
+        "chave": "Anos Finais 2.25", # 2011 em frente
+        #"chave": "Anos Finais 2.20",  # Para o ano de 2010
         "valor": "Ensino Fundamental - Anos Finais",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "ensino_medio": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Ensino Médio"],
-        #"chave": "Ensino Médio 2.29",
-        "chave": "Ensino Médio 2.23",  # Para o ano de 2010
+        "chave": "Ensino Médio 2.29", # 2011 em frente
+        #"chave": "Ensino Médio 2.23",  # Para o ano de 2010
         "valor": "Ensino Médio",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "educacao_profissional": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Profissional"],
-        #"chave": "2.34",
-        "chave": "2.27",  # Para o ano de 2010
-        "valor": "Educacao Profissional",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Profissional"],
+        "chave": "2.34", # 2011 em frente
+        #"chave": "2.27",  # Para o ano de 2010
+        "valor": "Educação Profissional",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "EJA": {
         "dicionario": RENAMES_ETAPA_ENSINO_SERIE["EJA"],
-        #"chave": "2.39",
-        "chave": "2.31",  # Para o ano de 2010
+        "chave": "2.39", # 2011 em frente
+        #"chave": "2.31",  # Para o ano de 2010
         "valor": "EJA",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "educacao_especial_classes_comuns": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educacao Especial - Classes Comuns"],
-        #"chave": "2.45",
-        "chave": "2.36",  # Para o ano de 2010
-        "valor": "Educacao Especial - Classes Comuns",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Especial - Classes Comuns"],
+        "chave": "2.45", # 2011 em frente
+        #"chave": "2.36",  # Para o ano de 2010
+        "valor": "Educação Especial - Classes Comuns",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
     "educacao_especial_classes_exclusivas": {
-        "dicionario": RENAMES_ETAPA_ENSINO_SERIE[
-            "Educacao Especial - Classes Exclusivas"
-        ],
-        #"chave": "2.51",
+        "dicionario": RENAMES_ETAPA_ENSINO_SERIE["Educação Especial - Classes Exclusivas"],
+        "chave": "2.51",
         #"chave": "2.50",  # Para o ano de 2011
-        "chave": "2.40",  # Para o ano de 2010
-        "valor": "Educacao Especial - Classes Exclusivas",
+        #"chave": "2.40",  # Para o ano de 2010
+        "valor": "Educação Especial - Classes Exclusivas",
         "skiprows": 8,
         "table": "docente_localizacao",
     },
@@ -411,8 +409,8 @@ def read_sheet(
     print("Tratando dados de", valor, ano)
     path_excel = os.path.join(
         INPUT,
-        f"Sinopse_Estatistica_da_Educaç╞o_Basica_{ano}",
-        f"Sinopse_Estatistica_da_Educaç╞o_Basica_{ano}.xlsx",
+        f"Sinopse_Estatistica_da_Educacao_Basica_{ano}",
+        f"Sinopse_Estatistica_da_Educação_Basica_{ano}.xlsx",
     )
     df = pd.read_excel(
         path_excel,
@@ -468,8 +466,8 @@ def read_sheet(
                     value_name="quantidade_docente",
                 )
             )
-            .assign(tipo_classe=tipo_classe)
-            for tipo_classe, df in dfs_localizacao.items()
+            .assign(etapa_ensino=etapa_ensino)
+            for etapa_ensino, df in dfs_localizacao.items()
         ]
     )
 
@@ -492,13 +490,15 @@ def read_sheet(
     df_localizacao["localizacao"] = df_localizacao["localizacao"].apply(
         lambda v: v.split("_")[0]
     )
+    df_localizacao["localizacao"] = df_localizacao["localizacao"].apply(lambda x: x.strip())
+
     df_localizacao["quantidade_docente"] = df_localizacao["quantidade_docente"].astype(int)
 
     df_localizacao = df_localizacao[
         [
             "sigla_uf",
             "id_municipio",
-            "tipo_classe",
+            "etapa_ensino",
             "rede",
             "localizacao",
             "quantidade_docente",
@@ -536,7 +536,7 @@ if __name__ == "__main__":
     for x in lista:
         read_sheet(
             table=localizacao[x]["table"],
-            ano=2007,
+            ano=2023,
             chave=localizacao[x]["chave"],
             valor=localizacao[x]["valor"],
             dicionario=localizacao[x]["dicionario"],

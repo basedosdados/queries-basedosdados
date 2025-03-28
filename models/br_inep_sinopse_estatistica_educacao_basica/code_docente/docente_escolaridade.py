@@ -4,6 +4,8 @@ import pandas as pd
 import basedosdados as bd
 import numpy as np
 
+pd.set_option("display.max_columns", None)
+pd.set_option("display.max_rows", None)
 
 INPUT = os.path.join(os.getcwd(), "input")
 OUTPUT = os.path.join(os.getcwd(), "output")
@@ -321,27 +323,27 @@ def read_sheet(
                 os.path.join(path, "data.csv"), index=False, mode="a", header=False
             )
 
-if __name__ == '__main__' :
-    lista = [
-        "educacao_basica",
-        "ensino_infantil_creche",
-        "educacao_infantil_pre_escola",
-        "ensino_fundamental",
-        "ensino_fundamental_anos_iniciais",
-        "ensino_fundamental_anos_finais",
-        "ensino_medio",
-        "educacao_profissional",
-        "EJA",
-        "educacao_especial_classes_comuns",
-        "educacao_especial_classes_exclusivas",
-    ]
 
-    for x in lista:
-        read_sheet(
-            table=escolaridade[x]["table"],
-            ano=2007,
-            chave=escolaridade[x]["chave"],
-            valor=escolaridade[x]["valor"],
-            dicionario=escolaridade[x]["dicionario"],
-            skiprows=escolaridade[x]["skiprows"],
-        )
+lista = [
+    "educacao_basica",
+    "ensino_infantil_creche",
+    "educacao_infantil_pre_escola",
+    "ensino_fundamental",
+    "ensino_fundamental_anos_iniciais",
+    "ensino_fundamental_anos_finais",
+    "ensino_medio",
+    "educacao_profissional",
+    "EJA",
+    "educacao_especial_classes_comuns",
+    "educacao_especial_classes_exclusivas",
+]
+
+for x in lista:
+    read_sheet(
+        table=escolaridade[x]["table"],
+        ano=2007,
+        chave=escolaridade[x]["chave"],
+        valor=escolaridade[x]["valor"],
+        dicionario=escolaridade[x]["dicionario"],
+        skiprows=escolaridade[x]["skiprows"],
+    )

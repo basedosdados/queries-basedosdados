@@ -4,6 +4,9 @@ import pandas as pd
 import basedosdados as bd
 import numpy as np
 
+pd.set_option("display.max_columns", None)
+pd.set_option("display.max_rows", None)
+
 INPUT = os.path.join(os.getcwd(), "input")
 OUTPUT = os.path.join(os.getcwd(), "output")
 
@@ -465,25 +468,25 @@ def read_sheet(
 
     return df_etapa_ensino
 
-if __name__ == "__main__":
-    lista = [
-        "educacao_basica",
-        "educacao_infantil",
-        "ensino_fundamental",
-        "educacao_profissional",
-        "EJA",
-        "educacao_especial",
-        "educacao_especial_classes_comuns",
-        "educacao_especial_classes_exclusivas",
-        #"educacao_indigena",
-    ]
 
-    for x in lista:
-        read_sheet(
-            table=etapa_ensino[x]["table"],
-            ano=2021,
-            chave=etapa_ensino[x]["chave"],
-            valor=etapa_ensino[x]["valor"],
-            dicionario=etapa_ensino[x]["dicionario"],
-            skiprows=etapa_ensino[x]["skiprows"],
-        )
+lista = [
+    "educacao_basica",
+    "educacao_infantil",
+    "ensino_fundamental",
+    "educacao_profissional",
+    "EJA",
+    "educacao_especial",
+    "educacao_especial_classes_comuns",
+    "educacao_especial_classes_exclusivas",
+    #"educacao_indigena",
+]
+
+for x in lista:
+    read_sheet(
+        table=etapa_ensino[x]["table"],
+        ano=2021,
+        chave=etapa_ensino[x]["chave"],
+        valor=etapa_ensino[x]["valor"],
+        dicionario=etapa_ensino[x]["dicionario"],
+        skiprows=etapa_ensino[x]["skiprows"],
+    )
