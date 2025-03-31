@@ -7,6 +7,8 @@
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
+
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
