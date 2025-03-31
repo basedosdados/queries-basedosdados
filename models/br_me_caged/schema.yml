@@ -11,9 +11,11 @@ models:
             where: __most_recent_year_month__
     columns:
       - name: ano
-        description: Ano
+        description: Ano da divulgação do dado no FTP do CAGED. Para esta tabela,
+          o ano de divulgação equivale ao ano de competência.
       - name: mes
-        description: Mês
+        description: Mês da divulgação do dado no FTP do CAGED. Para esta tabela,
+          o mes de divulgação equivale ao ano de competência.
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -87,9 +89,13 @@ models:
             where: __most_recent_year_month__
     columns:
       - name: ano
-        description: Ano
+        description: Ano da divulgação do dado no FTP do CAGED.
       - name: mes
-        description: Mês
+        description: Mês da divulgação do dado no FTP do CAGED.
+      - name: ano_competencia_movimentacao
+        description: Ano de competência da movimentação ocorrida fora do prazo.
+      - name: mes_competencia_movimentacao
+        description: Mês de competência da movimentação ocorrida fora do prazo.
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
@@ -162,9 +168,17 @@ models:
             where: __most_recent_year_month__
     columns:
       - name: ano
-        description: Ano
+        description: Ano da divulgação do dado no FTP do CAGED.
       - name: mes
-        description: Mês
+        description: Mês da divulgação do dado no FTP do CAGED.
+      - name: ano_competencia_movimentacao
+        description: Ano de competência da movimentação excluída.
+      - name: mes_competencia_movimentacao
+        description: Mês de competência da movimentação excluída.
+      - name: ano_declaracao_movimentacao
+        description: Ano de competência da movimentação excluída.
+      - name: mes_declaracao_movimentacao
+        description: Mês de competência da movimentação excluída.
       - name: sigla_uf
         description: Sigla da Unidade da Federação
       - name: id_municipio
