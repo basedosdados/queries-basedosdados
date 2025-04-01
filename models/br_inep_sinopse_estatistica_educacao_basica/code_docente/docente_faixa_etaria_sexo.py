@@ -391,13 +391,14 @@ def read_sheet(
     )
 
     df_faixa_etaria = df_faixa_etaria.rename(columns={"uf": "sigla_uf"}, errors="raise")
-    df_faixa_etaria["faixa_etaria"] = df_faixa_etaria["faixa_etaria"].apply(
-        lambda v: v.split("_")[-1]
-    )
 
     df_faixa_etaria["sexo"] = df_faixa_etaria["faixa_etaria"].apply(
         lambda v: v.split("_")[0]
     )
+    df_faixa_etaria["faixa_etaria"] = df_faixa_etaria["faixa_etaria"].apply(
+        lambda v: v.split("_")[-1]
+    )
+
 
     df_faixa_etaria["quantidade_docente"] = df_faixa_etaria["quantidade_docente"].astype(
         int
