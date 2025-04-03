@@ -25,4 +25,8 @@ select
     safe_cast(quantidade_submetralhadora as int64) quantidade_submetralhadora,
     safe_cast(total as int64) total
 from
-    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.armas_apreendidas_mensal` t
+    {{
+        set_datalake_project(
+            "br_rj_isp_estatisticas_seguranca_staging.armas_apreendidas_mensal"
+        )
+    }} t

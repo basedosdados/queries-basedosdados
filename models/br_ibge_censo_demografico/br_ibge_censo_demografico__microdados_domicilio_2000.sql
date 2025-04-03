@@ -67,4 +67,8 @@ select
     safe_cast(v1112 as string) v1112,
     safe_cast(v1113 as string) v1113
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_domicilio_2000` t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.microdados_domicilio_2000"
+        )
+    }} t

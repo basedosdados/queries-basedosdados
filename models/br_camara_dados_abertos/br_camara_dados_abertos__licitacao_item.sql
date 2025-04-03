@@ -23,4 +23,4 @@ select
     safe_cast(observacoes as string) observacao,
     safe_cast(naturezadespesa as string) natureza_despesa,
     safe_cast(programatrabalho as string) programa_trabalho,
-from `basedosdados-staging.br_camara_dados_abertos_staging.licitacao_item` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.licitacao_item") }} as t

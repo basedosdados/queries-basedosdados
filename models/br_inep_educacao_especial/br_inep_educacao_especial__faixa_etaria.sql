@@ -18,4 +18,4 @@ select
     safe_cast(tipo_classe as string) tipo_classe,
     safe_cast(faixa_etaria as string) faixa_etaria,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
-from `basedosdados-staging.br_inep_educacao_especial_staging.faixa_etaria` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.faixa_etaria") }} as t

@@ -15,7 +15,7 @@ with
     raw_cnes_profissional as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.profissional`
+        from {{ set_datalake_project("br_ms_cnes_staging.profissional") }}
         where cnes is not null and competen is not null
     ),
     profissional_x_estabelecimento as (

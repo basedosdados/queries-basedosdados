@@ -16,4 +16,6 @@ select
     safe_cast(descricao_divisao as string) as descricao_divisao,
     safe_cast(secao as string) as secao,
     safe_cast(descricao_secao as string) as descricao_secao
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.cnae_2_3_subclasses` as t
+from
+    {{ set_datalake_project("br_bd_diretorios_brasil_staging.cnae_2_3_subclasses") }}
+    as t

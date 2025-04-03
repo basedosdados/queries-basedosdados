@@ -12,4 +12,4 @@ select
     safe_cast(tipo as string) tipo,
     safe_cast(area as float64) area,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.pegada_urbana` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.pegada_urbana") }} as t

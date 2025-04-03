@@ -32,7 +32,7 @@ select distinct
     safe_cast(f.precipitacao as float64) precipitacao,
     safe_cast(f.risco_fogo as float64) risco_fogo,
     safe_cast(f.potencia_radiativa_fogo as float64) potencia_radiativa_fogo,
-from `basedosdados-staging.br_inpe_queimadas_staging.microdados` as f
+from {{ set_datalake_project("br_inpe_queimadas_staging.microdados") }} as f
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` m
     on f.municipio_uf = m.nome || ' - ' || m.sigla_uf

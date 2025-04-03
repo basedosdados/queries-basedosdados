@@ -19,4 +19,4 @@ select
     safe_cast(orgao as string) orgao,
     safe_cast(objeto as string) descricao,
     safe_cast(observacoes as string) observacao,
-from `basedosdados-staging.br_camara_dados_abertos_staging.licitacao_pedido` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.licitacao_pedido") }} as t

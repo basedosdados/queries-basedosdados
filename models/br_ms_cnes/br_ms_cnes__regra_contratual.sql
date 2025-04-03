@@ -19,7 +19,7 @@ with
     raw_cnes_regra_contratual as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.regra_contratual`
+        from {{ set_datalake_project("br_ms_cnes_staging.regra_contratual") }}
         where cnes is not null
     ),
     raw_cnes_regra_contratual_without_duplicates as (

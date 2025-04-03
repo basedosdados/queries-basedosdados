@@ -32,4 +32,4 @@ select
     safe_cast(
         porcentagem_realizado_orcamento as float64
     ) porcentagem_realizado_orcamento,
-from `basedosdados-staging.br_cgu_orcamento_publico_staging.orcamento`
+from {{ set_datalake_project("br_cgu_orcamento_publico_staging.orcamento") }}

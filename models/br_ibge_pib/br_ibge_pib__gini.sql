@@ -7,4 +7,4 @@ select
     safe_cast(replace(gini_va_industria, ",", ".") as float64) gini_va_industria,
     safe_cast(replace(gini_servicos, ",", ".") as float64) gini_va_servicos,
     safe_cast(replace(gini_va_adespss, ",", ".") as float64) gini_va_adespss,
-from `basedosdados-staging.br_ibge_pib_staging.gini` as t
+from {{ set_datalake_project("br_ibge_pib_staging.gini") }} as t

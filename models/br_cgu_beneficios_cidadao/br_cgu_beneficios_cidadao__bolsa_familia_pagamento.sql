@@ -27,5 +27,8 @@ select distinct
     safe_cast(nome as string) nome_favorecido,
     safe_cast(valor_beneficio as float64) valor_parcela,
 from
-    `basedosdados-staging.br_cgu_beneficios_cidadao_staging.bolsa_familia_pagamento`
-    as t
+    {{
+        set_datalake_project(
+            "br_cgu_beneficios_cidadao_staging.bolsa_familia_pagamento"
+        )
+    }} as t

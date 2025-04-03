@@ -19,4 +19,4 @@ select
     safe_cast(rede as string) rede,
     safe_cast(localizacao as string) localizacao,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
-from `basedosdados-staging.br_inep_educacao_especial_staging.localizacao` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.localizacao") }} as t

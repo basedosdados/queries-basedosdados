@@ -10,4 +10,4 @@ select distinct
     safe_cast(ponto as string) ponto,
     safe_cast(atonomeacao as string) ato_nomeacao,
     safe_cast(lotacao as string) lotacao,
-from `basedosdados-staging.br_camara_dados_abertos_staging.funcionario` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.funcionario") }} as t

@@ -21,4 +21,4 @@ select
     safe_cast(valor_medio_diario as float64) valor_medio_diario,
     safe_cast(valor_medio_diario_vincendo as float64) valor_medio_diario_vincendo,
     safe_cast(valor_ultimo_dia as float64) valor_ultimo_dia
-from `basedosdados-staging.br_bcb_sicor_staging.microdados_saldo` as t
+from {{ set_datalake_project("br_bcb_sicor_staging.microdados_saldo") }} as t

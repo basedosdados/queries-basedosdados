@@ -27,7 +27,7 @@ select
     safe_cast(agencias_processadas as int64) agencias_processadas,
     safe_cast(id_verbete as string) id_verbete,
     safe_cast(valor as float64) valor
-from `basedosdados-staging.br_bcb_estban_staging.municipio` as t
+from {{ set_datalake_project("br_bcb_estban_staging.municipio") }} as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

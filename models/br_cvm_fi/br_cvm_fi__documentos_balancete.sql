@@ -21,4 +21,4 @@ select
     safe_cast(tipo_fundo as string) tipo_fundo,
     safe_cast(codigo_conta as string) codigo_conta,
     safe_cast(valor_saldo as float64) saldo_conta,
-from `basedosdados-staging.br_cvm_fi_staging.documentos_balancete` as t
+from {{ set_datalake_project("br_cvm_fi_staging.documentos_balancete") }} as t

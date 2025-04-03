@@ -16,4 +16,4 @@ select
         else safe_cast(numero_consumidores as int64)
     end as numero_consumidores,
     safe_cast(consumo as int64) as consumo
-from `basedosdados-staging.br_mme_consumo_energia_eletrica_staging.uf` as t
+from {{ set_datalake_project("br_mme_consumo_energia_eletrica_staging.uf") }} as t

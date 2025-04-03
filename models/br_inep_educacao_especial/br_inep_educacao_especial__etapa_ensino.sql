@@ -24,4 +24,4 @@ select
         end as string
     ) etapa_ensino,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula
-from `basedosdados-staging.br_inep_educacao_especial_staging.etapa_ensino` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.etapa_ensino") }} as t

@@ -23,4 +23,4 @@ select
     safe_cast(descricao as string) descricao_item,
     safe_cast(quantidade_item as int64) quantidade_item,
     safe_cast(replace(valor_item, ",", ".") as float64) valor_item,
-from `basedosdados-staging.br_cgu_licitacao_contrato_staging.licitacao_item` as t
+from {{ set_datalake_project("br_cgu_licitacao_contrato_staging.licitacao_item") }} as t

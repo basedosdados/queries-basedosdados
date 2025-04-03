@@ -147,4 +147,8 @@ select
     safe_cast(v133 as int64) v133,
     safe_cast(v134 as int64) v134
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_idade_total_2010` t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.setor_censitario_idade_total_2010"
+        )
+    }} t

@@ -26,7 +26,11 @@ with
             safe_cast(nm_concurb as string) as nome_concentracao_urbana,
             safe_cast(area_km2 as float64) as area_km2,
         from
-            `basedosdados-staging.br_ibge_censo_2022_staging.domicilio_morador_setor_censitario`
+            {{
+                set_datalake_project(
+                    "br_ibge_censo_2022_staging.domicilio_morador_setor_censitario"
+                )
+            }}
     )
 
 select

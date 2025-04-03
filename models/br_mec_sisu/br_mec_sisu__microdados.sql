@@ -117,7 +117,7 @@ select
         when status_matricula = 'SUBSTITUÍDA OUTRA IES'
         then 'Substituída - outra IES'
     end as status_matricula
-from `basedosdados-staging.br_mec_sisu_staging.microdados` s
+from {{ set_datalake_project("br_mec_sisu_staging.microdados") }} s
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` d1
     on (s.sigla_uf_campus = d1.sigla_uf)

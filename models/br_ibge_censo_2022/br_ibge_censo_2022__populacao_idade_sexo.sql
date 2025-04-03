@@ -27,7 +27,12 @@ with
                 then 100
             end as idade_num,
             safe_cast(populacao_residente_pessoas_ as int64) populacao,
-        from `basedosdados-staging.br_ibge_censo_2022_staging.populacao_idade_sexo` t
+        from
+            {{
+                set_datalake_project(
+                    "br_ibge_censo_2022_staging.populacao_idade_sexo"
+                )
+            }} t
     )
 select
     t2.cod as id_municipio,

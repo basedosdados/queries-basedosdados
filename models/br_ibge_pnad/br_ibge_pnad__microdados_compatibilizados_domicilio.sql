@@ -56,5 +56,10 @@ select
     safe_cast(aluguel_deflacionado as float64) aluguel_deflacionado,
     safe_cast(prestacao_deflacionado as float64) prestacao_deflacionado,
     safe_cast(peso_amostral as float64) peso_amostral
-from `basedosdados-staging.br_ibge_pnad_staging.microdados_compatibilizados_domicilio`
+from
+    {{
+        set_datalake_project(
+            "br_ibge_pnad_staging.microdados_compatibilizados_domicilio"
+        )
+    }}
 where ano > 1996

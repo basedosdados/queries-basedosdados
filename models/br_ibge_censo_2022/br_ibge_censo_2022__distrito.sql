@@ -1425,7 +1425,7 @@ select
     safe_cast(v01409 as int64) v01409,
     safe_cast(v01410 as int64) v01410,
     safe_cast(v01411 as int64) v01411,
-from `basedosdados-staging.br_ibge_censo_2022_staging.distrito` as distritos
+from {{ set_datalake_project("br_ibge_censo_2022_staging.distrito") }} as distritos
 left join
     `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_distritos_alfabetizacao_BR`
     as alfabetizacao

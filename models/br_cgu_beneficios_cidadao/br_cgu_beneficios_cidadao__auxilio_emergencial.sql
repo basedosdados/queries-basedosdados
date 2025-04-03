@@ -31,4 +31,6 @@ select
     safe_cast(parcela as string) parcela,
     safe_cast(observacao as string) observacao,
     safe_cast(valor_beneficio as float64) valor_beneficio,
-from `basedosdados-staging.br_cgu_beneficios_cidadao_staging.auxilio_emergencial` as t
+from
+    {{ set_datalake_project("br_cgu_beneficios_cidadao_staging.auxilio_emergencial") }}
+    as t

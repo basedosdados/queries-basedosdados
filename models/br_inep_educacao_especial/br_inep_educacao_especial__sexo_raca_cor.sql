@@ -21,4 +21,4 @@ select
         case when raca_cor = 'Fmarela' then 'Amarela' else raca_cor end as string
     ) raca_cor,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
-from `basedosdados-staging.br_inep_educacao_especial_staging.sexo_raca_cor` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.sexo_raca_cor") }} as t

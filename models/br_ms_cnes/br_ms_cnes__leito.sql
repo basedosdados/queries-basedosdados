@@ -21,7 +21,7 @@ with
     raw_cnes_leito as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.leito`
+        from {{ set_datalake_project("br_ms_cnes_staging.leito") }}
         where cnes is not null
     ),
     cnes_leito_without_duplicates as (select distinct * from raw_cnes_leito),

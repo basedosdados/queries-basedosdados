@@ -8,4 +8,4 @@
 
 select
     safe_cast(categoria as string) categoria, safe_cast(descricao as string) descricao
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.cid_9` as t
+from {{ set_datalake_project("br_bd_diretorios_brasil_staging.cid_9") }} as t

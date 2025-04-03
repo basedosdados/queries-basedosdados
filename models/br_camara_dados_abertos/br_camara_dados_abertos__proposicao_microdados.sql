@@ -56,8 +56,11 @@ with
             safe_cast(ultimostatus_sequencia as string) sequencia_ultimo_status,
             safe_cast(ultimostatus_url as string) url_ultimo_status,
         from
-            `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_microdados`
-            as t
+            {{
+                set_datalake_project(
+                    "br_camara_dados_abertos_staging.proposicao_microdados"
+                )
+            }} as t
     ),
     query_total as (
         select

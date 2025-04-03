@@ -7,4 +7,5 @@ select distinct
     safe_cast(entidadeuf as string) sigla_uf,
     safe_cast(entidade as string) entidade,
     safe_cast(titulo as string) titulo,
-from `basedosdados-staging.br_camara_dados_abertos_staging.deputado_ocupacao` as t
+from
+    {{ set_datalake_project("br_camara_dados_abertos_staging.deputado_ocupacao") }} as t

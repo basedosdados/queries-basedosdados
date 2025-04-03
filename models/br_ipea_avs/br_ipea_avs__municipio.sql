@@ -126,4 +126,4 @@ select
     safe_cast(populacao_19_21 as int64) populacao_19_21,
     safe_cast(populacao_25_mais as int64) populacao_25_mais,
     safe_cast(populacao_65_mais as int64) populacao_65_mais,
-from `basedosdados-staging.br_ipea_avs_staging.municipio` as t
+from {{ set_datalake_project("br_ipea_avs_staging.municipio") }} as t

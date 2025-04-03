@@ -86,5 +86,8 @@ select
     safe_cast(taxa_repetencia_em_2_ano as float64) taxa_repetencia_em_2_ano,
     safe_cast(taxa_repetencia_em_3_ano as float64) taxa_repetencia_em_3_ano,
 from
-    `basedosdados-staging.br_inep_indicadores_educacionais_staging.municipio_taxa_transicao`
-    as t
+    {{
+        set_datalake_project(
+            "br_inep_indicadores_educacionais_staging.municipio_taxa_transicao"
+        )
+    }} as t

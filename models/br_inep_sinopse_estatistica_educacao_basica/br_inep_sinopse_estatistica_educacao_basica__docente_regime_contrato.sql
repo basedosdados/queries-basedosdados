@@ -20,5 +20,9 @@ select
     safe_cast(regime_contrato as string) regime_contrato,
     safe_cast(quantidade_docente as int64) quantidade_docente,
 from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.docente_regime_contrato`
+    {{
+        set_datalake_project(
+            "br_inep_sinopse_estatistica_educacao_basica_staging.docente_regime_contrato"
+        )
+    }}
     as t

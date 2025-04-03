@@ -196,7 +196,7 @@ with
             data_inicio,
             ano,
             mes
-        from `basedosdados-staging.br_bcb_agencia_staging.agencia` as t
+        from {{ set_datalake_project("br_bcb_agencia_staging.agencia") }} as t
         -- os arquivos mensais possuem cabeçalhos e rodapés que variam de posição;
         -- Este filtro remove linhas com valores inteiramente
         -- nulos

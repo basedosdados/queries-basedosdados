@@ -15,4 +15,4 @@ select
     safe_cast(id_bioma as string) id_bioma,
     safe_cast(nome_bioma as string) nome_bioma,
     safe.st_geogfromtext(geometria) geometria
-from `basedosdados-staging.br_geobr_mapas_staging.bioma` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.bioma") }} as t

@@ -13,4 +13,4 @@ select
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
     safe_cast(quantidade_matricula_aee as numeric) quantidade_matricula_aee,
 
-from `basedosdados-staging.br_inep_educacao_especial_staging.matricula_aee` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.matricula_aee") }} as t

@@ -25,4 +25,8 @@ select
     safe_cast(v011 as float64) v011,
     safe_cast(v012 as float64) v012
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_basico_2010` t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.setor_censitario_basico_2010"
+        )
+    }} t

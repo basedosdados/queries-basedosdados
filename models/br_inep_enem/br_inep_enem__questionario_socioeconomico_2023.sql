@@ -27,4 +27,6 @@ select
     safe_cast(q023 as string) q023,
     safe_cast(q024 as string) q024,
     safe_cast(q025 as string) q025
-from `basedosdados-staging.br_inep_enem_staging.questionario_socioeconomico_2023` as t
+from
+    {{ set_datalake_project("br_inep_enem_staging.questionario_socioeconomico_2023") }}
+    as t

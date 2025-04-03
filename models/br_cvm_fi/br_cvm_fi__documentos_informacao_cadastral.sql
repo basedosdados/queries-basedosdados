@@ -68,4 +68,5 @@ select
     safe_cast(
         indicador_aplicacao_total_recursos_exterior as int64
     ) indicador_aplicacao_total_recursos_exterior,
-from `basedosdados-staging.br_cvm_fi_staging.documentos_informacao_cadastral` as t
+from
+    {{ set_datalake_project("br_cvm_fi_staging.documentos_informacao_cadastral") }} as t

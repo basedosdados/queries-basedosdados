@@ -9,4 +9,5 @@ select
     safe_cast(id_natureza_juridica as string) as id_natureza_juridica,
     safe_cast(descricao as string) as descricao,
     safe_cast(escopo as string) as escopo
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.natureza_juridica` as t
+from
+    {{ set_datalake_project("br_bd_diretorios_brasil_staging.natureza_juridica") }} as t

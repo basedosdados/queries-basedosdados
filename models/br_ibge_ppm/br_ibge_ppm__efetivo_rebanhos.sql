@@ -16,5 +16,5 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(tipo_rebanho as string) tipo_rebanho,
     safe_cast(quantidade as int64) quantidade
-from `basedosdados-staging.br_ibge_ppm_staging.efetivo_rebanhos` as t
+from {{ set_datalake_project("br_ibge_ppm_staging.efetivo_rebanhos") }} as t
 where quantidade is not null

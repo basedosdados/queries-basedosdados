@@ -20,7 +20,7 @@ with
     raw_cnes_equipe as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.equipe`
+        from {{ set_datalake_project("br_ms_cnes_staging.equipe") }}
         where cnes is not null
     ),
     cnes_add_muni as (

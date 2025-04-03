@@ -346,7 +346,7 @@ select
     safe_cast(val_uti as float64) valor_uti,
     safe_cast(us_tot as float64) valor_dolar,
     safe_cast(val_tot as float64) valor_aih,
-from `basedosdados-staging.br_ms_sih_staging.aihs_reduzidas`
+from {{ set_datalake_project("br_ms_sih_staging.aihs_reduzidas") }}
 
 {% if is_incremental() %}
     where

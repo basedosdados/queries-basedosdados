@@ -27,4 +27,8 @@ select
     safe_cast(eleitores_biometria as string) eleitores_biometria,
     safe_cast(eleitores_deficiencia as string) eleitores_deficiencia
 from
-    `basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_municipio_zona` as t
+    {{
+        set_datalake_project(
+            "br_tse_eleicoes_staging.perfil_eleitorado_municipio_zona"
+        )
+    }} as t

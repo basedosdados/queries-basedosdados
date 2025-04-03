@@ -13,4 +13,8 @@ select distinct
     ) horario_inicio,
     safe_cast(iddeputado as string) id_deputado,
 from
-    `basedosdados-staging.br_camara_dados_abertos_staging.evento_presenca_deputado` as t
+    {{
+        set_datalake_project(
+            "br_camara_dados_abertos_staging.evento_presenca_deputado"
+        )
+    }} as t

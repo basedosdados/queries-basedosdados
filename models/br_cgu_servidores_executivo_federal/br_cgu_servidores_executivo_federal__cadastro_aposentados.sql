@@ -83,5 +83,8 @@ select
     ) diploma_ingresso_servico_publico,
     safe_cast(origem as string) origem,
 from
-    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.cadastro_aposentados`
-    as t
+    {{
+        set_datalake_project(
+            "br_cgu_servidores_executivo_federal_staging.cadastro_aposentados"
+        )
+    }} as t

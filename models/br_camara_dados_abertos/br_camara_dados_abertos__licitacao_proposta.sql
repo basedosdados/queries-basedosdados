@@ -13,4 +13,6 @@ select distinct
     safe_cast(fornecedorsituacao as string) fornecedor_situacao,
     safe_cast(dataproposta as date) data_proposta,
     safe_cast(diasvalidadeproposta as int64) validade_proposta,
-from `basedosdados-staging.br_camara_dados_abertos_staging.licitacao_proposta` as t
+from
+    {{ set_datalake_project("br_camara_dados_abertos_staging.licitacao_proposta") }}
+    as t

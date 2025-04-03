@@ -66,4 +66,5 @@ select
     safe_cast(descricao_cnae_2_doador_orig as string) descricao_cnae_2_doador_orig,
     safe_cast(nome_doador_orig_rf as string) nome_doador_orig_rf,
     safe_cast(valor_receita as float64) valor_receita
-from `basedosdados-staging.br_tse_eleicoes_staging.receitas_orgao_partidario` as t
+from
+    {{ set_datalake_project("br_tse_eleicoes_staging.receitas_orgao_partidario") }} as t

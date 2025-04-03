@@ -98,5 +98,9 @@ select
     safe_cast(v084 as int64) v084,
     safe_cast(v085 as int64) v085
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_alfabetizacao_total_2010`
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.setor_censitario_alfabetizacao_total_2010"
+        )
+    }}
     as t

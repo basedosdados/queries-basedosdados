@@ -22,4 +22,8 @@ select
         custo_marginal_operacao_semanal_carga_pesada as float64
     ) custo_marginal_operacao_semanal_carga_pesada
 from
-    `basedosdados-staging.br_ons_estimativa_custos_staging.custo_marginal_operacao_semanal` t
+    {{
+        set_datalake_project(
+            "br_ons_estimativa_custos_staging.custo_marginal_operacao_semanal"
+        )
+    }} t

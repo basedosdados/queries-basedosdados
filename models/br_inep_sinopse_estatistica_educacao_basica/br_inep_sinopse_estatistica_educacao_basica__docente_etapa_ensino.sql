@@ -38,7 +38,11 @@ with
                 replace(quantidade_docentes, ".0", "") as int64
             ) quantidade_docente,
         from
-            `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.docente_etapa_ensino`
+            {{
+                set_datalake_project(
+                    "br_inep_sinopse_estatistica_educacao_basica_staging.docente_etapa_ensino"
+                )
+            }}
     )
 
 select

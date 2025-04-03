@@ -24,4 +24,6 @@ select
         end as string
     ) tipo_deficiencia,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
-from `basedosdados-staging.br_inep_educacao_especial_staging.tipo_deficiencia` as t
+from
+    {{ set_datalake_project("br_inep_educacao_especial_staging.tipo_deficiencia") }}
+    as t

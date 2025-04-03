@@ -27,4 +27,4 @@ select
     safe_cast(win as int64) win,
     safe_cast(nomination as int64) nomination,
     safe_cast(oscar as int64) oscar,
-from `basedosdados-staging.world_imdb_movies_staging.top_movies_per_year` as t
+from {{ set_datalake_project("world_imdb_movies_staging.top_movies_per_year") }} as t

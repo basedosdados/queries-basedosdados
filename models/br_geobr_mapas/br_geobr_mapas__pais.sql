@@ -6,4 +6,4 @@
     )
 }}
 select safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.pais` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.pais") }} as t
