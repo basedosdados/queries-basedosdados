@@ -14,4 +14,4 @@ select
     safe_cast(replace(id_municipio, ".0", "") as string) id_municipio,
     safe_cast(sigla_uf as string) sigla_uf,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.area_risco_desastre` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.area_risco_desastre") }} as t

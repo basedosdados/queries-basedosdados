@@ -22,7 +22,7 @@ select
     safe_cast(
         ltrim(qualificacao_contribuinte, '0') as string
     ) qualificacao_contribuinte,
-from `basedosdados-staging.br_rf_cno_staging.vinculos` as t
+from {{ set_datalake_project("br_rf_cno_staging.vinculos") }} as t
 
 {% if is_incremental() %}
     where safe_cast(data as date) > (select max(data_extracao) from {{ this }})

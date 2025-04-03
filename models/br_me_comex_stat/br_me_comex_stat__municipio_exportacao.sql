@@ -28,7 +28,7 @@ select
     ) id_municipio,
     safe_cast(peso_liquido_kg as int64) peso_liquido_kg,
     safe_cast(valor_fob_dolar as int64) valor_fob_dolar
-from `basedosdados-staging.br_me_comex_stat_staging.municipio_exportacao` as t
+from {{ set_datalake_project("br_me_comex_stat_staging.municipio_exportacao") }} as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

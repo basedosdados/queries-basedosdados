@@ -19,7 +19,7 @@ with
     raw_cnes_incentivos as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.incentivos`
+        from {{ set_datalake_project("br_ms_cnes_staging.incentivos") }}
         where cnes is not null
     ),
     raw_cnes_incentivos_without_duplicates as (

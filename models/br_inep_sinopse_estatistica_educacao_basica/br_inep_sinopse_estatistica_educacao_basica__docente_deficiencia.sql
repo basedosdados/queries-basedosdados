@@ -33,4 +33,8 @@ select
     safe_cast(deficiencia as string) deficiencia,
     safe_cast(quantidade_docente as int64) quantidade_docente,
 from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.docente_deficiencia`
+    {{
+        set_datalake_project(
+            "br_inep_sinopse_estatistica_educacao_basica_staging.docente_deficiencia"
+        )
+    }}

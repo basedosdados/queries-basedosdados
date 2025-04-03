@@ -10,4 +10,4 @@ select
     safe_cast(end_date as date) end_date,
     safe_cast(competition_date as string) competition_date,
     safe_cast(isheld as string) is_held,
-from `basedosdados-staging.world_olympedia_olympics_staging.game` as t
+from {{ set_datalake_project("world_olympedia_olympics_staging.game") }} as t

@@ -9,4 +9,4 @@
 select
     safe_cast(id_etnia_indigena as string) id_etnia_indigena,
     safe_cast(nome as string) nome
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.etnia_indigena` as t
+from {{ set_datalake_project("br_bd_diretorios_brasil_staging.etnia_indigena") }} as t

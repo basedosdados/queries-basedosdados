@@ -25,4 +25,6 @@ select
     safe_cast(sigla_partido as string) sigla_partido,
     safe_cast(votos_nominais as int64) votos_nominais,
     safe_cast(votos_legenda as int64) votos_legenda
-from `basedosdados-staging.br_tse_eleicoes_staging.resultados_partido_municipio` as t
+from
+    {{ set_datalake_project("br_tse_eleicoes_staging.resultados_partido_municipio") }}
+    as t

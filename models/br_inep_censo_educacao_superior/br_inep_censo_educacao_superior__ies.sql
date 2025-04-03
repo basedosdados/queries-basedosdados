@@ -183,4 +183,4 @@ select
     safe_cast(
         quantidade_docentes_exercicio_deficiencia as int64
     ) quantidade_docentes_exercicio_deficiencia,
-from `basedosdados-staging.br_inep_censo_educacao_superior_staging.ies` as t
+from {{ set_datalake_project("br_inep_censo_educacao_superior_staging.ies") }} as t

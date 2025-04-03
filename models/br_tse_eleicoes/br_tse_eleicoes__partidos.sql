@@ -33,4 +33,4 @@ select
     safe_cast(sigla_federacao as string) sigla_federacao,
     safe_cast(composicao_federacao as string) composicao_federacao,
     safe_cast(situacao_legenda as string) situacao_legenda
-from `basedosdados-staging.br_tse_eleicoes_staging.partidos` as t
+from {{ set_datalake_project("br_tse_eleicoes_staging.partidos") }} as t

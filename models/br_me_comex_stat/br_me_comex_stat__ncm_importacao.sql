@@ -29,7 +29,7 @@ select
     safe_cast(valor_fob_dolar as float64) valor_fob_dolar,
     safe_cast(valor_frete as float64) valor_frete,
     safe_cast(valor_seguro as float64) valor_seguro
-from `basedosdados-staging.br_me_comex_stat_staging.ncm_importacao` as t
+from {{ set_datalake_project("br_me_comex_stat_staging.ncm_importacao") }} as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

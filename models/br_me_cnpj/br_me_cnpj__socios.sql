@@ -27,7 +27,7 @@ with
                 cast(qualificacao_representante_legal as int64) as string
             ) qualificacao_representante_legal,
             safe_cast(faixa_etaria as string) faixa_etaria
-        from `basedosdados-staging.br_me_cnpj_staging.socios` as t
+        from {{ set_datalake_project("br_me_cnpj_staging.socios") }} as t
         where qualificacao != "qualificacao"
     )
 select *

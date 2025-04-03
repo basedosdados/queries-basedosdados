@@ -19,4 +19,4 @@ select
     safe_cast(rede as string) rede,
     safe_cast(tempo_ensino as string) tempo_ensino,
     safe_cast(quantidade_matricula as numeric) quantidade_matricula,
-from `basedosdados-staging.br_inep_educacao_especial_staging.tempo_ensino` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.tempo_ensino") }} as t

@@ -11,5 +11,8 @@ select
     safe_cast(etapa_ensino as string) etapa_ensino,
     safe_cast(tdi as float64) tdi,
 from
-    `basedosdados-staging.br_inep_educacao_especial_staging.brasil_distorcao_idade_serie`
-    as t
+    {{
+        set_datalake_project(
+            "br_inep_educacao_especial_staging.brasil_distorcao_idade_serie"
+        )
+    }} as t

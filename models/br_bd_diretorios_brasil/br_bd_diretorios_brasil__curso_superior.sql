@@ -12,4 +12,4 @@ select
     safe_cast(id_area as string) id_area,
     safe_cast(nome_area as string) nome_area,
     safe_cast(grau_academico as string) grau_academico
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.curso_superior` as t
+from {{ set_datalake_project("br_bd_diretorios_brasil_staging.curso_superior") }} as t

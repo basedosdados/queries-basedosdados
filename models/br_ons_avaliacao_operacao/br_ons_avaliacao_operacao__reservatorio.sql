@@ -26,4 +26,4 @@ select
     safe_cast(perda_carga as float64) perda_carga,
     safe_cast(latitude as float64) latitude,
     safe_cast(longitude as float64) longitude
-from `basedosdados-staging.br_ons_avaliacao_operacao_staging.reservatorio` as t
+from {{ set_datalake_project("br_ons_avaliacao_operacao_staging.reservatorio") }} as t

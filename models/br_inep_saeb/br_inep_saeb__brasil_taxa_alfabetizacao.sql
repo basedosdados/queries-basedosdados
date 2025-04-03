@@ -11,4 +11,4 @@ select
     safe_cast(localizacao as string) localizacao,
     safe_cast(area as string) area,
     safe_cast(taxa_alfabetizacao as float64) taxa_alfabetizacao,
-from `basedosdados-staging.br_inep_saeb_staging.brasil_taxa_alfabetizacao` as t
+from {{ set_datalake_project("br_inep_saeb_staging.brasil_taxa_alfabetizacao") }} as t

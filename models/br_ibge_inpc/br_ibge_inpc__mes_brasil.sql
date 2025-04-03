@@ -19,7 +19,7 @@ select
     safe_cast(variacao_semestral as float64) variacao_semestral,
     safe_cast(variacao_anual as float64) variacao_anual,
     safe_cast(variacao_doze_meses as float64) variacao_doze_meses
-from `basedosdados-staging.br_ibge_inpc_staging.mes_brasil` as t
+from {{ set_datalake_project("br_ibge_inpc_staging.mes_brasil") }} as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

@@ -16,5 +16,9 @@ select
         quantidade_policial_civil_morto_servico as int64
     ) quantidade_policial_civil_morto_servico
 from
-    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.evolucao_policial_morto_servico_mensal`
+    {{
+        set_datalake_project(
+            "br_rj_isp_estatisticas_seguranca_staging.evolucao_policial_morto_servico_mensal"
+        )
+    }}
     as t

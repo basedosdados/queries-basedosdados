@@ -35,4 +35,4 @@ select
         then null
         else safe_cast(data_baixa_processo as date)
     end data_baixa_processo
-from `basedosdados-staging.br_stf_corte_aberta_staging.decisoes` as t
+from {{ set_datalake_project("br_stf_corte_aberta_staging.decisoes") }} as t

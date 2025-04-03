@@ -255,5 +255,8 @@ select
     safe_cast(m6462 as string) m6462,
     safe_cast(m6472 as string) m6472
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_pessoa_2010 `
-    as t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.microdados_pessoa_2010 "
+        )
+    }} as t

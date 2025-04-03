@@ -367,4 +367,4 @@ select
     safe_cast(safe_cast(tipo_ficha as numeric) as string) tipo_ficha,
     safe_cast(requisicao_sistema_gal as string) requisicao_sistema_gal,
     safe_cast(safe_cast(controle_srag_sinan as numeric) as string) controle_srag_sinan
-from `basedosdados-staging.br_ms_sinan_staging.microdados_influenza_srag` as t
+from {{ set_datalake_project("br_ms_sinan_staging.microdados_influenza_srag") }} as t

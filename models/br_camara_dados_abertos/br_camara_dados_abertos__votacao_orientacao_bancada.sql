@@ -6,5 +6,8 @@ select
     safe_cast(siglabancada as string) sigla_bancada,
     safe_cast(orientacao as string) orientacao,
 from
-    `basedosdados-staging.br_camara_dados_abertos_staging.votacao_orientacao_bancada`
-    as t
+    {{
+        set_datalake_project(
+            "br_camara_dados_abertos_staging.votacao_orientacao_bancada"
+        )
+    }} as t

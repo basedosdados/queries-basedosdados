@@ -16,4 +16,8 @@ select
     safe_cast(parse_date('%d/%m/%Y', data_de_inclusao) as date) data_apostilamento,
     safe_cast(replace(valor_apostilamento, ",", ".") as float64) valor_apostilamento,
 from
-    `basedosdados-staging.br_cgu_licitacao_contrato_staging.contrato_apostilamento` as t
+    {{
+        set_datalake_project(
+            "br_cgu_licitacao_contrato_staging.contrato_apostilamento"
+        )
+    }} as t

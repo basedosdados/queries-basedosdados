@@ -5,4 +5,4 @@ select
     safe_cast(replace(chave, ".0", "") as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor,
-from `basedosdados-staging.br_ibge_censo_demografico_staging.dicionario` as t
+from {{ set_datalake_project("br_ibge_censo_demografico_staging.dicionario") }} as t

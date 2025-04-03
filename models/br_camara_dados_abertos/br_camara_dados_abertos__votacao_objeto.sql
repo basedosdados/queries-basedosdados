@@ -19,4 +19,4 @@ select
     safe_cast(proposicao_siglatipo as string) sigla_tipo,
     safe_cast(replace(proposicao_numero, ".0", "") as string) numero,
     safe_cast(proposicao_titulo as string) titulo
-from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_objeto` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.votacao_objeto") }} as t

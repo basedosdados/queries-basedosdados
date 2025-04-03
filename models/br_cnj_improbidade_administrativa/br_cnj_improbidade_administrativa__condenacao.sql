@@ -347,4 +347,4 @@ select
     safe_cast(assunto_3 as string) assunto_3,
     safe_cast(assunto_4 as string) assunto_4,
     safe_cast(assunto_5 as string) assunto_5,
-from `basedosdados-staging.br_cnj_improbidade_administrativa_staging.condenacao`
+from {{ set_datalake_project("br_cnj_improbidade_administrativa_staging.condenacao") }}

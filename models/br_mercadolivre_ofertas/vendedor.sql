@@ -21,7 +21,7 @@ with
                 when classificacao = 'None' then null else classificacao
             end as classificacao,
             id_municipio,
-        from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
+        from {{ set_datalake_project("br_mercadolivre_ofertas_staging.vendedor") }}
     ),
     predata as (
         select
@@ -31,7 +31,7 @@ with
                 json_extract_scalar(opinioes, '$.Regular') as regular,
                 json_extract_scalar(opinioes, '$.Ruim') as ruim
             ) as opinioes
-        from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
+        from {{ set_datalake_project("br_mercadolivre_ofertas_staging.vendedor") }}
     ),
     tabela_ordenada as (
         select

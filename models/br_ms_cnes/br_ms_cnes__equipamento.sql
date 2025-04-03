@@ -21,7 +21,7 @@ with
     raw_cnes_equipamento as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.equipamento`
+        from {{ set_datalake_project("br_ms_cnes_staging.equipamento") }}
         where cnes is not null
     ),
     unique_raw_cnes_equipamento as (

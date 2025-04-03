@@ -37,4 +37,9 @@ select
     safe_cast(
         proporcao_energia_natural_afluente_armazenavel as float64
     ) proporcao_energia_natural_afluente_armazenavel
-from `basedosdados-staging.br_ons_avaliacao_operacao_staging.energia_natural_afluente` t
+from
+    {{
+        set_datalake_project(
+            "br_ons_avaliacao_operacao_staging.energia_natural_afluente"
+        )
+    }} t

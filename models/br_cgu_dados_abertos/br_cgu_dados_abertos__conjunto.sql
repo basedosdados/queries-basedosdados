@@ -17,4 +17,4 @@ select
     safe_cast(quantidade_reusos as int64) quantidade_reusos,
     safe_cast(quantidade_recursos as int64) quantidade_recursos,
     safe_cast(quantidade_downloads as int64) quantidade_downloads,
-from `basedosdados-staging.br_cgu_dados_abertos_staging.conjunto` as c
+from {{ set_datalake_project("br_cgu_dados_abertos_staging.conjunto") }} as c

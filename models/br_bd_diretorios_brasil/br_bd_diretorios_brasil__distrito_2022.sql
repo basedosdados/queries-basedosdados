@@ -11,6 +11,9 @@ select distinct
     safe_cast(cd_mun as string) as id_municipio,
     safe_cast(sigla as string) as sigla_uf,
 from
-    `basedosdados-staging.br_ibge_censo_2022_staging.domicilio_morador_setor_censitario`
-    as a
+    {{
+        set_datalake_project(
+            "br_ibge_censo_2022_staging.domicilio_morador_setor_censitario"
+        )
+    }} as a
 left join `basedosdados.br_bd_diretorios_brasil.uf` as b on a.id_uf = b.id_uf

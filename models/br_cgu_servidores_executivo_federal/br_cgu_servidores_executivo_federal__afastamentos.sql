@@ -38,4 +38,8 @@ select
     ) as data_final,
     safe_cast(origem as string) origem,
 from
-    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.afastamentos` as t
+    {{
+        set_datalake_project(
+            "br_cgu_servidores_executivo_federal_staging.afastamentos"
+        )
+    }} as t

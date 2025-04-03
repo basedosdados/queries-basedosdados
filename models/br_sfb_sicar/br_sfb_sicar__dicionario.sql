@@ -13,4 +13,4 @@ select
     safe_cast(chave as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor,
-from `basedosdados-staging.br_sfb_sicar_staging.dicionario` as t
+from {{ set_datalake_project("br_sfb_sicar_staging.dicionario") }} as t

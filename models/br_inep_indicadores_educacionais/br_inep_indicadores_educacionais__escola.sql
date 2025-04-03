@@ -225,4 +225,4 @@ select
     safe_cast(
         icg_nivel_complexidade_gestao_escola as string
     ) icg_nivel_complexidade_gestao_escola,
-from `basedosdados-staging.br_inep_indicadores_educacionais_staging.escola` as t
+from {{ set_datalake_project("br_inep_indicadores_educacionais_staging.escola") }} as t

@@ -1,5 +1,4 @@
 {{
-    
     config(
         alias="lavoura_permanente",
         schema="br_ibge_pam",
@@ -21,4 +20,4 @@ select
     round(safe_cast(quantidade_produzida as float64), 4) quantidade_produzida,
     round(safe_cast(rendimento_medio_producao as float64), 4) rendimento_medio_producao,
     round(safe_cast(valor_producao as float64), 4) valor_producao
-from `basedosdados-staging.br_ibge_pam_staging.lavoura_permanente` as t
+from {{ set_datalake_project("br_ibge_pam_staging.lavoura_permanente") }} as t

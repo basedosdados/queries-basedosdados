@@ -47,4 +47,4 @@ select
     safe_cast(tipo_fundo_investimento as string) tipo_fundo_investimento,
     safe_cast(ultimo_comunicado as string) ultimo_comunicado,
     safe_cast(data_comunicado as date) data_comunicado
-from `basedosdados-staging.br_cvm_oferta_publica_distribuicao_staging.dia` as t
+from {{ set_datalake_project("br_cvm_oferta_publica_distribuicao_staging.dia") }} as t

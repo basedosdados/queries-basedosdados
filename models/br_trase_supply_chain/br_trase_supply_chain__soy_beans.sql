@@ -32,7 +32,7 @@ with
                 )
             ) name_logistics_hub,
             safe_cast(substr(trase_geocode, 4, 11) as string) municipality_id
-        from `basedosdados-staging.br_trase_supply_chain_staging.soy_beans`
+        from {{ set_datalake_project("br_trase_supply_chain_staging.soy_beans") }}
 
     ),
     iso3 as (

@@ -19,7 +19,7 @@ with
     raw_cnes_dados_complementares as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.dados_complementares`
+        from {{ set_datalake_project("br_ms_cnes_staging.dados_complementares") }}
         where cnes is not null
     ),
     raw_cnes_dados_complementares_without_duplicates as (

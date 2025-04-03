@@ -13,4 +13,4 @@ select
         '(Zona de Preservação Ambiental',
         'Zona de Preservação Ambiental'
     ) as valor
-from `basedosdados-staging.br_mg_belohorizonte_smfa_iptu_staging.dicionario` as t
+from {{ set_datalake_project("br_mg_belohorizonte_smfa_iptu_staging.dicionario") }} as t

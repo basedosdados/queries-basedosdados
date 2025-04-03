@@ -28,4 +28,4 @@ select
     safe_cast(id_setor_censitario as string) id_setor_censitario,
     safe_cast(zona as string) zona,
     safe.st_geogfromtext(geometria) geometria
-from `basedosdados-staging.br_geobr_mapas_staging.setor_censitario_2010` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.setor_censitario_2010") }} as t

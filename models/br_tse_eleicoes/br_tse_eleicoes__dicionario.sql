@@ -12,4 +12,4 @@ select
     safe_cast(chave as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor,
-from `basedosdados-staging.br_tse_eleicoes_staging.dicionario` as t
+from {{ set_datalake_project("br_tse_eleicoes_staging.dicionario") }} as t

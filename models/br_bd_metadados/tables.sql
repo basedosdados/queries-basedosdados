@@ -18,4 +18,4 @@ select
     safe_cast(published_by as string) published_by,
     safe_cast(cleaned_by as string) cleaned_by,
     safe_cast(missing_metadata as string) missing_metadata
-from `basedosdados-staging.br_bd_metadados_staging.tables` as t
+from {{ set_datalake_project("br_bd_metadados_staging.tables") }} as t

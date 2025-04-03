@@ -20,7 +20,7 @@ select
     safe_cast(tipo_area as string) tipo_area,
     safe_cast(tipo_area_complementar as string) tipo_area_complementar,
     safe_cast(metragem as float64) metragem,
-from `basedosdados-staging.br_rf_cno_staging.areas` as t
+from {{ set_datalake_project("br_rf_cno_staging.areas") }} as t
 {% if is_incremental() %}
     where safe_cast(data as date) > (select max(data_extracao) from {{ this }})
 {% endif %}

@@ -95,7 +95,7 @@ select
     safe_cast(in_tp_val as string) tipo_valor,
     safe_cast(ltrim(sequencia) as string) sequencia,
     safe_cast(remessa as string) nome_remessa,
-from `basedosdados-staging.br_ms_sih_staging.servicos_profissionais` as sih
+from {{ set_datalake_project("br_ms_sih_staging.servicos_profissionais") }} as sih
 left join
     (
         select id_municipio, id_municipio_6,

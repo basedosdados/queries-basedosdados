@@ -15,4 +15,6 @@ select
         quantidade_docente_formacao_continuada as numeric
     ) quantidade_docente_formacao_continuada,
 
-from `basedosdados-staging.br_inep_educacao_especial_staging.docente_formacao` as t
+from
+    {{ set_datalake_project("br_inep_educacao_especial_staging.docente_formacao") }}
+    as t

@@ -81,5 +81,9 @@ select
         diploma_ingresso_servico_publico as string
     ) diploma_ingresso_servico_publico,
 from
-    `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.cadastro_reserva_reforma_militares`
+    {{
+        set_datalake_project(
+            "br_cgu_servidores_executivo_federal_staging.cadastro_reserva_reforma_militares"
+        )
+    }}
     as t

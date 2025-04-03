@@ -13,4 +13,4 @@ select
         date from safe.parse_datetime('%d/%m/%Y %T', data_modificacao_metadados)
     ) data_modificacao_metadados,
     safe_cast(quantidade_downloads as int64) quantidade_downloads,
-from `basedosdados-staging.br_cgu_dados_abertos_staging.recurso` as r
+from {{ set_datalake_project("br_cgu_dados_abertos_staging.recurso") }} as r

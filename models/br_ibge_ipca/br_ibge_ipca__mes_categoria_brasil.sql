@@ -15,7 +15,7 @@
 with
     drop_duplicates as (
         select distinct *
-        from `basedosdados-staging.br_ibge_ipca_staging.mes_categoria_brasil`
+        from {{ set_datalake_project("br_ibge_ipca_staging.mes_categoria_brasil") }}
     )
 
 select

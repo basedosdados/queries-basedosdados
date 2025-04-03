@@ -17,5 +17,9 @@ select
         moradores_em_domicilios_particulares_permanentes_ocupados_pessoas_ as int64
     ) populacao,
 from
-    `basedosdados-staging.br_ibge_censo_2022_staging.caracteristica_domicilio_grupo_idade_raca_ligacao_abastecimento_agua`
+    {{
+        set_datalake_project(
+            "br_ibge_censo_2022_staging.caracteristica_domicilio_grupo_idade_raca_ligacao_abastecimento_agua"
+        )
+    }}
     as t

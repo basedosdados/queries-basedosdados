@@ -13,4 +13,9 @@ select
     safe_cast(numero_ordem as string) numero_ordem,
     safe_cast(id_referencia_bacen_efetivo as string) id_referencia_bacen_efetivo,
     safe_cast(id_agencia as string) id_agencia
-from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_complemento_operacao` t
+from
+    {{
+        set_datalake_project(
+            "br_bcb_sicor_staging.recurso_publico_complemento_operacao"
+        )
+    }} t

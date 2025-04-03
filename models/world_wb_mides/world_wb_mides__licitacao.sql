@@ -45,4 +45,4 @@ select
     safe_cast(tipo_cadastro as string) tipo_cadastro,
     safe_cast(carona as string) carona,
     safe_cast(covid_19 as string) covid_19
-from `basedosdados-staging.world_wb_mides_staging.licitacao` as t
+from {{ set_datalake_project("world_wb_mides_staging.licitacao") }} as t

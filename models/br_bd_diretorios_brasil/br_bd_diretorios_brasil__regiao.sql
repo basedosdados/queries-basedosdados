@@ -7,4 +7,4 @@
 }}
 
 select safe_cast(sigla as string) sigla, safe_cast(nome as string) nome
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.regiao` as t
+from {{ set_datalake_project("br_bd_diretorios_brasil_staging.regiao") }} as t

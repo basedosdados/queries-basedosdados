@@ -20,4 +20,4 @@ select
     safe_cast(legislacao as string) legislacao,
     safe_cast(data_ultima as date) data_ultima,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.unidade_conservacao` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.unidade_conservacao") }} as t

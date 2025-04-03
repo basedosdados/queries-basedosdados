@@ -11,7 +11,12 @@ with
             ) sigla_uf,
             safe_cast(especie as string) especie,
             safe_cast(domicilios_recenseados_domicilios_ as int64) domicilios,
-        from `basedosdados-staging.br_ibge_censo_2022_staging.domicilio_recenseado` as t
+        from
+            {{
+                set_datalake_project(
+                    "br_ibge_censo_2022_staging.domicilio_recenseado"
+                )
+            }} as t
     )
 select t2.cod as id_municipio, ibge.* except (municipio, nome_municipio, sigla_uf)
 from ibge

@@ -372,4 +372,4 @@ select
             else null
         end as date
     ) as date_database_creation
-from `basedosdados-staging.world_oecd_pisa_staging.student` as t
+from {{ set_datalake_project("world_oecd_pisa_staging.student") }} as t

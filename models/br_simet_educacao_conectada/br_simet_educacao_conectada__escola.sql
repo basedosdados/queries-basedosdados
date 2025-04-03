@@ -68,4 +68,4 @@ select
     st_geogpoint(safe_cast(longitude as float64), safe_cast(latitude as float64)) ponto,
     date(2024, 12, 12) data_ultima_atualizacao
 
-from `basedosdados-staging.br_simet_educacao_conectada_staging.escola` as t
+from {{ set_datalake_project("br_simet_educacao_conectada_staging.escola") }} as t

@@ -90,6 +90,9 @@ select
     safe_cast(replace (chutes_fora_man, ".0", "") as int64) chutes_fora_mandante,
     safe_cast(replace (chutes_fora_vis, ".0", "") as int64) chutes_fora_visitante
 from
-    `basedosdados-staging.mundo_transfermarkt_competicoes_staging.brasileirao_serie_a`
-    as t
+    {{
+        set_datalake_project(
+            "mundo_transfermarkt_competicoes_staging.brasileirao_serie_a"
+        )
+    }} as t
 where data is not null

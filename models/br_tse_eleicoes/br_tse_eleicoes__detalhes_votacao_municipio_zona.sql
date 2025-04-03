@@ -39,4 +39,9 @@ select
     safe_cast(proporcao_votos_validos as float64) proporcao_votos_validos,
     safe_cast(proporcao_votos_brancos as float64) proporcao_votos_brancos,
     safe_cast(proporcao_votos_nulos as float64) proporcao_votos_nulos
-from `basedosdados-staging.br_tse_eleicoes_staging.detalhes_votacao_municipio_zona` as t
+from
+    {{
+        set_datalake_project(
+            "br_tse_eleicoes_staging.detalhes_votacao_municipio_zona"
+        )
+    }} as t

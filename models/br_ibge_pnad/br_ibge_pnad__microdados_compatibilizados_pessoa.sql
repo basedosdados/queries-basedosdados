@@ -118,5 +118,10 @@ select
     safe_cast(renda_abono_deflacionado as float64) renda_abono_deflacionado,
     safe_cast(renda_aluguel_deflacionado as float64) renda_aluguel_deflacionado,
     safe_cast(renda_outras_deflacionado as float64) renda_outras_deflacionado
-from `basedosdados-staging.br_ibge_pnad_staging.microdados_compatibilizados_pessoa`
+from
+    {{
+        set_datalake_project(
+            "br_ibge_pnad_staging.microdados_compatibilizados_pessoa"
+        )
+    }}
 where ano > 1990

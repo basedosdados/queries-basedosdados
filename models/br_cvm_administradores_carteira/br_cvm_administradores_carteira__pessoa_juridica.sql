@@ -44,7 +44,11 @@ with
             safe_cast(email as string) email,
             safe_cast(website as string) website
         from
-            `basedosdados-staging.br_cvm_administradores_carteira_staging.pessoa_juridica` t
+            {{
+                set_datalake_project(
+                    "br_cvm_administradores_carteira_staging.pessoa_juridica"
+                )
+            }} t
     )
 select *
 from tabela

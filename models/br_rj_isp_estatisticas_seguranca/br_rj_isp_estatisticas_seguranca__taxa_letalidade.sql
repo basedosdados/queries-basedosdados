@@ -8,5 +8,8 @@ select
     safe_cast(populacao as int64) populacao,
     safe_cast(taxa_cem_mil_habitantes as int64) taxa_cem_mil_habitantes
 from
-    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.taxa_letalidade `
-    as t
+    {{
+        set_datalake_project(
+            "br_rj_isp_estatisticas_seguranca_staging.taxa_letalidade "
+        )
+    }} as t

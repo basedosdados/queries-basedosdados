@@ -9,4 +9,4 @@ select distinct
     upper(safe_cast(siglaufautor as string)) sigla_uf_autor,
     safe_cast(ordemassinatura as string) ordem_assinatura,
     safe_cast(proponente as string) proponente,
-from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_autor` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.proposicao_autor") }} as t

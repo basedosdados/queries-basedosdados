@@ -9,4 +9,5 @@ select
     safe_cast(silver as int64) silver,
     safe_cast(bronze as int64) bronze,
     safe_cast(total as int64) total,
-from `basedosdados-staging.world_olympedia_olympics_staging.game_medal_tally` as t
+from
+    {{ set_datalake_project("world_olympedia_olympics_staging.game_medal_tally") }} as t

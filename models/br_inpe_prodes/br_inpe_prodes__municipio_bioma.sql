@@ -8,4 +8,4 @@ select
     safe_cast(floresta as float64) vegetacao_natural,
     safe_cast(nao_floresta as float64) nao_vegetacao_natural,
     safe_cast(hidrografia as float64) hidrografia
-from `basedosdados-staging.br_inpe_prodes_staging.municipio_bioma` as t
+from {{ set_datalake_project("br_inpe_prodes_staging.municipio_bioma") }} as t

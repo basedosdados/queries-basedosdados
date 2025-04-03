@@ -14,7 +14,8 @@
 with
     drop_duplicates as (
         select distinct *
-        from `basedosdados-staging.br_ibge_ipca15_staging.mes_categoria_municipio`
+        from
+            {{ set_datalake_project("br_ibge_ipca15_staging.mes_categoria_municipio") }}
     )
 select
     safe_cast(ano as int64) ano,

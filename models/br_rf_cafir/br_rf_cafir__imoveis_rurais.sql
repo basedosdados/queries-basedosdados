@@ -15,7 +15,7 @@
 with
     lower_munis as (
         select *, lower(municipio) as nome_mun,
-        from `basedosdados-staging.br_rf_cafir_staging.imoveis_rurais`
+        from {{ set_datalake_project("br_rf_cafir_staging.imoveis_rurais") }}
     ),
     fixed_names as (
         select

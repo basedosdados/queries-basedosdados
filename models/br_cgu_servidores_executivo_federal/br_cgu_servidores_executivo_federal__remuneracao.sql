@@ -97,4 +97,9 @@ select
         replace(total_verba_indenizatoria_usd, ",", ".") as float64
     ) total_verba_indenizatoria_usd,
     safe_cast(origem as string) origem,
-from `basedosdados-staging.br_cgu_servidores_executivo_federal_staging.remuneracao` as t
+from
+    {{
+        set_datalake_project(
+            "br_cgu_servidores_executivo_federal_staging.remuneracao"
+        )
+    }} as t

@@ -14,4 +14,4 @@ select
     safe_cast(indicador_cnae_2_1 as int64) indicador_cnae_2_1,
     safe_cast(indicador_cnae_2_2 as int64) indicador_cnae_2_2,
     safe_cast(indicador_cnae_2_3 as int64) indicador_cnae_2_3,
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.cnae_2` as t
+from {{ set_datalake_project("br_bd_diretorios_brasil_staging.cnae_2") }} as t

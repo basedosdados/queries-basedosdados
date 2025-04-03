@@ -19,4 +19,6 @@ select distinct
     safe_cast(fornecedorcpfcnpj as string) cpf_cnpj_fornecedor,
     safe_cast(vlroriginal as int64) valor_original,
     safe_cast(vlrtotal as int64) valor_total,
-from `basedosdados-staging.br_camara_dados_abertos_staging.licitacao_contrato` as t
+from
+    {{ set_datalake_project("br_camara_dados_abertos_staging.licitacao_contrato") }}
+    as t

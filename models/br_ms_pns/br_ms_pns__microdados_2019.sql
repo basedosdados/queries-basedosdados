@@ -1089,4 +1089,4 @@ select
     safe_cast(vdp001 as string) vdp001,
     safe_cast(vdr001 as string) vdr001,
     safe_cast(safe.parse_date('%Y%m%d', vddata) as date) vddata,
-from `basedosdados-staging.br_ms_pns_staging.microdados_2019` as t
+from {{ set_datalake_project("br_ms_pns_staging.microdados_2019") }} as t

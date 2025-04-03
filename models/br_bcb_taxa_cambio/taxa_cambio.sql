@@ -14,4 +14,4 @@ select
     safe_cast(paridade_venda as float64) paridade_venda,
     safe_cast(cotacao_compra as float64) cotacao_compra,
     safe_cast(cotacao_venda as float64) cotacao_venda
-from `basedosdados-staging.br_bcb_taxa_cambio_staging.taxa_cambio` as t
+from {{ set_datalake_project("br_bcb_taxa_cambio_staging.taxa_cambio") }} as t

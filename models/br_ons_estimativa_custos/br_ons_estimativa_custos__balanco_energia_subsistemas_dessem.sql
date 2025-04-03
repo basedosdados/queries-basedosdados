@@ -29,4 +29,8 @@ select
         geracao_fotovoltaica_verificada as float64
     ) geracao_fotovoltaica_verificada
 from
-    `basedosdados-staging.br_ons_estimativa_custos_staging.balanco_energia_subsistemas_dessem` t
+    {{
+        set_datalake_project(
+            "br_ons_estimativa_custos_staging.balanco_energia_subsistemas_dessem"
+        )
+    }} t

@@ -11,4 +11,4 @@ select
     safe_cast(result_format as string) result_format,
     safe_cast(result_detail as string) result_detail,
     safe_cast(result_description as string) result_description,
-from `basedosdados-staging.world_olympedia_olympics_staging.result` as t
+from {{ set_datalake_project("world_olympedia_olympics_staging.result") }} as t

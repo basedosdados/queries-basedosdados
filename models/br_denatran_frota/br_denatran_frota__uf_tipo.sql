@@ -52,7 +52,7 @@ with
             end as tipo_veiculo2,
             quantidade
 
-        from `basedosdados-staging.br_denatran_frota_staging.uf_tipo`
+        from {{ set_datalake_project("br_denatran_frota_staging.uf_tipo") }}
     )
 
 select

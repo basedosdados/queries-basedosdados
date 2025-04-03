@@ -30,4 +30,4 @@ select
     safe_cast(cep as string) cep,
     safe_cast(municipio_participante as string) municipio_participante,
     safe_cast(tipo as string) tipo
-from `basedosdados-staging.world_wb_mides_staging.licitacao_participante` as t
+from {{ set_datalake_project("world_wb_mides_staging.licitacao_participante") }} as t

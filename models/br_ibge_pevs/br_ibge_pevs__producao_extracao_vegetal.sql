@@ -20,7 +20,7 @@ select
     safe_cast(unidade as string) unidade,
     safe_cast(quantidade as int64) quantidade,
     round(safe_cast(valor as float64), 4) valor,
-from `basedosdados-staging.br_ibge_pevs_staging.producao_extracao_vegetal`
+from {{ set_datalake_project("br_ibge_pevs_staging.producao_extracao_vegetal") }}
 where
     produto is not null  -- isso faz categorias de agregação caírem
     and quantidade is not null  -- isso faz unidade vazia cair

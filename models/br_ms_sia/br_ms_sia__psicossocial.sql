@@ -20,7 +20,8 @@ with
             psicossocial.*,
             mun.id_municipio as id_municipio_executante,
             mun_res.id_municipio as id_municipio_residencia
-        from `basedosdados-staging.br_ms_sia_staging.psicossocial` as psicossocial
+        from
+            {{ set_datalake_project("br_ms_sia_staging.psicossocial") }} as psicossocial
         left join
             (
                 select id_municipio, id_municipio_6

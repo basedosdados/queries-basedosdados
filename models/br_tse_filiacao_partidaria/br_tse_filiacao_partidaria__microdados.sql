@@ -36,7 +36,7 @@ with
             safe_cast(dtcancelamento as date) data_cancelamento,
             safe_cast(dtexclusao as date) data_exclusao,
             safe_cast(data_extracao as date) data_extracao,
-        from `basedosdados-staging.br_tse_filiacao_partidaria_staging.microdados`
+        from {{ set_datalake_project("br_tse_filiacao_partidaria_staging.microdados") }}
     ),
     select_rows as (
         select

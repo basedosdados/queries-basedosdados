@@ -18,4 +18,4 @@ select
     safe_cast(vlrestimado as int64) valor_estimado,
     safe_cast(vlrcontratado as int64) valor_contratado,
     safe_cast(vlrpago as int64) valor_pago,
-from `basedosdados-staging.br_camara_dados_abertos_staging.licitacao` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.licitacao") }} as t

@@ -75,5 +75,8 @@ select
     safe_cast(v557 as int64) v557,
     safe_cast(v570 as int64) v570
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_pessoa_1980 `
-    as t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.microdados_pessoa_1980 "
+        )
+    }} as t

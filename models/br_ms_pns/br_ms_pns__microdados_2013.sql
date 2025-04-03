@@ -1000,4 +1000,4 @@ select
     safe_cast(vdf002 as int64) vdf002,
     safe_cast(vdf003 as int64) vdf003,
     safe_cast(safe.parse_date('%Y%m%d', vddata) as date) vddata,
-from `basedosdados-staging.br_ms_pns_staging.microdados_2013` as t
+from {{ set_datalake_project("br_ms_pns_staging.microdados_2013") }} as t

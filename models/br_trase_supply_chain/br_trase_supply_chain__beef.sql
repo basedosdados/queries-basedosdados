@@ -32,7 +32,7 @@ with
                     'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'
                 )
             ) name_logistics_hub
-        from `basedosdados-staging.br_trase_supply_chain_staging.beef`
+        from {{ set_datalake_project("br_trase_supply_chain_staging.beef") }}
 
     ),
     iso3 as (

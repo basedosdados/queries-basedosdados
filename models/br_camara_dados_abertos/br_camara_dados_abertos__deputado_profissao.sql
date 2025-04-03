@@ -13,4 +13,6 @@ select distinct
     ) horario,
     safe_cast(codtipoprofissao as string) id_profissao,
     safe_cast(titulo as string) titulo,
-from `basedosdados-staging.br_camara_dados_abertos_staging.deputado_profissao` as t
+from
+    {{ set_datalake_project("br_camara_dados_abertos_staging.deputado_profissao") }}
+    as t

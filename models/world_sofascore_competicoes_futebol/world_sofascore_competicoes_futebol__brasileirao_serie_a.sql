@@ -97,5 +97,8 @@ select
     safe_cast(tiro_meta_mandante as int64) tiro_meta_mandante,
     safe_cast(tiro_meta_visitante as int64) tiro_meta_visitante,
 from
-    `basedosdados-staging.world_sofascore_competicoes_futebol_staging.brasileirao_serie_a`
-    as t
+    {{
+        set_datalake_project(
+            "world_sofascore_competicoes_futebol_staging.brasileirao_serie_a"
+        )
+    }} as t

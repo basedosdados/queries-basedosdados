@@ -17,5 +17,5 @@ select
     safe_cast(produto as string) produto,
     safe_cast(quantidade as int64) quantidade,
     safe_cast(valor as int64) valor,
-from `basedosdados-staging.br_ibge_ppm_staging.producao_aquicultura` as t
+from {{ set_datalake_project("br_ibge_ppm_staging.producao_aquicultura") }} as t
 where quantidade is not null

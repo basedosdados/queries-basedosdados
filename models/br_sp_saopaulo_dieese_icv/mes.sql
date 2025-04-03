@@ -3,4 +3,4 @@ select
     safe_cast(mes as int64) mes,
     safe_cast(indice as float64) indice,
     safe_cast(variacao_mensal as float64) variacao_mensal
-from `basedosdados-staging.br_sp_saopaulo_dieese_icv_staging.mes` as t
+from {{ set_datalake_project("br_sp_saopaulo_dieese_icv_staging.mes") }} as t

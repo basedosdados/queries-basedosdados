@@ -23,4 +23,4 @@ select
     safe_cast(sigla_partido as string) sigla_partido,
     safe_cast(condicao as int64) condicao,
     safe_cast(percentual as float64) percentual
-from `basedosdados-staging.br_poder360_pesquisas_staging.microdados` as t
+from {{ set_datalake_project("br_poder360_pesquisas_staging.microdados") }} as t

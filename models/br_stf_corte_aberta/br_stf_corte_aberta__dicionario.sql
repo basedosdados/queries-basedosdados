@@ -5,4 +5,4 @@ select
     safe_cast(initcap(chave) as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(initcap(valor) as string) valor,
-from `basedosdados-staging.br_stf_corte_aberta_staging.dicionario` as t
+from {{ set_datalake_project("br_stf_corte_aberta_staging.dicionario") }} as t

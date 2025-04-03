@@ -217,5 +217,9 @@ select
     safe_cast(v203 as int64) v203,
     safe_cast(v204 as int64) v204
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_relacao_parentesco_filhos_2010`
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.setor_censitario_relacao_parentesco_filhos_2010"
+        )
+    }}
     as t

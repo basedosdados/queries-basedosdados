@@ -13,4 +13,4 @@ select
     safe_cast(tipo_cpf_cnpj as string) tipo_cpf_cnpj,
     safe_cast(tipo_beneficiario as string) tipo_beneficiario,
     safe_cast(id_dap as string) id_dap
-from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_mutuario` as t
+from {{ set_datalake_project("br_bcb_sicor_staging.recurso_publico_mutuario") }} as t

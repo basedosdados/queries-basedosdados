@@ -35,4 +35,4 @@ select
         then null
         else initcap(ultimaapresentacaoproposicao_descricao)
     end as descricao_ultima_proposicao
-from `basedosdados-staging.br_camara_dados_abertos_staging.votacao` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.votacao") }} as t

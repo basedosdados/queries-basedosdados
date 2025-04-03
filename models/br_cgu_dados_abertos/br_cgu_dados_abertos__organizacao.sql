@@ -17,7 +17,7 @@ select
     safe_cast(m.id_municipio as string) id_municipio,
     safe_cast(o.qtdseguidores as int64) quantidade_seguidores,
     safe_cast(o.qtdconjuntodedados as int64) quantidade_conjuntos
-from `basedosdados-staging.br_cgu_dados_abertos_staging.organizacao` as o
+from {{ set_datalake_project("br_cgu_dados_abertos_staging.organizacao") }} as o
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` as m
     on o.organizationuf = m.sigla_uf
