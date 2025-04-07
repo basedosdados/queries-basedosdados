@@ -10,4 +10,6 @@ select
     safe_cast(proposicao_codtipo as string) codigo_tipo,
     safe_cast(proposicao_siglatipo as string) sigla_tipo,
     safe_cast(replace(proposicao_numero, ".0", "") as string) numero,
-from `basedosdados-staging.br_camara_dados_abertos_staging.votacao_proposicao` as t
+from
+    {{ set_datalake_project("br_camara_dados_abertos_staging.votacao_proposicao") }}
+    as t

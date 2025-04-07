@@ -38,4 +38,4 @@ select
     safe_cast(vento_direcao as float64) vento_direcao,
     safe_cast(vento_rajada_max as float64) vento_rajada_max,
     safe_cast(vento_velocidade as float64) vento_velocidade
-from `basedosdados-staging.br_inmet_bdmep_staging.microdados` as t
+from {{ set_datalake_project("br_inmet_bdmep_staging.microdados") }} as t

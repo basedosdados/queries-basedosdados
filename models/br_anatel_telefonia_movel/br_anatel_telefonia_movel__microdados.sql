@@ -33,4 +33,4 @@ select
     safe_cast(pessoa as string) pessoa,
     safe_cast(produto as string) produto,
     safe_cast(acessos as int64) acessos
-from `basedosdados-staging.br_anatel_telefonia_movel_staging.microdados` as t
+from {{ set_datalake_project("br_anatel_telefonia_movel_staging.microdados") }} as t

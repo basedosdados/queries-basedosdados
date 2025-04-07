@@ -1430,7 +1430,8 @@ select
     safe_cast(v01409 as int64) v01409,
     safe_cast(v01410 as int64) v01410,
     safe_cast(v01411 as int64) v01411,
-from `basedosdados-staging.br_ibge_censo_2022_staging.setor_censitario` as setores
+from
+    {{ set_datalake_project("br_ibge_censo_2022_staging.setor_censitario") }} as setores
 left join
     `basedosdados-staging.br_ibge_censo_2022_staging.Agregados_por_setores_alfabetizacao_BR`
     as alfabetizacao

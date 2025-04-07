@@ -11,4 +11,6 @@ select
     safe_cast(pos as string) position,
     safe_cast(medal as string) medal,
     safe_cast(isteamsport as bool) is_team_sport,
-from `basedosdados-staging.world_olympedia_olympics_staging.athlete_event_result` as t
+from
+    {{ set_datalake_project("world_olympedia_olympics_staging.athlete_event_result") }}
+    as t

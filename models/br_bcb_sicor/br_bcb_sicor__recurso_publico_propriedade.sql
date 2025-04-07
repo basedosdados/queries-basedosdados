@@ -13,4 +13,4 @@ select
     safe_cast(id_sncr as string) id_sncr,
     safe_cast(id_nirf as string) id_nirf,
     safe_cast(id_car as string) id_car
-from `basedosdados-staging.br_bcb_sicor_staging.recurso_publico_propriedade` as t
+from {{ set_datalake_project("br_bcb_sicor_staging.recurso_publico_propriedade") }} as t

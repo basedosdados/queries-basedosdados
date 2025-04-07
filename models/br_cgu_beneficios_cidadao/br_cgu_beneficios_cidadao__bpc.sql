@@ -32,7 +32,7 @@ select
     safe_cast(numero as string) numero_beneficio,
     safe_cast(concedido_judicialmente as string) concedido_judicialmente,
     safe_cast(valor as float64) valor_parcela,
-from `basedosdados-staging.br_cgu_beneficios_cidadao_staging.bpc` t1
+from {{ set_datalake_project("br_cgu_beneficios_cidadao_staging.bpc") }} t1
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` t2
     on safe_cast(t1.id_municipio_siafi as int64)

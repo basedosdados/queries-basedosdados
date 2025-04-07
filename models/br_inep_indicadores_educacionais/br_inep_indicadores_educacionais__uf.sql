@@ -223,4 +223,4 @@ select
     safe_cast(icg_nivel_4 as float64) icg_nivel_4,
     safe_cast(icg_nivel_5 as float64) icg_nivel_5,
     safe_cast(icg_nivel_6 as float64) icg_nivel_6,
-from `basedosdados-staging.br_inep_indicadores_educacionais_staging.uf` as t
+from {{ set_datalake_project("br_inep_indicadores_educacionais_staging.uf") }} as t

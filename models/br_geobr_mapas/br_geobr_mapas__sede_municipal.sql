@@ -14,4 +14,4 @@ select
     safe_cast(id_regiao as string) id_regiao,
     safe_cast(regiao as string) regiao,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.sede_municipal` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.sede_municipal") }} as t

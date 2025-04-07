@@ -14,7 +14,7 @@
 with
     municipio_mae_6 as (
         select distinct id_municipio, id_municipio_6
-        from `basedosdados-staging.br_ms_sinasc_staging.microdados` mm6
+        from {{ set_datalake_project("br_ms_sinasc_staging.microdados") }} mm6
         left join
             `basedosdados.br_bd_diretorios_brasil.municipio` m
             on m.id_municipio_6 = mm6.id_municipio_mae
@@ -101,4 +101,4 @@ select
     safe_cast(status_dn as string) status_dn,
     safe_cast(status_dn_nova as string) status_dn_nova,
     safe_cast(paridade as string) paridade
-from `basedosdados-staging.br_ms_sinasc_staging.microdados` as t
+from {{ set_datalake_project("br_ms_sinasc_staging.microdados") }} as t

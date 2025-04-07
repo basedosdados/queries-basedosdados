@@ -38,4 +38,5 @@ select
     safe_cast(replace(valor_inicial_compra, ",", ".") as float64) valor_inicial_compra,
     safe_cast(replace(valor_final_compra, ",", ".") as float64) valor_final_compra,
 
-from `basedosdados-staging.br_cgu_licitacao_contrato_staging.contrato_compra` as t
+from
+    {{ set_datalake_project("br_cgu_licitacao_contrato_staging.contrato_compra") }} as t

@@ -23,4 +23,4 @@ select
     safe_cast(descricaosituacao as string) situacao,
     safe_cast(casa as string) casa,
     safe_cast(sala as string) sala,
-from `basedosdados-staging.br_camara_dados_abertos_staging.orgao` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.orgao") }} as t

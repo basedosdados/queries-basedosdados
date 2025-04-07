@@ -38,4 +38,8 @@ select
     safe_cast(v021 as int64) v021,
     safe_cast(v054 as int64) v054
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_domicilio_1970` t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.microdados_domicilio_1970"
+        )
+    }} t

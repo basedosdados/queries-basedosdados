@@ -6,4 +6,4 @@
     )
 }}
 select *
-from `basedosdados-staging.br_jota_staging.eleicao_auxiliar_categoria_origem`
+from {{ set_datalake_project("br_jota_staging.eleicao_auxiliar_categoria_origem") }}

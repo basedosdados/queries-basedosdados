@@ -19,4 +19,4 @@ select
     safe_cast(nivel_8 as float64) nivel_8,
     safe_cast(nivel_9 as float64) nivel_9,
     safe_cast(nivel_10 as float64) nivel_10
-from `basedosdados-staging.br_inep_saeb_staging.brasil` as t
+from {{ set_datalake_project("br_inep_saeb_staging.brasil") }} as t

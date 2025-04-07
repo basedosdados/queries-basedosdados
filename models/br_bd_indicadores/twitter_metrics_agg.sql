@@ -11,6 +11,6 @@ select
     any_value(followers_count) as followers,
     any_value(tweet_count) as tweets,
     any_value(listed_count) as listed
-from `basedosdados-dev.br_bd_indicadores.twitter_metrics`
+from {{ set_datalake_project("br_bd_indicadores.twitter_metrics") }}
 group by upload_day
 order by upload_day

@@ -303,4 +303,4 @@ select
     safe_cast(gdp_ud_usu as int64) gdp_ud_usu,
     safe_cast(hdi_ix_sav as int64) hdi_ix_sav,
     st_geogfromtext(geometry, make_valid => true) geometry
-from `basedosdados-staging.world_wwf_hydrosheds_staging.basins_atlas` as t
+from {{ set_datalake_project("world_wwf_hydrosheds_staging.basins_atlas") }} as t

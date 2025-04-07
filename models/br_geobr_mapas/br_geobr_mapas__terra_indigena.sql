@@ -23,4 +23,4 @@ select
     safe_cast(sigla_unidade_administrativa as string) sigla_unidade_administrativa,
     initcap(unidade_administrativa) unidade_administrativa,
     safe.st_geogfromtext(geometria) geometria,
-from `basedosdados-staging.br_geobr_mapas_staging.terra_indigena` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.terra_indigena") }} as t

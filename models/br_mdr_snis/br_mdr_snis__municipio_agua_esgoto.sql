@@ -203,4 +203,4 @@ select
         investimento_recurso_nao_oneroso_estado as float64
     ) investimento_recurso_nao_oneroso_estado,
     safe_cast(investimento_total_estado as float64) investimento_total_estado,
-from `basedosdados-staging.br_mdr_snis_staging.municipio_agua_esgoto` as t
+from {{ set_datalake_project("br_mdr_snis_staging.municipio_agua_esgoto") }} as t

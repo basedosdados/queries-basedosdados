@@ -11,5 +11,9 @@ select
     safe_cast(sexo as string) sexo,
     sum(safe_cast(pessoas_indigenas_pessoas_ as int64)) populacao_indigena,
 from
-    `basedosdados-staging.br_ibge_censo_2022_staging.populacao_grupo_idade_sexo_indigena` t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_2022_staging.populacao_grupo_idade_sexo_indigena"
+        )
+    }} t
 group by 1, 2, 3, 4

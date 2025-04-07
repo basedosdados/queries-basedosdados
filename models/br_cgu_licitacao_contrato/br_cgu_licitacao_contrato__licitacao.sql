@@ -26,7 +26,9 @@ select
     ) data_resultado_compra,
     safe_cast(parse_date('%d/%m/%Y', data_abertura) as date) data_abertura,
     safe_cast(replace(valor_licitacao, ",", ".") as float64) valor_licitacao,
-from `basedosdados-staging.br_cgu_licitacao_contrato_staging.licitacao` as licitacao
+from
+    {{ set_datalake_project("br_cgu_licitacao_contrato_staging.licitacao") }}
+    as licitacao
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` as dir_municipio
     on upper(dir_municipio.nome) = licitacao.municipio

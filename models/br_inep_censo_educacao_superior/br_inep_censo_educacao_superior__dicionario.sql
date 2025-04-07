@@ -7,4 +7,6 @@ select
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor
 
-from `basedosdados-staging.br_inep_censo_educacao_superior_staging.dicionario` as t
+from
+    {{ set_datalake_project("br_inep_censo_educacao_superior_staging.dicionario") }}
+    as t

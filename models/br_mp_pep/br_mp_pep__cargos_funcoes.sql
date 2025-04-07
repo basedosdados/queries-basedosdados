@@ -34,4 +34,4 @@ select
     safe_cast(raca_cor as string) as raca_cor,
     safe_cast(cce_e_fce as int64) as cce_e_fce,
     safe_cast(das_e_correlatas as int64) as das_e_correlatas
-from `basedosdados-staging.br_mp_pep_staging.cargos_funcoes`
+from {{ set_datalake_project("br_mp_pep_staging.cargos_funcoes") }}

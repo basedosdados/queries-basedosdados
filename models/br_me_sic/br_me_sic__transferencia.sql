@@ -33,4 +33,4 @@ select
         nome_unidade_organizacional_nivel_3 as string
     ) nome_unidade_organizacional_nivel_3,
     safe_cast(valor_custo_transferencia as float64) valor_custo_transferencia,
-from `basedosdados-staging.br_me_sic_staging.transferencia` as t
+from {{ set_datalake_project("br_me_sic_staging.transferencia") }} as t

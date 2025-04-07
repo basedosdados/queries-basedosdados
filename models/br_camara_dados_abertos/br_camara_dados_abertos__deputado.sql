@@ -56,7 +56,7 @@ with
             safe_cast(idlegislaturafinal as string) id_final_legislatura,
             safe_cast(urlwebsite as string) url_site,
             safe_cast(urlwebsite as string) url_rede_social,
-        from `basedosdados-staging.br_camara_dados_abertos_staging.deputado`
+        from {{ set_datalake_project("br_camara_dados_abertos_staging.deputado") }}
     ),
     uniao_valores as (
         select a.*, b.nome as name_id_municipio, b.id_municipio, b.sigla_uf

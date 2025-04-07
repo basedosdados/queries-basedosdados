@@ -17,4 +17,4 @@ select distinct
     safe_cast(year_edition as int64) year_edition,
     safe_cast(category as string) category,
     safe_cast(movie as string) movie,
-from `basedosdados-staging.world_ampas_oscar_staging.winner_demographics` as t
+from {{ set_datalake_project("world_ampas_oscar_staging.winner_demographics") }} as t

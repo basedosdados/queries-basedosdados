@@ -11,7 +11,8 @@ with
             safe_cast(datainicio as date) data_inicio,
             safe_cast(datafim as date) data_final,
             safe_cast(siglapartido as string) sigla_partido,
-        from `basedosdados-staging.br_camara_dados_abertos_staging.orgao_deputado`
+        from
+            {{ set_datalake_project("br_camara_dados_abertos_staging.orgao_deputado") }}
     )
 select *
 from orgao_deputado

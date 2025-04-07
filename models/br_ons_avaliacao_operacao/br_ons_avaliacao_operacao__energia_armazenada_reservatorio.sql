@@ -68,4 +68,8 @@ select
         proporcao_contribuicao_energia_armazenada_maxima_sin as float64
     ) proporcao_contribuicao_energia_armazenada_maxima_sin
 from
-    `basedosdados-staging.br_ons_avaliacao_operacao_staging.energia_armazenada_reservatorio` t
+    {{
+        set_datalake_project(
+            "br_ons_avaliacao_operacao_staging.energia_armazenada_reservatorio"
+        )
+    }} t

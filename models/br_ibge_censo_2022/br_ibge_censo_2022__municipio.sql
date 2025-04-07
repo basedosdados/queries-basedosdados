@@ -17,7 +17,7 @@ with
                 moradores_em_domicilios_particulares_permanentes_ocupados_pessoas_
                 as int64
             ) populacao,
-        from `basedosdados-staging.br_ibge_censo_2022_staging.municipio`
+        from {{ set_datalake_project("br_ibge_censo_2022_staging.municipio") }}
     ),
 
     area as (
@@ -25,7 +25,8 @@ with
             safe_cast(ano as int64) ano,
             municipio,
             safe_cast(area_da_unidade_territorial_quilometros_quadrados_ as int64) area,
-        from `basedosdados-staging.br_ibge_censo_2022_staging.municipio_area` as t
+        from
+            {{ set_datalake_project("br_ibge_censo_2022_staging.municipio_area") }} as t
     ),
 
     indice_envelhecimento as (
@@ -38,7 +39,11 @@ with
             safe_cast(replace(idade_mediana_anos_, ",", ".") as float64) idade_mediana,
             safe_cast(replace(razao_de_sexo_razao_, ",", ".") as float64) razao_sexo,
         from
-            `basedosdados-staging.br_ibge_censo_2022_staging.municipio_indice_envelhecimento`
+            {{
+                set_datalake_project(
+                    "br_ibge_censo_2022_staging.municipio_indice_envelhecimento"
+                )
+            }}
     ),
 
     indigenas as (
@@ -64,7 +69,8 @@ with
                     0
                 )
             ) as populacao_indigena_terra_indigena
-        from `basedosdados-staging.br_ibge_censo_2022_staging.municipio_indigenas`
+        from
+            {{ set_datalake_project("br_ibge_censo_2022_staging.municipio_indigenas") }}
         group by 1, 2
     ),
 
@@ -91,7 +97,12 @@ with
                     0
                 )
             ) as populacao_quilombola_territorio_quilombola
-        from `basedosdados-staging.br_ibge_censo_2022_staging.municipio_quilombolas`
+        from
+            {{
+                set_datalake_project(
+                    "br_ibge_censo_2022_staging.municipio_quilombolas"
+                )
+            }}
         group by 1, 2
     ),
 
@@ -105,7 +116,11 @@ with
                 5
             ) as taxa_alfabetizacao
         from
-            `basedosdados-staging.br_ibge_censo_2022_staging.alfabetizacao_grupo_idade_sexo_raca`
+            {{
+                set_datalake_project(
+                    "br_ibge_censo_2022_staging.alfabetizacao_grupo_idade_sexo_raca"
+                )
+            }}
         group by 1, 2
     )
 

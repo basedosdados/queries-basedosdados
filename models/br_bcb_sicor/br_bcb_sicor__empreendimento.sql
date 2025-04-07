@@ -23,4 +23,4 @@ select
     safe_cast(consorcio as string) consorcio,
     safe_cast(cedula_mae as string) cedula_mae,
     safe_cast(id_tipo_cultura as string) id_tipo_cultura
-from `basedosdados-staging.br_bcb_sicor_staging.empreendimento` as t
+from {{ set_datalake_project("br_bcb_sicor_staging.empreendimento") }} as t

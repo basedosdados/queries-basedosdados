@@ -11,4 +11,4 @@ select
     safe_cast(country_noc as string) country_noc,
     safe_cast(description as string) description,
     safe_cast(special_notes as string) special_notes,
-from `basedosdados-staging.world_olympedia_olympics_staging.athlete_bio` as t
+from {{ set_datalake_project("world_olympedia_olympics_staging.athlete_bio") }} as t

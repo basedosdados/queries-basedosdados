@@ -21,4 +21,9 @@ select
     safe_cast(subclass as string) subclass,
     safe_cast(dt as string) dt
 
-from `basedosdados-staging.br_trase_supply_chain_staging.soy_beans_storage_facilities` t
+from
+    {{
+        set_datalake_project(
+            "br_trase_supply_chain_staging.soy_beans_storage_facilities"
+        )
+    }} t

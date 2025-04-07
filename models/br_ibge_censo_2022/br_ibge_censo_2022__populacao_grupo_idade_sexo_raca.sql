@@ -6,4 +6,9 @@ select
     safe_cast(sexo as string) sexo,
     safe_cast(cor_ou_raca as string) cor_raca,
     safe_cast(populacao_residente_pessoas_ as int64) populacao,
-from `basedosdados-staging.br_ibge_censo_2022_staging.populacao_grupo_idade_sexo_raca` t
+from
+    {{
+        set_datalake_project(
+            "br_ibge_censo_2022_staging.populacao_grupo_idade_sexo_raca"
+        )
+    }} t

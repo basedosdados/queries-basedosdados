@@ -11,4 +11,4 @@ select
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(id_cnes as string) id_cnes,
     safe.st_geogfromtext(geometria) geometria
-from `basedosdados-staging.br_geobr_mapas_staging.estabelecimentos_saude` as t
+from {{ set_datalake_project("br_geobr_mapas_staging.estabelecimentos_saude") }} as t

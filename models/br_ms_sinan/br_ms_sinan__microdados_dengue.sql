@@ -781,7 +781,7 @@ with
             end data_digitacao,
             safe_cast(nduplic_n as string) duplicidade,
             safe_cast(cs_flxret as string) fluxo_retorno,
-        from `basedosdados-staging.br_ms_sinan_staging.microdados_dengue`
+        from {{ set_datalake_project("br_ms_sinan_staging.microdados_dengue") }}
     ),
     tabelas_join as (
         select

@@ -23,4 +23,6 @@ select
     safe_cast(id_conta_bd as string) id_conta_bd,
     safe_cast(conta_bd as string) conta_bd,
     safe_cast(valor as float64) valor
-from `basedosdados-staging.br_me_siconfi_staging.municipio_despesas_orcamentarias` as t
+from
+    {{ set_datalake_project("br_me_siconfi_staging.municipio_despesas_orcamentarias") }}
+    as t

@@ -39,7 +39,7 @@ select
     safe_cast(fracao_ideal as float64) fracao_ideal,
     safe_cast(area_terreno as float64) area_terreno,
     safe_cast(area_construida as float64) area_construida
-from `basedosdados-staging.br_mg_belohorizonte_smfa_iptu_staging.iptu` as t
+from {{ set_datalake_project("br_mg_belohorizonte_smfa_iptu_staging.iptu") }} as t
 {% if is_incremental() %}
     where
         date(cast(ano as int64), cast(mes as int64), 1)

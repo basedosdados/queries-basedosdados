@@ -62,4 +62,6 @@ select
     safe_cast(replace (chutes_vis, ".0", "") as int64) chutes_visitante,
     safe_cast(replace (chutes_fora_man, ".0", "") as int64) chutes_fora_mandante,
     safe_cast(replace (chutes_fora_vis, ".0", "") as int64) chutes_fora_visitante
-from `basedosdados-staging.mundo_transfermarkt_competicoes_staging.copa_brasil` as t
+from
+    {{ set_datalake_project("mundo_transfermarkt_competicoes_staging.copa_brasil") }}
+    as t

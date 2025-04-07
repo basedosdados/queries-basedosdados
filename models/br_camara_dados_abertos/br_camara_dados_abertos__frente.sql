@@ -10,4 +10,4 @@ select
     safe_cast(coordenador_id as string) id_coordenador,
     safe_cast(coordenador_nome as string) nome_coordenador,
     safe_cast(coordenador_urlfoto as string) url_foto_coordenador,
-from `basedosdados-staging.br_camara_dados_abertos_staging.frente` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.frente") }} as t

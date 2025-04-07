@@ -6,4 +6,4 @@ select
     safe_cast(indice_firjan_gestao_fiscal as float64) indice_firjan_gestao_fiscal,
     safe_cast(ranking_estadual as int64) ranking_estadual,
     safe_cast(ranking_nacional as int64) ranking_nacional,
-from `basedosdados-staging.br_firjan_ifgf_staging.ranking` as t
+from {{ set_datalake_project("br_firjan_ifgf_staging.ranking") }} as t

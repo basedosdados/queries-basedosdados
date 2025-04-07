@@ -19,7 +19,7 @@ with
     raw_cnes_gestao_metas as (
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
-        from `basedosdados-staging.br_ms_cnes_staging.gestao_metas`
+        from {{ set_datalake_project("br_ms_cnes_staging.gestao_metas") }}
         where cnes is not null
     ),
     raw_cnes_gestao_metas_without_duplicates as (

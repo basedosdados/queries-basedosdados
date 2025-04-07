@@ -13,4 +13,4 @@ select
     safe_cast(nota_saeb_media_padronizada as float64) nota_saeb_media_padronizada,
     safe_cast(ideb as float64) ideb,
     safe_cast(projecao as float64) projecao,
-from `basedosdados-staging.br_inep_ideb_staging.regiao` as t
+from {{ set_datalake_project("br_inep_ideb_staging.regiao") }} as t

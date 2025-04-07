@@ -27,4 +27,4 @@ select
     safe_cast(descricaotipo as string) tipo,
     safe_cast(localexterno as string) local_externo,
     safe_cast(localcamara_nome as string) nome_local,
-from `basedosdados-staging.br_camara_dados_abertos_staging.evento` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.evento") }} as t

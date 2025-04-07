@@ -20,7 +20,12 @@ with
             safe_cast(numero as string) as numero,
             safe_cast(tema as string) as tema,
             safe_cast(relevancia as int64) as relevancia
-        from `basedosdados-staging.br_camara_dados_abertos_staging.proposicao_tema`
+        from
+            {{
+                set_datalake_project(
+                    "br_camara_dados_abertos_staging.proposicao_tema"
+                )
+            }}
     )
 select *
 from tables

@@ -22,7 +22,7 @@ with
         -- Adicionar id_municipio de 7 dígitos
         select *
         from
-            `basedosdados-staging.br_ms_sia_staging.producao_ambulatorial`
+            {{ set_datalake_project("br_ms_sia_staging.producao_ambulatorial") }}
             as producao_ambulatorial
 
         left join

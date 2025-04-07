@@ -31,5 +31,8 @@ select
     parse_date("%d/%m/%Y", data_transacao) data_transacao,
     safe_cast(valor_transacao as float64) valor_transacao,
 from
-    `basedosdados-staging.br_cgu_cartao_pagamento_staging.microdados_governo_federal`
-    as t
+    {{
+        set_datalake_project(
+            "br_cgu_cartao_pagamento_staging.microdados_governo_federal"
+        )
+    }} as t

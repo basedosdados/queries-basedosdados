@@ -14,5 +14,5 @@ select
     safe_cast(opcao_mei as int64) opcao_mei,
     safe_cast(data_opcao_mei as date) data_opcao_mei,
     safe_cast(data_exclusao_mei as date) data_exclusao_mei
-from `basedosdados-staging.br_me_cnpj_staging.simples` as t
+from {{ set_datalake_project("br_me_cnpj_staging.simples") }} as t
 where opcao_mei != "opcao_mei"

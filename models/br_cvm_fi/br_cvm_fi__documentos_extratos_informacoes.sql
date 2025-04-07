@@ -293,4 +293,5 @@ select
     safe_cast(
         porcentagem_exposicao_maxima_cotas_ficfip as float64
     ) porcentagem_exposicao_maxima_cotas_ficfip,
-from `basedosdados-staging.br_cvm_fi_staging.documentos_extratos_informacoes` as t
+from
+    {{ set_datalake_project("br_cvm_fi_staging.documentos_extratos_informacoes") }} as t

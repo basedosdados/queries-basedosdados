@@ -33,4 +33,8 @@ select
     safe_cast(escolaridade as string) escolaridade,
     safe_cast(replace(quantidade_docente, ".0", "") as int64) quantidade_docente,
 from
-    `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.docente_escolaridade`
+    {{
+        set_datalake_project(
+            "br_inep_sinopse_estatistica_educacao_basica_staging.docente_escolaridade"
+        )
+    }}

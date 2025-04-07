@@ -18,4 +18,4 @@ select
     safe_cast(
         quantidade_docente_aee_formacao_continuada as int64
     ) quantidade_docente_aee_formacao_continuada,
-from `basedosdados-staging.br_inep_educacao_especial_staging.docente_aee` as t
+from {{ set_datalake_project("br_inep_educacao_especial_staging.docente_aee") }} as t

@@ -24,4 +24,4 @@ select
     safe_cast(livro_estetica_cenografica as string) estetica_cenografica,
     safe_cast(livro_tipo_localizacao_pred as string) tipo_localizacao,
     safe_cast(livro_localizacao_geografica as string) localizacao_geografica,
-from `basedosdados-staging.world_oceanos_mapeamento_staging.mapeamento` as t
+from {{ set_datalake_project("world_oceanos_mapeamento_staging.mapeamento") }} as t

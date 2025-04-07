@@ -5,4 +5,4 @@ select
     safe_cast(tema as string) tema,
     safe_cast(item as string) item,
     safe_cast(quantidade_escola as float64) quantidade_escola
-from `basedosdados-staging.br_fbsp_absp_staging.violencia_escola` as t
+from {{ set_datalake_project("br_fbsp_absp_staging.violencia_escola") }} as t

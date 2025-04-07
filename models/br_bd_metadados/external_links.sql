@@ -15,4 +15,4 @@ select
     safe_cast(temporal_coverage as string) temporal_coverage,
     safe_cast(update_frequency as string) update_frequency,
     safe_cast(observation_level as string) observation_level
-from `basedosdados-dev.br_bd_metadados_staging.external_links` as t
+from {{ set_datalake_project("br_bd_metadados_staging.external_links") }} as t

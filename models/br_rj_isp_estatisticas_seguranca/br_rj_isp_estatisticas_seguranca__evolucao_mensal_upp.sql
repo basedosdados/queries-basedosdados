@@ -56,4 +56,8 @@ select
     ) quantidade_policial_civil_morto_servico,
     safe_cast(quantidade_registro_ocorrencia as int64) quantidade_registro_ocorrencia
 from
-    `basedosdados-staging.br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_upp` t
+    {{
+        set_datalake_project(
+            "br_rj_isp_estatisticas_seguranca_staging.evolucao_mensal_upp"
+        )
+    }} t

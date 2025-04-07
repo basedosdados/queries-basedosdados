@@ -370,7 +370,8 @@ with
                         then 1
                         else 0
                     end as adequado_pandemia_sp
-                from `basedosdados-dev.br_inep_saeb.proficiencia`
+                from {{ set_datalake_project("br_inep_saeb.proficiencia") }}
+
             ) pivot (
                 max(proficiencia_saeb) as proficiencia_saeb,
                 max(insuficiente) as insuficiente,

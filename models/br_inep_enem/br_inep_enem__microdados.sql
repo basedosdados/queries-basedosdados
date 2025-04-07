@@ -79,4 +79,4 @@ select
     safe_cast(
         indicador_questionario_socioeconomico as boolean
     ) indicador_questionario_socioeconomico
-from `basedosdados-staging.br_inep_enem_staging.microdados` as t
+from {{ set_datalake_project("br_inep_enem_staging.microdados") }} as t

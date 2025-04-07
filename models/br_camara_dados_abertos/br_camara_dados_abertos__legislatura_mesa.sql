@@ -13,4 +13,4 @@ select
     safe_cast(urideputado as string) url_deputado,
     safe_cast(siglapartido as string) sigla_partido,
     safe_cast(siglauf as string) sigla_uf,
-from `basedosdados-staging.br_camara_dados_abertos_staging.legislatura_mesa` as t
+from {{ set_datalake_project("br_camara_dados_abertos_staging.legislatura_mesa") }} as t

@@ -28,7 +28,7 @@ with
             safe_cast(
                 safe.st_geogfromtext(geometry, make_valid => true) as geography
             ) geometria,
-        from `basedosdados-staging.br_sfb_sicar_staging.area_imovel` as car
+        from {{ set_datalake_project("br_sfb_sicar_staging.area_imovel") }} as car
 
     )
 

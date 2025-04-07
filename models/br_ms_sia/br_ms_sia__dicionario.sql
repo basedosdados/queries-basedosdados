@@ -15,4 +15,4 @@ select
         end as string
     ) as cobertura_temporal,
     safe_cast(valor as string) valor
-from `basedosdados-staging.br_ms_sia_staging.dicionario`
+from {{ set_datalake_project("br_ms_sia_staging.dicionario") }}

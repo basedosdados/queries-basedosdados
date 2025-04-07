@@ -24,4 +24,6 @@ select
     {{ validate_date_range("data_cancelamento", "1980-01-01") }} as data_cancelamento,
     {{ validate_date_range("data_regularizacao", "1980-01-01") }} as data_regularizacao,
     safe_cast(motivo_cancelamento as string) motivo_cancelamento,
-from `basedosdados-staging.br_tse_filiacao_partidaria_staging.microdados_antigos` as t
+from
+    {{ set_datalake_project("br_tse_filiacao_partidaria_staging.microdados_antigos") }}
+    as t

@@ -111,5 +111,8 @@ select
     safe_cast(v0310 as string) v0310,
     safe_cast(v7301 as float64) v7301
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.microdados_pessoa_1991 `
-    as t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.microdados_pessoa_1991 "
+        )
+    }} as t

@@ -16,5 +16,8 @@ select
     safe_cast(v002 as int64) v002,
     safe_cast(v003 as int64) v003
 from
-    `basedosdados-staging.br_ibge_censo_demografico_staging.setor_censitario_registro_civil_2010`
-    as t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_demografico_staging.setor_censitario_registro_civil_2010"
+        )
+    }} as t

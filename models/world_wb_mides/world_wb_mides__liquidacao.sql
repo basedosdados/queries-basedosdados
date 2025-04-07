@@ -82,7 +82,12 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_liquidado as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_ce` l
+                from
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_ce"
+                        )
+                    }} l
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_municipio_ce` m
                     on l.codigo_municipio = m.codigo_municipio
@@ -162,7 +167,11 @@ from
                         2
                     ) as valor_final
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_mg` as l
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_mg"
+                        )
+                    }} as l
                 left join
                     `basedosdados-staging.world_wb_mides_staging.raw_rsp_mg` as r
                     on l.id_rsp = r.id_rsp
@@ -207,7 +216,12 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(vl_liquidacao as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pb` l
+                from
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_pb"
+                        )
+                    }} l
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_municipio_pb` m
                     on l.cd_ugestora = safe_cast(m.id_unidade_gestora as string)
@@ -242,7 +256,12 @@ from
                     ) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(vlliquidacaoliquido as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pr` l
+                from
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_pr"
+                        )
+                    }} l
                 left join
                     basedosdados.br_bd_diretorios_brasil.municipio m
                     on cdibge = id_municipio_6
@@ -272,7 +291,12 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor as float64), 2) as valor_final,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_pe` l
+                from
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_pe"
+                        )
+                    }} l
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_municipio_pe` m
                     on l.id_unidade_gestora = safe_cast(m.id_unidadegestora as string)
@@ -325,7 +349,9 @@ from
                     safe_cast(null as string) as documento_responsavel,
                     safe_cast(null as bool) as indicador_restos_pagar,
                     safe_cast(vl_liquidacao as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                from
+                    {{ set_datalake_project("world_wb_mides_staging.raw_despesa_rs") }}
+                    as c
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
@@ -349,7 +375,9 @@ from
                         ) as string
                     ) as id_empenho_bd,
                     -1 * sum(safe_cast(vl_liquidacao as float64)) as valor_anulacao
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_rs` as c
+                from
+                    {{ set_datalake_project("world_wb_mides_staging.raw_despesa_rs") }}
+                    as c
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_orgao_rs` as a
                     on c.cd_orgao = a.cd_orgao
@@ -510,7 +538,8 @@ from
                     safe_cast(cd_acao as string) as acao,
                     safe_cast((left(ds_elemento, 8)) as string) as elemento_despesa,
                     safe_cast(replace(vl_despesa, ',', '.') as float64) as valor_inicial
-                from `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp` e
+                from
+                    {{ set_datalake_project("world_wb_mides_staging.raw_despesa_sp") }} e
                 left join
                     `basedosdados-staging.world_wb_mides_staging.aux_municipio_sp` m
                     on m.ds_orgao = e.ds_orgao
@@ -686,7 +715,11 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(liquidado as float64), 2) as valor_final
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_sp_municipio`
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_despesa_sp_municipio"
+                        )
+                    }}
             ),
             liquidado_municipio_rj_v1 as (
                 select
@@ -725,7 +758,11 @@ from
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_liquidado as float64), 2) as valor_final
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_rj_municipio`
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_despesa_rj_municipio"
+                        )
+                    }}
                 where (safe_cast(exercicio_empenho as int64)) < 2017
             ),
             frequencia_rj_v1 as (
@@ -811,7 +848,11 @@ from
                     safe_cast(null as bool) as indicador_restos_pagar,
                     round(safe_cast(valor as float64), 2) as valor_inicial
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_despesa_ato_rj_municipio"
+                        )
+                    }}
                 where tipoato = 'LIQUIDACAO'
             ),
             anulacao_municipio_rj_v2 as (
@@ -832,7 +873,11 @@ from
                     ) as id_empenho_bd,
                     sum(safe_cast(valor as float64)) as valor_anulacao,
                 from
-                    `basedosdados-staging.world_wb_mides_staging.raw_despesa_ato_rj_municipio`
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_despesa_ato_rj_municipio"
+                        )
+                    }}
                 where
                     tipoato in (
                         'CANCELAMENTO LIQUIDACAO',
@@ -911,7 +956,12 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor as float64), 2) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_rj`
+                from
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_rj"
+                        )
+                    }}
                 where numero_empenho is not null
             ),
             liquidacao_df as (
@@ -966,7 +1016,12 @@ from
                     round(
                         safe_cast(replace(valor, ',', '.') as float64), 2
                     ) as valor_inicial,
-                from `basedosdados-staging.world_wb_mides_staging.raw_liquidacao_df`
+                from
+                    {{
+                        set_datalake_project(
+                            "world_wb_mides_staging.raw_liquidacao_df"
+                        )
+                    }}
             ),
             liquidado_sc as (
                 select
@@ -1001,7 +1056,7 @@ from
                     round(safe_cast(0 as float64), 2) as valor_anulacao,
                     round(safe_cast(0 as float64), 2) as valor_ajuste,
                     round(safe_cast(valor_liquidacao as float64), 2) as valor_final
-                from `basedosdados-staging.world_wb_mides_staging.raw_empenho_sc`
+                from {{ set_datalake_project("world_wb_mides_staging.raw_empenho_sc") }}
             ),
             frequencia_sc as (
                 select id_empenho_bd, count(id_empenho_bd) as frequencia_id

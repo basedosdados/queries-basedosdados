@@ -15,4 +15,5 @@ select distinct
     safe_cast(descricao_area as string) descricao_area,
     safe_cast(grande_area as string) grande_area,
     safe_cast(descricao_grande_area as string) descricao_grande_area
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.area_conhecimento` as t
+from
+    {{ set_datalake_project("br_bd_diretorios_brasil_staging.area_conhecimento") }} as t

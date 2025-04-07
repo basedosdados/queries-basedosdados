@@ -21,4 +21,4 @@ select
     safe_cast(id_municipio_tse as string) id_municipio_tse,
     safe_cast(cargo as string) cargo,
     safe_cast(vagas as int64) vagas
-from `basedosdados-staging.br_tse_eleicoes_staging.vagas` as t
+from {{ set_datalake_project("br_tse_eleicoes_staging.vagas") }} as t

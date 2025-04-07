@@ -11,4 +11,4 @@ select
     safe_cast(trim(chave) as string) chave,
     safe_cast(cobertura_temporal as string) cobertura_temporal,
     safe_cast(valor as string) valor,
-from `basedosdados-staging.br_cgu_cartao_pagamento_staging.dicionario` as t
+from {{ set_datalake_project("br_cgu_cartao_pagamento_staging.dicionario") }} as t

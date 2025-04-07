@@ -88,7 +88,7 @@ with
             ) as preco_original,
             safe_cast(desconto as int64) desconto,
             safe_cast(preco as float64) as preco,
-        from `basedosdados-staging.br_mercadolivre_ofertas_staging.item`
+        from {{ set_datalake_project("br_mercadolivre_ofertas_staging.item") }}
 
     ),
     tabela_preco as (
@@ -173,7 +173,12 @@ with
         left join
             (
                 select distinct dia, lpad(id_vendor, 12, '0') as id_vendor, nome
-                from `basedosdados-staging.br_mercadolivre_ofertas_staging.vendedor`
+                from
+                    {{
+                        set_datalake_project(
+                            "br_mercadolivre_ofertas_staging.vendedor"
+                        )
+                    }}
             ) b
             on a.vendedor = b.nome
             and data_consulta = parse_date('%Y-%m-%d', dia)

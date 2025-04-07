@@ -30,4 +30,6 @@ select
     safe_cast(sequencial_candidato as string) sequencial_candidato,
     safe_cast(numero_candidato as string) numero_candidato,
     safe_cast(votos as int64) votos
-from `basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato_secao` as t
+from
+    {{ set_datalake_project("br_tse_eleicoes_staging.resultados_candidato_secao") }}
+    as t

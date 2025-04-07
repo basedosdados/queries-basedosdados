@@ -48,7 +48,8 @@ select
     safe_cast(origem_informacao as string) origem_informacao,
     safe_cast(indicador_exclusao as int64) indicador_exclusao,
     safe_cast(indicador_fora_prazo as int64) indicador_fora_prazo
-from `basedosdados-staging.br_me_caged_staging.microdados_movimentacao_excluida` a
+from
+    {{ set_datalake_project("br_me_caged_staging.microdados_movimentacao_excluida") }} a
 left join
     `basedosdados.br_bd_diretorios_brasil.municipio` b
     on a.id_municipio = b.id_municipio_6

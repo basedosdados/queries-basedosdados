@@ -11,4 +11,4 @@ select
     safe_cast(observations as string) observations,
     safe_cast(is_in_staging as string) is_in_staging,
     safe_cast(is_partition as string) is_partition
-from `basedosdados-dev.br_bd_metadados_staging.columns` as t
+from {{ set_datalake_project("br_bd_metadados_staging.columns") }} as t

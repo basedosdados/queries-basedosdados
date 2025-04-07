@@ -12,5 +12,8 @@ select
     safe_cast(alfabetiza__o as string) alfabetizacao,
     safe_cast(valor as int64) populacao,
 from
-    `basedosdados-staging.br_ibge_censo_2022_staging.alfabetizacao_grupo_idade_sexo_raca`
-    as t
+    {{
+        set_datalake_project(
+            "br_ibge_censo_2022_staging.alfabetizacao_grupo_idade_sexo_raca"
+        )
+    }} as t

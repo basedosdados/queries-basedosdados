@@ -11,5 +11,5 @@ select
     safe_cast(nome as string) nome,
     safe_cast(id_municipio as string) id_municipio,
     safe_cast(sigla_uf as string) sigla_uf
-from `basedosdados-staging.br_bd_diretorios_brasil_staging.distrito`
+from {{ set_datalake_project("br_bd_diretorios_brasil_staging.distrito") }}
 where ano = '2000'

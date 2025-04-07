@@ -36,4 +36,9 @@ select
     safe_cast(situacao_localidade as string) situacao_localidade,
     safe_cast(situacao_secao_acessibilidade as string) situacao_secao_acessibilidade,
     safe_cast(eleitores_secao as int64) eleitores_secao,
-from `basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado_local_votacao` as t
+from
+    {{
+        set_datalake_project(
+            "br_tse_eleicoes_staging.perfil_eleitorado_local_votacao"
+        )
+    }} as t

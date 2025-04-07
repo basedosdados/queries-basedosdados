@@ -19,4 +19,4 @@ select
     timestamp_millis(safe_cast(last_modified_time as int64)) as last_modified_time,
     safe_cast(row_count as int64) as row_count,
     safe_cast(size_bytes as int64) as size_bytes
-from `basedosdados-staging.br_bd_metadados_staging.bigquery_tables`
+from {{ set_datalake_project("br_bd_metadados_staging.bigquery_tables") }}
