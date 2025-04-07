@@ -7,4 +7,4 @@ select
     safe_cast(date_last_modified as date) date_last_modified,
     safe_cast(themes as string) themes,
     safe_cast(tags as string) tags
-from `basedosdados-dev.br_bd_metadados_staging.datasets` as t
+from {{ set_datalake_project("br_bd_metadados_staging.datasets") }}

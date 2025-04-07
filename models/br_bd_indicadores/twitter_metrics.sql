@@ -30,7 +30,7 @@ from
             safe_cast(followers_count as int64) followers_count,
             safe_cast(tweet_count as int64) tweet_count,
             safe_cast(listed_count as int64) listed_count
-        from `basedosdados-dev.br_bd_indicadores_staging.twitter_metrics`
+        from {{ set_datalake_project("br_bd_indicadores_staging.twitter_metrics") }}
     )
 where
     upload_day <= current_date('America/Sao_Paulo')
