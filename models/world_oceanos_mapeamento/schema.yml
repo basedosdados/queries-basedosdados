@@ -71,7 +71,7 @@ models:
       - name: indicador_juri_final
         description: Indica se o inscrito fez parte do Júri Final
   - name: world_oceanos_mapeamento__mapeamento
-    description: Insert `mapeamento` table description here
+    description: Mapeamento Oceanos
     columns:
       - name: id
         description: Id
