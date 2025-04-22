@@ -14,8 +14,6 @@
         ],
     )
 }}
-
-
 with
     cnpj_estabelecimentos as (
         select
