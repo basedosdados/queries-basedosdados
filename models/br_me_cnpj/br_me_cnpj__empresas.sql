@@ -7,10 +7,9 @@
             "field": "data",
             "data_type": "date",
         },
-        incremental_strategy="insert_overwrite",
         pre_hook=[
             "DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-            "DELETE FROM {{ this }}         WHERE data > '2025-03-20'",
+            "DELETE FROM {{ this }}         WHERE data IN ('2025-03-24', '2025-03-25', '2025-03-26', '2025-03-27', '2025-03-28', '2025-03-29', '2025-03-30', '2025-03-31', '2025-04-21', '2025-04-22')",
         ],
     )
 }}
