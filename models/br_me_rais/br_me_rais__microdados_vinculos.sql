@@ -75,7 +75,7 @@ select
     safe_cast(grau_instrucao_1985_2005 as string) grau_instrucao_1985_2005,
     safe_cast(grau_instrucao_apos_2005 as string) grau_instrucao_apos_2005,
     safe_cast(nacionalidade as string) nacionalidade,
-    safe_cast(sexo as string) sexo,
+    case when sexo = '01' then '1' when sexo = '02' then '2' else sexo end as sexo,
     safe_cast(raca_cor as string) raca_cor,
     safe_cast(indicador_portador_deficiencia as string) indicador_portador_deficiencia,
     safe_cast(tipo_deficiencia as string) tipo_deficiencia,
