@@ -16,7 +16,7 @@
 select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
-    cast(regexp_replace(id_municipio, r'\.0$', '') as string) id_municipio,
+    safe_cast(regexp_replace(id_municipio, r'\.0$', '') as string) id_municipio,
     safe_cast(tipo_vinculo as string) tipo_vinculo,
     safe_cast(vinculo_ativo_3112 as string) vinculo_ativo_3112,
     case
