@@ -12,9 +12,13 @@
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
     )
 }}
+
+
 select
     safe_cast(ano as int64) ano,
     safe_cast(mes as int64) mes,
+    safe_cast(substring(competenciamov, 1, 4) as int64) ano_competencia_movimentacao,
+    safe_cast(substring(competenciamov, 5, 6) as int64) mes_competencia_movimentacao,
     safe_cast(a.sigla_uf as string) sigla_uf,
     safe_cast(b.id_municipio as string) id_municipio,
     safe_cast(cnae_2_secao as string) cnae_2_secao,

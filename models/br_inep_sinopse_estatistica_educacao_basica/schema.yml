@@ -364,8 +364,7 @@ models:
       - name: quantidade_docente
         description: Número de docentes
   - name: br_inep_sinopse_estatistica_educacao_basica__docente_etapa_ensino
-    description: A base conta com o total de docentes por município, faixa etária
-      e sexo
+    description: A base conta com o total de docentes por etapa ensino
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:

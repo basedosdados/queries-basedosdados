@@ -6,13 +6,9 @@
         partition_by={
             "field": "ano",
             "data_type": "int64",
-            "range": {"start": 2005, "end": 2024, "interval": 1},
+            "range": {"start": 2005, "end": 2025, "interval": 1},
         },
         pre_hook="DROP ALL ROW ACCESS POLICIES ON {{ this }}",
-        post_hook=[
-            'CREATE OR REPLACE ROW ACCESS POLICY allusers_filter ON {{this}} GRANT TO ("allUsers") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) > 6)',
-            'CREATE OR REPLACE ROW ACCESS POLICY bdpro_filter ON {{this}} GRANT TO ("group:bd-pro@basedosdados.org", "group:sudo@basedosdados.org") FILTER USING (DATE_DIFF(DATE("{{ run_started_at.strftime("%Y-%m-%d") }}"),DATE(CAST(ano AS INT64),CAST(mes AS INT64),1), MONTH) <= 6)',
-        ],
     )
 }}
 with
@@ -20,7 +16,7 @@ with
         -- 1. Retirar linhas com id_estabelecimento_cnes nulo
         select *
         from `basedosdados-staging.br_ms_cnes_staging.profissional`
-        where cnes is not null
+        where cnes is not null and competen is not null
     ),
     profissional_x_estabelecimento as (
         select *
@@ -88,6 +84,8 @@ from profissional_x_estabelecimento
 {% if is_incremental() %}
     where
 
-        date(cast(ano as int64), cast(mes as int64), 1)
-        > (select max(date(cast(ano as int64), cast(mes as int64), 1)) from {{ this }})
+        safe.date(cast(ano as int64), cast(mes as int64), 1) > (
+            select max(safe.date(cast(ano as int64), cast(mes as int64), 1))
+            from {{ this }}
+        )
 {% endif %}

@@ -11,6 +11,7 @@ models:
             - mes
             - cnpj
             - data_competencia
+            - tipo_fundo
             - plano_contabil_balancete
             - codigo_conta
           config:
@@ -30,6 +31,8 @@ models:
         description: Data de competência
       - name: plano_contabil_balancete
         description: Plano contábil utilizado no balancete
+      - name: tipo_fundo
+        description: Tipo do fundo
       - name: codigo_conta
         description: Código da conta
       - name: saldo_conta

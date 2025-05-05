@@ -15,9 +15,22 @@ select
     safe_cast(ano as int64) ano,
     safe_cast(sigla_uf as string) sigla_uf,
     safe_cast(id_municipio as string) id_municipio,
-    safe_cast(tipo_classe as string) tipo_classe,
+    case
+        when tipo_classe = "Educacao Basica"
+        then "Educação Básica"
+        when tipo_classe = "Educacao Infantil"
+        then "Educação Infantil"
+        when tipo_classe = "Educacao Especial - Classes Exclusivas"
+        then "Educação Especial - Classes Exclusivas"
+        when tipo_classe = "Educacao Indigena"
+        then "Educação Indígena"
+        when tipo_classe = "Educacao Especial - Classes Comuns"
+        then "Educação Especial - Classes Comuns"
+        when tipo_classe = "Educacao Especial"
+        then "Educação Especial"
+        else tipo_classe
+    end etapa_ensino,
     safe_cast(deficiencia as string) deficiencia,
     safe_cast(quantidade_docente as int64) quantidade_docente,
 from
     `basedosdados-staging.br_inep_sinopse_estatistica_educacao_basica_staging.docente_deficiencia`
-    as t

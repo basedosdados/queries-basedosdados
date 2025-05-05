@@ -402,6 +402,9 @@ models:
     world_iea_pirls:
       +materialized: table
       +schema: world_iea_pirls
+    world_imdb_movies:
+      +materialized: table
+      +schema: world_imdb_movies
     world_oceanos_mapeamento:
       +materialized: table
       +schema: world_oceanos_mapeamento
@@ -411,6 +414,9 @@ models:
     world_olympedia_olympics:
       +materialized: table
       +schema: world_olympedia_olympics
+    world_sofascore_competicoes_futebol:
+      +materialized: table
+      +schema: world_sofascore_competicoes_futebol
     world_wb_mides:
       +materialized: table
       +schema: world_wb_mides
