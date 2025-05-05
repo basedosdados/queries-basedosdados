@@ -1,4 +1,6 @@
 {{ config(alias="dicionario", schema="br_me_rais") }}
+
+
 select
     safe_cast(id_tabela as string) id_tabela,
     safe_cast(nome_coluna as string) nome_coluna,
