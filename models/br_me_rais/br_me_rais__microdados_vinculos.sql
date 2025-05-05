@@ -295,12 +295,7 @@ select
         then 'Não identificado'
         when tipo_estabelecimento = 'CEI/CNO'
         then 'CEI'
-        else
-            cast(
-                cast(
-                    regexp_replace(tipo_estabelecimento, r'^0+', '') as string
-                ) as string
-            )
+        else safe_cast(regexp_replace(tipo_estabelecimento, r'^0+', '') as string)
     end as tipo_estabelecimento,
     safe_cast(natureza_juridica as string) natureza_juridica,
     safe_cast(indicador_simples as string) indicador_simples,
