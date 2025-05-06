@@ -1,3 +1,16 @@
+"""
+Esse script atualiza as seguintes tabelas do dataset br_inep_sinopse_estatistica_educacao_basica
+para 2024.
+
+Tabelas que esse script limpa:
+
+- tempo_ensino
+- localizacao
+- etapa_ensino_serie
+- faixa_etaria
+- sexo_raca_cor
+"""
+
 import os
 import zipfile
 import pandas as pd
@@ -227,7 +240,7 @@ dfs_etapa_ensino_serie = {
 def wide_to_long_etapa_ensino(
     df: pd.DataFrame, var_name: str, value_name: str
 ) -> pd.DataFrame:
-    df = df.copy().loc[(df["id_municipio"].notna()) & (df["id_municipio"] != " "),] # type: ignore
+    df = df.copy().loc[(df["id_municipio"].notna()) & (df["id_municipio"] != " "),]  # type: ignore
     assert df["id_municipio"].unique().size == 5570
     value_vars = [
         col
@@ -246,60 +259,64 @@ def wide_to_long_etapa_ensino(
     )
 
 
-df_etapa_enisno_serie = pd.concat(
-    [
-        wide_to_long_etapa_ensino(
-            df, var_name="etapa_ensino", value_name="quantidade_matricula"
-        )
-        for _, df in dfs_etapa_ensino_serie.items()
-    ]
-)
-
-
-def etapa_ensino_to_key(value: str) -> int:
+def create_etapa_ensino(value: str) -> str:
     if value.startswith("creche"):
-        return 1
+        return "Educação Infantil – Creche"
     elif value.startswith("pre_escola"):
-        return 2
+        return "Educação Infantil – Pré-Escola"
     elif value.startswith("em"):
-        return 5
+        return "Ensino Médio Regular"
     elif value.startswith("ep"):
         _, n, _ = value.split("_")
-        return int(n)
-    elif value.startswith("eja"):
-        _, kind, _ = value.split("_")
-
-        if kind == "ef":
-            return 13
-        elif kind == "em":
-            return 14
+        if n == "7":
+            return "Educação Profissional – Associada ao Ensino Médio"
+        elif n == "8":
+            return "Educação Profissional - Curso Técnico Concomitante"
+        elif n == "9":
+            return "Educação Profissional - Curso Técnico Subsequente"
+        elif n == "10":
+            return "Educação Profissional - Curso FIC Concomitante"
+        elif n == "11":
+            return "Educação Profissional - Curso FIC Integrado na Modalidade EJA"
         else:
-            assert False
+            raise Exception(f"Invalid {n=}, {value=}")
+    elif value.startswith("eja"):
+        _, eja_etapa, _ = value.split("_")
+
+        if eja_etapa == "ef":
+            return "EJA – Ensino Fundamental"
+        elif eja_etapa == "em":
+            return "EJA – Ensino Médio"
+        else:
+            raise Exception(f"Invalid {eja_etapa=}, {value=}")
 
     number, _ = value.split("_")
     number = int(number)
 
     if number <= 5:
-        return 3
+        return "Ensino Fundamental – Anos Iniciais"
     elif number >= 6 and number <= 9:
-        return 4
+        return "Ensino Fundamental – Anos Finais"
 
-    assert False
+    raise Exception(f"Invalid {number=}, {value=}")
 
 
-def etapa_ensino_to_serie(value: str) -> Optional[int]:
+def etapa_ensino_to_serie(value: str) -> Optional[str]:
     serie = value.split("_")
 
-    try:
-        return int(serie[0])
-    except:  # noqa: E722
-        if value.startswith("em"):
-            if serie[1] == "ns":
-                return 14
-            else:
-                return 9 + int(serie[1])
+    if serie[0].isdigit() and int(serie[0]) in range(1, 10):
+        return f"{serie[0].strip()}º ano do Ensino Fundamental – Anos Iniciais"
+    elif value.startswith("em"):
+        em_number = serie[1].strip()
+
+        if em_number == "ns":
+            return "Ensino Médio Não Seriado"
+        elif em_number.isdigit():
+            return f"{em_number}º ano do Ensino Médio Regular"
         else:
-            return None
+            raise Exception(f"Invalid {value=}")
+    else:
+        return None
 
 
 bd_dir = bd.read_sql(
@@ -307,62 +324,47 @@ bd_dir = bd.read_sql(
     billing_project_id="basedosdados-dev",
 )
 
-
-df_etapa_enisno_serie["etapa_ensino_key"] = df_etapa_enisno_serie["etapa_ensino"].apply(
-    etapa_ensino_to_key
-)
-
-df_etapa_enisno_serie["serie"] = df_etapa_enisno_serie["etapa_ensino"].apply(
-    etapa_ensino_to_serie
-)
-
-df_etapa_enisno_serie["serie"] = df_etapa_enisno_serie["serie"].astype("Int64")
-
-df_etapa_enisno_serie["rede"] = df_etapa_enisno_serie["etapa_ensino"].apply(
-    lambda v: v.split("_")[-1]
-)
-
-df_etapa_enisno_serie["uf"] = (
-    df_etapa_enisno_serie["uf"]
-    .apply(lambda uf: uf.strip())
-    .replace(
-        {i["nome"]: i["sigla"] for i in bd_dir.to_dict("records")}  # type: ignore
+df_etapa_ensino_serie = (
+    pd.concat(
+        [
+            wide_to_long_etapa_ensino(
+                df, var_name="etapa_ensino", value_name="quantidade_matricula"
+            )
+            for _, df in dfs_etapa_ensino_serie.items()
+        ]
     )
-)
-
-df_etapa_enisno_serie = df_etapa_enisno_serie.drop(columns=["etapa_ensino"]).rename(
-    columns={"etapa_ensino_key": "etapa_ensino", "uf": "sigla_uf"}, errors="raise"
-)
-
-df_etapa_enisno_serie["etapa_ensino"] = df_etapa_enisno_serie["etapa_ensino"].astype(
-    str
-)
-
-df_etapa_enisno_serie = df_etapa_enisno_serie[
-    [
-        "sigla_uf",
-        "id_municipio",
-        "rede",
-        "etapa_ensino",
-        "serie",
-        "quantidade_matricula",
+    .assign(
+        created_etapa_ensino=lambda d: d["etapa_ensino"]
+        .apply(create_etapa_ensino)
+        .astype("string"),
+        serie=lambda d: d["etapa_ensino"].apply(etapa_ensino_to_serie),
+        rede=lambda d: d["etapa_ensino"].apply(lambda v: v.split("_")[-1].title()),
+        sigla_uf=lambda d: d["uf"]
+        .apply(lambda uf: uf.strip())
+        .replace({i["nome"]: i["sigla"] for i in bd_dir.to_dict("records")}),
+        quantidade_matricula=lambda d: d["quantidade_matricula"].astype("Int64"),
+    )
+    .drop(columns=["etapa_ensino"])
+    .rename(
+        columns={"created_etapa_ensino": "etapa_ensino"},
+        errors="raise",
+    )[
+        [
+            "sigla_uf",
+            "id_municipio",
+            "rede",
+            "etapa_ensino",
+            "serie",
+            "quantidade_matricula",
+        ]
     ]
-]
+)
 
-df_etapa_enisno_serie["quantidade_matricula"] = df_etapa_enisno_serie[
-    "quantidade_matricula"
-].astype("Int64")
 
-df_etapa_enisno_serie
-
-df_etapa_enisno_serie["serie"].unique()
-
-for sigla_uf, df in df_etapa_enisno_serie.groupby("sigla_uf"):
-    path = os.path.join(
-        OUTPUT, "etapa_ensino_serie", "ano=2023", f"sigla_uf={sigla_uf}"
-    )
-    os.makedirs(path, exist_ok=True)
-    df.drop(columns=["sigla_uf"]).to_csv(os.path.join(path, "data.csv"), index=False)
+for sigla_uf, df in df_etapa_ensino_serie.groupby("sigla_uf"):
+    save_path_uf = OUTPUT / "etapa_ensino_serie" / "ano=2024" / f"sigla_uf={sigla_uf}"
+    os.makedirs(save_path_uf, exist_ok=True)
+    df.drop(columns=["sigla_uf"]).to_csv((save_path_uf / "data.csv"), index=False)
 
 
 ## Faixa etaria
@@ -476,35 +478,35 @@ df_faixa_etaria = pd.concat(
 
 df_faixa_etaria["etapa_ensino"] = df_faixa_etaria["etapa"].replace(
     {
-        "creche": 1,
-        "pre_escola": 2,
-        "anos_iniciais": 3,
-        "anos_finais": 4,
-        "ensino_medio": 5,
-        "ensino_profissional": 6,
-        "eja": 7,
+        "creche": "Educação Infantil – Creche",
+        "pre_escola": "Educação Infantil – Pré-Escola",
+        "anos_iniciais": "Ensino Fundamental – Anos Iniciais",
+        "anos_finais": "Ensino Fundamental – Anos Finais",
+        "ensino_medio": "Ensino Médio Regular",
+        "ensino_profissional": "Educação Profissional",
+        "eja": "Educação de Jovens e Adultos (EJA)",
     }
 )
 
 df_faixa_etaria["faixa_etaria"] = df_faixa_etaria["faixa_etaria"].replace(
     {
-        "ate_3_anos": 1,
-        "4_a_5_anos": 2,
-        "6_anos_ou_mais": 3,
-        "ate_5_anos": 4,
-        "6_a_10_anos": 5,
-        "11_a_14_anos": 6,
-        "15_a_17_anos": 7,
-        "18_a_19_anos": 8,
-        "20_anos_ou_mais": 9,
-        "ate_10_anos": 10,
-        "20_a_24_anos": 11,
-        "25_anos_ou_mais": 12,
-        "ate_14_anos": 13,
-        "25_a_29_anos": 14,
-        "30_a_34_anos": 15,
-        "35_a_39_anos": 16,
-        "40_anos_ou_mais": 17,
+        "ate_3_anos": "Até 3 anos",
+        "4_a_5_anos": "4 a 5 anos",
+        "6_anos_ou_mais": "6 anos ou mais",
+        "ate_5_anos": "Até 5 anos",
+        "6_a_10_anos": "6 a 10 anos",
+        "11_a_14_anos": "11 a 14 anos",
+        "15_a_17_anos": "15 a 17 anos",
+        "18_a_19_anos": "18 a 19 anos",
+        "20_anos_ou_mais": "20 anos ou mais",
+        "ate_10_anos": "Até 10 anos",
+        "20_a_24_anos": "20 a 24 anos",
+        "25_anos_ou_mais": "25 anos ou mais",
+        "ate_14_anos": "Até 14 anos",
+        "25_a_29_anos": "25 a 29 anos",
+        "30_a_34_anos": "30 a 34 anos",
+        "35_a_39_anos": "35 a 39 anos",
+        "40_anos_ou_mais": "40 anos ou mais",
     }
 )
 
@@ -524,138 +526,12 @@ df_faixa_etaria["quantidade_matricula"] = df_faixa_etaria[
     "quantidade_matricula"
 ].astype("Int64")
 
-
 for sigla_uf, df in df_faixa_etaria.groupby("sigla_uf"):
-    path = os.path.join(OUTPUT, "faixa_etaria", "ano=2023", f"sigla_uf={sigla_uf}")
+    path = OUTPUT / "faixa_etaria" / "ano=2024" / f"sigla_uf={sigla_uf}"
     os.makedirs(path, exist_ok=True)
-    df.drop(columns=["sigla_uf"]).to_csv(os.path.join(path, "data.csv"), index=False)
-
+    df.drop(columns=["sigla_uf"]).to_csv((path / "data.csv"), index=False)
 
 ## Localizacao
-
-sheets_localizacao_22 = {
-    "creche": "Creche 1.6",
-    "pre_escola": "Pré-Escola 1.10",
-    "anos_iniciais": "1.16",
-    "anos_finais": "1.21",
-    "ensino_medio": "1.26",
-    "ensino_profissional": "1.31",
-    "eja": "1.35",
-    "classes_comuns": "1.40",
-    "classes_exclusivas": "1.46",
-}
-
-## Localizacao 2022
-
-dfs_localizacao_22 = {
-    name: drop_unused_columns(
-        pd.read_excel(
-            os.path.join(
-                INPUT,
-                "Sinopse_Estatistica_da_Educa├з├гo_Basica_2022",
-                "Sinopse_Estatistica_da_Educa├з├гo_Basica_2022",
-                "Sinopse_Estatistica_da_Educa├з├гo_Basica_2022.xlsx",
-            ),
-            skiprows=8,
-            sheet_name=sheet_name,
-        ).rename(
-            columns={
-                "Unnamed: 1": "uf",
-                "Unnamed: 3": "id_municipio",
-                "Federal": "urbana_federal",
-                "Estadual": "urbana_estadual",
-                "Municipal": "urbana_municipal",
-                "Privada": "urbana_privada",
-                "Federal.1": "rural_federal",
-                "Estadual.1": "rural_estadual",
-                "Municipal.1": "rural_municipal",
-                "Privada.1": "rural_privada",
-            },
-            errors="raise",
-        )
-    )
-    for name, sheet_name in sheets_localizacao_22.items()
-}
-
-df_localizacao_22 = pd.concat(
-    [
-        df.pipe(
-            lambda d: d.loc[(d["id_municipio"].notna()) & (df["id_municipio"] != " "),]
-        )
-        .pipe(
-            lambda d: pd.melt(
-                d,
-                id_vars=["id_municipio", "uf"],
-                value_vars=[
-                    c
-                    for c in d.columns
-                    if c.startswith("rural") or c.startswith("urbana")
-                ],
-                var_name="localizacao",
-                value_name="quantidade_matricula",
-            )
-        )
-        .assign(etapa=etapa)
-        for etapa, df in dfs_localizacao_22.items()
-    ]
-)
-
-df_localizacao_22["uf"] = (
-    df_localizacao_22["uf"]
-    .apply(lambda uf: uf.strip())
-    .replace(
-        {i["nome"]: i["sigla"] for i in bd_dir.to_dict("records")}  # type: ignore
-    )
-)
-
-df_localizacao_22["rede"] = df_localizacao_22["localizacao"].apply(
-    lambda v: v.split("_")[-1]
-)
-
-df_localizacao_22["localizacao"] = df_localizacao_22["localizacao"].apply(
-    lambda v: v.split("_")[0]
-)
-
-df_localizacao_22["etapa"].unique()
-
-df_localizacao_22["etapa_ensino"] = df_localizacao_22["etapa"].replace(
-    {
-        "creche": 1,
-        "pre_escola": 2,
-        "anos_iniciais": 3,
-        "anos_finais": 4,
-        "ensino_medio": 5,
-        "ensino_profissional": 6,
-        "eja": 12,
-        "classes_comuns": 15,  # Educação Especial – Classes Comuns
-        "classes_exclusivas": 16,  # Educação Especial – Classes Exclusivas
-    }
-)
-
-
-df_localizacao_22 = df_localizacao_22.rename(columns={"uf": "sigla_uf"})[
-    [
-        "sigla_uf",
-        "id_municipio",
-        "rede",
-        "etapa_ensino",
-        "localizacao",
-        "quantidade_matricula",
-    ]
-]
-
-df_localizacao_22["quantidade_matricula"] = df_localizacao_22[
-    "quantidade_matricula"
-].astype("Int64")
-
-
-for sigla_uf, df in df_localizacao_22.groupby("sigla_uf"):
-    path = os.path.join(OUTPUT, "localizacao", "ano=2022", f"sigla_uf={sigla_uf}")
-    os.makedirs(path, exist_ok=True)
-    df.drop(columns=["sigla_uf"]).to_csv(os.path.join(path, "data.csv"), index=False)
-
-
-## Localizacao 2023
 
 sheets_localizacao = {
     "creche": "Creche 1.6",
@@ -721,25 +597,25 @@ df_localizacao["uf"] = (
     )
 )
 
-df_localizacao["rede"] = df_localizacao["localizacao"].apply(lambda v: v.split("_")[-1])
-
-df_localizacao["localizacao"] = df_localizacao["localizacao"].apply(
-    lambda v: v.split("_")[0]
+df_localizacao["rede"] = df_localizacao["localizacao"].apply(
+    lambda v: v.split("_")[-1].title()
 )
 
-df_localizacao["etapa"].unique()
+df_localizacao["localizacao"] = df_localizacao["localizacao"].apply(
+    lambda v: v.split("_")[0].title()
+)
 
 df_localizacao["etapa_ensino"] = df_localizacao["etapa"].replace(
     {
-        "creche": 1,
-        "pre_escola": 2,
-        "anos_iniciais": 3,
-        "anos_finais": 4,
-        "ensino_medio": 5,
-        "ensino_profissional": 6,
-        "eja": 12,
-        "classes_comuns": 15,  # Educação Especial – Classes Comuns
-        "classes_exclusivas": 16,  # Educação Especial – Classes Exclusivas
+        "creche": "Educação Infantil – Creche",
+        "pre_escola": "Educação Infantil – Pré-Escola",
+        "anos_iniciais": "Ensino Fundamental – Anos Iniciais",
+        "anos_finais": "Ensino Fundamental – Anos Finais",
+        "ensino_medio": "Ensino Médio Regular",
+        "ensino_profissional": "Educação Profissional",
+        "eja": "Educação de Jovens e Adultos (EJA)",
+        "classes_comuns": "Educação Especial – Classes Comuns",
+        "classes_exclusivas": "Educação Especial – Classes Exclusivas",
     }
 )
 
@@ -759,9 +635,9 @@ df_localizacao = df_localizacao.rename(columns={"uf": "sigla_uf"})[
 ]
 
 for sigla_uf, df in df_localizacao.groupby("sigla_uf"):
-    path = os.path.join(OUTPUT, "localizacao", "ano=2023", f"sigla_uf={sigla_uf}")
+    path = OUTPUT / "localizacao" / "ano=2024" / f"sigla_uf={sigla_uf}"
     os.makedirs(path, exist_ok=True)
-    df.drop(columns=["sigla_uf"]).to_csv(os.path.join(path, "data.csv"), index=False)
+    df.drop(columns=["sigla_uf"]).to_csv((path / "data.csv"), index=False)
 
 
 # Tempo ensino
@@ -830,23 +706,23 @@ df_tempo_ensino["uf"] = (
 )
 
 df_tempo_ensino["rede"] = df_tempo_ensino["tempo_ensino"].apply(
-    lambda v: v.split("_")[-1]
+    lambda v: v.split("_")[-1].title()
 )
 
 df_tempo_ensino["etapa_ensino"] = df_tempo_ensino["etapa"].replace(
     {
-        "creche": 1,
-        "pre_escola": 2,
-        "anos_iniciais": 3,
-        "anos_finais": 4,
-        "ensino_medio": 5,
-        "classes_comuns": 15,  # Educação Especial – Classes Comuns
-        "classes_exclusivas": 16,  # Educação Especial – Classes Exclusivas
+        "creche": "Educação Infantil – Creche",
+        "pre_escola": "Educação Infantil – Pré-Escola",
+        "anos_iniciais": "Ensino Fundamental – Anos Iniciais",
+        "anos_finais": "Ensino Fundamental – Anos Finais",
+        "ensino_medio": "Ensino Médio Regular",
+        "classes_comuns": "Educação Especial – Classes Comuns",
+        "classes_exclusivas": "Educação Especial – Classes Exclusivas",
     }
 )
 
 df_tempo_ensino["tempo_ensino"] = df_tempo_ensino["tempo_ensino"].apply(
-    lambda v: v.split("_")[0]
+    lambda v: v.split("_")[0].title()
 )
 
 df_tempo_ensino["quantidade_matricula"] = df_tempo_ensino[
@@ -866,9 +742,9 @@ df_tempo_ensino = df_tempo_ensino.rename(columns={"uf": "sigla_uf"})[
 ]
 
 for sigla_uf, df in df_tempo_ensino.groupby("sigla_uf"):
-    path = os.path.join(OUTPUT, "tempo_ensino", "ano=2023", f"sigla_uf={sigla_uf}")
+    path = OUTPUT / "tempo_ensino" / "ano=2024" / f"sigla_uf={sigla_uf}"
     os.makedirs(path, exist_ok=True)
-    df.drop(columns=["sigla_uf"]).to_csv(os.path.join(path, "data.csv"), index=False)
+    df.drop(columns=["sigla_uf"]).to_csv((path / "data.csv"), index=False)
 
 
 ## Sexo raca/cor
@@ -937,15 +813,15 @@ df_sexo_raca_cor["etapa"].unique()
 
 df_sexo_raca_cor["etapa_ensino"] = df_sexo_raca_cor["etapa"].replace(
     {
-        "creche": 1,
-        "pre_escola": 2,
-        "anos_iniciais": 3,
-        "anos_finais": 4,
-        "ensino_medio": 5,
-        "ensino_profissional": 6,
-        "eja": 12,
-        "classes_comuns": 15,  # Educação Especial – Classes Comuns
-        "classes_exclusivas": 16,  # Educação Especial – Classes Exclusivas
+        "creche": "Educação Infantil – Creche",
+        "pre_escola": "Educação Infantil – Pré-Escola",
+        "anos_iniciais": "Ensino Fundamental – Anos Iniciais",
+        "anos_finais": "Ensino Fundamental – Anos Finais",
+        "ensino_medio": "Ensino Médio Regular",
+        "ensino_profissional": "Educação Profissional",
+        "eja": "Educação de Jovens e Adultos (EJA)",
+        "classes_comuns": "Educação Especial – Classes Comuns",
+        "classes_exclusivas": "Educação Especial – Classes Exclusivas",
     }
 )
 
@@ -959,7 +835,7 @@ df_sexo_raca_cor["uf"] = (
 
 
 df_sexo_raca_cor["sexo"] = df_sexo_raca_cor["sexo_raca_cor"].apply(
-    lambda v: v.split("_")[0]
+    lambda v: v.split("_")[0].title()
 )
 
 df_sexo_raca_cor["raca_cor"] = df_sexo_raca_cor["sexo_raca_cor"].apply(
@@ -970,12 +846,12 @@ df_sexo_raca_cor["raca_cor"].unique()
 
 df_sexo_raca_cor["raca_cor"] = df_sexo_raca_cor["raca_cor"].replace(
     {
-        "nao-declarada": 9,
-        "branca": 1,
-        "preta": 2,
-        "parda": 3,
-        "amarela": 4,
-        "indigera": 5,
+        "nao-declarada": "Não declarada",
+        "branca": "Branca",
+        "preta": "Preta",
+        "parda": "Parda",
+        "amarela": "Amarela",
+        "indigera": "Indígena",
     }
 )
 
@@ -998,32 +874,23 @@ df_sexo_raca_cor = df_sexo_raca_cor.rename(columns={"uf": "sigla_uf"})[
 ]
 
 for sigla_uf, df in df_sexo_raca_cor.groupby("sigla_uf"):
-    path = os.path.join(OUTPUT, "sexo_raca_cor", "ano=2023", f"sigla_uf={sigla_uf}")
+    path = OUTPUT / "sexo_raca_cor" / "ano=2024" / f"sigla_uf={sigla_uf}"
     os.makedirs(path, exist_ok=True)
-    df.drop(columns=["sigla_uf"]).to_csv(os.path.join(path, "data.csv"), index=False)
-
-
-## Atualizar dicionario
-
-dic = bd.read_sql(
-    "SELECT * FROM `basedosdados.br_inep_sinopse_estatistica_educacao_basica.dicionario`",
-    billing_project_id="basedosdados-dev",
-)
-
-dic_localizacao = dic.loc[
-    (dic["id_tabela"] == "sexo_raca_cor") & (dic["nome_coluna"] == "etapa_ensino"),
-]
-
-dic_localizacao["id_tabela"] = "localizacao"
-
-dic_path = os.path.join(OUTPUT, "dicionario")
-os.makedirs(dic_path, exist_ok=True)
-pd.concat([dic, dic_localizacao]).to_csv(
-    os.path.join(dic_path, "dicionario.csv"), index=False
-)
+    df.drop(columns=["sigla_uf"]).to_csv((path / "data.csv"), index=False)
 
 
 ## Subir tabelas
+
+for dir in OUTPUT.iterdir():
+    table_id = dir.name
+    tb = bd.Table(
+        dataset_id="br_inep_sinopse_estatistica_educacao_basica", table_id=table_id
+    )
+    tb.create(
+        path=dir,
+        if_storage_data_exists="replace",
+        if_table_exists="replace",
+    )
 
 for table_id in os.listdir(OUTPUT):
     tb = bd.Table(
