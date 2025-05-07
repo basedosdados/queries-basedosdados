@@ -168,6 +168,9 @@ models:
     br_ibge_censo_demografico:
       +materialized: table
       +schema: br_ibge_censo_demografico
+    br_ibge_criacao_municipios:
+      +materialized: table
+      +schema: br_ibge_criacao_municipios
     br_ibge_estadic:
       +materialized: table
       +schema: br_ibge_estadic
