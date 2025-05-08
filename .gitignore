@@ -13,9 +13,9 @@ dbt_packages/
 __pycache__/
 .python-version
 #
-models/*/tmp/
-models/*/input/
-models/*/output/
-models/*/extra/
+models/**/tmp/
+models/**/input/
+models/**/output/
+models/**/extra/
 venv*
 edr_target/
